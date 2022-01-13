@@ -210,8 +210,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../.." title="Welcome to ljzsdut's notes" class="md-nav__link">
-      Welcome to ljzsdut's notes
+    <a href="../../.." title="Home" class="md-nav__link">
+      Home
     </a>
   </li>
 
@@ -8351,22 +8351,21 @@
 <li>
 <p>设置 <code>a</code> 标签的 <code>href</code> 属性</p>
 </li>
-<li>
-<p>```html
-   <a href="#comment-1">跳转到评论区</a>
- <br />
-<div style="height: 1000px;"></div>
-</p>
-</li>
 </ol>
-<div id="comment-1" style="background: green;">
+<div class="codehilite"><pre><span></span><code><span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#comment-1&quot;</span><span class="p">&gt;</span>跳转到评论区<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">&quot;height: 1000px;&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;comment-1&quot;</span> <span class="na">style</span><span class="o">=</span><span class="s">&quot;background: green;&quot;</span><span class="p">&gt;</span>
     这是后盾人评论内容区
-   </div>
-<p>```</p>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</code></pre></div>
+
 <ol>
 <li>也可以跳转到不同页面的锚点</li>
 </ol>
-<p><code>&lt;a href="article.html#comment-1"&gt;跳转到评论区&lt;/a&gt;</code></p>
+<div class="codehilite"><pre><span></span><code><span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;article.html#comment-1&quot;</span><span class="p">&gt;</span>跳转到评论区<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+</code></pre></div>
+
 <h3 id="_8"><a href="http://houdunren.gitee.io/note/html/4%20%E9%93%BE%E6%8E%A5%E4%B8%8E%E5%9B%BE%E7%89%87.html#%E9%82%AE%E7%AE%B1%E9%93%BE%E6%8E%A5">#</a>邮箱链接<a class="headerlink" href="#_8" title="Permanent link">¶</a></h3>
 <p>除了页面跳转外可以指定其他链接。使用以下方式也有缺点，邮箱可能会被恶意用户采集到，所以有些用户使用 <code>houdunren#qq.com</code> 然后提示用户 <code>请将#改为@后发邮件</code>的提示形式。</p>
 <div class="codehilite"><pre><span></span><code><span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;mailto:2300071698@qq.com&quot;</span><span class="p">&gt;</span>给后盾人发送邮件<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
@@ -8439,7 +8438,7 @@
       <div class="md-footer-copyright">
         
           <div class="md-footer-copyright__highlight">
-            Copyright &copy; 2019 - 2020 ljzsdut
+            Copyright &copy; 2019 - 2022 ljzsdut
           </div>
         
         powered by

@@ -210,8 +210,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../../.." title="Welcome to ljzsdut's notes" class="md-nav__link">
-      Welcome to ljzsdut's notes
+    <a href="../../../.." title="Home" class="md-nav__link">
+      Home
     </a>
   </li>
 
@@ -7990,113 +7990,61 @@
                 <h1 id="9_osd_pg">9. 统计 OSD 上 PG 的数量<a class="headerlink" href="#9_osd_pg" title="Permanent link">¶</a></h1>
 <hr />
 <p>我们可以通过一个 Python 脚本，统计出每个 OSD 上分布了多少个 PG ，以此判断集群的数据分布是否均衡。</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
-<span class="normal"> 2</span>
-<span class="normal"> 3</span>
-<span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span>
-<span class="normal">16</span>
-<span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span>
-<span class="normal">20</span>
-<span class="normal">21</span>
-<span class="normal">22</span>
-<span class="normal">23</span>
-<span class="normal">24</span>
-<span class="normal">25</span>
-<span class="normal">26</span>
-<span class="normal">27</span>
-<span class="normal">28</span>
-<span class="normal">29</span>
-<span class="normal">30</span>
-<span class="normal">31</span>
-<span class="normal">32</span>
-<span class="normal">33</span>
-<span class="normal">34</span>
-<span class="normal">35</span>
-<span class="normal">36</span>
-<span class="normal">37</span>
-<span class="normal">38</span>
-<span class="normal">39</span>
-<span class="normal">40</span>
-<span class="normal">41</span>
-<span class="normal">42</span>
-<span class="normal">43</span>
-<span class="normal">44</span>
-<span class="normal">45</span>
-<span class="normal">46</span>
-<span class="normal">47</span>
-<span class="normal">48</span>
-<span class="normal">49</span>
-<span class="normal">50</span>
-<span class="normal">51</span>
-<span class="normal">52</span>
-<span class="normal">53</span></pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code>#!/usr/bin/env  python
-import sys 
-import os
-import json
-cmd = &#39;&#39;&#39;
-ceph pg dump | awk &#39; /^pg_stat/ { col=1; while($col!=&quot;up&quot;) {col++}; col++ } /^[0-9a-f]+\.[0-9a-f]+/ {print $1,$col}&#39;
-&#39;&#39;&#39;
-body = os.popen(cmd).read()
-SUM = {}
-for line in  body.split(&#39;\n&#39;):
-    if not line.strip():
-        continue
-    SUM[line.split()[0]] = json.loads(line.split()[1])
-pool = set()
-for  key in  SUM:
-    pool.add(key.split(&#39;.&#39;)[0])
-mapping = {}
-for number in pool:
-    for k,v in SUM.items():
-        if k.split(&#39;.&#39;)[0] == number:
-            if number in mapping:
-                mapping[number] += v
-            else:
-                mapping[number] = v
-MSG = &quot;&quot;&quot;%(pool)-6s: %(pools)s | SUM
-%(line)s
-%(dy)s
-%(line)s
-%(sun)-6s: %(end)s |&quot;&quot;&quot;
-pools = &quot; &quot;.join([&#39;%(a)-6s&#39; % {&quot;a&quot;: x} for x in sorted(list(mapping))])
-line = len(pools) + 20
-MA = {}
-OSD = []
-for p in mapping:
-    osd = sorted(list(set(mapping[p])))
-    OSD += osd
-    count = sum([mapping[p].count(x) for x in osd])
-    osds = {}
-    for x in osd:
-        osds[x] = mapping[p].count(x)
-    MA[p] = {&quot;osd&quot;: osds, &quot;count&quot;: count}
-MA = sorted(MA.items(), key=lambda x:x[0])
-OSD = sorted(list(set(OSD)))
-DY = &quot;&quot;
-for osd in OSD:
-    count = sum([x[1][&quot;osd&quot;].get(osd,0) for x in MA])
-    w = [&quot;%(x)-6s&quot; % {&quot;x&quot;: x[1][&quot;osd&quot;].get(osd,0)} for x in MA]
-    #print w
-    w.append(&quot;| %(x)-6s&quot; % {&quot;x&quot;: count})
-    DY += &#39;osd.%(osd)-3s %(osds)s\n&#39; % {&quot;osd&quot;: osd, &quot;osds&quot;: &quot; &quot;.join(w)}
-SUM = &quot; &quot;.join([&quot;%(x)-6s&quot; % {&quot;x&quot;: x[1][&quot;count&quot;]} for x in MA])
-msg = {&quot;pool&quot;: &quot;pool&quot;, &quot;pools&quot;: pools, &quot;line&quot;: &quot;-&quot; * line, &quot;dy&quot;: DY, &quot;end&quot;: SUM, &quot;sun&quot;: &quot;SUM&quot;}
-print MSG % msg
+<div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env  python</span>
+<span class="kn">import</span> <span class="nn">sys</span> 
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="n">cmd</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">ceph pg dump | awk &#39; /^pg_stat/ { col=1; while($col!=&quot;up&quot;) {col++}; col++ } /^[0-9a-f]+\.[0-9a-f]+/ {print $1,$col}&#39;</span>
+<span class="s1">&#39;&#39;&#39;</span>
+<span class="n">body</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">popen</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="n">SUM</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span>  <span class="n">body</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">():</span>
+        <span class="k">continue</span>
+    <span class="n">SUM</span><span class="p">[</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">pool</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+<span class="k">for</span>  <span class="n">key</span> <span class="ow">in</span>  <span class="n">SUM</span><span class="p">:</span>
+    <span class="n">pool</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">key</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">mapping</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">number</span> <span class="ow">in</span> <span class="n">pool</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">SUM</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">k</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">number</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">number</span> <span class="ow">in</span> <span class="n">mapping</span><span class="p">:</span>
+                <span class="n">mapping</span><span class="p">[</span><span class="n">number</span><span class="p">]</span> <span class="o">+=</span> <span class="n">v</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">mapping</span><span class="p">[</span><span class="n">number</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+<span class="n">MSG</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span><span class="si">%(pool)-6s</span><span class="s2">: </span><span class="si">%(pools)s</span><span class="s2"> | SUM</span>
+<span class="si">%(line)s</span><span class="s2"></span>
+<span class="si">%(dy)s</span><span class="s2"></span>
+<span class="si">%(line)s</span><span class="s2"></span>
+<span class="si">%(sun)-6s</span><span class="s2">: </span><span class="si">%(end)s</span><span class="s2"> |&quot;&quot;&quot;</span>
+<span class="n">pools</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s1">&#39;</span><span class="si">%(a)-6s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">{</span><span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="n">x</span><span class="p">}</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">mapping</span><span class="p">))])</span>
+<span class="n">line</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">pools</span><span class="p">)</span> <span class="o">+</span> <span class="mi">20</span>
+<span class="n">MA</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">OSD</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">mapping</span><span class="p">:</span>
+    <span class="n">osd</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">mapping</span><span class="p">[</span><span class="n">p</span><span class="p">])))</span>
+    <span class="n">OSD</span> <span class="o">+=</span> <span class="n">osd</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="n">mapping</span><span class="p">[</span><span class="n">p</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">osd</span><span class="p">])</span>
+    <span class="n">osds</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">osd</span><span class="p">:</span>
+        <span class="n">osds</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">mapping</span><span class="p">[</span><span class="n">p</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">MA</span><span class="p">[</span><span class="n">p</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;osd&quot;</span><span class="p">:</span> <span class="n">osds</span><span class="p">,</span> <span class="s2">&quot;count&quot;</span><span class="p">:</span> <span class="n">count</span><span class="p">}</span>
+<span class="n">MA</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">MA</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">OSD</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">OSD</span><span class="p">)))</span>
+<span class="n">DY</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<span class="k">for</span> <span class="n">osd</span> <span class="ow">in</span> <span class="n">OSD</span><span class="p">:</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s2">&quot;osd&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">osd</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">MA</span><span class="p">])</span>
+    <span class="n">w</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;</span><span class="si">%(x)-6s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">{</span><span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s2">&quot;osd&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">osd</span><span class="p">,</span><span class="mi">0</span><span class="p">)}</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">MA</span><span class="p">]</span>
+    <span class="c1">#print w</span>
+    <span class="n">w</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;| </span><span class="si">%(x)-6s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">{</span><span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="n">count</span><span class="p">})</span>
+    <span class="n">DY</span> <span class="o">+=</span> <span class="s1">&#39;osd.</span><span class="si">%(osd)-3s</span><span class="s1"> </span><span class="si">%(osds)s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">{</span><span class="s2">&quot;osd&quot;</span><span class="p">:</span> <span class="n">osd</span><span class="p">,</span> <span class="s2">&quot;osds&quot;</span><span class="p">:</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">w</span><span class="p">)}</span>
+<span class="n">SUM</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot;</span><span class="si">%(x)-6s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">{</span><span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s2">&quot;count&quot;</span><span class="p">]}</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">MA</span><span class="p">])</span>
+<span class="n">msg</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;pool&quot;</span><span class="p">:</span> <span class="s2">&quot;pool&quot;</span><span class="p">,</span> <span class="s2">&quot;pools&quot;</span><span class="p">:</span> <span class="n">pools</span><span class="p">,</span> <span class="s2">&quot;line&quot;</span><span class="p">:</span> <span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="n">line</span><span class="p">,</span> <span class="s2">&quot;dy&quot;</span><span class="p">:</span> <span class="n">DY</span><span class="p">,</span> <span class="s2">&quot;end&quot;</span><span class="p">:</span> <span class="n">SUM</span><span class="p">,</span> <span class="s2">&quot;sun&quot;</span><span class="p">:</span> <span class="s2">&quot;SUM&quot;</span><span class="p">}</span>
+<span class="nb">print</span> <span class="n">MSG</span> <span class="o">%</span> <span class="n">msg</span>
 </code></pre></div>
-</td></tr></table>
+
 <p>执行效果如下：</p>
 <div class="codehilite"><pre><span></span><code>root@OPS-ceph1:~# ./cal_pg_per_osd.py 
 dumped all in format plain
@@ -8197,7 +8145,7 @@ SUM   : 128    1024   1024   1024   1024   1024   256    |
       <div class="md-footer-copyright">
         
           <div class="md-footer-copyright__highlight">
-            Copyright &copy; 2019 - 2020 ljzsdut
+            Copyright &copy; 2019 - 2022 ljzsdut
           </div>
         
         powered by

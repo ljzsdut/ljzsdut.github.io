@@ -210,8 +210,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../../.." title="Welcome to ljzsdut's notes" class="md-nav__link">
-      Welcome to ljzsdut's notes
+    <a href="../../../.." title="Home" class="md-nav__link">
+      Home
     </a>
   </li>
 
@@ -8324,7 +8324,7 @@
 <p>访问外网：报文从VM(二层转发)发送到网关qrouter上，qrouter进行snat转换成fip，并通过路由表到达fip名称空间中，查询fip中的路由表，发送至floating-gw。</p>
 <p>返程：floating-gw上的报文通过arp fip，fg开启arp代理后代为应答，报文到达fip上，通过路由表达到qrouter上，进行snat地址还原后，通过路由表发送至qr口，而后二层转发达到VM.</p>
 <h2 id="floatingip">通过FloatingIP访问外网<a class="headerlink" href="#floatingip" title="Permanent link">¶</a></h2>
-<div class="codehilite"><pre><span></span><code><span class="c1">#虚拟机内ping (192.168.3.69 --&gt; 100.121.0.75)</span>
+<div class="codehilite"><pre><span></span><code><span class="c1">#虚拟机内ping (192.168.3.69 --&gt; 100.121.0.75(sdata))</span>
 
 root@mgt01:~# openstack server list --all --long <span class="p">|</span>grep <span class="m">192</span>.168.3.69
 <span class="p">|</span> ce0692bb-93d5-457b-b0d3-f940d6c70d0d <span class="p">|</span> de0b0af2-0d1d-4e33-b297-ff2352b3f402-master-2            <span class="p">|</span> ACTIVE  <span class="p">|</span> None       <span class="p">|</span> Running     <span class="p">|</span> <span class="nv">az2</span><span class="o">=</span><span class="m">192</span>.168.3.69, <span class="m">100</span>.122.0.145<span class="p">;</span> <span class="nv">service_mgt</span><span class="o">=</span><span class="m">100</span>.123.2.16                                                                                                                  <span class="p">|</span> N/A <span class="o">(</span>booted from volume<span class="o">)</span>                       <span class="p">|</span> N/A <span class="o">(</span>booted from volume<span class="o">)</span>             <span class="p">|</span> cks_4C8G200G_general              <span class="p">|</span> e83dd349-6123-4efd-941b-7d426620288c <span class="p">|</span> az-native-test-2  <span class="p">|</span> compute03 <span class="p">|</span> <span class="nv">this</span><span class="o">=</span><span class="s1">&#39;that&#39;</span>
@@ -8457,7 +8457,7 @@ root@compute03:~# iptables -S -t nat
 -A POSTROUTING -j neutron-postrouting-bottom  
 -A neutron-l3-agent-POSTROUTING -d <span class="m">192</span>.168.0.0/16 -j ACCEPT
 -A neutron-l3-agent-PREROUTING -d <span class="m">169</span>.254.169.254/32 -i qr-+ -p tcp -m tcp --dport <span class="m">80</span> -j REDIRECT --to-ports <span class="m">9697</span><span class="c1">#②，不匹配，继续</span>
--A neutron-l3-agent-PREROUTING -d <span class="m">100</span>.122.0.145/32 -i rfp-b6a86b9f-6 -j DNAT <span class="o">[</span>unsupported revision<span class="o">]</span> <span class="c1">#③，不匹配，此时整个PREROUTING链都不匹配，完成PREROUTING链的规则检查，进入的路由检查</span>
+-A neutron-l3-agent-PREROUTING -d <span class="m">100</span>.122.0.145/32 -i rfp-b6a86b9f-6 -j DNAT <span class="o">[</span>unsupported revision<span class="o">]</span> <span class="c1">#③，不匹配，此时整个PREROUTING链都不匹配，完成PREROUTING链的规则检查，进入的路由检查（dnat转fip）</span>
 -A neutron-l3-agent-float-snat -s <span class="m">192</span>.168.3.69/32 -j SNAT --to-source <span class="m">100</span>.122.0.145 --random-fully 
 -A neutron-l3-agent-snat -j neutron-l3-agent-float-snat 
 -A neutron-postrouting-bottom -m comment --comment <span class="s2">&quot;Perform source NAT on outgoing traffic.&quot;</span> -j neutron-l3-agent-snat 
@@ -8468,8 +8468,8 @@ root@compute03:~# ip rule
 <span class="m">0</span>:  from all lookup <span class="nb">local</span>
 <span class="m">32766</span>:  from all lookup main
 <span class="m">32767</span>:  from all lookup default
-<span class="m">51869</span>:  from <span class="m">192</span>.168.3.69 lookup <span class="m">16</span>
-<span class="m">3232235521</span>: from <span class="m">192</span>.168.0.1/16 lookup <span class="m">3232235521</span>  <span class="c1">#①</span>
+<span class="m">51869</span>:  from <span class="m">192</span>.168.3.69 lookup <span class="m">16</span> <span class="c1">#①</span>
+<span class="m">3232235521</span>: from <span class="m">192</span>.168.0.1/16 lookup <span class="m">3232235521</span>  
 
 root@compute03:~# ip route show table <span class="m">16</span>
 default via <span class="m">169</span>.254.74.217 dev rfp-b6a86b9f-6 proto static  <span class="c1">#②，源IP为192.168.3.69的报文，从rfp口送出</span>
@@ -8630,7 +8630,7 @@ tcpdump: listening on fg-2417e6fb-ee, link-type EN10MB <span class="o">(</span>E
 <div class="codehilite"><pre><span></span><code>root@compute03:~# tcpdump -env -i enp175s0f1 icmp
 tcpdump: listening on enp175s0f1, link-type EN10MB <span class="o">(</span>Ethernet<span class="o">)</span>, capture size <span class="m">262144</span> bytes
 <span class="m">15</span>:46:03.572239 fa:16:3e:23:e6:31 &gt; <span class="m">00</span>:1e:08:0e:bc:45, ethertype <span class="m">802</span>.1Q <span class="o">(</span>0x8100<span class="o">)</span>, length <span class="m">102</span>: vlan <span class="m">20</span>, p <span class="m">0</span>, ethertype IPv4, <span class="o">(</span>tos 0x0, ttl <span class="m">62</span>, id <span class="m">5027</span>, offset <span class="m">0</span>, flags <span class="o">[</span>DF<span class="o">]</span>, proto ICMP <span class="o">(</span><span class="m">1</span><span class="o">)</span>, length <span class="m">84</span><span class="o">)</span>
-    <span class="m">100</span>.122.0.145 &gt; <span class="m">100</span>.121.0.75: ICMP <span class="nb">echo</span> request, id <span class="m">36215</span>, seq <span class="m">17208</span>, length <span class="m">64</span>
+    b: ICMP <span class="nb">echo</span> request, id <span class="m">36215</span>, seq <span class="m">17208</span>, length <span class="m">64</span>
 <span class="m">15</span>:46:03.572559 <span class="m">00</span>:1e:08:0e:bc:45 &gt; fa:16:3e:23:e6:31, ethertype <span class="m">802</span>.1Q <span class="o">(</span>0x8100<span class="o">)</span>, length <span class="m">102</span>: vlan <span class="m">20</span>, p <span class="m">0</span>, ethertype IPv4, <span class="o">(</span>tos 0x0, ttl <span class="m">63</span>, id <span class="m">23460</span>, offset <span class="m">0</span>, flags <span class="o">[</span>none<span class="o">]</span>, proto ICMP <span class="o">(</span><span class="m">1</span><span class="o">)</span>, length <span class="m">84</span><span class="o">)</span>
     <span class="m">100</span>.121.0.75 &gt; <span class="m">100</span>.122.0.145: ICMP <span class="nb">echo</span> reply, id <span class="m">36215</span>, seq <span class="m">17208</span>, length <span class="m">64</span>
 <span class="m">15</span>:46:04.596202 fa:16:3e:23:e6:31 &gt; <span class="m">00</span>:1e:08:0e:bc:45, ethertype <span class="m">802</span>.1Q <span class="o">(</span>0x8100<span class="o">)</span>, length <span class="m">102</span>: vlan <span class="m">20</span>, p <span class="m">0</span>, ethertype IPv4, <span class="o">(</span>tos 0x0, ttl <span class="m">62</span>, id <span class="m">5066</span>, offset <span class="m">0</span>, flags <span class="o">[</span>DF<span class="o">]</span>, proto ICMP <span class="o">(</span><span class="m">1</span><span class="o">)</span>, length <span class="m">84</span><span class="o">)</span>
@@ -8962,7 +8962,7 @@ tcpdump: listening on ens3, link-type EN10MB <span class="o">(</span>Ethernet<sp
       <div class="md-footer-copyright">
         
           <div class="md-footer-copyright__highlight">
-            Copyright &copy; 2019 - 2020 ljzsdut
+            Copyright &copy; 2019 - 2022 ljzsdut
           </div>
         
         powered by
