@@ -1,0 +1,1003 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>网络节点 · 笔记</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="John Lee <ljzsdut@163.com>">
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-back-to-top-button/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-chapter-fold/chapter-fold.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-expandable-chapters/expandable-chapters.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-code/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search-pro/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-page-toc-button/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-prism/prism.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../vxlan_mode/" />
+    
+    
+    <link rel="prev" href="compute_node.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="http://www.ljzsdut.com" target="_blank" class="custom-link">My Blog</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../intro/">
+            
+                <a href="../intro/">
+            
+                    
+                    概述
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../concept/">
+            
+                <a href="../concept/">
+            
+                    
+                    基本概念
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../gre_mode/">
+            
+                <a href="../gre_mode/">
+            
+                    
+                    GRE 模式
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../gre_mode/compute_node.html">
+            
+                <a href="../gre_mode/compute_node.html">
+            
+                    
+                    计算节点
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../gre_mode/network_node.html">
+            
+                <a href="../gre_mode/network_node.html">
+            
+                    
+                    网络节点
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    VLAN 模式
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="compute_node.html">
+            
+                <a href="compute_node.html">
+            
+                    
+                    计算节点
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.5.2" data-path="network_node.html">
+            
+                <a href="network_node.html">
+            
+                    
+                    网络节点
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../vxlan_mode/">
+            
+                <a href="../vxlan_mode/">
+            
+                    
+                    VXLAN 模式
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../vxlan_mode/compute_node/">
+            
+                <a href="../vxlan_mode/compute_node/">
+            
+                    
+                    计算节点
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1.1" data-path="../vxlan_mode/compute_node/br-int.html">
+            
+                <a href="../vxlan_mode/compute_node/br-int.html">
+            
+                    
+                    br-int
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.1.2" data-path="../vxlan_mode/compute_node/br-tun.html">
+            
+                <a href="../vxlan_mode/compute_node/br-tun.html">
+            
+                    
+                    br-tun
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../vxlan_mode/network_node/">
+            
+                <a href="../vxlan_mode/network_node/">
+            
+                    
+                    网络节点
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.2.1" data-path="../vxlan_mode/network_node/br-tun.html">
+            
+                <a href="../vxlan_mode/network_node/br-tun.html">
+            
+                    
+                    br-tun
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2.2" data-path="../vxlan_mode/network_node/br-int.html">
+            
+                <a href="../vxlan_mode/network_node/br-int.html">
+            
+                    
+                    br-int
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2.3" data-path="../vxlan_mode/network_node/br-ex.html">
+            
+                <a href="../vxlan_mode/network_node/br-ex.html">
+            
+                    
+                    br-ex
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../namespace/">
+            
+                <a href="../namespace/">
+            
+                    
+                    网络命名空间
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../namespace/dhcp.html">
+            
+                <a href="../namespace/dhcp.html">
+            
+                    
+                    DHCP 服务
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" data-path="../namespace/router.html">
+            
+                <a href="../namespace/router.html">
+            
+                    
+                    路由服务
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="../security_group/">
+            
+                <a href="../security_group/">
+            
+                    
+                    安全组
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.8.1" data-path="../security_group/input.html">
+            
+                <a href="../security_group/input.html">
+            
+                    
+                    INPUT
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.2" data-path="../security_group/output.html">
+            
+                <a href="../security_group/output.html">
+            
+                    
+                    OUTPUT
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.3" data-path="../security_group/forward.html">
+            
+                <a href="../security_group/forward.html">
+            
+                    
+                    FORWARD
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.4" data-path="../security_group/global_logic.html">
+            
+                <a href="../security_group/global_logic.html">
+            
+                    
+                    整体逻辑
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.5" data-path="../security_group/quick_find.html">
+            
+                <a href="../security_group/quick_find.html">
+            
+                    
+                    快速查找安全组规则
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.6" data-path="../security_group/other.html">
+            
+                <a href="../security_group/other.html">
+            
+                    
+                    其它
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="../lbaas/">
+            
+                <a href="../lbaas/">
+            
+                    
+                    LBaaS（负载均衡即服务）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.9.1" data-path="../lbaas/scenario.html">
+            
+                <a href="../lbaas/scenario.html">
+            
+                    
+                    典型场景
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.2" data-path="../lbaas/arch.html">
+            
+                <a href="../lbaas/arch.html">
+            
+                    
+                    实现细节
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.3" data-path="../lbaas/other.html">
+            
+                <a href="../lbaas/other.html">
+            
+                    
+                    其它问题
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="../fwaas/">
+            
+                <a href="../fwaas/">
+            
+                    
+                    FWaaS（防火墙即服务）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.10.1" data-path="../fwaas/scenario.html">
+            
+                <a href="../fwaas/scenario.html">
+            
+                    
+                    典型场景
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.2" data-path="../fwaas/arch.html">
+            
+                <a href="../fwaas/arch.html">
+            
+                    
+                    实现细节
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.3" data-path="../fwaas/other.html">
+            
+                <a href="../fwaas/other.html">
+            
+                    
+                    其它问题
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11" data-path="../dvr/">
+            
+                <a href="../dvr/">
+            
+                    
+                    DVR（分布式路由）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.11.1" data-path="../dvr/scenario.html">
+            
+                <a href="../dvr/scenario.html">
+            
+                    
+                    典型场景
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.2" data-path="../dvr/network_node.html">
+            
+                <a href="../dvr/network_node.html">
+            
+                    
+                    网络节点
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.3" data-path="../dvr/compute_node.html">
+            
+                <a href="../dvr/compute_node.html">
+            
+                    
+                    计算节点
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.4" data-path="../dvr/config.html">
+            
+                <a href="../dvr/config.html">
+            
+                    
+                    配置
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.5" data-path="../dvr/workflow.html">
+            
+                <a href="../dvr/workflow.html">
+            
+                    
+                    工作流程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.6" data-path="../dvr/implementation.html">
+            
+                <a href="../dvr/implementation.html">
+            
+                    
+                    实现细节
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12" data-path="../tool/">
+            
+                <a href="../tool/">
+            
+                    
+                    工具
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.12.1" data-path="../tool/easyovs.html">
+            
+                <a href="../tool/easyovs.html">
+            
+                    
+                    easyOVS
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13" data-path="../ref/">
+            
+                <a href="../ref/">
+            
+                    
+                    参考
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14" data-path="../appendix_install/">
+            
+                <a href="../appendix_install/">
+            
+                    
+                    附：安装配置
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >网络节点</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h2 id="&#x7F51;&#x7EDC;&#x8282;&#x70B9;">&#x7F51;&#x7EDC;&#x8282;&#x70B9;</h2>
+<p><img src="../_images/vlan_network_node.png" alt="Vlan &#x6A21;&#x5F0F;&#x4E0B;&#x7684;&#x7F51;&#x7EDC;&#x8282;&#x70B9;"></p>
+<p>&#x7C7B;&#x4F3C;GRE&#x6A21;&#x5F0F;&#x4E0B;&#xFF0C;br-eth1&#x6536;&#x5230;&#x5230;&#x8FBE;&#x7684;&#x7F51;&#x5305;&#xFF0C;int-br-eth1&#x548C;phy-br-eth1&#x4E0A;&#x5206;&#x522B;&#x8FDB;&#x884C;vlan&#x8F6C;&#x6362;&#xFF0C;&#x4FDD;&#x8BC1;&#x5230;&#x8FBE;br-int&#x4E0A;&#x7684;&#x7F51;&#x5305;&#x90FD;&#x662F;&#x5E26;&#x6709;&#x5185;&#x90E8;vlan tag&#xFF0C;&#x5230;&#x8FBE;br-eth1&#x4E0A;&#x7684;&#x90FD;&#x662F;&#x5E26;&#x6709;&#x5916;&#x90E8;vlan tag&#x3002;br-ex&#x5219;&#x5B8C;&#x6210;&#x5230;OpenStack&#x4EE5;&#x5916;&#x7F51;&#x7EDC;&#x7684;&#x8FDE;&#x63A5;&#x3002;
+&#x67E5;&#x770B;&#x7F51;&#x6865;&#x4FE1;&#x606F;&#xFF0C;&#x5305;&#x62EC;&#x4E09;&#x4E2A;&#x7F51;&#x6865;&#xFF0C;br-eth1&#x3001;br-int&#x548C;br-ex&#x3002;</p>
+<pre class="language-"><code class="lang-sh"><span class="token comment">#ovs</span>
+3bd78da8-d3b5-4112-a766-79506a7e2801
+    Bridge br-ex
+        Port <span class="token string">&quot;qg-VVV&quot;</span>
+            Interface <span class="token string">&quot;qg-VVV&quot;</span>
+                type: internal
+        Port br-ex
+            Interface br-ex
+                type: internal
+        Port <span class="token string">&quot;eth0&quot;</span>
+            Interface <span class="token string">&quot;eth0&quot;</span>
+    Bridge br-int
+        Port br-int
+            Interface br-int
+                type: internal
+        Port <span class="token string">&quot;int-br-eth1&quot;</span>
+            Interface <span class="token string">&quot;int-br-eth0&quot;</span>
+        Port <span class="token string">&quot;tapXXX&quot;</span>
+            tag: <span class="token number">1</span>
+            Interface <span class="token string">&quot;tapXXX&quot;</span>
+                type: internal
+Port <span class="token string">&quot;tapWWW&quot;</span>
+            tag: <span class="token number">2</span>
+            Interface <span class="token string">&quot;tapWWW&quot;</span>
+                type: internal
+        Port <span class="token string">&quot;qr-YYY&quot;</span>
+            tag: <span class="token number">1</span>
+            Interface <span class="token string">&quot;qr-YYY&quot;</span>
+                type: internal
+        Port <span class="token string">&quot;qr-ZZZ&quot;</span>
+            tag: <span class="token number">2</span>
+            Interface <span class="token string">&quot;qr-ZZZ&quot;</span>
+                type: internal
+    Bridge <span class="token string">&quot;br-eth1&quot;</span>
+        Port <span class="token string">&quot;phy-br-eth1&quot;</span>
+            Interface <span class="token string">&quot;phy-br-eth1&quot;</span>
+        Port <span class="token string">&quot;br-eth1&quot;</span>
+            Interface <span class="token string">&quot;br-eth1&quot;</span>
+                type: internal
+        Port <span class="token string">&quot;eth1&quot;</span>
+            Interface <span class="token string">&quot;eth1&quot;</span>
+</code></pre>
+<h3 id="br-eth1">br-eth1</h3>
+<p>br-eth1&#x4E3B;&#x8981;&#x8D1F;&#x8D23;&#x628A;&#x7269;&#x7406;&#x7F51;&#x7EDC;&#x4E0A;&#x5916;&#x90E8;vlan&#x8F6C;&#x5316;&#x4E3A;local vlan&#x3002;</p>
+<pre class="language-"><code class="lang-sh"><span class="token comment">#ovs-ofctl dump-flows br-eth1</span>
+NXST_FLOW reply <span class="token punctuation">(</span>xid<span class="token operator">=</span>0x4<span class="token punctuation">)</span>:
+ <span class="token assign-left variable">cookie</span><span class="token operator">=</span>0x0, <span class="token assign-left variable">duration</span><span class="token operator">=</span><span class="token number">144</span>.33s, <span class="token assign-left variable">table</span><span class="token operator">=</span><span class="token number">0</span>, <span class="token assign-left variable">n_packets</span><span class="token operator">=</span><span class="token number">13</span>, <span class="token assign-left variable">n_bytes</span><span class="token operator">=</span><span class="token number">28404</span>, <span class="token assign-left variable">idle_age</span><span class="token operator">=</span><span class="token number">24</span>, <span class="token assign-left variable">hard_age</span><span class="token operator">=</span><span class="token number">65534</span>, <span class="token assign-left variable">priority</span><span class="token operator">=</span><span class="token number">4</span>,in_port<span class="token operator">=</span><span class="token number">5</span>,dl_vlan<span class="token operator">=</span><span class="token number">101</span> <span class="token assign-left variable">actions</span><span class="token operator">=</span>mod_vlan_vid:1,NORMAL
+ <span class="token assign-left variable">cookie</span><span class="token operator">=</span>0x0, <span class="token assign-left variable">duration</span><span class="token operator">=</span><span class="token number">144</span>.33s, <span class="token assign-left variable">table</span><span class="token operator">=</span><span class="token number">0</span>, <span class="token assign-left variable">n_packets</span><span class="token operator">=</span><span class="token number">13</span>, <span class="token assign-left variable">n_bytes</span><span class="token operator">=</span><span class="token number">28404</span>, <span class="token assign-left variable">idle_age</span><span class="token operator">=</span><span class="token number">24</span>, <span class="token assign-left variable">hard_age</span><span class="token operator">=</span><span class="token number">65534</span>, <span class="token assign-left variable">priority</span><span class="token operator">=</span><span class="token number">4</span>,in_port<span class="token operator">=</span><span class="token number">5</span>,dl_vlan<span class="token operator">=</span><span class="token number">102</span> <span class="token assign-left variable">actions</span><span class="token operator">=</span>mod_vlan_vid:2,NORMAL
+ <span class="token assign-left variable">cookie</span><span class="token operator">=</span>0x0, <span class="token assign-left variable">duration</span><span class="token operator">=</span><span class="token number">608</span>.373s, <span class="token assign-left variable">table</span><span class="token operator">=</span><span class="token number">0</span>, <span class="token assign-left variable">n_packets</span><span class="token operator">=</span><span class="token number">23</span>, <span class="token assign-left variable">n_bytes</span><span class="token operator">=</span><span class="token number">1706</span>, <span class="token assign-left variable">idle_age</span><span class="token operator">=</span><span class="token number">65534</span>, <span class="token assign-left variable">hard_age</span><span class="token operator">=</span><span class="token number">65534</span>, <span class="token assign-left variable">priority</span><span class="token operator">=</span><span class="token number">2</span>,in_port<span class="token operator">=</span><span class="token number">5</span> <span class="token assign-left variable">actions</span><span class="token operator">=</span>drop
+ <span class="token assign-left variable">cookie</span><span class="token operator">=</span>0x0, <span class="token assign-left variable">duration</span><span class="token operator">=</span><span class="token number">675</span>.373s, <span class="token assign-left variable">table</span><span class="token operator">=</span><span class="token number">0</span>, <span class="token assign-left variable">n_packets</span><span class="token operator">=</span><span class="token number">58</span>, <span class="token assign-left variable">n_bytes</span><span class="token operator">=</span><span class="token number">10625</span>, <span class="token assign-left variable">idle_age</span><span class="token operator">=</span><span class="token number">24</span>, <span class="token assign-left variable">hard_age</span><span class="token operator">=</span><span class="token number">65534</span>, <span class="token assign-left variable">priority</span><span class="token operator">=</span><span class="token number">1</span> <span class="token assign-left variable">actions</span><span class="token operator">=</span>NORMAL
+</code></pre>
+<h3 id="br-int">br-int</h3>
+<p>br-int&#x4E0A;&#x6302;&#x8F7D;&#x4E86;&#x5927;&#x91CF;&#x7684;agent&#x6765;&#x63D0;&#x4F9B;&#x5404;&#x79CD;&#x7F51;&#x7EDC;&#x670D;&#x52A1;&#xFF0C;&#x53E6;&#x5916;&#x8D1F;&#x8D23;&#x5BF9;&#x53D1;&#x5F80;br-eth1&#x7684;&#x6D41;&#x91CF;&#xFF0C;&#x5B9E;&#x73B0;local vlan&#x8F6C;&#x5316;&#x4E3A;&#x5916;&#x90E8;vlan&#x3002;</p>
+<pre class="language-"><code class="lang-sh"><span class="token comment">#ovs-ofctl dump-flows br-int</span>
+NXST_FLOW reply <span class="token punctuation">(</span>xid<span class="token operator">=</span>0x4<span class="token punctuation">)</span>:
+ <span class="token assign-left variable">cookie</span><span class="token operator">=</span>0x0, <span class="token assign-left variable">duration</span><span class="token operator">=</span><span class="token number">147294</span>.121s, <span class="token assign-left variable">table</span><span class="token operator">=</span><span class="token number">0</span>, <span class="token assign-left variable">n_packets</span><span class="token operator">=</span><span class="token number">224</span>, <span class="token assign-left variable">n_bytes</span><span class="token operator">=</span><span class="token number">33961</span>, <span class="token assign-left variable">idle_age</span><span class="token operator">=</span><span class="token number">13</span>, <span class="token assign-left variable">hard_age</span><span class="token operator">=</span><span class="token number">65534</span>, <span class="token assign-left variable">priority</span><span class="token operator">=</span><span class="token number">3</span>,in_port<span class="token operator">=</span><span class="token number">4</span>,dl_vlan<span class="token operator">=</span><span class="token number">1</span> <span class="token assign-left variable">actions</span><span class="token operator">=</span>mod_vlan_vid:101,NORMAL
+ <span class="token assign-left variable">cookie</span><span class="token operator">=</span>0x0, <span class="token assign-left variable">duration</span><span class="token operator">=</span><span class="token number">603538</span>.84s, <span class="token assign-left variable">table</span><span class="token operator">=</span><span class="token number">0</span>, <span class="token assign-left variable">n_packets</span><span class="token operator">=</span><span class="token number">19</span>, <span class="token assign-left variable">n_bytes</span><span class="token operator">=</span><span class="token number">2234</span>, <span class="token assign-left variable">idle_age</span><span class="token operator">=</span><span class="token number">18963</span>, <span class="token assign-left variable">hard_age</span><span class="token operator">=</span><span class="token number">65534</span>, <span class="token assign-left variable">priority</span><span class="token operator">=</span><span class="token number">2</span>,in_port<span class="token operator">=</span><span class="token number">4</span> <span class="token assign-left variable">actions</span><span class="token operator">=</span>drop
+ <span class="token assign-left variable">cookie</span><span class="token operator">=</span>0x0, <span class="token assign-left variable">duration</span><span class="token operator">=</span><span class="token number">603547</span>.134s, <span class="token assign-left variable">table</span><span class="token operator">=</span><span class="token number">0</span>, <span class="token assign-left variable">n_packets</span><span class="token operator">=</span><span class="token number">31901</span>, <span class="token assign-left variable">n_bytes</span><span class="token operator">=</span><span class="token number">6419756</span>, <span class="token assign-left variable">idle_age</span><span class="token operator">=</span><span class="token number">13</span>, <span class="token assign-left variable">hard_age</span><span class="token operator">=</span><span class="token number">65534</span>, <span class="token assign-left variable">priority</span><span class="token operator">=</span><span class="token number">1</span> <span class="token assign-left variable">actions</span><span class="token operator">=</span>NORMAL
+</code></pre>
+<p>dnsmasq&#x8D1F;&#x8D23;&#x63D0;&#x4F9B;DHCP&#x670D;&#x52A1;&#xFF0C;&#x7ED1;&#x5B9A;&#x5230;&#x67D0;&#x4E2A;&#x7279;&#x5B9A;&#x7684;&#x540D;&#x5B57;&#x7A7A;&#x95F4;&#x4E0A;&#xFF0C;&#x6BCF;&#x4E2A;&#x9700;&#x8981;DHCP&#x670D;&#x52A1;&#x7684;&#x79DF;&#x6237;&#x7F51;&#x7EDC;&#x6709;&#x81EA;&#x5DF1;&#x4E13;&#x5C5E;&#x9694;&#x79BB;&#x7684;DHCP&#x670D;&#x52A1;&#xFF08;&#x56FE;&#x4E2D;&#x7684;tapXXX&#x548C;tapWWW&#x4E0A;&#x5404;&#x81EA;&#x76D1;&#x542C;&#x4E86;&#x4E00;&#x4E2A;dnsmasq&#xFF09;&#x3002;</p>
+<p>&#x8DEF;&#x7531;&#x662F;L3 agent&#x6765;&#x5B9E;&#x73B0;&#xFF0C;&#x6BCF;&#x4E2A;&#x5B50;&#x7F51;&#x5728;br-int&#x4E0A;&#x6709;&#x4E00;&#x4E2A;&#x7AEF;&#x53E3;&#xFF08;qr-YYY&#x548C;qr-ZZZ&#xFF0C;&#x5DF2;&#x914D;&#x7F6E;IP&#xFF0C;&#x5206;&#x522B;&#x662F;&#x5404;&#x81EA;&#x5185;&#x90E8;&#x5B50;&#x7F51;&#x7684;&#x7F51;&#x5173;&#xFF09;&#xFF0C;L3 agent&#x7ED1;&#x5B9A;&#x5230;&#x4E0A;&#x9762;&#x3002;&#x8981;&#x8BBF;&#x95EE;&#x5916;&#x90E8;&#x7684;&#x516C;&#x5171;&#x7F51;&#x7EDC;&#xFF0C;&#x9700;&#x8981;&#x901A;&#x8FC7;L3 agent&#x53D1;&#x51FA;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x7ECF;&#x8FC7;int-br-ex&#x5230;phy-br-ex&#xFF08;&#x5B9E;&#x9645;&#x4E0A;&#x5E76;&#x6CA1;&#x6709;&#x7F51;&#x5305;&#x4ECE;&#x8FD9;&#x4E2A;veth pair&#x4F20;&#x8F93;&#xFF09;&#x3002;&#x5982;&#x679C;&#x8981;&#x4F7F;&#x7528;&#x5916;&#x90E8;&#x53EF;&#x89C1;&#x7684;floating IP&#xFF0C;L3 agent&#x4ECD;&#x7136;&#x9700;&#x8981;&#x901A;&#x8FC7;iptables&#x6765;&#x8FDB;&#x884C;NAT&#x3002;</p>
+<p>&#x6BCF;&#x4E2A;L3 agent&#x6216;dnsmasq&#x90FD;&#x5728;&#x5404;&#x81EA;&#x72EC;&#x7ACB;&#x7684;&#x540D;&#x5B57;&#x7A7A;&#x95F4;&#x4E2D;&#xFF0C;&#x5982;&#x4E0B;&#x56FE;&#x6240;&#x793A;&#xFF0C;&#x5176;&#x4E2D;&#x540C;&#x4E00;&#x79DF;&#x6237;&#x7684;&#x4E24;&#x4E2A;&#x5B50;&#x7F51;&#x90FD;&#x4F7F;&#x7528;&#x4E86;&#x540C;&#x4E00;&#x4E2A;&#x8DEF;&#x7531;&#x5668;&#x3002;</p>
+<p><img src="../_images/vlan_network_ns.png" alt="&#x6BCF;&#x4E2A;&#x7F51;&#x7EDC;&#x529F;&#x80FD;&#x8FDB;&#x7A0B;&#x90FD;&#x5728;&#x81EA;&#x5DF1;&#x7684;&#x540D;&#x5B57;&#x7A7A;&#x95F4;&#x4E2D;"></p>
+<p>&#x5BF9;&#x4E8E;&#x5B50;&#x7F51;&#x4F7F;&#x7528;&#x4E0D;&#x540C;&#x8DEF;&#x7531;&#x5668;&#x7684;&#x60C5;&#x51B5;&#xFF0C;&#x591A;&#x4E2A;&#x8DEF;&#x7531;&#x5668;&#x4F1A;&#x5728;&#x81EA;&#x5DF1;&#x72EC;&#x7ACB;&#x7684;&#x540D;&#x5B57;&#x7A7A;&#x95F4;&#x4E2D;&#x3002;&#x4F8B;&#x5982;&#x8981;&#x5B9E;&#x73B0;&#x4E24;&#x4E2A;&#x79DF;&#x6237;&#x7684;&#x4E24;&#x4E2A;&#x5B50;&#x7F51;&#x7684;&#x60C5;&#x51B5;&#xFF0C;&#x5982;&#x4E0B;&#x56FE;&#x6240;&#x793A;&#x3002;</p>
+<p><img src="../_images/vlan_two_tenant_two_subnet.png" alt="&#x4E24;&#x4E2A;&#x79DF;&#x6237;&#x7684;&#x4E24;&#x4E2A;&#x5B50;&#x7F51;&#x7684;&#x7ED3;&#x6784;"></p>
+<p>&#x8FD9;&#x79CD;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x7F51;&#x7EDC;&#x8282;&#x70B9;&#x4E0A;&#x7684;&#x540D;&#x5B57;&#x7A7A;&#x95F4;&#x5982;&#x4E0B;&#x56FE;&#x6240;&#x793A;&#x3002;
+<img src="../_images/vlan_network_ns_2.png" alt="&#x4E24;&#x4E2A;&#x79DF;&#x6237;&#x4E24;&#x4E2A;&#x5B50;&#x7F51;&#x60C5;&#x51B5;&#x4E0B;&#x7684;&#x540D;&#x5B57;&#x7A7A;&#x95F4;"></p>
+<h3 id="br-ex">br-ex</h3>
+<p>br-ex&#x8981;&#x505A;&#x7684;&#x4E8B;&#x60C5;&#x5F88;&#x7B80;&#x5355;&#xFF0C;&#x53EA;&#x9700;&#x8981;&#x6B63;&#x5E38;&#x8F6C;&#x53D1;&#x5373;&#x53EF;&#x3002;</p>
+<pre class="language-"><code class="lang-sh"><span class="token comment">#ovs-ofctl dump-flows br-ex</span>
+NXST_FLOW reply <span class="token punctuation">(</span>xid<span class="token operator">=</span>0x4<span class="token punctuation">)</span>:
+ <span class="token assign-left variable">cookie</span><span class="token operator">=</span>0x0, <span class="token assign-left variable">duration</span><span class="token operator">=</span><span class="token number">6770</span>.969s, <span class="token assign-left variable">table</span><span class="token operator">=</span><span class="token number">0</span>, <span class="token assign-left variable">n_packets</span><span class="token operator">=</span><span class="token number">5411</span>, <span class="token assign-left variable">n_bytes</span><span class="token operator">=</span><span class="token number">306944</span>, <span class="token assign-left variable">idle_age</span><span class="token operator">=</span><span class="token number">0</span>, <span class="token assign-left variable">hard_age</span><span class="token operator">=</span><span class="token number">65534</span>, <span class="token assign-left variable">priority</span><span class="token operator">=</span><span class="token number">0</span> <span class="token assign-left variable">actions</span><span class="token operator">=</span>NORMAL
+</code></pre>
+
+<script>console.log("plugin-popup....");document.onclick = function(e){ e.target.tagName === "IMG" && window.open(e.target.src,e.target.src)}</script><style>img{cursor:pointer}</style>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="compute_node.html" class="navigation navigation-prev " aria-label="Previous page: 计算节点">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../vxlan_mode/" class="navigation navigation-next " aria-label="Next page: VXLAN 模式">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"网络节点","level":"1.5.2","depth":2,"next":{"title":"VXLAN 模式","level":"1.6","depth":1,"path":"vxlan_mode/README.md","ref":"vxlan_mode/README.md","articles":[{"title":"计算节点","level":"1.6.1","depth":2,"path":"vxlan_mode/compute_node/README.md","ref":"vxlan_mode/compute_node/README.md","articles":[{"title":"br-int","level":"1.6.1.1","depth":3,"path":"vxlan_mode/compute_node/br-int.md","ref":"vxlan_mode/compute_node/br-int.md","articles":[]},{"title":"br-tun","level":"1.6.1.2","depth":3,"path":"vxlan_mode/compute_node/br-tun.md","ref":"vxlan_mode/compute_node/br-tun.md","articles":[]}]},{"title":"网络节点","level":"1.6.2","depth":2,"path":"vxlan_mode/network_node/README.md","ref":"vxlan_mode/network_node/README.md","articles":[{"title":"br-tun","level":"1.6.2.1","depth":3,"path":"vxlan_mode/network_node/br-tun.md","ref":"vxlan_mode/network_node/br-tun.md","articles":[]},{"title":"br-int","level":"1.6.2.2","depth":3,"path":"vxlan_mode/network_node/br-int.md","ref":"vxlan_mode/network_node/br-int.md","articles":[]},{"title":"br-ex","level":"1.6.2.3","depth":3,"path":"vxlan_mode/network_node/br-ex.md","ref":"vxlan_mode/network_node/br-ex.md","articles":[]}]}]},"previous":{"title":"计算节点","level":"1.5.1","depth":2,"path":"vlan_mode/compute_node.md","ref":"vlan_mode/compute_node.md","articles":[]},"dir":"ltr"},"config":{"plugins":["back-to-top-button","chapter-fold","expandable-chapters","code","-lunr","-search","search-pro","page-toc-button","popup","prism","-highlight","livereload"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"chapter-fold":{},"prism":{},"livereload":{},"search-pro":{},"popup":{},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"page-toc-button":{"maxTocDepth":2,"minTocSize":2},"back-to-top-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"expandable-chapters":{}},"theme":"default","author":"John Lee <ljzsdut@163.com>","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"笔记","links":{"sharing":{"all":null,"facebook":null,"google":null,"twitter":null,"weibo":null},"sidebar":{"My Blog":"http://www.ljzsdut.com"}},"gitbook":"*","description":"notes","extension":null},"file":{"path":"vlan_mode/network_node.md","mtime":"2021-07-05T11:41:51.182Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-08-18T01:23:01.131Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-back-to-top-button/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-chapter-fold/chapter-fold.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-expandable-chapters/expandable-chapters.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-code/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-pro/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-pro/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-page-toc-button/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

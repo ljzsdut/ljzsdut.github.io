@@ -1,0 +1,918 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>9. 管理 Crushmap · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="modify_mon_ip.html" />
+    
+    
+    <link rel="prev" href="operate_pool.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    简介
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="common_operations.html">
+            
+                <a href="common_operations.html">
+            
+                    
+                    第一部分：常用操作
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="operate_cluster.html">
+            
+                <a href="operate_cluster.html">
+            
+                    
+                    1. 操作集群
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="monitor_cluster.html">
+            
+                <a href="monitor_cluster.html">
+            
+                    
+                    2. 监控集群
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="monitor_osd.html">
+            
+                <a href="monitor_osd.html">
+            
+                    
+                    3. 监控 OSD
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="monitor_pg.html">
+            
+                <a href="monitor_pg.html">
+            
+                    
+                    4. 监控 PG
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5" data-path="user_management.html">
+            
+                <a href="user_management.html">
+            
+                    
+                    5. 用户管理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.6" data-path="add_rm_mon.html">
+            
+                <a href="add_rm_mon.html">
+            
+                    
+                    6. 增加/删除 Monitor
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.7" data-path="add_rm_osd.html">
+            
+                <a href="add_rm_osd.html">
+            
+                    
+                    7. 增加/删除 OSD
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.8" data-path="operate_pool.html">
+            
+                <a href="operate_pool.html">
+            
+                    
+                    8. 操作 Pool
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.2.9" data-path="manage_crushmap.html">
+            
+                <a href="manage_crushmap.html">
+            
+                    
+                    9. 管理 Crushmap
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.10" data-path="modify_mon_ip.html">
+            
+                <a href="modify_mon_ip.html">
+            
+                    
+                    10. 修改 MON IP
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.11" data-path="change_cluster_conf.html">
+            
+                <a href="change_cluster_conf.html">
+            
+                    
+                    11. 修改集群配置
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.12" data-path="log_debug.html">
+            
+                <a href="log_debug.html">
+            
+                    
+                    12. 日志和调试
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../Troubleshooting/troubleshooting.html">
+            
+                <a href="../Troubleshooting/troubleshooting.html">
+            
+                    
+                    第二部分：故障处理
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../Troubleshooting/troubleshooting_mon.html">
+            
+                <a href="../Troubleshooting/troubleshooting_mon.html">
+            
+                    
+                    1. 常见 MON 故障处理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../Troubleshooting/troubleshooting_osd.html">
+            
+                <a href="../Troubleshooting/troubleshooting_osd.html">
+            
+                    
+                    2. 常见 OSD 故障处理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../Troubleshooting/troubleshooting_pg.html">
+            
+                <a href="../Troubleshooting/troubleshooting_pg.html">
+            
+                    
+                    3. 常见 PG 故障处理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../Troubleshooting/troubleshooting_lost_power.html">
+            
+                <a href="../Troubleshooting/troubleshooting_lost_power.html">
+            
+                    
+                    4. 全局 Ceph 节点宕机处理 
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="../Troubleshooting/troubleshooting_single_lost_power.html">
+            
+                <a href="../Troubleshooting/troubleshooting_single_lost_power.html">
+            
+                    
+                    5. 单个 Ceph 节点宕机处理 
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../Advance_usage/advanced_usage.html">
+            
+                <a href="../Advance_usage/advanced_usage.html">
+            
+                    
+                    第三部分：Ceph 进阶
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../Advance_usage/pg_pgp.html">
+            
+                <a href="../Advance_usage/pg_pgp.html">
+            
+                    
+                    1. PG 和 PGP 的区别
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../Advance_usage/mon_backup.html">
+            
+                <a href="../Advance_usage/mon_backup.html">
+            
+                    
+                    2. Monitor 的备份和恢复
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../Advance_usage/change_fd.html">
+            
+                <a href="../Advance_usage/change_fd.html">
+            
+                    
+                    3. 修改 Cinder/Glance 进程的最大可用 FD
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../Advance_usage/change_osd_journal.html">
+            
+                <a href="../Advance_usage/change_osd_journal.html">
+            
+                    
+                    4. 更换 OSD Journal
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="../Advance_usage/rescue_osd_parted.html">
+            
+                <a href="../Advance_usage/rescue_osd_parted.html">
+            
+                    
+                    5. 清空 OSD 的分区表后如何恢复
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.6" data-path="../Advance_usage/pg_active_remapped.html">
+            
+                <a href="../Advance_usage/pg_active_remapped.html">
+            
+                    
+                    6. PG 卡在 active + remapped 状态
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.7" data-path="../Advance_usage/find_rbd_data_loc.html">
+            
+                <a href="../Advance_usage/find_rbd_data_loc.html">
+            
+                    
+                    7. 查看 RBD 镜像的位置
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.8" data-path="../Advance_usage/rbd_real_size.html">
+            
+                <a href="../Advance_usage/rbd_real_size.html">
+            
+                    
+                    8. 查看 RBD 镜像的实际大小
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.9" data-path="../Advance_usage/cal_pg_per_osd.html">
+            
+                <a href="../Advance_usage/cal_pg_per_osd.html">
+            
+                    
+                    9. 统计 OSD 上 PG 的数量
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.10" data-path="../Advance_usage/list_rbd_watcher.html">
+            
+                <a href="../Advance_usage/list_rbd_watcher.html">
+            
+                    
+                    10. 查看使用 RBD 镜像的客户端
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >9. 管理 Crushmap</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="9-&#x7BA1;&#x7406;-crushmap">9. &#x7BA1;&#x7406; Crushmap</h1>
+<hr>
+<p>CRUSH &#x7B97;&#x6CD5;&#x901A;&#x8FC7;&#x8BA1;&#x7B97;&#x6570;&#x636E;&#x5B58;&#x50A8;&#x4F4D;&#x7F6E;&#x6765;&#x786E;&#x5B9A;&#x5982;&#x4F55;&#x5B58;&#x50A8;&#x548C;&#x68C0;&#x7D22;&#x3002; CRUSH &#x6388;&#x6743; Ceph &#x5BA2;&#x6237;&#x7AEF;&#x76F4;&#x63A5;&#x8FDE;&#x63A5; OSD &#xFF0C;&#x800C;&#x975E;&#x901A;&#x8FC7;&#x4E00;&#x4E2A;&#x4E2D;&#x592E;&#x670D;&#x52A1;&#x5668;&#x6216;&#x4EE3;&#x7406;&#x3002;&#x6570;&#x636E;&#x5B58;&#x50A8;&#x3001;&#x68C0;&#x7D22;&#x7B97;&#x6CD5;&#x7684;&#x4F7F;&#x7528;&#xFF0C;&#x4F7F; Ceph &#x907F;&#x514D;&#x4E86;&#x5355;&#x70B9;&#x6545;&#x969C;&#x3001;&#x6027;&#x80FD;&#x74F6;&#x9888;&#x3001;&#x548C;&#x4F38;&#x7F29;&#x7684;&#x7269;&#x7406;&#x9650;&#x5236;&#x3002;</p>
+<p>CRUSH &#x9700;&#x8981;&#x4E00;&#x5F20;&#x96C6;&#x7FA4;&#x7684; Map&#xFF0C;&#x4E14;&#x4F7F;&#x7528; CRUSH Map &#x628A;&#x6570;&#x636E;&#x4F2A;&#x968F;&#x673A;&#x5730;&#x3001;&#x5C3D;&#x91CF;&#x5E73;&#x5747;&#x5730;&#x5206;&#x5E03;&#x5230;&#x6574;&#x4E2A;&#x96C6;&#x7FA4;&#x7684; OSD &#x91CC;&#x3002;CRUSH Map &#x5305;&#x542B; OSD &#x5217;&#x8868;&#x3001;&#x628A;&#x8BBE;&#x5907;&#x6C47;&#x805A;&#x4E3A;&#x7269;&#x7406;&#x4F4D;&#x7F6E;&#x7684;&#x201C;&#x6876;&#x201D;&#x5217;&#x8868;&#x3001;&#x548C;&#x6307;&#x793A; CRUSH &#x5982;&#x4F55;&#x590D;&#x5236;&#x5B58;&#x50A8;&#x6C60;&#x91CC;&#x7684;&#x6570;&#x636E;&#x7684;&#x89C4;&#x5219;&#x5217;&#x8868;&#x3002;</p>
+<p>&#x5B8C;&#x5168;&#x624B;&#x52A8;&#x7BA1;&#x7406; CRUSH Map &#x4E5F;&#x662F;&#x53EF;&#x80FD;&#x7684;&#xFF0C;&#x5728;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x4E2D;&#x8BBE;&#x5B9A;&#xFF1A;</p>
+<pre><code>osd crush update on start = false
+</code></pre><h3 id="91-&#x7F16;&#x8F91;-crush-map">9.1 &#x7F16;&#x8F91; CRUSH Map</h3>
+<p>&#x8981;&#x7F16;&#x8F91;&#x73B0;&#x6709;&#x7684; CRUSH Map&#xFF1A;</p>
+<ol>
+<li>&#x83B7;&#x53D6; CRUSH Map&#xFF1B;</li>
+<li>&#x53CD;&#x7F16;&#x8BD1; CRUSH &#x56FE;&#xFF1B;</li>
+<li>&#x81F3;&#x5C11;&#x7F16;&#x8F91;&#x4E00;&#x4E2A;&#x8BBE;&#x5907;&#x3001;&#x6876;&#x3001;&#x89C4;&#x5219;&#xFF1B;</li>
+<li>&#x91CD;&#x7F16;&#x8BD1; CRUSH Map&#xFF1B;</li>
+<li>&#x6CE8;&#x5165; CRUSH Map&#x3002;</li>
+</ol>
+<p>&#x8981;&#x6FC0;&#x6D3B; CRUSH Map &#x91CC;&#x67D0;&#x5B58;&#x50A8;&#x6C60;&#x7684;&#x89C4;&#x5219;&#xFF0C;&#x627E;&#x5230;&#x901A;&#x7528;&#x89C4;&#x5219;&#x96C6;&#x7F16;&#x53F7;&#xFF0C;&#x7136;&#x540E;&#x628A;&#x5B83;&#x6307;&#x5B9A;&#x5230;&#x90A3;&#x4E2A;&#x89C4;&#x5219;&#x96C6;&#x3002;&#x8BE6;&#x60C5;&#x53C2;&#x89C1;&#x672C;&#x624B;&#x518C;&#x7B2C;&#x4E00;&#x90E8;&#x5206; <a href="operate_pool.html">8. &#x64CD;&#x4F5C; Pool</a> &#x4E2D;&#x8C03;&#x6574;&#x5B58;&#x50A8;&#x6C60;&#x9009;&#x9879;&#x503C;&#x90E8;&#x5206;&#x3002;</p>
+<h5 id="&#x83B7;&#x53D6;-crush-map">&#x83B7;&#x53D6; CRUSH Map</h5>
+<p>&#x8981;&#x83B7;&#x53D6;&#x96C6;&#x7FA4;&#x7684; CRUSH Map&#xFF0C;&#x6267;&#x884C;&#x547D;&#x4EE4;&#xFF1A;</p>
+<pre><code>ceph osd getcrushmap -o {compiled-crushmap-filename}
+</code></pre><p>Ceph &#x5C06;&#x628A; CRUSH &#x8F93;&#x51FA;&#xFF08; -o &#xFF09;&#x5230;&#x4F60;&#x6307;&#x5B9A;&#x7684;&#x6587;&#x4EF6;&#xFF0C;&#x7531;&#x4E8E; CRUSH Map &#x662F;&#x5DF2;&#x7F16;&#x8BD1;&#x7684;&#xFF0C;&#x6240;&#x4EE5;&#x7F16;&#x8F91;&#x524D;&#x5FC5;&#x987B;&#x5148;&#x53CD;&#x7F16;&#x8BD1;&#x3002;</p>
+<h5 id="&#x53CD;&#x7F16;&#x8BD1;-crush-map">&#x53CD;&#x7F16;&#x8BD1; CRUSH Map</h5>
+<p>&#x8981;&#x53CD;&#x7F16;&#x8BD1; CRUSH Map&#xFF0C;&#x6267;&#x884C;&#x547D;&#x4EE4;&#xFF1A;</p>
+<pre><code>crushtool -d {compiled-crushmap-filename} -o {decompiled-crushmap-filename}
+</code></pre><p>Ceph &#x5C06;&#x53CD;&#x7F16;&#x8BD1;&#xFF08; -d &#xFF09;&#x4E8C;&#x8FDB;&#x5236; CRUSH Map&#xFF0C;&#x4E14;&#x8F93;&#x51FA;&#xFF08; -o &#xFF09;&#x5230;&#x4F60;&#x6307;&#x5B9A;&#x7684;&#x6587;&#x4EF6;&#x3002;</p>
+<h5 id="&#x7F16;&#x8BD1;-crush-map">&#x7F16;&#x8BD1; CRUSH Map</h5>
+<p>&#x8981;&#x7F16;&#x8BD1; CRUSH Map&#xFF0C;&#x6267;&#x884C;&#x547D;&#x4EE4;&#xFF1A;</p>
+<pre><code>crushtool -c {decompiled-crush-map-filename} -o {compiled-crush-map-filename}
+</code></pre><p>Ceph &#x5C06;&#x628A;&#x5DF2;&#x7F16;&#x8BD1;&#x7684; CRUSH Map &#x4FDD;&#x5B58;&#x5230;&#x4F60;&#x6307;&#x5B9A;&#x7684;&#x6587;&#x4EF6;&#x3002;</p>
+<h5 id="&#x6CE8;&#x5165;-crush-map">&#x6CE8;&#x5165; CRUSH Map</h5>
+<p>&#x8981;&#x628A; CRUSH Map &#x5E94;&#x7528;&#x5230;&#x96C6;&#x7FA4;&#xFF0C;&#x6267;&#x884C;&#x547D;&#x4EE4;&#xFF1A;</p>
+<pre><code>ceph osd setcrushmap -i  {compiled-crushmap-filename}
+</code></pre><p>Ceph &#x5C06;&#x628A;&#x4F60;&#x6307;&#x5B9A;&#x7684;&#x5DF2;&#x7F16;&#x8BD1; CRUSH Map &#x6CE8;&#x5165;&#x5230;&#x96C6;&#x7FA4;&#x3002;</p>
+<h3 id="92-crush-map-&#x53C2;&#x6570;">9.2 CRUSH Map &#x53C2;&#x6570;</h3>
+<p>CRUSH Map &#x4E3B;&#x8981;&#x6709; 4 &#x4E2A;&#x6BB5;&#x843D;&#x3002;</p>
+<ol>
+<li><strong>&#x8BBE;&#x5907;&#xFF1A;</strong>&#x7531;&#x4EFB;&#x610F;&#x5BF9;&#x8C61;&#x5B58;&#x50A8;&#x8BBE;&#x5907;&#x7EC4;&#x6210;&#xFF0C;&#x5373;&#x5BF9;&#x5E94;&#x4E00;&#x4E2A; <code>ceph-osd</code>&#x8FDB;&#x7A0B;&#x7684;&#x5B58;&#x50A8;&#x5668;&#x3002; Ceph &#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x91CC;&#x7684;&#x6BCF;&#x4E2A; OSD &#x90FD;&#x5E94;&#x8BE5;&#x6709;&#x4E00;&#x4E2A;&#x8BBE;&#x5907;&#x3002;</li>
+<li><strong>&#x6876;&#x7C7B;&#x578B;&#xFF1A;</strong> &#x5B9A;&#x4E49;&#x4E86; CRUSH &#x5206;&#x7EA7;&#x7ED3;&#x6784;&#x91CC;&#x8981;&#x7528;&#x7684;&#x6876;&#x7C7B;&#x578B;&#xFF08; <code>types</code> &#xFF09;&#xFF0C;&#x6876;&#x7531;&#x9010;&#x7EA7;&#x6C47;&#x805A;&#x7684;&#x5B58;&#x50A8;&#x4F4D;&#x7F6E;&#xFF08;&#x5982;&#x884C;&#x3001;&#x673A;&#x67DC;&#x3001;&#x673A;&#x7BB1;&#x3001;&#x4E3B;&#x673A;&#x7B49;&#x7B49;&#xFF09;&#x53CA;&#x5176;&#x6743;&#x91CD;&#x7EC4;&#x6210;&#x3002;</li>
+<li><strong>&#x6876;&#x5B9E;&#x4F8B;&#xFF1A;</strong> &#x5B9A;&#x4E49;&#x4E86;&#x6876;&#x7C7B;&#x578B;&#x540E;&#xFF0C;&#x8FD8;&#x5FC5;&#x987B;&#x58F0;&#x660E;&#x4E3B;&#x673A;&#x7684;&#x6876;&#x7C7B;&#x578B;&#x3001;&#x4EE5;&#x53CA;&#x89C4;&#x5212;&#x7684;&#x5176;&#x5B83;&#x6545;&#x969C;&#x57DF;&#x3002;</li>
+<li><strong>&#x89C4;&#x5219;&#xFF1A;</strong> &#x7531;&#x9009;&#x62E9;&#x6876;&#x7684;&#x65B9;&#x6CD5;&#x7EC4;&#x6210;&#x3002;</li>
+</ol>
+<h5 id="crush-map-&#x4E4B;&#x8BBE;&#x5907;">CRUSH Map &#x4E4B;&#x8BBE;&#x5907;</h5>
+<p>&#x4E3A;&#x628A; PG &#x6620;&#x5C04;&#x5230; OSD &#xFF0C; CRUSH Map &#x9700;&#x8981; OSD &#x5217;&#x8868;&#xFF08;&#x5373;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x6240;&#x5B9A;&#x4E49;&#x7684; OSD &#x5B88;&#x62A4;&#x8FDB;&#x7A0B;&#x540D;&#x79F0;&#xFF09;&#xFF0C;&#x6240;&#x4EE5;&#x5B83;&#x4EEC;&#x9996;&#x5148;&#x51FA;&#x73B0;&#x5728; CRUSH Map &#x91CC;&#x3002;&#x8981;&#x5728; CRUSH Map &#x91CC;&#x58F0;&#x660E;&#x4E00;&#x4E2A;&#x8BBE;&#x5907;&#xFF0C;&#x5728;&#x8BBE;&#x5907;&#x5217;&#x8868;&#x540E;&#x9762;&#x65B0;&#x5EFA;&#x4E00;&#x884C;&#xFF0C;&#x8F93;&#x5165; <code>device</code> &#x3001;&#x4E4B;&#x540E;&#x662F;&#x552F;&#x4E00;&#x7684;&#x6570;&#x5B57; ID &#x3001;&#x4E4B;&#x540E;&#x662F;&#x76F8;&#x5E94;&#x7684; <code>ceph-osd</code> &#x5B88;&#x62A4;&#x8FDB;&#x7A0B;&#x5B9E;&#x4F8B;&#x540D;&#x5B57;&#x3002;</p>
+<pre><code># devices
+device {num} {osd.name}
+</code></pre><p>&#x4F8B;&#x5982;&#xFF1A;</p>
+<pre><code># devices
+device 0 osd.0
+device 1 osd.1
+device 2 osd.2
+device 3 osd.3
+</code></pre><h5 id="crush-map-&#x4E4B;&#x6876;&#x7C7B;&#x578B;">CRUSH Map &#x4E4B;&#x6876;&#x7C7B;&#x578B;</h5>
+<p>CRUSH Map &#x91CC;&#x7684;&#x7B2C;&#x4E8C;&#x4E2A;&#x5217;&#x8868;&#x5B9A;&#x4E49;&#x4E86; bucket &#xFF08;&#x6876;&#xFF09;&#x7C7B;&#x578B;&#xFF0C;&#x6876;&#x7B80;&#x5316;&#x4E86;&#x8282;&#x70B9;&#x548C;&#x53F6;&#x5B50;&#x5C42;&#x6B21;&#x3002;&#x8282;&#x70B9;&#xFF08;&#x6216;&#x975E;&#x53F6;&#x5B50;&#xFF09;&#x6876;&#x5728;&#x5206;&#x7EA7;&#x7ED3;&#x6784;&#x91CC;&#x4E00;&#x822C;&#x8868;&#x793A;&#x7269;&#x7406;&#x4F4D;&#x7F6E;&#xFF0C;&#x8282;&#x70B9;&#x6C47;&#x805A;&#x4E86;&#x5176;&#x5B83;&#x8282;&#x70B9;&#x6216;&#x53F6;&#x5B50;&#xFF0C;&#x53F6;&#x6876;&#x8868;&#x793A; <code>ceph-osd</code> &#x5B88;&#x62A4;&#x8FDB;&#x7A0B;&#x53CA;&#x5176;&#x5BF9;&#x5E94;&#x7684;&#x5B58;&#x50A8;&#x5A92;&#x4F53;&#x3002;</p>
+<p>&#x8981;&#x5F80; CRUSH Map &#x4E2D;&#x589E;&#x52A0;&#x4E00;&#x79CD; bucket &#x7C7B;&#x578B;&#xFF0C;&#x5728;&#x73B0;&#x6709;&#x6876;&#x7C7B;&#x578B;&#x5217;&#x8868;&#x4E0B;&#x65B9;&#x65B0;&#x589E;&#x4E00;&#x884C;&#xFF0C;&#x8F93;&#x5165; <code>type</code> &#x3001;&#x4E4B;&#x540E;&#x662F;&#x60DF;&#x4E00;&#x6570;&#x5B57; ID &#x548C;&#x4E00;&#x4E2A;&#x6876;&#x540D;&#x3002;&#x6309;&#x60EF;&#x4F8B;&#xFF0C;&#x4F1A;&#x6709;&#x4E00;&#x4E2A;&#x53F6;&#x5B50;&#x6876;&#x4E3A; <code>type 0</code> &#xFF0C;&#x7136;&#x800C;&#x4F60;&#x53EF;&#x4EE5;&#x6307;&#x5B9A;&#x4EFB;&#x4F55;&#x540D;&#x5B57;&#xFF08;&#x5982; osd &#x3001; disk &#x3001; drive &#x3001; storage &#x7B49;&#x7B49;&#xFF09;&#xFF1A;</p>
+<pre><code># types
+type {num} {bucket-name}
+</code></pre><p>&#x4F8B;&#x5982;&#xFF1A;</p>
+<pre><code># types
+type 0 osd
+type 1 host
+type 2 chassis
+type 3 rack
+type 4 row
+type 5 pdu
+type 6 pod
+type 7 room
+type 8 datacenter
+type 9 region
+type 10 root
+</code></pre><h5 id="crush-map-&#x4E4B;&#x6876;&#x5C42;&#x6B21;">CRUSH Map &#x4E4B;&#x6876;&#x5C42;&#x6B21;</h5>
+<p>CRUSH &#x7B97;&#x6CD5;&#x6839;&#x636E;&#x5404;&#x8BBE;&#x5907;&#x7684;&#x6743;&#x91CD;&#x3001;&#x5927;&#x81F4;&#x7EDF;&#x4E00;&#x7684;&#x6982;&#x7387;&#x628A;&#x6570;&#x636E;&#x5BF9;&#x8C61;&#x5206;&#x5E03;&#x5230;&#x5B58;&#x50A8;&#x8BBE;&#x5907;&#x4E2D;&#x3002; CRUSH &#x6839;&#x636E;&#x4F60;&#x5B9A;&#x4E49;&#x7684;&#x96C6;&#x7FA4;&#x8FD0;&#x884C;&#x56FE;&#x5206;&#x5E03;&#x5BF9;&#x8C61;&#x53CA;&#x5176;&#x526F;&#x672C;&#xFF0C; CRUSH Map &#x8868;&#x8FBE;&#x4E86;&#x53EF;&#x7528;&#x5B58;&#x50A8;&#x8BBE;&#x5907;&#x4EE5;&#x53CA;&#x5305;&#x542B;&#x5B83;&#x4EEC;&#x7684;&#x903B;&#x8F91;&#x5355;&#x5143;&#x3002;</p>
+<p>&#x8981;&#x628A; PG &#x6620;&#x5C04;&#x5230;&#x8DE8;&#x6545;&#x969C;&#x57DF;&#x7684; OSD &#xFF0C;&#x4E00;&#x4E2A; CRUSH Map &#x9700;&#x5B9A;&#x4E49;&#x4E00;&#x7CFB;&#x5217;&#x5206;&#x7EA7;&#x6876;&#x7C7B;&#x578B;&#xFF08;&#x5373;&#x73B0;&#x6709; CRUSH Map &#x7684; <code># type</code> &#x4E0B;&#xFF09;&#x3002;&#x521B;&#x5EFA;&#x6876;&#x5206;&#x7EA7;&#x7ED3;&#x6784;&#x7684;&#x76EE;&#x7684;&#x662F;&#x6309;&#x6545;&#x969C;&#x57DF;&#x9694;&#x79BB;&#x53F6;&#x5B50;&#x8282;&#x70B9;&#xFF0C;&#x50CF;&#x4E3B;&#x673A;&#x3001;&#x673A;&#x7BB1;&#x3001;&#x673A;&#x67DC;&#x3001;&#x7535;&#x529B;&#x5206;&#x914D;&#x5355;&#x5143;&#x3001;&#x673A;&#x7FA4;&#x3001;&#x884C;&#x3001;&#x623F;&#x95F4;&#x3001;&#x548C;&#x6570;&#x636E;&#x4E2D;&#x5FC3;&#x3002;&#x9664;&#x4E86;&#x8868;&#x793A;&#x53F6;&#x5B50;&#x8282;&#x70B9;&#x7684; OSD &#xFF0C;&#x5176;&#x5B83;&#x5206;&#x7EA7;&#x7ED3;&#x6784;&#x90FD;&#x662F;&#x4EFB;&#x610F;&#x7684;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x6309;&#x9700;&#x5B9A;&#x4E49;&#x3002;</p>
+<p>&#x58F0;&#x660E;&#x4E00;&#x4E2A;&#x6876;&#x5B9E;&#x4F8B;&#x65F6;&#xFF0C;&#x4F60;&#x5FC5;&#x987B;&#x6307;&#x5B9A;&#x5176;&#x7C7B;&#x578B;&#x3001;&#x60DF;&#x4E00;&#x540D;&#x79F0;&#xFF08;&#x5B57;&#x7B26;&#x4E32;&#xFF09;&#x3001;&#x60DF;&#x4E00;&#x8D1F;&#x6574;&#x6570; ID &#xFF08;&#x53EF;&#x9009;&#xFF09;&#x3001;&#x6307;&#x5B9A;&#x548C;&#x5404;&#x6761;&#x76EE;&#x603B;&#x5BB9;&#x91CF;/&#x80FD;&#x529B;&#x76F8;&#x5173;&#x7684;&#x6743;&#x91CD;&#x3001;&#x6307;&#x5B9A;&#x6876;&#x7B97;&#x6CD5;&#xFF08;&#x901A;&#x5E38;&#x662F; straw &#xFF09;&#x3001;&#x548C;&#x54C8;&#x5E0C;&#xFF08;&#x901A;&#x5E38;&#x4E3A; 0 &#xFF0C;&#x8868;&#x793A;&#x54C8;&#x5E0C;&#x7B97;&#x6CD5; rjenkins1 &#xFF09;&#x3002;&#x4E00;&#x4E2A;&#x6876;&#x53EF;&#x4EE5;&#x5305;&#x542B;&#x4E00;&#x5230;&#x591A;&#x4E2A;&#x6761;&#x76EE;&#xFF0C;&#x8FD9;&#x4E9B;&#x6761;&#x76EE;&#x53EF;&#x4EE5;&#x7531;&#x8282;&#x70B9;&#x6876;&#x6216;&#x53F6;&#x5B50;&#x7EC4;&#x6210;&#xFF0C;&#x5B83;&#x4EEC;&#x53EF;&#x4EE5;&#x6709;&#x4E2A;&#x6743;&#x91CD;&#x7528;&#x6765;&#x53CD;&#x6620;&#x6761;&#x76EE;&#x7684;&#x76F8;&#x5BF9;&#x6743;&#x91CD;&#x3002;</p>
+<p>&#x4F60;&#x53EF;&#x4EE5;&#x6309;&#x4E0B;&#x5217;&#x8BED;&#x6CD5;&#x58F0;&#x660E;&#x4E00;&#x4E2A;&#x8282;&#x70B9;&#x6876;&#xFF1A;</p>
+<pre><code>[bucket-type] [bucket-name] {
+        id [a unique negative numeric ID]
+        weight [the relative capacity/capability of the item(s)]
+        alg [the bucket type: uniform | list | tree | straw ]
+        hash [the hash type: 0 by default]
+        item [item-name] weight [weight]
+}
+</code></pre><p>&#x4F8B;&#x5982;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x5B9A;&#x4E49;&#x4E24;&#x4E2A;&#x4E3B;&#x673A;&#x6876;&#x548C;&#x4E00;&#x4E2A;&#x673A;&#x67DC;&#x6876;&#xFF0C;&#x673A;&#x67DC;&#x6876;&#x5305;&#x542B;&#x4E24;&#x4E2A;&#x4E3B;&#x673A;&#x6876;&#xFF0C; OSD &#x88AB;&#x58F0;&#x660E;&#x4E3A;&#x4E3B;&#x673A;&#x6876;&#x5185;&#x7684;&#x6761;&#x76EE;&#xFF1A;</p>
+<pre><code>host node1 {
+        id -1
+        alg straw
+        hash 0
+        item osd.0 weight 1.00
+        item osd.1 weight 1.00
+}
+
+host node2 {
+        id -2
+        alg straw
+        hash 0
+        item osd.2 weight 1.00
+        item osd.3 weight 1.00
+}
+
+rack rack1 {
+        id -3
+           alg straw
+        hash 0
+        item node1 weight 2.00
+        item node2 weight 2.00
+}
+</code></pre><h6 id="&#x8C03;&#x6574;&#x6876;&#x7684;&#x6743;&#x91CD;">&#x8C03;&#x6574;&#x6876;&#x7684;&#x6743;&#x91CD;</h6>
+<p>Ceph &#x7528;&#x53CC;&#x7CBE;&#x5EA6;&#x7C7B;&#x578B;&#x6570;&#x636E;&#x8868;&#x793A;&#x6876;&#x6743;&#x91CD;&#x3002;&#x6743;&#x91CD;&#x548C;&#x8BBE;&#x5907;&#x5BB9;&#x91CF;&#x4E0D;&#x540C;&#xFF0C;&#x6211;&#x4EEC;&#x5EFA;&#x8BAE;&#x7528; 1.00 &#x4F5C;&#x4E3A; 1TB &#x5B58;&#x50A8;&#x8BBE;&#x5907;&#x7684;&#x76F8;&#x5BF9;&#x6743;&#x91CD;&#xFF0C;&#x8FD9;&#x6837; 0.5 &#x7684;&#x6743;&#x91CD;&#x5927;&#x6982;&#x4EE3;&#x8868; 500GB &#x3001; 3.00 &#x5927;&#x6982;&#x4EE3;&#x8868; 3TB &#x3002;&#x8F83;&#x9AD8;&#x7EA7;&#x6876;&#x7684;&#x6743;&#x91CD;&#x662F;&#x6240;&#x6709;&#x53F6;&#x5B50;&#x6876;&#x7684;&#x6743;&#x91CD;&#x4E4B;&#x548C;&#x3002;</p>
+<p>&#x4E00;&#x4E2A;&#x6876;&#x7684;&#x6743;&#x91CD;&#x662F;&#x4E00;&#x7EF4;&#x7684;&#xFF0C;&#x4F60;&#x4E5F;&#x53EF;&#x4EE5;&#x8BA1;&#x7B97;&#x6761;&#x76EE;&#x6743;&#x91CD;&#x6765;&#x53CD;&#x6620;&#x5B58;&#x50A8;&#x8BBE;&#x5907;&#x6027;&#x80FD;&#x3002;&#x4F8B;&#x5982;&#xFF0C;&#x5982;&#x679C;&#x4F60;&#x6709;&#x5F88;&#x591A; 1TB &#x7684;&#x786C;&#x76D8;&#xFF0C;&#x5176;&#x4E2D;&#x4E00;&#x4E9B;&#x6570;&#x636E;&#x4F20;&#x8F93;&#x901F;&#x7387;&#x76F8;&#x5BF9;&#x4F4E;&#x3001;&#x5176;&#x4ED6;&#x7684;&#x6570;&#x636E;&#x4F20;&#x8F93;&#x7387;&#x76F8;&#x5BF9;&#x9AD8;&#xFF0C;&#x5373;&#x4F7F;&#x5B83;&#x4EEC;&#x5BB9;&#x91CF;&#x76F8;&#x540C;&#xFF0C;&#x4E5F;&#x5E94;&#x8BE5;&#x8BBE;&#x7F6E;&#x4E0D;&#x540C;&#x7684;&#x6743;&#x91CD;&#xFF08;&#x5982;&#x7ED9;&#x541E;&#x5410;&#x91CF;&#x8F83;&#x4F4E;&#x7684;&#x786C;&#x76D8;&#x8BBE;&#x7F6E;&#x6743;&#x91CD; 0.8 &#xFF0C;&#x8F83;&#x9AD8;&#x7684;&#x8BBE;&#x7F6E; 1.20 &#xFF09;&#x3002;</p>
+<h5 id="crush-map-&#x4E4B;&#x89C4;&#x5219;">CRUSH Map &#x4E4B;&#x89C4;&#x5219;</h5>
+<p>CRUSH Map &#x652F;&#x6301;&#x201C; CRUSH &#x89C4;&#x5219;&#x201D;&#x7684;&#x6982;&#x5FF5;&#xFF0C;&#x7528;&#x4EE5;&#x786E;&#x5B9A;&#x4E00;&#x4E2A;&#x5B58;&#x50A8;&#x6C60;&#x91CC;&#x6570;&#x636E;&#x7684;&#x5206;&#x5E03;&#x3002;CRUSH &#x89C4;&#x5219;&#x5B9A;&#x4E49;&#x4E86;&#x5F52;&#x7F6E;&#x548C;&#x590D;&#x5236;&#x7B56;&#x7565;&#x3001;&#x6216;&#x5206;&#x5E03;&#x7B56;&#x7565;&#xFF0C;&#x7528;&#x5B83;&#x53EF;&#x4EE5;&#x89C4;&#x5B9A; CRUSH &#x5982;&#x4F55;&#x653E;&#x7F6E;&#x5BF9;&#x8C61;&#x526F;&#x672C;&#x3002;&#x5BF9;&#x5927;&#x578B;&#x96C6;&#x7FA4;&#x6765;&#x8BF4;&#xFF0C;&#x4F60;&#x53EF;&#x80FD;&#x521B;&#x5EFA;&#x5F88;&#x591A;&#x5B58;&#x50A8;&#x6C60;&#xFF0C;&#x4E14;&#x6BCF;&#x4E2A;&#x5B58;&#x50A8;&#x6C60;&#x90FD;&#x6709;&#x5B83;&#x81EA;&#x5DF1;&#x7684; CRUSH &#x89C4;&#x5219;&#x96C6;&#x548C;&#x89C4;&#x5219;&#x3002;&#x9ED8;&#x8BA4;&#x7684; CRUSH Map &#x91CC;&#xFF0C;&#x6BCF;&#x4E2A;&#x5B58;&#x50A8;&#x6C60;&#x6709;&#x4E00;&#x6761;&#x89C4;&#x5219;&#x3001;&#x4E00;&#x4E2A;&#x89C4;&#x5219;&#x96C6;&#x88AB;&#x5206;&#x914D;&#x5230;&#x6BCF;&#x4E2A;&#x9ED8;&#x8BA4;&#x5B58;&#x50A8;&#x6C60;&#x3002;</p>
+<p><strong>&#x6CE8;&#x610F;&#xFF1A;</strong> &#x5927;&#x591A;&#x6570;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x4F60;&#x90FD;&#x4E0D;&#x9700;&#x8981;&#x4FEE;&#x6539;&#x9ED8;&#x8BA4;&#x89C4;&#x5219;&#x3002;&#x65B0;&#x521B;&#x5EFA;&#x5B58;&#x50A8;&#x6C60;&#x7684;&#x9ED8;&#x8BA4;&#x89C4;&#x5219;&#x96C6;&#x662F; <code>0</code> &#x3002;</p>
+<p>&#x89C4;&#x5219;&#x683C;&#x5F0F;&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre><code>rule &lt;rulename&gt; {
+
+        ruleset &lt;ruleset&gt;
+        type [ replicated | erasure ]
+        min_size &lt;min-size&gt;
+        max_size &lt;max-size&gt;
+        step take &lt;bucket-type&gt;
+        step [choose|chooseleaf] [firstn|indep] &lt;N&gt; &lt;bucket-type&gt;
+        step emit
+}
+</code></pre><p>&#x53C2;&#x6570;&#x8BF4;&#x660E;&#xFF1A;</p>
+<ul>
+<li><code>ruleset</code>&#xFF1A;&#x533A;&#x5206;&#x4E00;&#x6761;&#x89C4;&#x5219;&#x5C5E;&#x4E8E;&#x67D0;&#x4E2A;&#x89C4;&#x5219;&#x96C6;&#x7684;&#x624B;&#x6BB5;&#x3002;&#x7ED9;&#x5B58;&#x50A8;&#x6C60;&#x8BBE;&#x7F6E;&#x89C4;&#x5219;&#x96C6;&#x540E;&#x6FC0;&#x6D3B;&#x3002;</li>
+<li><code>type</code>&#xFF1A;&#x89C4;&#x5219;&#x7C7B;&#x578B;&#xFF0C;&#x76EE;&#x524D;&#x4EC5;&#x652F;&#x6301; <code>replicated</code> &#x548C; <code>erasure</code> &#xFF0C;&#x9ED8;&#x8BA4;&#x662F; <code>replicated</code> &#x3002;</li>
+<li><code>min_size</code>&#xFF1A;&#x53EF;&#x4EE5;&#x9009;&#x62E9;&#x6B64;&#x89C4;&#x5219;&#x7684;&#x5B58;&#x50A8;&#x6C60;&#x6700;&#x5C0F;&#x526F;&#x672C;&#x6570;&#x3002;</li>
+<li><code>max_size</code>&#xFF1A;&#x53EF;&#x4EE5;&#x9009;&#x62E9;&#x6B64;&#x89C4;&#x5219;&#x7684;&#x5B58;&#x50A8;&#x6C60;&#x6700;&#x5927;&#x526F;&#x672C;&#x6570;&#x3002;</li>
+<li><code>step take &lt;bucket-name&gt;</code>&#xFF1A;&#x9009;&#x53D6;&#x8D77;&#x59CB;&#x7684;&#x6876;&#x540D;&#xFF0C;&#x5E76;&#x8FED;&#x4EE3;&#x5230;&#x6811;&#x5E95;&#x3002;</li>
+<li><code>step choose firstn {num} type {bucket-type}</code>&#xFF1A;&#x9009;&#x53D6;&#x6307;&#x5B9A;&#x7C7B;&#x578B;&#x6876;&#x7684;&#x6570;&#x91CF;&#xFF0C;&#x8FD9;&#x4E2A;&#x6570;&#x5B57;&#x901A;&#x5E38;&#x662F;&#x5B58;&#x50A8;&#x6C60;&#x7684;&#x526F;&#x672C;&#x6570;&#xFF08;&#x5373; pool size &#xFF09;&#x3002;&#x5982;&#x679C; <code>{num} == 0</code> &#xFF0C; &#x9009;&#x62E9; <code>pool-num-replicas</code> &#x4E2A;&#x6876;&#xFF08;&#x6240;&#x6709;&#x53EF;&#x7528;&#x7684;&#xFF09;&#xFF1B;&#x5982;&#x679C; <code>{num} &gt; 0 &amp;&amp; &lt; pool-num-replicas</code> &#xFF0C;&#x5C31;&#x9009;&#x62E9;&#x90A3;&#x4E48;&#x591A;&#x7684;&#x6876;&#xFF1B;&#x5982;&#x679C; <code>{num} &lt; 0</code> &#xFF0C;&#x5B83;&#x610F;&#x5473;&#x7740;&#x9009;&#x62E9; <code>pool-num-replicas - {num}</code> &#x4E2A;&#x6876;&#x3002;</li>
+<li><code>step chooseleaf firstn {num} type {bucket-type}</code>&#xFF1A;&#x9009;&#x62E9; <code>{bucket-type}</code> &#x7C7B;&#x578B;&#x7684;&#x6876;&#x96C6;&#x5408;&#xFF0C;&#x5E76;&#x4ECE;&#x5404;&#x6876;&#x7684;&#x5B50;&#x6811;&#x91CC;&#x9009;&#x62E9;&#x4E00;&#x4E2A;&#x53F6;&#x5B50;&#x8282;&#x70B9;&#x3002;&#x6876;&#x96C6;&#x5408;&#x7684;&#x6570;&#x91CF;&#x901A;&#x5E38;&#x662F;&#x5B58;&#x50A8;&#x6C60;&#x7684;&#x526F;&#x672C;&#x6570;&#xFF08;&#x5373; pool size &#xFF09;&#x3002;&#x5982;&#x679C; <code>{num} == 0</code> &#xFF0C;&#x9009;&#x62E9; <code>pool-num-replicas</code> &#x4E2A;&#x6876;&#xFF08;&#x6240;&#x6709;&#x53EF;&#x7528;&#x7684;&#xFF09;&#xFF1B;&#x5982;&#x679C; <code>{num} &gt; 0 &amp;&amp; &lt; pool-num-replicas</code> &#xFF0C;&#x5C31;&#x9009;&#x62E9;&#x90A3;&#x4E48;&#x591A;&#x7684;&#x6876;&#xFF1B;&#x5982;&#x679C; <code>{num} &lt; 0</code> &#xFF0C;&#x5B83;&#x610F;&#x5473;&#x7740;&#x9009;&#x62E9; <code>pool-num-replicas - {num}</code> &#x4E2A;&#x6876;&#x3002;</li>
+<li><code>step emit</code>&#xFF1A;&#x8F93;&#x51FA;&#x5F53;&#x524D;&#x503C;&#x5E76;&#x6E05;&#x7A7A;&#x5806;&#x6808;&#x3002;&#x901A;&#x5E38;&#x7528;&#x4E8E;&#x89C4;&#x5219;&#x672B;&#x5C3E;&#xFF0C;&#x4E5F;&#x9002;&#x7528;&#x4E8E;&#x76F8;&#x540C;&#x89C4;&#x5219;&#x5E94;&#x7528;&#x5230;&#x4E0D;&#x540C;&#x6811;&#x7684;&#x60C5;&#x51B5;&#x3002;</li>
+</ul>
+<h3 id="93-&#x4E3B;&#x4EB2;&#x548C;&#x6027;">9.3 &#x4E3B;&#x4EB2;&#x548C;&#x6027;</h3>
+<p>&#x67D0;&#x4E2A; Ceph &#x5BA2;&#x6237;&#x7AEF;&#x8BFB;&#x5199;&#x6570;&#x636E;&#x65F6;&#xFF0C;&#x603B;&#x662F;&#x8FDE;&#x63A5; acting set &#x91CC;&#x7684;&#x4E3B; OSD &#xFF08;&#x5982; <code>[2, 3, 4]</code> &#x4E2D;&#xFF0C; <code>osd.2</code> &#x662F;&#x4E3B;&#x7684;&#xFF09;&#x3002;&#x6709;&#x65F6;&#x5019;&#x67D0;&#x4E2A; OSD &#x4E0E;&#x5176;&#x5B83;&#x7684;&#x76F8;&#x6BD4;&#x5E76;&#x4E0D;&#x9002;&#x5408;&#x505A;&#x4E3B; OSD &#xFF08;&#x6BD4;&#x5982;&#x5176;&#x786C;&#x76D8;&#x6162;&#x3001;&#x6216;&#x63A7;&#x5236;&#x5668;&#x6162;&#xFF09;&#x3002;&#x6700;&#x5927;&#x5316;&#x786C;&#x4EF6;&#x5229;&#x7528;&#x7387;&#x65F6;&#x4E3A;&#x9632;&#x6B62;&#x6027;&#x80FD;&#x74F6;&#x9888;&#xFF08;&#x7279;&#x522B;&#x662F;&#x8BFB;&#x64CD;&#x4F5C;&#xFF09;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x8C03;&#x6574; OSD &#x7684;&#x4E3B;&#x4EB2;&#x548C;&#x6027;&#xFF0C;&#x8FD9;&#x6837; CRUSH &#x5C31;&#x5C3D;&#x91CF;&#x4E0D;&#x628A;&#x5B83;&#x7528;&#x4F5C; acting set &#x91CC;&#x7684;&#x4E3B; OSD &#x4E86;&#x3002;</p>
+<pre><code>ceph osd primary-affinity &lt;osd-id&gt; &lt;weight&gt;
+</code></pre><p>&#x4E3B;&#x4EB2;&#x548C;&#x6027;&#x9ED8;&#x8BA4;&#x4E3A; <code>1</code> &#xFF08;&#x5C31;&#x662F;&#x8BF4;&#x6B64; OSD &#x53EF;&#x4F5C;&#x4E3A;&#x4E3B; OSD &#xFF09;&#x3002;&#x6B64;&#x503C;&#x5408;&#x6CD5;&#x8303;&#x56F4;&#x4E3A; <code>0-1</code> &#xFF0C;&#x5176;&#x4E2D; <code>0</code> &#x610F;&#x4E3A;&#x6B64; OSD &#x4E0D;&#x80FD;&#x7528;&#x4F5C;&#x4E3B;&#x7684;&#xFF0C; <code>1</code> &#x610F;&#x4E3A; OSD &#x53EF;&#x7528;&#x4F5C;&#x4E3B;&#x7684;&#x3002;&#x6B64;&#x6743;&#x91CD; <code>&lt; 1</code> &#x65F6;&#xFF0C; CRUSH &#x9009;&#x62E9;&#x4E3B; OSD &#x65F6;&#x9009;&#x4E2D;&#x5B83;&#x7684;&#x53EF;&#x80FD;&#x6027;&#x5C31;&#x8F83;&#x4F4E;&#x3002;</p>
+<h3 id="94-&#x589E;&#x52A0;&#x79FB;&#x52A8;-osd">9.4 &#x589E;&#x52A0;/&#x79FB;&#x52A8; OSD</h3>
+<p>&#x8981;&#x589E;&#x52A0;&#x6216;&#x79FB;&#x52A8;&#x5728;&#x7EBF;&#x96C6;&#x7FA4;&#x91CC; OSD &#x6240;&#x5BF9;&#x5E94;&#x7684; CRUSH Map &#x6761;&#x76EE;&#xFF0C;&#x6267;&#x884C; ceph osd crush set &#x547D;&#x4EE4;&#x3002;</p>
+<pre><code>ceph osd crush set {id-or-name} {weight} {bucket-type}={bucket-name} [{bucket-type}={bucket-name} ...]
+</code></pre><h3 id="95-&#x8C03;&#x6574;-osd-&#x7684;-crush-&#x6743;&#x91CD;">9.5 &#x8C03;&#x6574; OSD &#x7684; CRUSH &#x6743;&#x91CD;</h3>
+<p>&#x8981;&#x8C03;&#x6574;&#x5728;&#x7EBF;&#x96C6;&#x7FA4;&#x4E2D;&#x67D0;&#x4E2A; OSD &#x7684; CRUSH &#x6743;&#x91CD;&#xFF0C;&#x6267;&#x884C;&#x547D;&#x4EE4;&#xFF1A;</p>
+<pre><code>ceph osd crush reweight {name} {weight}
+</code></pre><h3 id="96-&#x5220;&#x9664;-osd">9.6 &#x5220;&#x9664; OSD</h3>
+<p>&#x8981;&#x4ECE;&#x5728;&#x7EBF;&#x96C6;&#x7FA4;&#x91CC;&#x628A;&#x67D0;&#x4E2A; OSD &#x5F7B;&#x5E95;&#x8E22;&#x51FA; CRUSH Map&#xFF0C;&#x6216;&#x4EC5;&#x8E22;&#x51FA;&#x67D0;&#x4E2A;&#x6307;&#x5B9A;&#x4F4D;&#x7F6E;&#x7684; OSD&#xFF0C;&#x6267;&#x884C;&#x547D;&#x4EE4;&#xFF1A;</p>
+<pre><code>ceph osd crush remove {name} {&lt;ancestor&gt;}
+</code></pre><h3 id="97-&#x589E;&#x52A0;&#x6876;">9.7 &#x589E;&#x52A0;&#x6876;</h3>
+<p>&#x8981;&#x5728;&#x8FD0;&#x884C;&#x96C6;&#x7FA4;&#x7684; CRUSH Map &#x4E2D;&#x65B0;&#x5EFA;&#x4E00;&#x4E2A;&#x6876;&#xFF0C;&#x7528; ceph osd crush add-bucket &#x547D;&#x4EE4;&#xFF1A;</p>
+<pre><code>ceph osd crush add-bucket {bucket-name} {bucket-type}
+</code></pre><h3 id="98-&#x79FB;&#x52A8;&#x6876;">9.8 &#x79FB;&#x52A8;&#x6876;</h3>
+<p>&#x8981;&#x628A;&#x4E00;&#x4E2A;&#x6876;&#x79FB;&#x52A8;&#x5230; CRUSH Map &#x91CC;&#x7684;&#x4E0D;&#x540C;&#x4F4D;&#x7F6E;&#xFF0C;&#x6267;&#x884C;&#x547D;&#x4EE4;&#xFF1A;</p>
+<pre><code>ceph osd crush move {bucket-name} {bucket-type}={bucket-name} [{bucket-type}={bucket-name} ...]
+</code></pre><h3 id="99-&#x5220;&#x9664;&#x6876;">9.9 &#x5220;&#x9664;&#x6876;</h3>
+<p>&#x8981;&#x628A;&#x4E00;&#x4E2A;&#x6876;&#x4ECE; CRUSH Map &#x7684;&#x5206;&#x7EA7;&#x7ED3;&#x6784;&#x4E2D;&#x5220;&#x9664;&#xFF0C;&#x53EF;&#x7528;&#x6B64;&#x547D;&#x4EE4;&#xFF1A;</p>
+<pre><code>ceph osd crush remove {bucket-name}
+</code></pre><p>&#x6CE8;&#x610F;&#xFF1A;&#x4ECE; CRUSH &#x5206;&#x7EA7;&#x7ED3;&#x6784;&#x91CC;&#x5220;&#x9664;&#x65F6;&#x5FC5;&#x987B;&#x662F;&#x7A7A;&#x6876;&#x3002;</p>
+<h3 id="910-&#x53EF;&#x8C03;&#x9009;&#x9879;">9.10 &#x53EF;&#x8C03;&#x9009;&#x9879;</h3>
+<p>&#x4ECE; v0.74 &#x8D77;&#xFF0C;&#x5982;&#x679C; CRUSH &#x53EF;&#x8C03;&#x9009;&#x9879;&#x4E0D;&#x662F;&#x6700;&#x4F18;&#x503C;&#xFF08; v0.73 &#x7248;&#x91CC;&#x7684;&#x9ED8;&#x8BA4;&#x503C;&#xFF09; Ceph &#x5C31;&#x4F1A;&#x53D1;&#x51FA;&#x5065;&#x5EB7;&#x544A;&#x8B66;&#xFF0C;&#x6709;&#x4E24;&#x79CD;&#x65B9;&#x6CD5;&#x53EF;&#x6D88;&#x9664;&#x8FD9;&#x4E9B;&#x544A;&#x8B66;&#xFF1A;</p>
+<p>1&#x3001;&#x8C03;&#x6574;&#x73B0;&#x6709;&#x96C6;&#x7FA4;&#x4E0A;&#x7684;&#x53EF;&#x8C03;&#x9009;&#x9879;&#x3002;&#x6CE8;&#x610F;&#xFF0C;&#x8FD9;&#x53EF;&#x80FD;&#x4F1A;&#x5BFC;&#x81F4;&#x4E00;&#x4E9B;&#x6570;&#x636E;&#x8FC1;&#x79FB;&#xFF08;&#x53EF;&#x80FD;&#x6709; 10% &#x4E4B;&#x591A;&#xFF09;&#x3002;&#x8FD9;&#x662F;&#x63A8;&#x8350;&#x7684;&#x529E;&#x6CD5;&#xFF0C;&#x4F46;&#x662F;&#x5728;&#x751F;&#x4EA7;&#x96C6;&#x7FA4;&#x4E0A;&#x8981;&#x6CE8;&#x610F;&#x6B64;&#x8C03;&#x6574;&#x5BF9;&#x6027;&#x80FD;&#x5E26;&#x6765;&#x7684;&#x5F71;&#x54CD;&#x3002;&#x6B64;&#x547D;&#x4EE4;&#x53EF;&#x542F;&#x7528;&#x8F83;&#x4F18;&#x53EF;&#x8C03;&#x9009;&#x9879;&#xFF1A;</p>
+<pre><code>ceph osd crush tunables optimal
+</code></pre><p>&#x5982;&#x679C;&#x5207;&#x6362;&#x5F97;&#x4E0D;&#x592A;&#x987A;&#x5229;&#xFF08;&#x5982;&#x8D1F;&#x8F7D;&#x592A;&#x9AD8;&#xFF09;&#x4E14;&#x5207;&#x6362;&#x624D;&#x4E0D;&#x4E45;&#xFF0C;&#x6216;&#x8005;&#x6709;&#x5BA2;&#x6237;&#x7AEF;&#x517C;&#x5BB9;&#x95EE;&#x9898;&#xFF08;&#x8F83;&#x8001;&#x7684; cephfs &#x5185;&#x6838;&#x9A71;&#x52A8;&#x6216; rbd &#x5BA2;&#x6237;&#x7AEF;&#x3001;&#x6216;&#x65E9;&#x4E8E; bobtail &#x7684; librados &#x5BA2;&#x6237;&#x7AEF;&#xFF09;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x8FD9;&#x6837;&#x5207;&#x56DE;&#xFF1A;</p>
+<pre><code>ceph osd crush tunables legacy
+</code></pre><p>2&#x3001;&#x4E0D;&#x5BF9; CRUSH &#x505A;&#x4EFB;&#x4F55;&#x66F4;&#x6539;&#x4E5F;&#x80FD;&#x6D88;&#x9664;&#x62A5;&#x8B66;&#xFF0C;&#x628A;&#x4E0B;&#x5217;&#x914D;&#x7F6E;&#x52A0;&#x5165; <code>ceph.conf</code> &#x7684; <code>[mon]</code> &#x6BB5;&#x4E0B;&#xFF1A;</p>
+<pre><code>mon warn on legacy crush tunables = false
+</code></pre><p>&#x4E3A;&#x4F7F;&#x53D8;&#x66F4;&#x751F;&#x6548;&#x9700;&#x91CD;&#x542F;&#x6240;&#x6709;&#x76D1;&#x89C6;&#x5668;&#xFF0C;&#x6216;&#x8005;&#x6267;&#x884C;&#x4E0B;&#x5217;&#x547D;&#x4EE4;&#xFF1A;</p>
+<pre><code>ceph tell mon.\* injectargs --no-mon-warn-on-legacy-crush-tunables
+</code></pre><h3 id="911-crush-map-&#x5B9E;&#x4F8B;">9.11 CRUSH Map &#x5B9E;&#x4F8B;</h3>
+<p>&#x5047;&#x8BBE;&#x4F60;&#x60F3;&#x8BA9;&#x5927;&#x591A;&#x6570;&#x5B58;&#x50A8;&#x6C60;&#x6620;&#x5C04;&#x5230;&#x4F7F;&#x7528;&#x5927;&#x5BB9;&#x91CF;&#x786C;&#x76D8;&#x7684; OSD &#x4E0A;&#xFF0C;&#x4F46;&#x662F;&#x5176;&#x4E2D;&#x4E00;&#x4E9B;&#x5B58;&#x50A8;&#x6C60;&#x6620;&#x5C04;&#x5230;&#x4F7F;&#x7528;&#x9AD8;&#x901F; SSD &#x7684; OSD &#x4E0A;&#x3002;&#x5728;&#x540C;&#x4E00;&#x4E2A; CRUSH Map &#x5185;&#x6709;&#x591A;&#x4E2A;&#x72EC;&#x7ACB;&#x7684; CRUSH &#x5C42;&#x7EA7;&#x7ED3;&#x6784;&#x662F;&#x53EF;&#x80FD;&#x7684;&#xFF0C;&#x5B9A;&#x4E49;&#x4E24;&#x68F5;&#x6811;&#x3001;&#x5206;&#x522B;&#x6709;&#x81EA;&#x5DF1;&#x7684;&#x6839;&#x8282;&#x70B9; &#x2014;&#x2014; &#x4E00;&#x4E2A;&#x7528;&#x4E8E;&#x673A;&#x68B0;&#x786C;&#x76D8;&#xFF08;&#x5982; root platter &#xFF09;&#x3001;&#x4E00;&#x4E2A;&#x7528;&#x4E8E; SSD &#xFF08;&#x5982; root ssd &#xFF09;&#xFF0C;&#x5177;&#x4F53;&#x7684; CRUSH Map &#x5185;&#x5BB9;&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre><code># devices
+device 0 osd.0
+device 1 osd.1
+device 2 osd.2
+device 3 osd.3
+device 4 osd.4
+device 5 osd.5
+device 6 osd.6
+device 7 osd.7
+
+# types
+type 0 osd
+type 1 host
+type 2 root
+
+# buckets
+host ceph-osd-ssd-server-1 {
+        id -1
+        alg straw
+        hash 0
+        item osd.0 weight 1.00
+        item osd.1 weight 1.00
+}
+
+host ceph-osd-ssd-server-2 {
+        id -2
+        alg straw
+        hash 0
+        item osd.2 weight 1.00
+        item osd.3 weight 1.00
+}
+
+host ceph-osd-platter-server-1 {
+        id -3
+        alg straw
+        hash 0
+        item osd.4 weight 1.00
+        item osd.5 weight 1.00
+}
+
+host ceph-osd-platter-server-2 {
+        id -4
+        alg straw
+        hash 0
+        item osd.6 weight 1.00
+        item osd.7 weight 1.00
+}
+
+root platter {
+        id -5
+        alg straw
+        hash 0
+        item ceph-osd-platter-server-1 weight 2.00
+        item ceph-osd-platter-server-2 weight 2.00
+}
+
+root ssd {
+        id -6
+        alg straw
+        hash 0
+        item ceph-osd-ssd-server-1 weight 2.00
+        item ceph-osd-ssd-server-2 weight 2.00
+}
+
+# rules
+rule replicated_ruleset {
+          ruleset 0
+          type replicated
+        min_size 1
+        max_size 10
+        step take default
+        step chooseleaf firstn 0 type host
+        step emit
+}
+
+rule platter {
+        ruleset 1
+        type replicated
+        min_size 0
+        max_size 10
+        step take platter
+        step chooseleaf firstn 0 type host
+        step emit
+}
+
+rule ssd {
+        ruleset 2
+        type replicated
+        min_size 0
+        max_size 4
+        step take ssd
+        step chooseleaf firstn 0 type host
+        step emit
+}
+
+rule ssd-primary {
+        ruleset 3
+        type replicated
+        min_size 5
+        max_size 10
+        step take ssd
+        step chooseleaf firstn 1 type host
+        step emit
+        step take platter
+        step chooseleaf firstn -1 type host
+        step emit
+}
+</code></pre><p>&#x7136;&#x540E;&#x4F60;&#x53EF;&#x4EE5;&#x8BBE;&#x7F6E;&#x4E00;&#x4E2A;&#x5B58;&#x50A8;&#x6C60;&#xFF0C;&#x8BA9;&#x5B83;&#x4F7F;&#x7528; SSD &#x89C4;&#x5219;&#xFF1A;</p>
+<pre><code>ceph osd pool set &lt;poolname&gt; crush_ruleset 2
+</code></pre><p>&#x540C;&#x6837;&#xFF0C;&#x7528; <code>ssd-primary</code> &#x89C4;&#x5219;&#x5C06;&#x4F7F;&#x5B58;&#x50A8;&#x6C60;&#x5185;&#x7684;&#x5404;&#x5F52;&#x7F6E;&#x7EC4;&#x7528; SSD &#x4F5C;&#x4E3B; OSD &#xFF0C;&#x666E;&#x901A;&#x786C;&#x76D8;&#x4F5C;&#x526F;&#x672C;&#x3002;</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="operate_pool.html" class="navigation navigation-prev " aria-label="Previous page: 8. 操作 Pool">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="modify_mon_ip.html" class="navigation navigation-next " aria-label="Next page: 10. 修改 MON IP">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"9. 管理 Crushmap","level":"1.2.9","depth":2,"next":{"title":"10. 修改 MON IP","level":"1.2.10","depth":2,"path":"Operation/modify_mon_ip.md","ref":"Operation/modify_mon_ip.md","articles":[]},"previous":{"title":"8. 操作 Pool","level":"1.2.8","depth":2,"path":"Operation/operate_pool.md","ref":"Operation/operate_pool.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"Operation/manage_crushmap.md","mtime":"2021-07-14T14:14:40.298Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-10-16T02:20:59.394Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

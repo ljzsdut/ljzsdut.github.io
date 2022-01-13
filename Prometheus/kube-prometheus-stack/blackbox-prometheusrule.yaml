@@ -1,0 +1,46 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  labels:
+    app: kube-prometheus-stack
+    release: kube-prometheus-stack
+  name: kube-prometheus-stack-blackbox
+  namespace: monitoring
+spec:
+  groups:
+  - name: Blackbox
+    rules:
+    - alert: BlackboxProbeHttpFailure
+      annotations:
+        description: |-
+          HTTP status code is not 200-399
+            VALUE = {{ $value }}
+            LABELS: {{ $labels }}
+        summary: Blackbox probe HTTP failure (instance {{ $labels.instance }})
+      expr: probe_http_status_code <= 199 OR probe_http_status_code >= 400
+      for: 1m
+      labels:
+        severity: critical
+    - alert: BlackboxSslCertificateWillExpireSoon
+      annotations:
+        description: |-
+          SSL certificate expires in 30 days
+            VALUE = {{ $value }}
+            LABELS: {{ $labels }}
+        summary: Blackbox SSL certificate will expire soon (instance {{ $labels.instance
+          }})
+      expr: probe_ssl_earliest_cert_expiry - time() < 86400 * 30
+      for: 5m
+      labels:
+        severity: warning
+    - alert: BlackboxSslCertificateExpired
+      annotations:
+        description: |-
+          SSL certificate has expired already
+            VALUE = {{ $value }}
+            LABELS: {{ $labels }}
+        summary: Blackbox SSL certificate expired (instance {{ $labels.instance }})
+      expr: probe_ssl_earliest_cert_expiry - time() <= 0
+      for: 5m
+      labels:
+        severity: critical

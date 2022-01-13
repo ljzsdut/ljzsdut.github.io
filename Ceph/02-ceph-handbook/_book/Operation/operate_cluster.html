@@ -1,0 +1,731 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>1. 操作集群 · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="monitor_cluster.html" />
+    
+    
+    <link rel="prev" href="common_operations.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    简介
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="common_operations.html">
+            
+                <a href="common_operations.html">
+            
+                    
+                    第一部分：常用操作
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="1.2.1" data-path="operate_cluster.html">
+            
+                <a href="operate_cluster.html">
+            
+                    
+                    1. 操作集群
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="monitor_cluster.html">
+            
+                <a href="monitor_cluster.html">
+            
+                    
+                    2. 监控集群
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="monitor_osd.html">
+            
+                <a href="monitor_osd.html">
+            
+                    
+                    3. 监控 OSD
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="monitor_pg.html">
+            
+                <a href="monitor_pg.html">
+            
+                    
+                    4. 监控 PG
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5" data-path="user_management.html">
+            
+                <a href="user_management.html">
+            
+                    
+                    5. 用户管理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.6" data-path="add_rm_mon.html">
+            
+                <a href="add_rm_mon.html">
+            
+                    
+                    6. 增加/删除 Monitor
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.7" data-path="add_rm_osd.html">
+            
+                <a href="add_rm_osd.html">
+            
+                    
+                    7. 增加/删除 OSD
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.8" data-path="operate_pool.html">
+            
+                <a href="operate_pool.html">
+            
+                    
+                    8. 操作 Pool
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.9" data-path="manage_crushmap.html">
+            
+                <a href="manage_crushmap.html">
+            
+                    
+                    9. 管理 Crushmap
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.10" data-path="modify_mon_ip.html">
+            
+                <a href="modify_mon_ip.html">
+            
+                    
+                    10. 修改 MON IP
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.11" data-path="change_cluster_conf.html">
+            
+                <a href="change_cluster_conf.html">
+            
+                    
+                    11. 修改集群配置
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.12" data-path="log_debug.html">
+            
+                <a href="log_debug.html">
+            
+                    
+                    12. 日志和调试
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../Troubleshooting/troubleshooting.html">
+            
+                <a href="../Troubleshooting/troubleshooting.html">
+            
+                    
+                    第二部分：故障处理
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../Troubleshooting/troubleshooting_mon.html">
+            
+                <a href="../Troubleshooting/troubleshooting_mon.html">
+            
+                    
+                    1. 常见 MON 故障处理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../Troubleshooting/troubleshooting_osd.html">
+            
+                <a href="../Troubleshooting/troubleshooting_osd.html">
+            
+                    
+                    2. 常见 OSD 故障处理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../Troubleshooting/troubleshooting_pg.html">
+            
+                <a href="../Troubleshooting/troubleshooting_pg.html">
+            
+                    
+                    3. 常见 PG 故障处理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../Troubleshooting/troubleshooting_lost_power.html">
+            
+                <a href="../Troubleshooting/troubleshooting_lost_power.html">
+            
+                    
+                    4. 全局 Ceph 节点宕机处理 
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="../Troubleshooting/troubleshooting_single_lost_power.html">
+            
+                <a href="../Troubleshooting/troubleshooting_single_lost_power.html">
+            
+                    
+                    5. 单个 Ceph 节点宕机处理 
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../Advance_usage/advanced_usage.html">
+            
+                <a href="../Advance_usage/advanced_usage.html">
+            
+                    
+                    第三部分：Ceph 进阶
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../Advance_usage/pg_pgp.html">
+            
+                <a href="../Advance_usage/pg_pgp.html">
+            
+                    
+                    1. PG 和 PGP 的区别
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../Advance_usage/mon_backup.html">
+            
+                <a href="../Advance_usage/mon_backup.html">
+            
+                    
+                    2. Monitor 的备份和恢复
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../Advance_usage/change_fd.html">
+            
+                <a href="../Advance_usage/change_fd.html">
+            
+                    
+                    3. 修改 Cinder/Glance 进程的最大可用 FD
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../Advance_usage/change_osd_journal.html">
+            
+                <a href="../Advance_usage/change_osd_journal.html">
+            
+                    
+                    4. 更换 OSD Journal
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="../Advance_usage/rescue_osd_parted.html">
+            
+                <a href="../Advance_usage/rescue_osd_parted.html">
+            
+                    
+                    5. 清空 OSD 的分区表后如何恢复
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.6" data-path="../Advance_usage/pg_active_remapped.html">
+            
+                <a href="../Advance_usage/pg_active_remapped.html">
+            
+                    
+                    6. PG 卡在 active + remapped 状态
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.7" data-path="../Advance_usage/find_rbd_data_loc.html">
+            
+                <a href="../Advance_usage/find_rbd_data_loc.html">
+            
+                    
+                    7. 查看 RBD 镜像的位置
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.8" data-path="../Advance_usage/rbd_real_size.html">
+            
+                <a href="../Advance_usage/rbd_real_size.html">
+            
+                    
+                    8. 查看 RBD 镜像的实际大小
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.9" data-path="../Advance_usage/cal_pg_per_osd.html">
+            
+                <a href="../Advance_usage/cal_pg_per_osd.html">
+            
+                    
+                    9. 统计 OSD 上 PG 的数量
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.10" data-path="../Advance_usage/list_rbd_watcher.html">
+            
+                <a href="../Advance_usage/list_rbd_watcher.html">
+            
+                    
+                    10. 查看使用 RBD 镜像的客户端
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >1. 操作集群</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="1-&#x64CD;&#x4F5C;&#x96C6;&#x7FA4;">1. &#x64CD;&#x4F5C;&#x96C6;&#x7FA4;</h1>
+<hr>
+<h2 id="11-&#x7528;-upstart-&#x63A7;&#x5236;-ceph">1.1 &#x7528; UPSTART &#x63A7;&#x5236; CEPH</h2>
+<p>&#x7528; ceph-deploy &#x628A; Ceph Cuttlefish &#x53CA;&#x66F4;&#x9AD8;&#x7248;&#x90E8;&#x7F72;&#x5230; Ubuntu 14.04 &#x4E0A;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x7528;&#x57FA;&#x4E8E;&#x4E8B;&#x4EF6;&#x7684; Upstart &#x6765;&#x542F;&#x52A8;&#x3001;&#x5173;&#x95ED; Ceph &#x8282;&#x70B9;&#x4E0A;&#x7684;&#x5B88;&#x62A4;&#x8FDB;&#x7A0B;&#x3002; Upstart &#x4E0D;&#x8981;&#x6C42;&#x4F60;&#x5728;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x91CC;&#x5B9A;&#x4E49;&#x5B88;&#x62A4;&#x8FDB;&#x7A0B;&#x4F8B;&#x7A0B;&#x3002;</p>
+<h3 id="111-&#x5217;&#x51FA;&#x8282;&#x70B9;&#x4E0A;&#x6240;&#x6709;&#x7684;-ceph-&#x4F5C;&#x4E1A;&#x548C;&#x5B9E;&#x4F8B;">1.1.1 &#x5217;&#x51FA;&#x8282;&#x70B9;&#x4E0A;&#x6240;&#x6709;&#x7684; Ceph &#x4F5C;&#x4E1A;&#x548C;&#x5B9E;&#x4F8B;</h3>
+<pre><code>sudo initctl list | grep ceph
+</code></pre><h3 id="112-&#x542F;&#x52A8;&#x6240;&#x6709;&#x5B88;&#x62A4;&#x8FDB;&#x7A0B;">1.1.2 &#x542F;&#x52A8;&#x6240;&#x6709;&#x5B88;&#x62A4;&#x8FDB;&#x7A0B;</h3>
+<p>&#x8981;&#x542F;&#x52A8;&#x67D0;&#x4E00; Ceph &#x8282;&#x70B9;&#x4E0A;&#x7684;&#x6240;&#x6709;&#x5B88;&#x62A4;&#x8FDB;&#x7A0B;&#xFF0C;&#x7528;&#x4E0B;&#x5217;&#x547D;&#x4EE4;&#xFF1A;</p>
+<pre><code>sudo start ceph-all
+</code></pre><h3 id="113-&#x505C;&#x6B62;&#x6240;&#x6709;&#x5B88;&#x62A4;&#x8FDB;&#x7A0B;">1.1.3 &#x505C;&#x6B62;&#x6240;&#x6709;&#x5B88;&#x62A4;&#x8FDB;&#x7A0B;</h3>
+<p>&#x8981;&#x505C;&#x6B62;&#x67D0;&#x4E00; Ceph &#x8282;&#x70B9;&#x4E0A;&#x7684;&#x6240;&#x6709;&#x5B88;&#x62A4;&#x8FDB;&#x7A0B;&#xFF0C;&#x7528;&#x4E0B;&#x5217;&#x547D;&#x4EE4;&#xFF1A;</p>
+<pre><code>sudo stop ceph-all
+</code></pre><h3 id="114-&#x6309;&#x7C7B;&#x578B;&#x542F;&#x52A8;&#x6240;&#x6709;&#x5B88;&#x62A4;&#x8FDB;&#x7A0B;">1.1.4 &#x6309;&#x7C7B;&#x578B;&#x542F;&#x52A8;&#x6240;&#x6709;&#x5B88;&#x62A4;&#x8FDB;&#x7A0B;</h3>
+<p>&#x8981;&#x542F;&#x52A8;&#x67D0;&#x4E00; Ceph &#x8282;&#x70B9;&#x4E0A;&#x7684;&#x67D0;&#x4E00;&#x7C7B;&#x5B88;&#x62A4;&#x8FDB;&#x7A0B;&#xFF0C;&#x7528;&#x4E0B;&#x5217;&#x547D;&#x4EE4;&#xFF1A;</p>
+<pre><code>sudo start ceph-osd-all
+sudo start ceph-mon-all
+sudo start ceph-mds-all
+</code></pre><h3 id="115-&#x6309;&#x7C7B;&#x578B;&#x505C;&#x6B62;&#x6240;&#x6709;&#x5B88;&#x62A4;&#x8FDB;&#x7A0B;">1.1.5 &#x6309;&#x7C7B;&#x578B;&#x505C;&#x6B62;&#x6240;&#x6709;&#x5B88;&#x62A4;&#x8FDB;&#x7A0B;</h3>
+<p>&#x8981;&#x505C;&#x6B62;&#x67D0;&#x4E00; Ceph &#x8282;&#x70B9;&#x4E0A;&#x7684;&#x67D0;&#x4E00;&#x7C7B;&#x5B88;&#x62A4;&#x8FDB;&#x7A0B;&#xFF0C;&#x7528;&#x4E0B;&#x5217;&#x547D;&#x4EE4;&#xFF1A;</p>
+<pre><code>sudo stop ceph-osd-all
+sudo stop ceph-mon-all
+sudo stop ceph-mds-all
+</code></pre><h3 id="116-&#x542F;&#x52A8;&#x5355;&#x4E2A;&#x8FDB;&#x7A0B;">1.1.6 &#x542F;&#x52A8;&#x5355;&#x4E2A;&#x8FDB;&#x7A0B;</h3>
+<p>&#x8981;&#x542F;&#x52A8;&#x67D0;&#x8282;&#x70B9;&#x4E0A;&#x4E00;&#x4E2A;&#x7279;&#x5B9A;&#x7684;&#x5B88;&#x62A4;&#x8FDB;&#x7A0B;&#x4F8B;&#x7A0B;&#xFF0C;&#x7528;&#x4E0B;&#x5217;&#x547D;&#x4EE4;&#x4E4B;&#x4E00;&#xFF1A;</p>
+<pre><code>sudo start ceph-osd id={id}
+sudo start ceph-mon id={hostname}
+sudo start ceph-mds id={hostname}
+</code></pre><p>&#x4F8B;&#x5982;&#xFF1A;</p>
+<pre><code>sudo start ceph-osd id=1
+sudo start ceph-mon id=ceph-server
+sudo start ceph-mds id=ceph-server
+</code></pre><h3 id="117-&#x505C;&#x6B62;&#x5355;&#x4E2A;&#x8FDB;&#x7A0B;">1.1.7 &#x505C;&#x6B62;&#x5355;&#x4E2A;&#x8FDB;&#x7A0B;</h3>
+<p>&#x8981;&#x505C;&#x6B62;&#x67D0;&#x8282;&#x70B9;&#x4E0A;&#x4E00;&#x4E2A;&#x7279;&#x5B9A;&#x7684;&#x5B88;&#x62A4;&#x8FDB;&#x7A0B;&#x4F8B;&#x7A0B;&#xFF0C;&#x7528;&#x4E0B;&#x5217;&#x547D;&#x4EE4;&#x4E4B;&#x4E00;&#xFF1A;</p>
+<pre><code>sudo stop ceph-osd id={id}
+sudo stop ceph-mon id={hostname}
+sudo stop ceph-mds id={hostname}
+</code></pre><p>&#x4F8B;&#x5982;&#xFF1A;</p>
+<pre><code>sudo stop ceph-osd id=1
+sudo stop ceph-mon id=ceph-server
+sudo stop ceph-mds id=ceph-server
+</code></pre><h2 id="12-&#x7528;-systemd-&#x63A7;&#x5236;-ceph">1.2 &#x7528; SYSTEMD &#x63A7;&#x5236; CEPH</h2>
+<p>&#x5BF9;&#x4E8E;&#x6240;&#x6709;&#x652F;&#x6301; <code>systemd</code> &#x7684; Linux &#x53D1;&#x884C;&#x7248;&#xFF08;CentOS 7, Fedora, Debian Jessie 8.x, SUSE&#xFF09;&#xFF0C;&#x4F7F;&#x7528;&#x539F;&#x751F;&#x7684; <code>systemd</code> &#x6587;&#x4EF6;&#x6765;&#x4EE3;&#x66FF;&#x4F20;&#x7EDF;&#x7684; <code>sysvinit</code> &#x811A;&#x672C;&#x3002;&#x4E0D;&#x8FC7;&#x9700;&#x8981;&#x6CE8;&#x610F;&#xFF0C;&#x8FD9;&#x548C; Ceph &#x7684;&#x7248;&#x672C;&#x4E5F;&#x6709;&#x5173;&#x7CFB;&#x3002;&#x5982;&#x679C; CentOS 7 + Jewel&#xFF0C;&#x4F7F;&#x7528;&#x7684;&#x5C31;&#x662F; <code>systemd</code> &#x3002;</p>
+<h3 id="121-&#x5217;&#x51FA;&#x8282;&#x70B9;&#x4E0A;&#x6240;&#x6709;&#x7684;-ceph-systemd-units">1.2.1 &#x5217;&#x51FA;&#x8282;&#x70B9;&#x4E0A;&#x6240;&#x6709;&#x7684; Ceph systemd units</h3>
+<pre><code>sudo systemctl status ceph\*.service ceph\*.target
+</code></pre><h3 id="122-&#x542F;&#x52A8;&#x6240;&#x6709;&#x5B88;&#x62A4;&#x8FDB;&#x7A0B;">1.2.2 &#x542F;&#x52A8;&#x6240;&#x6709;&#x5B88;&#x62A4;&#x8FDB;&#x7A0B;</h3>
+<p>&#x8981;&#x542F;&#x52A8;&#x67D0;&#x4E00; Ceph &#x8282;&#x70B9;&#x4E0A;&#x7684;&#x6240;&#x6709;&#x5B88;&#x62A4;&#x8FDB;&#x7A0B;&#xFF0C;&#x7528;&#x4E0B;&#x5217;&#x547D;&#x4EE4;&#xFF1A;</p>
+<pre><code>sudo systemctl start ceph.target
+</code></pre><h3 id="123-&#x505C;&#x6B62;&#x6240;&#x6709;&#x5B88;&#x62A4;&#x8FDB;&#x7A0B;">1.2.3 &#x505C;&#x6B62;&#x6240;&#x6709;&#x5B88;&#x62A4;&#x8FDB;&#x7A0B;</h3>
+<p>&#x8981;&#x505C;&#x6B62;&#x67D0;&#x4E00; Ceph &#x8282;&#x70B9;&#x4E0A;&#x7684;&#x6240;&#x6709;&#x5B88;&#x62A4;&#x8FDB;&#x7A0B;&#xFF0C;&#x7528;&#x4E0B;&#x5217;&#x547D;&#x4EE4;&#xFF1A;</p>
+<pre><code>sudo systemctl stop ceph\*.service ceph\*.target
+</code></pre><h3 id="124-&#x6309;&#x7C7B;&#x578B;&#x542F;&#x52A8;&#x6240;&#x6709;&#x5B88;&#x62A4;&#x8FDB;&#x7A0B;">1.2.4 &#x6309;&#x7C7B;&#x578B;&#x542F;&#x52A8;&#x6240;&#x6709;&#x5B88;&#x62A4;&#x8FDB;&#x7A0B;</h3>
+<p>&#x8981;&#x542F;&#x52A8;&#x67D0;&#x4E00; Ceph &#x8282;&#x70B9;&#x4E0A;&#x7684;&#x67D0;&#x4E00;&#x7C7B;&#x5B88;&#x62A4;&#x8FDB;&#x7A0B;&#xFF0C;&#x7528;&#x4E0B;&#x5217;&#x547D;&#x4EE4;&#xFF1A;</p>
+<pre><code>sudo systemctl start ceph-osd.target
+sudo systemctl start ceph-mon.target
+sudo systemctl start ceph-mds.target
+</code></pre><h3 id="125-&#x6309;&#x7C7B;&#x578B;&#x505C;&#x6B62;&#x6240;&#x6709;&#x5B88;&#x62A4;&#x8FDB;&#x7A0B;">1.2.5 &#x6309;&#x7C7B;&#x578B;&#x505C;&#x6B62;&#x6240;&#x6709;&#x5B88;&#x62A4;&#x8FDB;&#x7A0B;</h3>
+<p>&#x8981;&#x505C;&#x6B62;&#x67D0;&#x4E00; Ceph &#x8282;&#x70B9;&#x4E0A;&#x7684;&#x67D0;&#x4E00;&#x7C7B;&#x5B88;&#x62A4;&#x8FDB;&#x7A0B;&#xFF0C;&#x7528;&#x4E0B;&#x5217;&#x547D;&#x4EE4;&#xFF1A;</p>
+<pre><code>sudo systemctl stop ceph-mon\*.service ceph-mon.target
+sudo systemctl stop ceph-osd\*.service ceph-osd.target
+sudo systemctl stop ceph-mds\*.service ceph-mds.target
+</code></pre><h3 id="126-&#x542F;&#x52A8;&#x5355;&#x4E2A;&#x8FDB;&#x7A0B;">1.2.6 &#x542F;&#x52A8;&#x5355;&#x4E2A;&#x8FDB;&#x7A0B;</h3>
+<p>&#x8981;&#x542F;&#x52A8;&#x67D0;&#x8282;&#x70B9;&#x4E0A;&#x4E00;&#x4E2A;&#x7279;&#x5B9A;&#x7684;&#x5B88;&#x62A4;&#x8FDB;&#x7A0B;&#x4F8B;&#x7A0B;&#xFF0C;&#x7528;&#x4E0B;&#x5217;&#x547D;&#x4EE4;&#x4E4B;&#x4E00;&#xFF1A;</p>
+<pre><code>sudo systemctl start ceph-osd@{id}
+sudo systemctl start ceph-mon@{hostname}
+sudo systemctl start ceph-mds@{hostname}
+</code></pre><h3 id="127-&#x505C;&#x6B62;&#x5355;&#x4E2A;&#x8FDB;&#x7A0B;">1.2.7 &#x505C;&#x6B62;&#x5355;&#x4E2A;&#x8FDB;&#x7A0B;</h3>
+<p>&#x8981;&#x505C;&#x6B62;&#x67D0;&#x8282;&#x70B9;&#x4E0A;&#x4E00;&#x4E2A;&#x7279;&#x5B9A;&#x7684;&#x5B88;&#x62A4;&#x8FDB;&#x7A0B;&#x4F8B;&#x7A0B;&#xFF0C;&#x7528;&#x4E0B;&#x5217;&#x547D;&#x4EE4;&#x4E4B;&#x4E00;&#xFF1A;</p>
+<pre><code>sudo systemctl stop ceph-osd@{id}
+sudo systemctl stop ceph-mon@{hostname}
+sudo systemctl stop ceph-mds@{hostname}
+</code></pre><h2 id="13-&#x628A;-ceph-&#x5F53;&#x670D;&#x52A1;&#x8FD0;&#x884C;">1.3 &#x628A; CEPH &#x5F53;&#x670D;&#x52A1;&#x8FD0;&#x884C;</h2>
+<p>&#x5728;&#x67D0;&#x4E9B;&#x73AF;&#x5883;&#x4E0B;&#xFF0C;&#x8FD8;&#x53EF;&#x4EE5;&#x628A; Ceph &#x5F53;&#x505A;&#x670D;&#x52A1;&#x6765;&#x8FD0;&#x884C;&#xFF0C;&#x6BD4;&#x5982; CentOS 7 + Hammer &#x3002;</p>
+<h3 id="131-&#x542F;&#x52A8;&#x6240;&#x6709;&#x5B88;&#x62A4;&#x8FDB;&#x7A0B;">1.3.1 &#x542F;&#x52A8;&#x6240;&#x6709;&#x5B88;&#x62A4;&#x8FDB;&#x7A0B;</h3>
+<p>&#x8981;&#x542F;&#x52A8;&#x672C;&#x8282;&#x70B9;&#x4E0A;&#x7684;&#x6240;&#x6709; Ceph &#x5B88;&#x62A4;&#x8FDB;&#x7A0B;&#xFF0C;&#x7528;&#x4E0B;&#x5217;&#x547D;&#x4EE4;&#xFF1A;</p>
+<pre><code>sudo service ceph [start|restart]
+</code></pre><h3 id="132-&#x505C;&#x6B62;&#x6240;&#x6709;&#x5B88;&#x62A4;&#x8FDB;&#x7A0B;">1.3.2 &#x505C;&#x6B62;&#x6240;&#x6709;&#x5B88;&#x62A4;&#x8FDB;&#x7A0B;</h3>
+<p>&#x8981;&#x505C;&#x6B62;&#x672C;&#x8282;&#x70B9;&#x4E0A;&#x7684;&#x6240;&#x6709; Ceph &#x5B88;&#x62A4;&#x8FDB;&#x7A0B;&#xFF0C;&#x7528;&#x4E0B;&#x5217;&#x547D;&#x4EE4;&#xFF1A;</p>
+<pre><code>sudo service ceph stop
+</code></pre><h3 id="133-&#x6309;&#x7C7B;&#x578B;&#x542F;&#x52A8;&#x6240;&#x6709;&#x5B88;&#x62A4;&#x8FDB;&#x7A0B;">1.3.3 &#x6309;&#x7C7B;&#x578B;&#x542F;&#x52A8;&#x6240;&#x6709;&#x5B88;&#x62A4;&#x8FDB;&#x7A0B;</h3>
+<p>&#x8981;&#x542F;&#x52A8;&#x672C;&#x8282;&#x70B9;&#x4E0A;&#x7684;&#x67D0;&#x4E00;&#x7C7B; Ceph &#x5B88;&#x62A4;&#x8FDB;&#x7A0B;&#xFF0C;&#x7528;&#x4E0B;&#x5217;&#x547D;&#x4EE4;&#xFF1A;</p>
+<pre><code>sudo service ceph start {daemon-type}
+</code></pre><h3 id="134-&#x6309;&#x7C7B;&#x578B;&#x505C;&#x6B62;&#x6240;&#x6709;&#x5B88;&#x62A4;&#x8FDB;&#x7A0B;">1.3.4 &#x6309;&#x7C7B;&#x578B;&#x505C;&#x6B62;&#x6240;&#x6709;&#x5B88;&#x62A4;&#x8FDB;&#x7A0B;</h3>
+<p>&#x8981;&#x505C;&#x6B62;&#x672C;&#x8282;&#x70B9;&#x4E0A;&#x7684;&#x67D0;&#x4E00;&#x7C7B; Ceph &#x5B88;&#x62A4;&#x8FDB;&#x7A0B;&#xFF0C;&#x7528;&#x4E0B;&#x5217;&#x547D;&#x4EE4;&#xFF1A;</p>
+<pre><code>sudo service ceph stop {daemon-type}
+</code></pre><h3 id="135-&#x542F;&#x52A8;&#x5355;&#x4E2A;&#x8FDB;&#x7A0B;">1.3.5 &#x542F;&#x52A8;&#x5355;&#x4E2A;&#x8FDB;&#x7A0B;</h3>
+<p>&#x8981;&#x542F;&#x52A8;&#x672C;&#x8282;&#x70B9;&#x4E0A;&#x67D0;&#x4E2A;&#x7279;&#x5B9A;&#x7684;&#x5B88;&#x62A4;&#x8FDB;&#x7A0B;&#x4F8B;&#x7A0B;&#xFF0C;&#x7528;&#x4E0B;&#x5217;&#x547D;&#x4EE4;&#xFF1A;</p>
+<pre><code>sudo service ceph start {daemon-type}.{instance}
+</code></pre><h3 id="136-&#x505C;&#x6B62;&#x5355;&#x4E2A;&#x8FDB;&#x7A0B;">1.3.6 &#x505C;&#x6B62;&#x5355;&#x4E2A;&#x8FDB;&#x7A0B;</h3>
+<p>&#x8981;&#x505C;&#x6B62;&#x672C;&#x8282;&#x70B9;&#x4E0A;&#x67D0;&#x4E2A;&#x7279;&#x5B9A;&#x7684;&#x5B88;&#x62A4;&#x8FDB;&#x7A0B;&#x4F8B;&#x7A0B;&#xFF0C;&#x7528;&#x4E0B;&#x5217;&#x547D;&#x4EE4;&#xFF1A;</p>
+<pre><code>sudo service ceph start {daemon-type}.{instance}
+</code></pre>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="common_operations.html" class="navigation navigation-prev " aria-label="Previous page: 第一部分：常用操作">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="monitor_cluster.html" class="navigation navigation-next " aria-label="Next page: 2. 监控集群">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"1. 操作集群","level":"1.2.1","depth":2,"next":{"title":"2. 监控集群","level":"1.2.2","depth":2,"path":"Operation/monitor_cluster.md","ref":"Operation/monitor_cluster.md","articles":[]},"previous":{"title":"第一部分：常用操作","level":"1.2","depth":1,"path":"Operation/common_operations.md","ref":"Operation/common_operations.md","articles":[{"title":"1. 操作集群","level":"1.2.1","depth":2,"path":"Operation/operate_cluster.md","ref":"Operation/operate_cluster.md","articles":[]},{"title":"2. 监控集群","level":"1.2.2","depth":2,"path":"Operation/monitor_cluster.md","ref":"Operation/monitor_cluster.md","articles":[]},{"title":"3. 监控 OSD","level":"1.2.3","depth":2,"path":"Operation/monitor_osd.md","ref":"Operation/monitor_osd.md","articles":[]},{"title":"4. 监控 PG","level":"1.2.4","depth":2,"path":"Operation/monitor_pg.md","ref":"Operation/monitor_pg.md","articles":[]},{"title":"5. 用户管理","level":"1.2.5","depth":2,"path":"Operation/user_management.md","ref":"Operation/user_management.md","articles":[]},{"title":"6. 增加/删除 Monitor","level":"1.2.6","depth":2,"path":"Operation/add_rm_mon.md","ref":"Operation/add_rm_mon.md","articles":[]},{"title":"7. 增加/删除 OSD","level":"1.2.7","depth":2,"path":"Operation/add_rm_osd.md","ref":"Operation/add_rm_osd.md","articles":[]},{"title":"8. 操作 Pool","level":"1.2.8","depth":2,"path":"Operation/operate_pool.md","ref":"Operation/operate_pool.md","articles":[]},{"title":"9. 管理 Crushmap","level":"1.2.9","depth":2,"path":"Operation/manage_crushmap.md","ref":"Operation/manage_crushmap.md","articles":[]},{"title":"10. 修改 MON IP","level":"1.2.10","depth":2,"path":"Operation/modify_mon_ip.md","ref":"Operation/modify_mon_ip.md","articles":[]},{"title":"11. 修改集群配置","level":"1.2.11","depth":2,"path":"Operation/change_cluster_conf.md","ref":"Operation/change_cluster_conf.md","articles":[]},{"title":"12. 日志和调试","level":"1.2.12","depth":2,"path":"Operation/log_debug.md","ref":"Operation/log_debug.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"Operation/operate_cluster.md","mtime":"2021-07-14T14:14:40.298Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-10-16T02:20:59.394Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

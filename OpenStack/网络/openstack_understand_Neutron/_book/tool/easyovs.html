@@ -1,0 +1,1165 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>easyOVS · 笔记</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="John Lee <ljzsdut@163.com>">
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-back-to-top-button/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-chapter-fold/chapter-fold.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-expandable-chapters/expandable-chapters.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-code/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search-pro/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-page-toc-button/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-prism/prism.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../ref/" />
+    
+    
+    <link rel="prev" href="./" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="http://www.ljzsdut.com" target="_blank" class="custom-link">My Blog</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../intro/">
+            
+                <a href="../intro/">
+            
+                    
+                    概述
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../concept/">
+            
+                <a href="../concept/">
+            
+                    
+                    基本概念
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../gre_mode/">
+            
+                <a href="../gre_mode/">
+            
+                    
+                    GRE 模式
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../gre_mode/compute_node.html">
+            
+                <a href="../gre_mode/compute_node.html">
+            
+                    
+                    计算节点
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../gre_mode/network_node.html">
+            
+                <a href="../gre_mode/network_node.html">
+            
+                    
+                    网络节点
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../vlan_mode/">
+            
+                <a href="../vlan_mode/">
+            
+                    
+                    VLAN 模式
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../vlan_mode/compute_node.html">
+            
+                <a href="../vlan_mode/compute_node.html">
+            
+                    
+                    计算节点
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../vlan_mode/network_node.html">
+            
+                <a href="../vlan_mode/network_node.html">
+            
+                    
+                    网络节点
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../vxlan_mode/">
+            
+                <a href="../vxlan_mode/">
+            
+                    
+                    VXLAN 模式
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../vxlan_mode/compute_node/">
+            
+                <a href="../vxlan_mode/compute_node/">
+            
+                    
+                    计算节点
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1.1" data-path="../vxlan_mode/compute_node/br-int.html">
+            
+                <a href="../vxlan_mode/compute_node/br-int.html">
+            
+                    
+                    br-int
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.1.2" data-path="../vxlan_mode/compute_node/br-tun.html">
+            
+                <a href="../vxlan_mode/compute_node/br-tun.html">
+            
+                    
+                    br-tun
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../vxlan_mode/network_node/">
+            
+                <a href="../vxlan_mode/network_node/">
+            
+                    
+                    网络节点
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.2.1" data-path="../vxlan_mode/network_node/br-tun.html">
+            
+                <a href="../vxlan_mode/network_node/br-tun.html">
+            
+                    
+                    br-tun
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2.2" data-path="../vxlan_mode/network_node/br-int.html">
+            
+                <a href="../vxlan_mode/network_node/br-int.html">
+            
+                    
+                    br-int
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2.3" data-path="../vxlan_mode/network_node/br-ex.html">
+            
+                <a href="../vxlan_mode/network_node/br-ex.html">
+            
+                    
+                    br-ex
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../namespace/">
+            
+                <a href="../namespace/">
+            
+                    
+                    网络命名空间
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../namespace/dhcp.html">
+            
+                <a href="../namespace/dhcp.html">
+            
+                    
+                    DHCP 服务
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" data-path="../namespace/router.html">
+            
+                <a href="../namespace/router.html">
+            
+                    
+                    路由服务
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="../security_group/">
+            
+                <a href="../security_group/">
+            
+                    
+                    安全组
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.8.1" data-path="../security_group/input.html">
+            
+                <a href="../security_group/input.html">
+            
+                    
+                    INPUT
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.2" data-path="../security_group/output.html">
+            
+                <a href="../security_group/output.html">
+            
+                    
+                    OUTPUT
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.3" data-path="../security_group/forward.html">
+            
+                <a href="../security_group/forward.html">
+            
+                    
+                    FORWARD
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.4" data-path="../security_group/global_logic.html">
+            
+                <a href="../security_group/global_logic.html">
+            
+                    
+                    整体逻辑
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.5" data-path="../security_group/quick_find.html">
+            
+                <a href="../security_group/quick_find.html">
+            
+                    
+                    快速查找安全组规则
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.6" data-path="../security_group/other.html">
+            
+                <a href="../security_group/other.html">
+            
+                    
+                    其它
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="../lbaas/">
+            
+                <a href="../lbaas/">
+            
+                    
+                    LBaaS（负载均衡即服务）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.9.1" data-path="../lbaas/scenario.html">
+            
+                <a href="../lbaas/scenario.html">
+            
+                    
+                    典型场景
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.2" data-path="../lbaas/arch.html">
+            
+                <a href="../lbaas/arch.html">
+            
+                    
+                    实现细节
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.3" data-path="../lbaas/other.html">
+            
+                <a href="../lbaas/other.html">
+            
+                    
+                    其它问题
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="../fwaas/">
+            
+                <a href="../fwaas/">
+            
+                    
+                    FWaaS（防火墙即服务）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.10.1" data-path="../fwaas/scenario.html">
+            
+                <a href="../fwaas/scenario.html">
+            
+                    
+                    典型场景
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.2" data-path="../fwaas/arch.html">
+            
+                <a href="../fwaas/arch.html">
+            
+                    
+                    实现细节
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.3" data-path="../fwaas/other.html">
+            
+                <a href="../fwaas/other.html">
+            
+                    
+                    其它问题
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11" data-path="../dvr/">
+            
+                <a href="../dvr/">
+            
+                    
+                    DVR（分布式路由）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.11.1" data-path="../dvr/scenario.html">
+            
+                <a href="../dvr/scenario.html">
+            
+                    
+                    典型场景
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.2" data-path="../dvr/network_node.html">
+            
+                <a href="../dvr/network_node.html">
+            
+                    
+                    网络节点
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.3" data-path="../dvr/compute_node.html">
+            
+                <a href="../dvr/compute_node.html">
+            
+                    
+                    计算节点
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.4" data-path="../dvr/config.html">
+            
+                <a href="../dvr/config.html">
+            
+                    
+                    配置
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.5" data-path="../dvr/workflow.html">
+            
+                <a href="../dvr/workflow.html">
+            
+                    
+                    工作流程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.6" data-path="../dvr/implementation.html">
+            
+                <a href="../dvr/implementation.html">
+            
+                    
+                    实现细节
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    工具
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="1.12.1" data-path="easyovs.html">
+            
+                <a href="easyovs.html">
+            
+                    
+                    easyOVS
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13" data-path="../ref/">
+            
+                <a href="../ref/">
+            
+                    
+                    参考
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14" data-path="../appendix_install/">
+            
+                <a href="../appendix_install/">
+            
+                    
+                    附：安装配置
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >easyOVS</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h2 id="easyovs">easyOVS</h2>
+<p><a href="https://github.com/yeasy/easyOVS" target="_blank">easyOVS</a> &#x662F;&#x4E00;&#x4E2A;&#x5F00;&#x6E90;&#x7684; OpenvSwitch &#x865A;&#x62DF;&#x4EA4;&#x6362;&#x673A;&#x7BA1;&#x7406;&#x5DE5;&#x5177;&#x3002;&#x4F7F;&#x7528;&#x5B83;&#xFF0C;&#x7528;&#x6237;&#x53EF;&#x4EE5;&#x5F88;&#x8F7B;&#x677E;&#x7684;&#x5BF9; OpenvSwitch &#x7684;&#x7F51;&#x6865;&#x3001;&#x7AEF;&#x53E3;&#x7B49;&#x8FDB;&#x884C;&#x67E5;&#x770B;&#xFF0C;&#x540C;&#x65F6;&#x5B83;&#x6DF1;&#x5EA6;&#x6574;&#x5408;&#x4E86; OpenStack &#xFF08;&#x652F;&#x6301; Havana &#x7248;&#x672C;&#x5230; Juno &#x7248;&#x672C;&#xFF09; &#x4E2D;&#x7F51;&#x7EDC;&#x76F8;&#x5173;&#x7684;&#x4FE1;&#x606F;&#xFF0C;&#x4E5F;&#x662F;&#x4E00;&#x4E2A;&#x5341;&#x5206;&#x5F3A;&#x5927;&#x7684; Neutron &#x4E2D;&#x5404;&#x4E2A;&#x7EC4;&#x4EF6;&#x7684;&#x76D1;&#x6D4B;&#x5DE5;&#x5177;&#x3002;</p>
+<h3 id="&#x4E3B;&#x8981;&#x529F;&#x80FD;&#x4E00;&#x89C8;">&#x4E3B;&#x8981;&#x529F;&#x80FD;&#x4E00;&#x89C8;</h3>
+<ul>
+<li>&#x652F;&#x6301; OpenvSwitch &#x7248;&#x672C; 1.4.6 ~ 2.0.2&#xFF0C;OpenStack Havana &#x5230; Juno &#x7248;&#x672C;&#xFF1B;</li>
+<li>&#x652F;&#x6301;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x73AF;&#x5883;&#x62A5; Ubuntu&#x3001;Debian&#x3001;CentOS&#x3001;Fedora &#x548C; Redhat&#xFF1B;</li>
+<li>&#x8F93;&#x51FA;&#x7ED3;&#x679C;&#x7ECF;&#x8FC7;&#x5904;&#x7406;&#xFF0C;&#x652F;&#x6301;&#x5F69;&#x8272;&#x8F93;&#x51FA;&#xFF0C;&#x5341;&#x5206;&#x7B80;&#x6D01;&#x6613;&#x8BFB;&#xFF1B;</li>
+<li>&#x5F00;&#x542F; OpenStack &#x652F;&#x6301;&#xFF0C;&#x53EF;&#x4EE5;&#x83B7;&#x53D6;&#x7AEF;&#x53E3;&#x7684;&#x5730;&#x5740;&#x3001;mac&#x3001;vlan &#x751A;&#x81F3;&#x865A;&#x62DF;&#x673A;&#x5173;&#x8054;&#x7684; iptables &#x89C4;&#x5219;&#x7B49;&#x4FE1;&#x606F;&#xFF1B;</li>
+<li>&#x5BF9;&#x6D41;&#x8868;&#x64CD;&#x4F5C;&#x8BED;&#x6CD5;&#x66F4;&#x52A0;&#x7B80;&#x6D01;&#xFF0C;&#x5E76;&#x652F;&#x6301;&#x901A;&#x8FC7; id &#x8FDB;&#x884C;&#x5220;&#x9664;&#xFF1B;</li>
+<li>&#x652F;&#x6301; tab &#x81EA;&#x52A8;&#x8865;&#x5168;&#xFF1B;</li>
+<li>&#x652F;&#x6301;&#x901A;&#x8FC7; <code>-m &apos;cmd&apos;</code> &#x6765;&#x76F4;&#x63A5;&#x8FD0;&#x884C;&#x547D;&#x4EE4;&#xFF0C;&#x65E0;&#x9700;&#x8FDB;&#x5165; CLI &#x64CD;&#x4F5C;&#x3002;</li>
+</ul>
+<h3 id="&#x5B89;&#x88C5;">&#x5B89;&#x88C5;</h3>
+<p>&#x5B89;&#x88C5;&#x5341;&#x5206;&#x7B80;&#x5355;&#xFF0C;&#x4E00;&#x884C;&#x4EE3;&#x7801;&#x641E;&#x5B9A;&#x3002;</p>
+<pre class="language-"><code class="lang-sh"><span class="token function">git</span> clone https://github.com/yeasy/easyOVS.git <span class="token operator">&amp;&amp;</span> <span class="token function">sudo</span> <span class="token function">bash</span> ./easyOVS/util/install.sh
+</code></pre>
+<p>&#x5B89;&#x88C5;&#x6210;&#x529F;&#x540E;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;</p>
+<pre class="language-"><code class="lang-sh"><span class="token function">sudo</span> easyovs
+</code></pre>
+<p>&#x8FDB;&#x5165;&#x64CD;&#x4F5C;&#x754C;&#x9762;&#x3002;</p>
+<h3 id="&#x6253;&#x5F00;-openstack-&#x652F;&#x6301;">&#x6253;&#x5F00; OpenStack &#x652F;&#x6301;</h3>
+<p>&#x7531;&#x4E8E; OpenStack &#x7EC4;&#x4EF6;&#x4FE1;&#x606F;&#x83B7;&#x53D6;&#x9700;&#x8981;&#x6709;&#x76F8;&#x5173;&#x7684;&#x8BA4;&#x8BC1;&#x4FE1;&#x606F;&#xFF0C;&#x56E0;&#x6B64;&#x9700;&#x8981;&#x5728;&#x73AF;&#x5883;&#x53D8;&#x91CF;&#x6216;&#x8005;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x4E2D;&#x8FDB;&#x884C;&#x6307;&#x5B9A;&#x3002;</p>
+<h4 id="&#x73AF;&#x5883;&#x53D8;&#x91CF;">&#x73AF;&#x5883;&#x53D8;&#x91CF;</h4>
+<p>&#x53EF;&#x4EE5;&#x5728;&#x7528;&#x6237;&#x76EE;&#x5F55;&#x7684; <code>.bashrc</code> &#x6587;&#x4EF6;&#x4E2D;&#x52A0;&#x5165;</p>
+<pre class="language-"><code class="lang-sh"><span class="token builtin class-name">export</span> <span class="token assign-left variable">OS_USERNAME</span><span class="token operator">=</span>demo
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">OS_TENANT_NAME</span><span class="token operator">=</span>demo
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">OS_PASSWORD</span><span class="token operator">=</span>admin
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">OS_AUTH_URL</span><span class="token operator">=</span>http://127.0.0.1:5000/v2.0/
+</code></pre>
+<h4 id="&#x914D;&#x7F6E;&#x6587;&#x4EF6;">&#x914D;&#x7F6E;&#x6587;&#x4EF6;</h4>
+<p>&#x9ED8;&#x8BA4;&#x7684;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x5728; <code>/etc/easyovs.conf</code>&#xFF0C;&#x66FF;&#x6362;&#x4E3A;&#x76F8;&#x5E94;&#x7684;&#x8BA4;&#x8BC1;&#x4FE1;&#x606F;&#x5373;&#x53EF;&#x3002;</p>
+<pre class="language-"><code class="lang-sh"><span class="token punctuation">[</span>OS<span class="token punctuation">]</span>
+auth_url <span class="token operator">=</span> http://127.0.0.1:5000/v2.0
+username <span class="token operator">=</span> demo
+password <span class="token operator">=</span> admin
+tenant_name <span class="token operator">=</span> demo
+</code></pre>
+<h3 id="&#x64CD;&#x4F5C;&#x547D;&#x4EE4;">&#x64CD;&#x4F5C;&#x547D;&#x4EE4;</h3>
+<h4 id="help">help</h4>
+<p>&#x663E;&#x793A;&#x5E2E;&#x52A9;&#x4FE1;&#x606F;.</p>
+<h4 id="list">list</h4>
+<p>&#x5217;&#x51FA;&#x672C;&#x5730;&#x7684; OpenvSwitch &#x7F51;&#x6865;&#xFF0C;&#x4F8B;&#x5982;</p>
+<pre class="language-"><code class="lang-sh"> EasyOVS<span class="token operator">&gt;</span> list
+s1
+ Port:        s1-eth2 s1 s1-eth1
+ Interface:    s1-eth2 s1 s1-eth1
+ Controller:ptcp:6634 tcp:127.0.0.1:6633
+ Fail_Mode:    secure
+s2
+ Port:        s2 s2-eth3 s2-eth2 s2-eth1
+ Interface:    s2 s2-eth3 s2-eth2 s2-eth1
+ Controller:tcp:127.0.0.1:6633 ptcp:6635
+ Fail_Mode:    secure
+s3
+ Port:        s3-eth1 s3-eth3 s3-eth2 s3
+ Interface:    s3-eth1 s3-eth3 s3-eth2 s3
+ Controller:ptcp:6636 tcp:127.0.0.1:6633
+ Fail_Mode:    secure
+</code></pre>
+<h4 id="show">show</h4>
+<p><code>EasyOVS&gt; [bridge|default] show</code></p>
+<p>&#x663E;&#x793A;&#x67D0;&#x4E2A;&#x7F51;&#x6865;&#x4E0A;&#x7684;&#x7AEF;&#x53E3;&#x4FE1;&#x606F;&#xFF0C;&#x4F8B;&#x5982;</p>
+<pre class="language-"><code class="lang-sh"> EasyOVS<span class="token operator">&gt;</span> br-int show
+br-int
+Intf                Port        Vlan    Type        vmIP            vmMAC
+int-br-eth0         <span class="token number">15</span>
+qvo260209fa-72      <span class="token number">11</span>          <span class="token number">1</span>                   <span class="token number">192.168</span>.0.4     fa:16:3e:0f:17:04
+qvo583c7038-d3      <span class="token number">2</span>           <span class="token number">1</span>                   <span class="token number">192.168</span>.0.2     fa:16:3e:9c:dc:3a
+qvo8bf9cba2-3f      <span class="token number">9</span>           <span class="token number">1</span>                   <span class="token number">192.168</span>.0.5     fa:16:3e:a2:2f:0e
+qvod4de9fe0-6d      <span class="token number">8</span>           <span class="token number">2</span>                   <span class="token number">10.0</span>.0.2        fa:16:3e:38:2b:2e
+br-int              LOCAL               internal
+</code></pre>
+<h4 id="dump">dump</h4>
+<p><code>EasyOVS&gt; [bridge|default] dump</code></p>
+<p>&#x663E;&#x793A;&#x7F51;&#x6865;&#x4E0A;&#x7ED1;&#x5B9A;&#x7684;&#x6D41;&#x8868;&#x89C4;&#x5219;&#xFF0C;&#x4F8B;&#x5982;</p>
+<pre class="language-"><code class="lang-sh">EasyOVS<span class="token operator">&gt;</span> s1 dump
+ID TAB PKT       PRI   MATCH                                                       ACT
+<span class="token number">0</span>  <span class="token number">0</span>   <span class="token number">0</span>         <span class="token number">2400</span>  <span class="token assign-left variable">dl_dst</span><span class="token operator">=</span>ff:ff:ff:ff:ff:ff                                    CONTROLLER:65535
+<span class="token number">1</span>  <span class="token number">0</span>   <span class="token number">0</span>         <span class="token number">2400</span>  arp                                                         CONTROLLER:65535
+<span class="token number">2</span>  <span class="token number">0</span>   <span class="token number">0</span>         <span class="token number">2400</span>  <span class="token assign-left variable">dl_type</span><span class="token operator">=</span>0x88cc                                              CONTROLLER:65535
+<span class="token number">3</span>  <span class="token number">0</span>   <span class="token number">0</span>         <span class="token number">2400</span>  ip,nw_proto<span class="token operator">=</span><span class="token number">2</span>                                               CONTROLLER:65535
+<span class="token number">4</span>  <span class="token number">0</span>   <span class="token number">0</span>         <span class="token number">801</span>   <span class="token function">ip</span>                                                          CONTROLLER:65535
+<span class="token number">5</span>  <span class="token number">0</span>   <span class="token number">2</span>         <span class="token number">800</span>
+</code></pre>
+<h4 id="addflow">addflow</h4>
+<p><code>EasyOVS&gt; [bridge|default] addflow [match] actions=[action]</code></p>
+<p>&#x6DFB;&#x52A0;&#x4E00;&#x6761;&#x6D41;&#x5230;&#x7F51;&#x6865;&#xFF0C;&#x4F8B;&#x5982;</p>
+<p><code>EasyOVS&gt; br-int addflow priority=3 ip actions=OUTPUT:1</code></p>
+<h4 id="delflow">delflow</h4>
+<p><code>EasyOVS&gt; [bridge|default] delflow id1 id2...</code></p>
+<p>&#x4ECE;&#x7F51;&#x6865;&#x5220;&#x9664;&#x6D41;&#xFF0C;&#x5176;&#x4E2D; id &#x4FE1;&#x606F;&#x53EF;&#x4EE5;&#x4ECE; <code>dump</code> &#x7684;&#x7ED3;&#x679C;&#x4E2D;&#x62FF;&#x5230;.</p>
+<h4 id="set">set</h4>
+<p><code>EasyOVS&gt; bridge set</code></p>
+<p>&#x6307;&#x5B9A;&#x9ED8;&#x8BA4;&#x7F51;&#x6865;&#xFF0C;&#x540C;&#x65F6;&#x8FDB;&#x5165;&#x7F51;&#x6865;&#x64CD;&#x4F5C;&#x6A21;&#x5F0F;&#xFF0C;&#x6307;&#x5B9A;&#x540E;&#x8FDB;&#x884C;&#x64CD;&#x4F5C;&#x53EF;&#x4EE5;&#x5FFD;&#x7565;&#x7F51;&#x6865;&#x4FE1;&#x606F;&#x3002;</p>
+<pre class="language-"><code class="lang-sh">EasyOVS<span class="token operator">&gt;</span> <span class="token builtin class-name">set</span> br-int
+Set the default bridge to br-int.
+EasyOVS: br-int<span class="token operator">&gt;</span>
+</code></pre>
+<h4 id="exit">exit</h4>
+<p><code>EasyOVS&gt; exit</code></p>
+<p>&#x9000;&#x51FA;&#x7F51;&#x6865;&#x6A21;&#x5F0F;&#xFF0C;&#x6216;&#x8005;&#x9000;&#x51FA;&#x7A0B;&#x5E8F;.</p>
+<h4 id="get">get</h4>
+<p><code>EasyOVS&gt; get</code></p>
+<p>&#x5728;&#x7F51;&#x6865;&#x6A21;&#x5F0F;&#x4E0B;&#xFF0C;&#x83B7;&#x53D6;&#x5F53;&#x524D;&#x7684;&#x7F51;&#x6865;&#x540D;&#x79F0;.</p>
+<pre class="language-"><code class="lang-sh">EasyOVS: br-int<span class="token operator">&gt;</span> get
+Current default bridge is br-int
+</code></pre>
+<h4 id="ipt">ipt</h4>
+<p><code>EasyOVS&gt; ipt vm_ip1, vm_ip2...</code></p>
+<p>&#x7ED9;&#x5B9A;&#x865A;&#x62DF;&#x673A; IP &#x5730;&#x5740;&#xFF0C;&#x663E;&#x793A;&#x4E0E;&#x5B83;&#x76F8;&#x5173;&#x7684; iptables &#x89C4;&#x5219;&#x3002;&#x9700;&#x8981;&#x542F;&#x7528; OpenStack &#x652F;&#x6301;&#x3002;</p>
+<pre class="language-"><code class="lang-sh">EasyOVS<span class="token operator">&gt;</span> ipt <span class="token number">192.168</span>.0.2 <span class="token number">192.168</span>.0.4
+<span class="token comment">## IP = 192.168.0.2, port = qvo583c7038-d ##</span>
+    PKTS    SOURCE          DESTINATION     PROT  OTHER
+<span class="token comment">#IN:</span>
+     <span class="token number">672</span>    all             all             all   state RELATED,ESTABLISHED
+       <span class="token number">0</span>    all             all             tcp   tcp dpt:22
+       <span class="token number">0</span>    all             all             icmp
+       <span class="token number">0</span>    <span class="token number">192.168</span>.0.4     all             all
+       <span class="token number">3</span>    <span class="token number">192.168</span>.0.5     all             all
+       <span class="token number">8</span>    <span class="token number">10.0</span>.0.2        all             all
+   <span class="token number">85784</span>    <span class="token number">192.168</span>.0.3     all             udp   udp spt:67 dpt:68
+<span class="token comment">#OUT:</span>
+    196K    all             all             udp   udp spt:68 dpt:67
+   <span class="token number">86155</span>    all             all             all   state RELATED,ESTABLISHED
+    <span class="token number">1241</span>    all             all             all
+<span class="token comment">#SRC_FILTER:</span>
+   <span class="token number">59163</span>    <span class="token number">192.168</span>.0.2     all             all   MAC FA:16:3E:9C:DC:3A
+<span class="token comment">## IP = 192.168.0.4, port = qvo260209fa-7 ##</span>
+    PKTS    SOURCE          DESTINATION     PROT  OTHER
+<span class="token comment">#IN:</span>
+      <span class="token number">73</span>    all             all             all   state RELATED,ESTABLISHED
+       <span class="token number">0</span>    all             all             tcp   tcp dpt:22
+       <span class="token number">0</span>    all             all             icmp
+       <span class="token number">0</span>    <span class="token number">192.168</span>.0.2     all             all
+       <span class="token number">0</span>    <span class="token number">192.168</span>.0.5     all             all
+       <span class="token number">0</span>    <span class="token number">10.0</span>.0.2        all             all
+   <span class="token number">11331</span>    <span class="token number">192.168</span>.0.3     all             udp   udp spt:67 dpt:68
+<span class="token comment">#OUT:</span>
+   <span class="token number">30034</span>    all             all             udp   udp spt:68 dpt:67
+   <span class="token number">11377</span>    all             all             all   state RELATED,ESTABLISHED
+      <span class="token number">12</span>    all             all             all
+<span class="token comment">#SRC_FILTER:</span>
+    <span class="token number">9859</span>    <span class="token number">192.168</span>.0.4     all             all   MAC FA:16:3E:0F:17:04
+</code></pre>
+<h4 id="query">query</h4>
+<p><code>EasyOVS&gt; query port_ip, port_id...</code></p>
+<p>&#x7ED9;&#x5B9A;&#x67D0;&#x4E2A;&#x7684;&#x7AEF;&#x53E3;&#x7684; IP &#x5730;&#x5740;&#xFF0C;&#x6216;&#x8005;&#x90E8;&#x5206;&#x7AEF;&#x53E3; id &#x4FE1;&#x606F;&#xFF0C;&#x663E;&#x793A;&#x8BE5;&#x7AEF;&#x53E3;&#x76F8;&#x5173;&#x7684;&#x5B8C;&#x6574;&#x4FE1;&#x606F;&#x3002;&#x9700;&#x8981;&#x542F;&#x7528; OpenStack &#x652F;&#x6301;&#x3002;</p>
+<pre class="language-"><code class="lang-sh">EasyOVS<span class="token operator">&gt;</span> query <span class="token number">10.0</span>.0.2,c4493802
+<span class="token comment">## port_id = f47c62b0-dbd2-4faa-9cdd-8abc886ce08f</span>
+status: ACTIVE
+name:
+allowed_address_pairs: <span class="token punctuation">[</span><span class="token punctuation">]</span>
+admin_state_up: True
+network_id: ea3928dc-b1fd-4a1a-940e-82b8c55214e6
+tenant_id: 3a55e7b5f5504649a2dfde7147383d02
+extra_dhcp_opts: <span class="token punctuation">[</span><span class="token punctuation">]</span>
+binding:vnic_type: normal
+device_owner: compute:az_compute
+mac_address: fa:16:3e:52:7a:f2
+fixed_ips: <span class="token punctuation">[</span><span class="token punctuation">{</span>u<span class="token string">&apos;subnet_id&apos;</span><span class="token builtin class-name">:</span> u<span class="token string">&apos;94bf94c0-6568-4520-aee3-d12b5e472128&apos;</span>, u<span class="token string">&apos;ip_address&apos;</span><span class="token builtin class-name">:</span> u<span class="token string">&apos;10.0.0.2&apos;</span><span class="token punctuation">}</span><span class="token punctuation">]</span>
+id: f47c62b0-dbd2-4faa-9cdd-8abc886ce08f
+security_groups: <span class="token punctuation">[</span>u<span class="token string">&apos;7c2b801b-4590-4a1f-9837-1cceb7f6d1d0&apos;</span><span class="token punctuation">]</span>
+device_id: c3522974-8a08-481c-87b5-fe3822f5c89c
+<span class="token comment">## port_id = c4493802-4344-42bd-87a6-1b783f88609a</span>
+status: ACTIVE
+name:
+allowed_address_pairs: <span class="token punctuation">[</span><span class="token punctuation">]</span>
+admin_state_up: True
+network_id: ea3928dc-b1fd-4a1a-940e-82b8c55214e6
+tenant_id: 3a55e7b5f5504649a2dfde7147383d02
+extra_dhcp_opts: <span class="token punctuation">[</span><span class="token punctuation">]</span>
+binding:vnic_type: normal
+device_owner: compute:az_compute
+mac_address: fa:16:3e:94:84:90
+fixed_ips: <span class="token punctuation">[</span><span class="token punctuation">{</span>u<span class="token string">&apos;subnet_id&apos;</span><span class="token builtin class-name">:</span> u<span class="token string">&apos;94bf94c0-6568-4520-aee3-d12b5e472128&apos;</span>, u<span class="token string">&apos;ip_address&apos;</span><span class="token builtin class-name">:</span> u<span class="token string">&apos;10.0.0.4&apos;</span><span class="token punctuation">}</span><span class="token punctuation">]</span>
+id: c4493802-4344-42bd-87a6-1b783f88609a
+security_groups: <span class="token punctuation">[</span>u<span class="token string">&apos;7c2b801b-4590-4a1f-9837-1cceb7f6d1d0&apos;</span><span class="token punctuation">]</span>
+device_id: 9365c842-9228-44a6-88ad-33d7389cda5f
+</code></pre>
+<h4 id="sh">sh</h4>
+<p><code>EasyOVS&gt; sh cmd</code></p>
+<p>&#x6267;&#x884C;&#x7CFB;&#x7EDF;&#x547D;&#x4EE4;&#x3002;</p>
+<pre class="language-"><code class="lang-sh">EasyOVS<span class="token operator">&gt;</span> <span class="token function">sh</span> <span class="token function">ls</span> -l
+total <span class="token number">48</span>
+drwxr-xr-x. <span class="token number">2</span> root root <span class="token number">4096</span> Apr  <span class="token number">1</span> <span class="token number">14</span>:34 bin
+drwxr-xr-x. <span class="token number">5</span> root root <span class="token number">4096</span> Apr  <span class="token number">1</span> <span class="token number">14</span>:56 build
+drwxr-xr-x. <span class="token number">2</span> root root <span class="token number">4096</span> Apr  <span class="token number">1</span> <span class="token number">14</span>:56 dist
+drwxr-xr-x. <span class="token number">2</span> root root <span class="token number">4096</span> Apr  <span class="token number">1</span> <span class="token number">14</span>:09 doc
+drwxr-xr-x. <span class="token number">4</span> root root <span class="token number">4096</span> Apr  <span class="token number">1</span> <span class="token number">14</span>:56 easyovs
+-rw-r--r--. <span class="token number">1</span> root root  <span class="token number">660</span> Apr  <span class="token number">1</span> <span class="token number">14</span>:56 easyovs.1
+drwxr-xr-x. <span class="token number">2</span> root root <span class="token number">4096</span> Apr  <span class="token number">1</span> <span class="token number">14</span>:56 easyovs.egg-info
+-rw-r--r--. <span class="token number">1</span> root root <span class="token number">2214</span> Apr  <span class="token number">1</span> <span class="token number">14</span>:53 INSTALL
+-rw-r--r--. <span class="token number">1</span> root root <span class="token number">1194</span> Apr  <span class="token number">1</span> <span class="token number">14</span>:53 Makefile
+-rw-r--r--. <span class="token number">1</span> root root <span class="token number">3836</span> Apr  <span class="token number">1</span> <span class="token number">14</span>:53 README.md
+-rw-r--r--. <span class="token number">1</span> root root <span class="token number">1177</span> Apr  <span class="token number">1</span> <span class="token number">14</span>:53 setup.py
+drwxr-xr-x. <span class="token number">2</span> root root <span class="token number">4096</span> Apr  <span class="token number">1</span> <span class="token number">14</span>:09 util
+</code></pre>
+<h4 id="quit">quit</h4>
+<p>&#x8F93;&#x5165; <code>^d</code> &#x6216;&#x8005; <code>quit</code> &#x547D;&#x4EE4;&#x6765;&#x9000;&#x51FA;&#x7A0B;&#x5E8F;&#x3002;</p>
+<h3 id="&#x53C2;&#x6570;">&#x53C2;&#x6570;</h3>
+<h4 id="h">-h</h4>
+<p>&#x663E;&#x793A;&#x5E2E;&#x52A9;&#x4FE1;&#x606F;&#x3002;</p>
+<pre class="language-"><code class="lang-sh">$ easyovs -h
+Usage: easyovs <span class="token punctuation">[</span>options<span class="token punctuation">]</span>
+<span class="token punctuation">(</span>type easyovs -h <span class="token keyword">for</span> details<span class="token punctuation">)</span>
+
+The easyovs utility creates operation CLI from the <span class="token builtin class-name">command</span> line. It can run
+given commands, invoke the EasyOVS CLI, and run tests.
+
+Options:
+  -h, --help            show this <span class="token builtin class-name">help</span> message and <span class="token builtin class-name">exit</span>
+  -c, --clean           clean and <span class="token builtin class-name">exit</span>
+  -m CMD, --cmd<span class="token operator">=</span>CMD     Run customized commands <span class="token keyword">for</span> tests.
+  -v VERBOSITY, --verbosity<span class="token operator">=</span>VERBOSITY
+                        info<span class="token operator">|</span>warning<span class="token operator">|</span>critical<span class="token operator">|</span>error<span class="token operator">|</span>debug<span class="token operator">|</span>output
+  --version
+</code></pre>
+<h4 id="c">-c</h4>
+<p>&#x8FDB;&#x884C;&#x73AF;&#x5883;&#x6E05;&#x7406;&#x3002;</p>
+<h4 id="m">-m</h4>
+<p>&#x4E0D;&#x8FDB;&#x5165; CLI&#xFF0C;&#x76F4;&#x63A5;&#x6267;&#x884C;&#x7ED9;&#x5B9A;&#x7684;&#x547D;&#x4EE4;&#xFF0C;&#x663E;&#x793A;&#x7ED3;&#x679C;&#x3002;
+&#x4F8B;&#x5982;</p>
+<pre class="language-"><code class="lang-sh">$ <span class="token function">sudo</span> easyovs -m <span class="token string">&quot;show br-int&quot;</span>
+Intf                Port        Vlan    Type        vmIP            vmMAC
+qvof47c62b0-db      <span class="token number">2</span>           <span class="token number">1</span>                   <span class="token number">10.0</span>.0.2        fa:16:3e:52:7a:f2
+qvoc4493802-43      <span class="token number">3</span>           <span class="token number">1</span>                   <span class="token number">10.0</span>.0.4        fa:16:3e:94:84:90
+br-int              LOCAL               internal
+patch-tun           <span class="token number">6</span>                   patch
+</code></pre>
+<p>&#x4F8B;&#x5982;</p>
+<pre class="language-"><code class="lang-sh">$ <span class="token function">sudo</span> easyovs -m <span class="token string">&apos;br-int dump&apos;</span>
+ID TAB PKT       PRI   MATCH                                                       ACT
+<span class="token number">0</span>  <span class="token number">0</span>   <span class="token number">30</span>        <span class="token number">1</span>     *                                                           NORMAL
+<span class="token number">1</span>  <span class="token number">23</span>  <span class="token number">0</span>         <span class="token number">0</span>     *                                                           drop
+</code></pre>
+<h4 id="v">-v</h4>
+<p>&#x8BBE;&#x7F6E;&#x8F93;&#x51FA;&#x4FE1;&#x606F;&#x7684;&#x65E5;&#x5FD7;&#x7EA7;&#x522B;&#xFF0C;&#x5305;&#x62EC; debug&#xFF0C;info&#xFF0C;warn&#xFF0C;error &#x7B49;&#xFF0C;&#x65B9;&#x4FBF;&#x8FDB;&#x884C;&#x8C03;&#x8BD5;&#x3002;</p>
+<h4 id="-version">--version</h4>
+<p>&#x663E;&#x793A;&#x7248;&#x672C;&#x4FE1;&#x606F;&#x3002;</p>
+
+<script>console.log("plugin-popup....");document.onclick = function(e){ e.target.tagName === "IMG" && window.open(e.target.src,e.target.src)}</script><style>img{cursor:pointer}</style>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="./" class="navigation navigation-prev " aria-label="Previous page: 工具">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../ref/" class="navigation navigation-next " aria-label="Next page: 参考">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"easyOVS","level":"1.12.1","depth":2,"next":{"title":"参考","level":"1.13","depth":1,"path":"ref/README.md","ref":"ref/README.md","articles":[]},"previous":{"title":"工具","level":"1.12","depth":1,"path":"tool/README.md","ref":"tool/README.md","articles":[{"title":"easyOVS","level":"1.12.1","depth":2,"path":"tool/easyovs.md","ref":"tool/easyovs.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["back-to-top-button","chapter-fold","expandable-chapters","code","-lunr","-search","search-pro","page-toc-button","popup","prism","-highlight","livereload"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"chapter-fold":{},"prism":{},"livereload":{},"search-pro":{},"popup":{},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"page-toc-button":{"maxTocDepth":2,"minTocSize":2},"back-to-top-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"expandable-chapters":{}},"theme":"default","author":"John Lee <ljzsdut@163.com>","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"笔记","links":{"sharing":{"all":null,"facebook":null,"google":null,"twitter":null,"weibo":null},"sidebar":{"My Blog":"http://www.ljzsdut.com"}},"gitbook":"*","description":"notes","extension":null},"file":{"path":"tool/easyovs.md","mtime":"2021-07-05T11:41:51.182Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-08-18T01:23:01.131Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-back-to-top-button/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-chapter-fold/chapter-fold.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-expandable-chapters/expandable-chapters.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-code/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-pro/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-pro/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-page-toc-button/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

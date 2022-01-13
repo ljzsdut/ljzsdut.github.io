@@ -1,0 +1,712 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>3. 修改 Cinder/Glance 进程的最大可用 FD · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="change_osd_journal.html" />
+    
+    
+    <link rel="prev" href="mon_backup.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    简介
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../Operation/common_operations.html">
+            
+                <a href="../Operation/common_operations.html">
+            
+                    
+                    第一部分：常用操作
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../Operation/operate_cluster.html">
+            
+                <a href="../Operation/operate_cluster.html">
+            
+                    
+                    1. 操作集群
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../Operation/monitor_cluster.html">
+            
+                <a href="../Operation/monitor_cluster.html">
+            
+                    
+                    2. 监控集群
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="../Operation/monitor_osd.html">
+            
+                <a href="../Operation/monitor_osd.html">
+            
+                    
+                    3. 监控 OSD
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="../Operation/monitor_pg.html">
+            
+                <a href="../Operation/monitor_pg.html">
+            
+                    
+                    4. 监控 PG
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5" data-path="../Operation/user_management.html">
+            
+                <a href="../Operation/user_management.html">
+            
+                    
+                    5. 用户管理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.6" data-path="../Operation/add_rm_mon.html">
+            
+                <a href="../Operation/add_rm_mon.html">
+            
+                    
+                    6. 增加/删除 Monitor
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.7" data-path="../Operation/add_rm_osd.html">
+            
+                <a href="../Operation/add_rm_osd.html">
+            
+                    
+                    7. 增加/删除 OSD
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.8" data-path="../Operation/operate_pool.html">
+            
+                <a href="../Operation/operate_pool.html">
+            
+                    
+                    8. 操作 Pool
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.9" data-path="../Operation/manage_crushmap.html">
+            
+                <a href="../Operation/manage_crushmap.html">
+            
+                    
+                    9. 管理 Crushmap
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.10" data-path="../Operation/modify_mon_ip.html">
+            
+                <a href="../Operation/modify_mon_ip.html">
+            
+                    
+                    10. 修改 MON IP
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.11" data-path="../Operation/change_cluster_conf.html">
+            
+                <a href="../Operation/change_cluster_conf.html">
+            
+                    
+                    11. 修改集群配置
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.12" data-path="../Operation/log_debug.html">
+            
+                <a href="../Operation/log_debug.html">
+            
+                    
+                    12. 日志和调试
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../Troubleshooting/troubleshooting.html">
+            
+                <a href="../Troubleshooting/troubleshooting.html">
+            
+                    
+                    第二部分：故障处理
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../Troubleshooting/troubleshooting_mon.html">
+            
+                <a href="../Troubleshooting/troubleshooting_mon.html">
+            
+                    
+                    1. 常见 MON 故障处理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../Troubleshooting/troubleshooting_osd.html">
+            
+                <a href="../Troubleshooting/troubleshooting_osd.html">
+            
+                    
+                    2. 常见 OSD 故障处理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../Troubleshooting/troubleshooting_pg.html">
+            
+                <a href="../Troubleshooting/troubleshooting_pg.html">
+            
+                    
+                    3. 常见 PG 故障处理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../Troubleshooting/troubleshooting_lost_power.html">
+            
+                <a href="../Troubleshooting/troubleshooting_lost_power.html">
+            
+                    
+                    4. 全局 Ceph 节点宕机处理 
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="../Troubleshooting/troubleshooting_single_lost_power.html">
+            
+                <a href="../Troubleshooting/troubleshooting_single_lost_power.html">
+            
+                    
+                    5. 单个 Ceph 节点宕机处理 
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="advanced_usage.html">
+            
+                <a href="advanced_usage.html">
+            
+                    
+                    第三部分：Ceph 进阶
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="pg_pgp.html">
+            
+                <a href="pg_pgp.html">
+            
+                    
+                    1. PG 和 PGP 的区别
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="mon_backup.html">
+            
+                <a href="mon_backup.html">
+            
+                    
+                    2. Monitor 的备份和恢复
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.4.3" data-path="change_fd.html">
+            
+                <a href="change_fd.html">
+            
+                    
+                    3. 修改 Cinder/Glance 进程的最大可用 FD
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="change_osd_journal.html">
+            
+                <a href="change_osd_journal.html">
+            
+                    
+                    4. 更换 OSD Journal
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="rescue_osd_parted.html">
+            
+                <a href="rescue_osd_parted.html">
+            
+                    
+                    5. 清空 OSD 的分区表后如何恢复
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.6" data-path="pg_active_remapped.html">
+            
+                <a href="pg_active_remapped.html">
+            
+                    
+                    6. PG 卡在 active + remapped 状态
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.7" data-path="find_rbd_data_loc.html">
+            
+                <a href="find_rbd_data_loc.html">
+            
+                    
+                    7. 查看 RBD 镜像的位置
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.8" data-path="rbd_real_size.html">
+            
+                <a href="rbd_real_size.html">
+            
+                    
+                    8. 查看 RBD 镜像的实际大小
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.9" data-path="cal_pg_per_osd.html">
+            
+                <a href="cal_pg_per_osd.html">
+            
+                    
+                    9. 统计 OSD 上 PG 的数量
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.10" data-path="list_rbd_watcher.html">
+            
+                <a href="list_rbd_watcher.html">
+            
+                    
+                    10. 查看使用 RBD 镜像的客户端
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >3. 修改 Cinder/Glance 进程的最大可用 FD</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="3-&#x4FEE;&#x6539;-cinderglance-&#x8FDB;&#x7A0B;&#x7684;&#x6700;&#x5927;&#x53EF;&#x7528;-fd">3. &#x4FEE;&#x6539; Cinder/Glance &#x8FDB;&#x7A0B;&#x7684;&#x6700;&#x5927;&#x53EF;&#x7528; FD</h1>
+<hr>
+<p>&#x672C;&#x7BC7;&#x5185;&#x5BB9;&#x662F;&#x6839;&#x636E;&#x751F;&#x4EA7;&#x73AF;&#x5883;&#x4E2D;&#x9047;&#x5230;&#x7684;&#x5B9E;&#x9645;&#x95EE;&#x9898;&#x8FDB;&#x884C;&#x7684;&#x603B;&#x7ED3;&#x3002;</p>
+<h3 id="&#x80CC;&#x666F;">&#x80CC;&#x666F;</h3>
+<p>&#x5728;&#x751F;&#x4EA7;&#x73AF;&#x5883;&#x4E2D;&#x9047;&#x5230;&#x8FD9;&#x6837;&#x4E00;&#x4E2A;&#x95EE;&#x9898;&#xFF1A;<br>&#x4E0B;&#x53D1;&#x5220;&#x9664;&#x5377;&#x6D88;&#x606F;&#x65E0;&#x6CD5;&#x6210;&#x529F;&#x5220;&#x9664;&#x5377;&#xFF0C;&#x540E;&#x901A;&#x8FC7; cinder &#x547D;&#x4EE4;&#x884C;&#x547D;&#x4EE4; <code>cinder service-list</code> &#x67E5;&#x8BE2;cinder &#x670D;&#x52A1;&#x72B6;&#x6001;&#xFF0C;&#x53D1;&#x73B0; <code>cinder-volume host : r2202002controller@rbd-sata</code> &#x670D;&#x52A1;&#x72B6;&#x6001;&#x4E3A; <code>DOWN</code> &#x3002;</p>
+<pre><code>|  cinder-volume   |  r2202002controller@rbd-sata   | nova | enabled  |    down  |
+</code></pre><p>&#x8BE5;&#x72B6;&#x6001;&#x8868;&#x660E;&#x8BE5; cinder-volume &#x8FDB;&#x7A0B;&#x5DF2;&#x7ECF;&#x6CA1;&#x6709;&#x6B63;&#x5E38;&#x4E0A;&#x62A5;&#x5FC3;&#x8DF3;&#xFF0C;&#x5904;&#x4E8E;&#x65E0;&#x6CD5;&#x5904;&#x7406;&#x8BF7;&#x6C42;&#x7684;&#x72B6;&#x6001;&#x3002;</p>
+<h3 id="&#x539F;&#x56E0;&#x5206;&#x6790;">&#x539F;&#x56E0;&#x5206;&#x6790;</h3>
+<p>&#x901A;&#x8FC7;&#x73B0;&#x573A;&#x590D;&#x73B0;&#x95EE;&#x9898;&#x548C;&#x67E5;&#x770B; cinder-volume &#x65E5;&#x5FD7;&#xFF0C;&#x53D1;&#x73B0;&#x5728;&#x51FA;&#x95EE;&#x9898;&#x7684;&#x65F6;&#x95F4;&#x70B9;&#x90FD;&#x6709;&#x5220;&#x9664;&#x5377;&#x7684;&#x64CD;&#x4F5C;&#x4E0B;&#x53D1;&#xFF0C;&#x4F46;&#x662F;&#x6709;&#x7684;&#x5377;&#x4E00;&#x76F4;&#x672A;&#x7ED3;&#x675F;&#x5220;&#x9664;&#x5377;&#x6D41;&#x7A0B;&#xFF0C;&#x76F4;&#x5230;&#x91CD;&#x542F; cinder-volume &#x8FDB;&#x7A0B;&#x65F6;&#x624D;&#x6062;&#x590D;&#x3002;</p>
+<pre><code>2016-09-23 13:42:48.176 44907 INFO cinder.volume.manager [req-0182ed51-a4a7-44e4-bd3e-3d456610a135 ff01ec05ed4442799ebad096c1aa2921 584c5f2fed764ec9b840319eb2cd0608 - - -] volume b38ea39e-b1f5-4af6-a7b1-40fe1d5e80ee: deleting
+
+2016-09-23 16:52:08.290 52145 INFO cinder.volume.manager [req-be3fe7fc-39fe-4bc3-9a70-d5be1e7330ce - - - - -] Resuming delete on volume: b38ea39e-b1f5-4af6-a7b1-40fe1d5e80ee
+</code></pre><p>&#x6000;&#x7591;&#x5728;&#x5220;&#x9664; RDB &#x5377;&#x6D41;&#x7A0B;&#x6709;&#x6302;&#x6B7B;&#x95EE;&#x9898;&#xFF0C;&#x901A;&#x8FC7;&#x8FDB;&#x4E00;&#x6B65;&#x67E5;&#x770B;&#x65E5;&#x5FD7;&#xFF0C;&#x53D1;&#x73B0;&#x6700;&#x540E;&#x8D70;&#x5230;&#x8C03;&#x7528; RDB Client &#x5220;&#x9664;&#x5377;&#x65F6;&#x5C31;&#x4E2D;&#x65AD;&#x4E86;:</p>
+<pre><code>2016-09-23 13:43:27.911 44907 DEBUG cinder.volume.drivers.rbd [req-0182ed51-a4a7-44e4-bd3e-3d456610a135 ff01ec05ed4442799ebad096c1aa2921 584c5f2fed764ec9b840319eb2cd0608 - - -] deleting rbd volume volume-b38ea39e-b1f5-4af6-a7b1-40fe1d5e80  delete_volume /usr/local/lib/python2.7/dist-packages/cinder/volume/drivers/rbd.py:666
+</code></pre><p>&#x56E0;&#x4E3A;&#x8BE5;&#x95EE;&#x9898;&#x53D1;&#x751F;&#x5728; Ceph &#x96C6;&#x7FA4;&#x6269;&#x5BB9;&#x540E;&#xFF0C;&#x56E0;&#x6B64;&#x8FDB;&#x4E00;&#x6B65;&#x6000;&#x7591;&#x548C;&#x4E4B;&#x524D; Nova &#x6302;&#x5377;&#x540E;&#x8BFB;&#x53D6;&#x53D8;&#x6162;&#x95EE;&#x9898;&#x4E00;&#x6837;&#x662F;&#x7531;&#x4E8E;&#x8FDB;&#x7A0B;&#x6253;&#x5F00;&#x6587;&#x4EF6;&#x8FC7;&#x591A;&#x5F15;&#x8D77;&#x5F02;&#x5E38;&#xFF0C;&#x540E;&#x5728;&#x5B9E;&#x9A8C;&#x73AF;&#x5883;&#x4E2D;&#x901A;&#x8FC7;&#x6253;&#x5F00; RDB client &#x65E5;&#x5FD7;&#xFF0C;&#x91CD;&#x542F; cinder-volume &#x8FDB;&#x7A0B;&#x3002;</p>
+<pre><code>[client]
+rbd cache = true
+rbd cache writethrough until flush = true
+log file = /var/log/ceph/ceph.client.log
+debug client = 20
+debug rbd = 20
+debug librbd = 20
+debug objectcacher = 20
+</code></pre><p>&#x7136;&#x540E;&#x589E;&#x52A0; cinder-volume &#x8FDB;&#x7A0B;&#x5220;&#x5377;&#x65F6;&#x7684;&#x6253;&#x5F00;&#x6587;&#x4EF6;&#x6570;&#x6210;&#x529F;&#x590D;&#x73B0;&#x8BE5;&#x95EE;&#x9898;&#x3002;RDB client &#x65E5;&#x5FD7;&#x4E2D;&#x62A5; <code>too many open files</code> &#x5F02;&#x5E38;&#xFF0C;&#x540E;&#x5728;&#x751F;&#x4EA7;&#x73AF;&#x5883;&#x4E0A;&#x901A;&#x8FC7;&#x590D;&#x73B0;&#x95EE;&#x9898;&#x548C;&#x6253;&#x5F00; RDB Client &#x65E5;&#x5FD7;&#x89C2;&#x5BDF;&#x5230;&#x540C;&#x6837;&#x7684;&#x5F02;&#x5E38;&#xFF0C;&#x56E0;&#x6B64;&#x53EF;&#x4EE5;&#x786E;&#x5B9A;&#x662F;&#x7531;&#x4E8E;&#x6269;&#x5BB9;&#x540E; OSD &#x8282;&#x70B9;&#x589E;&#x591A;&#xFF0C;RDB client &#x5220;&#x9664;&#x5377;&#x65F6;&#x9700;&#x8981;&#x548C;&#x6240;&#x6709; OSD &#x5EFA;&#x7ACB; socket &#x94FE;&#x63A5;&#xFF0C;&#x8FD9;&#x6837;&#x5C31;&#x4F1A;&#x8D85;&#x8FC7;&#x76EE;&#x524D;&#x73AF;&#x5883;&#x4E2D; cinder-volume &#x8FDB;&#x7A0B;&#x5141;&#x8BB8;&#x6253;&#x5F00;&#x7684;&#x6587;&#x4EF6;&#x6570;&#xFF0C;&#x5BFC;&#x81F4;&#x5F02;&#x5E38;&#x53D1;&#x751F;&#xFF0C;&#x8FDB;&#x5165;&#x6302;&#x6B7B;&#x72B6;&#x6001;&#x3002;</p>
+<pre><code>2016-09-26 20:08:48.953810 7f099566b700 -1 -- 192.168.219.2:0/43062437 &gt;&gt; 192.168.219.130:6812/12006 pipe(0x7f0acdcdc090 sd=-1 :0 s=1 pgs=0 cs=0 l=1 c=0x7f0acdcae7e0).connect couldn&apos;t created socket (24) Too many open files
+2016-09-26 20:08:48.953803 7f099556a700 -1 -- 192.168.219.2:0/43062437 &gt;&gt; 192.168.219.113:6802/2740 pipe(0x7f0acdce0330 sd=-1 :0 s=1 pgs=0 cs=0 l=1 c=0x7f0acdcb2210).connect couldn&apos;t created socket (24) Too many open files
+2016-09-26 20:08:48.953898 7f0995267700 -1 -- 192.168.219.2:0/43062437 &gt;&gt; 192.168.219.179:6812/31845 pipe(0x7f0acdcf12f0 sd=-1 :0 s=1 pgs=0 cs=0 l=1 c=0x7f0acdced990).connect couldn&apos;t created socket (24) Too many open files
+2016-09-26 20:08:48.953913 7f099596e700 -1 -- 192.168.219.2:0/43062437 &gt;&gt; 192.168.219.169:6804/8418 pipe(0x7f0acdccd2f0 sd=-1 :0 s=1 pgs=0 cs=0 l=1 c=0x7f0acdcc0a90).connect couldn&apos;t created socket (24) Too many open files
+2016-09-26 20:08:48.953932 7f0995368700 -1 -- 192.168.219.2:0/43062437 &gt;&gt; 192.168.219.136:6806/23096 pipe(0x7f0acdce8f40 sd=-1 :0 s=1 pgs=0 cs=0 l=1 c=0x7f0acdcc7cf0).connect couldn&apos;t created socket (24) Too many open files
+</code></pre><h3 id="&#x89E3;&#x51B3;&#x65B9;&#x6848;">&#x89E3;&#x51B3;&#x65B9;&#x6848;</h3>
+<p>&#x7531;&#x4E8E;&#x95EE;&#x9898;&#x539F;&#x56E0;&#x662F; cinder-volume &#x5141;&#x8BB8;&#x6253;&#x5F00;&#x7684;&#x6587;&#x4EF6;&#x6570;&#x6CA1;&#x6709;&#x968F;&#x7740; Ceph &#x96C6;&#x7FA4;&#x7684;&#x6269;&#x5BB9;&#x505A;&#x76F8;&#x5E94;&#x7684;&#x8C03;&#x6574;&#xFF0C;&#x56E0;&#x6B64;&#x89E3;&#x51B3;&#x65B9;&#x6848;&#x662F;&#x8981;&#x8C03;&#x6574; cinder-volume &#x8FDB;&#x7A0B;&#x7684;&#x5141;&#x8BB8;&#x6253;&#x5F00;&#x6587;&#x4EF6;&#x6570;&#xFF0C;&#x76EE;&#x524D;&#x8C03;&#x6574;&#x4E3A; <code>65535</code>&#xFF08;&#x6839;&#x636E;&#x6D4B;&#x8BD5;&#xFF0C;&#x53D1;&#x73B0;&#x6BCF;&#x4E2A;&#x5220;&#x5377;&#x8BF7;&#x6C42;&#x8981;&#x5EFA;&#x7ACB;&#x5927;&#x7EA6; 1000 &#x591A;&#x4E2A;&#x94FE;&#x63A5;&#xFF0C;&#x56E0;&#x6B64;&#x8C03;&#x6574;&#x4E3A; <code>65535</code> &#x540E;&#x53EF;&#x4EE5;&#x652F;&#x6301;&#x5E76;&#x53D1;&#x5220;&#x9664;&#x7EA6; 60 &#x4E2A; RDB &#x5377;&#xFF0C;&#x540E;&#x7EED;&#x7248;&#x672C;&#x4F1A;&#x8003;&#x8651;&#x57FA;&#x4E8E;&#x6027;&#x80FD;&#x57FA;&#x7EBF;&#xFF0C;&#x8FDB;&#x884C;&#x63A5;&#x53E3;&#x5E76;&#x53D1;&#x64CD;&#x4F5C;&#x6570;&#x91CF;&#x7684;&#x9650;&#x5236;&#xFF0C;&#x9632;&#x6B62;&#x65E0;&#x9650;&#x5236;&#x7684;&#x5E76;&#x53D1;&#x5220;&#x5377;&#x5BFC;&#x81F4;&#x6587;&#x4EF6;&#x6253;&#x5F00;&#x6570;&#x8FC7;&#x5927;&#xFF09;&#x3002;</p>
+<p>1&#x3001;cinder-volume &#x8FDB;&#x7A0B;&#x88AB;&#x5C01;&#x88C5;&#x6210;&#x4E86; Ubuntu &#x4E0A;&#x7684; upstart &#x4EFB;&#x52A1;&#x3002;&#x4FEE;&#x6539; cinder-volume &#x8FDB;&#x7A0B;&#x542F;&#x52A8;&#x914D;&#x7F6E;&#x6587;&#x4EF6; <code>/etc/init/cinder-volume.conf</code> &#xFF0C;&#x589E;&#x52A0;&#x4E00;&#x884C;&#x914D;&#x7F6E;&#xFF1A;</p>
+<pre><code>limit nofile 65535 65535
+</code></pre><p><code>limit</code> &#x53D8;&#x91CF;&#x7528;&#x6765;&#x8BBE;&#x7F6E;&#x4EFB;&#x52A1;&#x7684;&#x8D44;&#x6E90;&#x9650;&#x5236;&#x3002;</p>
+<pre><code>root@R1controller1:~# vi /etc/init/cinder-volume.conf
+description &quot;Cinder Volume&quot;
+
+start on (local-filesystems and net-device-up IFACE!=lo)
+stop on runlevel [016]
+
+respawn
+limit nofile 65535 65535
+
+exec su -s /bin/sh -C &quot;exec cinder-volume --config-file /etc/cinder/cinder.conf &gt; /dev/null 2&gt;&amp;1&quot; root
+</code></pre><p>2&#x3001;&#x91CD;&#x542F; cinder-volume &#x8FDB;&#x7A0B;&#xFF0C;&#x5E76;&#x7528; <code>cat proc/pid/limits</code> &#x67E5;&#x8BE2;&#x8BBE;&#x7F6E;&#x662F;&#x5426;&#x751F;&#x6548;&#x3002;</p>
+<pre><code>root@R1controller1:~# service cinder-volume restart
+cinder-volume stop/waiting
+cinder-volume start/running, process 6298
+
+root@R1controller1:~# cat /etc/6298/limits | grep open
+Max open files       65535               65535               files
+</code></pre><p>3&#x3001;&#x68C0;&#x67E5; cinder-volume &#x670D;&#x52A1;&#x662F;&#x5426;&#x4E3A; <code>UP</code> &#x72B6;&#x6001;&#x3002;</p>
+<pre><code>root@R1controller1:~# cinder service-list
++------------------+---------------------------+------+---------+-------+----------------------------+-----------------+
+|      Binary      |            Host           | Zone |  Status | State |         Updated_at         | Disabled Reason |
++------------------+---------------------------+------+---------+-------+----------------------------+-----------------+
+|  cinder-backup   |      OPS-controller1      | nova | enabled |   up  | 2016-09-07T20:38:30.000000 |       None      |
+|  cinder-backup   |      OPS-controller2      | nova | enabled |   up  | 2016-09-07T20:38:26.000000 |       None      |
+| cinder-scheduler |      OPS-controller1      | nova | enabled |   up  | 2016-09-07T20:38:29.000000 |       None      |
+| cinder-scheduler |      OPS-controller2      | nova | enabled |   up  | 2016-09-07T20:38:29.000000 |       None      |
+|  cinder-volume   | OPS-controller1@netapp_fc | nova | enabled |   up  | 2016-09-07T20:38:32.000000 |       None      |
+|  cinder-volume   |  OPS-controller1@rbd-sas  | nova | enabled |   up  | 2016-09-07T20:38:33.000000 |       None      |
+|  cinder-volume   |  OPS-controller1@rbd-ssd  | nova | enabled |   up  | 2016-09-07T20:38:33.000000 |       None      |
+|  cinder-volume   |  OPS-controller2@rbd-sas  | nova | enabled |   up  | 2016-09-07T20:38:25.000000 |       None      |
+|  cinder-volume   |  OPS-controller2@rbd-ssd  | nova | enabled |   up  | 2016-09-07T20:38:27.000000 |       None      |
++------------------+---------------------------+------+---------+-------+----------------------------+-----------------+
+</code></pre><p>4&#x3001;&#x91CD;&#x65B0;&#x8FDB;&#x884C;&#x5220;&#x9664;&#x5377;&#x64CD;&#x4F5C;&#xFF0C;&#x5377;&#x53EF;&#x4EE5;&#x88AB;&#x6B63;&#x5E38;&#x5220;&#x9664;&#x3002;</p>
+<p>5&#x3001;&#x56E0;&#x4E3A; Glance &#x540E;&#x7AEF;&#x4E5F;&#x5BF9;&#x63A5;&#x7684;&#x662F; Ceph &#x96C6;&#x7FA4;&#xFF0C;&#x4E3A;&#x9632;&#x6B62; Glance &#x4E5F;&#x51FA;&#x73B0;&#x8BE5;&#x95EE;&#x9898;&#xFF0C;&#x5EFA;&#x8BAE;&#x4E5F;&#x4FEE;&#x6539; Glance &#x8FDB;&#x7A0B;&#x7684;&#x542F;&#x52A8;&#x914D;&#x7F6E;&#x6587;&#x4EF6; <code>/etc/init/glance-api.conf</code> &#xFF0C;&#x589E;&#x52A0; <code>limit nofile 65535 65535</code> &#x914D;&#x7F6E;&#x884C;&#x3002;</p>
+<p>6&#x3001;&#x91CD;&#x542F; glance-api &#x8FDB;&#x7A0B;&#x3002;</p>
+<pre><code>service glance-api restart
+</code></pre><p>7&#x3001;&#x91CD;&#x542F;&#x5B8C;&#x6210;&#x540E;&#x4E0A;&#x4F20;&#x6D4B;&#x8BD5;&#x955C;&#x50CF;&#xFF0C;&#x6D4B;&#x8BD5;&#x955C;&#x50CF;&#x53EF;&#x4EE5;&#x6B63;&#x5E38;&#x4E0A;&#x4F20;&#x548C;&#x5220;&#x9664;&#x3002;</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="mon_backup.html" class="navigation navigation-prev " aria-label="Previous page: 2. Monitor 的备份和恢复">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="change_osd_journal.html" class="navigation navigation-next " aria-label="Next page: 4. 更换 OSD Journal">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"3. 修改 Cinder/Glance 进程的最大可用 FD","level":"1.4.3","depth":2,"next":{"title":"4. 更换 OSD Journal","level":"1.4.4","depth":2,"path":"Advance_usage/change_osd_journal.md","ref":"Advance_usage/change_osd_journal.md","articles":[]},"previous":{"title":"2. Monitor 的备份和恢复","level":"1.4.2","depth":2,"path":"Advance_usage/mon_backup.md","ref":"Advance_usage/mon_backup.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"Advance_usage/change_fd.md","mtime":"2021-07-14T14:14:40.296Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-10-16T02:20:59.394Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

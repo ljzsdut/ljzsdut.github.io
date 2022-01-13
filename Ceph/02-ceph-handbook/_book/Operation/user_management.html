@@ -1,0 +1,797 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>5. 用户管理 · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="add_rm_mon.html" />
+    
+    
+    <link rel="prev" href="monitor_pg.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    简介
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="common_operations.html">
+            
+                <a href="common_operations.html">
+            
+                    
+                    第一部分：常用操作
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="operate_cluster.html">
+            
+                <a href="operate_cluster.html">
+            
+                    
+                    1. 操作集群
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="monitor_cluster.html">
+            
+                <a href="monitor_cluster.html">
+            
+                    
+                    2. 监控集群
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="monitor_osd.html">
+            
+                <a href="monitor_osd.html">
+            
+                    
+                    3. 监控 OSD
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="monitor_pg.html">
+            
+                <a href="monitor_pg.html">
+            
+                    
+                    4. 监控 PG
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.2.5" data-path="user_management.html">
+            
+                <a href="user_management.html">
+            
+                    
+                    5. 用户管理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.6" data-path="add_rm_mon.html">
+            
+                <a href="add_rm_mon.html">
+            
+                    
+                    6. 增加/删除 Monitor
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.7" data-path="add_rm_osd.html">
+            
+                <a href="add_rm_osd.html">
+            
+                    
+                    7. 增加/删除 OSD
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.8" data-path="operate_pool.html">
+            
+                <a href="operate_pool.html">
+            
+                    
+                    8. 操作 Pool
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.9" data-path="manage_crushmap.html">
+            
+                <a href="manage_crushmap.html">
+            
+                    
+                    9. 管理 Crushmap
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.10" data-path="modify_mon_ip.html">
+            
+                <a href="modify_mon_ip.html">
+            
+                    
+                    10. 修改 MON IP
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.11" data-path="change_cluster_conf.html">
+            
+                <a href="change_cluster_conf.html">
+            
+                    
+                    11. 修改集群配置
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.12" data-path="log_debug.html">
+            
+                <a href="log_debug.html">
+            
+                    
+                    12. 日志和调试
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../Troubleshooting/troubleshooting.html">
+            
+                <a href="../Troubleshooting/troubleshooting.html">
+            
+                    
+                    第二部分：故障处理
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../Troubleshooting/troubleshooting_mon.html">
+            
+                <a href="../Troubleshooting/troubleshooting_mon.html">
+            
+                    
+                    1. 常见 MON 故障处理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../Troubleshooting/troubleshooting_osd.html">
+            
+                <a href="../Troubleshooting/troubleshooting_osd.html">
+            
+                    
+                    2. 常见 OSD 故障处理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../Troubleshooting/troubleshooting_pg.html">
+            
+                <a href="../Troubleshooting/troubleshooting_pg.html">
+            
+                    
+                    3. 常见 PG 故障处理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../Troubleshooting/troubleshooting_lost_power.html">
+            
+                <a href="../Troubleshooting/troubleshooting_lost_power.html">
+            
+                    
+                    4. 全局 Ceph 节点宕机处理 
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="../Troubleshooting/troubleshooting_single_lost_power.html">
+            
+                <a href="../Troubleshooting/troubleshooting_single_lost_power.html">
+            
+                    
+                    5. 单个 Ceph 节点宕机处理 
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../Advance_usage/advanced_usage.html">
+            
+                <a href="../Advance_usage/advanced_usage.html">
+            
+                    
+                    第三部分：Ceph 进阶
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../Advance_usage/pg_pgp.html">
+            
+                <a href="../Advance_usage/pg_pgp.html">
+            
+                    
+                    1. PG 和 PGP 的区别
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../Advance_usage/mon_backup.html">
+            
+                <a href="../Advance_usage/mon_backup.html">
+            
+                    
+                    2. Monitor 的备份和恢复
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../Advance_usage/change_fd.html">
+            
+                <a href="../Advance_usage/change_fd.html">
+            
+                    
+                    3. 修改 Cinder/Glance 进程的最大可用 FD
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../Advance_usage/change_osd_journal.html">
+            
+                <a href="../Advance_usage/change_osd_journal.html">
+            
+                    
+                    4. 更换 OSD Journal
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="../Advance_usage/rescue_osd_parted.html">
+            
+                <a href="../Advance_usage/rescue_osd_parted.html">
+            
+                    
+                    5. 清空 OSD 的分区表后如何恢复
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.6" data-path="../Advance_usage/pg_active_remapped.html">
+            
+                <a href="../Advance_usage/pg_active_remapped.html">
+            
+                    
+                    6. PG 卡在 active + remapped 状态
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.7" data-path="../Advance_usage/find_rbd_data_loc.html">
+            
+                <a href="../Advance_usage/find_rbd_data_loc.html">
+            
+                    
+                    7. 查看 RBD 镜像的位置
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.8" data-path="../Advance_usage/rbd_real_size.html">
+            
+                <a href="../Advance_usage/rbd_real_size.html">
+            
+                    
+                    8. 查看 RBD 镜像的实际大小
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.9" data-path="../Advance_usage/cal_pg_per_osd.html">
+            
+                <a href="../Advance_usage/cal_pg_per_osd.html">
+            
+                    
+                    9. 统计 OSD 上 PG 的数量
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.10" data-path="../Advance_usage/list_rbd_watcher.html">
+            
+                <a href="../Advance_usage/list_rbd_watcher.html">
+            
+                    
+                    10. 查看使用 RBD 镜像的客户端
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >5. 用户管理</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="5-&#x7528;&#x6237;&#x7BA1;&#x7406;">5. &#x7528;&#x6237;&#x7BA1;&#x7406;</h1>
+<hr>
+<p>Ceph &#x628A;&#x6570;&#x636E;&#x4EE5;&#x5BF9;&#x8C61;&#x7684;&#x5F62;&#x5F0F;&#x5B58;&#x4E8E;&#x5404;&#x5B58;&#x50A8;&#x6C60;&#x4E2D;&#x3002;Ceph &#x7528;&#x6237;&#x5FC5;&#x987B;&#x5177;&#x6709;&#x8BBF;&#x95EE;&#x5B58;&#x50A8;&#x6C60;&#x7684;&#x6743;&#x9650;&#x624D;&#x80FD;&#x591F;&#x8BFB;&#x5199;&#x6570;&#x636E;&#x3002;&#x53E6;&#x5916;&#xFF0C;Ceph &#x7528;&#x6237;&#x5FC5;&#x987B;&#x5177;&#x6709;&#x6267;&#x884C;&#x6743;&#x9650;&#x624D;&#x80FD;&#x591F;&#x4F7F;&#x7528; Ceph &#x7684;&#x7BA1;&#x7406;&#x547D;&#x4EE4;&#x3002;</p>
+<h3 id="51-&#x6388;&#x6743;&#xFF08;&#x80FD;&#x529B;&#xFF09;">5.1 &#x6388;&#x6743;&#xFF08;&#x80FD;&#x529B;&#xFF09;</h3>
+<p>Ceph &#x7528; &#x201C;&#x80FD;&#x529B;&#x201D;&#xFF08; capabilities, caps &#xFF09;&#x8FD9;&#x4E2A;&#x672F;&#x8BED;&#x6765;&#x63CF;&#x8FF0;&#x7ED9;&#x8BA4;&#x8BC1;&#x7528;&#x6237;&#x7684;&#x6388;&#x6743;&#xFF0C;&#x8FD9;&#x6837;&#x624D;&#x80FD;&#x4F7F;&#x7528; Mon&#x3001; OSD &#x548C; MDS &#x7684;&#x529F;&#x80FD;&#x3002;&#x80FD;&#x529B;&#x4E5F;&#x7528;&#x4E8E;&#x9650;&#x5236;&#x5BF9;&#x67D0;&#x4E00;&#x5B58;&#x50A8;&#x6C60;&#x5185;&#x7684;&#x6570;&#x636E;&#x6216;&#x67D0;&#x4E2A;&#x547D;&#x540D;&#x7A7A;&#x95F4;&#x7684;&#x8BBF;&#x95EE;&#x3002; Ceph &#x7BA1;&#x7406;&#x5458;&#x7528;&#x6237;&#x53EF;&#x5728;&#x521B;&#x5EFA;&#x6216;&#x66F4;&#x65B0;&#x666E;&#x901A;&#x7528;&#x6237;&#x65F6;&#x8D4B;&#x4E88;&#x4ED6;&#x76F8;&#x5E94;&#x7684;&#x80FD;&#x529B;&#x3002;</p>
+<p>&#x80FD;&#x529B;&#x7684;&#x8BED;&#x6CD5;&#x7B26;&#x5408;&#x4E0B;&#x9762;&#x7684;&#x5F62;&#x5F0F;&#xFF1A;</p>
+<pre><code>{daemon-type} &apos;allow {capability}&apos; [{daemon-type} &apos;allow {capability}&apos;]
+</code></pre><p><strong>Monitor &#x80FD;&#x529B;</strong>&#xFF1A; Monitor &#x80FD;&#x529B;&#x5305;&#x62EC; <code>r</code> &#x3001; <code>w</code> &#x3001; <code>x</code> &#x548C; <code>allow profile {cap}</code>&#xFF0C;&#x4F8B;&#x5982;&#xFF1A;</p>
+<pre><code>mon &apos;allow rwx&apos;
+mon &apos;allow profile osd&apos;
+</code></pre><p><strong>OSD &#x80FD;&#x529B;</strong>&#xFF1A; OSD &#x80FD;&#x529B;&#x5305;&#x62EC; <code>r</code> &#x3001; <code>w</code> &#x3001; <code>x</code> &#x3001; <code>class-read</code> &#x3001; <code>class-write</code> &#x548C; <code>profile osd</code> &#x3002;&#x53E6;&#x5916;&#xFF0C; OSD &#x80FD;&#x529B;&#x8FD8;&#x652F;&#x6301;&#x5B58;&#x50A8;&#x6C60;&#x548C;&#x547D;&#x540D;&#x7A7A;&#x95F4;&#x7684;&#x914D;&#x7F6E;&#x3002;</p>
+<pre><code>osd &apos;allow {capability}&apos; [pool={poolname}] [namespace={namespace-name}]
+</code></pre><p><strong>MDS &#x80FD;&#x529B;</strong>&#xFF1A; MDS &#x80FD;&#x529B;&#x6BD4;&#x8F83;&#x7B80;&#x5355;&#xFF0C;&#x53EA;&#x9700;&#x8981; allow &#x6216;&#x8005;&#x7A7A;&#x767D;&#xFF0C;&#x4E5F;&#x4E0D;&#x4F1A;&#x89E3;&#x6790;&#x66F4;&#x591A;&#x9009;&#x9879;&#x3002;</p>
+<pre><code>mds &apos;allow&apos;
+</code></pre><p>&#x6CE8;&#x610F;&#xFF1A; Ceph &#x5BF9;&#x8C61;&#x7F51;&#x5173;&#x5B88;&#x62A4;&#x8FDB;&#x7A0B;&#xFF08; <code>radosgw</code> &#xFF09;&#x662F; Ceph &#x5B58;&#x50A8;&#x96C6;&#x7FA4;&#x7684;&#x4E00;&#x79CD;&#x5BA2;&#x6237;&#x7AEF;&#xFF0C;&#x6240;&#x4EE5;&#x5B83;&#x6CA1;&#x88AB;&#x8868;&#x793A;&#x6210;&#x4E00;&#x79CD;&#x72EC;&#x7ACB;&#x7684; Ceph &#x5B58;&#x50A8;&#x96C6;&#x7FA4;&#x5B88;&#x62A4;&#x8FDB;&#x7A0B;&#x7C7B;&#x578B;&#x3002;</p>
+<p>&#x4E0B;&#x9762;&#x63CF;&#x8FF0;&#x4E86;&#x5404;&#x79CD;&#x80FD;&#x529B;&#x3002;</p>
+<p><code>allow</code></p>
+<p><strong>&#x63CF;&#x8FF0;:</strong> &#x5728;&#x5B88;&#x62A4;&#x8FDB;&#x7A0B;&#x7684;&#x8BBF;&#x95EE;&#x8BBE;&#x7F6E;&#x4E4B;&#x524D;&#xFF0C;&#x4EC5;&#x5BF9; MDS &#x9690;&#x542B; <code>rw</code> &#x3002;</p>
+<p><code>r</code></p>
+<p><strong>&#x63CF;&#x8FF0;:</strong> &#x6388;&#x4E88;&#x7528;&#x6237;&#x8BFB;&#x6743;&#x9650;&#xFF0C;&#x5BF9; monitor &#x5177;&#x6709;&#x8BFB;&#x6743;&#x9650;&#x624D;&#x80FD;&#x83B7;&#x53D6; CRUSH map&#x3002;</p>
+<p><code>w</code></p>
+<p><strong>&#x63CF;&#x8FF0;:</strong> &#x6388;&#x4E88;&#x7528;&#x6237;&#x5199;&#x5BF9;&#x8C61;&#x7684;&#x6743;&#x9650;&#x3002;</p>
+<p><code>x</code></p>
+<p><strong>&#x63CF;&#x8FF0;:</strong> &#x6388;&#x4E88;&#x7528;&#x6237;&#x8C03;&#x7528;&#x7C7B;&#x65B9;&#x6CD5;&#x7684;&#x80FD;&#x529B;&#xFF0C;&#x5373;&#x540C;&#x65F6;&#x6709;&#x8BFB;&#x548C;&#x5199;&#xFF0C;&#x4E14;&#x80FD;&#x5728; monitor &#x4E0A;&#x6267;&#x884C; <code>auth</code> &#x64CD;&#x4F5C;&#x3002;</p>
+<p><code>class-read</code></p>
+<p><strong>&#x63CF;&#x8FF0;:</strong> &#x6388;&#x4E88;&#x7528;&#x6237;&#x8C03;&#x7528;&#x7C7B;&#x8BFB;&#x53D6;&#x65B9;&#x6CD5;&#x7684;&#x80FD;&#x529B;&#xFF0C; <code>x</code> &#x7684;&#x5B50;&#x96C6;&#x3002;</p>
+<p><code>class-write</code></p>
+<p><strong>&#x63CF;&#x8FF0;:</strong> &#x6388;&#x4E88;&#x7528;&#x6237;&#x8C03;&#x7528;&#x7C7B;&#x5199;&#x5165;&#x65B9;&#x6CD5;&#x7684;&#x80FD;&#x529B;&#xFF0C; <code>x</code> &#x7684;&#x5B50;&#x96C6;&#x3002;</p>
+<p><code>*</code></p>
+<p><strong>&#x63CF;&#x8FF0;:</strong> &#x6388;&#x6743;&#x6B64;&#x7528;&#x6237;&#x8BFB;&#x3001;&#x5199;&#x548C;&#x6267;&#x884C;&#x67D0;&#x5B88;&#x62A4;&#x8FDB;&#x7A0B;/&#x5B58;&#x50A8;&#x6C60;&#xFF0C;&#x4E14;&#x5141;&#x8BB8;&#x6267;&#x884C;&#x7BA1;&#x7406;&#x547D;&#x4EE4;&#x3002;</p>
+<p><code>profile osd</code></p>
+<p><strong>&#x63CF;&#x8FF0;:</strong> &#x6388;&#x6743;&#x4E00;&#x4E2A;&#x7528;&#x6237;&#x4EE5; OSD &#x8EAB;&#x4EFD;&#x8FDE;&#x63A5;&#x5176;&#x5B83; OSD &#x6216; Monitor&#x3002;&#x6388;&#x4E88; OSD &#x4EEC;&#x5141;&#x8BB8;&#x5176;&#x5B83; OSD &#x5904;&#x7406;&#x590D;&#x5236;&#x3001;&#x5FC3;&#x8DF3;&#x6D41;&#x91CF;&#x548C;&#x72B6;&#x6001;&#x62A5;&#x544A;&#x3002;</p>
+<p><code>profile mds</code></p>
+<p><strong>&#x63CF;&#x8FF0;:</strong> &#x6388;&#x6743;&#x4E00;&#x4E2A;&#x7528;&#x6237;&#x4EE5; MDS &#x8EAB;&#x4EFD;&#x8FDE;&#x63A5;&#x5176;&#x5B83; MDS &#x6216; Monitor&#x3002;</p>
+<p><code>profile bootstrap-osd</code></p>
+<p><strong>&#x63CF;&#x8FF0;:</strong> &#x6388;&#x6743;&#x7528;&#x6237;&#x81EA;&#x4E3E;&#x5F15;&#x5BFC;&#x4E00;&#x4E2A; OSD &#x3002;&#x6388;&#x4E88;&#x90E8;&#x7F72;&#x5DE5;&#x5177;&#xFF0C;&#x50CF; <code>ceph-disk</code> &#x3001;<code>ceph-deploy</code> &#x7B49;&#x7B49;&#xFF0C;&#x8FD9;&#x6837;&#x5B83;&#x4EEC;&#x5728;&#x81EA;&#x4E3E;&#x5F15;&#x5BFC; OSD &#x65F6;&#x5C31;&#x6709;&#x6743;&#x9650;&#x589E;&#x52A0;&#x5BC6;&#x94A5;&#x4E86;&#x3002;</p>
+<p><code>profile bootstrap-mds</code></p>
+<p><strong>&#x63CF;&#x8FF0;:</strong> &#x6388;&#x6743;&#x7528;&#x6237;&#x81EA;&#x4E3E;&#x5F15;&#x5BFC;&#x4E00;&#x4E2A; MDS&#x3002;&#x6388;&#x4E88;&#x4F8B;&#x5982; <code>ceph-deploy</code> &#x7684;&#x90E8;&#x7F72;&#x5DE5;&#x5177;&#xFF0C;&#x8FD9;&#x6837;&#x5B83;&#x4EEC;&#x5728;&#x81EA;&#x4E3E;&#x5F15;&#x5BFC; MDS &#x65F6;&#x5C31;&#x6709;&#x6743;&#x9650;&#x589E;&#x52A0;&#x5BC6;&#x94A5;&#x4E86;&#x3002;</p>
+<h3 id="52-&#x7BA1;&#x7406;&#x7528;&#x6237;">5.2 &#x7BA1;&#x7406;&#x7528;&#x6237;</h3>
+<p>&#x7528;&#x6237;&#x7BA1;&#x7406;&#x529F;&#x80FD;&#x53EF;&#x4EE5;&#x8BA9; Ceph &#x5B58;&#x50A8;&#x96C6;&#x7FA4;&#x7684;&#x7BA1;&#x7406;&#x5458;&#x6709;&#x80FD;&#x529B;&#x53BB;&#x521B;&#x5EFA;&#x3001;&#x66F4;&#x65B0;&#x548C;&#x5220;&#x9664;&#x96C6;&#x7FA4;&#x7684;&#x666E;&#x901A;&#x7528;&#x6237;&#x3002;&#x5F53;&#x521B;&#x5EFA;&#x6216;&#x5220;&#x9664;&#x4E00;&#x4E2A;&#x7528;&#x6237;&#x65F6;&#xFF0C;&#x53EF;&#x80FD;&#x9700;&#x8981;&#x628A; keys &#x5206;&#x53D1;&#x7ED9;&#x5404;&#x5BA2;&#x6237;&#x7AEF;&#xFF0C;&#x4EE5;&#x4FBF;&#x5B83;&#x4EEC;&#x53EF;&#x4EE5;&#x52A0;&#x5165;&#x5230; keyring &#x6587;&#x4EF6;&#x4E2D;&#x3002;</p>
+<h5 id="&#x7F57;&#x5217;&#x7528;&#x6237;">&#x7F57;&#x5217;&#x7528;&#x6237;</h5>
+<p>&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x4E0B;&#x9762;&#x7684;&#x547D;&#x4EE4;&#x7F57;&#x5217;&#x7528;&#x6237;&#xFF1A;</p>
+<pre><code>ceph auth list
+</code></pre><p>Ceph &#x4F1A;&#x5217;&#x51FA;&#x96C6;&#x7FA4;&#x4E2D;&#x7684;&#x6240;&#x6709;&#x7528;&#x6237;&#x3002;&#x4F8B;&#x5982;&#xFF0C;&#x5728;&#x4E00;&#x4E2A;&#x53EA;&#x6709; 2 &#x4E2A; OSD &#x7684;&#x7B80;&#x5355;&#x73AF;&#x5883;&#x4E2D;&#xFF0C;<code>ceph auth list</code> &#x5C06;&#x4F1A;&#x8F93;&#x5165;&#x7C7B;&#x4F3C;&#x4E0B;&#x9762;&#x7684;&#x5185;&#x5BB9;&#xFF1A;</p>
+<pre><code>installed auth entries:
+
+osd.0
+        key: AQCvCbtToC6MDhAATtuT70Sl+DymPCfDSsyV4w==
+        caps: [mon] allow profile osd
+        caps: [osd] allow *
+osd.1
+        key: AQC4CbtTCFJBChAAVq5spj0ff4eHZICxIOVZeA==
+        caps: [mon] allow profile osd
+        caps: [osd] allow *
+client.admin
+        key: AQBHCbtT6APDHhAA5W00cBchwkQjh3dkKsyPjw==
+        caps: [mds] allow
+        caps: [mon] allow *
+        caps: [osd] allow *
+client.bootstrap-mds
+        key: AQBICbtTOK9uGBAAdbe5zcIGHZL3T/u2g6EBww==
+        caps: [mon] allow profile bootstrap-mds
+client.bootstrap-osd
+        key: AQBHCbtT4GxqORAADE5u7RkpCN/oo4e5W0uBtw==
+        caps: [mon] allow profile bootstrap-osd
+</code></pre><p>&#x6CE8;&#x610F; <code>TYPE.ID</code> &#x8FD9;&#x79CD;&#x7528;&#x6237;&#x8868;&#x793A;&#x65B9;&#x6CD5;&#xFF0C;&#x6BD4;&#x5982; <code>osd.0</code> &#x8868;&#x793A;&#x7528;&#x6237;&#x7C7B;&#x578B;&#x662F; <code>osd</code> &#x4E14;&#x5176; ID &#x662F; <code>0</code> &#xFF0C; <code>client.admin</code> &#x8868;&#x793A;&#x7528;&#x6237;&#x7C7B;&#x578B;&#x662F; <code>client</code> &#x4E14;&#x5176; ID &#x662F; <code>admin</code> &#xFF08;&#x5373;&#x9ED8;&#x8BA4;&#x7684; <code>client.admin</code> &#x7528;&#x6237;&#xFF09;&#x3002;&#x53E6;&#x5916;&#xFF0C;&#x6BCF;&#x4E2A;&#x7528;&#x6237;&#x6761;&#x76EE;&#x90FD;&#x6709;&#x4E00;&#x4E2A; <code>key: &lt;value&gt;</code> &#x5BF9;&#xFF0C;&#x4E00;&#x4E2A;&#x6216;&#x591A;&#x4E2A; <code>caps:</code> &#x6761;&#x76EE;&#x3002;</p>
+<h5 id="&#x83B7;&#x53D6;&#x7528;&#x6237;">&#x83B7;&#x53D6;&#x7528;&#x6237;</h5>
+<p>&#x83B7;&#x53D6;&#x67D0;&#x4E00;&#x7279;&#x5B9A;&#x7528;&#x6237;&#x7684;&#x4FE1;&#x606F;&#xFF1A;</p>
+<pre><code>ceph auth get {TYPE.ID}
+</code></pre><p>&#x4F8B;&#x5982;&#xFF1A;</p>
+<pre><code>ceph auth get client.admin
+</code></pre><p>&#x8FD8;&#x53EF;&#x4EE5;&#x7ED9;&#x547D;&#x4EE4;&#x52A0;&#x4E0A; <code>-o {filename}</code> &#x9009;&#x9879;&#x628A;&#x8F93;&#x5165;&#x4FDD;&#x5B58;&#x5230;&#x4E00;&#x4E2A;&#x6587;&#x4EF6;&#x4E2D;&#x3002;</p>
+<h5 id="&#x589E;&#x52A0;&#x7528;&#x6237;">&#x589E;&#x52A0;&#x7528;&#x6237;</h5>
+<p>&#x589E;&#x52A0;&#x4E00;&#x4E2A;&#x7528;&#x6237;&#x5C31;&#x662F;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x7528;&#x6237;&#x540D;&#xFF08;&#x5373; <code>TYPE.ID</code>&#xFF09;&#x3001;&#x4E00;&#x4E2A;&#x5BC6;&#x94A5;&#x548C;&#x4EFB;&#x4F55;&#x5305;&#x542B;&#x5728;&#x521B;&#x5EFA;&#x547D;&#x4EE4;&#x4E2D;&#x7684;&#x80FD;&#x529B;&#x3002;&#x6709;&#x4EE5;&#x4E0B;&#x51E0;&#x79CD;&#x65B9;&#x5F0F;&#x53EF;&#x4EE5;&#x65B0;&#x589E;&#x4E00;&#x4E2A;&#x7528;&#x6237;&#xFF1A;</p>
+<ul>
+<li><code>ceph auth add</code>&#xFF1A;&#x6B64;&#x547D;&#x4EE4;&#x662F;&#x6700;&#x6743;&#x5A01;&#x7684;&#x65B0;&#x589E;&#x7528;&#x6237;&#x65B9;&#x5F0F;&#x3002;&#x5B83;&#x56DE;&#x65B0;&#x5EFA;&#x4E00;&#x4E2A;&#x7528;&#x6237;&#xFF0C;&#x4EA7;&#x751F;&#x4E00;&#x4E2A; key &#xFF0C;&#x5E76;&#x8D4B;&#x4E88;&#x7528;&#x6237;&#x4EFB;&#x4F55;&#x7ED9;&#x5B9A;&#x7684;&#x80FD;&#x529B;&#x3002;</li>
+<li><code>ceph auth get-or-create</code>&#xFF1A;&#x8FD9;&#x79CD;&#x65B9;&#x5F0F;&#x901A;&#x5E38;&#x662F;&#x6700;&#x4FBF;&#x6377;&#x7684;&#x4E00;&#x79CD;&#xFF0C;&#x56E0;&#x4E3A;&#x5B83;&#x7684;&#x8FD4;&#x56DE;&#x503C;&#x662F;&#x5305;&#x542B;&#x7528;&#x6237;&#x540D;&#xFF08;&#x5728;&#x65B9;&#x62EC;&#x53F7;&#x5185;&#xFF09;&#x548C;&#x5BC6;&#x94A5;&#x7684;&#x683C;&#x5F0F;&#x3002;&#x5982;&#x679C;&#x7528;&#x6237;&#x5DF2;&#x7ECF;&#x5B58;&#x5728;&#xFF0C;&#x8BE5;&#x547D;&#x4EE4;&#x4F1A;&#x8FD4;&#x56DE;&#x5BC6;&#x94A5;&#x6587;&#x4EF6;&#x683C;&#x5F0F;&#x7684;&#x7528;&#x6237;&#x540D;&#x548C;&#x5BC6;&#x94A5;&#x4FE1;&#x606F;&#x3002;&#x53EF;&#x4EE5;&#x4F7F;&#x7528; <code>-o {filename}</code> &#x9009;&#x9879;&#x628A;&#x8F93;&#x5165;&#x4FDD;&#x5B58;&#x5230;&#x4E00;&#x4E2A;&#x6587;&#x4EF6;&#x4E2D;&#x3002;</li>
+<li><code>ceph auth get-or-create-key</code>&#xFF1A;&#x8BE5;&#x547D;&#x4EE4;&#x53EF;&#x4EE5;&#x5F88;&#x65B9;&#x4FBF;&#x5730;&#x521B;&#x5EFA;&#x7528;&#x6237;&#xFF0C;&#x4F46;&#x662F;&#x53EA;&#x4F1A;&#x8FD4;&#x56DE;&#x7528;&#x6237;&#x7684;&#x5BC6;&#x94A5;&#x3002;&#x5BF9;&#x4E8E;&#x67D0;&#x4E9B;&#x53EA;&#x9700;&#x8981;&#x5BC6;&#x94A5;&#x7684;&#x7528;&#x6237;&#xFF08;&#x5982; libvirt &#xFF09;&#x6765;&#x8BF4;&#x662F;&#x5F88;&#x6709;&#x7528;&#x7684;&#x3002;&#x5982;&#x679C;&#x7528;&#x6237;&#x5DF2;&#x7ECF;&#x5B58;&#x5728;&#xFF0C;&#x8BE5;&#x547D;&#x4EE4;&#x4EC5;&#x4EC5;&#x8FD4;&#x56DE;&#x7528;&#x6237;&#x7684;&#x5BC6;&#x94A5;&#x3002;&#x53EF;&#x4EE5;&#x4F7F;&#x7528; <code>-o {filename}</code> &#x9009;&#x9879;&#x628A;&#x8F93;&#x5165;&#x4FDD;&#x5B58;&#x5230;&#x4E00;&#x4E2A;&#x6587;&#x4EF6;&#x4E2D;&#x3002;</li>
+</ul>
+<p>&#x4E0B;&#x9762;&#x662F;&#x51E0;&#x4E2A;&#x4F8B;&#x5B50;&#xFF1A;</p>
+<pre><code>ceph auth add client.john mon &apos;allow r&apos; osd &apos;allow rw pool=liverpool&apos;
+ceph auth get-or-create client.paul mon &apos;allow r&apos; osd &apos;allow rw pool=liverpool&apos;
+ceph auth get-or-create client.george mon &apos;allow r&apos; osd &apos;allow rw pool=liverpool&apos; -o george.keyring
+ceph auth get-or-create-key client.ringo mon &apos;allow r&apos; osd &apos;allow rw pool=liverpool&apos; -o ringo.key
+</code></pre><h5 id="&#x4FEE;&#x6539;&#x7528;&#x6237;&#x7684;&#x80FD;&#x529B;">&#x4FEE;&#x6539;&#x7528;&#x6237;&#x7684;&#x80FD;&#x529B;</h5>
+<p><code>ceph auth caps</code> &#x547D;&#x4EE4;&#x5141;&#x8BB8;&#x4F60;&#x6307;&#x5B9A;&#x7528;&#x6237;&#x5E76;&#x6539;&#x53D8;&#x7528;&#x6237;&#x7684;&#x80FD;&#x529B;&#x3002;&#x8BBE;&#x5B9A;&#x65B0;&#x7684;&#x80FD;&#x529B;&#x4F1A;&#x8986;&#x76D6;&#x5F53;&#x524D;&#x7684;&#x80FD;&#x529B;&#x3002;&#x67E5;&#x770B;&#x5F53;&#x524D;&#x7684;&#x80FD;&#x529B;&#x53EF;&#x4EE5;&#x4F7F;&#x7528; <code>ceph auth get USERTYPE.USERID</code> &#x547D;&#x4EE4;&#x3002;&#x8981;&#x589E;&#x52A0;&#x80FD;&#x529B;&#xFF0C;&#x4F60;&#x5E94;&#x8BE5;&#x5728;&#x5982;&#x4E0B;&#x683C;&#x5F0F;&#x7684;&#x547D;&#x4EE4;&#x4E2D;&#x5305;&#x542B;&#x5F53;&#x524D;&#x5DF2;&#x7ECF;&#x5B58;&#x5728;&#x7684;&#x80FD;&#x529B;&#xFF1A;</p>
+<pre><code>ceph auth caps USERTYPE.USERID {daemon} &apos;allow [r|w|x|*|...] [pool={pool-name}] [namespace={namespace-name}]&apos; [{daemon} &apos;allow [r|w|x|*|...] [pool={pool-name}] [namespace={namespace-name}]&apos;]
+</code></pre><p>&#x4F8B;&#x5982;&#xFF1A;</p>
+<pre><code>ceph auth get client.john
+ceph auth caps client.john mon &apos;allow r&apos; osd &apos;allow rw pool=liverpool&apos;
+ceph auth caps client.paul mon &apos;allow rw&apos; osd &apos;allow rwx pool=liverpool&apos;
+ceph auth caps client.brian-manager mon &apos;allow *&apos; osd &apos;allow *&apos;
+</code></pre><p>&#x8981;&#x79FB;&#x9664;&#x67D0;&#x4E2A;&#x80FD;&#x529B;&#xFF0C;&#x4F60;&#x53EF;&#x80FD;&#x9700;&#x8981;&#x8FDB;&#x884C;&#x91CD;&#x7F6E;&#x3002;&#x5982;&#x679C;&#x4F60;&#x60F3;&#x53D6;&#x6D88;&#x67D0;&#x4E2A;&#x7528;&#x6237;&#x5BF9;&#x7279;&#x5B9A;&#x5B88;&#x62A4;&#x8FDB;&#x7A0B;&#x7684;&#x6240;&#x6709;&#x8BBF;&#x95EE;&#x6743;&#x9650;&#xFF0C;&#x53EF;&#x4EE5;&#x6307;&#x5B9A;&#x4E00;&#x4E2A;&#x7A7A;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#x3002;&#x6BD4;&#x5982;&#xFF1A;</p>
+<pre><code>ceph auth caps client.ringo mon &apos; &apos; osd &apos; &apos;
+</code></pre><h5 id="&#x5220;&#x9664;&#x7528;&#x6237;">&#x5220;&#x9664;&#x7528;&#x6237;</h5>
+<p>&#x60F3;&#x8981;&#x5220;&#x9664;&#x4E00;&#x4E2A;&#x7528;&#x6237;&#xFF0C;&#x53EF;&#x4EE5;&#x7528; <code>ceph auth del</code> &#x547D;&#x4EE4;&#xFF1A;</p>
+<pre><code>ceph auth del {TYPE}.{ID}
+</code></pre><p>&#x5176;&#x4E2D;&#xFF0C; <code>{TYPE}</code> &#x662F; <code>client</code>&#xFF0C;<code>osd</code>&#xFF0C;<code>mon</code> &#x6216; <code>mds</code> &#x7684;&#x5176;&#x4E2D;&#x4E00;&#x79CD;&#x3002;<code>{ID}</code> &#x662F;&#x7528;&#x6237;&#x7684;&#x540D;&#x5B57;&#x6216;&#x5B88;&#x62A4;&#x8FDB;&#x7A0B;&#x7684; ID &#x3002;</p>
+<h5 id="&#x6253;&#x5370;&#x7528;&#x6237;&#x7684;&#x5BC6;&#x94A5;">&#x6253;&#x5370;&#x7528;&#x6237;&#x7684;&#x5BC6;&#x94A5;</h5>
+<p>&#x6253;&#x5370;&#x67D0;&#x4E2A;&#x7528;&#x6237;&#x7684;&#x6388;&#x6743;&#x5BC6;&#x94A5;&#x5230;&#x6807;&#x51C6;&#x8F93;&#x51FA;&#x754C;&#x9762;&#xFF0C;&#x53EF;&#x4EE5;&#x6267;&#x884C;&#x5982;&#x4E0B;&#x547D;&#x4EE4;&#xFF1A;</p>
+<pre><code>ceph auth print-key {TYPE}.{ID}
+</code></pre><p>&#x5176;&#x4E2D;&#xFF0C; <code>{TYPE}</code> &#x662F; <code>client</code>&#xFF0C;<code>osd</code>&#xFF0C;<code>mon</code> &#x6216; <code>mds</code> &#x7684;&#x5176;&#x4E2D;&#x4E00;&#x79CD;&#x3002;<code>{ID}</code> &#x662F;&#x7528;&#x6237;&#x7684;&#x540D;&#x5B57;&#x6216;&#x5B88;&#x62A4;&#x8FDB;&#x7A0B;&#x7684; ID &#x3002;</p>
+<p>&#x5F53;&#x9700;&#x8981;&#x5F80;&#x5BA2;&#x6237;&#x7AEF;&#x8F6F;&#x4EF6;&#x4E2D;&#x6CE8;&#x5165; Ceph &#x7528;&#x6237;&#xFF08;&#x5982; libvirt&#xFF09;&#x7684;&#x5BC6;&#x94A5;&#x65F6;&#xFF0C;&#x6253;&#x5370;&#x7528;&#x6237;&#x7684;&#x5BC6;&#x94A5;&#x65F6;&#x5F88;&#x6709;&#x7528;&#x7684;&#x3002;</p>
+<pre><code>mount -t ceph serverhost:/ mountpoint -o name=client.user,secret=`ceph auth print-key client.user`
+</code></pre><h5 id="&#x5BFC;&#x5165;&#x7528;&#x6237;">&#x5BFC;&#x5165;&#x7528;&#x6237;</h5>
+<p>&#x4F7F;&#x7528; <code>ceph auth import</code> &#x547D;&#x4EE4;&#x5E76;&#x6307;&#x5B9A;&#x5BC6;&#x94A5;&#x6587;&#x4EF6;&#xFF0C;&#x53EF;&#x4EE5;&#x5BFC;&#x5165;&#x4E00;&#x4E2A;&#x6216;&#x591A;&#x4E2A;&#x7528;&#x6237;&#xFF1A;</p>
+<pre><code>ceph auth import -i /path/to/keyring
+</code></pre><p>&#x6BD4;&#x5982;&#xFF1A;</p>
+<pre><code>sudo ceph auth import -i /etc/ceph/ceph.keyring
+</code></pre><h3 id="53-&#x5BC6;&#x94A5;&#x7BA1;&#x7406;">5.3 &#x5BC6;&#x94A5;&#x7BA1;&#x7406;</h3>
+<p>&#x5F53;&#x4F60;&#x901A;&#x8FC7;&#x5BA2;&#x6237;&#x7AEF;&#x8BBF;&#x95EE; Ceph &#x96C6;&#x7FA4;&#x65F6;&#xFF0C;Ceph &#x5BA2;&#x6237;&#x7AEF;&#x4F1A;&#x4F7F;&#x7528;&#x672C;&#x5730;&#x7684; keyring &#x6587;&#x4EF6;&#x3002;&#x9ED8;&#x8BA4;&#x4F7F;&#x7528;&#x4E0B;&#x5217;&#x8DEF;&#x5F84;&#x548C;&#x540D;&#x79F0;&#x7684; keyring &#x6587;&#x4EF6;&#xFF1A;</p>
+<ul>
+<li><code>/etc/ceph/$cluster.$name.keyring</code></li>
+<li><code>/etc/ceph/$cluster.keyring</code></li>
+<li><code>/etc/ceph/keyring</code></li>
+<li><code>/etc/ceph/keyring.bin</code></li>
+</ul>
+<p>&#x4F60;&#x4E5F;&#x53EF;&#x4EE5;&#x5728; <code>ceph.conf</code> &#x4E2D;&#x53E6;&#x884C;&#x6307;&#x5B9A; keyring &#x7684;&#x8DEF;&#x5F84;&#xFF0C;&#x4F46;&#x4E0D;&#x63A8;&#x8350;&#x8FD9;&#x6837;&#x505A;&#x3002;</p>
+<p><code>$cluster</code> &#x5143;&#x53D8;&#x91CF;&#x662F;&#x4F60;&#x7684; Ceph &#x96C6;&#x7FA4;&#x540D;&#x79F0;&#xFF0C;&#x9ED8;&#x8BA4;&#x540D;&#x79F0;&#x662F; <code>ceph</code> &#x3002;<code>$name</code> &#x5143;&#x53D8;&#x91CF;&#x662F;&#x7528;&#x6237;&#x7C7B;&#x578B;&#x548C; ID &#x3002;&#x6BD4;&#x5982;&#x7528;&#x6237;&#x662F; <code>client.admin</code>&#xFF0C;&#x90A3;&#x5C31;&#x5F97;&#x5230; <code>ceph.client.admin.keyring</code> &#x3002;</p>
+<p>&#x672C;&#x5C0F;&#x8282;&#x4ECB;&#x7ECD;&#x5982;&#x4F55;&#x4F7F;&#x7528; <code>ceph-authtool</code> &#x5DE5;&#x5177;&#x6765;&#x4ECE;&#x5BA2;&#x6237;&#x7AEF;&#x7BA1;&#x7406; keyring &#x3002;</p>
+<h5 id="&#x521B;&#x5EFA;&#x5BC6;&#x94A5;">&#x521B;&#x5EFA;&#x5BC6;&#x94A5;</h5>
+<p>&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x7A7A;&#x7684; keyring &#x6587;&#x4EF6;&#xFF0C;&#x4F7F;&#x7528; <code>--create-keyring</code> &#x6216; <code>-C</code> &#x9009;&#x9879;&#x3002;&#x6BD4;&#x5982;&#xFF1A;</p>
+<pre><code>ceph-authtool --create-keyring /path/to/keyring
+</code></pre><p>&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x5305;&#x542B;&#x591A;&#x4E2A;&#x7528;&#x6237;&#x7684; keyring &#x6587;&#x4EF6;&#xFF0C;&#x63A8;&#x8350;&#x4F7F;&#x7528; <code>$cluster.keyring</code> &#x4F5C;&#x4E3A;&#x6587;&#x4EF6;&#x540D;&#xFF0C;&#x5E76;&#x5B58;&#x653E;&#x4E8E; <code>/etc/ceph</code> &#x76EE;&#x5F55;&#x4E0B;&#x3002;&#x8FD9;&#x6837;&#x5C31;&#x65E0;&#x9700;&#x5728;&#x672C;&#x5730;&#x7684; <code>ceph.conf</code> &#x6587;&#x4EF6;&#x4E2D;&#x6307;&#x5B9A; keyring &#x7684;&#x8DEF;&#x5F84;&#x4E86;&#x3002;</p>
+<pre><code>sudo ceph-authtool -C /etc/ceph/ceph.keyring
+</code></pre><p>&#x521B;&#x5EFA;&#x4EC5;&#x5305;&#x542B;&#x4E00;&#x4E2A;&#x7528;&#x6237;&#x7684; keyring &#x6587;&#x4EF6;&#x65F6;&#xFF0C;&#x5EFA;&#x8BAE;&#x4F7F;&#x7528;&#x96C6;&#x7FA4;&#x540D;&#x3001;&#x7528;&#x6237;&#x7C7B;&#x578B;&#x548C;&#x7528;&#x6237;&#x540D;&#x79F0;&#x4F5C;&#x4E3A;&#x6587;&#x4EF6;&#x540D;&#xFF0C;&#x5E76;&#x5B58;&#x653E;&#x4E8E; <code>/etc/ceph</code> &#x76EE;&#x5F55;&#x4E0B;&#x3002;</p>
+<h5 id="&#x7ED9;&#x5BC6;&#x94A5;&#x6587;&#x4EF6;&#x4E2D;&#x589E;&#x52A0;&#x7528;&#x6237;">&#x7ED9;&#x5BC6;&#x94A5;&#x6587;&#x4EF6;&#x4E2D;&#x589E;&#x52A0;&#x7528;&#x6237;</h5>
+<p>&#x4E3A;&#x4E86;&#x83B7;&#x53D6;&#x67D0;&#x4E2A;&#x7528;&#x6237;&#x7684; keyring &#x6587;&#x4EF6;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528; <code>ceph auth get</code> &#x547D;&#x4EE4;&#x52A0; <code>-o</code> &#x9009;&#x9879;&#xFF0C;&#x4EE5; keyring &#x6587;&#x4EF6;&#x683C;&#x5F0F;&#x6765;&#x4FDD;&#x5B58;&#x8F93;&#x51FA;&#x3002;&#x6BD4;&#x5982;&#xFF1A;</p>
+<pre><code>sudo ceph auth get client.admin -o /etc/ceph/ceph.client.admin.keyring
+</code></pre><p>&#x5F53;&#x4F60;&#x60F3;&#x8981;&#x5411; keyring &#x6587;&#x4EF6;&#x4E2D;&#x5BFC;&#x5165;&#x67D0;&#x4E2A;&#x7528;&#x6237;&#x65F6;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528; ceph-authtool &#x6765;&#x6307;&#x5B9A;&#x76EE;&#x7684;&#x548C;&#x6E90; keyring &#x6587;&#x4EF6;&#x3002;&#x6BD4;&#x5982;&#xFF1A;</p>
+<pre><code>sudo ceph-authtool /etc/ceph/ceph.keyring --import-keyring /etc/ceph/ceph.client.admin.keyring
+</code></pre><h5 id="&#x521B;&#x5EFA;&#x7528;&#x6237;">&#x521B;&#x5EFA;&#x7528;&#x6237;</h5>
+<p>&#x53EF;&#x4EE5;&#x5728; Ceph &#x5BA2;&#x6237;&#x7AEF;&#x76F4;&#x63A5;&#x521B;&#x5EFA;&#x7528;&#x6237;&#x3001;&#x5BC6;&#x94A5;&#x548C;&#x80FD;&#x529B;&#x3002;&#x7136;&#x540E;&#x518D;&#x5BFC;&#x5165; Ceph &#x96C6;&#x7FA4;&#x3002;&#x6BD4;&#x5982;&#xFF1A;</p>
+<pre><code>sudo ceph-authtool -n client.ringo --cap osd &apos;allow rwx&apos; --cap mon &apos;allow rwx&apos; /etc/ceph/ceph.keyring
+</code></pre><p>&#x521B;&#x5EFA; keyring &#x6587;&#x4EF6;&#x3001;&#x589E;&#x52A0;&#x7528;&#x6237;&#x4E5F;&#x53EF;&#x4EE5;&#x540C;&#x65F6;&#x8FDB;&#x884C;&#x3002;&#x6BD4;&#x5982;&#xFF1A;</p>
+<pre><code>sudo ceph-authtool -C /etc/ceph/ceph.keyring -n client.ringo --cap osd &apos;allow rwx&apos; --cap mon &apos;allow rwx&apos; --gen-key
+</code></pre><p>&#x4E0A;&#x8FF0;&#x6B65;&#x9AA4;&#x4E2D;&#xFF0C;&#x65B0;&#x7528;&#x6237; client.ringo &#x4EC5;&#x5B58;&#x5728;&#x4E8E; keyring &#x6587;&#x4EF6;&#x4E2D;&#xFF0C;&#x8FD8;&#x9700;&#x8981;&#x628A;&#x65B0;&#x7528;&#x6237;&#x52A0;&#x5165;&#x5230; Ceph &#x96C6;&#x7FA4;&#x4E2D;&#x3002;</p>
+<pre><code>sudo ceph auth add client.ringo -i /etc/ceph/ceph.keyring
+</code></pre><h5 id="&#x4FEE;&#x6539;&#x7528;&#x6237;&#x80FD;&#x529B;">&#x4FEE;&#x6539;&#x7528;&#x6237;&#x80FD;&#x529B;</h5>
+<p>&#x4FEE;&#x6539;&#x8BB0;&#x5F55;&#x5728; keyring &#x6587;&#x4EF6;&#x4E2D;&#x7684;&#x7528;&#x6237;&#x80FD;&#x529B;&#x65F6;&#xFF0C;&#x9700;&#x8981;&#x6307;&#x5B9A; keyring &#x3001;&#x7528;&#x6237;&#x548C;&#x65B0;&#x7684;&#x80FD;&#x529B;&#x9009;&#x9879;&#x3002;&#x6BD4;&#x5982;&#xFF1A;</p>
+<pre><code>sudo ceph-authtool /etc/ceph/ceph.keyring -n client.ringo --cap osd &apos;allow rwx&apos; --cap mon &apos;allow rwx&apos;
+</code></pre><p>&#x66F4;&#x65B0; Ceph &#x5B58;&#x50A8;&#x96C6;&#x7FA4;&#x7684;&#x7528;&#x6237;&#xFF0C;&#x4F60;&#x5FC5;&#x987B;&#x66F4;&#x65B0; keyring &#x6587;&#x4EF6;&#x4E2D;&#x5BF9;&#x5E94;&#x7528;&#x6237;&#x5165;&#x53E3;&#x7684;&#x4FE1;&#x606F;&#x3002;</p>
+<pre><code>sudo ceph auth import -i /etc/ceph/ceph.keyring
+</code></pre><h3 id="54-&#x547D;&#x4EE4;&#x884C;&#x4F7F;&#x7528;&#x65B9;&#x6CD5;">5.4 &#x547D;&#x4EE4;&#x884C;&#x4F7F;&#x7528;&#x65B9;&#x6CD5;</h3>
+<p>Ceph &#x652F;&#x6301;&#x901A;&#x8FC7;&#x4E0B;&#x5217;&#x65B9;&#x5F0F;&#x4F7F;&#x7528;&#x7528;&#x6237;&#x540D;&#x79F0;&#x548C;&#x5BC6;&#x94A5;&#x3002;</p>
+<p><code>--id | --user</code></p>
+<p><strong>&#x63CF;&#x8FF0;&#xFF1A;</strong> Ceph &#x901A;&#x8FC7;&#x7C7B;&#x578B;&#x548C; ID &#x6765;&#x786E;&#x5B9A;&#x7528;&#x6237;&#xFF0C;&#x5982; <code>TYPE.ID</code> &#x6216; <code>client.admin</code>, <code>client.user1</code> &#x3002;&#x4F7F;&#x7528; <code>--id</code> &#x6216; <code>--user</code> &#x9009;&#x9879;&#x6307;&#x5B9A;&#x7528;&#x6237;&#x7684; ID&#xFF0C;&#x6BD4;&#x5982;&#xFF0C;&#x6307;&#x5B9A;&#x4F7F;&#x7528; <code>client.foo</code> &#x7528;&#x6237;&#xFF1A;</p>
+<pre><code>ceph --id foo --keyring /path/to/keyring health
+ceph --user foo --keyring /path/to/keyring health
+</code></pre><p><code>--name | -n</code></p>
+<p><strong>&#x63CF;&#x8FF0;&#xFF1A;</strong> &#x4F7F;&#x7528; --name &#x6216; -n &#x9009;&#x9879;&#x6307;&#x5B9A;&#x7528;&#x6237;&#x7684;&#x5168;&#x540D;&#xFF08; TYPE.ID &#xFF09;&#xFF0C;&#x6BD4;&#x5982;&#xFF1A;</p>
+<pre><code>ceph --name client.foo --keyring /path/to/keyring health
+ceph -n client.foo --keyring /path/to/keyring health
+</code></pre><p><code>--keyring</code></p>
+<p><strong>&#x63CF;&#x8FF0;&#xFF1A;</strong> &#x6307;&#x5B9A;&#x5305;&#x542B;&#x4E00;&#x4E2A;&#x6216;&#x591A;&#x4E2A;&#x7528;&#x6237;&#x53CA;&#x5176;&#x5BC6;&#x94A5;&#x7684; keyring &#x6587;&#x4EF6;&#x8DEF;&#x5F84;&#x3002; <code>--secret</code> &#x9009;&#x9879;&#x63D0;&#x4F9B;&#x540C;&#x6837;&#x7684;&#x529F;&#x80FD;&#xFF0C;&#x4F46;&#x5BF9; Ceph RADOS Gateway &#x4E0D;&#x751F;&#x6548;&#xFF08; <code>--secret</code> &#x9009;&#x9879;&#x6709;&#x5176;&#x4ED6;&#x7684;&#x4F5C;&#x7528;&#xFF09;&#x3002;&#x6BD4;&#x5982;&#xFF1A;</p>
+<pre><code>sudo rbd map --id foo --keyring /path/to/keyring mypool/myimage
+</code></pre>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="monitor_pg.html" class="navigation navigation-prev " aria-label="Previous page: 4. 监控 PG">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="add_rm_mon.html" class="navigation navigation-next " aria-label="Next page: 6. 增加/删除 Monitor">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"5. 用户管理","level":"1.2.5","depth":2,"next":{"title":"6. 增加/删除 Monitor","level":"1.2.6","depth":2,"path":"Operation/add_rm_mon.md","ref":"Operation/add_rm_mon.md","articles":[]},"previous":{"title":"4. 监控 PG","level":"1.2.4","depth":2,"path":"Operation/monitor_pg.md","ref":"Operation/monitor_pg.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"Operation/user_management.md","mtime":"2021-07-14T14:14:40.299Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-10-16T02:20:59.394Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

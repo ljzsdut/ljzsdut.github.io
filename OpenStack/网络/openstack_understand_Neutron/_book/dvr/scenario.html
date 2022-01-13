@@ -1,0 +1,972 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>典型场景 · 笔记</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="John Lee <ljzsdut@163.com>">
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-back-to-top-button/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-chapter-fold/chapter-fold.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-expandable-chapters/expandable-chapters.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-code/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search-pro/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-page-toc-button/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-prism/prism.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="network_node.html" />
+    
+    
+    <link rel="prev" href="./" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="http://www.ljzsdut.com" target="_blank" class="custom-link">My Blog</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../intro/">
+            
+                <a href="../intro/">
+            
+                    
+                    概述
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../concept/">
+            
+                <a href="../concept/">
+            
+                    
+                    基本概念
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../gre_mode/">
+            
+                <a href="../gre_mode/">
+            
+                    
+                    GRE 模式
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../gre_mode/compute_node.html">
+            
+                <a href="../gre_mode/compute_node.html">
+            
+                    
+                    计算节点
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../gre_mode/network_node.html">
+            
+                <a href="../gre_mode/network_node.html">
+            
+                    
+                    网络节点
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../vlan_mode/">
+            
+                <a href="../vlan_mode/">
+            
+                    
+                    VLAN 模式
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../vlan_mode/compute_node.html">
+            
+                <a href="../vlan_mode/compute_node.html">
+            
+                    
+                    计算节点
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../vlan_mode/network_node.html">
+            
+                <a href="../vlan_mode/network_node.html">
+            
+                    
+                    网络节点
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../vxlan_mode/">
+            
+                <a href="../vxlan_mode/">
+            
+                    
+                    VXLAN 模式
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../vxlan_mode/compute_node/">
+            
+                <a href="../vxlan_mode/compute_node/">
+            
+                    
+                    计算节点
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1.1" data-path="../vxlan_mode/compute_node/br-int.html">
+            
+                <a href="../vxlan_mode/compute_node/br-int.html">
+            
+                    
+                    br-int
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.1.2" data-path="../vxlan_mode/compute_node/br-tun.html">
+            
+                <a href="../vxlan_mode/compute_node/br-tun.html">
+            
+                    
+                    br-tun
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../vxlan_mode/network_node/">
+            
+                <a href="../vxlan_mode/network_node/">
+            
+                    
+                    网络节点
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.2.1" data-path="../vxlan_mode/network_node/br-tun.html">
+            
+                <a href="../vxlan_mode/network_node/br-tun.html">
+            
+                    
+                    br-tun
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2.2" data-path="../vxlan_mode/network_node/br-int.html">
+            
+                <a href="../vxlan_mode/network_node/br-int.html">
+            
+                    
+                    br-int
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2.3" data-path="../vxlan_mode/network_node/br-ex.html">
+            
+                <a href="../vxlan_mode/network_node/br-ex.html">
+            
+                    
+                    br-ex
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../namespace/">
+            
+                <a href="../namespace/">
+            
+                    
+                    网络命名空间
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../namespace/dhcp.html">
+            
+                <a href="../namespace/dhcp.html">
+            
+                    
+                    DHCP 服务
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" data-path="../namespace/router.html">
+            
+                <a href="../namespace/router.html">
+            
+                    
+                    路由服务
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="../security_group/">
+            
+                <a href="../security_group/">
+            
+                    
+                    安全组
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.8.1" data-path="../security_group/input.html">
+            
+                <a href="../security_group/input.html">
+            
+                    
+                    INPUT
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.2" data-path="../security_group/output.html">
+            
+                <a href="../security_group/output.html">
+            
+                    
+                    OUTPUT
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.3" data-path="../security_group/forward.html">
+            
+                <a href="../security_group/forward.html">
+            
+                    
+                    FORWARD
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.4" data-path="../security_group/global_logic.html">
+            
+                <a href="../security_group/global_logic.html">
+            
+                    
+                    整体逻辑
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.5" data-path="../security_group/quick_find.html">
+            
+                <a href="../security_group/quick_find.html">
+            
+                    
+                    快速查找安全组规则
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.6" data-path="../security_group/other.html">
+            
+                <a href="../security_group/other.html">
+            
+                    
+                    其它
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="../lbaas/">
+            
+                <a href="../lbaas/">
+            
+                    
+                    LBaaS（负载均衡即服务）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.9.1" data-path="../lbaas/scenario.html">
+            
+                <a href="../lbaas/scenario.html">
+            
+                    
+                    典型场景
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.2" data-path="../lbaas/arch.html">
+            
+                <a href="../lbaas/arch.html">
+            
+                    
+                    实现细节
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.3" data-path="../lbaas/other.html">
+            
+                <a href="../lbaas/other.html">
+            
+                    
+                    其它问题
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="../fwaas/">
+            
+                <a href="../fwaas/">
+            
+                    
+                    FWaaS（防火墙即服务）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.10.1" data-path="../fwaas/scenario.html">
+            
+                <a href="../fwaas/scenario.html">
+            
+                    
+                    典型场景
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.2" data-path="../fwaas/arch.html">
+            
+                <a href="../fwaas/arch.html">
+            
+                    
+                    实现细节
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.3" data-path="../fwaas/other.html">
+            
+                <a href="../fwaas/other.html">
+            
+                    
+                    其它问题
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    DVR（分布式路由）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="1.11.1" data-path="scenario.html">
+            
+                <a href="scenario.html">
+            
+                    
+                    典型场景
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.2" data-path="network_node.html">
+            
+                <a href="network_node.html">
+            
+                    
+                    网络节点
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.3" data-path="compute_node.html">
+            
+                <a href="compute_node.html">
+            
+                    
+                    计算节点
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.4" data-path="config.html">
+            
+                <a href="config.html">
+            
+                    
+                    配置
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.5" data-path="workflow.html">
+            
+                <a href="workflow.html">
+            
+                    
+                    工作流程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.6" data-path="implementation.html">
+            
+                <a href="implementation.html">
+            
+                    
+                    实现细节
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12" data-path="../tool/">
+            
+                <a href="../tool/">
+            
+                    
+                    工具
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.12.1" data-path="../tool/easyovs.html">
+            
+                <a href="../tool/easyovs.html">
+            
+                    
+                    easyOVS
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13" data-path="../ref/">
+            
+                <a href="../ref/">
+            
+                    
+                    参考
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14" data-path="../appendix_install/">
+            
+                <a href="../appendix_install/">
+            
+                    
+                    附：安装配置
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >典型场景</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h2 id="&#x5178;&#x578B;&#x573A;&#x666F;">&#x5178;&#x578B;&#x573A;&#x666F;</h2>
+<p>&#x4ECE;&#x7F51;&#x7EDC;&#x7684;&#x8BBF;&#x95EE;&#x770B;&#xFF0C;&#x6D89;&#x53CA;&#x5230;&#x8DEF;&#x7531;&#x670D;&#x52A1;&#x7684;&#x81F3;&#x5C11;&#x662F;&#x9700;&#x8981;&#x8DE8;&#x5B50;&#x7F51;&#x7684;&#x8BBF;&#x95EE;&#xFF0C;&#x53C8;&#x5305;&#x62EC;&#x662F;&#x5426;&#x662F;&#x540C;&#x4E00;&#x673A;&#x5668;&#x3001;&#x662F;&#x5426;&#x662F;&#x6D89;&#x53CA;&#x5230;&#x5916;&#x7F51;&#xFF08;&#x4E1C;&#x897F;&#x5411; vs &#x5357;&#x5317;&#x5411;&#xFF09;&#x3002;</p>
+<p>&#x8003;&#x8651;&#x4E0B;&#x9762;&#x51E0;&#x4E2A;&#x8DE8;&#x5B50;&#x7F51;&#x8DEF;&#x7531;&#x7684;&#x5178;&#x578B;&#x573A;&#x666F;&#x3002;</p>
+<table>
+<thead>
+<tr>
+<th>&#x65B9;&#x5411;</th>
+<th>&#x540C;&#x4E00;&#x673A;&#x5668;</th>
+<th>&#x4E0D;&#x540C;&#x673A;&#x5668;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&#x4E1C;&#x897F;</td>
+<td>&#x672C;&#x5730;&#x7F51;&#x6865;&#x5904;&#x7406;</td>
+<td>&#x672C;&#x5730;&#x4E1C;&#x897F;&#x8DEF;&#x7531;&#x5668;</td>
+</tr>
+<tr>
+<td>&#x5357;&#x5317;</td>
+<td>&#x672C;&#x5730;&#x5357;&#x5317;&#x8DEF;&#x7531;&#x5668; floating &#x8F6C;&#x53D1;</td>
+<td>&#x7F51;&#x7EDC;&#x8282;&#x70B9; SNAT &#x8F6C;&#x53D1;</td>
+</tr>
+</tbody>
+</table>
+<h3 id="&#x4E1C;&#x897F;&#x5411;">&#x4E1C;&#x897F;&#x5411;</h3>
+<p>&#x4E1C;&#x897F;&#x5411;&#x610F;&#x5473;&#x7740;&#x79DF;&#x6237;&#x540C;&#x4E00;&#x4E2A;&#x6570;&#x636E;&#x4E2D;&#x5FC3;&#x5185;&#x4E0D;&#x540C;&#x5B50;&#x7F51;&#x4E4B;&#x95F4;&#x7684;&#x4E92;&#x76F8;&#x8BBF;&#x95EE;&#x3002;</p>
+<h4 id="&#x540C;&#x4E00;&#x673A;&#x5668;">&#x540C;&#x4E00;&#x673A;&#x5668;</h4>
+<p>&#x5BF9;&#x4E8E;&#x540C;&#x4E00;&#x4E3B;&#x673A;&#x4E0A;&#x7684;&#x4E0D;&#x540C;&#x5B50;&#x7F51;&#x4E4B;&#x95F4;&#x8BBF;&#x95EE;&#xFF0C;&#x8DEF;&#x7531;&#x5668;&#x76F4;&#x63A5;&#x5728; br-int &#x4E0A;&#x8F6C;&#x53D1;&#x5373;&#x53EF;&#xFF0C;&#x4E0D;&#x9700;&#x8981;&#x7ECF;&#x8FC7;&#x5916;&#x90E8;&#x7F51;&#x6865;&#x3002;</p>
+<h4 id="&#x4E0D;&#x540C;&#x673A;&#x5668;">&#x4E0D;&#x540C;&#x673A;&#x5668;</h4>
+<p><img src="../_images/dvr_case1.png" alt="&#x540C;&#x79DF;&#x6237;&#x4E0D;&#x540C;&#x673A;&#x5668;&#x4E4B;&#x95F4;&#x5B50;&#x7F51;&#x8BBF;&#x95EE;"></p>
+<p>&#x5982;&#x56FE;&#x6240;&#x793A;&#xFF0C;&#x79DF;&#x6237; T1 &#x7684;&#x4E24;&#x53F0;&#x865A;&#x62DF;&#x673A; VM1&#xFF08;&#x8BA1;&#x7B97;&#x8282;&#x70B9; 1&#xFF09;&#x548C; VM4&#xFF08;&#x8BA1;&#x7B97;&#x8282;&#x70B9; 2&#xFF09;&#x5206;&#x522B;&#x5C5E;&#x4E8E;&#x4E0D;&#x540C;&#x5B50;&#x7F51;&#xFF0C;&#x4F4D;&#x4E8E;&#x4E0D;&#x540C;&#x7684;&#x8BA1;&#x7B97;&#x8282;&#x70B9;&#x3002;VM1 &#x8981;&#x8BBF;&#x95EE; VM4&#xFF0C;&#x7531;&#x8BA1;&#x7B97;&#x8282;&#x70B9; 1 &#x4E0A;&#x7684; IR1 &#x8D77;&#x5230;&#x8DEF;&#x7531;&#x5668;&#x529F;&#x80FD;&#x3002;&#x8FD4;&#x7A0B;&#x7684;&#x7F51;&#x5305;&#xFF0C;&#x5219;&#x7531;&#x8BA1;&#x7B97;&#x8282;&#x70B9; 2 &#x4E0A;&#x7684;&#x8DEF;&#x7531;&#x5668; IR2 &#x8D77;&#x4F5C;&#x7528;&#x3002;</p>
+<p>&#x4E24;&#x4E2A;&#x8DEF;&#x7531;&#x5668;&#x7684; id&#x3001;&#x5185;&#x90E8;&#x63A5;&#x53E3;&#x3001;&#x529F;&#x80FD;&#x7B49;&#x5176;&#x5B9E;&#x90FD;&#x662F;&#x4E00;&#x6837;&#x7684;&#x3002;&#x5373;&#x540C;&#x4E00;&#x4E2A;&#x8DEF;&#x7531;&#x5668;&#xFF0C;&#x4F46;&#x662F;&#x5B9E;&#x9645;&#x4E0A;&#x5728;&#x591A;&#x4E2A;&#x8BA1;&#x7B97;&#x8282;&#x70B9;&#x4E0A;&#x540C;&#x65F6;&#x5B58;&#x5728;&#x3002;</p>
+<p>&#x8FD9;&#x91CC;&#x53EF;&#x80FD;&#x6709;&#x4EBA;&#x4F1A;&#x60F3;&#x5230;&#xFF0C;&#x591A;&#x53F0;&#x540C;&#x6837;&#x7684;&#x8DEF;&#x7531;&#x5668;&#xFF0C;&#x5982;&#x679C;&#x90FD;&#x66B4;&#x9732;&#x5728;&#x5916;&#x90E8;&#x7F51;&#x7EDC;&#x4E0A;&#xFF0C;&#x4F1A;&#x51FA;&#x73B0;&#x51B2;&#x7A81;&#x3002;&#x4F8B;&#x5982;&#x5F53; VM1 &#x7684;&#x8BF7;&#x6C42;&#x5305;&#x79BB;&#x5F00;&#x8BA1;&#x7B97;&#x8282;&#x70B9; 1 &#x65F6;&#xFF0C;&#x5E26;&#x7684;&#x6E90; mac &#x662F;&#x8DEF;&#x7531;&#x5668;&#x76EE;&#x6807;&#x63A5;&#x53E3;&#x7684; mac&#xFF0C;&#x800C;&#x8FD9;&#x4E2A; mac &#x5728;&#x8BA1;&#x7B97;&#x8282;&#x70B9; 2 &#x4E0A;&#x7684;&#x8DEF;&#x7531;&#x5668;&#x4E0A;&#x540C;&#x6837;&#x5B58;&#x5728;&#x3002;</p>
+<p>&#x56E0;&#x6B64;&#xFF0C;&#x9700;&#x8981;&#x62E6;&#x622A;&#x8DEF;&#x7531;&#x5668;&#x5BF9;&#x5916;&#x7684;&#x66B4;&#x9732;&#x4FE1;&#x606F;&#x3002;&#x4E00;&#x4E2A;&#x662F;&#x8BA9;&#x6BCF;&#x4E2A;&#x8DEF;&#x7531;&#x5668;&#x53EA;&#x5E94;&#x7B54;&#x672C;&#x673A;&#x7684; mac &#x8BF7;&#x6C42;&#xFF1B;&#x53E6;&#x4E00;&#x4E2A;&#x662F;&#x7EDD;&#x5BF9;&#x4E0D;&#x8BA9;&#x5E26;&#x7740;&#x8DEF;&#x7531;&#x5668; mac &#x5730;&#x5740;&#x7684;&#x5305;&#x76F4;&#x63A5;&#x6254;&#x51FA;&#x53BB;&#x3002;&#x5B9E;&#x73B0;&#x4E0A;&#x5728; br-int &#xFF08;&#x5E94;&#x8BE5;&#x662F;br-tun&#x4E0A;&#x5427;&#xFF1F;&#xFF1F;&#xFF09;&#x4E0A;&#x8FDB;&#x884C;&#x62E6;&#x622A;&#xFF0C;&#x4FEE;&#x6539;&#x5176;&#x6E90; mac &#x4E3A; tunnel &#x7AEF;&#x53E3;&#x7684; mac&#x3002;&#x540C;&#x6837;&#x7684;&#xFF0C;&#x8BA1;&#x7B97;&#x8282;&#x70B9; 2 &#x5728; br-int &#x4E0A;&#x62E6;&#x622A;&#x6E90; mac &#x4E3A;&#x8FD9;&#x4E2A; tunnel &#x7AEF;&#x53E3;&#x7684; mac&#xFF0C;&#x66FF;&#x6362;&#x4E3A;&#x6B63;&#x5E38;&#x7684;&#x5B50;&#x7F51;&#x7F51;&#x5173;&#x7684; mac&#xFF0C;&#x76F4;&#x63A5;&#x6254;&#x7ED9;&#x76EE;&#x6807;&#x865A;&#x62DF;&#x673A;&#x6240;&#x5728;&#x7684;&#x4E3B;&#x673A;&#x3002;</p>
+<h3 id="&#x5357;&#x5317;&#x5411;">&#x5357;&#x5317;&#x5411;</h3>
+<h4 id="&#x65E0;-floating-ip">&#x65E0; floating IP</h4>
+<p>&#x8FD9;&#x79CD;&#x60C5;&#x51B5;&#xFF08;&#x5373; SNAT&#xFF09;&#x4E0B;&#xFF0C;&#x8DDF;&#x4F20;&#x7EDF;&#x6A21;&#x5F0F;&#x5F88;&#x7C7B;&#x4F3C;&#xFF0C;&#x9996;&#x5148;&#x6765;&#x770B;&#x5916;&#x90E8;&#x8BBF;&#x95EE;&#x5185;&#x90E8;&#x5B50;&#x7F51;&#x3002;</p>
+<p><img src="../_images/dvr_case2a.png" alt="&#x901A;&#x8FC7; SNAT &#x8BBF;&#x95EE;&#x5185;&#x90E8;&#x5B50;&#x7F51;"></p>
+<p>&#x79DF;&#x6237; T2 &#x5728;&#x5916;&#x90E8;&#xFF0C;&#x901A;&#x8FC7;&#x9ED8;&#x8BA4;&#x7684; SNAT &#x7F51;&#x5173;&#x8BBF;&#x95EE;&#x5185;&#x90E8;&#x5B50;&#x7F51;&#x7684; vm VM1&#x3002;&#x6B64;&#x65F6;&#xFF0C;&#x7F51;&#x7EDC;&#x8282;&#x70B9;&#x4E0A;&#x7684; T2-SNAT &#x8D77;&#x5230;&#x8DEF;&#x7531;&#x5668;&#x7684;&#x4F5C;&#x7528;</p>
+<p><img src="../_images/dvr_case2b.png" alt="&#x5185;&#x90E8;&#x5B50;&#x7F51;&#x901A;&#x8FC7; SNAT &#x8BBF;&#x95EE;&#x5916;&#x90E8;"></p>
+<p>&#x53CD;&#x8FC7;&#x6765;&#xFF0C;&#x79DF;&#x6237; T2 &#x5185;&#x90E8;&#x5B50;&#x7F51;&#x7684; vm VM1 &#x8BD5;&#x56FE;&#x8BBF;&#x95EE;&#x5916;&#x90E8;&#x7F51;&#x7EDC;&#xFF0C;&#x5219;&#x4ECD;&#x7136;&#x7ECF;&#x8FC7;&#x7F51;&#x7EDC;&#x8282;&#x70B9;&#x4E0A;&#x7684; T2-SNAT &#x8DEF;&#x7531;&#x5668;&#x3002;</p>
+<p>&#x4E3A;&#x4F55;&#x8FD9;&#x79CD;&#x60C5;&#x51B5;&#x4E0B;&#x5FC5;&#x987B;&#x4ECE;&#x7F51;&#x7EDC;&#x8282;&#x70B9;&#x8D70;&#xFF1F;&#x8FD9;&#x662F;&#x56E0;&#x4E3A;&#x5BF9;&#x4E8E;&#x5916;&#x90E8;&#x7F51;&#x7EDC;&#x6765;&#x8BF4;&#xFF0C;&#x770B;&#x5230;&#x7684;&#x90FD;&#x662F;&#x5916;&#x90E8;&#x63A5;&#x53E3;&#x7684;&#x5730;&#x5740;&#xFF0C;&#x8FD9;&#x4E2A;&#x5730;&#x5740;&#x53EA;&#x6709;&#x4E00;&#x4E2A;&#x3002;</p>
+<p>&#x5F53;&#x7136;&#xFF0C;&#x5982;&#x679C;&#x4EE5;&#x540E;&#x6BCF;&#x4E2A;&#x8BA1;&#x7B97;&#x8282;&#x70B9;&#x4E0A;&#x90FD;&#x53EF;&#x4EE5;&#x5E26;&#x6709;&#x8FD9;&#x6837;&#x4E00;&#x4E2A; SNAT &#x9ED8;&#x8BA4;&#x5916;&#x90E8;&#x5730;&#x5740;&#x7684;&#x8BDD;&#xFF0C;&#x8FD9;&#x79CD;&#x60C5;&#x51B5;&#x4E0B;&#x7684;&#x6D41;&#x91CF;&#x4E5F;&#x662F;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x4ECE;&#x8BA1;&#x7B97;&#x8282;&#x70B9;&#x51FA;&#x53BB;&#x7684;&#x3002;</p>
+<h4 id="&#x6709;-floating-ip">&#x6709; floating IP</h4>
+<p><img src="../_images/dvr_case3.png" alt="&#x5E26;&#x6709; floating IP &#x7684;&#x5357;&#x5317;&#x5411;&#x8BBF;&#x95EE;"></p>
+<p>&#x8FD9;&#x79CD;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x8BA1;&#x7B97;&#x8282;&#x70B9;&#x4E0A;&#x7684;&#x4E13;&#x95E8;&#x8D1F;&#x8D23;&#x7684;&#x5916;&#x90E8;&#x8DEF;&#x7531;&#x5668;&#x5C06;&#x8D1F;&#x8D23;&#x8FDB;&#x884C;&#x8F6C;&#x53D1;&#xFF0C;&#x5373;&#x8BA1;&#x7B97;&#x8282;&#x70B9; 1 &#x4E0A;&#x7684; IR2 &#x548C;&#x8BA1;&#x7B97;&#x8282;&#x70B9; 2 &#x4E0A;&#x7684; IR1&#x3002;</p>
+
+<script>console.log("plugin-popup....");document.onclick = function(e){ e.target.tagName === "IMG" && window.open(e.target.src,e.target.src)}</script><style>img{cursor:pointer}</style>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="./" class="navigation navigation-prev " aria-label="Previous page: DVR（分布式路由）">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="network_node.html" class="navigation navigation-next " aria-label="Next page: 网络节点">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"典型场景","level":"1.11.1","depth":2,"next":{"title":"网络节点","level":"1.11.2","depth":2,"path":"dvr/network_node.md","ref":"dvr/network_node.md","articles":[]},"previous":{"title":"DVR（分布式路由）","level":"1.11","depth":1,"path":"dvr/README.md","ref":"dvr/README.md","articles":[{"title":"典型场景","level":"1.11.1","depth":2,"path":"dvr/scenario.md","ref":"dvr/scenario.md","articles":[]},{"title":"网络节点","level":"1.11.2","depth":2,"path":"dvr/network_node.md","ref":"dvr/network_node.md","articles":[]},{"title":"计算节点","level":"1.11.3","depth":2,"path":"dvr/compute_node.md","ref":"dvr/compute_node.md","articles":[]},{"title":"配置","level":"1.11.4","depth":2,"path":"dvr/config.md","ref":"dvr/config.md","articles":[]},{"title":"工作流程","level":"1.11.5","depth":2,"path":"dvr/workflow.md","ref":"dvr/workflow.md","articles":[]},{"title":"实现细节","level":"1.11.6","depth":2,"path":"dvr/implementation.md","ref":"dvr/implementation.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["back-to-top-button","chapter-fold","expandable-chapters","code","-lunr","-search","search-pro","page-toc-button","popup","prism","-highlight","livereload"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"chapter-fold":{},"prism":{},"livereload":{},"search-pro":{},"popup":{},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"page-toc-button":{"maxTocDepth":2,"minTocSize":2},"back-to-top-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"expandable-chapters":{}},"theme":"default","author":"John Lee <ljzsdut@163.com>","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"笔记","links":{"sharing":{"all":null,"facebook":null,"google":null,"twitter":null,"weibo":null},"sidebar":{"My Blog":"http://www.ljzsdut.com"}},"gitbook":"*","description":"notes","extension":null},"file":{"path":"dvr/scenario.md","mtime":"2021-07-10T04:43:54.744Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-08-18T01:23:01.131Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-back-to-top-button/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-chapter-fold/chapter-fold.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-expandable-chapters/expandable-chapters.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-code/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-pro/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-pro/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-page-toc-button/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

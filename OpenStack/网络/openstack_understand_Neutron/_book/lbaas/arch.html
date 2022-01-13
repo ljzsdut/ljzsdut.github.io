@@ -1,0 +1,983 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>实现细节 · 笔记</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="John Lee <ljzsdut@163.com>">
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-back-to-top-button/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-chapter-fold/chapter-fold.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-expandable-chapters/expandable-chapters.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-code/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search-pro/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-page-toc-button/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-prism/prism.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="other.html" />
+    
+    
+    <link rel="prev" href="scenario.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="http://www.ljzsdut.com" target="_blank" class="custom-link">My Blog</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../intro/">
+            
+                <a href="../intro/">
+            
+                    
+                    概述
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../concept/">
+            
+                <a href="../concept/">
+            
+                    
+                    基本概念
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../gre_mode/">
+            
+                <a href="../gre_mode/">
+            
+                    
+                    GRE 模式
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../gre_mode/compute_node.html">
+            
+                <a href="../gre_mode/compute_node.html">
+            
+                    
+                    计算节点
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../gre_mode/network_node.html">
+            
+                <a href="../gre_mode/network_node.html">
+            
+                    
+                    网络节点
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../vlan_mode/">
+            
+                <a href="../vlan_mode/">
+            
+                    
+                    VLAN 模式
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../vlan_mode/compute_node.html">
+            
+                <a href="../vlan_mode/compute_node.html">
+            
+                    
+                    计算节点
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../vlan_mode/network_node.html">
+            
+                <a href="../vlan_mode/network_node.html">
+            
+                    
+                    网络节点
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../vxlan_mode/">
+            
+                <a href="../vxlan_mode/">
+            
+                    
+                    VXLAN 模式
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../vxlan_mode/compute_node/">
+            
+                <a href="../vxlan_mode/compute_node/">
+            
+                    
+                    计算节点
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1.1" data-path="../vxlan_mode/compute_node/br-int.html">
+            
+                <a href="../vxlan_mode/compute_node/br-int.html">
+            
+                    
+                    br-int
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.1.2" data-path="../vxlan_mode/compute_node/br-tun.html">
+            
+                <a href="../vxlan_mode/compute_node/br-tun.html">
+            
+                    
+                    br-tun
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../vxlan_mode/network_node/">
+            
+                <a href="../vxlan_mode/network_node/">
+            
+                    
+                    网络节点
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.2.1" data-path="../vxlan_mode/network_node/br-tun.html">
+            
+                <a href="../vxlan_mode/network_node/br-tun.html">
+            
+                    
+                    br-tun
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2.2" data-path="../vxlan_mode/network_node/br-int.html">
+            
+                <a href="../vxlan_mode/network_node/br-int.html">
+            
+                    
+                    br-int
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2.3" data-path="../vxlan_mode/network_node/br-ex.html">
+            
+                <a href="../vxlan_mode/network_node/br-ex.html">
+            
+                    
+                    br-ex
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../namespace/">
+            
+                <a href="../namespace/">
+            
+                    
+                    网络命名空间
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../namespace/dhcp.html">
+            
+                <a href="../namespace/dhcp.html">
+            
+                    
+                    DHCP 服务
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" data-path="../namespace/router.html">
+            
+                <a href="../namespace/router.html">
+            
+                    
+                    路由服务
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="../security_group/">
+            
+                <a href="../security_group/">
+            
+                    
+                    安全组
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.8.1" data-path="../security_group/input.html">
+            
+                <a href="../security_group/input.html">
+            
+                    
+                    INPUT
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.2" data-path="../security_group/output.html">
+            
+                <a href="../security_group/output.html">
+            
+                    
+                    OUTPUT
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.3" data-path="../security_group/forward.html">
+            
+                <a href="../security_group/forward.html">
+            
+                    
+                    FORWARD
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.4" data-path="../security_group/global_logic.html">
+            
+                <a href="../security_group/global_logic.html">
+            
+                    
+                    整体逻辑
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.5" data-path="../security_group/quick_find.html">
+            
+                <a href="../security_group/quick_find.html">
+            
+                    
+                    快速查找安全组规则
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.6" data-path="../security_group/other.html">
+            
+                <a href="../security_group/other.html">
+            
+                    
+                    其它
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    LBaaS（负载均衡即服务）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.9.1" data-path="scenario.html">
+            
+                <a href="scenario.html">
+            
+                    
+                    典型场景
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.9.2" data-path="arch.html">
+            
+                <a href="arch.html">
+            
+                    
+                    实现细节
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.3" data-path="other.html">
+            
+                <a href="other.html">
+            
+                    
+                    其它问题
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="../fwaas/">
+            
+                <a href="../fwaas/">
+            
+                    
+                    FWaaS（防火墙即服务）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.10.1" data-path="../fwaas/scenario.html">
+            
+                <a href="../fwaas/scenario.html">
+            
+                    
+                    典型场景
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.2" data-path="../fwaas/arch.html">
+            
+                <a href="../fwaas/arch.html">
+            
+                    
+                    实现细节
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.3" data-path="../fwaas/other.html">
+            
+                <a href="../fwaas/other.html">
+            
+                    
+                    其它问题
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11" data-path="../dvr/">
+            
+                <a href="../dvr/">
+            
+                    
+                    DVR（分布式路由）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.11.1" data-path="../dvr/scenario.html">
+            
+                <a href="../dvr/scenario.html">
+            
+                    
+                    典型场景
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.2" data-path="../dvr/network_node.html">
+            
+                <a href="../dvr/network_node.html">
+            
+                    
+                    网络节点
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.3" data-path="../dvr/compute_node.html">
+            
+                <a href="../dvr/compute_node.html">
+            
+                    
+                    计算节点
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.4" data-path="../dvr/config.html">
+            
+                <a href="../dvr/config.html">
+            
+                    
+                    配置
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.5" data-path="../dvr/workflow.html">
+            
+                <a href="../dvr/workflow.html">
+            
+                    
+                    工作流程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.6" data-path="../dvr/implementation.html">
+            
+                <a href="../dvr/implementation.html">
+            
+                    
+                    实现细节
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12" data-path="../tool/">
+            
+                <a href="../tool/">
+            
+                    
+                    工具
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.12.1" data-path="../tool/easyovs.html">
+            
+                <a href="../tool/easyovs.html">
+            
+                    
+                    easyOVS
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13" data-path="../ref/">
+            
+                <a href="../ref/">
+            
+                    
+                    参考
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14" data-path="../appendix_install/">
+            
+                <a href="../appendix_install/">
+            
+                    
+                    附：安装配置
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >实现细节</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h2 id="&#x5B9E;&#x73B0;&#x7EC6;&#x8282;">&#x5B9E;&#x73B0;&#x7EC6;&#x8282;</h2>
+<p>&#x8DDF;&#x5927;&#x90E8;&#x5206;&#x7684;&#x9AD8;&#x7EA7;&#x670D;&#x52A1;&#x4E00;&#x6837;&#xFF0C;LBaaS &#x5728;&#x7F51;&#x7EDC;&#x8282;&#x70B9;&#x4E0A;&#x5B9E;&#x73B0;&#x3002;</p>
+<h3 id="qlbaas-&#x547D;&#x540D;&#x7A7A;&#x95F4;">qlbaas &#x547D;&#x540D;&#x7A7A;&#x95F4;</h3>
+<p>&#x5728;&#x542F;&#x52A8;&#x4E86; LBaaS &#x4E4B;&#x540E;&#xFF0C;&#x7F51;&#x7EDC;&#x8282;&#x70B9;&#x4E0A;&#x4F1A;&#x591A;&#x4E00;&#x4E2A; qlbaas-xxx &#x547D;&#x540D;&#x7A7A;&#x95F4;&#xFF0C;&#x5176;&#x4E2D;&#x4E00;&#x4E2A; tap &#x7C7B;&#x578B;&#x7AEF;&#x53E3;&#xFF0C;&#x7ED1;&#x5B9A;&#x4E86;&#x6211;&#x4EEC;&#x5B9A;&#x4E49;&#x7684; VIP&#x3002;</p>
+<pre class="language-"><code class="lang-sh">$ <span class="token function">sudo</span> <span class="token function">ip</span> netns <span class="token builtin class-name">exec</span> qlbaas-574a31da-a28a-449f-8c9d-3d3687c3c02a <span class="token function">ip</span> addr
+<span class="token number">1</span>: lo: <span class="token operator">&lt;</span>LOOPBACK,UP,LOWER_UP<span class="token operator">&gt;</span> mtu <span class="token number">65536</span> qdisc noqueue state UNKNOWN group default
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet <span class="token number">127.0</span>.0.1/8 scope <span class="token function">host</span> lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope <span class="token function">host</span>
+       valid_lft forever preferred_lft forever
+<span class="token number">52</span>: tapfb358342-59: <span class="token operator">&lt;</span>BROADCAST,UP,LOWER_UP<span class="token operator">&gt;</span> mtu <span class="token number">1500</span> qdisc noqueue state UNKNOWN group default
+    link/ether fa:16:3e:68:77:37 brd ff:ff:ff:ff:ff:ff
+    inet <span class="token number">10.0</span>.0.250/24 brd <span class="token number">10.0</span>.0.255 scope global tapfb358342-59
+       valid_lft forever preferred_lft forever
+    inet6 fe80::f816:3eff:fe68:7737/64 scope <span class="token function">link</span>
+       valid_lft forever preferred_lft forever
+</code></pre>
+<p>&#x8BE5; tap &#x7C7B;&#x578B;&#x7AEF;&#x53E3;&#xFF0C;&#x4F1A;&#x8FDE;&#x63A5;&#x5230;&#x7F51;&#x7EDC;&#x8282;&#x70B9;&#x7684; br-int &#x7F51;&#x6865;&#x4E0A;&#x3002;</p>
+<h3 id="haproxy">HAProxy</h3>
+<p>&#x6B64;&#x65F6;&#x5728;&#x7F51;&#x7EDC;&#x8282;&#x70B9;&#x4E0A;&#x67E5;&#x770B;&#x8FDB;&#x7A0B;&#xFF0C;&#x4F1A;&#x53D1;&#x73B0;&#x4E00;&#x4E2A; haproxy &#x8FDB;&#x7A0B;&#x3002;</p>
+<pre class="language-"><code class="lang-sh">$ <span class="token function">ps</span> aux<span class="token operator">|</span><span class="token function">grep</span> haproxy
+nobody   <span class="token number">17331</span>  <span class="token number">0.0</span>  <span class="token number">0.0</span>  <span class="token number">20376</span>  <span class="token number">1104</span> ?        Ss   <span class="token number">15</span>:08   <span class="token number">0</span>:00 haproxy -f /opt/stack/data/neutron/lbaas/574a31da-a28a-449f-8c9d-3d3687c3c02a/conf -p /opt/stack/data/neutron/lbaas/574a31da-a28a-449f-8c9d-3d3687c3c02a/pid -sf <span class="token number">17323</span>
+</code></pre>
+<p>&#x67E5;&#x770B; HAProxy &#x7684;&#x914D;&#x7F6E;&#x6587;&#x4EF6;</p>
+<pre class="language-"><code class="lang-sh">$ <span class="token function">cat</span> /opt/stack/data/neutron/lbaas/574a31da-a28a-449f-8c9d-3d3687c3c02a/conf
+global
+        daemon
+        user nobody
+        group nogroup
+        log /dev/log local0
+        log /dev/log local1 notice
+        stats socket /opt/stack/data/neutron/lbaas/574a31da-a28a-449f-8c9d-3d3687c3c02a/sock mode 0666 level user
+defaults
+        log global
+        retries <span class="token number">3</span>
+        option redispatch
+        <span class="token function">timeout</span> connect <span class="token number">5000</span>
+        <span class="token function">timeout</span> client <span class="token number">50000</span>
+        <span class="token function">timeout</span> server <span class="token number">50000</span>
+frontend df25900f-53b1-4aab-8436-8411ec710445
+        option tcplog
+        <span class="token builtin class-name">bind</span> <span class="token number">10.0</span>.0.250:22
+        mode tcp
+        default_backend 574a31da-a28a-449f-8c9d-3d3687c3c02a
+backend 574a31da-a28a-449f-8c9d-3d3687c3c02a
+        mode tcp
+        balance leastconn
+        server <span class="token number">45481748</span>-3104-462c-ae4b-fae0f4b08c20 <span class="token number">10.0</span>.0.2:22 weight <span class="token number">1</span>
+        server 227b69fe-8685-4df6-b2a5-2f964c74886c <span class="token number">10.0</span>.0.4:22 weight <span class="token number">1</span>
+</code></pre>
+<p>&#x53EF;&#x89C1;&#xFF0C;&#x91CC;&#x9762;&#x7684;&#x914D;&#x7F6E;&#x4FE1;&#x606F;&#xFF0C;&#x8DDF;&#x6211;&#x4EEC;&#x4E4B;&#x524D;&#x914D;&#x7F6E;&#x7684;&#x5B8C;&#x5168;&#x4E00;&#x81F4;&#x3002;</p>
+<p>&#x5F53;&#x6709;&#x8BF7;&#x6C42;&#x8BBF;&#x95EE; 10.0.0.250:22 &#x7684;&#x65F6;&#x5019;&#xFF0C;&#x6700;&#x7EC8;&#x4F1A;&#x5230;&#x8FBE;&#x8BE5; qlbaas &#x547D;&#x540D;&#x7A7A;&#x95F4;&#xFF0C;&#x8BF7;&#x6C42;&#x88AB; HAProxy &#x6536;&#x5230;&#xFF0C;&#x6309;&#x7167;&#x8D1F;&#x8F7D;&#x5747;&#x8861;&#x7B56;&#x7565;&#xFF0C;&#x8F6C;&#x53D1;&#x7ED9;&#x5408;&#x9002;&#x7684;&#x865A;&#x673A;&#x3002;</p>
+<p>&#x53EF;&#x4EE5;&#x901A;&#x8FC7; ssh &#x8FDB;&#x884C;&#x6D4B;&#x8BD5;&#x3002;</p>
+<pre class="language-"><code class="lang-sh">$ <span class="token function">sudo</span> <span class="token function">ip</span> netns <span class="token builtin class-name">exec</span> qrouter-40fff075-d3a2-477b-942c-6b1adb42e35e <span class="token function">ssh</span> <span class="token number">10.0</span>.0.250
+</code></pre>
+<p>&#x5728;&#x540E;&#x7AEF;&#x7684;&#x865A;&#x673A;&#x6293;&#x5305;&#xFF0C;SSH &#x8BF7;&#x6C42;&#x662F; 10.0.0.250 -&gt; 10.0.0.2&#xFF0C;&#x8BF4;&#x660E;&#x5B9E;&#x9645;&#x4E0A;&#x662F; HAProxy &#x8F6C;&#x53D1;&#x4E86;&#x8BF7;&#x6C42;&#x3002;</p>
+
+<script>console.log("plugin-popup....");document.onclick = function(e){ e.target.tagName === "IMG" && window.open(e.target.src,e.target.src)}</script><style>img{cursor:pointer}</style>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="scenario.html" class="navigation navigation-prev " aria-label="Previous page: 典型场景">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="other.html" class="navigation navigation-next " aria-label="Next page: 其它问题">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"实现细节","level":"1.9.2","depth":2,"next":{"title":"其它问题","level":"1.9.3","depth":2,"path":"lbaas/other.md","ref":"lbaas/other.md","articles":[]},"previous":{"title":"典型场景","level":"1.9.1","depth":2,"path":"lbaas/scenario.md","ref":"lbaas/scenario.md","articles":[]},"dir":"ltr"},"config":{"plugins":["back-to-top-button","chapter-fold","expandable-chapters","code","-lunr","-search","search-pro","page-toc-button","popup","prism","-highlight","livereload"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"chapter-fold":{},"prism":{},"livereload":{},"search-pro":{},"popup":{},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"page-toc-button":{"maxTocDepth":2,"minTocSize":2},"back-to-top-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"expandable-chapters":{}},"theme":"default","author":"John Lee <ljzsdut@163.com>","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"笔记","links":{"sharing":{"all":null,"facebook":null,"google":null,"twitter":null,"weibo":null},"sidebar":{"My Blog":"http://www.ljzsdut.com"}},"gitbook":"*","description":"notes","extension":null},"file":{"path":"lbaas/arch.md","mtime":"2021-07-05T11:41:51.178Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-08-18T01:23:01.131Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-back-to-top-button/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-chapter-fold/chapter-fold.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-expandable-chapters/expandable-chapters.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-code/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-pro/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-pro/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-page-toc-button/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

@@ -1,0 +1,243 @@
+- job_name: 'istio/envoy-stats'
+  scrape_interval: 15s
+  metrics_path: /stats/prometheus
+  kubernetes_sd_configs:
+    - role: pod
+  relabel_configs:
+    - source_labels: [__meta_kubernetes_pod_container_port_name]
+      action: keep
+      regex: '.*-envoy-prom'
+    - source_labels: [__address__, __meta_kubernetes_pod_annotation_prometheus_io_port]
+      action: replace
+      regex: ([^:]+)(?::\d+)?;(\d+)
+      replacement: $1:15090
+      target_label: __address__
+    - action: labelmap
+      regex: __meta_kubernetes_pod_label_(.+)
+    - source_labels: [__meta_kubernetes_namespace]
+      action: replace
+      target_label: namespace
+    - source_labels: [__meta_kubernetes_pod_name]
+      action: replace
+      target_label: pod_name
+- job_name: 'istio/istio-mesh'
+  scrape_interval: 15s
+  kubernetes_sd_configs:
+    - role: endpoints
+      namespaces:
+        names:
+          - istio-system
+  relabel_configs:
+    - source_labels: [__meta_kubernetes_service_name, __meta_kubernetes_endpoint_port_name]
+      action: keep
+      regex: istio-telemetry;prometheus
+  metric_relabel_configs:
+    - source_labels: [source_workload_namespace]
+      action: replace
+      target_label: namespace
+- job_name: 'istio/istio-policy'
+  scrape_interval: 15s
+  kubernetes_sd_configs:
+    - role: endpoints
+      namespaces:
+        names:
+          - istio-system
+  relabel_configs:
+    - source_labels: [__meta_kubernetes_service_name, __meta_kubernetes_endpoint_port_name]
+      action: keep
+      regex: istio-policy;http-monitoring
+- job_name: 'istio/istio-telemetry'
+  scrape_interval: 15s
+  kubernetes_sd_configs:
+    - role: endpoints
+      namespaces:
+        names:
+          - istio-system
+  relabel_configs:
+    - source_labels: [__meta_kubernetes_service_name, __meta_kubernetes_endpoint_port_name]
+      action: keep
+      regex: istio-telemetry;http-monitoring
+- job_name: 'istio/pilot'
+  scrape_interval: 15s
+  kubernetes_sd_configs:
+    - role: endpoints
+      namespaces:
+        names:
+          - istio-system
+  relabel_configs:
+    - source_labels: [__meta_kubernetes_service_name, __meta_kubernetes_endpoint_port_name]
+      action: keep
+      regex: istio-pilot;http-monitoring
+- job_name: 'istio/galley'
+  scrape_interval: 15s
+  kubernetes_sd_configs:
+    - role: endpoints
+      namespaces:
+        names:
+          - istio-system
+  relabel_configs:
+    - source_labels: [__meta_kubernetes_service_name, __meta_kubernetes_endpoint_port_name]
+      action: keep
+      regex: istio-galley;http-monitoring
+- job_name: 'istio/citadel'
+  scrape_interval: 15s
+  kubernetes_sd_configs:
+    - role: endpoints
+      namespaces:
+        names:
+          - istio-system
+  relabel_configs:
+    - source_labels: [__meta_kubernetes_service_name, __meta_kubernetes_endpoint_port_name]
+      action: keep
+      regex: istio-citadel;http-monitoring
+- job_name: 'prometheus-io-scrape'
+  kubernetes_sd_configs:
+  - role: pod
+    namespaces:
+      names:
+      - ingress-nginx
+      - ingress-controller
+      - kube-system
+  relabel_configs:
+  - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_scrape]
+    action: keep
+    regex: true
+  - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_scheme]
+    action: replace
+    target_label: __scheme__
+    regex: (https?)
+  - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_path]
+    action: replace
+    target_label: __metrics_path__
+    regex: (.+)
+  - source_labels: [__address__, __meta_kubernetes_pod_annotation_prometheus_io_port]
+    action: replace
+    target_label: __address__
+    regex: ([^:]+)(?::\d+)?;(\d+)
+    replacement: $1:$2
+  - source_labels: [__meta_kubernetes_pod_node_name]
+    action: replace
+    target_label: node
+    regex: (.+)
+    replacement: $1
+  - source_labels: [__meta_kubernetes_namespace]
+    action: replace
+    target_label: namespace
+    regex: (.+)
+    replacement: $1
+  - source_labels: [__meta_kubernetes_pod_name]
+    action: replace
+    target_label: pod
+    regex: (.+)
+    replacement: $1
+  - source_labels: [__meta_kubernetes_pod_ip]
+    action: replace
+    target_label: pod_ip
+    regex: (.+)
+    replacement: $1
+  - source_labels: [__meta_kubernetes_pod_host_ip]
+    action: replace
+    target_label: host_ip
+    regex: (.+)
+    replacement: $1
+  - source_labels: [__meta_kubernetes_pod_controller_kind]
+    action: replace
+    target_label: created_by_kind
+    regex: (.+)
+    replacement: $1
+  - source_labels: [__meta_kubernetes_pod_controller_name]
+    action: replace
+    target_label: created_by_kind
+    regex: (.+)
+    replacement: $1
+- job_name: 'kubernetes-http-services'
+  metrics_path: /probe
+  params:
+    module: [http_2xx]  # 使用定义的http模块
+  kubernetes_sd_configs:
+  - role: service  # service 类型的服务发现
+  relabel_configs:
+  # 只有service的annotation中配置了 prometheus.io/http_probe=true 的才进行发现
+  - source_labels: [__meta_kubernetes_service_annotation_prometheus_io_http_probe]
+    action: keep
+    regex: true
+  - source_labels: [__address__]
+    target_label: __param_target
+  - target_label: __address__
+    replacement: blackbox:9115  #blackbox-exporter访问地址
+  - source_labels: [__param_target]
+    target_label: instance
+  - action: labelmap
+    regex: __meta_kubernetes_service_label_(.+)
+  - source_labels: [__meta_kubernetes_namespace]
+    target_label: kubernetes_namespace
+  - source_labels: [__meta_kubernetes_service_name]
+    target_label: kubernetes_name
+
+- job_name: 'kubernetes-ingresses'
+  metrics_path: /probe
+  params:
+    module: [http_2xx]  # 使用定义的http模块
+  kubernetes_sd_configs:
+  - role: ingress  # ingress 类型的服务发现
+  relabel_configs:
+  # 只有ingress的annotation中配置了 prometheus.io/http_probe=true的才进行发现
+  - source_labels: [__meta_kubernetes_ingress_annotation_prometheus_io_http_probe]
+    action: keep
+    regex: true
+  - source_labels: [__meta_kubernetes_ingress_scheme,__address__,__meta_kubernetes_ingress_path]
+    regex: (.+);(.+);(.+)
+    replacement: ${1}://${2}${3}
+    target_label: __param_target
+  - target_label: __address__
+    replacement: blackbox:9115
+  - source_labels: [__param_target]
+    target_label: instance
+  - action: labelmap
+    regex: __meta_kubernetes_ingress_label_(.+)
+  - source_labels: [__meta_kubernetes_namespace]
+    target_label: kubernetes_namespace
+  - source_labels: [__meta_kubernetes_ingress_name]
+    target_label: kubernetes_name
+- job_name: 'blackbox_http_2xx'
+  scrape_interval: 45s
+  metrics_path: /probe
+  params:
+    module: [http_2xx]  # Look for a HTTP 200 response.
+  static_configs:
+      - targets:
+        - https://oppc.rencaiyoujia.com/ping
+        - https://api.rencaiyoujia.com/ping
+        - https://www.rencaiyoujia.com
+        - https://m.rencaiyoujia.com
+        - https://www.m.rencaiyoujia.com
+        - https://fa.rencaiyoujia.com
+        - https://rencaiyoujia.com
+        - https://rcpgadmin.rencaiyoujia.com
+        - https://dsfh5.rencaiyoujia.com
+        - http://pubapi.rencaiyoujia.com/ping
+        - https://assessh5.rencaiyoujia.com
+        - https://ommp.rencaiyoujia.com
+        - https://ommp.rencaiyoujia.com
+        - https://risk-rule.rencaiyoujia.com/ping
+        - https://bcpay-ad-api.rencaiyoujia.com/ping
+        - https://bcpay-api.rencaiyoujia.com/ping
+        - https://walletapi.rencaiyoujia.com/ping
+        - https://risk-frontend.rencaiyoujia.com
+        - https://withdraw.rencaiyoujia.com
+        - https://wallet.rencaiyoujia.com
+        - https://nacos.rencaiyoujia.com/nacos
+        - https://s.rencaiyoujia.com
+        - https://www.xiaocaiyoujia.com
+        - https://www.xiaocaiyoujia.com/h5/
+        - https://www.m.govjob.rencaiyoujia.com/
+        - https://www.rencaiyoujia.com/govapi/test/ping
+        - https://govjob.rencaiyoujia.com/auth
+        - https://govjobadmin.rencaiyoujia.com/
+  relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: blackbox:9115

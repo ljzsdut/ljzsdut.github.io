@@ -1,0 +1,145 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: dingtalk-config
+  namespace: monitoring
+data:
+  config.yml: |-
+    templates:
+      # 自定义模板路径
+      - /etc/dingtalk/default.tmpl  
+    targets:
+      webhook1:
+        url: https://oapi.dingtalk.com/robot/send?access_token=a759ccff30f90a10be625fcef8bc03afff499cc3b2159b98a579fe315968f0ca       
+  default.tmpl: |-
+    {{ define "__subject" }}[{{ .Status | toUpper }}{{ if eq .Status "firing" }}:{{ .Alerts.Firing | len }}{{ end }}] {{ .GroupLabels.SortedPairs.Values | join " " }} {{ if gt (len .CommonLabels) (len .GroupLabels) }}({{ with .CommonLabels.Remove .GroupLabels.Names }}{{ .Values | join " " }}{{ end }}){{ end }}{{ end }}
+    {{ define "__alertmanagerURL" }}{{ .ExternalURL }}/#/alerts?receiver={{ .Receiver }}{{ end }}
+
+    {{ define "__text_alert_list" }}{{ range . }}
+    **Labels**
+    {{ range .Labels.SortedPairs }}> - {{ .Name }}: {{ .Value | markdown | html }}
+    {{ end }}
+    **Annotations**
+    {{ range .Annotations.SortedPairs }}> - {{ .Name }}: {{ .Value | markdown | html }}
+    {{ end }}
+    **Source:** [{{ .GeneratorURL }}]({{ .GeneratorURL }})
+    {{ end }}{{ end }}
+
+    {{/* Firing */}}
+
+    {{ define "default.__text_alert_list" }}{{ range . }}
+
+    **Trigger Time:** {{ dateInZone "2006.01.02 15:04:05" (.StartsAt) "Asia/Shanghai" }}
+
+    **Summary:** {{ .Annotations.summary }}
+
+    **Description:** {{ .Annotations.description }}
+
+    **Graph:** [📈 ]({{ .GeneratorURL }})
+
+    **Details:**
+    {{ range .Labels.SortedPairs }}{{ if and (ne (.Name) "severity") (ne (.Name) "summary") }}> - {{ .Name }}: {{ .Value | markdown | html }}
+    {{ end }}{{ end }}
+    {{ end }}{{ end }}
+
+    {{/* Resolved */}}
+
+    {{ define "default.__text_resolved_list" }}{{ range . }}
+
+    **Trigger Time:** {{ dateInZone "2006.01.02 15:04:05" (.StartsAt) "Asia/Shanghai" }}
+
+    **Resolved Time:** {{ dateInZone "2006.01.02 15:04:05" (.EndsAt) "Asia/Shanghai" }}
+
+    **Summary:** {{ .Annotations.summary }}
+
+    **Graph:** [📈 ]({{ .GeneratorURL }})
+
+    **Details:**
+    {{ range .Labels.SortedPairs }}{{ if and (ne (.Name) "severity") (ne (.Name) "summary") }}> - {{ .Name }}: {{ .Value | markdown | html }}
+    {{ end }}{{ end }}
+    {{ end }}{{ end }}
+
+    {{/* Default */}}
+    {{ define "default.title" }}{{ template "__subject" . }}{{ end }}
+    {{ define "default.content" }}#### \[{{ .Status | toUpper }}{{ if eq .Status "firing" }}:{{ .Alerts.Firing | len }}{{ end }}\] **[{{ index .GroupLabels "alertname" }}]({{ template "__alertmanagerURL" . }})**
+    {{ if gt (len .Alerts.Firing) 0 -}}
+
+    ![Firing-img](https://is3-ssl.mzstatic.com/image/thumb/Purple20/v4/e0/23/cf/e023cf56-0623-0cdf-afce-97ae90eabfda/mzl.uplmrpgi.png/320x0w.jpg)
+
+    **Alerts Firing**
+    {{ template "default.__text_alert_list" .Alerts.Firing }}
+    {{- end }}
+    {{ if gt (len .Alerts.Resolved) 0 -}}
+
+    ![Resolved-img](https://is3-ssl.mzstatic.com/image/thumb/Purple18/v4/41/72/99/4172990a-f666-badf-9726-6204a320c16e/mzl.dypdixoy.png/320x0w.png)
+
+    **Alerts Resolved**
+    {{ template "default.__text_resolved_list" .Alerts.Resolved }}
+    {{- end }}
+    {{- end }}
+
+    {{/* Legacy */}}
+    {{ define "legacy.title" }}{{ template "__subject" . }}{{ end }}
+    {{ define "legacy.content" }}#### \[{{ .Status | toUpper }}{{ if eq .Status "firing" }}:{{ .Alerts.Firing | len }}{{ end }}\] **[{{ index .GroupLabels "alertname" }}]({{ template "__alertmanagerURL" . }})**
+    {{ template "__text_alert_list" .Alerts.Firing }}
+    {{- end }}
+
+    {{/* Following names for compatibility */}}
+    {{ define "ding.link.title" }}{{ template "default.title" . }}{{ end }}
+    {{ define "ding.link.content" }}{{ template "default.content" . }}{{ end }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    run: webhook-dingtalk
+  name: webhook-dingtalk
+  namespace: monitoring
+spec:
+  selector:
+    matchLabels:
+      run: webhook-dingtalk
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        run: webhook-dingtalk
+    spec:
+      containers:
+      - name: webhook-dingtalk
+        image: timonwong/prometheus-webhook-dingtalk:v1.4.0
+        imagePullPolicy: IfNotPresent
+        args:
+        - --config.file=/etc/dingtalk/config.yml
+        - --web.enable-ui
+        - --web.enable-lifecycle
+        ports:
+        - containerPort: 8060
+          protocol: TCP
+        volumeMounts:
+        - mountPath: /etc/dingtalk
+          name: dingtalk-config
+      volumes:
+      - configMap:
+          defaultMode: 420
+          name: dingtalk-config
+        name: dingtalk-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    run: webhook-dingtalk
+  name: webhook-dingtalk
+  namespace: monitoring
+spec:
+  ports:
+  - port: 8060
+    protocol: TCP
+    targetPort: 8060
+  selector:
+    run: webhook-dingtalk
+  sessionAffinity: None
+---
+#之后就可以配置webhook的地址了：http://webhook-dingtalk.monitoring:8060/dingtalk/webhook1/send  #Webhook1是profile

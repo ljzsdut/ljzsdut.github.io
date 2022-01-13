@@ -1,0 +1,62 @@
+config:
+  modules:  #Blackbox-Exporter中所有的探针均是以 Module 的信息进行配置，模块名字自定义
+    http_2xx:  # http Get请求 检测模块 
+      prober: http
+      timeout: 10s
+      http:
+        valid_http_versions: ["HTTP/1.1", "HTTP/2"]
+        valid_status_codes: [200,301,302,308]
+        method: GET
+        no_follow_redirects: false
+        preferred_ip_protocol: "ip4"  #默认ipv6 ，目前国内使用ipv6很少。
+    http_post_2xx: # http post 监测模块
+      prober: http
+      timeout: 10s
+      http:
+        valid_http_versions: ["HTTP/1.1", "HTTP/2"]
+        method: POST
+        preferred_ip_protocol: "ip4"
+        # headers:
+        #   Content-Type: application/json ##header头
+        # body: '{"hmac":"","params":{"publicFundsKeyWords":"xxx"}}' ##传参
+    tcp_connect:  # TCP 检测模块
+      prober: tcp
+      timeout: 10s
+    dns:  # DNS 检测模块
+      prober: dns
+      dns:
+        transport_protocol: "tcp"  # 默认是 udp
+        preferred_ip_protocol: "ip4"  # 默认是 ip6
+        query_name: "kubernetes.default.svc.cluster.local"
+
+# 生成ServiceMonitor对象，用于blackbox去抓取metrics
+serviceMonitor:
+  ## If true, a ServiceMonitor CRD is created for a prometheus operator
+  ## https://github.com/coreos/prometheus-operator
+  ##
+  enabled: false
+
+  # Default values that will be used for all ServiceMonitors created by `targets`
+  defaults:
+    additionalMetricsRelabels: {}
+    labels: {}
+    interval: 30s
+    scrapeTimeout: 30s
+    module: http_2xx
+  ## scheme: HTTP scheme to use for scraping. Can be used with `tlsConfig` for example if using istio mTLS.
+  scheme: http
+  ## tlsConfig: TLS configuration to use when scraping the endpoint. For example if using istio mTLS.
+  ## Of type: https://github.com/coreos/prometheus-operator/blob/master/Documentation/api.md#tlsconfig
+  tlsConfig: {}
+  bearerTokenFile:
+
+  targets:
+    - name: blackbox-oppc-rencaiyoujia-com     # Human readable URL that will appear in Prometheus / AlertManager
+      url: https://oppc.rencaiyoujia.com/ping  # The URL that blackbox will scrape
+      labels:                          # Map of labels for ServiceMonitor. Overrides value set in `defaults`
+        release: kube-prometheus-stack
+      interval: 60s                    # Scraping interval. Overrides value set in `defaults`
+      scrapeTimeout: 60s               # Scrape timeout. Overrides value set in `defaults`
+      module: http_2xx                 # Module used for scraping. Overrides value set in `defaults`
+      additionalMetricsRelabels: {}    # Map of metric labels and values to add
+
