@@ -1,0 +1,746 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>1. PG 和 PGP 的区别 · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="mon_backup.html" />
+    
+    
+    <link rel="prev" href="advanced_usage.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    简介
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../Operation/common_operations.html">
+            
+                <a href="../Operation/common_operations.html">
+            
+                    
+                    第一部分：常用操作
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../Operation/operate_cluster.html">
+            
+                <a href="../Operation/operate_cluster.html">
+            
+                    
+                    1. 操作集群
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../Operation/monitor_cluster.html">
+            
+                <a href="../Operation/monitor_cluster.html">
+            
+                    
+                    2. 监控集群
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="../Operation/monitor_osd.html">
+            
+                <a href="../Operation/monitor_osd.html">
+            
+                    
+                    3. 监控 OSD
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="../Operation/monitor_pg.html">
+            
+                <a href="../Operation/monitor_pg.html">
+            
+                    
+                    4. 监控 PG
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5" data-path="../Operation/user_management.html">
+            
+                <a href="../Operation/user_management.html">
+            
+                    
+                    5. 用户管理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.6" data-path="../Operation/add_rm_mon.html">
+            
+                <a href="../Operation/add_rm_mon.html">
+            
+                    
+                    6. 增加/删除 Monitor
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.7" data-path="../Operation/add_rm_osd.html">
+            
+                <a href="../Operation/add_rm_osd.html">
+            
+                    
+                    7. 增加/删除 OSD
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.8" data-path="../Operation/operate_pool.html">
+            
+                <a href="../Operation/operate_pool.html">
+            
+                    
+                    8. 操作 Pool
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.9" data-path="../Operation/manage_crushmap.html">
+            
+                <a href="../Operation/manage_crushmap.html">
+            
+                    
+                    9. 管理 Crushmap
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.10" data-path="../Operation/modify_mon_ip.html">
+            
+                <a href="../Operation/modify_mon_ip.html">
+            
+                    
+                    10. 修改 MON IP
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.11" data-path="../Operation/change_cluster_conf.html">
+            
+                <a href="../Operation/change_cluster_conf.html">
+            
+                    
+                    11. 修改集群配置
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.12" data-path="../Operation/log_debug.html">
+            
+                <a href="../Operation/log_debug.html">
+            
+                    
+                    12. 日志和调试
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../Troubleshooting/troubleshooting.html">
+            
+                <a href="../Troubleshooting/troubleshooting.html">
+            
+                    
+                    第二部分：故障处理
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../Troubleshooting/troubleshooting_mon.html">
+            
+                <a href="../Troubleshooting/troubleshooting_mon.html">
+            
+                    
+                    1. 常见 MON 故障处理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../Troubleshooting/troubleshooting_osd.html">
+            
+                <a href="../Troubleshooting/troubleshooting_osd.html">
+            
+                    
+                    2. 常见 OSD 故障处理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../Troubleshooting/troubleshooting_pg.html">
+            
+                <a href="../Troubleshooting/troubleshooting_pg.html">
+            
+                    
+                    3. 常见 PG 故障处理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../Troubleshooting/troubleshooting_lost_power.html">
+            
+                <a href="../Troubleshooting/troubleshooting_lost_power.html">
+            
+                    
+                    4. 全局 Ceph 节点宕机处理 
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="../Troubleshooting/troubleshooting_single_lost_power.html">
+            
+                <a href="../Troubleshooting/troubleshooting_single_lost_power.html">
+            
+                    
+                    5. 单个 Ceph 节点宕机处理 
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="advanced_usage.html">
+            
+                <a href="advanced_usage.html">
+            
+                    
+                    第三部分：Ceph 进阶
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="1.4.1" data-path="pg_pgp.html">
+            
+                <a href="pg_pgp.html">
+            
+                    
+                    1. PG 和 PGP 的区别
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="mon_backup.html">
+            
+                <a href="mon_backup.html">
+            
+                    
+                    2. Monitor 的备份和恢复
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="change_fd.html">
+            
+                <a href="change_fd.html">
+            
+                    
+                    3. 修改 Cinder/Glance 进程的最大可用 FD
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="change_osd_journal.html">
+            
+                <a href="change_osd_journal.html">
+            
+                    
+                    4. 更换 OSD Journal
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="rescue_osd_parted.html">
+            
+                <a href="rescue_osd_parted.html">
+            
+                    
+                    5. 清空 OSD 的分区表后如何恢复
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.6" data-path="pg_active_remapped.html">
+            
+                <a href="pg_active_remapped.html">
+            
+                    
+                    6. PG 卡在 active + remapped 状态
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.7" data-path="find_rbd_data_loc.html">
+            
+                <a href="find_rbd_data_loc.html">
+            
+                    
+                    7. 查看 RBD 镜像的位置
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.8" data-path="rbd_real_size.html">
+            
+                <a href="rbd_real_size.html">
+            
+                    
+                    8. 查看 RBD 镜像的实际大小
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.9" data-path="cal_pg_per_osd.html">
+            
+                <a href="cal_pg_per_osd.html">
+            
+                    
+                    9. 统计 OSD 上 PG 的数量
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.10" data-path="list_rbd_watcher.html">
+            
+                <a href="list_rbd_watcher.html">
+            
+                    
+                    10. 查看使用 RBD 镜像的客户端
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >1. PG 和 PGP 的区别</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="1-pg-&#x548C;-pgp-&#x7684;&#x533A;&#x522B;">1. PG &#x548C; PGP &#x7684;&#x533A;&#x522B;</h1>
+<hr>
+<p>&#x672C;&#x7BC7;&#x5185;&#x5BB9;&#x6765;&#x81EA; <a href="http://www.zphj1987.com/2016/10/19/Ceph%E4%B8%ADPG%E5%92%8CPGP%E7%9A%84%E5%8C%BA%E5%88%AB/" target="_blank">zphj1987 &#x2014;&#x2014; Ceph &#x4E2D; PG &#x548C; PGP &#x7684;&#x533A;&#x522B;</a></p>
+<h3 id="&#x524D;&#x8A00;">&#x524D;&#x8A00;</h3>
+<p>&#x9996;&#x5148;&#x6765;&#x4E00;&#x6BB5;&#x5173;&#x4E8E; PG &#x548C; PGP &#x533A;&#x522B;&#x7684;&#x82F1;&#x6587;&#x89E3;&#x91CA;&#xFF1A;</p>
+<blockquote>
+<p>PG = Placement Group<br>PGP = Placement Group for Placement purpose<br>pg_num = number of placement groups mapped to an OSD<br>When pg_num is increased for any pool, every PG of this pool splits into half, but they all remain mapped to their parent OSD.<br>Until this time, Ceph does not start rebalancing. Now, when you increase the pgp_num value for the same pool, PGs start to migrate from the parent to some other OSD, and cluster rebalancing starts. This is how PGP plays an important role.<br>By Karan Singh</p>
+</blockquote>
+<p>&#x4EE5;&#x4E0A;&#x662F;&#x6765;&#x81EA;&#x90AE;&#x4EF6;&#x5217;&#x8868;&#x7684; <code>Karan Singh</code> &#x5BF9; PG &#x548C; PGP &#x7684;&#x76F8;&#x5173;&#x89E3;&#x91CA;&#xFF0C;&#x4ED6;&#x4E5F;&#x662F; <code>Learning Ceph</code> &#x548C; <code>Ceph Cookbook</code> &#x7684;&#x4F5C;&#x8005;&#xFF0C;&#x4EE5;&#x4E0A;&#x7684;&#x89E3;&#x91CA;&#x6CA1;&#x6709;&#x95EE;&#x9898;&#xFF0C;&#x6211;&#x4EEC;&#x6765;&#x770B;&#x4E0B;&#x5177;&#x4F53;&#x5728;&#x96C6;&#x7FA4;&#x91CC;&#x9762;&#x5982;&#x4F55;&#x4F5C;&#x7528;&#x3002;</p>
+<h3 id="&#x5B9E;&#x8DF5;">&#x5B9E;&#x8DF5;</h3>
+<p>&#x73AF;&#x5883;&#x51C6;&#x5907;&#xFF0C;&#x56E0;&#x4E3A;&#x662F;&#x6D4B;&#x8BD5;&#x73AF;&#x5883;&#xFF0C;&#x6211;&#x53EA;&#x51C6;&#x5907;&#x4E86;&#x4E24;&#x53F0;&#x673A;&#x5668;&#xFF0C;&#x6BCF;&#x53F0;&#x673A;&#x5668; 4 &#x4E2A; OSD&#xFF0C;&#x6240;&#x4EE5;&#x505A;&#x4E86;&#x4E00;&#x4E9B;&#x53C2;&#x6570;&#x7684;&#x8BBE;&#x7F6E;&#xFF0C;&#x8BA9;&#x6570;&#x636E;&#x5C3D;&#x91CF;&#x6563;&#x5217;&#xFF1A;</p>
+<pre><code>osd_crush_chooseleaf_type = 0
+</code></pre><p>&#x4EE5;&#x4E0A;&#x4E3A;&#x4FEE;&#x6539;&#x7684;&#x53C2;&#x6570;&#xFF0C;&#x8FD9;&#x4E2A;&#x662F;&#x8BA9;&#x6211;&#x7684;&#x73AF;&#x5883;&#x6545;&#x969C;&#x57DF;&#x4E3A; OSD &#x5206;&#x7EC4;&#x7684;&#x3002;</p>
+<h5 id="&#x521B;&#x5EFA;&#x6D4B;&#x8BD5;&#x9700;&#x8981;&#x7684;&#x5B58;&#x50A8;&#x6C60;">&#x521B;&#x5EFA;&#x6D4B;&#x8BD5;&#x9700;&#x8981;&#x7684;&#x5B58;&#x50A8;&#x6C60;</h5>
+<p>&#x6211;&#x4EEC;&#x521D;&#x59CB;&#x60C5;&#x51B5;&#x53EA;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x540D;&#x4E3A; testpool &#x5305;&#x542B; 6 &#x4E2A; PG &#x7684;&#x5B58;&#x50A8;&#x6C60;&#xFF1A;</p>
+<pre><code>ceph osd pool create testpool 6 6
+pool &apos;testpool&apos; created
+</code></pre><p>&#x6211;&#x4EEC;&#x770B;&#x4E00;&#x4E0B;&#x9ED8;&#x8BA4;&#x521B;&#x5EFA;&#x5B8C;&#x4E86;&#x540E;&#x7684; PG &#x5206;&#x5E03;&#x60C5;&#x51B5;&#xFF1A;</p>
+<pre><code>ceph pg dump pgs|grep ^1|awk &apos;{print $1,$2,$15}&apos;
+dumped pgs in format plain
+1.1 0 [3,6,0]
+1.0 0 [7,0,6]
+1.3 0 [4,1,2]
+1.2 0 [7,4,1]
+1.5 0 [4,6,3]
+1.4 0 [3,0,4]
+</code></pre><p>&#x6211;&#x4EEC;&#x5199;&#x5165;&#x4E00;&#x4E9B;&#x5BF9;&#x8C61;&#xFF0C;&#x56E0;&#x4E3A;&#x6211;&#x4EEC;&#x5173;&#x5FC3;&#x7684;&#x4E0D;&#x4EC5;&#x662F; PG &#x7684;&#x53D8;&#x52A8;&#xFF0C;&#x540C;&#x6837;&#x5173;&#x5FC3; PG &#x5185;&#x5BF9;&#x8C61;&#x6709;&#x6CA1;&#x6709;&#x79FB;&#x52A8;&#xFF0C;&#x6240;&#x4EE5;&#x9700;&#x8981;&#x51C6;&#x5907;&#x4E00;&#x4E9B;&#x6D4B;&#x8BD5;&#x6570;&#x636E;&#xFF0C;&#x8FD9;&#x4E2A;&#x8C03;&#x7528;&#x539F;&#x751F; <code>rados</code> &#x63A5;&#x53E3;&#x5199;&#x6700;&#x65B9;&#x4FBF;&#x3002;</p>
+<pre><code>rados -p testpool bench 20 write --no-cleanup
+</code></pre><p>&#x6211;&#x4EEC;&#x518D;&#x6765;&#x67E5;&#x8BE2;&#x4E00;&#x6B21;&#xFF1A;</p>
+<pre><code>ceph pg dump pgs|grep ^1|awk &apos;{print $1,$2,$15}&apos;
+dumped pgs in format plain
+1.1 75 [3,6,0]
+1.0 83 [7,0,6]
+1.3 144 [4,1,2]
+1.2 146 [7,4,1]
+1.5 86 [4,6,3]
+1.4 80 [3,0,4]
+</code></pre><p>&#x53EF;&#x4EE5;&#x770B;&#x5230;&#x5199;&#x5165;&#x4E86;&#x4E00;&#x4E9B;&#x6570;&#x636E;&#xFF0C;&#x5176;&#x4E2D;&#x7684;&#x7B2C;&#x4E8C;&#x5217;&#x4E3A;&#x8FD9;&#x4E2A; PG &#x5F53;&#x4E2D;&#x7684;&#x5BF9;&#x8C61;&#x7684;&#x6570;&#x76EE;&#xFF0C;&#x7B2C;&#x4E09;&#x5217;&#x4E3A; PG &#x6240;&#x5728;&#x7684; OSD&#x3002;</p>
+<h5 id="&#x589E;&#x52A0;-pg-&#x6D4B;&#x8BD5;">&#x589E;&#x52A0; PG &#x6D4B;&#x8BD5;</h5>
+<p>&#x6211;&#x4EEC;&#x6765;&#x6269;&#x5927; PG &#x518D;&#x770B;&#x770B;&#xFF1A;</p>
+<pre><code>ceph osd pool set testpool pg_num 12
+set pool 1 pg_num to 12
+</code></pre><p>&#x518D;&#x6B21;&#x67E5;&#x8BE2;&#xFF1A;</p>
+<pre><code>ceph pg dump pgs|grep ^1|awk &apos;{print $1,$2,$15}&apos;
+dumped pgs in format plain
+1.1 37 [3,6,0]
+1.9 38 [3,6,0]
+1.0 41 [7,0,6]
+1.8 42 [7,0,6]
+1.3 48 [4,1,2]
+1.b 48 [4,1,2]
+1.7 48 [4,1,2]
+1.2 48 [7,4,1]
+1.6 49 [7,4,1]
+1.a 49 [7,4,1]
+1.5 86 [4,6,3]
+1.4 80 [3,0,4]
+</code></pre><p>&#x53EF;&#x4EE5;&#x770B;&#x5230;&#x4E0A;&#x9762;&#x65B0;&#x52A0;&#x4E0A;&#x7684; PG &#x7684;&#x5206;&#x5E03;&#x8FD8;&#x662F;&#x57FA;&#x4E8E;&#x8001;&#x7684;&#x5206;&#x5E03;&#x7EC4;&#x5408;&#xFF0C;&#x5E76;&#x6CA1;&#x6709;&#x51FA;&#x73B0;&#x65B0;&#x7684; OSD &#x7EC4;&#x5408;&#xFF0C;&#x56E0;&#x4E3A;&#x6211;&#x4EEC;&#x5F53;&#x524D;&#x7684;&#x8BBE;&#x7F6E;&#x662F; pgp_num &#x4E3A; 6,&#x90A3;&#x4E48;&#x4E09;&#x4E2A; OSD &#x7684;&#x7EC4;&#x5408;&#x7684;&#x4E2A;&#x6570;&#x5C31;&#x662F; 6 &#x4E2A;&#xFF0C;&#x56E0;&#x4E3A;&#x5F53;&#x524D;&#x4E3A; 12 &#x4E2A; PG&#xFF0C;&#x5206;&#x5E03;&#x53EA;&#x80FD;&#x4ECE; 6 &#x79CD;&#x7EC4;&#x5408;&#x91CC;&#x9762;&#x6311;&#x9009;&#xFF0C;&#x6240;&#x4EE5;&#x4F1A;&#x6709;&#x91CD;&#x590D;&#x7684;&#x7EC4;&#x5408;&#x3002;</p>
+<p>&#x6839;&#x636E;&#x4E0A;&#x9762;&#x7684;&#x5206;&#x5E03;&#x60C5;&#x51B5;&#xFF0C;&#x53EF;&#x4EE5;&#x786E;&#x5B9A;&#x7684;&#x662F;&#xFF0C;&#x589E;&#x52A0; PG &#x64CD;&#x4F5C;&#x4F1A;&#x5F15;&#x8D77; PG &#x5185;&#x90E8;&#x5BF9;&#x8C61;&#x5206;&#x88C2;&#xFF0C;&#x5206;&#x88C2;&#x7684;&#x4EFD;&#x6570;&#x662F;&#x6839;&#x636E;&#x65B0;&#x589E; PG &#x7EC4;&#x5408;&#x91CD;&#x590D;&#x60C5;&#x51B5;&#x6765;&#x786E;&#x5B9A;&#x7684;&#xFF0C;&#x6BD4;&#x5982;&#x4E0A;&#x9762;&#x7684;&#x60C5;&#x51B5;&#xFF1A;</p>
+<ul>
+<li><code>1.1</code> &#x7684;&#x5BF9;&#x8C61;&#x5206;&#x6210;&#x4E86;&#x4E24;&#x4EFD; <code>[3,6,0]</code></li>
+<li><code>1.3</code> &#x7684;&#x5BF9;&#x8C61;&#x5206;&#x6210;&#x4E86;&#x4E09;&#x4EFD; <code>[4,1,2]</code></li>
+<li><code>1.4</code> &#x7684;&#x5BF9;&#x8C61;&#x6CA1;&#x6709;&#x62C6;&#x5206; <code>[3,0,4]</code></li>
+</ul>
+<p><strong>&#x7ED3;&#x8BBA;&#xFF1A; &#x589E;&#x52A0; PG &#x4F1A;&#x5F15;&#x8D77; PG &#x5185;&#x7684;&#x5BF9;&#x8C61;&#x5206;&#x88C2;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x5728; OSD &#x4E0A;&#x521B;&#x5EFA;&#x4E86;&#x65B0;&#x7684; PG &#x76EE;&#x5F55;&#xFF0C;&#x7136;&#x540E;&#x8FDB;&#x884C;&#x90E8;&#x5206;&#x5BF9;&#x8C61;&#x7684; <code>move</code> &#x7684;&#x64CD;&#x4F5C;&#x3002;</strong></p>
+<h5 id="&#x589E;&#x52A0;-pgp-&#x6D4B;&#x8BD5;">&#x589E;&#x52A0; PGP &#x6D4B;&#x8BD5;</h5>
+<p>&#x6211;&#x4EEC;&#x5C06;&#x539F;&#x6765;&#x7684; PGP &#x4ECE; 6 &#x8C03;&#x6574;&#x5230; 12&#xFF1A;</p>
+<pre><code>ceph osd pool set testpool pgp_num 12
+
+ceph pg dump pgs|grep ^1|awk &apos;{print $1,$2,$15}&apos;
+dumped pgs in format plain
+1.a 49 [1,2,6]
+1.b 48 [1,6,2]
+1.1 37 [3,6,0]
+1.0 41 [7,0,6]
+1.3 48 [4,1,2]
+1.2 48 [7,4,1]
+1.5 86 [4,6,3]
+1.4 80 [3,0,4]
+1.7 48 [1,6,0]
+1.6 49 [3,6,7]
+1.9 38 [1,4,2]
+1.8 42 [1,2,3]
+</code></pre><p>&#x53EF;&#x4EE5;&#x770B;&#x5230; PG &#x91CC;&#x9762;&#x7684;&#x5BF9;&#x8C61;&#x5E76;&#x6CA1;&#x6709;&#x53D1;&#x751F;&#x53D8;&#x5316;&#xFF0C;&#x800C; PG &#x6240;&#x5728;&#x7684;&#x5BF9;&#x5E94;&#x5173;&#x7CFB;&#x53D1;&#x751F;&#x4E86;&#x53D8;&#x5316;&#x3002;</p>
+<p>&#x6211;&#x4EEC;&#x770B;&#x4E0B;&#x4E0E;&#x8C03;&#x6574; PGP &#x524D;&#x540E;&#x7684;&#x5BF9;&#x6BD4;&#xFF1A;</p>
+<pre><code>*1.1 37 [3,6,0]          1.1 37 [3,6,0]*
+ 1.9 38 [3,6,0]          1.9 38 [1,4,2]
+*1.0 41 [7,0,6]          1.0 41 [7,0,6]*
+ 1.8 42 [7,0,6]          1.8 42 [1,2,3]
+*1.3 48 [4,1,2]          1.3 48 [4,1,2]*
+ 1.b 48 [4,1,2]          1.b 48 [1,6,2]
+ 1.7 48 [4,1,2]          1.7 48 [1,6,0]
+*1.2 48 [7,4,1]          1.2 48 [7,4,1]*
+ 1.6 49 [7,4,1]          1.6 49 [3,6,7]
+ 1.a 49 [7,4,1]          1.a 49 [1,2,6]
+*1.5 86 [4,6,3]          1.5 86 [4,6,3]*
+*1.4 80 [3,0,4]          1.4 80 [3,0,4]*
+</code></pre><p>&#x53EF;&#x4EE5;&#x770B;&#x5230;&#x5176;&#x4E2D;&#x6700;&#x539F;&#x59CB;&#x7684; 6 &#x4E2A; PG &#x7684;&#x5206;&#x5E03;&#x5E76;&#x6CA1;&#x6709;&#x53D8;&#x5316;&#xFF08;&#x6807;&#x6CE8;&#x4E86; <code>*</code> &#x53F7;&#xFF09;&#xFF0C;&#x53D8;&#x5316;&#x7684;&#x662F;&#x540E;&#x589E;&#x52A0;&#x7684; PG&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x5C06;&#x91CD;&#x590D;&#x7684; PG &#x5206;&#x5E03;&#x8FDB;&#x884C;&#x91CD;&#x65B0;&#x5206;&#x5E03;&#xFF0C;&#x8FD9;&#x91CC;&#x5E76;&#x4E0D;&#x662F;&#x968F;&#x673A;&#x5B8C;&#x5168;&#x6253;&#x6563;&#xFF0C;&#x800C;&#x662F;&#x6839;&#x636E;&#x9700;&#x8981;&#x53BB;&#x8FDB;&#x884C;&#x91CD;&#x5206;&#x5E03;&#x3002;</p>
+<p><strong>&#x7ED3;&#x8BBA;&#xFF1A; &#x8C03;&#x6574; PGP &#x4E0D;&#x4F1A;&#x5F15;&#x8D77; PG &#x5185;&#x7684;&#x5BF9;&#x8C61;&#x7684;&#x5206;&#x88C2;&#xFF0C;&#x4F46;&#x662F;&#x4F1A;&#x5F15;&#x8D77; PG &#x7684;&#x5206;&#x5E03;&#x7684;&#x53D8;&#x52A8;&#x3002;</strong></p>
+<h3 id="&#x603B;&#x7ED3;">&#x603B;&#x7ED3;</h3>
+<ul>
+<li>PG &#x662F;&#x6307;&#x5B9A;&#x5B58;&#x50A8;&#x6C60;&#x5B58;&#x50A8;&#x5BF9;&#x8C61;&#x7684;&#x76EE;&#x5F55;&#x6709;&#x591A;&#x5C11;&#x4E2A;&#xFF0C;PGP &#x662F;&#x5B58;&#x50A8;&#x6C60; PG &#x7684; OSD &#x5206;&#x5E03;&#x7EC4;&#x5408;&#x4E2A;&#x6570;&#x3002;</li>
+<li>PG &#x7684;&#x589E;&#x52A0;&#x4F1A;&#x5F15;&#x8D77; PG &#x5185;&#x7684;&#x6570;&#x636E;&#x8FDB;&#x884C;&#x5206;&#x88C2;&#xFF0C;&#x5206;&#x88C2;&#x5230;&#x76F8;&#x540C;&#x7684; OSD &#x4E0A;&#x65B0;&#x751F;&#x6210;&#x7684; PG &#x5F53;&#x4E2D;&#x3002;</li>
+<li>PGP &#x7684;&#x589E;&#x52A0;&#x4F1A;&#x5F15;&#x8D77;&#x90E8;&#x5206; PG &#x7684;&#x5206;&#x5E03;&#x8FDB;&#x884C;&#x53D8;&#x5316;&#xFF0C;&#x4F46;&#x662F;&#x4E0D;&#x4F1A;&#x5F15;&#x8D77; PG &#x5185;&#x5BF9;&#x8C61;&#x7684;&#x53D8;&#x52A8;&#x3002;</li>
+</ul>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="advanced_usage.html" class="navigation navigation-prev " aria-label="Previous page: 第三部分：Ceph 进阶">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="mon_backup.html" class="navigation navigation-next " aria-label="Next page: 2. Monitor 的备份和恢复">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"1. PG 和 PGP 的区别","level":"1.4.1","depth":2,"next":{"title":"2. Monitor 的备份和恢复","level":"1.4.2","depth":2,"path":"Advance_usage/mon_backup.md","ref":"Advance_usage/mon_backup.md","articles":[]},"previous":{"title":"第三部分：Ceph 进阶","level":"1.4","depth":1,"path":"Advance_usage/advanced_usage.md","ref":"Advance_usage/advanced_usage.md","articles":[{"title":"1. PG 和 PGP 的区别","level":"1.4.1","depth":2,"path":"Advance_usage/pg_pgp.md","ref":"Advance_usage/pg_pgp.md","articles":[]},{"title":"2. Monitor 的备份和恢复","level":"1.4.2","depth":2,"path":"Advance_usage/mon_backup.md","ref":"Advance_usage/mon_backup.md","articles":[]},{"title":"3. 修改 Cinder/Glance 进程的最大可用 FD","level":"1.4.3","depth":2,"path":"Advance_usage/change_fd.md","ref":"Advance_usage/change_fd.md","articles":[]},{"title":"4. 更换 OSD Journal","level":"1.4.4","depth":2,"path":"Advance_usage/change_osd_journal.md","ref":"Advance_usage/change_osd_journal.md","articles":[]},{"title":"5. 清空 OSD 的分区表后如何恢复","level":"1.4.5","depth":2,"path":"Advance_usage/rescue_osd_parted.md","ref":"Advance_usage/rescue_osd_parted.md","articles":[]},{"title":"6. PG 卡在 active + remapped 状态","level":"1.4.6","depth":2,"path":"Advance_usage/pg_active_remapped.md","ref":"Advance_usage/pg_active_remapped.md","articles":[]},{"title":"7. 查看 RBD 镜像的位置","level":"1.4.7","depth":2,"path":"Advance_usage/find_rbd_data_loc.md","ref":"Advance_usage/find_rbd_data_loc.md","articles":[]},{"title":"8. 查看 RBD 镜像的实际大小","level":"1.4.8","depth":2,"path":"Advance_usage/rbd_real_size.md","ref":"Advance_usage/rbd_real_size.md","articles":[]},{"title":"9. 统计 OSD 上 PG 的数量","level":"1.4.9","depth":2,"path":"Advance_usage/cal_pg_per_osd.md","ref":"Advance_usage/cal_pg_per_osd.md","articles":[]},{"title":"10. 查看使用 RBD 镜像的客户端","level":"1.4.10","depth":2,"path":"Advance_usage/list_rbd_watcher.md","ref":"Advance_usage/list_rbd_watcher.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"Advance_usage/pg_pgp.md","mtime":"2021-07-14T14:14:40.297Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-10-16T02:20:59.394Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

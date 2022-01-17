@@ -1,0 +1,787 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>4. 监控 PG · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="user_management.html" />
+    
+    
+    <link rel="prev" href="monitor_osd.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    简介
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="common_operations.html">
+            
+                <a href="common_operations.html">
+            
+                    
+                    第一部分：常用操作
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="operate_cluster.html">
+            
+                <a href="operate_cluster.html">
+            
+                    
+                    1. 操作集群
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="monitor_cluster.html">
+            
+                <a href="monitor_cluster.html">
+            
+                    
+                    2. 监控集群
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="monitor_osd.html">
+            
+                <a href="monitor_osd.html">
+            
+                    
+                    3. 监控 OSD
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.2.4" data-path="monitor_pg.html">
+            
+                <a href="monitor_pg.html">
+            
+                    
+                    4. 监控 PG
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5" data-path="user_management.html">
+            
+                <a href="user_management.html">
+            
+                    
+                    5. 用户管理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.6" data-path="add_rm_mon.html">
+            
+                <a href="add_rm_mon.html">
+            
+                    
+                    6. 增加/删除 Monitor
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.7" data-path="add_rm_osd.html">
+            
+                <a href="add_rm_osd.html">
+            
+                    
+                    7. 增加/删除 OSD
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.8" data-path="operate_pool.html">
+            
+                <a href="operate_pool.html">
+            
+                    
+                    8. 操作 Pool
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.9" data-path="manage_crushmap.html">
+            
+                <a href="manage_crushmap.html">
+            
+                    
+                    9. 管理 Crushmap
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.10" data-path="modify_mon_ip.html">
+            
+                <a href="modify_mon_ip.html">
+            
+                    
+                    10. 修改 MON IP
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.11" data-path="change_cluster_conf.html">
+            
+                <a href="change_cluster_conf.html">
+            
+                    
+                    11. 修改集群配置
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.12" data-path="log_debug.html">
+            
+                <a href="log_debug.html">
+            
+                    
+                    12. 日志和调试
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../Troubleshooting/troubleshooting.html">
+            
+                <a href="../Troubleshooting/troubleshooting.html">
+            
+                    
+                    第二部分：故障处理
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../Troubleshooting/troubleshooting_mon.html">
+            
+                <a href="../Troubleshooting/troubleshooting_mon.html">
+            
+                    
+                    1. 常见 MON 故障处理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../Troubleshooting/troubleshooting_osd.html">
+            
+                <a href="../Troubleshooting/troubleshooting_osd.html">
+            
+                    
+                    2. 常见 OSD 故障处理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../Troubleshooting/troubleshooting_pg.html">
+            
+                <a href="../Troubleshooting/troubleshooting_pg.html">
+            
+                    
+                    3. 常见 PG 故障处理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../Troubleshooting/troubleshooting_lost_power.html">
+            
+                <a href="../Troubleshooting/troubleshooting_lost_power.html">
+            
+                    
+                    4. 全局 Ceph 节点宕机处理 
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="../Troubleshooting/troubleshooting_single_lost_power.html">
+            
+                <a href="../Troubleshooting/troubleshooting_single_lost_power.html">
+            
+                    
+                    5. 单个 Ceph 节点宕机处理 
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../Advance_usage/advanced_usage.html">
+            
+                <a href="../Advance_usage/advanced_usage.html">
+            
+                    
+                    第三部分：Ceph 进阶
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../Advance_usage/pg_pgp.html">
+            
+                <a href="../Advance_usage/pg_pgp.html">
+            
+                    
+                    1. PG 和 PGP 的区别
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../Advance_usage/mon_backup.html">
+            
+                <a href="../Advance_usage/mon_backup.html">
+            
+                    
+                    2. Monitor 的备份和恢复
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../Advance_usage/change_fd.html">
+            
+                <a href="../Advance_usage/change_fd.html">
+            
+                    
+                    3. 修改 Cinder/Glance 进程的最大可用 FD
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../Advance_usage/change_osd_journal.html">
+            
+                <a href="../Advance_usage/change_osd_journal.html">
+            
+                    
+                    4. 更换 OSD Journal
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="../Advance_usage/rescue_osd_parted.html">
+            
+                <a href="../Advance_usage/rescue_osd_parted.html">
+            
+                    
+                    5. 清空 OSD 的分区表后如何恢复
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.6" data-path="../Advance_usage/pg_active_remapped.html">
+            
+                <a href="../Advance_usage/pg_active_remapped.html">
+            
+                    
+                    6. PG 卡在 active + remapped 状态
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.7" data-path="../Advance_usage/find_rbd_data_loc.html">
+            
+                <a href="../Advance_usage/find_rbd_data_loc.html">
+            
+                    
+                    7. 查看 RBD 镜像的位置
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.8" data-path="../Advance_usage/rbd_real_size.html">
+            
+                <a href="../Advance_usage/rbd_real_size.html">
+            
+                    
+                    8. 查看 RBD 镜像的实际大小
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.9" data-path="../Advance_usage/cal_pg_per_osd.html">
+            
+                <a href="../Advance_usage/cal_pg_per_osd.html">
+            
+                    
+                    9. 统计 OSD 上 PG 的数量
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.10" data-path="../Advance_usage/list_rbd_watcher.html">
+            
+                <a href="../Advance_usage/list_rbd_watcher.html">
+            
+                    
+                    10. 查看使用 RBD 镜像的客户端
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >4. 监控 PG</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="4-&#x76D1;&#x63A7;-pg">4. &#x76D1;&#x63A7; PG</h1>
+<p>CRUSH &#x7B97;&#x6CD5;&#x628A; PG &#x5206;&#x914D;&#x5230; OSD &#x65F6;&#xFF0C;&#x5B83;&#x4F1A;&#x6839;&#x636E;&#x5B58;&#x50A8;&#x6C60;&#x7684;&#x526F;&#x672C;&#x6570;&#x8BBE;&#x7F6E;&#xFF0C;&#x628A; PG &#x5206;&#x914D;&#x5230;&#x4E0D;&#x540C;&#x7684; OSD &#x4E0A;&#x3002;&#x6BD4;&#x5982;&#xFF0C;&#x5982;&#x679C;&#x5B58;&#x50A8;&#x6C60;&#x8BBE;&#x7F6E;&#x4E3A; 3 &#x526F;&#x672C;&#xFF0C; CRUSH &#x53EF;&#x80FD;&#x628A;&#x5B83;&#x4EEC;&#x5206;&#x522B;&#x5206;&#x914D;&#x5230; <code>osd.1</code> &#x3001;<code>osd.2</code> &#x3001;<code>osd.3</code> &#x3002;&#x8003;&#x8651;&#x5230; CRUSH Map &#x4E2D;&#x8BBE;&#x5B9A;&#x7684;&#x6545;&#x969C;&#x57DF;&#xFF0C;&#x5B9E;&#x9645;&#x4E0A; CRUSH &#x627E;&#x51FA;&#x7684;&#x662F;&#x4F2A;&#x968F;&#x673A;&#x4F4D;&#x7F6E;&#xFF0C;&#x6240;&#x4EE5;&#x5728;&#x5927;&#x578B;&#x96C6;&#x7FA4;&#x4E2D;&#xFF0C;&#x5F88;&#x5C11;&#x80FD;&#x770B;&#x5230; PG &#x88AB;&#x5206;&#x914D;&#x5230;&#x4E86;&#x76F8;&#x90BB;&#x7684; OSD &#x3002;&#x6211;&#x4EEC;&#x628A;&#x6D89;&#x53CA;&#x67D0;&#x4E2A;&#x7279;&#x5B9A; PG &#x526F;&#x672C;&#x7684;&#x4E00;&#x7EC4; OSD &#x79F0;&#x4E3A; <strong>acting set</strong> &#x3002;&#x5728;&#x67D0;&#x4E9B;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x4F4D;&#x4E8E; acting set &#x4E2D;&#x7684;&#x4E00;&#x4E2A; OSD <code>down</code> &#x4E86;&#x6216;&#x8005;&#x4E0D;&#x80FD;&#x4E3A; PG &#x5185;&#x7684;&#x5BF9;&#x8C61;&#x63D0;&#x4F9B;&#x670D;&#x52A1;&#xFF0C;&#x8FD9;&#x4E9B;&#x60C5;&#x5F62;&#x53D1;&#x751F;&#x65F6;&#x65E0;&#x9700;&#x60CA;&#x614C;&#xFF0C;&#x5E38;&#x89C1;&#x539F;&#x56E0;&#x5982;&#x4E0B;&#xFF1A;</p>
+<ul>
+<li>&#x4F60;&#x589E;&#x52A0;&#x6216;&#x79FB;&#x9664;&#x4E86;&#x67D0;&#x4E2A; OSD &#x3002;&#x7136;&#x540E; CRUSH &#x7B97;&#x6CD5;&#x628A; PG &#x91CD;&#x65B0;&#x5206;&#x914D;&#x5230;&#x4E86;&#x5176;&#x4ED6; OSD &#xFF0C;&#x56E0;&#x6B64;&#x6539;&#x53D8;&#x4E86; Acting Set &#x7684;&#x6784;&#x6210;&#xFF0C;&#x5E76;&#x4E14;&#x5F15;&#x53D1;&#x4E86; &#x201C;backfill&#x201D; &#x8FC7;&#x7A0B;&#x6765;&#x8FDB;&#x884C;&#x6570;&#x636E;&#x8FC1;&#x79FB;&#x3002;</li>
+<li>&#x67D0;&#x4E2A; OSD <code>down</code> &#x4E86;&#x3001;&#x91CD;&#x542F;&#x4E86;&#xFF0C;&#x800C;&#x73B0;&#x5728;&#x6B63;&#x5728;&#x6062;&#x590D;&#xFF08; <code>recovering</code> &#xFF09;&#x3002;</li>
+<li>Acting Set &#x4E2D;&#x7684;&#x4E00;&#x4E2A; OSD <code>down</code> &#x4E86;&#xFF0C;&#x4E0D;&#x80FD;&#x63D0;&#x4F9B;&#x670D;&#x52A1;&#xFF0C;&#x53E6;&#x4E00;&#x4E2A; OSD &#x4E34;&#x65F6;&#x63A5;&#x66FF;&#x5176;&#x5DE5;&#x4F5C;&#x3002;</li>
+</ul>
+<p>Ceph &#x9760; <strong>Up Set</strong> &#x5904;&#x7406;&#x5BA2;&#x6237;&#x7AEF;&#x8BF7;&#x6C42;&#xFF0C;&#x5B83;&#x4EEC;&#x662F;&#x5B9E;&#x9645;&#x5904;&#x7406;&#x8BFB;&#x5199;&#x8BF7;&#x6C42;&#x7684; OSD &#x96C6;&#x5408;&#x3002;&#x5927;&#x591A;&#x6570;&#x60C5;&#x51B5;&#x4E0B; Up Set &#x548C; Acting Set &#x662F;&#x76F8;&#x540C;&#x7684;&#x3002;&#x5982;&#x679C;&#x4E0D;&#x540C;&#xFF0C;&#x8BF4;&#x660E;&#x53EF;&#x80FD; Ceph &#x6B63;&#x5728;&#x8FC1;&#x79FB;&#x6570;&#x636E;&#x3001;&#x67D0; OSD &#x5728;&#x6062;&#x590D;&#x3001;&#x6216;&#x8005;&#x6709;&#x522B;&#x7684;&#x95EE;&#x9898;&#x3002;&#x8FD9;&#x79CD;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C; Ceph &#x901A;&#x5E38;&#x8868;&#x73B0;&#x4E3A; &#x201C;HEALTH WARN&#x201D; &#x72B6;&#x6001;&#xFF0C;&#x8FD8;&#x6709; &#x201C;stuck stale&#x201D; &#x6D88;&#x606F;&#x3002;</p>
+<p>&#x7528;&#x4E0B;&#x5217;&#x547D;&#x4EE4;&#x83B7;&#x53D6; PG &#x5217;&#x8868;&#xFF1A;</p>
+<pre><code>ceph pg dump
+</code></pre><p>&#x67E5;&#x770B;&#x6307;&#x5B9A; PG &#x7684; Acting Set &#x6216; Up Set &#x4E2D;&#x5305;&#x542B;&#x7684; OSD&#xFF0C;&#x6267;&#x884C;&#xFF1A;</p>
+<pre><code>ceph pg map {pg-num}
+</code></pre><p>&#x547D;&#x4EE4;&#x7684;&#x8F93;&#x51FA;&#x4F1A;&#x544A;&#x8BC9;&#x4F60; osdmap &#x7248;&#x672C;&#xFF08; eNNN &#xFF09;&#x3001;PG &#x53F7;&#xFF08; {pg-num} &#xFF09;&#x3001;Up Set &#x5185;&#x7684; OSD &#xFF08; up[] &#xFF09;&#x3001;&#x548C; Acting Set &#x5185;&#x7684; OSD &#xFF08; acting[] &#xFF09;&#x3002;</p>
+<pre><code>osdmap e1196 pg 0.2d (0.2d) -&gt; up [13,30] acting [13,30]
+</code></pre><h3 id="41-&#x8282;&#x70B9;&#x4E92;&#x8054;">4.1 &#x8282;&#x70B9;&#x4E92;&#x8054;</h3>
+<p>&#x5199;&#x5165;&#x6570;&#x636E;&#x524D;&#xFF0C;PG &#x5FC5;&#x987B;&#x5904;&#x4E8E; <code>active</code> &#x3001;&#x800C;&#x4E14;<strong>&#x5E94;&#x8BE5;</strong>&#x662F; <code>clean</code> &#x72B6;&#x6001;&#x3002;&#x5047;&#x8BBE;&#x67D0;&#x5B58;&#x50A8;&#x6C60;&#x7684; PG &#x6709; 3 &#x526F;&#x672C;&#xFF0C;&#x4E3A;&#x8BA9; Ceph &#x786E;&#x5B9A; PG &#x7684;&#x5F53;&#x524D;&#x72B6;&#x6001;&#xFF0C;PG &#x7684;&#x4E3B; OSD &#xFF08;&#x5373; acting set &#x5185;&#x7684;&#x7B2C;&#x4E00;&#x4E2A; OSD &#xFF09;&#x4F1A;&#x4E0E;&#x7B2C;&#x4E8C;&#x548C;&#x7B2C;&#x4E09; OSD &#x5EFA;&#x7ACB;&#x8FDE;&#x63A5;&#x3001;&#x5E76;&#x5C31; PG &#x7684;&#x5F53;&#x524D;&#x72B6;&#x6001;&#x8FBE;&#x6210;&#x4E00;&#x81F4;&#x610F;&#x89C1;&#x3002;</p>
+<p><img src="http://i.imgur.com/2uOjQIu.png" alt=""></p>
+<p>OSD &#x4EEC;&#x4E5F;&#x5411; Mon &#x62A5;&#x544A;&#x81EA;&#x5DF1;&#x7684;&#x72B6;&#x6001;&#x3002;&#x8981;&#x6392;&#x9664;&#x8282;&#x70B9;&#x4E92;&#x8054;&#x7684;&#x95EE;&#x9898;&#xFF0C;&#x8BF7;&#x53C2;&#x8003;&#x672C;&#x624B;&#x518C;&#x7B2C;&#x4E8C;&#x90E8;&#x5206; <a href="../Troubleshooting/troubleshooting_pg.html">3. &#x5E38;&#x89C1; PG &#x6545;&#x969C;&#x5904;&#x7406;</a> &#x4E2D;&#x7684;&#x76F8;&#x5173;&#x90E8;&#x5206;&#x8FDB;&#x884C;&#x5904;&#x7406;&#x3002;</p>
+<h3 id="42-&#x76D1;&#x63A7;-pg-&#x72B6;&#x6001;">4.2 &#x76D1;&#x63A7; PG &#x72B6;&#x6001;</h3>
+<p>&#x5982;&#x679C;&#x4F60;&#x6267;&#x884C;&#x4E86; <code>ceph health</code> &#x3001; <code>ceph -s</code> &#x3001;&#x6216; <code>ceph -w</code> &#x547D;&#x4EE4;&#xFF0C;&#x4F60;&#x4E5F;&#x8BB8;&#x6CE8;&#x610F;&#x5230;&#x4E86;&#x96C6;&#x7FA4;&#x5E76;&#x975E;&#x603B;&#x8FD4;&#x56DE; <code>HEALTH_OK</code> &#x3002;&#x68C0;&#x67E5;&#x5B8C; OSD &#x662F;&#x5426;&#x5728;&#x8FD0;&#x884C;&#x540E;&#xFF0C;&#x4F60;&#x8FD8;&#x5E94;&#x8BE5;&#x68C0;&#x67E5; PG &#x7684;&#x72B6;&#x6001;&#x3002;&#x4F60;&#x5E94;&#x8BE5;&#x660E;&#x767D;&#xFF0C;&#x5728; PG &#x5EFA;&#x7ACB;&#x8FDE;&#x63A5;&#x65F6;&#x96C6;&#x7FA4;<strong>&#x4E0D;&#x4F1A;</strong>&#x8FD4;&#x56DE; <code>HEALTH_OK</code> &#xFF1A;</p>
+<ul>
+<li>&#x521A;&#x521A;&#x521B;&#x5EFA;&#x4E86;&#x4E00;&#x4E2A;&#x5B58;&#x50A8;&#x6C60;&#xFF0C;PG &#x8FD8;&#x6CA1;&#x8FBE;&#x6210;&#x4E00;&#x81F4;&#x3002;</li>
+<li>PG &#x6B63;&#x5728;&#x6062;&#x590D;&#x3002;</li>
+<li>&#x521A;&#x521A;&#x589E;&#x52A0;&#x6216;&#x5220;&#x9664;&#x4E86;&#x4E00;&#x4E2A; OSD &#x3002;</li>
+<li>&#x521A;&#x521A;&#x4FEE;&#x6539;&#x4E86; CRUSH Map&#xFF0C;PG &#x6B63;&#x5728;&#x8FC1;&#x79FB;&#x3002;</li>
+<li>&#x67D0;&#x4E00; PG &#x7684;&#x526F;&#x672C;&#x95F4;&#x7684;&#x6570;&#x636E;&#x4E0D;&#x4E00;&#x81F4;&#x3002;</li>
+<li>Ceph &#x6B63;&#x5728;&#x6D17;&#x5237;&#x4E00;&#x4E2A; PG &#x7684;&#x526F;&#x672C;&#x3002;</li>
+<li>Ceph &#x6CA1;&#x6709;&#x8DB3;&#x591F;&#x53EF;&#x7528;&#x5BB9;&#x91CF;&#x6765;&#x5B8C;&#x6210;&#x56DE;&#x586B;&#x64CD;&#x4F5C;&#x3002;</li>
+</ul>
+<p>&#x5982;&#x679C;&#x662F;&#x524D;&#x8FF0;&#x539F;&#x56E0;&#x4E4B;&#x4E00;&#x5BFC;&#x81F4;&#x4E86; Ceph &#x8FD4;&#x56DE; <code>HEALTH_WARN</code> &#xFF0C;&#x65E0;&#x9700;&#x7D27;&#x5F20;&#x3002;&#x5F88;&#x591A;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x96C6;&#x7FA4;&#x4F1A;&#x81EA;&#x884C;&#x6062;&#x590D;&#xFF1B;&#x6709;&#x4E9B;&#x65F6;&#x5019;&#x4F60;&#x5F97;&#x91C7;&#x53D6;&#x4E9B;&#x63AA;&#x65BD;&#x3002;&#x5F52;&#x7F6E; PG &#x7684;&#x4E00;&#x4EF6;&#x91CD;&#x8981;&#x4E8B;&#x60C5;&#x662F;&#x4FDD;&#x8BC1;&#x96C6;&#x7FA4;&#x542F;&#x52A8;&#x5E76;&#x8FD0;&#x884C;&#x7740;&#xFF0C;&#x6240;&#x6709; PG &#x90FD;&#x5904;&#x4E8E; <code>active</code> &#x72B6;&#x6001;&#x3001;&#x5E76;&#x4E14;&#x6700;&#x597D;&#x662F; <code>clean</code> &#x72B6;&#x6001;&#x3002;&#x7528;&#x4E0B;&#x5217;&#x547D;&#x4EE4;&#x67E5;&#x770B;&#x6240;&#x6709; PG &#x72B6;&#x6001;&#xFF1A;</p>
+<pre><code>ceph pg stat
+</code></pre><p>&#x5176;&#x7ED3;&#x679C;&#x4F1A;&#x544A;&#x8BC9;&#x4F60; PG map &#x7684;&#x7248;&#x672C;&#x53F7;&#xFF08; vNNNNNN &#xFF09;&#x3001;PG &#x603B;&#x6570; x &#x3001;&#x6709;&#x591A;&#x5C11; PG &#x5904;&#x4E8E;&#x67D0;&#x79CD;&#x7279;&#x5B9A;&#x72B6;&#x6001;&#xFF0C;&#x5982; <code>active+clean</code> &#xFF08; y &#xFF09;&#x3002;</p>
+<pre><code>vNNNNNN: x pgs: y active+clean; z MB data, aa MB used, bb MB / cc MB avail
+</code></pre><p>&#x9664;&#x4E86; PG &#x72B6;&#x6001;&#x4E4B;&#x5916;&#xFF0C; Ceph &#x4E5F;&#x4F1A;&#x62A5;&#x544A;&#x6570;&#x636E;&#x5360;&#x636E;&#x7684;&#x7A7A;&#x95F4;&#xFF08; aa &#xFF09;&#x3001;&#x5269;&#x4F59;&#x53EF;&#x7528;&#x7A7A;&#x95F4;&#xFF08; bb &#xFF09;&#x548C; PG &#x603B;&#x5BB9;&#x91CF;&#x3002;&#x8FD9;&#x4E9B;&#x6570;&#x5B57;&#x5728;&#x67D0;&#x4E9B;&#x60C5;&#x51B5;&#x4E0B;&#x662F;&#x5F88;&#x91CD;&#x8981;&#x7684;&#xFF1A;</p>
+<ul>
+<li>&#x96C6;&#x7FA4;&#x5FEB;&#x8FBE;&#x5230; <code>near full ratio</code> &#x6216; <code>full ratio</code> &#x65F6;&#x3002;</li>
+<li>&#x7531;&#x4E8E; CRUSH &#x914D;&#x7F6E;&#x9519;&#x8BEF;&#x81F4;&#x4F7F;&#x6570;&#x636E;&#x6CA1;&#x80FD;&#x5728;&#x96C6;&#x7FA4;&#x5185;&#x6B63;&#x786E;&#x5206;&#x5E03;&#x3002;</li>
+</ul>
+<h4 id="pg-id">PG ID</h4>
+<p>PG IDs &#x7531;&#x5B58;&#x50A8;&#x6C60;&#x53F7;&#xFF08;&#x4E0D;&#x662F;&#x5B58;&#x50A8;&#x6C60;&#x540D;&#x5B57;&#xFF09;&#x3001;&#x540E;&#x9762;&#x8DDF;&#x4E00;&#x4E2A;&#x70B9;&#xFF08; . &#xFF09;&#x3001;&#x518D;&#x52A0;&#x4E00;&#x4E2A; 16 &#x8FDB;&#x5236;&#x6570;&#x5B57;&#x7684; PG ID &#x3002;&#x7528; <code>ceph osd lspools</code> &#x53EF;&#x67E5;&#x770B;&#x5B58;&#x50A8;&#x6C60;&#x53F7;&#x53CA;&#x5176;&#x540D;&#x5B57;&#xFF0C;&#x4F8B;&#x5982;&#xFF0C;&#x9ED8;&#x8BA4;&#x5B58;&#x50A8;&#x6C60; rbd &#x5BF9;&#x5E94;&#x7684;&#x5B58;&#x50A8;&#x6C60;&#x53F7;&#x662F; 0 &#x3002;&#x5B8C;&#x6574;&#x7684; PG ID &#x683C;&#x5F0F;&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre><code>{pool-num}.{pg-id}
+</code></pre><p>&#x5178;&#x578B;&#x4F8B;&#x5B50;&#xFF1A;</p>
+<pre><code>0.1f
+</code></pre><p>&#x7528;&#x4E0B;&#x5217;&#x547D;&#x4EE4;&#x83B7;&#x53D6; PG &#x5217;&#x8868;&#xFF1A;</p>
+<pre><code>ceph pg dump
+</code></pre><p>&#x4F60;&#x4E5F;&#x53EF;&#x4EE5;&#x8BA9;&#x5B83;&#x8F93;&#x51FA;&#x5230; JSON &#x683C;&#x5F0F;&#xFF0C;&#x5E76;&#x4FDD;&#x5B58;&#x5230;&#x6587;&#x4EF6;&#xFF1A;</p>
+<pre><code>ceph pg dump -o {filename} --format=json
+</code></pre><p>&#x8981;&#x67E5;&#x8BE2;&#x67D0;&#x4E2A; PG&#xFF0C;&#x7528;&#x4E0B;&#x5217;&#x547D;&#x4EE4;&#xFF1A;</p>
+<pre><code>ceph pg {poolnum}.{pg-id} query
+</code></pre><p>Ceph &#x4F1A;&#x8F93;&#x51FA;&#x6210; JSON &#x683C;&#x5F0F;&#x3002;</p>
+<pre><code>{
+    &quot;state&quot;: &quot;active+clean&quot;,
+    &quot;snap_trimq&quot;: &quot;[]&quot;,
+    &quot;epoch&quot;: 26760,
+    &quot;up&quot;: [
+        1,
+        2
+    ],
+    &quot;acting&quot;: [
+        1,
+        2
+    ],
+    &quot;actingbackfill&quot;: [
+        &quot;1&quot;,
+        &quot;2&quot;
+    ],
+    &quot;info&quot;: {
+        &quot;pgid&quot;: &quot;0.2d&quot;,
+        &quot;last_update&quot;: &quot;26708&apos;96&quot;,
+        &quot;last_complete&quot;: &quot;26708&apos;96&quot;,
+        &quot;log_tail&quot;: &quot;0&apos;0&quot;,
+        &quot;last_user_version&quot;: 96,
+        &quot;last_backfill&quot;: &quot;MAX&quot;,
+        &quot;purged_snaps&quot;: &quot;[1~1]&quot;,
+        &quot;history&quot;: {
+            &quot;epoch_created&quot;: 1,
+            &quot;last_epoch_started&quot;: 26760,
+            &quot;last_epoch_clean&quot;: 26760,
+    ......
+    &quot;recovery_state&quot;: [
+        {
+            &quot;name&quot;: &quot;Started\/Primary\/Active&quot;,
+            &quot;enter_time&quot;: &quot;2016-11-05 11:01:12.719671&quot;,
+            &quot;might_have_unfound&quot;: [],
+            &quot;recovery_progress&quot;: {
+                &quot;backfill_targets&quot;: [],
+                &quot;waiting_on_backfill&quot;: [],
+                &quot;last_backfill_started&quot;: &quot;0\/\/0\/\/-1&quot;,
+                &quot;backfill_info&quot;: {
+                    &quot;begin&quot;: &quot;0\/\/0\/\/-1&quot;,
+                    &quot;end&quot;: &quot;0\/\/0\/\/-1&quot;,
+                    &quot;objects&quot;: []
+                },
+                &quot;peer_backfill_info&quot;: [],
+                &quot;backfills_in_flight&quot;: [],
+                &quot;recovering&quot;: [],
+                &quot;pg_backend&quot;: {
+                    &quot;pull_from_peer&quot;: [],
+                    &quot;pushing&quot;: []
+                }
+            },
+            &quot;scrub&quot;: {
+                &quot;scrubber.epoch_start&quot;: &quot;26752&quot;,
+                &quot;scrubber.active&quot;: 0,
+                &quot;scrubber.waiting_on&quot;: 0,
+                &quot;scrubber.waiting_on_whom&quot;: []
+            }
+        },
+        {
+            &quot;name&quot;: &quot;Started&quot;,
+            &quot;enter_time&quot;: &quot;2016-11-05 11:01:11.737126&quot;
+        }
+    ],
+    &quot;agent_state&quot;: {}
+}
+</code></pre><h3 id="43-&#x627E;&#x51FA;&#x6545;&#x969C;-pg">4.3 &#x627E;&#x51FA;&#x6545;&#x969C; PG</h3>
+<p>&#x5982;&#x524D;&#x6240;&#x8FF0;&#xFF0C;&#x4E00;&#x4E2A; PG &#x72B6;&#x6001;&#x4E0D;&#x662F; <code>active+clean</code> &#x65F6;&#x672A;&#x5FC5;&#x6709;&#x95EE;&#x9898;&#x3002;&#x4E00;&#x822C;&#x6765;&#x8BF4;&#xFF0C;PG &#x5361;&#x4F4F;&#x65F6; Ceph &#x7684;&#x81EA;&#x4FEE;&#x590D;&#x529F;&#x80FD;&#x53EF;&#x80FD;&#x4F1A;&#x4E0D;&#x8D77;&#x4F5C;&#x7528;&#xFF0C;&#x5361;&#x4F4F;&#x7684;&#x72B6;&#x6001;&#x7EC6;&#x5206;&#x4E3A;&#xFF1A;</p>
+<ul>
+<li><strong>Unclean</strong>: PG &#x91CC;&#x6709;&#x4E9B;&#x5BF9;&#x8C61;&#x7684;&#x526F;&#x672C;&#x6570;&#x672A;&#x8FBE;&#x5230;&#x671F;&#x671B;&#x503C;&#xFF0C;&#x5B83;&#x4EEC;&#x5E94;&#x8BE5;&#x8FDB;&#x884C;&#x6062;&#x590D;&#x3002;</li>
+<li><strong>Inactive</strong>: PG &#x4E0D;&#x80FD;&#x5904;&#x7406;&#x8BFB;&#x5199;&#x8BF7;&#x6C42;&#xFF0C;&#x56E0;&#x4E3A;&#x5B83;&#x4EEC;&#x5728;&#x7B49;&#x7740;&#x4E00;&#x4E2A;&#x6301;&#x6709;&#x6700;&#x65B0;&#x6570;&#x636E;&#x7684; OSD &#x56DE;&#x5230; <code>up</code> &#x72B6;&#x6001;&#x3002;</li>
+<li><strong>Stale</strong>: PG &#x5904;&#x4E8E;&#x4E00;&#x79CD;&#x672A;&#x77E5;&#x72B6;&#x6001;&#xFF0C;&#x56E0;&#x4E3A;&#x5B58;&#x50A8;&#x5B83;&#x4EEC;&#x7684; OSD &#x6709;&#x4E00;&#x9635;&#x5B50;&#x6CA1;&#x5411; Mon &#x62A5;&#x544A;&#x4E86;&#xFF08;&#x7531;&#x53C2;&#x6570; <code>mon osd report timeout</code> &#x914D;&#x7F6E;&#xFF09;&#x3002;</li>
+</ul>
+<p>&#x4E3A;&#x627E;&#x51FA;&#x5361;&#x4F4F;&#x7684;&#x5F52;&#x7F6E;&#x7EC4;&#xFF0C;&#x6267;&#x884C;&#xFF1A;</p>
+<pre><code>ceph pg dump_stuck [unclean|inactive|stale|undersized|degraded]
+</code></pre><p>&#x5173;&#x4E8E;&#x6392;&#x9664;&#x5361;&#x4F4F;&#x7684; PG &#x89C1;&#x8BF7;&#x53C2;&#x8003;&#x672C;&#x624B;&#x518C;&#x7B2C;&#x4E8C;&#x90E8;&#x5206; <a href="../Troubleshooting/troubleshooting_pg.html">3. &#x5E38;&#x89C1; PG &#x6545;&#x969C;&#x5904;&#x7406;</a> &#x4E2D;&#x7684;&#x76F8;&#x5173;&#x90E8;&#x5206;&#x8FDB;&#x884C;&#x5904;&#x7406;&#x3002;</p>
+<h3 id="44-&#x5B9A;&#x4F4D;&#x5BF9;&#x8C61;&#x4F4D;&#x7F6E;">4.4 &#x5B9A;&#x4F4D;&#x5BF9;&#x8C61;&#x4F4D;&#x7F6E;</h3>
+<p>&#x8981;&#x628A;&#x5BF9;&#x8C61;&#x6570;&#x636E;&#x5B58;&#x5165; Ceph &#x5BF9;&#x8C61;&#x5B58;&#x50A8;&#xFF0C; Ceph &#x5BA2;&#x6237;&#x7AEF;&#x5FC5;&#x987B;&#xFF1A;</p>
+<ol>
+<li>&#x8BBE;&#x7F6E;&#x5BF9;&#x8C61;&#x540D;</li>
+<li>&#x6307;&#x5B9A;&#x5B58;&#x50A8;&#x6C60;</li>
+</ol>
+<p>Ceph &#x5BA2;&#x6237;&#x7AEF;&#x7D22;&#x53D6;&#x6700;&#x65B0;&#x96C6;&#x7FA4; map&#x3001;&#x5E76;&#x7528; CRUSH &#x7B97;&#x6CD5;&#x8BA1;&#x7B97;&#x5BF9;&#x8C61;&#x5230; PG &#x7684;&#x6620;&#x5C04;&#xFF0C;&#x7136;&#x540E;&#x8BA1;&#x7B97;&#x5982;&#x4F55;&#x52A8;&#x6001;&#x5730;&#x628A; PG &#x5206;&#x914D;&#x5230; OSD &#x3002;&#x8981;&#x5B9A;&#x4F4D;&#x5BF9;&#x8C61;&#x4F4D;&#x7F6E;&#xFF0C;&#x53EA;&#x9700;&#x8981;&#x77E5;&#x9053;&#x5BF9;&#x8C61;&#x540D;&#x548C;&#x5B58;&#x50A8;&#x6C60;&#x540D;&#x5B57;&#xFF1A;</p>
+<pre><code>ceph osd map {poolname} {object-name}
+</code></pre><h5 id="&#x7EC3;&#x4E60;&#xFF1A;&#x5B9A;&#x4F4D;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;">&#x7EC3;&#x4E60;&#xFF1A;&#x5B9A;&#x4F4D;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;</h5>
+<p>&#x6211;&#x4EEC;&#x5148;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;&#x3002;&#x7ED9; rados put &#x547D;&#x4EE4;&#x6307;&#x5B9A;&#x4E00;&#x5BF9;&#x8C61;&#x540D;&#x3001;&#x4E00;&#x4E2A;&#x5305;&#x542B;&#x6570;&#x636E;&#x7684;&#x6D4B;&#x8BD5;&#x6587;&#x4EF6;&#x8DEF;&#x5F84;&#x3001;&#x548C;&#x4E00;&#x4E2A;&#x5B58;&#x50A8;&#x6C60;&#x540D;&#x5B57;&#xFF0C;&#x4F8B;&#x5982;&#xFF1A;</p>
+<pre><code>rados put {object-name} {file-path} --pool=data
+rados put test-object-1 testfile.txt --pool=data
+</code></pre><p>&#x7528;&#x4E0B;&#x5217;&#x547D;&#x4EE4;&#x786E;&#x8BA4; Ceph &#x5BF9;&#x8C61;&#x5B58;&#x50A8;&#x5DF2;&#x7ECF;&#x5305;&#x542B;&#x6B64;&#x5BF9;&#x8C61;&#xFF1A;</p>
+<pre><code>rados -p data ls
+</code></pre><p>&#x73B0;&#x5728;&#x53EF;&#x4EE5;&#x5B9A;&#x4F4D;&#x5BF9;&#x8C61;&#x4E86;&#xFF1A;</p>
+<pre><code>ceph osd map {pool-name} {object-name}
+ceph osd map data test-object-1
+</code></pre><p>Ceph &#x5E94;&#x8BE5;&#x8F93;&#x51FA;&#x5BF9;&#x8C61;&#x7684;&#x4F4D;&#x7F6E;&#xFF0C;&#x4F8B;&#x5982;&#xFF1A;</p>
+<pre><code>osdmap e537 pool &apos;data&apos; (0) object &apos;test-object-1&apos; -&gt; pg 0.d1743484 (0.4) -&gt; up [1,0] acting [1,0]
+</code></pre><p>&#x8981;&#x5220;&#x9664;&#x6D4B;&#x8BD5;&#x5BF9;&#x8C61;&#xFF0C;&#x7528; rados rm &#x5373;&#x53EF;&#xFF0C;&#x5982;&#xFF1A;</p>
+<pre><code>rados rm test-object-1 --pool=data
+</code></pre>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="monitor_osd.html" class="navigation navigation-prev " aria-label="Previous page: 3. 监控 OSD">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="user_management.html" class="navigation navigation-next " aria-label="Next page: 5. 用户管理">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"4. 监控 PG","level":"1.2.4","depth":2,"next":{"title":"5. 用户管理","level":"1.2.5","depth":2,"path":"Operation/user_management.md","ref":"Operation/user_management.md","articles":[]},"previous":{"title":"3. 监控 OSD","level":"1.2.3","depth":2,"path":"Operation/monitor_osd.md","ref":"Operation/monitor_osd.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"Operation/monitor_pg.md","mtime":"2021-07-14T14:14:40.298Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-10-16T02:20:59.394Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
