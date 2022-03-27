@@ -8831,22 +8831,22 @@
 <p>https://blog.csdn.net/qq_16240085/article/details/100083878</p>
 <p>https://mp.weixin.qq.com/s/CREcsCGJzU7Bp9mP7-0sJg</p>
 <h4 id="userspace">userspace<a class="headerlink" href="#userspace" title="Permanent link">¶</a></h4>
-<p><img alt="image-20220102112703070" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20220102112703070-1641094023182.png" /></p>
+<p><img alt="image-20220102112703070" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20220102112703070-1641094023182.png" /></p>
 <p>由Proxy在Node上创建监听端口，配置iptables规则将流量指向代理端口，代理端口再将请求转发至Pod。</p>
 <p>流量走向如下图：Client pod--&gt;内核空间iptables--&gt;用户空间kube-proxy--&gt;pod2；</p>
 <p>缺点：由用户空间的kube-proxy进行接受并调度，流量需要在内核空间和用户空间不断转换，效率很低，基本已经废弃；v1.1及之前版本</p>
-<p><img alt="Service-userspace" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/Service-userspace.png" /></p>
+<p><img alt="Service-userspace" src="https://gitee.com/ljzsdut/pic/raw/master/default/Service-userspace.png" /></p>
 <h4 id="iptables">iptables<a class="headerlink" href="#iptables" title="Permanent link">¶</a></h4>
 <p><a href="https://www.cnblogs.com/charlieroro/p/9588019.html">理解kubernetes环境的iptables</a></p>
-<p><img alt="image-20220102113306443" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20220102113306443-1641094386553.png" /></p>
+<p><img alt="image-20220102113306443" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20220102113306443-1641094386553.png" /></p>
 <p>Client pod的请求直接由iptables规则调度至目标pod2，由内核空间的iptables规则进行调度；v1.2~v1.10</p>
 <p>缺点：如果pod数量很多，会有很多iptables规则。而iptables规则变动时，比如某个pod重启导致iptables规则中pod的IP发生变化，而用户空间的iptables工具向内核的netfilter发送规则时，是全量的，需要将全部的iptables规则都发送过去，该规则变化可能需要几分钟。</p>
 <blockquote>
 <p>岔个话题：我只能说K8s默认使用iptables来实现Service到Pod的转换欠下了大量的技术债。K8s的问题列表里面曾经记录了一个问题#44613：在100个Node的K8s集群里，kube-proxy有时会消耗70%的CPU。还有一个更恐怖的对比数据：当K8s里有5k个services（每个service平均需要插入8条rule，一共40k iptables rules）的时候，插入一条新的rule需要11分钟；而当services数量scale out 4倍到20k（160k rules）时，需要花费5个小时，而非44分钟，才能成功加入一条新的rule。可以看到时间消耗呈指数增加，而非线性。</p>
 </blockquote>
-<p><img alt="Service-iptables" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/Service-iptables.png" /></p>
+<p><img alt="Service-iptables" src="https://gitee.com/ljzsdut/pic/raw/master/default/Service-iptables.png" /></p>
 <h4 id="ipvs">ipvs<a class="headerlink" href="#ipvs" title="Permanent link">¶</a></h4>
-<p><img alt="image-20220102113404753" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20220102113404753-1641094444868.png" /></p>
+<p><img alt="image-20220102113404753" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20220102113404753-1641094444868.png" /></p>
 <p>Client pod的请求直接由ipvs规则调度至目标pod2；v1.11+，</p>
 <p>即使kube-proxy已经设置启用ipvs模式，但是其在启动时，会验证节点是否安装了ipvs的相关模块，如果未启用ipvs，自动转换为iptables。</p>
 <p>如何更换代理模式：</p>
@@ -8887,7 +8887,7 @@
 <p>nq：不排队调度</p>
 </li>
 </ul>
-<p><img alt="Service-ipvs" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/Service-ipvs.png" /></p>
+<p><img alt="Service-ipvs" src="https://gitee.com/ljzsdut/pic/raw/master/default/Service-ipvs.png" /></p>
 <p>如果某个service后端的pod资源发生改变了，比如service的标签选择器发送改变导致后端又增加了一个pod，该pod的适用信息会立即反应到apiserver上(etcd中)，而后kube-proxy会watch到该变化并将该变化立即转变为service规则(iptables/ipvs规则)。</p>
 <h2 id="service">Service类型<a class="headerlink" href="#service" title="Permanent link">¶</a></h2>
 <h3 id="clusterip">ClusterIP<a class="headerlink" href="#clusterip" title="Permanent link">¶</a></h3>
@@ -9315,7 +9315,7 @@ metadata:
 </code></pre></div>
 
 <h3 id="5corednsk8s">5、coredns为k8s生成哪些记录<a class="headerlink" href="#5corednsk8s" title="Permanent link">¶</a></h3>
-<p><img alt="image-20220211082546964" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20220211082546964-1644539156003.png" /></p>
+<p><img alt="image-20220211082546964" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20220211082546964-1644539156003.png" /></p>
                 
                   
                 

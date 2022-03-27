@@ -8576,9 +8576,9 @@
 <p>上述中的节点是指的k8s的node，而不是pod。</p>
 <p><strong>重要提醒！</strong> 每个卷只能同一时刻只能以一种访问模式挂载，即使该卷能够支持 多种访问模式。例如，一个Glusterfs卷可以被某节点以 ReadWriteOnce 模式挂载，或者被多个节点以 ReadOnlyMany 模式挂载，但不可以同时以两种模式 挂载。</p>
 </blockquote>
-<p><img alt="1535363942777" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/1535363942777.png" /></p>
+<p><img alt="1535363942777" src="https://gitee.com/ljzsdut/pic/raw/master/default/1535363942777.png" /></p>
 <p>上图所示：pod与pvc处于同一个名称空间</p>
-<p><img alt="1535363980041" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/1535363980041.png" /></p>
+<p><img alt="1535363980041" src="https://gitee.com/ljzsdut/pic/raw/master/default/1535363980041.png" /></p>
 <h2 id="_2">示例<a class="headerlink" href="#_2" title="Permanent link">¶</a></h2>
 <h3 id="pv">定义pv：<a class="headerlink" href="#pv" title="Permanent link">¶</a></h3>
 <div class="codehilite"><pre><span></span><code><span class="p p-Indicator">[</span><span class="nv">root@k8smaster volumes</span><span class="p p-Indicator">]</span><span class="c1"># cat pv-demo.yaml </span>

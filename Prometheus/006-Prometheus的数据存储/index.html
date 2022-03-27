@@ -8542,7 +8542,7 @@
 <li>block会压缩、合并历史数据块，随着压缩合并，其block数量会减少；</li>
 <li>block的大小并不固定，但最小会保存两个小时的数据；</li>
 </ul>
-<p><img alt="1" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/1-1642813458603.png" /></p>
+<p><img alt="1" src="https://gitee.com/ljzsdut/pic/raw/master/default/1-1642813458603.png" /></p>
 <p>Head（chunks_head）是当前使用的块，保存在内存中。为了数据的持久化，也会通过内存映射和wal机制保存在磁盘上，当时间窗口结束，则将head保存为block。</p>
 <h3 id="block">block<a class="headerlink" href="#block" title="Permanent link">¶</a></h3>
 <p>每个block都有单独的目录，里面包含该时间窗口内所有的chunk、index、tombstones、meta.json</p>
@@ -8583,7 +8583,7 @@
 <p>needed_disk_space=retention_time_seconds * ingested_samples_per_second * bytes_per_sample</p>
 <h2 id="prometheus_2">Prometheus远程存储<a class="headerlink" href="#prometheus_2" title="Permanent link">¶</a></h2>
 <p>Prometheus可通过基于gRPC的适配器对接到远程存储，适配器主要处理“读”和“写”两种数据操作，它们可分别通过不同的URL完成。</p>
-<p><img alt="DAnIFs-1642814899876" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/DAnIFs-1642814899876-1642814902802.png" /></p>
+<p><img alt="DAnIFs-1642814899876" src="https://gitee.com/ljzsdut/pic/raw/master/default/DAnIFs-1642814899876-1642814902802.png" /></p>
 <h3 id="_1">远程写<a class="headerlink" href="#_1" title="Permanent link">¶</a></h3>
 <div class="codehilite"><pre><span></span><code><span class="c1"># The URL of the endpoint to send samples to.</span>
 url: &lt;string&gt;

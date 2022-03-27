@@ -8471,7 +8471,7 @@
 <p>在ceph的手册里<a href="https://www.oschina.net/action/GoToLink?url=http%3A%2F%2Fdocs.ceph.com%2Fdocs%2Fmaster%2Frados%2Foperations%2Fcache-tiering%2F">http://docs.ceph.com/docs/master/rados/operations/cache-tiering/</a> 中对 cache tiering 进行了描述。</p>
 <p>分布式的集群一般都是采用廉价的pc搭建，这些pc通常使用的是传统的机械硬盘，所以在磁盘的访问速度上有一定的限制，没有理想的iops数据。当去优化一个系统的IO性能时，最先想到的就是添加cache，热数据在cache被访问到，缩短数据的访问延时。Cache 一般会有 memory 或者ssd来做，考虑到价格和安全性，一般都是采用ssd作为cache。尤其实在随机io上，如果随机io全部放在ssd上，等数据冷却，将数据合并后，再刷入机械硬盘中，提升系统的io性能。(本来是想给大家看一下ssd和机械盘的性能测试结果的，但是测试数据是公司的不能放出来，自己测试的数据找不到了。。。。)。</p>
 <p>对于ceph而言，怎么利用ssd作为普通磁盘的cache的，从手册中可知，先创建一个机械硬盘的pool，叫做storage tier，然后再创建一个使用ssd的pool ，叫做cache tier，把cache tier放在 storage tier之上。如下图：</p>
-<p><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/150757_USeE_2460844-1645064763292.png" /></p>
+<p><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/150757_USeE_2460844-1645064763292.png" /></p>
 <p>当客户端访问操作数据时，优先读写cache tier数据(当然要根据cache mode来决定)，如果数据在storage tier 则会提升到cache tier中，在cache tier中 会有请求命中算法、缓存刷写算法、缓存淘汰算法等的实现，将热数据提升到cache tier中，将冷数据下放到storage tier中。</p>
 <p>这就是一般的缓存技术实现，但是对于ceph来讲一个分布式的存储怎么来实现这个cache tier，实现起来是不是和文档一样的呢？让我们一起来探秘 cache tier.</p>
 <h2 id="cache_tier_2">二、 Cache tier 基本了解<a class="headerlink" href="#cache_tier_2" title="Permanent link">¶</a></h2>
@@ -8489,17 +8489,17 @@
 <p>手册里 已经教会大家怎么来使用这个cache tier的，不知道的自行回去修习，不然怕后面看不懂，那这里再手把手走一下？</p>
 <p>我用的是实验环境，也没有ssd盘，直接在普通盘上创建一个cachepool，我们只是看一下cache tier的处理流程，所以影响不大。</p>
 <p>1.1ceph 实验环境，可参考https://my.oschina.net/u/2460844/blog/515353。一个mon，3个osd。</p>
-<p><img alt="JkOICn-1645064833589" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/JkOICn-1645064833589-1645064839902.png" /></p>
+<p><img alt="JkOICn-1645064833589" src="https://gitee.com/ljzsdut/pic/raw/master/default/JkOICn-1645064833589-1645064839902.png" /></p>
 <p>1.2创建cache pool，这里为了方便跟踪代码，所以创建的cachepool 只有8个pg。</p>
 <p>这里原本有一个rbd pool是创建ceph默认，然后再新创建一个cache tier的 pool，新的pool名字直接叫做cachepool。现在我们有两个pool 一个是rbd，一个cachepool。</p>
 <p>1.3 添加cachepool 为rbd的tier，这里直接使用add-cache 命令，该命令是其他几个命令集合的形式，用起来快速一点，采用默认项。但是后面要接一个缓存大小的设置，这里使用200M的大小。</p>
 <p>./ceph osd tier add-cache rbd cachepool 209715200</p>
 <p>然后查看pool的详细信息</p>
-<p><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/150951_sdzj_2460844-20220217102725219-1645064845314.png" /></p>
+<p><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/150951_sdzj_2460844-20220217102725219-1645064845314.png" /></p>
 <p>Pool 0 就是名字为rbd的pool，这里有两个重要指标 read_tier 1 write_tier 1,这里的1指的是pool 1. Pool 1就是刚刚创建的cachepool，在看看pool1 的设置，tier_of 为0 是指pool1是pool0的tier，还有一个重要的要说cache_mode，默认创建的就是write_back模式的缓存，最后一个bloom 过滤器，缓存命中的算法，忘了是什么的人，可以搜一下。</p>
 <p>代码里去搜一下add-cache的实现就可以知道了，命令会发送给osdminitor，在osd minitor中处理。</p>
 <p>前面一些对pool的检查代码就不说了，这里是主要的代码，这部分代码比较简单可以一代而过就好了。总之就是将tier的关系添加到两个pool里，然后pool的信息会推送到所有的节点上。</p>
-<p><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/151025_ddCf_2460844-20220217102730055-1645064850156.png" /></p>
+<p><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/151025_ddCf_2460844-20220217102730055-1645064850156.png" /></p>
 <p>6496：获取base pool信息</p>
 <p>6497：获取cache pool 信息</p>
 <p>6498：检查是pool tier的关系。</p>
@@ -8534,7 +8534,7 @@
 
 <p>客户端的调用流程就不细说了，前面的blog也有讲过，这里我们挑重点的说。在客户端想ceph集群发送写请求的时候，一定会先拿到pool的相关信息，然后根据pool的信息再经过crush算法，得知数据副本所在的位置，然后把数据发送到对应的osd上。这里比较重要的就是计算crush算法，因为crush算法会决定你发送到那些osd上。</p>
 <p>跟踪 客户端代码：…/src/osdc/Objecter.cc 中Objecter::_calc_target，捡重要的说，</p>
-<p><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/151131_C5Aq_2460844-20220217102738888-1645064858986.png" /></p>
+<p><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/151131_C5Aq_2460844-20220217102738888-1645064858986.png" /></p>
 <p>2513：判断是否需要检查 存在cache tiering。</p>
 <p>2516：如果是读请求，并且该pool存在read_tier。这个read_tier就是上面说的在osd monitor设置过的，指向cache pool。</p>
 <p>2517：如果是读请求，则将target_oloc.pool 设置为read_tier。</p>
@@ -8544,12 +8544,12 @@
 <p>1.5 cache pool的请求处理。决定请求是否缓存命中，或者redirect处理。</p>
 <p>osd先接收到客户端发送来的请求，然后调用ReplicatedPG:: do_request() &gt;&gt;&gt;&gt;&gt; ReplicatedPG::do_op () 中处理，这都是正常的一个pool 处理请求的流程，在do_op中来看看不同于其他普通pool的处理。</p>
 <p>当然也在里面挑重要的说：</p>
-<p><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/151246_yPVj_2460844-20220217102741767-1645064861879.png" /></p>
+<p><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/151246_yPVj_2460844-20220217102741767-1645064861879.png" /></p>
 <p>1623：判断下，当在对应的object 目录下找不到对应的object，是否需要创建object的context。如果是写请求需要创建，如果是读请求则不需要创建。</p>
 <p>1625：根据接收到的msg恢复出 原始的oid（这个oid的信息仍然指向base pool，在1629中设置，但是当前处理的pg是cache pool的pg）。</p>
 <p>1638：根据oid ，然后在cachepool中创建对应的head信息。Head和oid的区别在于一个指向了cache pool一个指向了base pool。查找head的context信息，如果是写操作没有找到head context，则会为head创建一个context，如果是读操作则没有则失败，有则返回正确。当读操作的时候，且查找context失败，则missing_oid会指向head信息。</p>
 <p>目前得到的几个信息整理下，oid(原始的object id)、missing_oid(在cache pool中不存在的oid信息)，r(获取object context 失败错误码)，obc（object 的context信息）。继续下面的代码：</p>
-<p><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/151313_Mk1w_2460844-20220217102746113-1645064866201.png" /></p>
+<p><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/151313_Mk1w_2460844-20220217102746113-1645064866201.png" /></p>
 <p>1680：当读操作时候，读的object 不再当前的cache pool中，有可能被evict 或者该object还没写入到cache中，但是该object曾经在操作过。</p>
 <p>1681：判断是否有hit_set 集合，该集合是用来统计pg中被操作过的object,无论是否命中过缓存。</p>
 <p>1683：如果是读操作，且要读的object在当前的cachepool中不存在，但是在hit_set中记录了该object 刚被访问过。</p>
@@ -8561,33 +8561,33 @@
 <p>1697：这里判断缓存的flush、evict等操作，后面细说。Flush阈值、evict阈值的判断。只要不直接return，则不影响正常流程。</p>
 <p>这里有两个重要的事情重申下，一个是hit_set集合，一个是flush、evict等操作触发。</p>
 <p>继续下面代码：</p>
-<p><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/151335_WvdM_2460844-20220217102755681-1645064875771.png" /></p>
+<p><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/151335_WvdM_2460844-20220217102755681-1645064875771.png" /></p>
 <p>1706：判断msg中flags不需要 ignore cache的时候，则进行maybe_handle_cache()，如果maybe_handle_cache 处理成功了则直接return，否则继续进行后面的操作。</p>
 <p>这个后面的操作就是基本的操作，如果读的话，则直接读本osd，如果写的话，就分发到其他replicate osd上。</p>
 <p>细看maybe_handle_cache做了什么，因为他影响了正常的处理流程。</p>
 <p>ReplicatedPG::maybe_handle_cache()流程解析：</p>
-<p><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/151401_LCCl_2460844-20220217102758704-1645064878792.png" /></p>
+<p><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/151401_LCCl_2460844-20220217102758704-1645064878792.png" /></p>
 <p>1971：函数入参解析，op就是当前需要处理的请求，write_ordered 是否为写指令，obc 是object context，r是find_object_context 处理后的错误码，missing_oid之前介绍过，must_promote 是否要从base pool提升到cache pool，in_hit_set是否在近期刚访问过。</p>
 <p>1979：判断该pool 如果不是cachepool 或者pool没有设置缓存模式，则认为不是缓存pool直接return false。普通pool或者cachepool未设置缓存模式，都直接返回。</p>
-<p><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/151429_8ZGq_2460844-20220217102805080-1645064885180.png" /></p>
+<p><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/151429_8ZGq_2460844-20220217102805080-1645064885180.png" /></p>
 <p>2008：好不起眼的一个判断，让人们仿佛忘了他的存在，但他确实坑爹一样的存在，为了表达它的重要性，你加个注释好么！ 这个判断就是为了判断该object是否在cache pool中是否命中。如果在cachepool中命中，则直接return false，然后在do_op中会直接操作cache pool后面的流程。这里有个小问题，他没区分是cache模式 和op的操作因素，表示疑问，这部分后面也会有log进行证明。</p>
 <p>2012：如果op没能命中cache pool则，则获取op中object的oloc信息，该信息记录了object所在的pool，现在它还指向base pool。</p>
 <p>2015：如果设定了直接需要promote操作，则直接promote操作就可以了。这里再说一下promote_object（）,是将base pool中对应的object拷贝到cache pool中，然后再处理op。这里只需要记住 promote_object（）就是将object从base pool中拷贝到cache pool中即可。</p>
 <p>2021：判断cachepool是否可以进行代理读 proxy_read。默认是可以的，这个属性是后续版本加入的，ceph比较靠前的版本是没有的。</p>
 <p>1.5.1 writeback模式：</p>
-<p><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/151453_IOat_2460844-20220217102807783-1645064887878.png" /></p>
+<p><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/151453_IOat_2460844-20220217102807783-1645064887878.png" /></p>
 <p>2026：判断缓存模式</p>
 <p>2028：如果是writeback模式，如果在未命中的情况下，writeback模式如何处理。</p>
 <p>2029：如果现在cache已经满了，需要全部的evict。</p>
 <p>2031：如果是读操作，可以proxy_read的直接do_proxy_read(),否则do_cache_redirect()直接转向到base pool中。</p>
 <p>2046：如果是写操作，添加到waiting_for_cache_not_full等待队列，缓存evict后会重新处理该op。</p>
 <p>下面就是如果cache 在非full情况下的处理：</p>
-<p><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/151512_nm77_2460844-20220217102818081-1645064898182.png" /></p>
+<p><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/151512_nm77_2460844-20220217102818081-1645064898182.png" /></p>
 <p>2050：如果是写请求的情况</p>
 <p>2052：则需要从base pool 提升object到cache pool中。</p>
 <p>2056：剩下后面的情况就都是读操作了，这里判断是否可以proxyread,如果可以则直接do_proxy_read()。</p>
 <p>2061：如果这object是block住的，则不能进行操作。</p>
-<p><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/151535_Z6cV_2460844-20220217102811969-1645064892063.png" /></p>
+<p><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/151535_Z6cV_2460844-20220217102811969-1645064892063.png" /></p>
 <p>在writeback模式下，读操作未命中时，min_read_recency_for_promote 该值默认情况下为1，这个在ceph osd pool ls detail 时也能看到。默认走了case1。如果近期访问过，说明object比较热，可以提升到cache 中，如果可以proxy read则在上面已经do_proxy_read(),如果不可以proxy_read,则直接do_cache_redirect()。最后break ，return。</p>
 <p>1.5.2 forward模式：</p>
 <p>Forward模式就是把所有的请求都转向给base pool。</p>
@@ -8622,7 +8622,7 @@
 <p>1、使用命令add-cache 可以将一个cachepool作为base pool的tier。这时会设置pool的信息，在pool里面记录了cache pool和base pool的关系。</p>
 <p>2、客户端在获取pool信息的时候可知，目标base pool存在一个tier，叫做cache pool，那么操作base pool的请求都会发送给cache pool。</p>
 <p>3、请求达到cache pool中时，作为tier的pool会有一些特别的处理maybe_cache_handle，具体的流程如下图：</p>
-<p><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/153900_fdcs_2460844-20220217102830534-1645064910633.png" /></p>
+<p><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/153900_fdcs_2460844-20220217102830534-1645064910633.png" /></p>
 <p>a、会判断操作的object是否在cache pool中命中，如果命中，则直接在cache pool中处理，和在普通pool的请求一样处理。后续会有agent线程将缓存脏数据刷写到base pool中。</p>
 <p>b、没有命中缓存的情况下，才会去判断缓存模式。如果命中缓存，不管是什么模式都会在cache pool中处理。下面的处理都是未命中缓存的情况。</p>
 <p>c、判断是否是writeback模式，读操作，如果可以proxy_read，那就直接do_proxy_read读取数据即可，不可以proxy_read 就使用do_cache_redirect，告诉客户端去base pool中读取。写操作，如果当前是evict_full模式，说明现在缓存中已经达到了阈值，需要等待缓存淘汰一些object，在完成写操作，目前放在等待队列中等待，如果不是evict_full模式，则需要从base pool中promote对应的object到cache pool中，promote结束后继续处理本次的写操作。</p>
@@ -8631,7 +8631,7 @@
 <p>f、判断是不是readforward模式。该模式读操作全部都告诉客户端直接去base pool中读取即可，写操作按着writeback模式处理。</p>
 <p>g、判断是不是readproxy模式。该模式读操作都采用cachepool的proxy read方法，写操作按着writeback模式处理。</p>
 <p>h、这里在解释一下这几个操作如下图：</p>
-<p><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/153930_Nn1F_2460844-20220217102836968-1645064917061.png" /></p>
+<p><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/153930_Nn1F_2460844-20220217102836968-1645064917061.png" /></p>
 <p><strong>绿框</strong>：客户端请求cache pool，cache pool告诉客户端你应该去base pool中请求，客户端收到应答后，再次发送请求到base pool中请求数据，由base pool告诉客户端请求完成。</p>
 <p><strong>蓝框</strong>：客户端发送读请求到cache pool，但是未命中，则cache pool自己会发送请求到base pool中，获取数据后，由cache pool将数据发送给客户端，完成读请求。但是值得注意的是，虽然cache pool读取到了该object，但不会保存在cache pool中，下次请求仍然需要重新向basepool请求。</p>
 <p>紫框：当客户端发送请求到cache pool中，但是cache pool未命中，cache pool会选择将该ojbect从base pool中提升到cache pool中，然后在cache pool进行读写操作，操作完成后告知客户端请求完成，在cache pool会缓存该object，下次直接在cache中处理，和proxy_read存在的区别。</p>

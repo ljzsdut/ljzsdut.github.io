@@ -8529,7 +8529,7 @@
 <ul>
 <li>fio</li>
 </ul>
-<p><img alt="image-20210413105340636" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20210413105340636-1618282421035.png" /></p>
+<p><img alt="image-20210413105340636" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20210413105340636-1618282421035.png" /></p>
 <h2 id="iops">iops测试<a class="headerlink" href="#iops" title="Permanent link">¶</a></h2>
 <h3 id="14k">1、4k随机写<a class="headerlink" href="#14k" title="Permanent link">¶</a></h3>
 <div class="codehilite"><pre><span></span><code>fio -filename<span class="o">=</span>/mnt/cephfs/fio.file -direct<span class="o">=</span><span class="m">1</span> -iodepth<span class="o">=</span><span class="m">32</span> -thread -rw<span class="o">=</span>randwrite -ioengine<span class="o">=</span>libaio -bs<span class="o">=</span>4k -size<span class="o">=</span>200m -numjobs<span class="o">=</span><span class="m">2</span> -runtime<span class="o">=</span><span class="m">60</span> -group_reporting  -name<span class="o">=</span>Write_PPS_Testing

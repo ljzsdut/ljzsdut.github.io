@@ -8375,21 +8375,21 @@
 <p>白名单机制似乎更加安全一些，黑名单机制似乎更加灵活一些。</p>
 <p>那么，我们就来做一个简单的白名单吧，也就是说，只放行被规则匹配到的报文，其他报文一律拒绝，那么，我们先来配置规则。</p>
 <p>假设，我想要放行ssh远程连接相关的报文，也想要放行web服务相关的报文，那么，我们在INPUT链中添加如下规则。</p>
-<p><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/050417_1551_1-20220310154936643-1646898576728.png" /></p>
+<p><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/050417_1551_1-20220310154936643-1646898576728.png" /></p>
 <p>如上图所示，我们已经放行了特定的报文，只有上述两条规则匹配到的报文才会被放行，现在，我们只要将INPUT链的默认策略改为DROP，即可实现白名单机制。</p>
 <p>示例如下。</p>
-<p><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/050417_1551_2-1646898565049.png" /></p>
+<p><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/050417_1551_2-1646898565049.png" /></p>
 <p>上图中，我们已经将INPUT链的默认策略改为DROP，并且已经实现了所谓的白名单机制，即默认拒绝所有报文，只放行特定的报文。</p>
 <p>如果此时，我不小心执行了”iptables -F”操作，根据我们之前学到的知识去判断，我们还能够通过ssh工具远程到服务器上吗？</p>
 <p>我想你已经判断出了正确答案，没错，按照上图中的情况，如果此时执行”iptables -F”操作，filter表中的所有链中的所有规则都会被清空，而INPUT链的默认策略为DROP，所以所有报文都会被拒绝，不止ssh远程请求会被拒绝，其他报文也会被拒绝，我们来实验一下。</p>
-<p><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/050417_1551_3-20220310154943316-1646898583394.png" /></p>
+<p><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/050417_1551_3-20220310154943316-1646898583394.png" /></p>
 <p>如上图所示，在当前ssh远程工具中执行”iptables -F”命令后，由于INPUT链中已经不存在任何规则，所以，所有报文都被拒绝了，包括当前的ssh远程连接。</p>
 <p>这就是默认策略设置为DROP的缺点，在对应的链中没有设置任何规则时，这样使用默认策略为DROP是非常不明智的，因为管理员也会把自己拒之门外，即使对应的链中存在放行规则，当我们不小心使用”iptables -F”清空规则时，放行规则被删除，则所有数据包都无法进入，这个时候就相当于给管理员挖了个坑，所以，我们如果想要使用”白名单”的机制，最好将链的默认策略保持为”ACCEPT”，然后将”拒绝所有请求”这条规则放在链的尾部，将”放行规则”放在前面，这样做，既能实现”白名单”机制，又能保证在规则被清空时，管理员还有机会连接到主机，示例如下。</p>
 <p>因为刚才的ssh连接已经被拒绝，所以，此时直接在控制台中设置iptables规则</p>
-<p><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/050417_1551_4-1646898565079.png" /></p>
+<p><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/050417_1551_4-1646898565079.png" /></p>
 <p>如上图所示，先将INPUT链的默认策略设置为ACCEPT</p>
 <p>然后继续配置需要放行的报文的规则，如下图所示，当所有放行规则设置完成后，在INPUT链的尾部，设置一条拒绝所有请求的规则。</p>
-<p><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/050417_1551_5-20220310154948754-1646898588844.png" /></p>
+<p><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/050417_1551_5-20220310154948754-1646898588844.png" /></p>
 <p>上图中的设置，既将INPUT链的默认策略设置为了ACCEPT，同时又使用了白名单机制，因为如果报文符合放行条件，则会被前面的放行规则匹配到，如果报文不符合放行条件，则会被最后一条拒绝规则匹配到，此刻，即使我们误操作，执行了”iptables -F”操作，也能保证管理员能够远程到主机上进行维护，因为默认策略仍然是ACCEPT。</p>
 <p>其实，在之前知识的基础上，理解所谓的黑白名单机制是很容易的，此处只是将最佳实践总结了一下，希望这篇文章能够对你有所帮助。</p>
                 

@@ -8456,7 +8456,7 @@
 <h2 id="_1">概述<a class="headerlink" href="#_1" title="Permanent link">¶</a></h2>
 <p>Envoy对xDS API的管理由后端服务器实现，包括LDS、CDS、RDS、EDS、SDS、HDS(Health Discovery Service)、RLS(Rate Limit Service)和MS(Metric Service)等；所有这些API都提供了最终的一致性，并且彼此间不存在相互影响；部分更高级别的操作(例如执行服务的A/B部署)需要进行排序以防止流量被丢弃，因此，基于一个管理服务器提供多类API时还需要使用聚合发现服务(ADS)API；ADS API允许所有其他API通过来自单个管理服务器的单个gRPC双向流进行编组，从而允许对操作进行确定性排序;</p>
 <p>Envoy提供了基于Python和Golang的SDK，可以基于这些SDK开发各种DS服务器。也可以使用开源的DS管理服务器，例如istio（pilot）。</p>
-<p><img alt="image-20211017184144427" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20211017184144427-1634470101621.png" /></p>
+<p><img alt="image-20211017184144427" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20211017184144427-1634470101621.png" /></p>
 <h2 id="_2">动态配置<a class="headerlink" href="#_2" title="Permanent link">¶</a></h2>
 <p>Envoy支持基于文件系统或通过查询一到多个管理服务器(Management Server) 来发现各种动态资源(配置信息)，这些发现服务及其相应的API联合起来称为 xDS API;</p>
 <p>xDS API为Envoy提供了资源的动态配置机制，它也被称为Data Plane API</p>
@@ -8469,7 +8469,7 @@
 <p>总之，Envoy通过订阅，指定要监视的文件系统路径、启动gRPC流或轮询REST- JSON URL来请求资源配置信息，后两种方法涉及使用DiscoveryRequest proto载荷发送请求，这三种方法中，资源均以DiscoveryResponse proto负载的形式进行响应。</p>
 <h2 id="envoyconfigsource">Envoy资源的配置源(ConfigSource)<a class="headerlink" href="#envoyconfigsource" title="Permanent link">¶</a></h2>
 <p>配置源(ConfigSource)用于指定资源配置数据的来源，用于为Listener、Cluster、 Route、Endpoint、Secret和VirtualHost等资源提供配置信息；目前，Envoy支持的资源配置源只能是path、api_config_source或ads其中之一；api_config_source或ads的数据来自于xDS API Server，即Management Server；</p>
-<p><img alt="image-20211023170303382" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20211023170303382-1634979783662.png" /></p>
+<p><img alt="image-20211023170303382" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20211023170303382-1634979783662.png" /></p>
 <h1 id="_3">文件系统订阅<a class="headerlink" href="#_3" title="Permanent link">¶</a></h1>
 <p>文件系统订阅为Envoy提供动态配置的最简单方法，是将其放置在ConfigSource中显式指定的文件路径中。Envoy将使用inotify(Mac OS X上的kqueue)来监视文件的更改，并在更新时解析文件中的DiscoveryResponse proto。二进制protobufs，JSON，YAML和proto文本是DiscoveryResponse支持的格式，这意味着，无论采用上述何种方案，文件内容自身需要编排为DiscoveryResponse proto响应报文的格式。</p>
 <blockquote>
@@ -8481,7 +8481,7 @@
 <p>Enovy支持为每个xDS API独立指定gRPC ApiConfigSource，它指向与管理服务器对应的某上游集群，这将为每个xDS资源类型启动一个独立的双向gRPC流，可能会发送给不同的管理服务器，每个流都有自己独立维护的资源版本 ，且不存在跨资源类型的共享版本机制 ;在不使用ADS的情况下，每个资源类型可能具有不同的版本，因为Envoy API允许指向不同的EDS/RDS资源配置并对应不同的ConfigSources。</p>
 <p>API的交付方式采用最终一致性机制 ;</p>
 <p>下图是基于ACK的配置逻辑：</p>
-<p><img alt="image-20211023171127642" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20211023171127642-1634980287771.png" /></p>
+<p><img alt="image-20211023171127642" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20211023171127642-1634980287771.png" /></p>
 <h2 id="discovery_proto">Discovery Proto<a class="headerlink" href="#discovery_proto" title="Permanent link">¶</a></h2>
 <p>源码文件envoy/api/envoy/api/v2/discovery.proto共定义了5种报文格式</p>
 <ul>
@@ -8493,9 +8493,9 @@
 </ul>
 <p>DeltaDiscoveryRequest and DeltaDiscoveryResponse are used in a new gRPC endpoint for Delta xDS.</p>
 <h2 id="discovery_request_proto">Discovery Request Proto<a class="headerlink" href="#discovery_request_proto" title="Permanent link">¶</a></h2>
-<p><img alt="image-20211023175148270" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20211023175148270-1634982708401.png" /></p>
+<p><img alt="image-20211023175148270" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20211023175148270-1634982708401.png" /></p>
 <h2 id="discovery_response_proto">Discovery Response Proto<a class="headerlink" href="#discovery_response_proto" title="Permanent link">¶</a></h2>
-<p><img alt="image-20211023175208742" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20211023175208742-1634982728877.png" /></p>
+<p><img alt="image-20211023175208742" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20211023175208742-1634982728877.png" /></p>
 <h2 id="type_urls">Type URLs<a class="headerlink" href="#type_urls" title="Permanent link">¶</a></h2>
 <p>每个xDS API都与某特定的资源类型相关，xDS API和资源类型之间是1:1 的关系，其对应关系如下:</p>
 <ul>
@@ -8557,11 +8557,11 @@
 <p>若本次更新已成功应用，则version_info的值设置为相应的DiscoveryResponse报文中的版 本号，例如下图中的X;</p>
 </li>
 </ol>
-<p><img alt="image-20211023180014980" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20211023180014980-1634983215114.png" /></p>
+<p><img alt="image-20211023180014980" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20211023180014980-1634983215114.png" /></p>
 <p>续前，若Envoy拒绝配置更新版本X，则响应以error_detail及前一个的版本 号;而前一个版本号为空的初始版本号，则error_detail会包含有关错误的 更为详细的信息:</p>
-<p><img alt="image-20211023180128903" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20211023180128903-1634983289044.png" /></p>
+<p><img alt="image-20211023180128903" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20211023180128903-1634983289044.png" /></p>
 <p>续前，即便拒绝了某响应报文，后续，API更新级可能会在新的版本Y上 成功完成</p>
-<p><img alt="image-20211023180213766" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20211023180213766-1634983333905.png" /></p>
+<p><img alt="image-20211023180213766" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20211023180213766-1634983333905.png" /></p>
 <p><strong>注意事项:</strong></p>
 <ul>
 <li>
@@ -8592,7 +8592,7 @@
 <li>配合仔细规划的更新顺序，ADS可规避更新过程中流量丢失</li>
 <li>使用 ADS，在单个流上可通过类型 URL 来进行复用多个独立的 DiscoveryRequest/DiscoveryResponse 序列</li>
 </ul>
-<p><img alt="image-20211023184412903" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20211023184412903-1634985853046.png" /></p>
+<p><img alt="image-20211023184412903" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20211023184412903-1634985853046.png" /></p>
 <h1 id="rest-json">REST-JSON轮询订阅<a class="headerlink" href="#rest-json" title="Permanent link">¶</a></h1>
 <ul>
 <li>

@@ -8714,7 +8714,7 @@
                 
                   <h1>01 floatingIP与外网互访抓包分析</h1>
                 
-                <p><img alt="zcAL8a-1629254806562" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/zcAL8a-1629254806562.png" /></p>
+                <p><img alt="zcAL8a-1629254806562" src="https://gitee.com/ljzsdut/pic/raw/master/default/zcAL8a-1629254806562.png" /></p>
 <p><strong>过程简述：</strong></p>
 <p>首先要知道，fip是配置在qrouter上的iptables规则，并不存在任一个网卡上。</p>
 <p>访问外网：报文从VM(二层转发)发送到网关qrouter上，qrouter进行snat转换成fip，并通过路由表到达fip名称空间中，查询fip中的路由表，发送至floating-gw。</p>
@@ -8757,7 +8757,7 @@ network:floatingip_agent_gateway        ：fip的节点代理端口，fip名称�
 network:router_gateway                  ：路由器上的外部网关port。IP在snat名称空间的qg口
 </code></pre></div>
 
-<p><img alt="image-20220305225104169" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20220305225104169-1646491864299.png" /></p>
+<p><img alt="image-20220305225104169" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20220305225104169-1646491864299.png" /></p>
 <p>snat里的sg口和qg口通过如下sql获取：</p>
 <div class="codehilite"><pre><span></span><code><span class="k">SELECT</span>
     <span class="n">id</span>
@@ -8845,7 +8845,7 @@ tcpdump: listening on ens3, link-type EN10MB <span class="o">(</span>Ethernet<sp
 <p>实现安全组和二层转发。</p>
 <h3 id="2qrouter19216801">2、qrouter(192.168.0.1)<a class="headerlink" href="#2qrouter19216801" title="Permanent link">¶</a></h3>
 <p>查询到routerid为b6a86b9f-6cf4-4ec3-a57a-00ce3e49142d，位于compute03节点上。</p>
-<p><img alt="image-20210805104742093" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20210805104742093-1628131662250.png" /></p>
+<p><img alt="image-20210805104742093" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20210805104742093-1628131662250.png" /></p>
 <div class="codehilite"><pre><span></span><code>root@mgt01:~# ssh compute03
 root@compute03:~# ip netns <span class="nb">exec</span> qrouter-b6a86b9f-6cf4-4ec3-a57a-00ce3e49142d bash
 root@compute03:~# ip a

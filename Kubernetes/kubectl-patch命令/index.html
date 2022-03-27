@@ -8667,7 +8667,7 @@ kubectl get deployment patch-demo -o yaml
 </code></pre></div>
 
 <p>可以看到每个pod运行两个容器。</p>
-<p><img alt="在这里插入图片描述" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpXzEwMTM1Nw==,size_16,color_FFFFFF,t_70-1644896568429.png" /></p>
+<p><img alt="在这里插入图片描述" src="https://gitee.com/ljzsdut/pic/raw/master/default/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpXzEwMTM1Nw==,size_16,color_FFFFFF,t_70-1644896568429.png" /></p>
 <p><strong>注意:</strong></p>
 <p>上述操作 patch称为 a strategic merge patch。patch操作没有替换 containers 列表，相反在列表中添加新的容器。patch操作对于存在的列表， 可能在某些情况下会进行替换，也可能是merge列表操作。a strategic merge patch 列表要么被替换要么被merge取决于patch策略。源码中通过 patchStrategy 键值指定。如下示：</p>
 <div class="codehilite"><pre><span></span><code><span class="kd">type</span> <span class="nx">PodSpec</span> <span class="kd">struct</span> <span class="p">{</span>
@@ -8683,7 +8683,7 @@ kubectl get deployment patch-demo -o yaml
 <div class="codehilite"><pre><span></span><code>kubectl patch xxxx --type merge --patch “yaml或json格式字符串”
 </code></pre></div>
 
-<p><img alt="在这里插入图片描述" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpXzEwMTM1Nw==,size_16,color_FFFFFF,t_70-20220215114536362-1644896736457.png" /></p>
+<p><img alt="在这里插入图片描述" src="https://gitee.com/ljzsdut/pic/raw/master/default/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpXzEwMTM1Nw==,size_16,color_FFFFFF,t_70-20220215114536362-1644896736457.png" /></p>
 <p>默认的type参数是strategic。</p>
 <p>示例</p>
 <p><strong>yaml格式</strong>：创建文件patch-file-2.yaml</p>
@@ -8709,7 +8709,7 @@ kubectl get deployment patch-demo -o yaml
         terminationMessagePolicy: File
 </code></pre></div>
 
-<p><img alt="20190525150035991" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/20190525150035991-1644899457688.png" /></p>
+<p><img alt="20190525150035991" src="https://gitee.com/ljzsdut/pic/raw/master/default/20190525150035991-1644899457688.png" /></p>
 <p><strong>json格式</strong>： patch-file.json</p>
 <div class="codehilite"><pre><span></span><code><span class="p">{</span>
    <span class="nt">&quot;spec&quot;</span><span class="p">:</span> <span class="p">{</span>
@@ -8735,8 +8735,8 @@ kubectl patch deployment patch-demo --patch <span class="s1">&#39;{&quot;spec&qu
 </code></pre></div>
 
 <h3 id="json_patch">json patch<a class="headerlink" href="#json_patch" title="Permanent link">¶</a></h3>
-<p><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/2019052515015316-1644899542615.png" /></p>
-<p><img alt="在这里插入图片描述" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpXzEwMTM1Nw==,size_16,color_FFFFFF,t_70-20220215123231479-1644899551547.png" /></p>
+<p><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/2019052515015316-1644899542615.png" /></p>
+<p><img alt="在这里插入图片描述" src="https://gitee.com/ljzsdut/pic/raw/master/default/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpXzEwMTM1Nw==,size_16,color_FFFFFF,t_70-20220215123231479-1644899551547.png" /></p>
 <h2 id="_1">总结<a class="headerlink" href="#_1" title="Permanent link">¶</a></h2>
 <p>kubectl patch用于更改Deployment对象的实时配置，并没有更改最初用于创建Deployment对象的配置文件。用于更新API对象的其他命令包括 kubectl annotate， kubectl edit， kubectl replace， kubectl scale和kubectl apply。</p>
 <p>本文主要是介绍patch操作及put操作区别，kubernetes几种patch操作，以及后续我们在接口中如何使用patch操作实时更新对象。</p>

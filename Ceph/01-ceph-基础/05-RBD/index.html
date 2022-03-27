@@ -9617,7 +9617,7 @@ Rolling back to snapshot: <span class="m">100</span>% complete...done.
 </ul>
 <p>在RBD上使用分层克隆的方法非常简单：创建一个image，对image创建一个快照并将其置入保护模式，而后克隆此快照即可。</p>
 <p>创建克隆的image时，需要指定引用的存储池、镜像和镜像快照，以及克隆的目标 image的存储池和镜像名称，因此，克隆镜像支持跨存储池进行。</p>
-<p><img alt="image-20211007171742222" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20211007171742222-1633598262394.png" /></p>
+<p><img alt="image-20211007171742222" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20211007171742222-1633598262394.png" /></p>
 <h3 id="_12">保护上游的原始快照<a class="headerlink" href="#_12" title="Permanent link">¶</a></h3>
 <p>下游image需要引用上游快照中的数据，克隆出的镜像采用cow写时复制的技术，快照的意外删除必将导致数据服务的中止，因此在克隆操作之前，必须将上游的快照置于保护模式，设置了保护的快照是无法删除的：</p>
 <div class="codehilite"><pre><span></span><code>rbd snap protect <span class="o">[</span>--pool &lt;pool&gt;<span class="o">]</span> --image &lt;image&gt; --snap &lt;snap&gt;

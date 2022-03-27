@@ -8760,7 +8760,7 @@
                 
                 <h2 id="_1">七、认证&amp;授权&amp;准入控制<a class="headerlink" href="#_1" title="Permanent link">¶</a></h2>
 <p>无论是k8s集群管理员(使用工具)还是Pod中的应用程序（service account）访问apiserver，都需要经过身份认证、授权检查、准入控制检查等步骤。k8s高度模块化，认证和授权都是通过插件的形式实现，支持多种不同的认证、授权方式。我们可以同时启用多种不同的身份认证插件或授权插件，如果一种插件检查不通过，会继续进行其他插件的检查；如果一种插件通过检查，则不再进行后续插件的检查。即“通过短路”机制。</p>
-<p><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/Ciqc1F-RVYyAeaf5AABESlN1pJg327-1604536628309.png" /></p>
+<p><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/Ciqc1F-RVYyAeaf5AABESlN1pJg327-1604536628309.png" /></p>
 <h3 id="_2">认证：<a class="headerlink" href="#_2" title="Permanent link">¶</a></h3>
 <p>认证这个概念比较好理解，就是做身份校验，解决“你是谁？”的问题。</p>
 <p>在认证阶段最重要的就是身份（Identity），我们需要从中获取到用户的相关信息。通常，Identity 信息可以通过 User 或者 Group 来定义，但是 Kubernetes 中其实并没有相关定义，所以你无法通过 Kubernetes API 接口进行创建、查询和管理。</p>
@@ -8872,7 +8872,7 @@ namespace:  <span class="m">7</span> bytes
 </code></pre></div>
 
 <p>Data 里面的 token 是base64加密的，我们可以到https://jwt.io/中 Decode 出来：</p>
-<p><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/Ciqc1F-RVduACXUqABUdlGrHMh4648-1604537866717.png" /></p>
+<p><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/Ciqc1F-RVduACXUqABUdlGrHMh4648-1604537866717.png" /></p>
 <p>从解析出来的 Payload 中可以看到， ServiceAccount 所属的 namespace、name 等信息。</p>
 <p>除此之外，还支持<a href="https://kubernetes.io/zh/docs/reference/access-authn-authz/authentication/#bootstrap-tokens">Bootstrap Token</a>、<a href="https://kubernetes.io/zh/docs/reference/access-authn-authz/authentication/#openid-connect-tokens">OpeID Connect Token (OIDC Token)</a>、<a href="https://kubernetes.io/zh/docs/reference/access-authn-authz/authentication/#webhook-token-authentication">Webhook Token</a>等，在此不一一介绍。</p>
 <p>值得一提的是，Bootstrap Token 是 kubeadm 引入的方便创建新集群所使用的 Token 类型，通过如下类似的命令就可以将其加入新的节点中：</p>
@@ -8901,7 +8901,7 @@ namespace:  <span class="m">7</span> bytes
 </code></pre></div>
 
 <p>这条命令会使用用户名zhangsan生成一个 CSR，且它属于 "app1" 和 "app2" 两个用户组，然后我们使用 CA 证书根据这个 CSR 就可以签发出一对证书。当用这对证书去访问 APIServer 时，它拿到的用户就是zhangsan了。</p>
-<p><img alt="image-20211228152351460" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20211228152351460-1640676231632.png" /></p>
+<p><img alt="image-20211228152351460" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20211228152351460-1640676231632.png" /></p>
 <h3 id="_3">授权：<a class="headerlink" href="#_3" title="Permanent link">¶</a></h3>
 <p>授权负责做权限管控，解决“你能干什么？”的问题，给予你能访问 Kubernetes 集群中的哪些资源以及做哪些操作的权利，比如你是否能创建一个 Pod，是否能删除一个 Pod。</p>
 <p>Kubernetes 内部有多种授权模块，比如 <a href="https://kubernetes.io/zh/docs/reference/access-authn-authz/node/">Node</a>、<a href="https://kubernetes.io/zh/docs/reference/access-authn-authz/abac/">ABAC</a>、<a href="https://kubernetes.io/zh/docs/reference/access-authn-authz/rbac/">RBAC</a>、<a href="https://kubernetes.io/zh/docs/reference/access-authn-authz/webhook/">Webhook</a>。授权阶段会根据从 AuthN 拿到的用户信息，依次按配置的授权次序逐一进行权限验证。任一授权模块验证通过，即允许该请求继续访问。</p>
@@ -9087,7 +9087,7 @@ default-token-cm4hr   kubernetes.io/service-account-token   <span class="m">3</s
 
 <h2 id="kubeconfig">KUBECONFIG<a class="headerlink" href="#kubeconfig" title="Permanent link">¶</a></h2>
 <p>kubectl是怎么使用配置文件的？</p>
-<p><img alt="kubeconfig" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/kubeconfig.png" /></p>
+<p><img alt="kubeconfig" src="https://gitee.com/ljzsdut/pic/raw/master/default/kubeconfig.png" /></p>
 <p>kubectl config命令其实就是修改~/.kube/config这个配置文件(当然也可以指定修改某个配置文件)，相关的命令有：</p>
 <p>Available Commands:
   current-context   Displays the current-context
@@ -9342,7 +9342,7 @@ users:
 <h2 id="rbac_1">RBAC<a class="headerlink" href="#rbac_1" title="Permanent link">¶</a></h2>
 <p>​   RBAC是Role-Based Access Control的简称，中文为基于角色的访问控制；RBAC使用“rbac.authorization.k8s.io”API组来驱动授权决策，允许管理员通过Kubernetes API动态配置策略。从1.8开始，RBAC模式处于稳定版本，并由<code>rbac.authorization.k8s.io/v1</code> API提供支持。要启用RBAC，请使用<code>--authorization-mode = RBAC</code>启动apiserver。</p>
 <p><strong>访问控制就是指权限，基于角色的访问控制，见名知意：就是将权限授予角色，然后将角色与用户进行绑定从而完成对用户的授权，而不是直接将权限授予用户(基于用户的访问控制).</strong></p>
-<p><img alt="kubernetes-rbac" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/kubernetes-rbac.png" /></p>
+<p><img alt="kubernetes-rbac" src="https://gitee.com/ljzsdut/pic/raw/master/default/kubernetes-rbac.png" /></p>
 <p>从上图中我们可以看到：</p>
 <ul>
 <li>角色即许可：名为pod-reader的Role拥有Pod的get和list许可(permissions=object+action，对某个<strong>对象</strong>允许的<strong>操作</strong>)；</li>
@@ -9351,7 +9351,7 @@ users:
 <p>说明：Role、RoleBinding、ClusterRole、ClusterRoleBinding都是标准的k8s资源对象。</p>
 <p>user和group在tls证书中CN、O中定义。</p>
 <p>工作逻辑：</p>
-<p><img alt="1535682463211" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/1535682463211.png" /></p>
+<p><img alt="1535682463211" src="https://gitee.com/ljzsdut/pic/raw/master/default/1535682463211.png" /></p>
 <p>Rolebinding既可以绑定role也可以绑定clusterrole；clusterrolebinding只能绑定clusterrole：</p>
 <ul>
 <li>
@@ -9424,7 +9424,7 @@ subjects:
 </code></pre></div>
 
 <p>总结：</p>
-<p><img alt="1535699865608" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/1535699865608.png" /></p>
+<p><img alt="1535699865608" src="https://gitee.com/ljzsdut/pic/raw/master/default/1535699865608.png" /></p>
 <p>实战：创建一个名称为ljzsdut的用户，只能查询kube-system命名空间中的pod</p>
 <div class="codehilite"><pre><span></span><code><span class="o">[</span>root@k8smaster pki<span class="o">]</span><span class="c1"># (umask 077;openssl genrsa -out ljzsdut.key 2048)</span>
 Generating RSA private key, <span class="m">2048</span> bit long modulus

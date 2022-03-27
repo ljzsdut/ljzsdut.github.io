@@ -8530,7 +8530,7 @@
 <p>3、librados是RADOS存储集群的API,它支持C、C++、Java、Python,Ruby和PHP等编程语言</p>
 <p>RadosGW、RBD和CephFS都是RADOS存储服务的客户端,它们把RADOS的存储服务接口(librados)分别从不同的角度做了进一步抽象,因而各自适用于不同的应用场景</p>
 <h3 id="ceph_2">Ceph核心组件介绍<a class="headerlink" href="#ceph_2" title="Permanent link">¶</a></h3>
-<p><img alt="hQwb2A-1633565090109" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/hQwb2A-1633565090109-1633565098195.png" /></p>
+<p><img alt="hQwb2A-1633565090109" src="https://gitee.com/ljzsdut/pic/raw/master/default/hQwb2A-1633565090109-1633565098195.png" /></p>
 <p>1、mon:监视器,维护整个集群的元数据</p>
 <p>2、OSD:也就是负责响应客户端请求返回具体数据的进程,一个Ceph集群一般都有很多个OSD,每个osd代表一个磁盘</p>
 <p>3、mds:是CephFS服务依赖的元数据服务</p>
@@ -8624,7 +8624,7 @@
 </tr>
 </tbody>
 </table>
-<p><img alt="image-20211007113319025" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20211007113319025-1633577599194.png" /></p>
+<p><img alt="image-20211007113319025" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20211007113319025-1633577599194.png" /></p>
 <p>各主机需要预设的系统环境如下:
 1、借助于NTP服务设定各节点时间精确同步
 2、通过DNS完成各节点的主机名称解析,测试环境主机数量较少时也可以使用hosts文件进行
@@ -8866,9 +8866,9 @@ root       <span class="m">14750</span>    <span class="m">8515</span>  <span cl
 <p><a href="https://zhuanlan.zhihu.com/p/45084771">BlueStore-先进的用户态文件系统(一)</a></p>
 <p><a href="https://zhuanlan.zhihu.com/p/46362124">BlueStore-先进的用户态文件系统(二)</a></p>
 <p><a href="https://www.jianshu.com/p/e38d7f1a2a78">BlueStore 架构及原理分析</a></p>
-<p><img alt="iMnQcr-1633571721469" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/iMnQcr-1633571721469-1633571729006.png" /></p>
-<p><img alt="image-20211007095630676" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20211007095630676-1633571790857-1633571803298.png" /></p>
-<p><img alt="image-20211007095706866" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20211007095706866-1633571827048.png" /></p>
+<p><img alt="iMnQcr-1633571721469" src="https://gitee.com/ljzsdut/pic/raw/master/default/iMnQcr-1633571721469-1633571729006.png" /></p>
+<p><img alt="image-20211007095630676" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20211007095630676-1633571790857-1633571803298.png" /></p>
+<p><img alt="image-20211007095706866" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20211007095706866-1633571827048.png" /></p>
 <h4 id="_9">列出并擦净磁盘<a class="headerlink" href="#_9" title="Permanent link">¶</a></h4>
 <p>1、“ceph-deploy disk”命令可以检查并列出OSD节点上所有可用的磁盘的相关信息</p>
 <div class="codehilite"><pre><span></span><code><span class="o">[</span>cephadm@ceph-admin ceph-cluster<span class="o">]</span>$ ceph-deploy disk list stor01 stor02 stor03 stor04
@@ -9300,7 +9300,7 @@ LISTEN     <span class="m">0</span>      <span class="m">128</span>          *:7
 LISTEN     <span class="m">0</span>      <span class="m">128</span>       <span class="o">[</span>::<span class="o">]</span>:7480                  <span class="o">[</span>::<span class="o">]</span>:*                   users:<span class="o">((</span><span class="s2">&quot;radosgw&quot;</span>,pid<span class="o">=</span><span class="m">15629</span>,fd<span class="o">=</span><span class="m">53</span><span class="o">))</span>
 </code></pre></div>
 
-<p><img alt="image-20211007105256363" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20211007105256363-1633575176577.png" /></p>
+<p><img alt="image-20211007105256363" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20211007105256363-1633575176577.png" /></p>
 <p>默认情况下，RGW实例监听于TCP协议的7480端口，需要更换时，可以通过在运行RGW的节点上编辑其主配置文件ceph.conf进行修改，相关参数如下所示:</p>
 <div class="codehilite"><pre><span></span><code><span class="o">[</span>client<span class="o">]</span>
 <span class="nv">rgw_frontends</span> <span class="o">=</span> <span class="s2">&quot;civetweb port=8080&quot;</span>

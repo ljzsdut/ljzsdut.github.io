@@ -8880,7 +8880,7 @@
 <p>Python的变量名解析机制有时称为LEGB法则，这也是由作用域的命令而来的。 当在函数中使用未认证的变量名时，Python搜索4个作用域[本地作用域（L），之后是上一层结构中def或lambda的本地作用域（E），之后是全局作用域（G），最后是内置作用域（B）]并且在第一处能够找到这个变量名的地方停下来不在继续寻找。如果变量名在这次搜索中没有找到，Python会报错。变量名在使用前首先必须赋值过。 当在函数中给一个变量名赋值时（而不是在一个表达式中对其进行引用），Python总是创建或改变变量名的作用域为本地作用域，除非它已经在那个函数中声明为全局变量。 当在函数之外给一个变量名赋值时（也就是，在一个模块文件的顶层），本地作用域与全局作用域的范围（这个模块的命名空间）是相同的。</p>
 </li>
 </ol>
-<p><img alt="image-20200303103934753" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20200303103934753.png" /></p>
+<p><img alt="image-20200303103934753" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20200303103934753.png" /></p>
 <p>```python
    def scope_test():
        def do_local():
@@ -8948,7 +8948,7 @@
 </code></pre></div>
 
 <h2 id="_8">六、内置函数<a class="headerlink" href="#_8" title="Permanent link">¶</a></h2>
-<p><img alt="image-20200303104520568" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20200303104520568.png" /></p>
+<p><img alt="image-20200303104520568" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20200303104520568.png" /></p>
 <p><a href="https://www.runoob.com/python3/python3-built-in-functions.html">内置函数详解</a></p>
 <div class="codehilite"><pre><span></span><code><span class="nb">abs</span><span class="p">()</span>  <span class="c1">#绝对值</span>
 </code></pre></div>
@@ -8966,7 +8966,7 @@
 <span class="s2">&quot;&#39;123abc李聚章def&amp;&#39;&quot;</span>
 </code></pre></div>
 
-<p><img alt="image-20200303104924033" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20200303104924033.png" /></p>
+<p><img alt="image-20200303104924033" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20200303104924033.png" /></p>
 <p>将10进制<strong>数字</strong>转换为其他进制的<strong>字符串</strong>：</p>
 <div class="codehilite"><pre><span></span><code><span class="nb">bin</span><span class="p">(</span><span class="n">integer</span><span class="p">)</span>    <span class="c1">#将10进制数字转换为2进制字符串       binary的缩写</span>
 <span class="nb">oct</span><span class="p">(</span><span class="n">integer</span><span class="p">)</span>        <span class="c1">#将10进制数字转换为8进制字符串       octal的缩写，[&#39;ɒktl]</span>
@@ -8992,7 +8992,7 @@
 <span class="mi">17</span>
 </code></pre></div>
 
-<p><img alt="image-20200303105151959" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20200303105151959.png" /></p>
+<p><img alt="image-20200303105151959" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20200303105151959.png" /></p>
 <div class="codehilite"><pre><span></span><code><span class="c1">#字符串转换为字节</span>
 <span class="nb">bytes</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>       <span class="c1">#函数返回一个新的bytes对象，该对象是一个 0 &lt;= x &lt; 256 区间内的整数不可变序列。它是 bytearray 的不可变版本。如果第一个参数为字符串str时，encoding参数也必须提供，函数将字符串使用str.encode方法转换成不可变的字节数组（字节是一种二进制的字符串，Python2中不区分bytes和str类型）</span>
 <span class="nb">bytearray</span><span class="p">()</span>     <span class="c1">#方法返回一个新字节数组。这个数组里的元素是可变的，并且每个元素的值范围: 0 &lt;= x &lt; 256。</span>

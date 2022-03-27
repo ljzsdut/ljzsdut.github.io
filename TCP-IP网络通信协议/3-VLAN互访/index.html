@@ -8450,7 +8450,7 @@
                 
                 <p>如果要实现跨子网互访，就要经过三层设备——路由器。</p>
 <h2 id="1">1、路由器<a class="headerlink" href="#1" title="Permanent link">¶</a></h2>
-<p><img alt="image-20210708083427570" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20210708083427570-1625704467717.png" /></p>
+<p><img alt="image-20210708083427570" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20210708083427570-1625704467717.png" /></p>
 <p>配置：交换机的两端都设置为ACESS口，路由器接口配置IP作为网关地址，PC的网关设置为路由器上相关的地址。</p>
 <p>缺点：每添加一个VLAN，就需要添加一根线连接到路由器，耗费一个路由器接口。</p>
 <div class="codehilite"><pre><span></span><code><span class="c1"># 一、交换机配置</span>
@@ -8499,8 +8499,8 @@ R02-YW-41<span class="o">(</span>config-if<span class="o">)</span><span class="c
 </code></pre></div>
 
 <h2 id="2">2、单臂路由<a class="headerlink" href="#2" title="Permanent link">¶</a></h2>
-<p><img alt="image-20210708083754058" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20210708083754058-1625704674207.png" /></p>
-<p><img alt="image-20210708083816679" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20210708083816679-1625704696818.png" /></p>
+<p><img alt="image-20210708083754058" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20210708083754058-1625704674207.png" /></p>
+<p><img alt="image-20210708083816679" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20210708083816679-1625704696818.png" /></p>
 <p>配置：在路由器上配置Acess类型的子接口（并配置IP作为vlan的网关），与路由器连接的交换机上的口配置为Trunk口。PC的网关设置为路由器上相关的地址。</p>
 <p>优点：一个交换机上无论设置多少个VLAN，只需要一根线与交换机连接即可。</p>
 <div class="codehilite"><pre><span></span><code><span class="c1"># 一、交换机配置</span>
@@ -8545,9 +8545,9 @@ R02-YW-41<span class="o">(</span>config-if<span class="o">)</span><span class="c
 
 <h2 id="3">3、三层交换机<a class="headerlink" href="#3" title="Permanent link">¶</a></h2>
 <p>一个交换机虚拟接口（Switch Virtual Interface，SVI）代表一个由Acess口构成的VLAN（其实就是通常所说的VLAN接口），SVI接口是当在interface vlan全局配置命令后面键入具体的VLAN ID时创建的，即 <code>interface vlan VLAN_ID</code>会创建一个tag为VLAN_ID的Acess口。</p>
-<p><img alt="image-20210708084458438" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20210708084458438-1625705098569.png" /></p>
+<p><img alt="image-20210708084458438" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20210708084458438-1625705098569.png" /></p>
 <p>3层交换机实现VLAN互访，类似于单臂路由，svi等同于路由器的子接口，交换模块连接路由模块的接口可以认为自动设置为Trunk口了，在配置的时候，无需考虑该配置，只需要配置svi口即可。</p>
-<p><img alt="image-20210708085925047" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20210708085925047-1625706174829.png" /></p>
+<p><img alt="image-20210708085925047" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20210708085925047-1625706174829.png" /></p>
 <div class="codehilite"><pre><span></span><code><span class="c1"># 三层交换机配置</span>
 R02-YW-41# configure terminal                                       <span class="c1">#进入配置终端</span>
 R02-YW-41<span class="o">(</span>config<span class="o">)</span><span class="c1"># vlan 10                                                                              #创建VLAN 10</span>

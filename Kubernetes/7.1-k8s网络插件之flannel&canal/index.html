@@ -8647,7 +8647,7 @@
 <li>集群网络：service network，是专用于Service资源对象的网络，它也是一个虚拟网络，用于为Kubernetes集群之中的Service配置IP 地址，但此地址并不配置于任何主机或容器的网络接口之上，而是通过Node之上的kube-proxy配置为iptables 或ipvs规则，从而将发往此地址的所有流量调度至其后端的各Pod对象之上。Service网络在Kubernetes集群创建时予以指定，而各Service的地址则在用户创建Service时予以动态配置。</li>
 </ul>
 <p>外部访问：节点网络--&gt;集群网络--&gt;pod网络</p>
-<p><img alt="1534215949633" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/1534215949633-1576550027600.png" /></p>
+<p><img alt="1534215949633" src="https://gitee.com/ljzsdut/pic/raw/master/default/1534215949633-1576550027600.png" /></p>
 <h3 id="k8s_1">k8s四种通信类型<a class="headerlink" href="#k8s_1" title="Permanent link">¶</a></h3>
 <ul>
 <li>同一个Pod内多个容器间通信：通过lo网卡通信</li>
@@ -8659,7 +8659,7 @@
 </ul>
 <h3 id="nodepod">同一Node上Pod之间是如何通信的<a class="headerlink" href="#nodepod" title="Permanent link">¶</a></h3>
 <p><a href="https://www.bilibili.com/video/BV1aK4y1U7tL/?spm_id_from=333.788.recommend_more_video.0">参考视频</a></p>
-<p><img alt="image-20210417150214311" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20210417150214311-1618642934730.png" /></p>
+<p><img alt="image-20210417150214311" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20210417150214311-1618642934730.png" /></p>
 <p>Pod间网络通信主要依赖于2个网络设备。 </p>
 <ul>
 <li>
@@ -8791,7 +8791,7 @@ listening on eth0, link-type EN10MB <span class="o">(</span>Ethernet<span class=
 <li>覆盖网络方案：例如flannel，将pod网络的包封装成节点网络的包，到达目标节点后，再捷报还原成pod网络的包。 特点：不依赖于底层网络，但有封包解包的性能开销</li>
 <li>路由方案：例如calico。特点：依赖于底层网络设备，但性能开销小。</li>
 </ul>
-<p><img alt="image-20210401082224769" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20210401082224769-1617236545009.png" /></p>
+<p><img alt="image-20210401082224769" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20210401082224769-1617236545009.png" /></p>
 <p>Flannel:</p>
 <p>1、跨主机Pod间通信，flannel通过修改宿主机的路由，将报文发送到flannel.1虚拟网卡。</p>
 <p>2、flannel会对到达flannel.1虚拟网卡的报文进行overlay封装。</p>
@@ -8804,7 +8804,7 @@ listening on eth0, link-type EN10MB <span class="o">(</span>Ethernet<span class=
 <li>calico：网络配置+网络策略（例如实现多租户网络隔离）</li>
 <li>canal：calico+flannel的结合体</li>
 </ul>
-<p><img alt="image-20210417165759469" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20210417165759469-1618649879708.png" /></p>
+<p><img alt="image-20210417165759469" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20210417165759469-1618649879708.png" /></p>
 <p>考虑到k8s的网络实现众多，为了简化集成，k8s支持CNI标准，不同的网络实现通过CNI以插件的形式和k8s进行集成。kubelet通过cni接口去操作Pod网络，比如添加/删除pod网络接口。</p>
 <h3 id="cni_1"><strong>如何使用CNI插件？</strong><a class="headerlink" href="#cni_1" title="Permanent link">¶</a></h3>
 <p>https://blog.csdn.net/liukuan73/article/details/78883847</p>

@@ -8371,7 +8371,7 @@
 <p>从字面上理解，state可以译为状态，但是我们也可以用一个高大上的词去解释它，state模块可以让iptables实现”连接追踪”机制。</p>
 <p>那么，既然是”连接追踪”，则必然要有”连接”。</p>
 <p>咱们就来聊聊什么是连接吧，一说到连接，你可能会下意识的想到tcp连接，但是，对于state模块而言的”连接”并不能与tcp的”连接”画等号，在TCP/IP协议簇中，UDP和ICMP是没有所谓的连接的，但是对于state模块来说，tcp报文、udp报文、icmp报文都是有连接状态的，我们可以这样认为，对于state模块而言，只要两台机器在”你来我往”的通信，就算建立起了连接，如下图所示</p>
-<p><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/050317_1442_1-20220310154646379-1646898406460.png" /></p>
+<p><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/050317_1442_1-20220310154646379-1646898406460.png" /></p>
 <p>而报文在这个所谓的链接中是什么状态的呢？这是我们后面讨论的话题。</p>
 <p>对于state模块的连接而言，”连接”其中的报文可以分为5种状态，报文状态可以为NEW、ESTABLISHED、RELATED、INVALID、UNTRACKED</p>
 <p>那么上述报文的状态都代表什么含义呢？我们先来大概的了解一下概念，然后再结合示例说明。</p>
@@ -8379,7 +8379,7 @@
 <p><strong>NEW</strong>：连接中的第一个包，状态就是NEW，我们可以理解为新连接的第一个包的状态为NEW。</p>
 <p><strong>ESTABLISHED</strong>：我们可以把NEW状态包后面的包的状态理解为ESTABLISHED，表示连接已建立。</p>
 <p>或许用图说话更容易被人理解</p>
-<p><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/050317_1442_2-20220310154650621-1646898410701.png" /></p>
+<p><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/050317_1442_2-20220310154650621-1646898410701.png" /></p>
 <p><strong>RELATED</strong>：从字面上理解RELATED译为关系，但是这样仍然不容易理解，我们举个例子。</p>
 <p>比如FTP服务，FTP服务端会建立两个进程，一个命令进程，一个数据进程。</p>
 <p>命令进程负责服务端与客户端之间的命令传输（我们可以把这个传输过程理解成state中所谓的一个”连接”，暂称为”命令连接”）。</p>
@@ -8394,7 +8394,7 @@
 <p>好了，我们已经大致了解了state模块中所定义的5种状态，那么现在，我们回过头想想刚才的问题。</p>
 <p>刚才问题的根源就是：怎样判断报文是否是为了回应之前发出的报文。</p>
 <p>刚才举例中的问题即可使用state扩展模块解决，我们只要放行状态为ESTABLISHED的报文即可，因为如果报文的状态为ESTABLISHED，那么报文肯定是之前发出的报文的回应，如果你还不放心，可以将状态为RELATED或ESTABLISHED的报文都放行，这样，就表示只有回应我们的报文能够通过防火墙，如果是别人主动发送过来的新的报文，则无法通过防火墙，示例如下。</p>
-<p><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/050317_1442_3-20220310154632453-1646898392563.png" /></p>
+<p><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/050317_1442_3-20220310154632453-1646898392563.png" /></p>
 <p>当前主机IP为104，当放行ESTABLISHED与RELATED状态的包以后，并没有影响通过本机远程ssh到IP为77的主机上，但是无法从104上使用22端口主动连接到77上。</p>
 <p>对于其他端口与IP来说，也是相同的，可以从104主动发送报文，并且能够收到响应报文，但是其他主机并不能主动向104发起请求。</p>
 <p>好了，state模块就总结到这里，希望这篇文章能够对你有所帮助。</p>

@@ -8483,7 +8483,7 @@ default via <span class="m">169</span>.254.1.1 dev eth0
 <p>这个MAC地址应该是Calico硬塞进去的，而且还能响应 ARP。但它究竟是怎么实现的呢？</p>
 <p>我们先来回想一下正常情况，内核会对外发送ARP请求，询问整个二层网络中谁拥有 <code>169.254.1.1</code> 这个 IP 地址，拥有这个IP地址的设备会将自己的 MAC地址返回给对方。但现在的情况比较尴尬，容器和主机都没有这个IP地址，甚至连主机上的端口 <code>calicba2f87f6bb</code>，MAC地址也是一个无用的 <code>ee:ee:ee:ee:ee:ee</code>。按道理容器和主机网络根本就无法通信才对呀！所以Calico是怎么做到的呢？</p>
 <p>这里我就不绕弯子了，实际上Calico利用了网卡的<strong>代理 ARP</strong>功能。代理ARP是ARP协议的一个变种，<strong>当ARP请求目标跨网段时，网关设备收到此ARP请求，会用自己的MAC地址返回给请求者</strong>，这便是代理ARP（Proxy ARP）。举个例子：</p>
-<p><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/v2-0d4e7b569a87838936c323e70e704779_720w-1618883534452.jpg" /></p>
+<p><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/v2-0d4e7b569a87838936c323e70e704779_720w-1618883534452.jpg" /></p>
 <p>上面这张图中，电脑发送ARP请求服务器 8.8.8.8 的MAC地址，路由器（网关）收到这个请求时会进行判断，由于目标8.8.8.8不属于本网段（即跨网段），此时便返回自己的接口MAC地址给PC，后续电脑访问服务器时，目标MAC直接封装为MAC254。</p>
 <p>现在我们知道，Calico本质上还是利用了代理ARP撒了一个“善意的谎言”，下面我们来确认一下。</p>
 <p>查看宿主机的网卡信息和路由信息：</p>
@@ -8523,7 +8523,7 @@ listening on calicba2f87f6bb, link-type EN10MB <span class="o">(</span>Ethernet<
 </ol>
 <h2 id="2">2. 模拟组网<a class="headerlink" href="#2" title="Permanent link">¶</a></h2>
 <p>既然我们已经掌握了Calico的组网原理，接下来就可以手动模拟验证了。架构如图所示：</p>
-<p><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/v2-9fd3ad0592f8c226d5d50a1677bdfeef_720w-1618883534452.jpg" /></p>
+<p><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/v2-9fd3ad0592f8c226d5d50a1677bdfeef_720w-1618883534452.jpg" /></p>
 <p>先在 Host0 上执行以下命令：</p>
 <div class="codehilite"><pre><span></span><code><span class="c1"># 创建veth-pair设备和netns，将eth0加入到网络名称空间ns0中</span>
 $ ip link add veth0 <span class="nb">type</span> veth peer name eth0

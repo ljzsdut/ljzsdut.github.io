@@ -8421,7 +8421,7 @@
 </ul>
 <h1 id="ovs">OVS架构<a class="headerlink" href="#ovs" title="Permanent link">¶</a></h1>
 <p>先看下OVS整体架构，用户空间主要组件有数据库服务ovsdb-server和守护进程ovs-vswitchd。kernel中是datapath内核模块。最上面的Controller表示OpenFlow控制器，控制器与OVS是通过OpenFlow协议进行连接，控制器不一定位于OVS主机上，下面分别介绍图中各组件</p>
-<p><img alt="ovs1" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/openvswitch-arch-1625724840979.png" /></p>
+<p><img alt="ovs1" src="https://gitee.com/ljzsdut/pic/raw/master/default/openvswitch-arch-1625724840979.png" /></p>
 <h3 id="ovs-vswitchd">ovs-vswitchd<a class="headerlink" href="#ovs-vswitchd" title="Permanent link">¶</a></h3>
 <p><code>ovs-vswitchd</code>守护进程是OVS的核心部件，它和<code>datapath</code>内核模块一起实现OVS基于流的数据交换。作为核心组件，它使用openflow协议与上层OpenFlow控制器通信，使用OVSDB协议与<code>ovsdb-server</code>通信，使用<code>netlink</code>和<code>datapath</code>内核模块通信。<code>ovs-vswitchd</code>在启动时会读取<code>ovsdb-server</code>中配置信息，然后配置内核中的<code>datapaths</code>和所有OVS switches，当ovsdb中的配置信息改变时(例如使用ovs-vsctl工具)，<code>ovs-vswitchd</code>也会自动更新其配置以保持与数据库同步</p>
 <div class="codehilite"><pre><span></span><code><span class="c1"># ps -ef |grep ovs-vs</span>
@@ -8464,7 +8464,7 @@ root     22166 22165  0 Jan17 ?        00:02:32 ovsdb-server /etc/openvswitch/co
 <p>The datapath module in the kernel receives the packets first, from a physical NIC or a VM’s virtual NIC. Either ovs-vswitchd has instructed the datapath how to handle packets of this type, or it has not. In the former case, the datapath module simply follows the instructions, called actions, given by ovs-vswitchd, which list physical ports or tunnels on which to transmit the packet. Actions may also specify packet modifications, packet sampling, or instructions to drop the packet. In the other case, where the datapath has not been told what to do with the packet, it delivers it to ovs-vswitchd. In userspace, ovs-vswitchd determines how the packet should be handled, then it passes the packet back to the datapath with the desired handling. Usually, ovs-vswitchd also tells the datapath to cache the actions, for handling similar future packets.</p>
 </blockquote>
 <p>为了说明datapath，来看一张更详细的架构图，图中的大部分组件上面都有提到</p>
-<p><img alt="ovs1" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/openvswitch-details-1625724841361.png" /></p>
+<p><img alt="ovs1" src="https://gitee.com/ljzsdut/pic/raw/master/default/openvswitch-details-1625724841361.png" /></p>
 <p>用户空间<code>ovs-vswitchd</code>和内核模块<code>datapath</code>决定了数据包的转发，首先，<code>datapath</code>内核模块收到进入数据包(物理网卡或虚拟网卡)，然后查找其缓存(datapath flows)，当有一个匹配的flow时它执行对应的操作，否则<code>datapath</code>会把该数据包送入用户空间由<code>ovs-vswitchd</code>负责在其OpenFlow flows中查询(图1中的First Packet)，<code>ovs-vswitchd</code>查询后把匹配的actions返回给<code>datapath</code>并设置一条datapath flows到<code>datapath</code>中，这样后续进入的同类型的数据包(图1中的Subsequent Packets)因为缓存匹配会被<code>datapath</code>直接处理，不用再次进入用户空间。</p>
 <p><code>datapath</code>专注于数据交换，它不需要知道OpenFlow的存在。与OpenFlow打交道的是<code>ovs-vswitchd</code>，<code>ovs-vswitchd</code>存储所有Flow规则供<code>datapath</code>查询或缓存.</p>
 <p>虽然有<code>ovs-dpctl</code>管理工具的存在，但我们没必要去手动管理<code>datapath</code>，这是用户空间<code>ovs-vswitchd</code>的工作</p>
@@ -8724,7 +8724,7 @@ ovs-ofctl del-flows br0 <span class="s2">&quot;in_port=100&quot;</span>
 <h1 id="open_vswitch_1">三、使用open vswitch构建虚拟网络<a class="headerlink" href="#open_vswitch_1" title="Permanent link">¶</a></h1>
 <h2 id="1">1、构建物理机和物理机相互连接的网络<a class="headerlink" href="#1" title="Permanent link">¶</a></h2>
 <p>在安装open vswitch的主机上有两块网卡，分别为eth0、eth1，把这两块网卡挂接到open vswitch的网桥上，然后有两台物理机host1、host2分别连接到eth0和eth1上，实现这两台物理机的通信。构建结果图如下：
-<img alt="在这里插入图片描述" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzIwODE3MzI3,size_16,color_FFFFFF,t_70-1625721506988.jpeg" />
+<img alt="在这里插入图片描述" src="https://gitee.com/ljzsdut/pic/raw/master/default/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzIwODE3MzI3,size_16,color_FFFFFF,t_70-1625721506988.jpeg" />
 执行以下命令：</p>
 <div class="codehilite"><pre><span></span><code>ovs-vsctl add-br br0 <span class="c1">#建立一个名为br0的open vswitch网桥</span>
 ovs-vsctl add-port br0 eth0 <span class="c1">#把eth0挂接到br0中</span>
@@ -8778,7 +8778,7 @@ tap,script<span class="o">=</span>/etc/ovs-ifup,downscript<span class="o">=</spa
 
 <h2 id="4">4、构建网桥和网桥相连的网络<a class="headerlink" href="#4" title="Permanent link">¶</a></h2>
 <p>以上操作都是将多个主机（物理机或虚拟机）连接到同一个网桥上，实现它们之间的通信，但是要构建复杂的网络，就需要多个网桥，在装有open vswitch的主机上建立两个网桥，实现它们之间的连接，构建结果如下：
-<img alt="在这里插入图片描述" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzIwODE3MzI3,size_16,color_FFFFFF,t_70-20210708131827335-1625721507439.jpeg" />
+<img alt="在这里插入图片描述" src="https://gitee.com/ljzsdut/pic/raw/master/default/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzIwODE3MzI3,size_16,color_FFFFFF,t_70-20210708131827335-1625721507439.jpeg" />
 执行命令：</p>
 <div class="codehilite"><pre><span></span><code>ovs-vsctl add-br br0 <span class="c1">#添加一个名为br0的网桥</span>
 ovs-vsctl add-br br1 <span class="c1">#添加一个名为br1的网桥</span>

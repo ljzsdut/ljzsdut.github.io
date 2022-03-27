@@ -8495,11 +8495,11 @@
 <p>注意： <strong>在全部节点安装</strong></p>
 </blockquote>
 <p>1、选择节点 — ”ceph“ 点击 ” Install ceph ”</p>
-<p><img alt="rnzqmC-1617754822703" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/rnzqmC-1617754822703-1617754829477.png" /></p>
+<p><img alt="rnzqmC-1617754822703" src="https://gitee.com/ljzsdut/pic/raw/master/default/rnzqmC-1617754822703-1617754829477.png" /></p>
 <p>2、选择版本</p>
-<p><img alt="lTxXVv-1617754859497" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/lTxXVv-1617754859497-1617754863450.png" /></p>
+<p><img alt="lTxXVv-1617754859497" src="https://gitee.com/ljzsdut/pic/raw/master/default/lTxXVv-1617754859497-1617754863450.png" /></p>
 <p>3、输入 ” Y “ 开始安装</p>
-<p><img alt="RwJkHl-1617754907836" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/RwJkHl-1617754907836-1617754910921-1617754961025.jpg" /></p>
+<p><img alt="RwJkHl-1617754907836" src="https://gitee.com/ljzsdut/pic/raw/master/default/RwJkHl-1617754907836-1617754910921-1617754961025.jpg" /></p>
 <p>如果软件包下载速度较慢，可以采用如下2种方案处理：</p>
 <ul>
 <li>
@@ -8533,18 +8533,18 @@ echo '10.10.10.100 download.proxmox.com' &gt;&gt; /etc/hosts</code></p>
 </blockquote>
 <h2 id="ceph_1">配置ceph<a class="headerlink" href="#ceph_1" title="Permanent link">¶</a></h2>
 <p>在第一个节点上，主要配置"网络"和"ceph monitor"。</p>
-<p><img alt="ADEXoj-1617756240993" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/ADEXoj-1617756240993-1617756254838.png" /></p>
-<p><img alt="wAU8NC-1617760872213" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/wAU8NC-1617760872213-1617760879476.png" /></p>
+<p><img alt="ADEXoj-1617756240993" src="https://gitee.com/ljzsdut/pic/raw/master/default/ADEXoj-1617756240993-1617756254838.png" /></p>
+<p><img alt="wAU8NC-1617760872213" src="https://gitee.com/ljzsdut/pic/raw/master/default/wAU8NC-1617760872213-1617760879476.png" /></p>
 <p>此时，集群已经创建完毕。为了保证monitor和mgr的高可用，我们需要至少创建3个monitor和2个mgr。</p>
-<p><img alt="wgHeIQ-1617761356714" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/wgHeIQ-1617761356714-1617761361908.png" /></p>
+<p><img alt="wgHeIQ-1617761356714" src="https://gitee.com/ljzsdut/pic/raw/master/default/wgHeIQ-1617761356714-1617761361908.png" /></p>
 <h2 id="osd">创建osd<a class="headerlink" href="#osd" title="Permanent link">¶</a></h2>
 <p>创建osd时，需要先定位到磁盘所在的主机上，然后再进行”ceph“ — ”osd“ 选项中进行创建。</p>
-<p><img alt="nEGewp-1617761517843" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/nEGewp-1617761517843-1617761519656.png" /></p>
+<p><img alt="nEGewp-1617761517843" src="https://gitee.com/ljzsdut/pic/raw/master/default/nEGewp-1617761517843-1617761519656.png" /></p>
 <h2 id="pool">创建pool<a class="headerlink" href="#pool" title="Permanent link">¶</a></h2>
-<p><img alt="image-20210407101907573" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20210407101907573-1617761947704.png" /></p>
+<p><img alt="image-20210407101907573" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20210407101907573-1617761947704.png" /></p>
 <h2 id="pve">添加存储池至PVE<a class="headerlink" href="#pve" title="Permanent link">¶</a></h2>
 <p>”数据中心“ — ”存储“ — ”添加“ — ”RBD“。</p>
-<p><img alt="9o6HKi-1617762146096" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/9o6HKi-1617762146096-1617762150427.png" /></p>
+<p><img alt="9o6HKi-1617762146096" src="https://gitee.com/ljzsdut/pic/raw/master/default/9o6HKi-1617762146096-1617762150427.png" /></p>
 <h2 id="_1">参考文档<a class="headerlink" href="#_1" title="Permanent link">¶</a></h2>
 <p>ceph:https://pve.proxmox.com/pve-docs/chapter-pveceph.html</p>
 <p>pmxcfs: https://pve.proxmox.com/pve-docs/chapter-pmxcfs.html#chapter_pmxcfs</p>

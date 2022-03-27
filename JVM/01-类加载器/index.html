@@ -8532,19 +8532,19 @@
 <ul>
 <li>创建类的实例</li>
 </ul>
-<p><img alt="image-20200303132724973" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20200303132724973-1621047874549.png" /></p>
-<p><img alt="image-20200303132724973" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20200303133341018-1621047880766.png" /></p>
-<p><img alt="image-20200303134542076" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20200303134542076-1621048029696.png" /></p>
+<p><img alt="image-20200303132724973" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20200303132724973-1621047874549.png" /></p>
+<p><img alt="image-20200303132724973" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20200303133341018-1621047880766.png" /></p>
+<p><img alt="image-20200303134542076" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20200303134542076-1621048029696.png" /></p>
 <ul>
 <li>访问某个类或接口的静态变量(static)，或对该静态变量赋值（对于静态字段来说，只有直接定义了该字段的类才会被初始化）</li>
 </ul>
-<p><img alt="image-20200303131301423" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20200303131301423-1621047897658.png" /></p>
-<p><img alt="image-20200302180544254" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20200302180544254-1621047902507.png" /></p>
-<p><img alt="image-20200303132458444" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20200303132458444-1621047907232.png" /></p>
+<p><img alt="image-20200303131301423" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20200303131301423-1621047897658.png" /></p>
+<p><img alt="image-20200302180544254" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20200302180544254-1621047902507.png" /></p>
+<p><img alt="image-20200303132458444" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20200303132458444-1621047907232.png" /></p>
 <ul>
 <li>调用类的静态方法</li>
 </ul>
-<p><img alt="image-20200303141214282" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20200303141214282-1621047914766.png" /></p>
+<p><img alt="image-20200303141214282" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20200303141214282-1621047914766.png" /></p>
 <ul>
 <li>
 <p>反射（如<code>Class.forName("com.test.Test")</code>）</p>
@@ -8553,7 +8553,7 @@
 <p>初始化一个类的子类时，会主动使用父类。（当一个类在初始化时，要求其父类全部都已经初始化完毕）接口没有要求父类必须完成初始化。</p>
 </li>
 </ul>
-<p><img alt="image-20200303135955376" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20200303135955376-1621047920725.png" /></p>
+<p><img alt="image-20200303135955376" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20200303135955376-1621047920725.png" /></p>
 <ul>
 <li>
 <p>包含main方法的类（java虚拟机启动时被表明为启动类的类）</p>
@@ -8564,7 +8564,7 @@
 </ul>
 <h3 id="_4">被动使用<a class="headerlink" href="#_4" title="Permanent link">¶</a></h3>
 <p>除了以上7种，其它使用java类的方法都呗看做对类的<strong>被动使用</strong>，都不会导致类的<strong>初始化</strong>。</p>
-<p><img alt="image-20200303142315338" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20200303142315338-1621047936423.png" /></p>
+<p><img alt="image-20200303142315338" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20200303142315338-1621047936423.png" /></p>
 <h2 id="_5">类的加载<a class="headerlink" href="#_5" title="Permanent link">¶</a></h2>
 <p>类的加载指的是将类的.class文件中的二进制数据读入到内存中,将其放在运行时数据区的方法区内,然后在内存中创建一个java.lang.Class对象(规范并未说明 Class对象位于哪里, HotSpot虚拟机将其放在了方法区中)用来封装类在方法区内的数据结构。</p>
 <p>类的加载的最终产品是位于内存中的Class对象。
@@ -8585,11 +8585,11 @@ Class对象封装了类在方法区内的数据结构，并且向Java程序员�
 <li>如果这个类直没有被程序主动使用，那么类加载器就不会报告错误。</li>
 </ul>
 <h3 id="_6">类加载器<a class="headerlink" href="#_6" title="Permanent link">¶</a></h3>
-<p><img alt=" " src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20200303145155861-1621048035652.png" /></p>
+<p><img alt=" " src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20200303145155861-1621048035652.png" /></p>
 <p>父亲也会委托其父亲的。</p>
-<p><img alt="image-20200303145242144" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20200303145242144-1621048041126.png" /></p>
-<p><img alt="image-20200303145450039" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20200303145450039-1621047943153.png" /></p>
-<p><img alt="image-20200303153248507" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20200303153248507-1621047946557.png" /></p>
+<p><img alt="image-20200303145242144" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20200303145242144-1621048041126.png" /></p>
+<p><img alt="image-20200303145450039" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20200303145450039-1621047943153.png" /></p>
+<p><img alt="image-20200303153248507" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20200303153248507-1621047946557.png" /></p>
 <h2 id="_7">类的连接<a class="headerlink" href="#_7" title="Permanent link">¶</a></h2>
 <p>类被加载后，就进入连接阶段。连接就是将已经读入到内存的类的二进制数据合并到虚拟机的运行时环境中去。</p>
 <h3 id="_8">类的验证<a class="headerlink" href="#_8" title="Permanent link">¶</a></h3>
@@ -8601,18 +8601,18 @@ Class对象封装了类在方法区内的数据结构，并且向Java程序员�
 <li>二进制兼容性的验证</li>
 </ul>
 <h3 id="_9">类的准备<a class="headerlink" href="#_9" title="Permanent link">¶</a></h3>
-<p><img alt="image-20200303144129990" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20200303144129990-1621047953184.png" /></p>
+<p><img alt="image-20200303144129990" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20200303144129990-1621047953184.png" /></p>
 <h2 id="_10">类的初始化<a class="headerlink" href="#_10" title="Permanent link">¶</a></h2>
-<p><img alt="image-20200303144157303" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20200303144157303-1621047957508.png" /></p>
-<p><img alt="image-20200303144418752" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20200303144418752-1621047964127.png" /></p>
+<p><img alt="image-20200303144157303" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20200303144157303-1621047957508.png" /></p>
+<p><img alt="image-20200303144418752" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20200303144418752-1621047964127.png" /></p>
 <p>类的初始化步骤：</p>
 <ul>
 <li>假如这个类还没有被加载和连接，那就先进行加载和连接</li>
 <li>假如类存在直接父类，并且这个父类还没有被初始化，那就先初始化直接父类</li>
 <li>假如类中存在初始化语句，那就依次执行这些初始化语句</li>
 </ul>
-<p><img alt="image-20200303144854326" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20200303144854326-1621047969504.png" /></p>
-<p><img alt="image-20200303152026287" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20200303152026287-1621047975121.png" /></p>
+<p><img alt="image-20200303144854326" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20200303144854326-1621047969504.png" /></p>
+<p><img alt="image-20200303152026287" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20200303152026287-1621047975121.png" /></p>
 <p>调用ClassL oader类的loadClass方法加载一个类，并不是对类的主动使用，不会导致类的初始化。</p>
                 
                   

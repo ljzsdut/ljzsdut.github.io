@@ -8717,10 +8717,10 @@ listening on em1, link-type EN10MB <span class="o">(</span>Ethernet<span class="
 
 <h1 id="ip">IP报文经过路由器的转发过程及变化<a class="headerlink" href="#ip" title="Permanent link">¶</a></h1>
 <h3 id="_2">动画演示分层封包、解包<a class="headerlink" href="#_2" title="Permanent link">¶</a></h3>
-<p><img alt="up-8f894980b3afbdfe8c273b157e4ab5fa787-1619057726873" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/up-8f894980b3afbdfe8c273b157e4ab5fa787-1619057726873-1619057767062.gif" /></p>
-<p><img alt="LFgbW3-1619057858537" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/LFgbW3-1619057858537-1619057861395.gif" /></p>
+<p><img alt="up-8f894980b3afbdfe8c273b157e4ab5fa787-1619057726873" src="https://gitee.com/ljzsdut/pic/raw/master/default/up-8f894980b3afbdfe8c273b157e4ab5fa787-1619057726873-1619057767062.gif" /></p>
+<p><img alt="LFgbW3-1619057858537" src="https://gitee.com/ljzsdut/pic/raw/master/default/LFgbW3-1619057858537-1619057861395.gif" /></p>
 <h3 id="_3">跨路由的封包、解包过程<a class="headerlink" href="#_3" title="Permanent link">¶</a></h3>
-<p><img alt="image-20210422104016724" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20210422104016724-1619059216954-1619149799452.png" /></p>
+<p><img alt="image-20210422104016724" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20210422104016724-1619059216954-1619149799452.png" /></p>
 <ol>
 <li>路由器收到数据包后，报文送到数据链路层，数据链路层解封以太网帧头部，提取目的MAC地址</li>
 <li>查看目的MAC地址是不是自己本身的MAC地址。这个时候出现两种情况，具体如下：</li>
@@ -8778,41 +8778,41 @@ listening on em1, link-type EN10MB <span class="o">(</span>Ethernet<span class="
 </ul>
 <h3 id="3mac">3、交换机MAC地址表转发过程：<a class="headerlink" href="#3mac" title="Permanent link">¶</a></h3>
 <h4 id="mac">MAC地址表初始化：<a class="headerlink" href="#mac" title="Permanent link">¶</a></h4>
-<p><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/v2-741cddbc902e9efc8636e6ffc2c055a4_1440w-20220317081051879-1647475851969.jpg" /></p>
+<p><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/v2-741cddbc902e9efc8636e6ffc2c055a4_1440w-20220317081051879-1647475851969.jpg" /></p>
 <p>交换机刚启动时，MAC地址表中无表项。以上图中的交换机就是刚刚启动的时候的MAC地址表。可以看出并没有任何的表项，当接入PC的时候，交换机开始进行学习MAC地址，见下图：</p>
 <h4 id="mac1">MAC地址表学习过程（1）<a class="headerlink" href="#mac1" title="Permanent link">¶</a></h4>
-<p><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/v2-fb0d709603ead2dfb4f3c206823586f6_1440w-20220317081048096-1647475848193.jpg" /></p>
+<p><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/v2-fb0d709603ead2dfb4f3c206823586f6_1440w-20220317081048096-1647475848193.jpg" /></p>
 <ul>
 <li>PCA发出数据帧</li>
 <li>交换机把PCA的帧中的<strong>源地址</strong>MAC_A与接收到此帧的端口E1/0/1关联起来</li>
 <li>交换机把PCA的帧从所有其他端口发送出去（除了接收到帧的端口E1/0/1）</li>
 </ul>
 <h4 id="mac2">MAC地址表学习过程（2）<a class="headerlink" href="#mac2" title="Permanent link">¶</a></h4>
-<p><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/v2-fb0d709603ead2dfb4f3c206823586f6_1440w-20220317081101809-1647475861901.jpg" /></p>
+<p><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/v2-fb0d709603ead2dfb4f3c206823586f6_1440w-20220317081101809-1647475861901.jpg" /></p>
 <p>PCB、PCC、PCD发出数据帧，交换机会把接收到的帧中的源地址与相应的端口关联起来，至此，交换机的MAC地址表学习完成，开始进行数据的转发。</p>
 <h3 id="4">4、交换机对数据帧的转发与过滤<a class="headerlink" href="#4" title="Permanent link">¶</a></h3>
 <h4 id="_6">单播帧的转发：<a class="headerlink" href="#_6" title="Permanent link">¶</a></h4>
-<p><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/v2-66f93b24fe6f0666959eb629c6613261_1440w-20220317081205228-1647475925349.jpg" /></p>
+<p><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/v2-66f93b24fe6f0666959eb629c6613261_1440w-20220317081205228-1647475925349.jpg" /></p>
 <ul>
 <li>PCA发出目的到PCD的单播数据帧</li>
 <li>交换机根据帧中的目的地址，从相应的端口E1/0/4发送出去</li>
 <li>交换机不在其他端口上转发此单播数据帧</li>
 </ul>
 <h4 id="_7">广播、组播和未知单播帧的转发：<a class="headerlink" href="#_7" title="Permanent link">¶</a></h4>
-<p><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/v2-4220b11946b4edcbea586cd9d2bf1509_1440w-20220317081246000-1647475966091.jpg" /></p>
+<p><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/v2-4220b11946b4edcbea586cd9d2bf1509_1440w-20220317081246000-1647475966091.jpg" /></p>
 <p>交换机会把广播、组播和未知单播帧从所有其他端口发送出去（除了接收到帧的端口）</p>
 <h2 id="vlan">VLAN基本原理<a class="headerlink" href="#vlan" title="Permanent link">¶</a></h2>
 <h3 id="1_1">1、广播风暴<a class="headerlink" href="#1_1" title="Permanent link">¶</a></h3>
-<p><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/v2-26ed2a4eb34486f9743c8b96189122b7_1440w-20220317080702930-1647475623006.jpg" /></p>
+<p><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/v2-26ed2a4eb34486f9743c8b96189122b7_1440w-20220317080702930-1647475623006.jpg" /></p>
 <p>所谓广播帧就是在二层环境中设备发出的广播帧在广播域中传播，这样会导致广播镇占用网络带宽，降低设备性能。</p>
 <h3 id="2_1">2、使用三层设备路由器隔离广播域<a class="headerlink" href="#2_1" title="Permanent link">¶</a></h3>
-<p><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/v2-f15f75e0a6954bf1789e7a80fa67b93d_1440w-20220317081316645-1647475996742.jpg" /></p>
+<p><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/v2-f15f75e0a6954bf1789e7a80fa67b93d_1440w-20220317081316645-1647475996742.jpg" /></p>
 <p>广播帧属于二层并不会跨越三层，所以为了解决广播风暴，可以使用三层设备隔离广播域，减小广播域范围。比如使用路由器来隔离广播域，由于路由器是三层设备，对数据的转发容易形成瓶颈，所以一般我们使用VLAN来隔离广播域。</p>
 <h3 id="3vlan">3、VLAN隔离广播<a class="headerlink" href="#3vlan" title="Permanent link">¶</a></h3>
-<p><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/v2-199c2102bbfaf6b2ee4c2ffd11b840d2_1440w-20220317081319235-1647475999326.jpg" /></p>
+<p><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/v2-199c2102bbfaf6b2ee4c2ffd11b840d2_1440w-20220317081319235-1647475999326.jpg" /></p>
 <p>二层交换机使用VLAN（虚拟局域网）隔离广播，用来减小广播域范围。这样的话，不同VLAN之间是无法进行通信的，假设PCA发送一个广播帧，只会在VLAN1之间传播并不会传播到VLAN2，这样既限制了广播域的范围，又保证了VLAN2的安全性。</p>
 <h3 id="4vlan">4、VLan优点<a class="headerlink" href="#4vlan" title="Permanent link">¶</a></h3>
-<p><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/v2-f5309f7797636f6203e667bc824be3ea_1440w-20220317081322110-1647476002199.jpg" /></p>
+<p><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/v2-f5309f7797636f6203e667bc824be3ea_1440w-20220317081322110-1647476002199.jpg" /></p>
 <ul>
 <li>有效控制广播域范围</li>
 <li>增强局域网的安全性</li>
@@ -8820,41 +8820,41 @@ listening on em1, link-type EN10MB <span class="o">(</span>Ethernet<span class="
 </ul>
 <h3 id="5vlanvlan">5、VLAN分类（VLAN的划分方法）<a class="headerlink" href="#5vlanvlan" title="Permanent link">¶</a></h3>
 <h4 id="vlan_1">基于端口的VLAN：<a class="headerlink" href="#vlan_1" title="Permanent link">¶</a></h4>
-<p><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/v2-b880b6fc0f919b1944127c3da8e53dab_1440w-20220317080650427-1647475610503.jpg" /></p>
+<p><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/v2-b880b6fc0f919b1944127c3da8e53dab_1440w-20220317080650427-1647475610503.jpg" /></p>
 <p>基于端口的VLAN划分方法是最常用的一种划分方法，就是一个或者几个端口属于一个VLAN，这个端口下面的用户也就属于该 VLAN。假设以上图中，E1/0/1和E1/0/2属于VLAN10，E1/0/3和E1/0/4属于VLAN20，那么PCA和PCB也都都属于 VLAN10，可以互相通信，PCC和PCD属于VLAN20，也可以互相通信。</p>
 <p>这种划分方法的优先就是配置比较方便，只要在交换机上将相应的端口加入相应的 VLAN 即可，缺点是对于用户来说如果更改了交换机的端口也就更换了VLAN ID。</p>
 <h4 id="macvlan">基于MAC地址的VLAN：<a class="headerlink" href="#macvlan" title="Permanent link">¶</a></h4>
-<p><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/v2-52d028acc5f174e7034c89203740ed66_1440w-20220317081326401-1647476006507.jpg" /></p>
+<p><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/v2-52d028acc5f174e7034c89203740ed66_1440w-20220317081326401-1647476006507.jpg" /></p>
 <p>基于 MAC 地址的 VLAN 就是在划分 VLAN 的时候根据 MAC 地址划分 VLAN，比如将 PCA和 PCB 的 MAC 地址划分在 vlan10中，那么 PCA 和 PCB 就属于 VLAN10，PCC 和 PCD 同理。</p>
 <p>这种划分方法的优点是对于用户来说不受地理位置的闲置，不管PCA用户接在哪个接口，都属于VLAN10，缺点是配置较基于端口的划分方法繁琐。</p>
 <h4 id="vlan_2">基于协议的VLAN：<a class="headerlink" href="#vlan_2" title="Permanent link">¶</a></h4>
-<p><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/v2-e5f20e8a1b87b5efba5ae725b4c25632_1440w-20220317081330492-1647476010570.jpg" /></p>
+<p><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/v2-e5f20e8a1b87b5efba5ae725b4c25632_1440w-20220317081330492-1647476010570.jpg" /></p>
 <p>这种划分方法是指运行不同的协议划分到相同的VLAN中，比如PCA和PCB都运行的是IP协议，属于VLAN10，PCC和PCD同理。</p>
 <p>此种划分方法优点依旧是不受物理位置的影响，不管PCA接在交换机的哪个接口，都属于VLAN10。缺点的其实PC真正可以运行的协议并没有很多，有划分vlan数量上的限制。</p>
 <h4 id="vlan_3">基于子网的VLAN：<a class="headerlink" href="#vlan_3" title="Permanent link">¶</a></h4>
-<p><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/v2-2c92c1497fc3e316a26601be1b61693e_1440w-1647475585868.jpg" /></p>
+<p><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/v2-2c92c1497fc3e316a26601be1b61693e_1440w-1647475585868.jpg" /></p>
 <p>这种划分方法是根据子网划分，比如10.0.0.0/24属于VLAN10,20.0.0.0/24属于vlan20；</p>
 <p>以上四种划分方法最常用配置最方便是基于端口的VLAN划分方法，后面的实验示例也是以基于端口的划分方法。</p>
 <h3 id="6vlan">6、Vlan技术原理<a class="headerlink" href="#6vlan" title="Permanent link">¶</a></h3>
 <p>VLAN标签：</p>
-<p><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/v2-43e6a4b89a41330dbab4defd7525cf64_1440w-20220317081334512-1647476014597.jpg" /></p>
+<p><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/v2-43e6a4b89a41330dbab4defd7525cf64_1440w-20220317081334512-1647476014597.jpg" /></p>
 <p>对于交换机来说，是根据VLAN标签来区分不同VLAN的以太网帧的。比如PCA发送一个目的地址为PCB的数据帧，到达交换机，交换机会打上VLAN 10的标签，然后根据vlan表确定从PCB的端口转发出去交给PCB。下面会详细介绍VLAN标签的操作。</p>
 <p>802.1Q帧格式：</p>
-<p><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/v2-f52185330afa334b2b1f1a4fd48b3cbc_1440w-20220317081338036-1647476018122.jpg" /></p>
+<p><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/v2-f52185330afa334b2b1f1a4fd48b3cbc_1440w-20220317081338036-1647476018122.jpg" /></p>
 <p>我们知道PC发送的数据并不带VLAN标签，那么VLAN ID的标签是什么时候打上的呢，其实是在数据中进入交换机端口的时候打上的。在标准的以太网帧的源地址SA和类型Type之间打上的Tag标签，此tag标签中含有VLAN ID，VLAN ID的范围为4096，去掉一个默认的vlan 1和vlan4096作为保留vlan，实际可用的vlan ID个数为4094个。</p>
 <p>单交换机VLAN标签操作：</p>
-<p><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/v2-14f91c5d664e318659c3f6abc30a7be4_1440w-20220317081341390-1647476021463.jpg" /></p>
+<p><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/v2-14f91c5d664e318659c3f6abc30a7be4_1440w-20220317081341390-1647476021463.jpg" /></p>
 <p>上面已经提过PC发送的数据不带VLAN标签，所以实在进入交换机的时候打上vlan标签，既然PC发出的数据不带VLAN标签，那么在出交换机的时候交换机需要对数据帧的VLAN标签进行剥离再转发给相对应的PC。</p>
 <p>例如：PC发送一个保标准的以太网帧，源地址为PCA的地址，目的地址为PCC的地址，到达交换的时候端口的时候，交换机会打上VLAN10的标签，然后根据vlan表从PCC所在的端口转发，同时需要将VLAN 10的标签剥离，也就是说此数据帧到达PCC的时候依旧是标准的以太网帧，并不带VLAN标签，PCB和PCD同理。</p>
 <p>Access链路类型端口：</p>
-<p><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/v2-1d99855bca1fba4659264b3dfc09d6f3_1440w-20220317080657506-1647475617594.jpg" /></p>
+<p><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/v2-1d99855bca1fba4659264b3dfc09d6f3_1440w-20220317080657506-1647475617594.jpg" /></p>
 <p>VLAN 有三种链路类型，常用的是 Access 和 trunk 链路类型，下面也是介绍这种链路类型。第一种是 Access 链路类型，此链路类型的特点是只允许缺省的 VLAN 通过，同时仅发送和接收一个 VLAN 的数据帧。</p>
 <p>所以 access 链路类型一般适用于连接用户设备，也就是交换机直接接 PC使用 access 链路。</p>
 <p>跨交换机VLAN标签操作：</p>
-<p><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/v2-a731e334d72a02d3d7e16c1ee8e4c1e0_1440w-20220317081348731-1647476028812.jpg" /></p>
+<p><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/v2-a731e334d72a02d3d7e16c1ee8e4c1e0_1440w-20220317081348731-1647476028812.jpg" /></p>
 <p>上面讲过，vlan 标签是在进入交换机的时候打上的，出交换机剥离标签，那么在如上的拓扑中，PCA 发送一个目的地址到PCC的数据帧，到达 SWA，SWA 打上 VLAN10的标签，然后从E1/0/24剥离标签然后转发出去，到达 SWB 打上vlan10的标签，从E1/0/1转发到 PCC，这是正常数据帧的转发，但是上面说过Access链路类型只支持一个数据帧通过，那么入股 PCB 同时再发一个 VLAN20 的数据帧的话就无法进行转发，为此，通过 trunk 链路类型实现。</p>
 <p>Trunk 链路类型端口：</p>
-<p><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/v2-73c3545f0ca35028e9e80311b6e0f680_1440w-20220317081352561-1647476032640.jpg" /></p>
+<p><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/v2-73c3545f0ca35028e9e80311b6e0f680_1440w-20220317081352561-1647476032640.jpg" /></p>
 <p>Trunk 链路类型的有点久是允许多个 VLAN 通过，可以接收和发送多个 VLAN 的数据帧。同时对于缺省的 VLAN 也就是 PVID 的以太网帧是不带标签的。</p>
 <p>所以 trunk 链路类型一般用户交换机之间的连接。</p>
 <h1 id="_8">静态路由特性详解<a class="headerlink" href="#_8" title="Permanent link">¶</a></h1>
@@ -8872,14 +8872,14 @@ listening on em1, link-type EN10MB <span class="o">(</span>Ethernet<span class="
 <p><strong>5、单向性</strong></p>
 <p>静态路由是具有单向性的，也就是它仅为数据提供沿着下一跳的方向进行路由，不提供反向路由。所以如果你想要使源节点与目标节点或网络进行双向通信，就必须同时配置回程静态路由。</p>
 <p>如图7-2所示，如果想要使得PC1（PC1已配置了A节点的IP地址10.16.1.2/24作为网关地址）能够ping通PC2，则必须同时配置以下两条静态路由。</p>
-<p><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/v2-f05d46975038e211b8b0b2c8250a37e4_1440w-1647478608234.jpg" /></p>
+<p><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/v2-f05d46975038e211b8b0b2c8250a37e4_1440w-1647478608234.jpg" /></p>
 <p>图7-2 静态路由单向性示例</p>
 <p>① ：在R1路由器上配置了到达PC2的正向静态路由（以PC2 10.16.3.2/24作为目标节点，以C节点IP地址10.16.2.2/24作为下一跳地址）；</p>
 <p>② ：在R2路由器上配置到达PC1的回程静态路由（以PC1 10.16.1.1/24作为目标节点，以B节点IP地址10.16.2.1/24作为下一跳地址），以提供Ping过程回程ICMP消息的路由路径。</p>
 <p><strong>6、接力性</strong></p>
 <p><span style='color:red;background:背景颜色;font-size:文字大小;'>如果某条静态路由中间经过的跳数大于1（也就是整条路由路径经历了三个或以上路由器结点），则必须在除最后一个路由器外的其它路由器上依次配置到达相同目标节点或目标网络的静态路由，</span>这就是静态路由的“接力”特性，否则仅在源路由器上配置这么静态路由还是不可达的。</p>
 <p>如图7-3所示是一个三个路由器串联的简单的网络，各个路由器节点及PC机的IP地址均在图中进行了标注，PC1已配置好指向R1的A节点地址的网关，现假设要使PC1能ping得通PC2，则需要在各路由器上配置以下四条静态路由（两条正向，两条回程）：</p>
-<p><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/v2-7cced781346013a252567e0836ad8c8b_1440w-20220317085654295-1647478614372.jpg" /></p>
+<p><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/v2-7cced781346013a252567e0836ad8c8b_1440w-20220317085654295-1647478614372.jpg" /></p>
 <p>图7-3 静态路由接力性示例</p>
 <p>① ：在R1路由器上配置了到达PC2的正向静态路由（以PC2 10.16.4.0/24作为目标节点，以C节点IP地址10.16.2.2/24作为下一跳地址）；</p>
 <p>② ：在R2路由器上配置了到达PC2的正向接力静态路由（同样以PC2 10.16.4.0/24作为目标节点，以E节点IP地址10.16.3.2/24作为下一跳地址）；</p>

@@ -8641,87 +8641,87 @@
                 <h2 id="_1">基本配置<a class="headerlink" href="#_1" title="Permanent link">¶</a></h2>
 <h3 id="_2">管理用户<a class="headerlink" href="#_2" title="Permanent link">¶</a></h3>
 <p>管理用户是资产（被控服务器）上的 root，或拥有 <code>NOPASSWD: ALL</code> sudo 权限的用户， JumpServer 使用该用户来 <code>推送系统用户</code>、<code>获取资产硬件信息</code> 等。</p>
-<p><img alt="image-20201222184853257" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20201222184853257-1608634269754.png" /></p>
-<p><img alt="image-20201222185157588" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20201222185157588-1608634317691.png" /></p>
+<p><img alt="image-20201222184853257" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20201222184853257-1608634269754.png" /></p>
+<p><img alt="image-20201222185157588" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20201222185157588-1608634317691.png" /></p>
 <h3 id="_3">创建资产<a class="headerlink" href="#_3" title="Permanent link">¶</a></h3>
-<p><img alt="image-20201222185443401" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20201222185443401-1608634483508.png" /></p>
-<p><img alt="image-20201222190207313" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20201222190207313-1608634927418.png" /></p>
-<p><img alt="image-20201222190708019" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20201222190708019-1608635228130.png" /></p>
+<p><img alt="image-20201222185443401" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20201222185443401-1608634483508.png" /></p>
+<p><img alt="image-20201222190207313" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20201222190207313-1608634927418.png" /></p>
+<p><img alt="image-20201222190708019" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20201222190708019-1608635228130.png" /></p>
 <h3 id="_4">系统用户<a class="headerlink" href="#_4" title="Permanent link">¶</a></h3>
 <p>添加授权之前，需要先进行创建系统用户。</p>
 <p>系统用户是 JumpServer 跳转登录资产时使用的用户，可以理解为登录资产用户，如 web，sa，dba（<code>ssh web@some-host</code>），而不是使用某个用户的用户名跳转登录服务器（<code>ssh xiaoming@some-host</code>）； 简单来说是用户使用自己的用户名登录 JumpServer，JumpServer 使用系统用户登录资产。 系统用户创建时，如果选择了自动推送，JumpServer 会使用 Ansible 自动推送系统用户到资产中，如果资产（交换机）不支持 Ansible，请手动填写账号密码。</p>
-<p><img alt="image-20201222191457540" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20201222191457540-1608635697650.png" /></p>
-<p><img alt="image-20201222191546703" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20201222191546703-1608635746812.png" /></p>
-<p><img alt="image-20201222192123364" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20201222192123364-1608636083473.png" /></p>
-<p><img alt="image-20201222193934953" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20201222193934953-1608637175058.png" /></p>
+<p><img alt="image-20201222191457540" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20201222191457540-1608635697650.png" /></p>
+<p><img alt="image-20201222191546703" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20201222191546703-1608635746812.png" /></p>
+<p><img alt="image-20201222192123364" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20201222192123364-1608636083473.png" /></p>
+<p><img alt="image-20201222193934953" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20201222193934953-1608637175058.png" /></p>
 <p>如果不选用“自动推送”，则需用在资产上手动创建该“系统用户”。如果选用“自动推送”，则会在资产的系统用户上创建公钥连接，私钥保存在jms中。</p>
 <p>对于普通用户，可以禁用一些危险命令：</p>
 <div class="codehilite"><pre><span></span><code>!/bin/bash,!/bin/tcsh,!/bin/su,!/usr/bin/passwd,!/usr/bin/passwd root,!/bin/vim /etc/sudoers,!/usr/bin/vim /etc/sudoers,!/usr/sbin/visudo,!/usr/bin/sudo -i,!/bin/bi /etc/ssh/*,!/bin/chmod <span class="m">777</span> /etc/*,!/bin/chmod <span class="m">777</span> *,!/bin/chmod <span class="m">777</span>,!/bin/chmod -R <span class="m">777</span> *,!/bin/rm /*,!/bin/rm /,!/bin/rm -rf /,!/bin/rm -rf /*,!/bin/rm /etc,!/bin/rm -r /etc,!/bin/rm -rf /etc,!/bin/rm /etc/*,!/bin/rm -r /etc/*,!/bin/rm -rf /etc/*,!/bin/rm /root,!/bin/rm -r /root,!/bin/rm -rf /root,!/bin/rm /root/*,!/bin/rm -r /root/*,!/bin/rm -rf /root/*,!/bin/rm /bin,!/bin/rm -r /bin,!/bin/rm -rf /bin,!/bin/rm /bin/*,!/bin/rm -r /bin/*,!/bin/rm -rf /bin/*
 </code></pre></div>
 
-<p><img alt="image-20201222192403453" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20201222192403453-1608636243559.png" /></p>
-<p><img alt="image-20201222192640709" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20201222192640709-1608636400819.png" /></p>
+<p><img alt="image-20201222192403453" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20201222192403453-1608636243559.png" /></p>
+<p><img alt="image-20201222192640709" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20201222192640709-1608636400819.png" /></p>
 <h3 id="_5">资产授权<a class="headerlink" href="#_5" title="Permanent link">¶</a></h3>
-<p><img alt="image-20201222192706398" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20201222192706398-1608636426511.png" /></p>
-<p><img alt="image-20201222192920216" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20201222192920216-1608636560331.png" /></p>
-<p><img alt="image-20201222192938974" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20201222192938974-1608636579080.png" /></p>
+<p><img alt="image-20201222192706398" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20201222192706398-1608636426511.png" /></p>
+<p><img alt="image-20201222192920216" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20201222192920216-1608636560331.png" /></p>
+<p><img alt="image-20201222192938974" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20201222192938974-1608636579080.png" /></p>
 <h3 id="_6">验证登录<a class="headerlink" href="#_6" title="Permanent link">¶</a></h3>
-<p><img alt="image-20201222193219145" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20201222193219145-1608636739247.png" /></p>
+<p><img alt="image-20201222193219145" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20201222193219145-1608636739247.png" /></p>
 <p>我们登录jms，发现已经可以登录服务器了。</p>
 <p>也可以使用ssh协议进行连接。</p>
 <div class="codehilite"><pre><span></span><code>ssh oper@IP -p <span class="m">2222</span>  <span class="c1">#用户是登录jms用户</span>
 </code></pre></div>
 
-<p><img alt="image-20201222194503700" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20201222194503700-1608637503815.png" /></p>
-<p><img alt="image-20201222194645276" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20201222194645276-1608637605402.png" /></p>
+<p><img alt="image-20201222194503700" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20201222194503700-1608637503815.png" /></p>
+<p><img alt="image-20201222194645276" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20201222194645276-1608637605402.png" /></p>
 <h2 id="_7">手动推送系统用户<a class="headerlink" href="#_7" title="Permanent link">¶</a></h2>
-<p><img alt="image-20201222201220365" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20201222201220365-1608639140478.png" /></p>
+<p><img alt="image-20201222201220365" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20201222201220365-1608639140478.png" /></p>
 <h2 id="1">最佳实践1：<a class="headerlink" href="#1" title="Permanent link">¶</a></h2>
 <blockquote>
 <p>也可以多个jms用户共用同一个系统用户，这样可以避免重复推送系统用户</p>
 </blockquote>
 <p>1、创建2个系统用户，一个是普通的开发者用户；一个是运维使用的用户</p>
-<p><img alt="image-20201222202757565" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20201222202757565-1608640077674.png" /></p>
-<p><img alt="image-20201222203320246" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20201222203320246-1608640400354.png" /></p>
+<p><img alt="image-20201222202757565" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20201222202757565-1608640077674.png" /></p>
+<p><img alt="image-20201222203320246" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20201222203320246-1608640400354.png" /></p>
 <p>2、创建2个jms用户组，一个是开发者组，一个是运维组</p>
-<p><img alt="image-20201222203714604" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20201222203714604-1608640634715.png" /></p>
+<p><img alt="image-20201222203714604" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20201222203714604-1608640634715.png" /></p>
 <p>3、创建2个资产授权条目，一个配置用户组dev使用系统用户dev_safe访问资产；一个配置用户组operater使用系统用户operater访问资产。</p>
-<p><img alt="image-20201222203902712" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20201222203902712-1608640742830.png" /></p>
-<p><img alt="image-20201222203936358" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20201222203936358-1608640776473.png" /></p>
+<p><img alt="image-20201222203902712" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20201222203902712-1608640742830.png" /></p>
+<p><img alt="image-20201222203936358" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20201222203936358-1608640776473.png" /></p>
 <p>4、新增jms用户（日后新增用户时，只需要操作该步骤即可）</p>
 <p>只需将jms用户加入相关的组即可。</p>
-<p><img alt="image-20201222204337228" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20201222204337228-1608641017338.png" /></p>
-<p><img alt="image-20201222204303389" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20201222204303389-1608640983582.png" /></p>
-<p><img alt="image-20201222204438920" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20201222204438920-1608641079035.png" /></p>
+<p><img alt="image-20201222204337228" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20201222204337228-1608641017338.png" /></p>
+<p><img alt="image-20201222204303389" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20201222204303389-1608640983582.png" /></p>
+<p><img alt="image-20201222204438920" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20201222204438920-1608641079035.png" /></p>
 <p>记得手动推送一下系统用户.</p>
 <h2 id="2">最佳实践2：一类用户使用同一个系统用户。<a class="headerlink" href="#2" title="Permanent link">¶</a></h2>
 <h3 id="12">1、创建2个用户组：开发人员、运维人员<a class="headerlink" href="#12" title="Permanent link">¶</a></h3>
-<p><img alt="image-20201222210640907" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20201222210640907-1608642401023.png" /></p>
+<p><img alt="image-20201222210640907" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20201222210640907-1608642401023.png" /></p>
 <h3 id="2_1">2、创建一个管理用户<a class="headerlink" href="#2_1" title="Permanent link">¶</a></h3>
 <p>该用户的公钥已经手动配置到各个资产上了。</p>
-<p><img alt="image-20201222210744649" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20201222210744649-1608642464759.png" /></p>
-<p><img alt="image-20201222210830573" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20201222210830573-1608642510687.png" /></p>
+<p><img alt="image-20201222210744649" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20201222210744649-1608642464759.png" /></p>
+<p><img alt="image-20201222210830573" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20201222210830573-1608642510687.png" /></p>
 <h3 id="3">3、创建资产<a class="headerlink" href="#3" title="Permanent link">¶</a></h3>
-<p><img alt="image-20201222210956317" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20201222210956317-1608642596438.png" /></p>
-<p><img alt="image-20201222211023192" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20201222211023192-1608642623304.png" /></p>
+<p><img alt="image-20201222210956317" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20201222210956317-1608642596438.png" /></p>
+<p><img alt="image-20201222211023192" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20201222211023192-1608642623304.png" /></p>
 <h3 id="4">4、创建系统用户<a class="headerlink" href="#4" title="Permanent link">¶</a></h3>
 <p>一个用于绑定jms开发组，一个用于绑定jms运维组。</p>
-<p><img alt="image-20201222211349469" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20201222211349469-1608642829587.png" /></p>
+<p><img alt="image-20201222211349469" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20201222211349469-1608642829587.png" /></p>
 <p>此外，系统用户还可以配置“命令过滤器”，用来禁止哪些命令的执行。例如禁止rm命令。</p>
-<p><img alt="image-20201222211458516" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20201222211458516-1608642898632.png" /></p>
-<p><img alt="image-20201222211519500" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20201222211519500-1608642919610.png" /></p>
+<p><img alt="image-20201222211458516" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20201222211458516-1608642898632.png" /></p>
+<p><img alt="image-20201222211519500" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20201222211519500-1608642919610.png" /></p>
 <p>5、资产授权</p>
 <p>条目1：配置“开发人员”组使用“开发人员”的系统用户访问资产</p>
 <p>条目2：配置“运维人员”组使用“运维人员”的系统用户访问资产</p>
 <blockquote>
 <p>一个授权上可以绑定多个系统用户，优先使用“优先级”高的系统用户连接资产。</p>
 </blockquote>
-<p><img alt="image-20201222212142025" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20201222212142025-1608643302141.png" /></p>
-<p><img alt="image-20201222212218887" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20201222212218887-1608643339006.png" /></p>
+<p><img alt="image-20201222212142025" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20201222212142025-1608643302141.png" /></p>
+<p><img alt="image-20201222212218887" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20201222212218887-1608643339006.png" /></p>
 <p>以上4步定义了2个jms组及其权限，如果有新的需求，也可以再进行创建组。</p>
 <h3 id="5jms">5、创建jms用户（新增用户只需操作此步骤即可）<a class="headerlink" href="#5jms" title="Permanent link">¶</a></h3>
 <p>创建用户，将用户添加到该组中即可。</p>
-<p><img alt="image-20201222212511538" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20201222212511538-1608643511657.png" /></p>
+<p><img alt="image-20201222212511538" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20201222212511538-1608643511657.png" /></p>
 <h2 id="_8">网域<a class="headerlink" href="#_8" title="Permanent link">¶</a></h2>
 <p>如果jms不能直接连接资产，但是可以通过其他机器跳转后连接，那么这台机器就可以作为网域使用。</p>
                 

@@ -8535,13 +8535,13 @@
 </ul>
 <h4 id="web"><strong>通过 Web 界面创建</strong><a class="headerlink" href="#web" title="Permanent link">¶</a></h4>
 <p>默认为通过节点主机名解析的IP创建集群管理网络。</p>
-<p><img alt="19eHcv-1617684949410" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/19eHcv-1617684949410-1617684954231.png" /></p>
+<p><img alt="19eHcv-1617684949410" src="https://gitee.com/ljzsdut/pic/raw/master/default/19eHcv-1617684949410-1617684954231.png" /></p>
 <p>在新的版本当中，已经支持通过添加第二个网络作为备份网络。</p>
-<p><img alt="image-20210511080802021" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20210511080802021-1620691703951.png" /></p>
+<p><img alt="image-20210511080802021" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20210511080802021-1620691703951.png" /></p>
 <blockquote>
 <p>[info]确保为集群通信选择的网络没有被用于任何高流量负载，比如(网络)存储或实时迁移。虽然集群网络本身生成的数据量很小，但它对延迟非常敏感。</p>
 </blockquote>
-<p><img alt="image-20210406130026533" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20210406130026533-1617685226648.png" /></p>
+<p><img alt="image-20210406130026533" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20210406130026533-1617685226648.png" /></p>
 <p>创建集群最核心的就是集群同步服务corosync，corosync成功后会生成配置文件corosync.conf，，如果启动失败后需要手动修改配置文件。</p>
 <h4 id="_3"><strong>通过命令创建</strong><a class="headerlink" href="#_3" title="Permanent link">¶</a></h4>
 <div class="codehilite"><pre><span></span><code><span class="c1"># 创建集群</span>
@@ -8554,11 +8554,11 @@ $ pvecm status
 <p>即将添加到集群的节点不能容纳任何来宾（guests）。在加入集群时，会覆盖/etc/pve中的所有现有配置，因为guest id可能会发生冲突。作为一种解决方案，创建 guest(vzdump)的备份，并在将节点添加到集群后将其恢复为不同的ID。</p>
 <p><strong>web 界面的方式</strong></p>
 <p>获取加入集群信息</p>
-<p><img alt="ul2lMu-1617685050804" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/ul2lMu-1617685050804-1617685054334.png" /></p>
+<p><img alt="ul2lMu-1617685050804" src="https://gitee.com/ljzsdut/pic/raw/master/default/ul2lMu-1617685050804-1617685054334.png" /></p>
 <p>在要加入集群的节点上</p>
-<p><img alt="KEvHF1-1617685065173" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/KEvHF1-1617685065173-1617685067485.png" /></p>
+<p><img alt="KEvHF1-1617685065173" src="https://gitee.com/ljzsdut/pic/raw/master/default/KEvHF1-1617685065173-1617685067485.png" /></p>
 <p>虽然，有的时候，不指定 Link 0 的地址，也能加入集群，但在多网络当中，建议还是指定一下较好。</p>
-<p><img alt="image-20210406130637267" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20210406130637267-1617685597414.png" /></p>
+<p><img alt="image-20210406130637267" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20210406130637267-1617685597414.png" /></p>
 <p><strong>命令行的方式</strong></p>
 <p>集群中添加节点</p>
 <div class="codehilite"><pre><span></span><code>$ pvecm add <span class="m">192</span>.168.20.71    // 在 <span class="m">73</span> 上，添加到 <span class="m">71</span> 集群当中

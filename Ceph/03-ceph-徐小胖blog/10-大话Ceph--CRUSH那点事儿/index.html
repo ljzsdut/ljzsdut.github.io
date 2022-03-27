@@ -8619,7 +8619,7 @@
 </ul>
 <p>现在问题转化为：如何将PG_ID映射到有各自权重的OSD上。这里我直接使用CRUSH里面采取的<code>Straw</code>算法，翻译过来就是抽签，说白了就是挑个最长的签，这里的签指的是OSD的权重。</p>
 <p>那么问题就来了，总不至于每次都挑容量最大的OSD吧，这不分分钟都把数据存满那个最大的 OSD了吗？是的，所以在挑之前先把这些OSD<code>搓一搓</code>，这里直接介绍CRUSH的方法，如下图(可忽视代码直接看文字)：</p>
-<p><img alt="Alt text" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/1478244507156-1633996654754.png" /></p>
+<p><img alt="Alt text" src="https://gitee.com/ljzsdut/pic/raw/master/default/1478244507156-1633996654754.png" /></p>
 <ul>
 <li>CRUSH_HASH( PG_ID, OSD_ID, r ) ===&gt; draw</li>
 <li>( draw &amp;0xffff ) * osd_weight ===&gt; osd_straw</li>
@@ -8629,7 +8629,7 @@
 <p>这个<code>draw</code>到底有啥用？其实，CRUSH希望得到一个随机数，也就是这里的<code>draw</code>，然后拿这个随机数去乘以OSD的权重，这样把随机数和OSD的权重搓在一起，就得到了每个OSD的实际签长，而且每个签都不一样长(极大概率)，就很容易从中挑一个最长的。</p>
 <p>说白了，CRUSH希望<code>随机</code>挑一个OSD出来，但是还要满足权重越大的OSD被挑中的概率越大，为了达到随机的目的，它在挑之前让每个OSD都拿着自己的权重乘以一个随机数，再取乘积最大的那个。那么这里我们再定个小目标：挑个一亿次！从宏观来看，同样是乘以一个随机数，在样本容量足够大之后，这个随机数对挑中的结果不再有影响，起决定性影响的是OSD的权重，也就是说，OSD的权重越大，宏观来看被挑中的概率越大。</p>
 <p>这里再说明下CRUSH造出来的随机数<code>draw</code>，前文可知，对于常量输入，一定会得到一样的输出，所以这并不是真正的随机，所以说，CRUSH是一个<code>伪随机</code>算法。下图是<code>CRUSH_HASH</code>的代码段，我喜欢叫它搅拌搅拌再搅拌得出一个随机数:</p>
-<p><img alt="Alt text" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/1478244378743-1633996655078.png" /></p>
+<p><img alt="Alt text" src="https://gitee.com/ljzsdut/pic/raw/master/default/1478244378743-1633996655078.png" /></p>
 <p>如果看到这里你已经被搅晕了，那让我再简单梳理下PG选择一个OSD时做的事情：</p>
 <ul>
 <li>给出一个PG_ID，作为CRUSH_HASH的输入。</li>
@@ -8693,7 +8693,7 @@
 然后，我们再让<code>r = 1</code>，再生成一组<code>CRUSH_HASH</code>的随机值，乘以OSD的weight，再取一个最大的得到第二个OSD，依此得到第三个OSD，如果在此过程中，选中了相同的OSD，那么将<code>r</code>再加一，生成一组随机值，再选一次，直到选中三个OSD为止。</p>
 <h2 id="crush_1">CRUSH算法的应用<a class="headerlink" href="#crush_1" title="Permanent link">¶</a></h2>
 <p>理解了上面CRUSH选择OSD的过程，我们就很容易进一步将CRUSH算法结合实际结构，这里给出Sage在他的博士论文中画的一个树状结构图：
-<img alt="Alt text" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/1478486778573-1633996655621.png" /></p>
+<img alt="Alt text" src="https://gitee.com/ljzsdut/pic/raw/master/default/1478486778573-1633996655621.png" /></p>
 <p>最下面的蓝色长条可以看成一个个主机，里面的灰色圆柱形可以看成一个个OSD，紫色的cabinet可以也就是一个个机柜， 绿色的row可以看成一排机柜，顶端的root是我们的根节点，没有实际意义，你可以把它看成一个数据中心的意思，也可以看成一个机房的意思，不过只是起到了一个树状结构的根节点的作用。</p>
 <p>基于这样的结构选择OSD，我们提出了新的要求：</p>
 <ul>
@@ -8734,7 +8734,7 @@
 </ul>
 <p>RULE一般分为三步走 : <code>take</code>–&gt;<code>choose N</code>–&gt;<code>emit</code>。<code>Take</code>这一步负责选择一个根节点，这个根节点不一定是<code>root</code>，也可以是任何一个Bucket。<code>choose N</code>做的就是按照每个Bucket的weight以及每个<code>choose</code>语句选出符合条件的Bucket，并且，<strong>下一个<code>choose</code>的选择对象为上一步得到的结果</strong>。<code>emit</code>就是输出最终结果，相当于出栈。</p>
 <p>这里再举个简单的例子，也就是我们最常见的三个主机每个主机三个OSD的结构：
-<img alt="Alt text" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/1478497045877-1633996655816.png" /></p>
+<img alt="Alt text" src="https://gitee.com/ljzsdut/pic/raw/master/default/1478497045877-1633996655816.png" /></p>
 <p>我们要从三个host下面各选出一个OSD，使得三个副本各落在一个host上，这时候，就能保证挂掉两个host，还有一个副本在运行了，那么这样的RULE就形如：</p>
 <ul>
 <li>take(root) ============&gt; [default] 注意是根节点的名字</li>
@@ -8776,7 +8776,7 @@
 </tbody>
 </table>
 <p>但是想要构建成如下的结构：
-<img alt="Alt text" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/1478501078240-20211012075824644-1633996704753.png" /></p>
+<img alt="Alt text" src="https://gitee.com/ljzsdut/pic/raw/master/default/1478501078240-20211012075824644-1633996704753.png" /></p>
 <p>这里我们不能把一台主机劈成两半把SATA盘和SSD各分一半，所以就来介绍下CRUSH里面的虚虚实实，什么是实？所有的OSD都是实实在在的节点！什么是虚？除了OSD之外的所有Bucket都是虚的！</p>
 <p>也就是说，我们可以建立几个Bucket，分别名叫<code>ceph-1-sata</code>,<code>root-sata</code>,<code>ceph-1-ssd</code>, <code>root-ssd</code>，而这些Bucket不需要和实际结构有任何关系，可以看成是我们假想出来的结构，为了达到分层的目的，我们可以假象出任意形式的bucket。</p>
 <p>将所有的SATA添加到<code>ceph-x-sata</code>节点下，再将<code>ceph-x-sata</code>加入到根节点<code>root-sata</code>下，同理处理剩下的三个SSD盘。那么现在可以制定两个RULE：</p>
@@ -8795,7 +8795,7 @@
 <p>具体的建造指令可以参考之前的<a href="http://xuxiaopang.com/2016/10/10/ceph-full-install-el7-jewel/#自定义crush">自定义CRUSH一节</a></p>
 <p>这一节想要说明的是，CRUSH里面的节点除了OSD之外的所有bucket都是可以自定义的，并不需要和实际的物理结构相关，但要记住这样做的目的是将OSD分开，从而建立适当的RULE去选择OSD，所以不要把树状结构建立的脱离了实际情况，比如从三个机器上各挑一个OSD然后放到一个自定义的host节点下，虽然可以这样做，但是是没有意义的，说白了要根据自己的数据分布要求去构建OSD树结构，因为CRUSH只认RULE,并不知道你底层的实际结构！！！</p>
 <p>甚至，你可以像<a href="http://cephnotes.ksperis.com/blog/2015/02/02/crushmap-example-of-a-hierarchical-cluster-map/">这篇文章</a>里面一样构建出花式的树状结构！一切都在于你的想象力以及集群的应用需求。</p>
-<p><img alt="Alt text" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/1478503163385-20211012075835541-1633996715653.png" />USH</p>
+<p><img alt="Alt text" src="https://gitee.com/ljzsdut/pic/raw/master/default/1478503163385-20211012075835541-1633996715653.png" />USH</p>
 <p>现在再正式介绍CRUSH算法在Ceph中的存在形式，首先导出一个集群的CRUSH Map:</p>
 <div class="codehilite"><pre><span></span><code>[root@ceph-1 ~]# ceph osd getcrushmap -o /tmp/map
 got crush map from osdmap epoch 67
@@ -8911,7 +8911,7 @@ rule replicated_ruleset {
 <p>介绍完了这两步走的核心流程之后，最后再着重强调下<code>计算</code>两字，可以发现，从对象计算PG再到PG计算OSD组合，从头到尾都是通过计算得到最终的映射关系的，但是这些计算不论放在客户端还是服务器端，计算的结果都是相同的，因为里面所谓的随机值都是伪随机，只要传入一样的输入得到的输出结果都是一样的，所以Ceph把计算对象存储位置的任务发放给客户端，实际上，客户端在计算完一个对象需要保存的OSD之后，直接和OSD建立通讯，将数据直接存入OSD中，只要集群的Map没有变化，客户端和服务端计算出来的保存位置都是一样的，所以这大大的降低了服务器端的计算压力。</p>
 <p>本文没有直接介绍CRUSH算法，而是从<code>把一个对象存进Ceph</code>的流程来分析，着重解释了对象到PG的映射，PG到OSD的映射这两个流程，介绍了它们的计算方法。</p>
 <p>最后再给一个别人画的计算路径图，仅供理解。
-<img alt="Alt text" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/1478573403493-1633996656285-1633996741777.png" /></p>
+<img alt="Alt text" src="https://gitee.com/ljzsdut/pic/raw/master/default/1478573403493-1633996656285-1633996741777.png" /></p>
                 
                   
                 

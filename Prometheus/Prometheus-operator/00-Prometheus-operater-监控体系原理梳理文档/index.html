@@ -8474,7 +8474,7 @@ thanosrulers.monitoring.coreos.com            <span class="m">2020</span>-09-08T
 <li>podmonitors：根据此对象，operater会自动生成抓取目标pod的配置</li>
 <li>prometheusrules：根据此对象，operater会自动生成rule配置</li>
 </ul>
-<p><img alt="operater逻辑" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/operater逻辑-1597131535669.jpg" /></p>
+<p><img alt="operater逻辑" src="https://gitee.com/ljzsdut/pic/raw/master/default/operater逻辑-1597131535669.jpg" /></p>
 <h3 id="prometheusyaml">Prometheus对象yaml文件：<a class="headerlink" href="#prometheusyaml" title="Permanent link">¶</a></h3>
 <div class="codehilite"><pre><span></span><code><span class="c1">#kubectl get Prometheus -o yaml</span>
 <span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">v1</span>
@@ -10089,7 +10089,7 @@ type: Opaque
 ...省略其他...
 </code></pre></div>
 
-<p><img alt="Prometheus指定alertmanager" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20200925110058771-1604115695728.png" /></p>
+<p><img alt="Prometheus指定alertmanager" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20200925110058771-1604115695728.png" /></p>
 <h4 id="_2"><strong>操作步骤：</strong><a class="headerlink" href="#_2" title="Permanent link">¶</a></h4>
 <p>1、修改additional-scrape-configs.yaml文件内容：</p>
 <div class="codehilite"><pre><span></span><code><span class="p p-Indicator">-</span> <span class="nt">job_name</span><span class="p">:</span> <span class="s">&#39;istio/envoy-stats&#39;</span>
@@ -10326,9 +10326,9 @@ kubectl create secret generic prometheus-cluster-monitoring-additional-scrape-co
 <h3 id="2servicemonitorprometheusjob">2、定义ServiceMonitor自动生成Prometheus中job部分的配置文件<a class="headerlink" href="#2servicemonitorprometheusjob" title="Permanent link">¶</a></h3>
 <p>文档：https://cloud.tencent.com/document/product/248/53288</p>
 <p>Prometheus对象可以关联Alertmanager、PrometheusRule、ServiceMonitor。而ServiceMonitor可以被operater生成为Prometheus的配置文件，从而关联到相应的Service（Endpoints）。</p>
-<p><img alt="pAtTzp-1596614354991" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/pAtTzp-1596614354991.png" /></p>
+<p><img alt="pAtTzp-1596614354991" src="https://gitee.com/ljzsdut/pic/raw/master/default/pAtTzp-1596614354991.png" /></p>
 <p><strong>action: keep的作用</strong></p>
-<p><img alt="l277OZ-1596611840832" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/l277OZ-1596611840832.png" /></p>
+<p><img alt="l277OZ-1596611840832" src="https://gitee.com/ljzsdut/pic/raw/master/default/l277OZ-1596611840832.png" /></p>
 <h3 id="3">3、服务自动发现配置<a class="headerlink" href="#3" title="Permanent link">¶</a></h3>
 <p>后面详解！！！</p>
 <h3 id="4">4、自定义告警规则<a class="headerlink" href="#4" title="Permanent link">¶</a></h3>

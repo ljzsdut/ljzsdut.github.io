@@ -8434,7 +8434,7 @@ kubectl delete node node-name
 <p>这三个命令是正式release的1.2新加入的命令，三个命令一起介绍，是因为三个命令配合使用可以实现节点的维护。在1.2之前，因为没有相应的命令支持，如果要维护一个节点，只能stop该节点上的kubelet将该节点退出集群，是集群不在将新的pod调度到该节点上。如果该节点上本生就没有pod在运行，则不会对业务有任何影响。如果该节点上有pod正在运行，kubelet停止后，master会发现该节点不可达，而将该节点标记为notReady状态，不会将新的节点调度到该节点上。同时，会在其他节点上创建新的pod替换该节点上的pod。这种方式虽然能够保证集群的健壮性，但是任然有些暴力，如果业务只有一个副本，而且该副本正好运行在被维护节点上的话，可能仍然会造成业务的短暂中断。</p>
 <p>​     1.2中新加入的这3个命令可以保证维护节点时，平滑的将被维护节点上的业务迁移到其他节点上，保证业务不受影响。</p>
 <p>如下图所示是一个整个的节点维护的流程（为了方便demo增加了一些查看节点信息的操作）：</p>
-<p><img alt="cordon" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/cordon.png" /></p>
+<p><img alt="cordon" src="https://gitee.com/ljzsdut/pic/raw/master/default/cordon.png" /></p>
 <p>1）首先查看当前集群所有节点状态，可以看到共四个节点都处于ready状态；</p>
 <p>2）查看当前nginx两个副本分别运行在d-node1和k-node2两个节点上；</p>
 <p>3）使用cordon命令将d-node1标记为不可调度；</p>
@@ -8444,7 +8444,7 @@ kubectl delete node node-name
 <p>7）再查看nginx的状态发现，d-node1上的副本已经被迁移到k-node1上；这时候就可以对d-node1进行一些节点维护的操作，如升级内核，升级Docker等；</p>
 <p>8）节点维护完后，使用uncordon命令解锁d-node1，使其重新变得可调度；</p>
 <p>9）检查节点状态，发现d-node1重新变回Ready状态。</p>
-<p><img alt="NMT架构在k8s中的实现拓补图" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/NMT架构在k8s中的实现拓补图.png" /></p>
+<p><img alt="NMT架构在k8s中的实现拓补图" src="https://gitee.com/ljzsdut/pic/raw/master/default/NMT架构在k8s中的实现拓补图.png" /></p>
                 
                   
                 

@@ -8745,7 +8745,7 @@
 <p>​   Kubernetes集群管理员通过提供不同的存储类，可以满足用户不同的服务质量级别、备份策略和任意策略要求的存储需求(实现对不同存储进行分类)。动态存储卷供应使用StorageClass进行实现，其<strong>实现pv的动态供给</strong>、按需被创建。如果没有<strong>动态存储供应</strong>，Kubernetes集群的管理员将不得不通过手工的方式类创建新的存储卷。通过动态存储卷，Kubernetes将能够按照用户的需要，自动创建其需要的存储。</p>
 <p>​        <strong>定义存储类后，当创建pvc后就不再请求pv，而是来请求StorageClass，而StorageClass将会为pvc自动创建一个可用pv。(存储类实例化成存储对象即pv)</strong> </p>
 <p>基于StorageClass的动态存储供应整体过程如下图所示：ss</p>
-<p><img alt="ss" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/StorageClass.png" /></p>
+<p><img alt="ss" src="https://gitee.com/ljzsdut/pic/raw/master/default/StorageClass.png" /></p>
 <p>1）集群管理员预先创建存储类（StorageClass）；</p>
 <p>2）用户创建使用存储类的持久化存储声明(PVC：PersistentVolumeClaim)；</p>
 <p>3）存储持久化声明通知系统，它需要一个持久化存储(PV: PersistentVolume)；</p>

@@ -8386,24 +8386,24 @@
 <p>1）Cluster表示：流量可以转发到其他节点上的Pod。</p>
 <p>2）Local表示：流量只发给本机的Pod。</p>
 <p>图示一下：</p>
-<p><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/1586510301168059348-1614331767701.png" /></p>
+<p><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/1586510301168059348-1614331767701.png" /></p>
 <h1 id="2_2">2   这2种模式有什么区别<a class="headerlink" href="#2_2" title="Permanent link">¶</a></h1>
 <p>存在这2种模式的原因就是，<strong>当前节点的Kube-proxy在转发报文的时候，会不会保留原始访问者的IP。</strong>例如再试一下阿里云的SLB(nginx-controller的service类型为loadbalancer)时，如果设置为Cluster，此时nginx无法获取客户的真实IP信息，此时可以将其修改为“Local”。</p>
 <h2 id="21_1cluster">2.1   选择（1）Cluster<a class="headerlink" href="#21_1cluster" title="Permanent link">¶</a></h2>
 <p>注：这个是默认模式，Kube-proxy不管容器实例在哪，公平转发。</p>
 <p>Kube-proxy转发时会替换掉报文的源IP。即：容器收的报文，源IP地址，已经被替换为上一个转发节点的了。</p>
-<p><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/1586510338657094752-1614331767872.png" /></p>
+<p><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/1586510338657094752-1614331767872.png" /></p>
 <p>原因是Kube-proxy在做转发的时候，会做一次SNAT (source network address translation)，所以源IP变成了节点1的IP地址。</p>
 <p>ps：snat确保回去的报文可以原路返回，不然回去的路径不一样，客户会认为非法报文的。（我发给张三的，怎么李四给我回应？丢弃！）</p>
 <p>这种模式好处是负载均衡会比较好，因为无论容器实例怎么分布在多个节点上，它都会转发过去。当然，由于多了一次转发，性能会损失一丢丢。</p>
 <h2 id="22_2local">2.2   选择（2）Local<a class="headerlink" href="#22_2local" title="Permanent link">¶</a></h2>
 <p>这种情况下，只转发给本机的容器，绝不跨节点转发。</p>
 <p>Kube-proxy转发时会保留源IP。即：容器收到的报文，看到源IP地址还是用户的。</p>
-<p><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/1586510382077050695-1614331768182.png" /></p>
+<p><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/1586510382077050695-1614331768182.png" /></p>
 <p>缺点是负载均衡可能不是很好，因为一旦容器实例分布在多个节点上，它只转发给本机，不跨节点转发流量。当然，少了一次转发，性能会相对好一丢丢。</p>
 <p>注：这种模式下的Service类型只能为外部流量，即：LoadBalancer 或者 NodePort 两种，否则会报错。</p>
 <p>同时，<strong>由于本机不会跨节点转发报文，所以要想所有节点上的容器有负载均衡，就需要上一级的Loadbalancer来做负载均衡了</strong>。</p>
-<p><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/1586510405081095597-1614331768347.png" /></p>
+<p><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/1586510405081095597-1614331768347.png" /></p>
 <p>不过流量还是会不太均衡，如上图，Loadbalancer看到的是2个后端（把节点的IP），每个Node上面几个Pod对Loadbalancer来说是不知道的。</p>
 <p>想要解决负载不均衡的问题：可以给Pod容器设置反亲和，让这些容器平均的分布在各个节点上（不要聚在一起）。</p>
 <div class="codehilite"><pre><span></span><code><span class="nt">affinity</span><span class="p">:</span>
@@ -8421,7 +8421,7 @@
 </code></pre></div>
 
 <p>像下面这样，负载均衡情况就会好很多~</p>
-<p><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/1586510430723055169-1614331768587.png" /></p>
+<p><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/1586510430723055169-1614331768587.png" /></p>
 <h1 id="3">3   两种模式该怎么选<a class="headerlink" href="#3" title="Permanent link">¶</a></h1>
 <p>要想性能（时延）好，当然应该选 Local 模式喽，毕竟流量转发少一次SNAT嘛。</p>
 <p>不过注意，选了这个就得考虑好怎么处理好负载均衡问题（ps：通常我们使用Pod间反亲和来达成）。</p>

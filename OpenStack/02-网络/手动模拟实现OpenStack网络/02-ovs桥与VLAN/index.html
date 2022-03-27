@@ -8495,7 +8495,7 @@
                   <h1>02 ovs桥与VLAN</h1>
                 
                 <p>openvswitch相关介绍</p>
-<p><img alt="HG6kM0-1625318464677" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/HG6kM0-1625318464677-1625318477465.jpg" /></p>
+<p><img alt="HG6kM0-1625318464677" src="https://gitee.com/ljzsdut/pic/raw/master/default/HG6kM0-1625318464677-1625318477465.jpg" /></p>
 <ol>
 <li>
 <p><strong>ovs-vswitchd</strong>：OVS守护进程，OVS的核心部件，实现交换功能，和Linux内核兼容模块一起，实现基于流的交换（flow-based switching）。它和上层 controller 通信遵从 OPENFLOW 协议，它与 ovsdb-server 通信使用 OVSDB 协议，它和内核模块通过netlink通信，它支持多个独立的 datapath（网桥），它通过更改flow table 实现了绑定和VLAN等功能。 </p>
@@ -8580,7 +8580,7 @@ Database commands:
 </code></pre></div>
 
 <h2 id="1ovs">试验1：ovs配置两台虚拟机互通<a class="headerlink" href="#1ovs" title="Permanent link">¶</a></h2>
-<p><img alt="image-20210703233050845" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20210703233050845-1625326250991-1625326281271.png" /></p>
+<p><img alt="image-20210703233050845" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20210703233050845-1625326250991-1625326281271.png" /></p>
 <div class="codehilite"><pre><span></span><code><span class="o">[</span>root@OS-network-1 etc<span class="o">]</span><span class="c1"># cat &gt;/etc/qemu-ovs-ifup&lt;&lt;&quot;EOF&quot;</span>
 <span class="c1">#!/bin/bash</span>
 
@@ -8714,7 +8714,7 @@ round-trip min/avg/max <span class="o">=</span> <span class="m">1</span>.631/1.6
 </code></pre></div>
 
 <h2 id="2ovsvlantag">试验2：ovs设置VLAN(基于Tag)<a class="headerlink" href="#2ovsvlantag" title="Permanent link">¶</a></h2>
-<p><img alt="image-20210703233050845" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20210703233050845-1625326250991.png" /></p>
+<p><img alt="image-20210703233050845" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20210703233050845-1625326250991.png" /></p>
 <p>基于试验1</p>
 <div class="codehilite"><pre><span></span><code><span class="o">[</span>root@OS-network-1 ~<span class="o">]</span><span class="c1"># ovs-vsctl list port</span>
 _uuid               : 12ba7374-1323-4ecb-88a4-1974b7324818
@@ -8863,7 +8863,7 @@ round-trip min/avg/max <span class="o">=</span> <span class="m">4</span>.420/4.4
 </code></pre></div>
 
 <h2 id="3vlan">试验3：跨多个桥设置VLAN<a class="headerlink" href="#3vlan" title="Permanent link">¶</a></h2>
-<p><img alt="image-20210703233829396" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20210703233829396-1625326709551.png" /></p>
+<p><img alt="image-20210703233829396" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20210703233829396-1625326709551.png" /></p>
 <p>试验目标：将上图中的4个vm都设置为VLAN=10。</p>
 <p>创建ovs桥br-in2，并使用veth设备连接br-in1和br-in2：</p>
 <div class="codehilite"><pre><span></span><code><span class="c1">#创建br-in2桥</span>
@@ -9122,7 +9122,7 @@ round-trip min/avg/max <span class="o">=</span> <span class="m">4</span>.750/4.7
 </code></pre></div>
 
 <h2 id="4vlan">试验4：多个VLAN<a class="headerlink" href="#4vlan" title="Permanent link">¶</a></h2>
-<p><img alt="image-20210703233829396" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20210703233829396-1625326709551-1625328349310.png" /></p>
+<p><img alt="image-20210703233829396" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20210703233829396-1625326709551-1625328349310.png" /></p>
 <p>试验目标：vm1和vm3设置VLAN为20；vm2和vm4设置vlan为30；</p>
 <p>设置VLAN：</p>
 <div class="codehilite"><pre><span></span><code><span class="o">[</span>root@OS-network-1 ~<span class="o">]</span><span class="c1"># ovs-vsctl set port veth1.0 tag=20</span>

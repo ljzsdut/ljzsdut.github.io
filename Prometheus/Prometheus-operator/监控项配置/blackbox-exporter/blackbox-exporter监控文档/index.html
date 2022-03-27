@@ -8972,7 +8972,7 @@ $ curl -X POST <span class="s2">&quot;http://10.244.3.174:9090/-/reload&quot;</s
 </code></pre></div>
 
 <p>打开 Prometheus 的 Target 页面，就会看到 上面定义的 kubernetes-service-dns 任务了：</p>
-<p><img alt="prometheus blackbox dns" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/prometheus-webui-blackbox-dns-1604215671218.png" /></p>
+<p><img alt="prometheus blackbox dns" src="https://gitee.com/ljzsdut/pic/raw/master/default/prometheus-webui-blackbox-dns-1604215671218.png" /></p>
 <p>回到 Graph 页面，可以使用 <code>probe_success{job="kubernetes-service-dns"}</code> 来查看检测结果，这样就实现了对 DNS 的黑盒监控。 除了 DNS 的配置外，上面我们还配置了一个 <code>http_2xx</code> 的模块，也就是 HTTP 探针，HTTP 探针是进行黑盒监控时最常用的探针之一，通过 HTTP 探针能够对网站或者 HTTP 服务建立有效的监控，包括其本身的可用性，以及用户体验相关的如响应时间等等。除了能够在服务出现异常的时候及时报警，还能帮助系统管理员分析和优化网站体验。这里我们可以使用他来对 http 服务进行检测。</p>
 <p>因为前面已经给 Blackbox 配置了 <code>http_2xx</code> 模块，所以这里只需要在 Prometheus 中加入抓取任务，这里我们可以结合前面的 Prometheus 的服务发现功能来做黑盒监控，对于 Service 和 Ingress 类型的服务发现，用来进行黑盒监控是非常合适的，配置如下所示：</p>
 <div class="codehilite"><pre><span></span><code><span class="p p-Indicator">-</span> <span class="nt">job_name</span><span class="p">:</span> <span class="s">&#39;kubernetes-http-services&#39;</span>
@@ -9034,7 +9034,7 @@ $ curl -X POST <span class="s2">&quot;http://10.244.3.174:9090/-/reload&quot;</s
 </code></pre></div>
 
 <p>打开 Prometheus 的 Target 页面，就会看到上面定义的两个任务了：</p>
-<p><img alt="prometheus blackbox service ingress" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/prometheus-webui-blackbox-service-ingress-1604215693015.png" /></p>
+<p><img alt="prometheus blackbox service ingress" src="https://gitee.com/ljzsdut/pic/raw/master/default/prometheus-webui-blackbox-service-ingress-1604215693015.png" /></p>
 <p>但是现在还没有任何数据，这是因为上面是匹配 <code>__meta_kubernetes_ingress_annotation_prometheus_io_http_probe</code> 这个元信息，所以如果我们需要让这两个任务发现的话需要在 Service 或者 Ingress 中配置对应的 annotation：</p>
 <div class="codehilite"><pre><span></span><code><span class="nt">annotation</span><span class="p">:</span>
   <span class="nt">prometheus.io/http-probe</span><span class="p">:</span> <span class="s">&quot;true&quot;</span>
@@ -9063,9 +9063,9 @@ status:
 </code></pre></div>
 
 <p>这个时候我们查看到 Ingress 这个任务下面已经有抓取任务了：</p>
-<p><img alt="prometheus blackbox ingress" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/prometheus-webui-blackbox-ingress-1604215702576.png" /></p>
+<p><img alt="prometheus blackbox ingress" src="https://gitee.com/ljzsdut/pic/raw/master/default/prometheus-webui-blackbox-ingress-1604215702576.png" /></p>
 <p>比如现在我们可以使用 <code>probe_duration_seconds</code> 来检查监控结果：</p>
-<p><img alt="prometheus blackbox ingress query" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/prometheus-webui-blackbox-ingress-query-1604215709677.png" /></p>
+<p><img alt="prometheus blackbox ingress query" src="https://gitee.com/ljzsdut/pic/raw/master/default/prometheus-webui-blackbox-ingress-query-1604215709677.png" /></p>
 <p>对于 Service 是一样的，当然如果你需要对监控的路径、端口这些做控制，我们可以自己在 relabel_configs 中去做相应的配置，比如我们想对 Service 的黑盒做自定义配置，可以想下面这样配置：</p>
 <div class="codehilite"><pre><span></span><code><span class="p p-Indicator">-</span> <span class="nt">source_labels</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="nv">__meta_kubernetes_service_name</span><span class="p p-Indicator">,</span> <span class="nv">__meta_kubernetes_namespace</span><span class="p p-Indicator">,</span> <span class="nv">__meta_kubernetes_service_annotation_prometheus_io_http_probe_port</span><span class="p p-Indicator">,</span> <span class="nv">__meta_kubernetes_service_annotation_prometheus_io_http_probe_path</span><span class="p p-Indicator">]</span>
   <span class="nt">action</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">replace</span>

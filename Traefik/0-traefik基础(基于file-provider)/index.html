@@ -9278,7 +9278,7 @@
                 
                 <h2 id="_1">零、概述<a class="headerlink" href="#_1" title="Permanent link">¶</a></h2>
 <h3 id="traefik">traefik处理请求的过程<a class="headerlink" href="#traefik" title="Permanent link">¶</a></h3>
-<p><img alt="mZX9Hc-1614566958023" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/mZX9Hc-1614566958023-1614566970613.png" /></p>
+<p><img alt="mZX9Hc-1614566958023" src="https://gitee.com/ljzsdut/pic/raw/master/default/mZX9Hc-1614566958023-1614566970613.png" /></p>
 <p>1、请求流量会经过定义的EntryPoints(监听IP和Port)</p>
 <p>2、Routers分析流入的请求，判断是否能够匹配一系列的匹配规则(RULES)</p>
 <p>3、如果匹配成功，Routers可能会在将requtest转发到应用服务(SERVICES)之前，通过一个或多个Middlewares将requtet进行转换处理。</p>
@@ -9395,7 +9395,7 @@
 </blockquote>
 <p>router将请求连接到后端服务。</p>
 <p>路由器负责将传入请求连接到可以处理这些请求的服务。在此过程中，路由器可以使用中间件来更新请求，或者在将请求转发到服务之前采取行动。</p>
-<p><img alt="kMt1g0-1614581537618" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/kMt1g0-1614581537618-1614581544127.png" /></p>
+<p><img alt="kMt1g0-1614581537618" src="https://gitee.com/ljzsdut/pic/raw/master/default/kMt1g0-1614581537618-1614581544127.png" /></p>
 <p>router分为3类，每一种router的配置有少许不同。</p>
 <ul>
 <li>http routers</li>
@@ -9608,7 +9608,7 @@ http:
 </code></pre></div>
 
 <h3 id="services">Services<a class="headerlink" href="#services" title="Permanent link">¶</a></h3>
-<p><img alt="923quE-1614583636703" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/923quE-1614583636703-1614583640318.png" /></p>
+<p><img alt="923quE-1614583636703" src="https://gitee.com/ljzsdut/pic/raw/master/default/923quE-1614583636703-1614583640318.png" /></p>
 <p>Services负责配置如何到达处理传入请求的实际服务。此处的service是比k8s中更高一级的service（在k8s service上进行封装），在k8s中的service等同于上图中的server。</p>
 <p>Service分为3类：</p>
 <ul>
@@ -9988,7 +9988,7 @@ curl --cookie "lvl1=whoami1; lvl2=http://127.0.0.1:8081" http://localhost:8000</
 <h2 id="middlewares_1">四、Middlewares<a class="headerlink" href="#middlewares_1" title="Permanent link">¶</a></h2>
 <h3 id="_9">概述<a class="headerlink" href="#_9" title="Permanent link">¶</a></h3>
 <p>中间件用于调整报文。</p>
-<p><img alt="s31wFg-1614670564522" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/s31wFg-1614670564522-1614670588713.png" /></p>
+<p><img alt="s31wFg-1614670564522" src="https://gitee.com/ljzsdut/pic/raw/master/default/s31wFg-1614670564522-1614670588713.png" /></p>
 <p>中间件附属在路由器上，是一种在请求发送到后端服务之前（或来自后端服务器的响应报文发送到客户端之前）调整请求的方法。</p>
 <p>Traefik中有几种可用的中间件，一些可以修改请求，标头，一些负责重定向，一些添加身份验证，等等。多种中间件可以链式组合以适应各种情况。</p>
 <h3 id="_10">中间件示例<a class="headerlink" href="#_10" title="Permanent link">¶</a></h3>

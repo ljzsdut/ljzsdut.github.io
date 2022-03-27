@@ -8759,7 +8759,7 @@ $ <span class="nb">echo</span> <span class="m">1</span> &gt; /proc/sys/net/ipv4/
 <p>Calico 较少的依赖性使它能适配所有 VM、Container、白盒或者混合环境场景。</p>
 <h2 id="calico">Calico架构<a class="headerlink" href="#calico" title="Permanent link">¶</a></h2>
 <h3 id="_2">架构图：<a class="headerlink" href="#_2" title="Permanent link">¶</a></h3>
-<p><a href="https://img2018.cnblogs.com/blog/1060878/201904/1060878-20190413152300545-538840176.png"><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/1060878-20190413152300545-538840176-1619159759980.png" /></a></p>
+<p><a href="https://img2018.cnblogs.com/blog/1060878/201904/1060878-20190413152300545-538840176.png"><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/1060878-20190413152300545-538840176-1619159759980.png" /></a></p>
 <p>Calico网络模型主要工作组件：</p>
 <p>1.Felix：运行在每一台 Host 的 agent 进程，主要负责网络接口管理和监听、路由、ARP 管理、ACL 管理和同步、状态上报等。</p>
 <p>2.etcd：分布式键值存储，主要负责网络元数据一致性，确保Calico网络状态的准确性，可以与kubernetes共用；</p>
@@ -8779,14 +8779,14 @@ $ <span class="nb">echo</span> <span class="m">1</span> &gt; /proc/sys/net/ipv4/
 <h2 id="ipip_1">IPIP 工作模式<a class="headerlink" href="#ipip_1" title="Permanent link">¶</a></h2>
 <h3 id="1">1.测试环境<a class="headerlink" href="#1" title="Permanent link">¶</a></h3>
 <p>一个msater节点，ip 172.171.5.95，一个node节点 ip 172.171.5.96 </p>
-<p><a href="https://img2018.cnblogs.com/blog/1060878/201904/1060878-20190413150641464-621788389.png"><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/1060878-20190413150641464-621788389-1619159760014.png" /></a></p>
+<p><a href="https://img2018.cnblogs.com/blog/1060878/201904/1060878-20190413150641464-621788389.png"><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/1060878-20190413150641464-621788389-1619159760014.png" /></a></p>
 <p>创建一个daemonset的应用，pod1落在master节点上 ip地址为192.168.236.3，pod2落在node节点上 ip地址为192.168.190.203</p>
-<p><a href="https://img2018.cnblogs.com/blog/1060878/201904/1060878-20190413150652618-320617155.png"><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/1060878-20190413150652618-320617155-1619159760092.png" /></a></p>
+<p><a href="https://img2018.cnblogs.com/blog/1060878/201904/1060878-20190413150652618-320617155.png"><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/1060878-20190413150652618-320617155-1619159760092.png" /></a></p>
 <p><strong>pod1 ping pod2</strong></p>
-<p><a href="https://img2018.cnblogs.com/blog/1060878/201904/1060878-20190413153642465-2094530861.png"><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/1060878-20190413153642465-2094530861-1619159760209.png" /></a></p>
+<p><a href="https://img2018.cnblogs.com/blog/1060878/201904/1060878-20190413153642465-2094530861.png"><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/1060878-20190413153642465-2094530861-1619159760209.png" /></a></p>
 <h3 id="2ping">2.ping包的旅程<a class="headerlink" href="#2ping" title="Permanent link">¶</a></h3>
 <p><strong>pod1上的路由信息</strong></p>
-<p><a href="https://img2018.cnblogs.com/blog/1060878/201904/1060878-20190413150713064-1083686463.png"><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/1060878-20190413150713064-1083686463-1619159760255.png" /></a></p>
+<p><a href="https://img2018.cnblogs.com/blog/1060878/201904/1060878-20190413150713064-1083686463.png"><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/1060878-20190413150713064-1083686463-1619159760255.png" /></a></p>
 <p>根据路由信息，ping 192.168.190.203，会匹配到第一条。第一条路由的意思是：去往任何网段的数据包都发往网管169.254.1.1，然后从eth0网卡发送出去。(169.254.1.1这个地址的arp解析采用了宿主机的arp代理实现，其对应的MAC地址为pod的eth0网卡的对端网卡的MAC)</p>
 <p>路由表中Flags标志的含义：</p>
 <p>U up表示当前为启动状态</p>
@@ -8795,63 +8795,63 @@ $ <span class="nb">echo</span> <span class="m">1</span> &gt; /proc/sys/net/ipv4/
 <p>D Dynamicaly 表示该路由是重定向报文修改</p>
 <p>M 表示该路由已被重定向报文修改</p>
 <p><strong>master节点上的路由信息</strong></p>
-<p><a href="https://img2018.cnblogs.com/blog/1060878/201904/1060878-20190413150720233-1995872444.png"><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/1060878-20190413150720233-1995872444-1619159760354.png" /></a></p>
+<p><a href="https://img2018.cnblogs.com/blog/1060878/201904/1060878-20190413150720233-1995872444.png"><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/1060878-20190413150720233-1995872444-1619159760354.png" /></a></p>
 <p>当ping包来到master节点上，会匹配到路由tunl0。该路由的意思是：去往192.169.190.192/26的网段的数据包都发往网关172.171.5.96。因为pod1在5.95，pod2在5.96。所以数据包就通过设备tunl0发往到node节点上。 </p>
 <p><strong>node节点上路由信息</strong></p>
-<p><a href="https://img2018.cnblogs.com/blog/1060878/201904/1060878-20190413154329954-1165326319.png"><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/1060878-20190413154329954-1165326319-1619159760454.png" /></a></p>
+<p><a href="https://img2018.cnblogs.com/blog/1060878/201904/1060878-20190413154329954-1165326319.png"><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/1060878-20190413154329954-1165326319-1619159760454.png" /></a></p>
 <p>当node节点网卡收到数据包之后，发现发往的目的ip为192.168.190.203，于是匹配到红线的路由。该路由的意思是：192.168.190.203是本机直连设备，去往设备的数据包发往caliadce112d250。</p>
 <p>那么该设备是什么呢？如果到这里你能猜出来是什么，那说明你的网络功底是不错的。这个设备就是veth pair的一端。在创建pod2时calico会给pod2创建一个veth pair设备。一端是pod2的网卡，另一端就是我们看到的caliadce112d250。下面我们验证一下。在pod2中安装ethtool工具，然后使用ethtool -S eth0,查看veth pair另一端的设备号。</p>
-<p><a href="https://img2018.cnblogs.com/blog/1060878/201904/1060878-20190413154707177-2093232618.png"><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/1060878-20190413154707177-2093232618-1619159760546.png" /></a></p>
+<p><a href="https://img2018.cnblogs.com/blog/1060878/201904/1060878-20190413154707177-2093232618.png"><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/1060878-20190413154707177-2093232618-1619159760546.png" /></a></p>
 <p>pod2 网卡另一端的设备好号是18，在node上查看编号为18的网络设备，可以发现该网络设备就是caliadce112d250。</p>
-<p><a href="https://img2018.cnblogs.com/blog/1060878/201904/1060878-20190413155040787-1729369707.png"><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/1060878-20190413155040787-1729369707-1619159760613.png" /></a></p>
+<p><a href="https://img2018.cnblogs.com/blog/1060878/201904/1060878-20190413155040787-1729369707.png"><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/1060878-20190413155040787-1729369707-1619159760613.png" /></a></p>
 <p>所以，node上的路由，发送caliadce112d250的数据其实就是发送到pod2的网卡中。ping包的旅行到这里就到了目的地。</p>
-<p><a href="https://img2018.cnblogs.com/blog/1060878/201904/1060878-20190413150729776-1365068043.png"><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/1060878-20190413150729776-1365068043-1619159760682.png" /></a></p>
+<p><a href="https://img2018.cnblogs.com/blog/1060878/201904/1060878-20190413150729776-1365068043.png"><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/1060878-20190413150729776-1365068043-1619159760682.png" /></a></p>
 <p>查看一下pod2中的路由信息，发现该路由信息和pod1中是一样的。</p>
-<p><a href="https://img2018.cnblogs.com/blog/1060878/201904/1060878-20190413150746241-395523835.png"><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/1060878-20190413150746241-395523835-1619159760764.png" /></a> </p>
+<p><a href="https://img2018.cnblogs.com/blog/1060878/201904/1060878-20190413150746241-395523835.png"><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/1060878-20190413150746241-395523835-1619159760764.png" /></a> </p>
 <p>顾名思义，IPIP网络就是将IP网络封装在IP网络里。IPIP网络的特点是所有pod的数据流量都从隧道tunl0发送，并且在tunl0这增加了一层传输层的封包。</p>
 <p>在master网卡上抓包分析该过程。</p>
-<p><a href="https://img2018.cnblogs.com/blog/1060878/201904/1060878-20190414232527057-801852995.png"><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/1060878-20190414232527057-801852995-1619159760865.png" /></a></p>
-<p><a href="https://img2018.cnblogs.com/blog/1060878/201904/1060878-20190413150813156-308581738.png"><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/1060878-20190413150813156-308581738-1619159760974.png" /></a></p>
+<p><a href="https://img2018.cnblogs.com/blog/1060878/201904/1060878-20190414232527057-801852995.png"><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/1060878-20190414232527057-801852995-1619159760865.png" /></a></p>
+<p><a href="https://img2018.cnblogs.com/blog/1060878/201904/1060878-20190413150813156-308581738.png"><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/1060878-20190413150813156-308581738-1619159760974.png" /></a></p>
 <p>打开ICMP 285，pod1 ping pod2的数据包，能够看到该数据包一共5层，其中IP所在的网络层有两个，分别是pod之间的网络和主机之间的网络封装。</p>
-<p><a href="https://img2018.cnblogs.com/blog/1060878/201904/1060878-20190413150820715-66735737.png"><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/1060878-20190413150820715-66735737-1619159761045.png" /></a></p>
+<p><a href="https://img2018.cnblogs.com/blog/1060878/201904/1060878-20190413150820715-66735737.png"><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/1060878-20190413150820715-66735737-1619159761045.png" /></a></p>
 <p>根据数据包的封装顺序，应该是在pod1 ping pod2的ICMP包外面多封装了一层主机之间的数据包。</p>
-<p><a href="https://img2018.cnblogs.com/blog/1060878/201904/1060878-20190414173605263-65569449.png"><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/1060878-20190414173605263-65569449-1619159761108.png" /></a></p>
+<p><a href="https://img2018.cnblogs.com/blog/1060878/201904/1060878-20190414173605263-65569449.png"><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/1060878-20190414173605263-65569449-1619159761108.png" /></a></p>
 <p>之所以要这样做是因为tunl0是一个隧道端点设备，在数据到达时要加上一层封装，便于发送到对端隧道设备中。 </p>
 <p>两层IP封装的具体内容</p>
-<p><a href="https://img2018.cnblogs.com/blog/1060878/201904/1060878-20190413150826196-1894311200.png"><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/1060878-20190413150826196-1894311200-1619159761180.png" /></a></p>
+<p><a href="https://img2018.cnblogs.com/blog/1060878/201904/1060878-20190413150826196-1894311200.png"><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/1060878-20190413150826196-1894311200-1619159761180.png" /></a></p>
 <p>IPIP的连接方式：</p>
-<p><a href="https://img2018.cnblogs.com/blog/1060878/201904/1060878-20190415165144848-1984358878.png"><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/1060878-20190415165144848-1984358878-1619159761405.png" /></a></p>
+<p><a href="https://img2018.cnblogs.com/blog/1060878/201904/1060878-20190415165144848-1984358878.png"><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/1060878-20190415165144848-1984358878-1619159761405.png" /></a></p>
 <h2 id="bgp_1">BGP 工作模式<a class="headerlink" href="#bgp_1" title="Permanent link">¶</a></h2>
 <h3 id="1bgp">1.修改配置，启用BGP<a class="headerlink" href="#1bgp" title="Permanent link">¶</a></h3>
 <p>在安装calico网络时，默认安装是IPIP网络。calico.yaml文件中，将CALICO_IPV4POOL_IPIP的值修改成 "off"，就能够替换成BGP网络。 </p>
 <div class="codehilite"><pre><span></span><code>kubectl edit ds calico-node -n kube-system
 </code></pre></div>
 
-<p><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/1060878-20190414174416871-1167710181-1619159761479.png" /></p>
+<p><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/1060878-20190414174416871-1167710181-1619159761479.png" /></p>
 <p><strong>对比启用BGP模式的前后变化</strong></p>
 <p>BGP网络相比较IPIP网络，最大的不同之处就是没有了隧道设备 tunl0。 前面介绍过IPIP网络pod之间的流量发送tunl0，然后tunl0发送对端设备。BGP网络中，pod之间的流量直接从网卡发送目的地，减少了tunl0这个环节。</p>
 <p>master节点上路由信息。从路由信息来看，没有tunl0设备。 </p>
-<p><a href="https://img2018.cnblogs.com/blog/1060878/201904/1060878-20190415113440788-275117848.png"><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/1060878-20190415113440788-275117848-1619159761540.png" /></a> </p>
+<p><a href="https://img2018.cnblogs.com/blog/1060878/201904/1060878-20190415113440788-275117848.png"><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/1060878-20190415113440788-275117848-1619159761540.png" /></a> </p>
 <p>同样创建一个daemonset，pod1在master节点上，pod2在node节点上。</p>
-<p><a href="https://img2018.cnblogs.com/blog/1060878/201904/1060878-20190415114541797-340745707.png"><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/1060878-20190415114541797-340745707-1619159761615.png" /></a></p>
+<p><a href="https://img2018.cnblogs.com/blog/1060878/201904/1060878-20190415114541797-340745707.png"><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/1060878-20190415114541797-340745707-1619159761615.png" /></a></p>
 <h3 id="2ping_1">2.ping包之旅<a class="headerlink" href="#2ping_1" title="Permanent link">¶</a></h3>
 <p><strong>pod1 ping pod2</strong></p>
-<p><a href="https://img2018.cnblogs.com/blog/1060878/201904/1060878-20190415114230073-496262441.png"><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/1060878-20190415114230073-496262441-1619159761682.png" /></a></p>
+<p><a href="https://img2018.cnblogs.com/blog/1060878/201904/1060878-20190415114230073-496262441.png"><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/1060878-20190415114230073-496262441-1619159761682.png" /></a></p>
 <p>根据pod1中的路由信息，ping包通过eth0网卡发送到master节点上。</p>
 <p>master节点上路由信息。根据匹配到的 192.168.190.192 路由，该路由的意思是：去往网段192.168.190.192/26 的数据包，发送网段172.171.5.96。而5.96就是node节点。所以，该数据包直接发送了5.96节点。 </p>
-<p><a href="https://img2018.cnblogs.com/blog/1060878/201904/1060878-20190415114439204-1886327378.png"><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/1060878-20190415114439204-1886327378-1619159761754.png" /></a></p>
+<p><a href="https://img2018.cnblogs.com/blog/1060878/201904/1060878-20190415114439204-1886327378.png"><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/1060878-20190415114439204-1886327378-1619159761754.png" /></a></p>
 <p>node节点上的路由信息。根据匹配到的192.168.190.192的路由，数据将发送给 cali6fcd7d1702e设备，该设备和上面分析的是一样，为pod2的veth pair 的一端。数据就直接发送给pod2的网卡。 </p>
-<p><a href="https://img2018.cnblogs.com/blog/1060878/201904/1060878-20190415115008617-409053518.png"><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/1060878-20190415115008617-409053518-1619159761895.png" /></a></p>
+<p><a href="https://img2018.cnblogs.com/blog/1060878/201904/1060878-20190415115008617-409053518.png"><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/1060878-20190415115008617-409053518-1619159761895.png" /></a></p>
 <p>当pod2对ping包做出回应之后，数据到达node节点上，匹配到192.168.236.0的路由，该路由说的是：去往网段192.168.236.0/26 的数据，发送给网关 172.171.5.95。数据包就直接通过网卡ens160，发送到master节点上。</p>
-<p><a href="https://img2018.cnblogs.com/blog/1060878/201904/1060878-20190415115329941-1036275159.png"><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/1060878-20190415115329941-1036275159-1619159762069.png" /></a></p>
+<p><a href="https://img2018.cnblogs.com/blog/1060878/201904/1060878-20190415115329941-1036275159.png"><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/1060878-20190415115329941-1036275159-1619159762069.png" /></a></p>
 <p>通过在master节点上抓包，查看经过的流量，筛选出ICMP，找到pod1 ping pod2的数据包。</p>
-<p><a href="https://img2018.cnblogs.com/blog/1060878/201904/1060878-20190415115718930-42251257.png"><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/1060878-20190415115718930-42251257-1619159762280.png" /></a></p>
+<p><a href="https://img2018.cnblogs.com/blog/1060878/201904/1060878-20190415115718930-42251257.png"><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/1060878-20190415115718930-42251257-1619159762280.png" /></a></p>
 <p>可以看到BGP网络下，没有使用IPIP模式，数据包是正常的封装。</p>
-<p><a href="https://img2018.cnblogs.com/blog/1060878/201904/1060878-20190415113605760-703346562.png"><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/1060878-20190415113605760-703346562-1619159762660.png" /></a></p>
+<p><a href="https://img2018.cnblogs.com/blog/1060878/201904/1060878-20190415113605760-703346562.png"><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/1060878-20190415113605760-703346562-1619159762660.png" /></a></p>
 <p>值得注意的是mac地址的封装。192.168.236.0是pod1的ip，192.168.190.198是pod2的ip。而源mac地址是 master节点网卡的mac，目的mac是node节点的网卡的mac。这说明，在 master节点的路由接收到数据，重新构建数据包时，使用arp请求，将node节点的mac拿到，然后封装到数据链路层。</p>
-<p><a href="https://img2018.cnblogs.com/blog/1060878/201904/1060878-20190415113611124-513029729.png"><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/1060878-20190415113611124-513029729-1619159762844.png" /></a></p>
+<p><a href="https://img2018.cnblogs.com/blog/1060878/201904/1060878-20190415113611124-513029729.png"><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/1060878-20190415113611124-513029729-1619159762844.png" /></a></p>
 <p><strong>BGP的连接方式：</strong></p>
-<p><a href="https://img2018.cnblogs.com/blog/1060878/201904/1060878-20190415165320714-135136611.png"><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/1060878-20190415165320714-135136611-1619159763040.png" /></a></p>
+<p><a href="https://img2018.cnblogs.com/blog/1060878/201904/1060878-20190415165320714-135136611.png"><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/1060878-20190415165320714-135136611-1619159763040.png" /></a></p>
 <h2 id="_4">两种网络对比<a class="headerlink" href="#_4" title="Permanent link">¶</a></h2>
 <p><strong>IPIP网络</strong>：</p>
 <p>流量：tunlo设备封装数据，形成隧道，承载流量。</p>

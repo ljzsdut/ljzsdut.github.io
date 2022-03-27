@@ -8522,7 +8522,7 @@
 <div class="codehilite"><pre><span></span><code>[root@k8s-01 ~]# vim /etc/systemd/system/etcd.service
 </code></pre></div>
 
-<p><img alt="image_1e2vbd3ti1res1c9ns8h1cjs1vmg9.png-215.8kB" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image_1e2vbd3ti1res1c9ns8h1cjs1vmg9-1604368860948.png" /></p>
+<p><img alt="image_1e2vbd3ti1res1c9ns8h1cjs1vmg9.png-215.8kB" src="https://gitee.com/ljzsdut/pic/raw/master/default/image_1e2vbd3ti1res1c9ns8h1cjs1vmg9-1604368860948.png" /></p>
 <blockquote>
 <p>由于网络上大部分文章都是kubeadm的监控，这里我就不在整理了。这篇文章主要针对kubernetes二进制搭建</p>
 </blockquote>
@@ -8657,9 +8657,9 @@ etcd-k8s                  ClusterIP   None                     2379/TCP         
 </code></pre></div>
 
 <p>可以详细的看一下service是否绑定到对象的ip上</p>
-<p><img alt="image_1e2vdve6b1cur10pfqdd1mjc1hf8m.png-150.9kB" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image_1e2vdve6b1cur10pfqdd1mjc1hf8m-1604368869466.png" /></p>
+<p><img alt="image_1e2vdve6b1cur10pfqdd1mjc1hf8m.png-150.9kB" src="https://gitee.com/ljzsdut/pic/raw/master/default/image_1e2vdve6b1cur10pfqdd1mjc1hf8m-1604368869466.png" /></p>
 <p>创建完成后，稍等一会我们可以去prometheus ui界面查看targets，便会出现etcd监控信息</p>
-<p><img alt="image_1e2veu5u34co8tnprp15eg18i413.png-208.3kB" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image_1e2veu5u34co8tnprp15eg18i413-1604368871211.png" /></p>
+<p><img alt="image_1e2veu5u34co8tnprp15eg18i413.png-208.3kB" src="https://gitee.com/ljzsdut/pic/raw/master/default/image_1e2veu5u34co8tnprp15eg18i413-1604368871211.png" /></p>
 <blockquote>
 <p>如果提示ip:2379 connection refused，首先检查本地Telnet 是否正常，在检查etcd配置文件是否是监听0.0.0.0:2379</p>
 </blockquote>
@@ -8668,13 +8668,13 @@ etcd-k8s                  ClusterIP   None                     2379/TCP         
 <p>还可以导入中文版ETCD集群插件</p>
 <p>https://grafana.com/grafana/dashboards/9733</p>
 <p>点击HOME–&gt;导入模板</p>
-<p><img alt="image_1e2vfitsg1hctmfk1mt3k9nb0f1g.png-316.1kB" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image_1e2vfitsg1hctmfk1mt3k9nb0f1g-1604368879204.png" /></p>
+<p><img alt="image_1e2vfitsg1hctmfk1mt3k9nb0f1g.png-316.1kB" src="https://gitee.com/ljzsdut/pic/raw/master/default/image_1e2vfitsg1hctmfk1mt3k9nb0f1g-1604368879204.png" /></p>
 <p>这里可以导入<code>3070</code>或者<code>9733</code></p>
-<p><img alt="image_1e2vfks2a1gdumks4m3ulo41p1t.png-105kB" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image_1e2vfks2a1gdumks4m3ulo41p1t-1604368882839.png" /></p>
+<p><img alt="image_1e2vfks2a1gdumks4m3ulo41p1t.png-105kB" src="https://gitee.com/ljzsdut/pic/raw/master/default/image_1e2vfks2a1gdumks4m3ulo41p1t-1604368882839.png" /></p>
 <p><strong>3070</strong>模板如下</p>
-<p><img alt="image_1e2vfnikj12s0f0gla1u3j14ac2n.png-300kB" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image_1e2vfnikj12s0f0gla1u3j14ac2n-1604368887192.png" /></p>
+<p><img alt="image_1e2vfnikj12s0f0gla1u3j14ac2n.png-300kB" src="https://gitee.com/ljzsdut/pic/raw/master/default/image_1e2vfnikj12s0f0gla1u3j14ac2n-1604368887192.png" /></p>
 <p><strong>9733</strong>模板如下</p>
-<p><img alt="image_1e2vfll3n19loo0h6pc1jql18jd2a.png-422kB" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image_1e2vfll3n19loo0h6pc1jql18jd2a-1604368893094.png" /></p>
+<p><img alt="image_1e2vfll3n19loo0h6pc1jql18jd2a.png-422kB" src="https://gitee.com/ljzsdut/pic/raw/master/default/image_1e2vfll3n19loo0h6pc1jql18jd2a-1604368893094.png" /></p>
                 
                   
                 

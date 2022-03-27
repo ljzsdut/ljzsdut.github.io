@@ -8551,33 +8551,33 @@
 <li>Cinder-backup: Cinder-backup 为块存储卷（Volumes）提供了备份服务，要实现Volumes的备份，需要提供备份存储驱动的实现，目前比较常见的备份存储后端由Swift提供。与Cinder-volume类似，Cinder-backup也通过Driver 插件架构的形式与不同的存储备份后端交互。</li>
 <li>消息队列:Cinder 项目的不同内部服务组件之间通过 Queue进行消息交互，如Cinder-volume与 Cinder-scheduler之间的信息交互。Cinder 项目内部各个服务之间的消息交互如图10一1所示。</li>
 </ul>
-<p><img alt="image-20210912163210066" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20210912163210066-1631435530206.png" /></p>
-<p><img alt="image-20210912163347026" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20210912163347026-1631435627163.png" /></p>
+<p><img alt="image-20210912163210066" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20210912163210066-1631435530206.png" /></p>
+<p><img alt="image-20210912163347026" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20210912163347026-1631435627163.png" /></p>
 <p>Cinder项目的整体架构如图10一2所示，图形界面客户端或命令行客户端通过 Horizon与 Cinder-api服务交互，Cinder-api通过 Keystone实现客户端身份验证，Cinder-volume通过Driver插件形式管理各种 Volume Providers存储后端，并将 Volumes 相关的消息写人DB进行保存。</p>
 <h2 id="cinder_2">cinder块存储的使用<a class="headerlink" href="#cinder_2" title="Permanent link">¶</a></h2>
 <p>Cinder提供了不同存储后端的抽象统一接口，通过Cinder 项目，用户可以将不同的存储后端整合在一起并通过统一的OpenStack API接口对外提供存储资源服务。</p>
 <p>而Cinder块存储最常见的使用方式便是在不同的存储后端上创建Volumes，并将 Volumes挂载到虚拟机上以块存储的形式提供存储服务。此外，为了实现虚拟机的高可用，通常也将系统镜像写人Cinder块存储，使其成为 Bootable Volume，从而可以在虚拟机宿主服务器故障的情况下在其他物理主机上迅速重启位于故障物理机上的虚拟机。（当用户将系统镜像写人Volume之后，此Volume成为 Bootable Volume，用户可利用 Bootable Volume创建虚拟机。）</p>
 <p><strong>功能：</strong></p>
 <p>在 Cinder提供的功能中，创建、扩展、删除、Attach 和 Detach 是最核心的功能，也是块存储工作过程中最常使用的功能。其他如快照创建和基于镜像的 Volume创建也是比较重要的功能。快照功能使得虚机系统的复制变得非常简单，基于镜像的Volume创建可以实现 SAN BOOT功能，而这使得虚机在线迁移变得更为简单（无须配置类似NFS共享文件系统即可实现live-migration）。</p>
-<p><img alt="image-20210912164034970" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20210912164034970-1631436035113.png" /></p>
-<p><img alt="image-20210912164429947" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20210912164429947-1631436270088.png" /></p>
+<p><img alt="image-20210912164034970" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20210912164034970-1631436035113.png" /></p>
+<p><img alt="image-20210912164429947" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20210912164429947-1631436270088.png" /></p>
 <p><strong>volume的生命周期</strong></p>
 <p>通常而言，Cinder 块存储提供的Volume总是与Nova虚拟机的生命周期密切关联在一起，如在虚拟机的创建时，对应着也要创建Volume并将 Volume 挂载到虚拟机。在虚拟机的运行过程中，随着业务数据的增加，可能需要对 Volume 进行扩容或者对主要数据进行快照保存，而在虚拟机被终止或销毁时，对应的Volume将会被卸载。卸载并不意味着 Volume上的数据会丢失，而只有在删除 Volume 后其上的数据才会丢失。用户可以将卸载后的Volume 挂载到其他虚拟机并继续访问其上的数据。</p>
 <p><img alt="image-20210912164724261" src="/Users/lijuzhang/Library/Application%20Support/typora-user-images/image-20210912164724261.png" /></p>
 <h2 id="cinder_3">Cinder块存储插件<a class="headerlink" href="#cinder_3" title="Permanent link">¶</a></h2>
 <p>Cinder 项目中的 Cinder-Volume服务通过插件式（Plugins）的 Driver与各种后端 VolumeProviders 进行交互，从而屏蔽了后端各种开源或商业的存储实现方式，并对外提供统一的Cinder API 接口。Cinder项目在架构上与Neutron类似，均是采用可插拔的插件来兼容各个厂商的存储设备和驱动，从而使得各个存储厂商均可参与Cinder 项目并提供自己的存储插件供用户使用，而用户也可以自主选择适合自己的存储产品，并只需在 Cinder的配置文件中进行适当的存储Driver设置即可。</p>
 <p>在 Cinder中, Cinder volume为不同的 Volume后端( Volume Providers,通常为不同厂商的存储设备)提供了统一的 Driver接口,而 Volume Provider只需实现这些接口即可。当存储设备厂商基于自己的设备实现了这些 Driver接口后,购买了相应厂商存储设备的用户便可通过这些插件在Cinder中使用厂商存储。</p>
-<p><img alt="image-20210912165052086" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20210912165052086-1631437032584.png" /></p>
+<p><img alt="image-20210912165052086" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20210912165052086-1631437032584.png" /></p>
 <h3 id="lvm">lvm插件<a class="headerlink" href="#lvm" title="Permanent link">¶</a></h3>
 <p>在LVM插件架构中，Volumes 以VG的LV形式被创建，即用户在配置Cinder块存储和创建Volumes之前，需要在存储节点上创建卷组VG，并在配置文件中指定使用此VG进行 Volumes创建源。此外，计算节点与存储节点之间的存储网络通过iSCSI协议实现，运行虚拟机的计算节点作为iSCSI的发起端（iSCSI Initiator），而运行 Cinder-Volume的存储节点作为 iSCSI的目标端（iSCSI Target），用户通过Cinder一API创建的每个Volume 对应的都是存储节点中VG上的一个逻辑卷LV，当用户发起 Attach （或Detach）操作时，存储节点上的Volumes 通过iSCSI协议自动挂载到计算节点虚拟机上（或从计算节点虚拟机上卸载）。在基于LVM 的 Cinder创建架构中，Volume 操作完全由 LVM 来实现，此外，全部计算节点虚拟机上的I/O通过软件iSCSI协议集中传输到存储节点，因此采用 LVM 插件实现的 Cinder块存储比较适合轻负载I/O应用场景，而且由于全部虚拟机的读写I/O通过软件iSCSI协议汇聚至存储节点，这很容易造成存储节点的I/O性能瓶颈。不过使用 LVM插件的优势在于无须特定存储设备和对应插件的支持，任何存储设备都可以映射到存储节点Linux系统中，并通过LVM插件架构实现 Cinder块存储服务。</p>
-<p><img alt="image-20210912165658466" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20210912165658466-1631437018610.png" /></p>
+<p><img alt="image-20210912165658466" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20210912165658466-1631437018610.png" /></p>
 <p>缺点：</p>
 <p>由于LVM插件部署和使用简单，而且适用于不同的物理或虚拟存储设备，因此 LVM插件是 OpenStack官方 Cinder 部署文档指定的默认插件，但是基于LVM插件的Cinder块存储服务功能完全基于软件仿真来实现，因此仅适用于开发和测试等轻量级系统环境中。而在高并发 I/O的生产环境中，基于LVM的 Cinder 服务并不具备高可用性和稳定性，尤其是Cinder-Volume服务在高可用实现方面一直是个难点。此外，由于虚拟机的I/O数据全部通过以太网络写人存储节点，因此存储节点的性能和带宽限制很容易造成存储I/O瓶颈。</p>
 <p>Volume到计算节点虚拟机的挂载通过软件iSCSI实现。而其不足之处在于虚拟机I/O不能像FC插件一样直接写人存储设备，因此一旦Cinder-Volume 或 iSCSITarget 端服务故障，则虚拟机到存储节点的I/O将会停止，虚拟机也有可能崩溃，并且整个集群存储网络的带宽会受到运行Cinder-Volume服务存储节点的带宽限制。</p>
 <h3 id="ceph">ceph插件<a class="headerlink" href="#ceph" title="Permanent link">¶</a></h3>
 <h3 id="nfs">nfs插件<a class="headerlink" href="#nfs" title="Permanent link">¶</a></h3>
 <p>下图展示了 cinder、nova 是如何与 NFS volume provider 协调工作的。</p>
-<p><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/640-1647303161433.jpeg" /></p>
+<p><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/640-1647303161433.jpeg" /></p>
 <p><strong>NFS Volume Provider</strong></p>
 <p>就是我们通常说的 NFS Server，提供远程 NFS 目录，NFS Clinet 可以 mount 这些远程目录到本地，然后像使用本地目录一样创建、读写文件以及子目录。</p>
 <p><strong>cinder-volume</strong></p>

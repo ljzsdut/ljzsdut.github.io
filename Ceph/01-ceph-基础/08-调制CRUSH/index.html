@@ -8592,7 +8592,7 @@
 <li><code>step emit</code>：输出当前值并清空堆栈。通常用于规则末尾，也适用于相同规则应用到不同树的情况。</li>
 </ul>
 <p>这里再举个简单的例子，也就是我们最常见的三个主机每个主机三个OSD的结构：
-<img alt="Alt text" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/1478497045877-20211014080246000-1634169766773.png" /></p>
+<img alt="Alt text" src="https://gitee.com/ljzsdut/pic/raw/master/default/1478497045877-20211014080246000-1634169766773.png" /></p>
 <p>我们要从三个host下面各选出一个OSD，使得三个副本各落在一个host上，这时候，就能保证挂掉两个host，还有一个副本在运行了，那么这样的RULE就形如：</p>
 <ul>
 <li>take(root) ============&gt; [default] 注意是根节点的名字</li>
@@ -9089,7 +9089,7 @@ rule replicated_rule <span class="o">{</span>
 <blockquote>
 <p>注意：CRUSH规则变动，会导致数据迁移。</p>
 </blockquote>
-<p><img alt="image-20210412141509059-1633859725709" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20210412141509059-1633859725709-1633859735370.png" /></p>
+<p><img alt="image-20210412141509059-1633859725709" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20210412141509059-1633859725709-1633859735370.png" /></p>
 <h3 id="1_1">1、手动修改<a class="headerlink" href="#1_1" title="Permanent link">¶</a></h3>
 <p><a href="https://docs.ceph.com/en/nautilus/rados/operations/crush-map-edits/#manually-editing-a-crush-map">参考链接-官方</a></p>
 <p>推荐文章：http://xuxiaopang.com/2016/11/08/easy-ceph-CRUSH/</p>
@@ -9129,7 +9129,7 @@ ceph osd crush add-bucket &lt;name&gt; &lt;type&gt;
 
 <p>示例：</p>
 <p>把刚刚建的12个OSD组成下图所示的架构，这里的<code>root-sata</code>，<code>ceph-1-sata</code>等都是我们虚构出来的，和主机名没有任何关系，但是OSD必须和刚刚部署的顺序一一对应！</p>
-<p><img alt="WnC1Vw-1633915202888" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/WnC1Vw-1633915202888-1633915214822.png" /></p>
+<p><img alt="WnC1Vw-1633915202888" src="https://gitee.com/ljzsdut/pic/raw/master/default/WnC1Vw-1633915202888-1633915214822.png" /></p>
 <p>创建root和host级别的bucket：</p>
 <div class="codehilite"><pre><span></span><code>ceph osd crush add-bucket root-sata root
 ceph osd crush add-bucket root-ssd root
