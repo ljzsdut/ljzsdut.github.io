@@ -8383,7 +8383,7 @@
                 
                 <p>ceph工作原理</p>
 <h1 id="rados">一、rados逻辑架构<a class="headerlink" href="#rados" title="Permanent link">¶</a></h1>
-<p><img alt="image-20210912202607061" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20210912202607061-1631449567203.png" /></p>
+<p><img alt="image-20210912202607061" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20210912202607061-1631449567203.png" /></p>
 <p><strong>RADOS集群组件：</strong></p>
 <ul>
 <li>OSD：object storage daemon（ceph-osd），对象存储设备，一般是一个磁盘。</li>
@@ -8410,7 +8410,7 @@
 <p><strong>什么情况会导致Cluster Map发生变化？</strong></p>
 <p>从客户端与RADOS的交互中可以看出，若Ceph集群的Cluster Map信息保持稳定不变，则客户端对于对象数据的读写访问无须通过元数据服务器进行查询即可实现，客户端获取Cluster Map信息之后只需进行简单的计算即可获取数据对象存储位置并完成数据访问操作。对于运行中的RADOS而言，<strong>通常只有在集群OSD出现意外故障或者人为有计划地增删扩容OSD节点导致在线OSD数目变化时，Ceph集群的Cluster Map信息才会出现变化</strong>。而对于一个正常运行的生产系统，出现这两种场景的频率显然要远低于客户端数据的读写频率，这也是Ceph存储集群可以提供高并发和高性能客户端数据访问的主要原因。</p>
 <h1 id="fileobjectpgpoolosd">二、File、Object、PG、Pool、OSD关系<a class="headerlink" href="#fileobjectpgpoolosd" title="Permanent link">¶</a></h1>
-<p><img alt="JbrvaB-1608615394356" src="https://gitee.com/ljzsdut/pic/raw/master/default/JbrvaB-1608615394356.png" /></p>
+<p><img alt="JbrvaB-1608615394356" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/JbrvaB-1608615394356.png" /></p>
 <p>数据存储过程由上到下所涉及的Ceph术语包括了File、Object、PG、OSD。</p>
 <h2 id="1file">1、File<a class="headerlink" href="#1file" title="Permanent link">¶</a></h2>
 <p>File是最高层次的数据对象，即终端用户所能看到和操作的数据对象，也是用户需要存储或者访问的数据文件。对于那些基于 Ceph对象存储而开发的应用程序而言，这里的File就是应用程序所要存储访问的“对象”，或者说就是用户希望存取访问的“对象”。</p>
@@ -8433,7 +8433,7 @@
 <li>当Client存储对象时，CRUSH将映射每一个对象到一个PG；</li>
 </ul>
 <p>归置组在OSD守护进程和Ceph客户端之间生成了一个中间层，CRUSH算法(一致性hash+crush)负责将每个对象动态映射到一个归置组，然后再将每个归置组动态映射到一个或多个OSD 守护进程，从而能够支持在新的OSD设备上线时动态进行数据重新平衡。</p>
-<p><img alt="image-20211007125501705" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20211007125501705-1633582501840.png" /></p>
+<p><img alt="image-20211007125501705" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20211007125501705-1633582501840.png" /></p>
 <h3 id="32">3.2、归置组计数<a class="headerlink" href="#32" title="Permanent link">¶</a></h3>
 <p>使用以下方法创建新池时：</p>
 <div class="codehilite"><pre><span></span><code>ceph osd pool create {pool-name} pg_num
@@ -8604,7 +8604,7 @@ ceph tell osd.* injectargs --osd_max_backfills  <span class="m">1</span>
 <li>写入操作时，Ceph客户端使用CRUSH算法来计算对象的PG ID和Primary OSD</li>
 <li>主OSD根据设定的副本数、对象的名称、存储池名称和集群运行图(Cluster Map )计算出PG的各辅助OSD，而后由主OSD将数据同步给这些辅助OSD</li>
 </ul>
-<p><img alt="image-20211007123403267" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20211007123403267-1633581243408.png" /></p>
+<p><img alt="image-20211007123403267" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20211007123403267-1633581243408.png" /></p>
 <h4 id="522io">5.2.2、纠删码池IO<a class="headerlink" href="#522io" title="Permanent link">¶</a></h4>
 <p>纠删码是一种前向纠错(FEC)代码</p>
 <ul>
@@ -8617,8 +8617,8 @@ ceph tell osd.* injectargs --osd_max_backfills  <span class="m">1</span>
 <li>例如，把包含数据“ABCDEFGHI”的对象NYAN保存到存储池中时，假设纠删码算法会将内容分割为三个数据块：第一个包含“ABC"，第二个为”DEF“，最后一个为”GHI“，并为这三个数据块额外创建两个编码块：第四个”YXY“和第五个”GQC“</li>
 <li>在有着两个编码块配置的存储池中，它容许至多两个OSD不可用而不影响数据的可用性。假设，在某个时刻OSD1和OSD3因故无法正常响应客户端请求，这意味着客户端仅能读取到 ”ABC“、”DEF“和”QGC“，此时纠删编码算法会通过计算得出”GHI“和”YXY“</li>
 </ul>
-<p><img alt="image-20211007123541664" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20211007123541664-1633581341796.png" /></p>
-<p><img alt="image-20201221111625391" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20201221111625391-1608520585521.png" /></p>
+<p><img alt="image-20211007123541664" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20211007123541664-1633581341796.png" /></p>
+<p><img alt="image-20201221111625391" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20201221111625391-1608520585521.png" /></p>
 <h1 id="ceph">三、Ceph数据存储过程<a class="headerlink" href="#ceph" title="Permanent link">¶</a></h1>
 <p>在 Ceph存储集群中，数据存取的核心基础是RADOS，上层应用（如RBD、RGW 和 CephFS）对于数据对象存储的理论核心均是基于RADOS实现的。</p>
 <h2 id="1">1、概述<a class="headerlink" href="#1" title="Permanent link">¶</a></h2>
@@ -8628,7 +8628,7 @@ ceph tell osd.* injectargs --osd_max_backfills  <span class="m">1</span>
 <li>而后是将PG ID基于<strong>CRUSH算法</strong>映射到OSD</li>
 </ul>
 <p>此两个过程都以“<strong>实时计算</strong>”的方式完成，而非传统的查表方式，从而有效规避了任何组件被“中心化”的可能性，使得集群规模扩展不再受限，这个实时计算操作到的算法就是CRUSH（Controlled Replication Under Scalable Hashing）。它是一种数据分布式算法，类似于一致性哈希算法，用于为RADOS存储集群控制数据分布。</p>
-<p><img alt="image-20211007140937004" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20211007140937004-1633586977171.png" /></p>
+<p><img alt="image-20211007140937004" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20211007140937004-1633586977171.png" /></p>
 <p>存取对象时，客户端从Ceph mon请求获取<strong>集群运行图</strong>，绑定到指定的存储池，并对存储池上PG内的对象执行IO操作：</p>
 <ul>
 <li>存储池的CRUSH规则集和PG的数量是决定Ceph如何放置数据的关键性因素；</li>
@@ -8658,12 +8658,12 @@ ceph tell osd.* injectargs --osd_max_backfills  <span class="m">1</span>
 </li>
 </ul>
 </blockquote>
-<p><img alt="image-20201221093753982" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20201221093753982-1626271865907-1626271879814.png" /></p>
+<p><img alt="image-20201221093753982" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20201221093753982-1626271865907-1626271879814.png" /></p>
 <p>1）取得Object的name进行Hash运算。取得的Hash值与PG数取余，得到的结果与Pool ID结成PG的编号（如图10-5中的4.32）。</p>
 <p>2）通过CRUSH算法，把PG映射到具体的主OSD和辅助OSD。</p>
 <p>在Ceph里，PG是数据存储的管理单元，如果把PG当作一致性Hash里的存储节点，那么它就是最简单的数据分布（即取余算法）方式。不同的是，PG是抽象的存储节点，它不会随着物理节点的加入或者离开而增加或减少（一个pool中的pg数量不会因为osd的数目变化而发生变化），因此object到PG的映射是稳定的。</p>
 <h2 id="2">2、流程详解<a class="headerlink" href="#2" title="Permanent link">¶</a></h2>
-<p><img alt="image-20210912202928996" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20210912202928996-1631449769127.png" /></p>
+<p><img alt="image-20210912202928996" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20210912202928996-1631449769127.png" /></p>
 <p>整个数据存储过程中，共分为三个层次的映射，在每一个层次的映射中， Ceph均采用不同的映射方式：</p>
 <ul>
 <li>第一次映射为File --&gt; Object，</li>
@@ -8681,7 +8681,7 @@ ceph tell osd.* injectargs --osd_max_backfills  <span class="m">1</span>
 <h3 id="22objectpghash">2.2、Object到PG的映射（一致性Hash）<a class="headerlink" href="#22objectpghash" title="Permanent link">¶</a></h3>
 <p>Object --&gt; PG的映射是Ceph存储系统中数据存储的第二次映射，这里的映射采用的是Hash算法。Hash算法的输入参数为Object的OID。图10-23中所示的计算公式为<code>hash(oid) &amp; mask --&gt; pgid</code>，即首先使用静态哈希函数计算Object的OID哈希值，这样会将OID映射成近似均匀分布的伪随机值，再将这个伪随机值与给定的MASK按位进行“与”（and或&amp;）操作（可以简单理解为取余操作），从而找到PGID，并最终确定该Object应该映射到哪个PG。</p>
 <p>当在Ceph里创建存储池（在创建Pool时需要指定PG数量，对于这个Pool来说，PG数量是固定的，OSD数量变化时，只会影响整个集群的PG数量，但不会影响该Pool中的PG数量），这个Pool中的PG组成的整个Hash环就固定了，如图10-6所示，对象到PG的映射就唯一确认，即Object具体存储到哪个PG是确定的，不会随着下层OSD的增删而改变，这充分体现了Ceph在数据可靠性的特征之一。</p>
-<p><img alt="image-20201221094140651" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20201221094140651-1608514900894.png" /></p>
+<p><img alt="image-20201221094140651" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20201221094140651-1608514900894.png" /></p>
 <p>根据RADOS的设计原理，假设Ceph集群中某个Pool的PG的总数为N（N通常为2的m次方，m为整数），则MASK的值取为<code>N-1</code>。因此，图10-23 中所示的PGID 计算公式其实是从所有N个PG中近似均匀地随机选取一个PG来存放Object，这里之所以强调“近似”，是因为根据概率统计的理论，只有PG数目足够多才能足够接近随机性。根据这一原理，只有在存在大量Object和PG的情况下， Ceph集群才能够将Object 近似随机地分布到PG中，最终也才能保证存储集群中每个PG所组织管理的Object数量均衡，而这一点对于Ceph存储集群的正常运行和性能提升有很大影响，因为只有数据均匀分布，才不至于某些节点过于负载，某些节点却“无所事事”。</p>
 <p>为保证Objects近似均匀地分布到PGs中，一方面需要合理设置Object的Size以保证File被拆分为尽量多的Object，同时Ceph集群中的PG数目在OSD数目一定的情况下不宜太少，通常PG数目需要设置为OSD数目的数百倍。至于Object的Size和PG的数目如何精确设置，目前并没有特别严谨的计算公式，更多的需要根据用户的实际使用测试结果来评估。</p>
 <h3 id="23pgosdcrush">2.3、PG到OSD的映射（CRUSH）<a class="headerlink" href="#23pgosdcrush" title="Permanent link">¶</a></h3>
@@ -8712,17 +8712,17 @@ ceph tell osd.* injectargs --osd_max_backfills  <span class="m">1</span>
 <p>CRUSH的计算过程中仅仅使用pgid,cluster map和placement rule作为哈希函数的输入。一般而言placement rule不会轻易变化，因此，如果cluster map不发生变化，那么对于同一个pgid来说，结果就是确定的；同时因为使用的哈希函数得到的pgid是伪随机的，所以CRUSH选择每个目标存储对象OSD概率相对独立(然而我们在后面将会看到一受控的副本策略改变了这种独立性)，从而可以保证数据在整个集群之间均匀分布。</p>
 </blockquote>
 <p>PG  --&gt; OSD的映射是 Ceph存储系统中数据存储的第三次映射，也是逻辑到物理存储的映射。如图10-23所示，RADOS采用CRUSH算法进行PG到OSD的映射，而CRUSH算法的输入参数为PGID， CRUSH算法计算的结果将是一组m个OSD，m通常也代表了数据对象的副本数，生产系统中建议设置为3，这样每个PG将会映射到3个不同的OSD中，其中包括1个Primary OSD 和2个Secondary OSD。PG到OSD的映射如图10-24所示。</p>
-<p><img alt="image-20210912203805727" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20210912203805727-1631450286186.png" /></p>
+<p><img alt="image-20210912203805727" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20210912203805727-1631450286186.png" /></p>
 <p>PG与OSD之间的映射采用的是CRUSH算法，而CRUSH算法依赖Ceph集群中的Cluster Map和集群数据存储策略（Policy），通常集群策略在配置完成之后就不会发生改变，因此影响CRUSH的因素主要是Cluster Map，而Cluster Map会根据集群OSD数目的变化（如OSD意外故障而离线或者人为增删 OSD数目等）而变化，因此PG与OSD之间的映射并非固定不变，即特定的PG并不会永远固定地映射到特定的某个OSD。正是因为CRUSH算法在实际应用中不会经常改变计算结果，因此PG与OSD的映射关系也不会经常变化，但是正因为CRUSH算法的动态性，Ceph集群才具有了在OSD等故障情况下的自我愈合能力。例如OSD的故障或者增加必然导致Cluster Map变化，Cluster Map的改变必然导致CRUSH算法得到的PG与OSD之间的映射与故障发生之前的映射不一致，这意味着Ceph集群会自动将故障OSD上的PG迁移到正常运行的OSD中，通常将这个过程称为数据再平衡（Re-balancing）。OSD数目增加时，PG在OSD中Re-balancing的过程如图10-25所示，图中，PG最初全部分布在OSD1和 OSD2上，由于新增OSD3导致Cluster Map变化，因此PG的映射关系也跟着改变，Re-balancing过程使得原有的PG重新分布到OSD1、OSD2和OSD3上，而根据RADOS的设计，最终的PG应该近似均匀地分布到OSD集群中。</p>
-<p><img alt="image-20210912203835669" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20210912203835669-1631450315811.png" /></p>
+<p><img alt="image-20210912203835669" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20210912203835669-1631450315811.png" /></p>
 <p>通常，对于OSD故障情况，数据自动Re-balancing是用户所希望的，但是如果是用户人为扩展OSD数目，则数据Re-balancing 会消耗大量节点资源，因此用户并不希望这种场景下出现数据的Re-balancing，这也正是使用CRUSH算法的主要原因，即在大规模的OSD 集群中，如果OSD数目继续增大，Ceph集群中大多数的PG与OSD之间的映射关系不会受到影响，仅有小部分PG的映射关系会发生变化从而引起数据Re-balancing。因此，总结起来，使用CRUSH算法可以使得PG与OSD之间的映射具有独特的<strong>动态性和稳定性</strong>，所以，除了数据访问无须查表的优势之外，CRUSH算法的设计也是Ceph的核心灵魂。</p>
 <p>到此，文件数据在Ceph存储系统中的存储映射过程已经完成，高层次的文件数据File经过Ceph内部的三次映射之后，已经成功分布存储到物理存储设备OSD中。从整个存储过程来看，数据的存取没有经历任何查表操作，并且第三次映射所采用的CRUSH算法为Ceph集群的自我愈合和数据稳定性提供了强大支撑。</p>
 <h1 id="ceph_1">四、Ceph数据访问流程<a class="headerlink" href="#ceph_1" title="Permanent link">¶</a></h1>
 <p>这里主要从抽象性的角度来分析客户端访问Ceph存储集群的步骤和流程。</p>
 <p>Ceph客户端在向 Ceph存储集群写人数据时，首选需要从Ceph Monitor中提取Cluster Map，并根据 Cluster Map信息在客户端本地计算出数据的存储位置信息，然后再将数据写人Ceph的Pools 中。这里Pool是 PG的集合，Ceph中的PG对 Objects进行组织管理，而Pool又对PG 进行组织管理（PG 和 Pool都是逻辑概念），如对客户端的授权访问等操作便是通过 Pool来实现的。Ceph客户端向 Ceph存储集群写人数据的抽象过程如图10-26所示。</p>
-<p><img alt="image-20210912203951611" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20210912203951611-1631450391753.png" /></p>
+<p><img alt="image-20210912203951611" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20210912203951611-1631450391753.png" /></p>
 <p>现假设客户端需要将较小的数据文件Filel存人 Ceph存储集群中，且Filel1仅被映射为一个Object。 Object被映射到某个PG中，而根据用户设置最终的PG需要映射到3个OSD中（即数据副本为3份），则File1写人Ceph存储集群中的具体流程如图10-27所示。</p>
-<p><img alt="image-20210912204009466" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20210912204009466-1631450409597.png" /></p>
+<p><img alt="image-20210912204009466" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20210912204009466-1631450409597.png" /></p>
 <p>根据前文的分析，Filel被映射为 Object， Object被映射到PG， PG再通过CRUSH 算法映射到一组OSD中，这里一组OSD包含三个OSD，通常这组OSD中的三个OSD拥有不同的OSD序号，而较为靠前的OSD通常被称为Primary OSD，后面两个则分别是Secondary OSD 和 Tertiary OSD。当客户端经过三个映射步骤找到File1文件的最终存储位置后，便会向Primary OSD 发起写操作，如图10-27中的步骤1所示。当Primary OSD接收到客户端的写请求后，便会向Secondary OSD和Tertiary OSD 发起写操作，如图10-27中的步骤2和3所示。Secondary OSD 和 Tertiary OSD写操作完成后，便会分别向 Primary OSD返回写成功应答信号，如图10-27中步骤4和5所示。Primary OSD接收到Secondary OSD 和Tertiary OSD的写完成信号，并确认自己的写操作也完成后，便向Ceph客户端返回本次写操作执行成功的应答信号，如图10-27中的步骤6所示。在图10-24所示的数据写人流程中，客户端只需向Primary OSD 发出写请求，而不用同时向 Secondary OSD 和 TertiaryOSD 发出写请求，这样的设计缓减了客户端发送多次重复请求所造成的网络带宽压力，在高并发大量客户端同时访问的场景中，这对存储系统的性能提升起到了非常关键的作用。另外，由于客户端需要等待3个OSD均返回数据写人磁盘成功的信号后才能执行后续的操作，这对于客户端而言将是难以忍受的等待。鉴于此，Ceph提供了<strong>二次应答机制</strong>，即一旦全部 OSD将数据写人缓存，即返回写人成功的信号给客户端，此时客户端可以进行后续操作，而当数据全部写入磁盘后，OSD再次返回最终的确认信号给客户端，此时客户端便可对之前的数据进行删除操作。</p>
 <p>从图10-26 和图10-27中可以看到，<strong>Ceph客户端对Ceph存储集群的访问完全无须查表寻址这一过程</strong>，而且各个客户端获取 Cluster Map信息后在自己本地进行数据存储位置的简单计算，而不是依赖中心化的元数据服务器进行地址查询，当客户端计算出数据存储位置后直接对Primary OSD 发起访问请求。因此，大量高并发的客户端可以同时对 Ceph存储集群发起访问，各个客户端独立进行地址计算并且与不同的OSD进行交互，彼此之间不影响，所以 Ceph存储集群在宏观上是一种可以提供高并发访问的存储集群。此外，如果客户端的File被切分为多个Object，则客户端可以并行与多个OSD交互从而一次性并发获取多个Object，因此从微观数据访问来看，Ceph存储集群也具备并发性。最后，从微观到宏观的并发性真正实现了Ceph存储集群的高性能。</p>
 <h1 id="ceph_2">五、Ceph数据恢复流程<a class="headerlink" href="#ceph_2" title="Permanent link">¶</a></h1>
@@ -8745,11 +8745,11 @@ ceph tell osd.* injectargs --osd_max_backfills  <span class="m">1</span>
 </ol>
 <h2 id="1_1">1、感知集群状态<a class="headerlink" href="#1_1" title="Permanent link">¶</a></h2>
 <p>Ceph集群分为MON集群和OSD集群两大部分。其中MON集群由奇数个Monitor节点组成，这些Monitor节点通过Paxos算法组成一个决策者集群，共同作出关键集群事件的决策和广播。“OSD节点离开”和“OSD节点加入”就是其中两个关键的集群事件。</p>
-<p><img alt="caBvAj-1643285516686" src="https://gitee.com/ljzsdut/pic/raw/master/default/caBvAj-1643285516686.png" /></p>
+<p><img alt="caBvAj-1643285516686" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/caBvAj-1643285516686.png" /></p>
 <p>MON集群管理着整个Ceph集群的成员状态，将OSD节点的状态信息存放在OSDMap中，OSD节点定期向MON和对等OSD（Peer OSD）发送心跳包，声明自己处于在线状态。MON接收来自OSD的心跳消息确认OSD在线；同时，MON也接收来自OSD对于Peer OSD的故障检测。MON根据心跳间隔等信息判定OSD是否在线，同时更新OSDMap并向各个节点通告最新集群状态。比如某台服务器宕机，其上OSD节点和MON集群的心跳超时或是这些OSD的对等OSD发送的失败通告超过阈值后，这些OSD将被MON集群判定为离线。</p>
-<p><img alt="Fw56yp-1643285537485" src="https://gitee.com/ljzsdut/pic/raw/master/default/Fw56yp-1643285537485.png" /></p>
+<p><img alt="Fw56yp-1643285537485" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/Fw56yp-1643285537485.png" /></p>
 <p>判定OSD节点离线后，Ceph将最新的OSDMap通过消息机制随机分发给一个OSD，客户端（对等OSD）处理IO请求的时候发现自身的OSDMap版本过低，会向MON请求最新的OSDMap。每个OSD中PG的另外两个副本可能在集群任意OSD中，借此经过一段时间的传播，最终整个集群的OSD都会接收到OSDMap的更新。</p>
-<p><img alt="9JMJgc-1643285551408" src="https://gitee.com/ljzsdut/pic/raw/master/default/9JMJgc-1643285551408.png" /></p>
+<p><img alt="9JMJgc-1643285551408" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/9JMJgc-1643285551408.png" /></p>
 <h2 id="2_1">2、确定受影响的数据<a class="headerlink" href="#2_1" title="Permanent link">¶</a></h2>
 <p>Ceph中对象数据的维护由PG（Placement Group）负责，PG作为Ceph中最小的数据管理单元，直接管理对象数据，每个OSD都会管理一定数量的PG。客户端对于对象数据的IO请求，会根据对象ID的Hash值均衡分布在各个PG中。PG中维护了一份PGLog，用来记录该PG的数据变化，这些记录会被持久化记录到后端存储中。</p>
 <p>PGLog中记录了每次操作的数据和PG的版本，每次数据变更操作都会使PG的版本自增，PGLog中默认保存3000条记录，PG会定期触发Trim操作清理多余的PGLog。通常情况下，在同一个PG的不同副本中的PGLog应该是一致的，故障发生后，不同副本的PGLog可能会处于不一致的状态。</p>

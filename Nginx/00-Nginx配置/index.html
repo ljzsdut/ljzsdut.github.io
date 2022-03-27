@@ -10007,7 +10007,7 @@ nginx: configuration file /apps/nginx/conf/nginx.conf <span class="nb">test</spa
 <span class="o">[</span>root@CentOS7 ~<span class="o">]</span><span class="c1">#/apps/nginx/sbin/nginx -s reload</span>
 </code></pre></div>
 
-<p>访问测试<img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/640-1578033484857.webp" /> </p>
+<p>访问测试<img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/640-1578033484857.webp" /> </p>
 <h2 id="faviconico">关于favicon.ico<a class="headerlink" href="#faviconico" title="Permanent link">¶</a></h2>
 <p>favicon.ico 文件是浏览器收藏网址时显示的图标，当客户端使用浏览器问页面时，浏览器会自己主动发起请求获取页面的favicon.ico文件，但是当浏览器请求的favicon.ico文件不存在时，服务器会记录404日志，而且浏览器也会显示404报错。</p>
 <h3 id="_6">具体配置<a class="headerlink" href="#_6" title="Permanent link">¶</a></h3>
@@ -10025,7 +10025,7 @@ nginx: configuration file /apps/nginx/conf/nginx.conf <span class="nb">test</spa
 </code></pre></div>
 
 <h3 id="_7">显示效果<a class="headerlink" href="#_7" title="Permanent link">¶</a></h3>
-<p><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/640.webp" /> </p>
+<p><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/640.webp" /> </p>
 <h2 id="nginx_server"><strong>修改Nginx Server版本信息</strong><a class="headerlink" href="#nginx_server" title="Permanent link">¶</a></h2>
 <div class="codehilite"><pre><span></span><code><span class="c1"># 修改Nginx源码文件，此配置文件需要在nginx.conf的http中添加server_tokens  off;开启nginx版本隐藏才能实现预期效果</span>
 <span class="o">[</span>root@CentOS7 nginx-1.14.2<span class="o">]</span><span class="c1">#vim src/http/ngx_http_header_filter_module.c</span>
@@ -10051,7 +10051,7 @@ Server: Darius/10.0
  <span class="m">14</span> <span class="c1">#define NGINX_VER          &quot;Darius/&quot; NGINX_VERSION</span>
 </code></pre></div>
 
-<p><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/640-1578033514168.webp" /> </p>
+<p><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/640-1578033514168.webp" /> </p>
 <h2 id="nginx_rewrite"><strong>Nginx Rewrite模块相关功能</strong><a class="headerlink" href="#nginx_rewrite" title="Permanent link">¶</a></h2>
 <p>Nginx服务器利用ngx_http_rewrite_module 模块解析和处理rewrite请求，此功能依靠 PCRE(perl compatibler egularexpression)，因此编译之前要安装PCRE库，rewrite是nginx服务器的重要功能之一，用于实现URL的重写，URL的重写是非常有用的功能，比如它可以在我们改变网站结构之后，不需要客户端修改原来的书签，也无需其他网站修改我们的链接，就可以设置为访问，另外还可以在一定程度上提高网站的安全性。</p>
 <h3 id="if"><strong>if指令</strong><a class="headerlink" href="#if" title="Permanent link">¶</a></h3>
@@ -10271,7 +10271,7 @@ Connection: keep-alive
 Location: http://www.darius.com
 </code></pre></div>
 
-<p><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/640-1578033545280.webp" /> </p>
+<p><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/640-1578033545280.webp" /> </p>
 <h3 id="rewrite_3"><strong>rewrite 临时重定向</strong><a class="headerlink" href="#rewrite_3" title="Permanent link">¶</a></h3>
 <div class="codehilite"><pre><span></span><code><span class="o">[</span>root@CentOS7-Test ~<span class="o">]</span><span class="c1">#curl -I 192.168.36.104</span>
 HTTP/1.1 <span class="m">302</span> Moved Temporarily
@@ -10283,7 +10283,7 @@ Connection: keep-alive
 Location: http://www.darius.com
 </code></pre></div>
 
-<p><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/640-1578033558263.webp" /> </p>
+<p><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/640-1578033558263.webp" /> </p>
 <h3 id="rewriteuri"><strong>rewrite之URI重定向</strong><a class="headerlink" href="#rewriteuri" title="Permanent link">¶</a></h3>
 <p>break和last都能阻止继续执行后面的rewrite指令，last如果在location下的话，对于重写后的URI会重新匹配location，而break不会重新匹配location。</p>
 <p>区别：</p>
@@ -10385,7 +10385,7 @@ Accept-Ranges: bytes
 pc web
 </code></pre></div>
 
-<p><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/640-1578033580117.webp" /> </p>
+<p><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/640-1578033580117.webp" /> </p>
 <h3 id="_8"><strong>判断文件是否存在</strong><a class="headerlink" href="#_8" title="Permanent link">¶</a></h3>
 <div class="codehilite"><pre><span></span><code><span class="c1"># 当用户访问到公司网站时，输入一个错误的URL，可以将用户访问的浏览页面重定向到公司官网首页上</span>
   location / <span class="o">{</span>
@@ -10431,7 +10431,7 @@ regular expression：被指定的正则表达式模式匹配到的字符串,要�
 </code></pre></div>
 
 <h3 id="_9"><strong>盗链测试</strong><a class="headerlink" href="#_9" title="Permanent link">¶</a></h3>
-<p><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/640-1578033598215.webp" /> </p>
+<p><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/640-1578033598215.webp" /> </p>
 <div class="codehilite"><pre><span></span><code><span class="o">[</span>root@CentOS7 conf.d<span class="o">]</span><span class="c1">#cat a.conf</span>
 server <span class="o">{</span>
   listen <span class="m">80</span><span class="p">;</span>
@@ -10456,7 +10456,7 @@ server <span class="o">{</span>
 &lt;/html&gt;
 </code></pre></div>
 
-<p><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/640-1578033609714.webp" /> </p>
+<p><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/640-1578033609714.webp" /> </p>
 <h3 id="_10"><strong>被盗链日志查看</strong><a class="headerlink" href="#_10" title="Permanent link">¶</a></h3>
 <div class="codehilite"><pre><span></span><code>[root@CentOS7 conf.d]#tail -f /apps/nginx/logs/*.log
 ==&gt; /apps/nginx/logs/www_darius_com_access.log &lt;==
@@ -10477,7 +10477,7 @@ server <span class="o">{</span>
 </code></pre></div>
 
 <p>页面访问测试</p>
-<p><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/640-1578033621782.webp" /> </p>
+<p><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/640-1578033621782.webp" /> </p>
 <h2 id="nginx_7"><strong>Nginx反向代理</strong><a class="headerlink" href="#nginx_7" title="Permanent link">¶</a></h2>
 <p>反向代理：反向代理也叫reverse proxy，指的是代理外网用户的请求到内部的指定web服务器，并将数据返回给用户的一种方式，这是用的比较多的一种方式。</p>
 <p>Nginx除了可以在企业提供高性能的web服务之外，另外还可以将本身不具备的请求通过某种预定义的协议转发至其它服务器处理，不同的协议就是Nginx服务器与其他服务器进行通信的一种规范，主要在不同的场景使用以下模块实现不同的功能：</p>
@@ -10524,7 +10524,7 @@ Content-Type: text/html<span class="p">;</span> <span class="nv">charset</span><
 &lt;h1&gt;Real Server <span class="m">110</span>&lt;/h1&gt;
 </code></pre></div>
 
-<p><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/640-1578033642835.webp" /> </p>
+<p><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/640-1578033642835.webp" /> </p>
 <ol>
 <li>proxy_hide_header; 用于nginx作为反向代理的时候，在返回给客户端http响应的时候，隐藏后端服务版本相应头部的信息，可以设置在http/server或location块</li>
 </ol>
@@ -10770,8 +10770,8 @@ X-Cache: HIT   <span class="c1"># 第二次访问命中缓存</span>
 X-Accel: www.a.com
 </code></pre></div>
 
-<p>自定义头部<img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/640-1578033685572.webp" /> </p>
-<p>第二次访问命中缓存<img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/640-1578033693406.webp" /> </p>
+<p>自定义头部<img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/640-1578033685572.webp" /> </p>
+<p>第二次访问命中缓存<img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/640-1578033693406.webp" /> </p>
 <h2 id="nginx_http_1"><strong>Nginx http反向代理高级应用</strong><a class="headerlink" href="#nginx_http_1" title="Permanent link">¶</a></h2>
 <p>Nginx可以基于ngx_http_upstream_module模块提供服务器分组转发、权重分配、状态监测、调度算法等高级功能</p>
 <h3 id="http_upstream"><strong>http upstream 配置参数</strong><a class="headerlink" href="#http_upstream" title="Permanent link">¶</a></h3>
@@ -10933,7 +10933,7 @@ location ~* &quot;\.(.jpg|png|jpeg|gif)&quot; {
 </code></pre></div>
 
 <h3 id="_16"><strong>负载均衡实验环境</strong><a class="headerlink" href="#_16" title="Permanent link">¶</a></h3>
-<p><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/640-1578033708701.webp" /> </p>
+<p><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/640-1578033708701.webp" /> </p>
 <h3 id="redis"><strong>基于Redis的负载均衡实例</strong><a class="headerlink" href="#redis" title="Permanent link">¶</a></h3>
 <h4 id="redis_1"><strong>安装并配置Redis服务</strong><a class="headerlink" href="#redis_1" title="Permanent link">¶</a></h4>
 <div class="codehilite"><pre><span></span><code>[root@CentOS7-1 ~]#yum install -y redis

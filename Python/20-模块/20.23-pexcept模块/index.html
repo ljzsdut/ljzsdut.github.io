@@ -8760,7 +8760,7 @@
 <span class="nb">print</span><span class="p">(</span><span class="n">child</span><span class="o">.</span><span class="n">after</span><span class="p">)</span>
 </code></pre></div>
 
-<p><img alt="JdRTW4-1635727546697" src="https://gitee.com/ljzsdut/pic/raw/master/default/JdRTW4-1635727546697-1635727558573.png" /></p>
+<p><img alt="JdRTW4-1635727546697" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/JdRTW4-1635727546697-1635727558573.png" /></p>
 <p>expect 方法中也可以传入一个列表，列表中的每个元素都是一个关键字的正则表达式</p>
 <div class="codehilite"><pre><span></span><code><span class="n">child</span> <span class="o">=</span> <span class="n">pexpect</span><span class="o">.</span><span class="n">spawn</span><span class="p">(</span><span class="s1">&#39;ls -l ./&#39;</span><span class="p">)</span>
 <span class="n">index</span> <span class="o">=</span> <span class="n">child</span><span class="o">.</span><span class="n">expect</span><span class="p">([</span><span class="s1">&#39;test&#39;</span><span class="p">,</span> <span class="s1">&#39;run&#39;</span><span class="p">])</span>   <span class="c1"># 匹配到列表中任意一个元素即停止匹配</span>

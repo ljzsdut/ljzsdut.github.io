@@ -8511,7 +8511,7 @@ virtual-service<span class="o">(</span>crd<span class="o">)</span>    ---&gt;   
 <p>虚拟服务：定义路由规则。描述满足条件的请求去哪里。描述的主体是一个服务，而不是一组规则。该服务中包含了路由规则。</p>
 <p>VirtualService定义了访问地址和路由目标的联系，<strong>它将流量如何路由到给定目标地址。</strong>(对特定的目标进行定义路由规则)</p>
 <p>一个不是很准确的理解：VirtualService可以理解为是k8s中的Service的替代品（替换host指定的k8s的Service），不过这个替代品只要在网格内的请求才会使用（请求的发起端和接收端都在网格内）。如果不是服务网格内的请求，则会使用原生的k8s的Service。之所以说不准确，是指host不仅仅是指k8s中的Service，也可能是ingress-gateway中定义的host，也可能是通配符<code>“*”</code>或通配符<code>“*”</code>前缀。</p>
-<p><img alt="image-20210701135701451" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20210701135701451-1625119021623.png" /></p>
+<p><img alt="image-20210701135701451" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20210701135701451-1625119021623.png" /></p>
 <div class="codehilite"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">networking.istio.io/v1alpha3</span>
 <span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">VirtualService</span>  <span class="c1">#本质上是envoy的配置文件片段。定义了访问hosts中指定的目标服务时，如何路由</span>
 <span class="nt">metadata</span><span class="p">:</span>
@@ -8543,8 +8543,8 @@ virtual-service<span class="o">(</span>crd<span class="o">)</span>    ---&gt;   
 </code></pre></div>
 
 <p>HTTPRoute规则的功能是:满足HTTPMatchRequest条件的流量都被路由到HTTPRouteDestination，执行重定向 （HTTPRedirect）、重写 （HTTPRewrite）、重试 （HTTPRetry）、故障注入（HTTPFaultInjection）、跨站 （CorsPolicy） 策略等。HTTP 不仅可以做路由匹配，还可以做一些写操作来修改请求本身，对用户来说非常灵活。</p>
-<p><img alt="image-20210628113120570" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20210628113120570-1624851080740.png" /></p>
-<p><img alt="image-20210701140206231" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20210701140206231-1625119326373.png" /></p>
+<p><img alt="image-20210628113120570" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20210628113120570-1624851080740.png" /></p>
+<p><img alt="image-20210701140206231" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20210701140206231-1625119326373.png" /></p>
 <p>示例：基于权重</p>
 <div class="codehilite"><pre><span></span><code><span class="nt">spec</span><span class="p">:</span>
   <span class="nt">hosts</span><span class="p">:</span>
@@ -8575,7 +8575,7 @@ virtual-service<span class="o">(</span>crd<span class="o">)</span>    ---&gt;   
 <h2 id="destinationrule">DestinationRule<a class="headerlink" href="#destinationrule" title="Permanent link">¶</a></h2>
 <p>参考文档：https://istio.io/latest/zh/docs/concepts/traffic-management/#destination-rules</p>
 <p>目标规则：定义服务子集、策略。描述到达目标的请求怎么处理。</p>
-<p><img alt="image-20210701140951427" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20210701140951427-1625119791570.png" /></p>
+<p><img alt="image-20210701140951427" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20210701140951427-1625119791570.png" /></p>
 <div class="codehilite"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">networking.istio.io/v1alpha3</span>
 <span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">DestinationRule</span>
 <span class="nt">metadata</span><span class="p">:</span>
@@ -8605,7 +8605,7 @@ virtual-service<span class="o">(</span>crd<span class="o">)</span>    ---&gt;   
 <p>使用<a href="https://istio.io/latest/zh/docs/reference/config/networking/gateway/#Gateway">网关</a>为网格来管理入站和出站流量，可以让您指定要进入或离开网格的流量。网关配置被用于运行在网格边界的独立 Envoy 代理，而不是服务工作负载的 sidecar 代理。</p>
 <p>功能：由于外部流量不在网格内部，所以无法对外部流量进行流量治理。采用ingress gateway，可以将外部流量加入到服务网格内，从而实现流量治理。</p>
 <p>作用：只定义了envoy的􏱜􏱻􏵓􏵏􏵅􏷝􏱜􏱻􏵓􏵏􏵅􏷝􏱜􏱻􏵓􏵏􏵅􏷝接入点（监听端口和host，类似nginx的listen和server_name命令），只做4层到6层的端口、tls相关配置，7层的相关配置在virtualService上进行。</p>
-<p><img alt="image-20210701142350353" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20210701142350353-1625120630499.png" /></p>
+<p><img alt="image-20210701142350353" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20210701142350353-1625120630499.png" /></p>
 <div class="codehilite"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">networking.istio.io/v1alpha3</span>
 <span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Gateway</span>
 <span class="nt">metadata</span><span class="p">:</span>
@@ -8630,7 +8630,7 @@ virtual-service<span class="o">(</span>crd<span class="o">)</span>    ---&gt;   
 <h2 id="serviceentry">ServiceEntry<a class="headerlink" href="#serviceentry" title="Permanent link">¶</a></h2>
 <p>文档：https://istio.io/latest/zh/docs/concepts/traffic-management/#virtual-service-example</p>
 <p>ServiceEntry：将网格外的服务加入网格中，像网格内的服务一样进行管理。</p>
-<p><img alt="image-20210701184454218" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20210701184454218-1625136294365.png" /></p>
+<p><img alt="image-20210701184454218" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20210701184454218-1625136294365.png" /></p>
 <div class="codehilite"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">networking.istio.io/v1alpha3</span>
 <span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ServiceEntry</span>
 <span class="nt">metadata</span><span class="p">:</span>

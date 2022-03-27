@@ -8585,7 +8585,7 @@
 <p>Kubernetes集群可承载运行用户的完整应用环境，包括多种服务及相关的配置信息等，对这些应用的管理操作需要进行精心的认证及授权编排，以确保其安全性。本文描述了集群各组件间的安全通信时相关的加密通信及认证机制用到的数字证书等话题。</p>
 <h3 id="etcd">一、etcd集群及相关的数字证书<a class="headerlink" href="#etcd" title="Permanent link">¶</a></h3>
 <p>Kubernetes的API Server将集群的状态数据存储于集群存储服务etcd中，包括那些包含了敏感数据的Secret资源对象。出于提升服务可用性、数据冗余及安全性等目的，生产环境通常应该配置有着3、5或7个节点的etcd集群，集群内各节点间基于https协议进行通信，它们使用<strong>Peer类型</strong>的数字证书进行彼此间的通信时的身份认证。而且，各etcd节点提供<strong>Server类型</strong>的数字证书与客户端建立安全连接，并验正其客户端的<strong>Client类型</strong>的数字证书。Kubernetes各集群组件中，kube-apiserver是惟一一个可直接与集群存储etcd通信的组件，它是etcd服务的客户端。(图中的箭头方向表示客户端请求服务器的方向)</p>
-<p><img alt="M5WfO0-1605663439379" src="https://gitee.com/ljzsdut/pic/raw/master/default/M5WfO0-1605663439379.png" /></p>
+<p><img alt="M5WfO0-1605663439379" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/M5WfO0-1605663439379.png" /></p>
 <table>
 <thead>
 <tr>
@@ -8627,7 +8627,7 @@
 <p>​   Kubernetes集群的其它各组件均需要通过kube-apiserver访问集群资源，例如各kube-controller-manager、kube-scheduler、kube-proxy和kubelet组件，以及客户端工具程序kubectl等，因此，它们均为API Server的客户端。同样出于安全性等目的，Kubernetes集群的API Server需要借助TLS协议与其客户端通信，并应该基于X509数字证书或令牌认证机制验正各组件的身份。通常，这些客户端会基于kubeconfig配置文件在请求报文中附带认证数据，包括用户名及相关的客户端证书和私钥等。</p>
 <p>​   另外，kubelet自身也通过HTTPS端点暴露了一组API，它们提供了多个不同级别的敏感数据，并支持来自于客户端的请求，在节点和容器上执行不同级别的操作。默认情况下，未被其它身份认证插件拒绝的那些对kubelet的HTTPS端点的请求将被视为匿名请求，并自动赋予其隶属于system:unauthenticated用户组的用户名system:anonymous。不过，kubelet可使用<code>--anonymous-auth=false</code>选项拒绝匿名访问，并设置其通过<code>--client-ca-file</code>选项指定CA以验正客户端身份，它可直接使用kubernetes-ca，同时还应该为kube-apiserver使用<code>--kubelet-client-certificate</code>和<code>--kubelet-client-key</code>选项指定用于认证到kubelet的客户端证书和私钥。</p>
 <p>​   补充：因为kubelet自己也有APIs，它们会被apiserver请求来完成某些操作 。而且这些不同的api对应的操作级别不同，每一个api都需要做ssl身份验证。因为这样的api种类太多，所以kubelet自动实现这些身份验证。那怎么自动实现呢？其实每一个node上的kubelet上都有一个二级CA，然后给kubelet的api发证书，并且这个CA是kubenetes-ca的二级CA，这意味着apiserver拿着由kubenetes-ca签署的证书去连接kubelet的api是可以被允许的，因为<strong>证书链信任是传递的</strong>。</p>
-<p><img alt="1zwu2Q-1624843413930" src="https://gitee.com/ljzsdut/pic/raw/master/default/1zwu2Q-1624843413930-1624843420945.png" /></p>
+<p><img alt="1zwu2Q-1624843413930" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/1zwu2Q-1624843413930-1624843420945.png" /></p>
 <p>​   事实上，启用RBAC授权插件的API Server还会在认证完成后严格检验请求操作的授权，它<strong>会把客户端证书中的CN识别为用户名，并将O识别为用户所属的组</strong>。而kube-controller-manager、kube-scheduler、kube-proxy和kubelet等组件分别需要获取到特定的授权方能正确运行，它们应该分别使用专有的用户名或者组名以获取默认的授权。这就要求我们在生成证书时，需要指定特定的CN和O以获取特定的权限。</p>
 <table>
 <thead>
@@ -8734,7 +8734,7 @@
 <p>​   除了API Server提供的核心API，Kubernetes还支持通过聚合层（aggregation layer）对其进行扩展。简单来说，聚合层允许管理员在群集中部署使用额外的Kubernetes风格的API，例如service catalog或用户自定义的API server等。聚合层本身打包在kube-apiserver程序中并作为进程的一部分运行，但仅在管理员通过行定的APIService对象注册扩展资源之后，它才为其<strong>代理转发</strong>相应的请求。通常，APIService会由运行于Kubernetes集群上的Pod中的extention-apiserver实现。</p>
 <p>​   由kube-aggregator控制器提供服务的组apiregistraion.k8s.io/v1beta1下的APIService资源是用于注册扩展apiserver的API。</p>
 <p>​   创建一个APIService资源时，作为注册和发现过程的一部分，kube-aggregator控制器（位于kube-apiserver内部）将启动与extention-apiserver的基于TLS（若启用了的话）的HTTP2连接，而后经由此连接将经过身份验证的用户请求代理到extention-apiserver上，于是，kube-aggregator被设置为执行RequestHeader客户端认证。</p>
-<p><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/640-1576548123937.webp" /></p>
+<p><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/640-1576548123937.webp" /></p>
 <p>不过，只有kube-apiserver在启动时使用了如下选项时才能启用其内建的聚合层：</p>
 <div class="codehilite"><pre><span></span><code>--requestheader-client-ca-file<span class="o">=</span>&lt;path to aggregator CA cert&gt;
 --requestheader-allowed-names<span class="o">=</span>front-proxy-client
@@ -8798,11 +8798,11 @@ server will make a self-signed cert/key-pair and store it at
 </blockquote>
 <h3 id="_1">五、相关的数字证书<a class="headerlink" href="#_1" title="Permanent link">¶</a></h3>
 <p>总结起来，Kubernetes集群至少需要三个CA，分别用于为不同应用场景中的服务端、客户端或对等节点间的通信签署证书。</p>
-<p><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/640-1576547855534.webp" /></p>
+<p><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/640-1576547855534.webp" /></p>
 <p>各组件大致要用到如下表格中的证书：</p>
-<p><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/640-1576547862300.webp" /></p>
+<p><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/640-1576547862300.webp" /></p>
 <p>以及以下kubeconfig配置文件，它们承载了相关客户端的认证凭据，这些认证凭据通常也来自于数字证书：</p>
-<p><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/640-1576547867301.webp" /></p>
+<p><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/640-1576547867301.webp" /></p>
 <div class="codehilite"><pre><span></span><code><span class="o">[</span>root@physerver certs<span class="o">]</span><span class="c1"># tree master-etc/</span>
 master-etc/
 ├── etcd
@@ -8930,14 +8930,14 @@ node-etc/
 <h3 id="6">6、总结<a class="headerlink" href="#6" title="Permanent link">¶</a></h3>
 <p>使用kubeadm安装k8s时，使用的3种CA和它们签署的证书：</p>
 <p>k8s建议使用不同的ca签署不同的证书（下图使用了3套CA），但是为了简单，也可以使用同一个ca签署所有的证书。</p>
-<p><img alt="k8s证书介绍" src="https://gitee.com/ljzsdut/pic/raw/master/default/k8s证书机器签发.png" /></p>
+<p><img alt="k8s证书介绍" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/k8s证书机器签发.png" /></p>
 <p>参考文档：
 https://www.kubernetes.org.cn/2540.html
 https://docs.lvrui.io/2018/09/28/%E8%AF%A6%E8%A7%A3kubeadm%E7%94%9F%E6%88%90%E7%9A%84%E8%AF%81%E4%B9%A6/    </p>
 <h2 id="kubernetes-">【理论】Kubernetes集群高可用-概述<a class="headerlink" href="#kubernetes-" title="Permanent link">¶</a></h2>
 <p>Kubernetes具有自愈能力，它跟踪到某工作节点发生故障时，控制平面可以将离线节点上的Pod对象重新编排至其它可用工作节点运行，因此，更多的工作节点也意味着更好的容错能力，因为它使得Kubernetes在实现工作节点故障转移时拥有更加灵活的自由度。而当管理员检测到集群负载过重或无法容纳其更多的Pod对象时，通常需要手动将节点添加到群集，其过程略繁琐，Kubernetes cluster-autoscaler还为集群提供了规模按需自动缩放的能力。</p>
 <p>然而，添加更多工作节点并不能使群集适应各种故障，例如，若主API服务器出现故障（由于其主机出现故障或网络分区将其从集群中隔离），将无法再跟踪和控制集群。因此，还需要冗余控制平面的各组件以实现主节点的服务高可用性。基于冗余数量的不同，控制平面能容忍一个甚至是几个节点的故障。一般来说，高可用控制平面至少需要三个Master节点来承受最多一个Master节点的丢失，才能保证等待状态的Master能保持半数以上以满足节点选举时的法定票数。一个最小化的Master节点高可用架构如下图所示。</p>
-<p><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/640-1576547876592.webp" /></p>
+<p><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/640-1576547876592.webp" /></p>
 <p>Kubernetes组件中仅etcd需要复杂逻辑完成集群功能，其它组件间的松耦合特性使得能够通过多种方式实现Master节点的高可用性，上图是较为常用的一种架构，各架构方式也通常有一些共同的指导方针： </p>
 <p>（1）利用etcd自身提供的分布式存储集群为kubernetes构建一个可靠的存储层；</p>
 <p>（2）将无状态的apiserver运行为多副本(本质就是http服务器)，并在其前端使用负载均衡器(或DNS)调度请求；需要注意的是，负载均衡器本身也需要高可用；可以使用Haproxy/Nginx+keepalived实现。</p>
@@ -8953,7 +8953,7 @@ https://docs.lvrui.io/2018/09/28/%E8%AF%A6%E8%A7%A3kubeadm%E7%94%9F%E6%88%90%E7%
 <p>（2）基于etcd发现服务构建集群：通过一个事先存在的etcd集群进行服务发现来组建新集群，支持集群的动态构建，它依赖于一个现存可用的etcd服务；</p>
 <p>（3）基于DNS的服务资源记录构建集群：通过在DNS服务上的某域名下为每个节点创建一条SRV记录，而后基于此域名进行服务发现来动态组建新集群，它依赖于DNS服务及事先管理妥当的资源记录；</p>
 <p>一般说来，对于etcd分布式存储集群来说，三节点集群可容错一个节点，五节点集群可容错两个节点，七节点集群可容错三个节点，依次类推，但通常多于七个节点的集群规模是不必要的，而且对系统性能也会产生负面影响。</p>
-<p><img alt="sYpocf-1595315814340" src="https://gitee.com/ljzsdut/pic/raw/master/default/sYpocf-1595315814340.png" /></p>
+<p><img alt="sYpocf-1595315814340" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/sYpocf-1595315814340.png" /></p>
 <h3 id="apiserver">二、apiserver高可用<a class="headerlink" href="#apiserver" title="Permanent link">¶</a></h3>
 <p>apiserver本质上就是一个http服务器，本身是无状态的，他们的状态数据保存在etcd中。这种无状态的应用实现高可用是十分简单的，只需将无状态的apiserver运行为多副本，并在其前端使用负载均衡器调度请求(或DNS调度)；需要注意的是，负载均衡器本身也需要高可用；可以使用Haproxy/Nginx+keepalived实现。</p>
 <h3 id="controller_managerscheduler">三、Controller Manager和Scheduler高可用<a class="headerlink" href="#controller_managerscheduler" title="Permanent link">¶</a></h3>
@@ -8985,8 +8985,8 @@ Events:
 <h2 id="kubeadm">【理论】kubeadm部署介绍<a class="headerlink" href="#kubeadm" title="Permanent link">¶</a></h2>
 <p>参考文档：<a href="https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/high-availability/">多Master的k8s安装</a></p>
 <h3 id="master">一、多Master拓补图<a class="headerlink" href="#master" title="Permanent link">¶</a></h3>
-<p><img alt="安装拓补图" src="https://gitee.com/ljzsdut/pic/raw/master/default/20190827110823410.png" /></p>
-<p><img alt="sYpocf-1595315814340" src="https://gitee.com/ljzsdut/pic/raw/master/default/sYpocf-1595315814340.png" /></p>
+<p><img alt="安装拓补图" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/20190827110823410.png" /></p>
+<p><img alt="sYpocf-1595315814340" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/sYpocf-1595315814340.png" /></p>
 <h3 id="_3">二、安装步骤<a class="headerlink" href="#_3" title="Permanent link">¶</a></h3>
 <ul>
 <li>前提工作：</li>

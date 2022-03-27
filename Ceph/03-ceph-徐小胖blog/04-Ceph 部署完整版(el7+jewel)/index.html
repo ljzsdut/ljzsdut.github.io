@@ -8554,7 +8554,7 @@
                 
                 <h1 id="ceph_el7jewel">Ceph 部署完整版(el7+jewel)<a class="headerlink" href="#ceph_el7jewel" title="Permanent link">¶</a></h1>
 <p>发表于 2016-10-10  |   |  阅读次数</p>
-<p><img alt="完工架构" src="https://gitee.com/ljzsdut/pic/raw/master/default/1476095400667-1633996388429.png" /></p>
+<p><img alt="完工架构" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/1476095400667-1633996388429.png" /></p>
 <h2 id="_1">环境<a class="headerlink" href="#_1" title="Permanent link">¶</a></h2>
 <ol>
 <li>3台装有<code>CentOS 7</code>的主机，每台主机有5个磁盘(虚拟机磁盘要大于30G)，具体虚拟机搭建可以查看<a href="http://xuxiaopang.com/2016/09/29/build-vm/">虚拟机搭建 </a>, 目前已经有了3个2T的盘，再在每个节点添加一个240G的盘，假装是一个用作journal的SSD，和一个800G的盘，假装是一个用作OSD的SSD。另外再添加1台装有<code>CentOS 7</code>的主机，用作<code>ntp server</code>和<code>ceph本地源</code>，详细信息如下：</li>
@@ -9106,7 +9106,7 @@ ceph-deploy osd activate ceph-1:/dev/sdf1 ceph-2:/dev/sdf1 ceph-3:/dev/sdf1
 <p>执行完后，查看<code>ceph -s</code>，应该可以看到12个OSD是<code>up</code>的。</p>
 <h2 id="crush">自定义CRUSH<a class="headerlink" href="#crush" title="Permanent link">¶</a></h2>
 <p>最后的工作就是把刚刚建的12个OSD组成下图所示的架构，这里的<code>root-sata</code>，<code>ceph-1-sata</code>等都是我们虚构出来的，和主机名没有任何关系，但是OSD必须和刚刚部署的顺序一一对应！</p>
-<p><img alt="搭建的Ceph架构图" src="https://gitee.com/ljzsdut/pic/raw/master/default/1476095400667-1633996388429.png" /></p>
+<p><img alt="搭建的Ceph架构图" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/1476095400667-1633996388429.png" /></p>
 <p>首先创建对应的Bucket，指令规范为：</p>
 <div class="codehilite"><pre><span></span><code>ceph osd crush add &lt;osdname (id|osd.id)&gt; &lt;float[0.0-]&gt; &lt;args&gt; [&lt;args&gt;...]     
 # add or update crushmap position and  weight for &lt;name&gt; with &lt;weight&gt; and  location &lt;args&gt;

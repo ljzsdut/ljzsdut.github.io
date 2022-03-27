@@ -8737,7 +8737,7 @@ Please, find your login credentials stored <span class="k">in</span> the keyston
 <p>此外，无论哪种组合，br-int上都会打上内部vlan ID。需要注意的是：对于同一个network，在不同计算节点上br-int桥上的内部VLAN ID可能不一致。而对于br-ex、br-eth1或br-tun桥而言，如果是flat网络，则没有任何Tag；如果是vlan网络，则会打上VLAN tag；如果是vxlan隧道网络，则打上vxlan tag。</p>
 </blockquote>
 <p>通用的拓扑：</p>
-<p><img alt="image-20220312203330513" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20220312203330513-1647088526361.png" /></p>
+<p><img alt="image-20220312203330513" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20220312203330513-1647088526361.png" /></p>
 <p>综上所述，OpenStack在设计东西向和南北向流量时，遵循了一定的规则，以下以ovs桥进行说明：</p>
 <p>1、南北向和东西向流量分别使用不同的网桥，走不同的路线，例如南北向是br-ex，东西向是br-eth1/br-tun。</p>
 <p>2、使用两层ovs桥：虚机流量先进入到第1层的br-int桥，然后再进入第2层的br-ex或br-eth1/br-tun。</p>
@@ -8752,7 +8752,7 @@ Please, find your login credentials stored <span class="k">in</span> the keyston
 <li>虽然不同的local network共用一个ovs桥(br-int)，但是不同的local network通过内部vlanID实现隔离。所以local网络中不同网络不互通。</li>
 <li>因为ovs桥没有与物理网卡连接，所以instance无法与宿主机之外的网络通信。</li>
 </ul>
-<p><img alt="local网络ovs机制" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20211210140719024-1639116442508.png" /></p>
+<p><img alt="local网络ovs机制" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20211210140719024-1639116442508.png" /></p>
 <p>Linuxbridge机制驱动：</p>
 <ul>
 <li>Local Network的特点是不会与宿主机的任何物理网卡相连，也不关联任何的外部VLAN ID.</li>
@@ -8760,7 +8760,7 @@ Please, find your login credentials stored <span class="k">in</span> the keyston
 <li>因为bridge没有与物理网卡连接，所以instance无法与宿主机之外的网络通信。</li>
 <li>同时因为每个local network有自己的bridge， bridge之间是没有连通的，所以两个local network之间也不能通信，即使它们位于同一宿主机上。</li>
 </ul>
-<p><img alt="linuxbridge机制驱动" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20211213081658679-1639354618874.png" /></p>
+<p><img alt="linuxbridge机制驱动" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20211213081658679-1639354618874.png" /></p>
 <h2 id="flat">三、flat网络<a class="headerlink" href="#flat" title="Permanent link">¶</a></h2>
 <h3 id="0">0、概述<a class="headerlink" href="#0" title="Permanent link">¶</a></h3>
 <p>flat network（扁平网络）是不带tag 的网络，宿主机的物理网卡通过ovs网桥直接与flat network连接，每个flat network二层网络（ovs桥）都会占用一个物理网卡。如果要创建多个flat网络，就需要准备多个物理网卡。</p>
@@ -8793,9 +8793,9 @@ Please, find your login credentials stored <span class="k">in</span> the keyston
 </ul>
 <p><strong>flat网络最佳实践：</strong></p>
 <p>配置为flat Porvider网络：使用管理员创建，设置为外部网络，只创建1个子网，且子网的cidr与真实的物理网络的cidr相同。然后将该网络的IP直接分配给租户虚机。</p>
-<p><img alt="image-20211210153208056" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20211210153208056-1639121528247.png" /></p>
+<p><img alt="image-20211210153208056" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20211210153208056-1639121528247.png" /></p>
 <p>多个flat网络的情形: 使用不同的物理网卡</p>
-<p><img alt="image-20220310202519175" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20220310202519175-1646915119384.png" /></p>
+<p><img alt="image-20220310202519175" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20220310202519175-1646915119384.png" /></p>
 <h3 id="1">1、修改配置文件<a class="headerlink" href="#1" title="Permanent link">¶</a></h3>
 <p>控制节点：</p>
 <div class="codehilite"><pre><span></span><code><span class="c1">#控制节点：/etc/neutron/plugins/ml2/ml2_conf.ini</span>
@@ -8948,7 +8948,7 @@ e389f847-7e44-4e41-bec2-3526884d4672
 </code></pre></div>
 
 <p>此时的网络结构：</p>
-<p><img alt="image-20211210143655799" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20211210143655799-1639118216120.png" /></p>
+<p><img alt="image-20211210143655799" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20211210143655799-1639118216120.png" /></p>
 <h3 id="3">3、创建网络和子网<a class="headerlink" href="#3" title="Permanent link">¶</a></h3>
 <blockquote>
 <p>注意点：关于是否勾选“外部网络”？</p>
@@ -8958,21 +8958,21 @@ e389f847-7e44-4e41-bec2-3526884d4672
 </blockquote>
 <p>注意：<span style='color:red;background:yellow;font-size:文字大小;'>flat网络必须以管理员用户以管理员身份创建(“管理员” --&gt; "网络")，普通用户创建、管理员用户在项目下创建都会报错。</span></p>
 <p>"物理网络"如何取值：根据配置项<code>bridge_mappings=flat1:br-eth1</code>配置选择。此处为flat1。</p>
-<p><img alt="image-20211210192202026" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20211210192202026-1639135322200.png" /></p>
+<p><img alt="image-20211210192202026" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20211210192202026-1639135322200.png" /></p>
 <p>创建flat类型的子网时，cidr使用真实的物理网络的cidr，网关为真实的物理网络中网关，地址池为真实物理网络中的一段。</p>
 <blockquote>
 <p>flat网络用作租户网络/Provider网络？</p>
 <p>如果填写的不是真实的物理网络cidr（作为租户网络）或多个不同cidr的子网，则需要使用虚机路由器打通各个子网间通信，否则也不会进行跨子网互访。如果想访问外网，则需要再创建一个flat类型的Provider网络，作为qrouter的外部网关。此时，创建了个2个flat类型的网络，一个用作租户网络，一个用作Provider网络。（理论可行，未测试！）</p>
 </blockquote>
-<p><img alt="image-20211210175942716" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20211210175942716-1639130382920.png" /></p>
-<p><img alt="image-20211210182212198" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20211210182212198-1639131732372.png" /></p>
+<p><img alt="image-20211210175942716" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20211210175942716-1639130382920.png" /></p>
+<p><img alt="image-20211210182212198" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20211210182212198-1639131732372.png" /></p>
 <blockquote>
 <p>说明：</p>
 <p>1、子网地址池中的第1个IP会分给qdhcp名称空间下的网卡。如果不指定地址池，则使用cidr中所有的IP。</p>
 <p>2、创建network时，qdhcp-xxx不会创建，创建第1个子网时，才会创建。之后创建第2、3...个子网时就不会再创建qdhcp了。所以网络和qdhcp是一对一的关系。一个qdhcp负责为整个二层网络分配地址。</p>
 </blockquote>
 <p>创建完子网后，此时，会在网络节点上创建一个qdhcp名称空间，br-int桥上会创建一个port，该port是dhcp的tap设备。图如下：</p>
-<p><img alt="image-20211210144944656" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20211210144944656-1639118984844.png" /></p>
+<p><img alt="image-20211210144944656" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20211210144944656-1639118984844.png" /></p>
 <h3 id="4vm1">4、创建虚机vm1<a class="headerlink" href="#4vm1" title="Permanent link">¶</a></h3>
 <blockquote>
 <p>使用管理员或普通用户都可以。</p>
@@ -8990,11 +8990,11 @@ qvo8200daaf-ad
 </code></pre></div>
 
 <p>此时的网络结构如下：</p>
-<p><img alt="image-20211210152809986" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20211210152809986-1639121290173.png" /></p>
+<p><img alt="image-20211210152809986" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20211210152809986-1639121290173.png" /></p>
 <h3 id="5vm2">5、创建虚机vm2<a class="headerlink" href="#5vm2" title="Permanent link">¶</a></h3>
 <p>因为计算节点上没有HDCP服务，所以没有相应的tap 设备。</p>
 <p>此时，网络结构如下：</p>
-<p><img alt="image-20211210153208056" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20211210153208056-1639121528247.png" /></p>
+<p><img alt="image-20211210153208056" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20211210153208056-1639121528247.png" /></p>
 <blockquote>
 <p>注意：</p>
 <p>测试之前，安全组要放通icmp。</p>
@@ -9002,9 +9002,9 @@ qvo8200daaf-ad
 <p>openstack security group rule create --ingress --protocol tcp --dst-port 22 --remote-ip '0.0.0.0/0' default</p>
 </blockquote>
 <p>vm1可以ping通vm2：</p>
-<p><img alt="image-20220312104031193" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20220312104031193-1647053036711.png" /></p>
+<p><img alt="image-20220312104031193" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20220312104031193-1647053036711.png" /></p>
 <p>物理也是可以ping通虚机：</p>
-<p><img alt="image-20220312103451025" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20220312103451025-1647053031873.png" /></p>
+<p><img alt="image-20220312103451025" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20220312103451025-1647053031873.png" /></p>
 <h3 id="6flat">6、说明：关于flat租户网络<a class="headerlink" href="#6flat" title="Permanent link">¶</a></h3>
 <p>按理说，“flat租户网络+flat Provider网络”的组合是能跑的通的，（一个flat租户网络，也可以创建多个子网，子网不一定需要与物理网络具有相同是cidr，此时要借助qrouter打通不同的子网）。但是flat租户网络的模式一般只会在测试环境中使用，使用方式：创建一个Provider网络，cidr与真实的物理网络保持一致，然后直接为虚机分配flat Provider网络中的IP。</p>
 <blockquote>
@@ -9024,10 +9024,10 @@ qvo8200daaf-ad
 </ul>
 <p>Linux Bridge机制驱动实现的VLAN网络：</p>
 <p>不同的vlan连接到不同的linux-bridge桥。</p>
-<p><img alt="Linux Bridge机制驱动实现的VLAN网络" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20211210195342473-1639137222669.png" /></p>
+<p><img alt="Linux Bridge机制驱动实现的VLAN网络" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20211210195342473-1639137222669.png" /></p>
 <p>ovs机制驱动：</p>
 <p>与Linux Bridge driver 不同，Open vSwitch driver 并不通过eth1.100、 eth1.101 等VLAN interface（网卡子接口）来隔离不同的VLAN。而是所有vlan的所有instance都连接到同一个网桥br-int， Open vSwitch通过flow rule （流规则）来指定如何对进出br-int 的数据进行转发。</p>
-<p><img alt="ovs机制驱动实现的VLAN网络" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20211210193906353-1639136346535.png" /></p>
+<p><img alt="ovs机制驱动实现的VLAN网络" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20211210193906353-1639136346535.png" /></p>
 <p>上图中：vm1和vm2属于vlan100；vm3属于vlan101。他们都在同一个br-int桥上。</p>
 <h3 id="1_1">1、配置文件<a class="headerlink" href="#1_1" title="Permanent link">¶</a></h3>
 <p><strong>试验：vlan网络（租户网络）+flat网络（Provider网络）</strong></p>
@@ -9062,18 +9062,18 @@ ovs-vsctl add-port br-eth1 eth1
 
 <h3 id="3_1">3、创建网络、子网、虚机（租户）<a class="headerlink" href="#3_1" title="Permanent link">¶</a></h3>
 <p>省略，与flat网络类似。</p>
-<p><img alt="image-20220312225957970" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20220312225957970-1647097198171.png" /></p>
-<p><img alt="image-20220312230100001" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20220312230100001-1647097260178.png" /></p>
+<p><img alt="image-20220312225957970" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20220312225957970-1647097198171.png" /></p>
+<p><img alt="image-20220312230100001" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20220312230100001-1647097260178.png" /></p>
 <p>经测试：vm1可以ping通vm3，但无法ping通vm2。即同子网内互通，跨子网不通。</p>
 <p>此时的拓扑如下：</p>
-<p><img alt="image-20220312142640920" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20220312142640920-1647066401112.png" /></p>
+<p><img alt="image-20220312142640920" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20220312142640920-1647066401112.png" /></p>
 <h3 id="4vlan">4、vlan路由器<a class="headerlink" href="#4vlan" title="Permanent link">¶</a></h3>
 <p>同一个网络上的不同子网间通信，必须借助于router，可以是物理router或者虚拟router。下图是通过虚拟路由器实现：</p>
 <p>创建路由器，并添加2个子网的接口：</p>
-<p><img alt="image-20220312230441815" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20220312230441815-1647097482013.png" /></p>
+<p><img alt="image-20220312230441815" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20220312230441815-1647097482013.png" /></p>
 <p>经测试：vm1可以ping通vm2，即跨子网可以互通。</p>
 <p>此时的拓扑图如下：</p>
-<p><img alt="image-20220312142418775" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20220312142418775-1647066364435.png" /></p>
+<p><img alt="image-20220312142418775" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20220312142418775-1647066364435.png" /></p>
 <h3 id="5vlanflat">5、vlan访问外网（flat类型）<a class="headerlink" href="#5vlanflat" title="Permanent link">¶</a></h3>
 <p>通过router可以实现位于不同vlan的instance之间的通信。那instance如何与外部网络通信？这里的外部网络指的是租户网络以外的网络。租户网络是由Neutron创建和维护的网络。外部网络不由Neutron创建。如果是私有云，外部网络通常指的是公司intranet;如果是公有云，外部网络通常指的是internet。外部网络是已经存在的网络，一般都是flat网络或vlan网络。</p>
 <h4 id="51">5.1、配置文件<a class="headerlink" href="#51" title="Permanent link">¶</a></h4>
@@ -9107,26 +9107,26 @@ ovs-vsctl add-port br-ex eth2
 </code></pre></div>
 
 <h4 id="53">5.3、创建外部网络、子网（管理员）<a class="headerlink" href="#53" title="Permanent link">¶</a></h4>
-<p><img alt="image-20220312233051945" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20220312233051945-1647099052164.png" /></p>
+<p><img alt="image-20220312233051945" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20220312233051945-1647099052164.png" /></p>
 <h4 id="54router">5.4、配置router的外部网关（租户）<a class="headerlink" href="#54router" title="Permanent link">¶</a></h4>
-<p><img alt="image-20220312231432369" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20220312231432369-1647098072587-1647099100631.png" /></p>
+<p><img alt="image-20220312231432369" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20220312231432369-1647098072587-1647099100631.png" /></p>
 <p>此时的拓扑图如下：</p>
-<p><img alt="image-20220312142848785" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20220312142848785-1647072203778.png" /></p>
+<p><img alt="image-20220312142848785" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20220312142848785-1647072203778.png" /></p>
 <blockquote>
 <p>说明：</p>
 <p>1、br-eth1和eth1是租户vlan网络不通计算节点的东西向流量，br-ex和eth2是vlan网络的南北向流量。</p>
 <p>2、（集中式路由）router连接qg-xx口，实际上是通过路线：router --&gt; br-int --&gt; br-ex --&gt; qg口</p>
 </blockquote>
 <h4 id="55floating_ip">5.5、分配Floating IP<a class="headerlink" href="#55floating_ip" title="Permanent link">¶</a></h4>
-<p><img alt="image-20220312233318171" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20220312233318171-1647099198366.png" /></p>
+<p><img alt="image-20220312233318171" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20220312233318171-1647099198366.png" /></p>
 <p>测试：外部网络可以ping通</p>
-<p><img alt="image-20220312233410547" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20220312233410547-1647099250736.png" /></p>
+<p><img alt="image-20220312233410547" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20220312233410547-1647099250736.png" /></p>
 <h2 id="vxlan">五、vxlan网络<a class="headerlink" href="#vxlan" title="Permanent link">¶</a></h2>
 <h3 id="_3">概述<a class="headerlink" href="#_3" title="Permanent link">¶</a></h3>
 <ul>
 <li>隧道网卡需要配置IP</li>
 </ul>
-<p><img alt="image-20211211114246263" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20211211114246263-1639357788761.png" /></p>
+<p><img alt="image-20211211114246263" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20211211114246263-1639357788761.png" /></p>
 <h3 id="_4">配置文件<a class="headerlink" href="#_4" title="Permanent link">¶</a></h3>
 <p>试验基于全新packstack部署的环境进行。</p>
 <h4 id="1neutron-server">1、neutron-server配置核心插件<a class="headerlink" href="#1neutron-server" title="Permanent link">¶</a></h4>
@@ -9194,42 +9194,42 @@ ovs-vsctl add-port br-ex eth2
 </blockquote>
 <p>此时的网络结构如下：</p>
 <p>（该图中，eth1和eth2需要调换，即按照试验环境，eth2需要连入br-tun桥，而不是eth1）</p>
-<p><img alt="image-20211211111734501" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20211211111734501-1639192654804.png" /></p>
+<p><img alt="image-20211211111734501" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20211211111734501-1639192654804.png" /></p>
 <h3 id="vxlan_1">创建VXLAN网络和虚机<a class="headerlink" href="#vxlan_1" title="Permanent link">¶</a></h3>
 <p>（管理员或普通用户，一般是普通用户创建租户网络）创建网络vxlan100和子网subnet_172_16_100_0，地址为172.16.100.0/24</p>
-<p><img alt="image-20211211113746137" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20211211113746137-1639357816242.png" /></p>
-<p><img alt="image-20211211113831018" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20211211113831018-1639357820071.png" /></p>
-<p><img alt="image-20211211113920819" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20211211113920819-1639357823904.png" /></p>
+<p><img alt="image-20211211113746137" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20211211113746137-1639357816242.png" /></p>
+<p><img alt="image-20211211113831018" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20211211113831018-1639357820071.png" /></p>
+<p><img alt="image-20211211113920819" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20211211113920819-1639357823904.png" /></p>
 <p>创建2台虚机连接到subnet_172_16_100_0：cirros-vm-1、cirros-vm-2</p>
-<p><img alt="image-20211211113939687" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20211211113939687-1639357828238.png" /></p>
+<p><img alt="image-20211211113939687" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20211211113939687-1639357828238.png" /></p>
 <p>虚机间可以ping通：</p>
-<p><img alt="image-20211211114006317" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20211211114006317-1639357832196.png" /></p>
+<p><img alt="image-20211211114006317" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20211211114006317-1639357832196.png" /></p>
 <p>当前的网络结构：</p>
-<p><img alt="image-20211211114246263" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20211211114246263-1639357837943.png" /></p>
+<p><img alt="image-20211211114246263" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20211211114246263-1639357837943.png" /></p>
 <p>vxlan数据包流表分析：</p>
 <p>在网络vxlan100内，再创建第2个子网subnet_172_16_101_0，地址为172.16.101.0/24</p>
-<p><img alt="image-20211211120517226" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20211211120517226-1639195517440.png" /></p>
+<p><img alt="image-20211211120517226" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20211211120517226-1639195517440.png" /></p>
 <p>在该子网内创建2个虚机：cirros-vm-3、cirros-vm-4</p>
-<p><img alt="image-20211211121511442" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20211211121511442-1639196111636.png" /></p>
+<p><img alt="image-20211211121511442" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20211211121511442-1639196111636.png" /></p>
 <p>测试：不同子网，三层不通：</p>
-<p><img alt="image-20211211121453580" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20211211121453580-1639196093788.png" /></p>
+<p><img alt="image-20211211121453580" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20211211121453580-1639196093788.png" /></p>
 <p>但是二层是互通的：</p>
-<p><img alt="image-20211211121643164" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20211211121643164-1639196203358.png" /></p>
+<p><img alt="image-20211211121643164" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20211211121643164-1639196203358.png" /></p>
 <p>如果要实现不同子网三层互通，就需要通过使用router设备。</p>
 <h3 id="vxlan_2">vxlan路由器<a class="headerlink" href="#vxlan_2" title="Permanent link">¶</a></h3>
 <p>路由服务提供跨subnet互联互通的能力。</p>
 <p>对于flat和vlan类型的网络，可以使用物理router或虚拟router。对于overlay网络，我们需要借助虚拟router实现路由功能。</p>
 <p>创建路由：router1</p>
-<p><img alt="image-20211211123438718" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20211211123438718-1639197278920.png" /></p>
+<p><img alt="image-20211211123438718" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20211211123438718-1639197278920.png" /></p>
 <p>添加接口：将subnet_172_16_100_0和subnet_172_16_101_0两个子网的接口加入到router1</p>
-<p><img alt="image-20211211123613918" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20211211123613918-1639197374111.png" /></p>
-<p><img alt="image-20211211123659975" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20211211123659975-1639197420189.png" /></p>
+<p><img alt="image-20211211123613918" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20211211123613918-1639197374111.png" /></p>
+<p><img alt="image-20211211123659975" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20211211123659975-1639197420189.png" /></p>
 <p>此时，两个子网都与router1连通。</p>
-<p><img alt="image-20211211123848582" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20211211123848582-1639197528763.png" /></p>
+<p><img alt="image-20211211123848582" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20211211123848582-1639197528763.png" /></p>
 <p>此时的网络结构：</p>
 <p><strong>（说明：下图使用的是vlan网络的图示，与vxlan稍有不同：br-eth1应为br-tun，eth1应配置IP）</strong></p>
-<p><img alt="vlan网络" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20211211123937004-1639197577204.png" /></p>
-<p><img alt="image-20211211124152036" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20211211124152036-1639197712230.png" /></p>
+<p><img alt="vlan网络" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20211211123937004-1639197577204.png" /></p>
+<p><img alt="image-20211211124152036" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20211211124152036-1639197712230.png" /></p>
 <h3 id="vxlanfip">vxlan访问外网（FIP）<a class="headerlink" href="#vxlanfip" title="Permanent link">¶</a></h3>
 <p>通过router可以实现位于不同子网的instance 之间的通信。</p>
 <p>接下来要探讨的问题是instance 如何与外部网络通信。</p>
@@ -9268,19 +9268,19 @@ ovs-vsctl add-port br-ex eth2
 <h4 id="2flat">2、管理员身份创建外部网络（Flat网络）<a class="headerlink" href="#2flat" title="Permanent link">¶</a></h4>
 <p>其他创建细节参考flat网络创建</p>
 <p>创建外部网络：external_net、子网：ext_subnet</p>
-<p><img alt="image-20211211133906511" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20211211133906511-1639201146747.png" /></p>
-<p><img alt="image-20211210193011114" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20211210193011114-1639135811280.png" /></p>
-<p><img alt="image-20211210193308772" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20211210193308772-1639135988941.png" /></p>
-<p><img alt="image-20211211134155677" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20211211134155677-1639201315875.png" /></p>
+<p><img alt="image-20211211133906511" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20211211133906511-1639201146747.png" /></p>
+<p><img alt="image-20211210193011114" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20211210193011114-1639135811280.png" /></p>
+<p><img alt="image-20211210193308772" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20211210193308772-1639135988941.png" /></p>
+<p><img alt="image-20211211134155677" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20211211134155677-1639201315875.png" /></p>
 <h4 id="3router1">3、设置router1的外部网关<a class="headerlink" href="#3router1" title="Permanent link">¶</a></h4>
 <p>即：将外网连接到router1虚拟路由器</p>
-<p><img alt="image-20211211134656901" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20211211134656901-1639201617115.png" /></p>
+<p><img alt="image-20211211134656901" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20211211134656901-1639201617115.png" /></p>
 <p>启用snat（只有设置为外部网络才能启用NAT功能，该网关IP会配置在该网络对应的snat名称空间下的qg口）：</p>
-<p><img alt="image-20211211134722363" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20211211134722363-1639201642559.png" /></p>
+<p><img alt="image-20211211134722363" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20211211134722363-1639201642559.png" /></p>
 <p>此时的网络结构如下：</p>
-<p><img alt="image-20211211134825234" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20211211134825234-1647072237613.png" /></p>
+<p><img alt="image-20211211134825234" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20211211134825234-1647072237613.png" /></p>
 <p><strong>（说明：）<span style='color:red;background:yellow;font-size:文字大小;'>下图使用的是vlan网络的图示，与vxlan稍有不同：br-eth1应为br-tun，eth1应配置IP</span></strong></p>
-<p><img alt="vlan的网络结构" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20211211141251349-1639357762797.png" /></p>
+<p><img alt="vlan的网络结构" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20211211141251349-1639357762797.png" /></p>
 <p>查看qrouter名称空间下的网卡：</p>
 <div class="codehilite"><pre><span></span><code><span class="o">[</span>root@network ~<span class="o">]</span><span class="c1"># ip net exec qrouter-85484a90-36d9-4bf0-8e81-f133bbc11aff ip a</span>
 <span class="m">1</span>: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu <span class="m">65536</span> qdisc noqueue state UNKNOWN group default qlen <span class="m">1000</span>
@@ -9317,16 +9317,16 @@ ovs-vsctl add-port br-ex eth2
 </ul>
 </blockquote>
 <p>此时，虚机就可以访问外网了，但是并不是使用的Floating IP：</p>
-<p><img alt="image-20211211135539359" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20211211135539359-1639202139566.png" /></p>
+<p><img alt="image-20211211135539359" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20211211135539359-1639202139566.png" /></p>
 <h4 id="4floating_ip">4、分配Floating IP<a class="headerlink" href="#4floating_ip" title="Permanent link">¶</a></h4>
 <p>此时虚机能够访问外网，但是外网无法访问虚机，如果要实现访问虚机，可以通过Floating IP。</p>
 <p>Open vSwitch driver环境中，floating IP的实现与Linux Bridge driver完全一样: 都是通过在router 提供网关的外网interface(qg-xxx)上配置iptables NAT规则实现。</p>
 <p>分配FIP:</p>
-<p><img alt="image-20211211135848278" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20211211135848278-1639202328492.png" /></p>
+<p><img alt="image-20211211135848278" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20211211135848278-1639202328492.png" /></p>
 <p>关联FIP：</p>
-<p><img alt="image-20211211135950128" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20211211135950128-1639202390336.png" /></p>
+<p><img alt="image-20211211135950128" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20211211135950128-1639202390336.png" /></p>
 <p>可以发现虚机cirros-vm-3分配到了一个FIP：10.37.128.235</p>
-<p><img alt="image-20211211140412382" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20211211140412382-1639202652582.png" /></p>
+<p><img alt="image-20211211140412382" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20211211140412382-1639202652582.png" /></p>
 <p>测试：在真实的物理网络中访问虚机</p>
 <div class="codehilite"><pre><span></span><code><span class="o">[</span> Mac-mini:/Users/lijuzhang <span class="o">]</span>  ➜ ping <span class="m">10</span>.37.129.235 -c <span class="m">2</span>
 PING <span class="m">10</span>.37.129.235 <span class="o">(</span><span class="m">10</span>.37.129.235<span class="o">)</span>: <span class="m">56</span> data bytes
@@ -9542,7 +9542,7 @@ Updated router: router1
 
 <p>新建网络(dvrtest)和子网(dvrtest_subnet，cidr为172.16.1.0/24)，并连接到路由器router1中，然后创建2台虚机。</p>
 <p>此时结构图如下：</p>
-<p><img alt="image-20211212213205464" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20211212213205464-1639315925718.png" /></p>
+<p><img alt="image-20211212213205464" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20211212213205464-1639315925718.png" /></p>
 <p>此时，测试虚机直接的连通性：所有虚机间可以互通。</p>
 <h2 id="qroutersnat">qrouter+snat两个名称空间共同组成一个路由器<a class="headerlink" href="#qroutersnat" title="Permanent link">¶</a></h2>
 <div class="codehilite"><pre><span></span><code><span class="c1">#qrouter+snat两个名称空间共同组成一个路由器，每个network下有一个router。：</span>
@@ -9560,7 +9560,7 @@ Updated router: router1
 
 <p>从上图可以得知：</p>
 <p>每个network中只有一个router，每个router对应一个snat名称空间(二者ID一致)，每个router上有n个snat的port（每个subnet对应一个snat口），即network：route=1：1</p>
-<p><img alt="image-20220303105228447" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20220303105228447-1646275948618-1646323802866.png" /></p>
+<p><img alt="image-20220303105228447" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20220303105228447-1646275948618-1646323802866.png" /></p>
 <p>每个子网对应一个snat口。</p>
 <h1 id="cirros">cirros优化<a class="headerlink" href="#cirros" title="Permanent link">¶</a></h1>
 <p>由于cirros映像封装了busybox拥有linux的各项功能，具有体积小，功能全的特点，常常被用来做网络等方面功能的测试使用。但是官方提供的映像文件在使用过程中，因为加载了一些cloud、网络等模块，启动速度特别慢(约20分钟，显示如下)。所以使用起来很不方便，现在我们做一些<a href="https://www.zhangqiongjie.com/2688.html">系统调整加快启动速度</a>（调整后10秒启动）。</p>

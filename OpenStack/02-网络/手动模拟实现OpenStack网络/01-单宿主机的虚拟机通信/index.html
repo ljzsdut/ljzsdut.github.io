@@ -8718,7 +8718,7 @@
                 
                 <h1 id="_1">虚拟机访问外网<a class="headerlink" href="#_1" title="Permanent link">¶</a></h1>
 <h2 id="_2">拓扑图<a class="headerlink" href="#_2" title="Permanent link">¶</a></h2>
-<p><img alt="image-20210702153347108" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20210702153347108-1625211227308.png" /></p>
+<p><img alt="image-20210702153347108" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20210702153347108-1625211227308.png" /></p>
 <ul>
 <li>br-ex是一个物理桥，与物理网卡绑定；采用linux网桥实现。作用是为宿主机内的虚拟机提供网络出口</li>
 <li>br-in是一个虚拟桥，采用linux网桥实现。作用是连接虚拟机，提供虚拟机间通信的二层设备</li>
@@ -9257,9 +9257,9 @@ round-trip min/avg/max <span class="o">=</span> <span class="m">0</span>.709/0.7
 </code></pre></div>
 
 <h2 id="_5">扩展<a class="headerlink" href="#_5" title="Permanent link">¶</a></h2>
-<p><img alt="image-20210702162249986" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20210702162249986-1625214170165.png" /></p>
-<p><img alt="image-20210702162137990" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20210702162137990-1625214098209.png" /></p>
-<p><img alt="image-20210702162203549" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20210702162203549-1625214123729.png" /></p>
+<p><img alt="image-20210702162249986" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20210702162249986-1625214170165.png" /></p>
+<p><img alt="image-20210702162137990" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20210702162137990-1625214098209.png" /></p>
+<p><img alt="image-20210702162203549" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20210702162203549-1625214123729.png" /></p>
 <div class="codehilite"><pre><span></span><code><span class="c1"># 创建内部桥br-in</span>
 <span class="o">[</span>root@OS-network-1 ~<span class="o">]</span><span class="c1"># brctl addbr br-in2</span>
 <span class="o">[</span>root@OS-network-1 ~<span class="o">]</span><span class="c1"># ip link set br-in2 up</span>

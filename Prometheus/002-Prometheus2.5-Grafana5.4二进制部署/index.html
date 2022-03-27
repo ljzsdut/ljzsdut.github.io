@@ -8516,7 +8516,7 @@ Checking /usr/local/prometheus/prometheus.yml
 </ul>
 </blockquote>
 <h5 id="_1"><strong>数据保存（持久化）说明：</strong><a class="headerlink" href="#_1" title="Permanent link">¶</a></h5>
-<p><img alt="QikQoe-1593313123522" src="https://gitee.com/ljzsdut/pic/raw/master/default/QikQoe-1593313123522.png" /></p>
+<p><img alt="QikQoe-1593313123522" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/QikQoe-1593313123522.png" /></p>
 <p>其中这些长串字母的目录是历史数据保留；而当前近期数据实际上保留在内存中，并且按照一定间隔存放在wal/目录中防止突然断电或者重启，以用来恢复内存中的数据。（wal：write after log）</p>
 <h5 id="prometheusyml"><strong>prometheus.yml配置文件说明：</strong><a class="headerlink" href="#prometheusyml" title="Permanent link">¶</a></h5>
 <div class="codehilite"><pre><span></span><code>global:
@@ -8654,7 +8654,7 @@ Hint: Some lines were ellipsized, use -l to show in full.
 </code></pre></div>
 
 <p>Prometheus自带有简单的UI,http://172.16.8.253:9090/</p>
-<p><img alt="Prometheus-ui" src="https://gitee.com/ljzsdut/pic/raw/master/default/Prometheus-ui.png" /></p>
+<p><img alt="Prometheus-ui" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/Prometheus-ui.png" /></p>
 <h2 id="node_exporter">二、node_exporter安装及配置<a class="headerlink" href="#node_exporter" title="Permanent link">¶</a></h2>
 <p>常用的exporter：</p>
 <ul>
@@ -8735,9 +8735,9 @@ firewall-cmd --add-port<span class="o">=</span><span class="m">9100</span>/tcp -
 
 <h4 id="6_1">6、客户监控端数据汇报<a class="headerlink" href="#6_1" title="Permanent link">¶</a></h4>
 <p>访问：http://172.16.8.253:9100/metrics，查看从exporter具体能抓到的数据.如下：有数据返回表示成功</p>
-<p><img alt="Prometheus-metrics" src="https://gitee.com/ljzsdut/pic/raw/master/default/Prometheus-metrics.png" /></p>
-<p><img alt="image-20200701150237431" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20200701150237431-1596610627213.png" /></p>
-<p><img alt="image-20200701150325696" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20200701150325696-1595809328305-1626312030842.png" /></p>
+<p><img alt="Prometheus-metrics" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/Prometheus-metrics.png" /></p>
+<p><img alt="image-20200701150237431" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20200701150237431-1596610627213.png" /></p>
+<p><img alt="image-20200701150325696" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20200701150325696-1595809328305-1626312030842.png" /></p>
 <h2 id="pushgateway">三、Pushgateway安装与使用：<a class="headerlink" href="#pushgateway" title="Permanent link">¶</a></h2>
 <p>pushgateway是另一种获取监控数据的prometheus 插件，采用被动推送的方式来接收exporter的推送的数据(而不是向exporter主动获取) 。它是可以单独运行在任何节点上的插件(并不一定要在被监控客户端)，然后通过用户自定义开发脚本把需要监控的数据发送给pushgateway，prometheus server再向pushgateway拉取数据。</p>
 <p>下载地址：https://github.com/prometheus/pushgateway</p>
@@ -8786,7 +8786,7 @@ systemctl start grafana-server.service
 <h4 id="3web">3、访问WEB界面<a class="headerlink" href="#3web" title="Permanent link">¶</a></h4>
 <p>http://172.16.9.253:3000</p>
 <p><strong>默认账号/密码：admin/admin</strong></p>
-<p><img alt="Prometheus-grafana1" src="https://gitee.com/ljzsdut/pic/raw/master/default/Prometheus-grafana1.png" /></p>
+<p><img alt="Prometheus-grafana1" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/Prometheus-grafana1.png" /></p>
 <h4 id="4grafana">4、Grafana添加数据源<a class="headerlink" href="#4grafana" title="Permanent link">¶</a></h4>
 <div class="codehilite"><pre><span></span><code>在登陆首页，点击<span class="s2">&quot;Configuration-&gt;Data Sources&quot;</span>按钮，跳转到添加数据源页面，配置如下：
 Name: prometheus  <span class="c1"># （任意）</span>
@@ -8796,12 +8796,12 @@ Access: Server  <span class="c1">#以server的身份访问Prometheus，其他值
 点击<span class="s2">&quot;Save&amp;Test&quot;</span>，如下：
 </code></pre></div>
 
-<p><img alt="grafana-datasource" src="https://gitee.com/ljzsdut/pic/raw/master/default/Grafana-DataSource-1596676196084.png" /></p>
+<p><img alt="grafana-datasource" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/Grafana-DataSource-1596676196084.png" /></p>
 <h4 id="5dashboard">5、导入dashboard：<a class="headerlink" href="#5dashboard" title="Permanent link">¶</a></h4>
 <p>在https://grafana.com/grafana/dashboards上查询dashboard模板，找到想使用的模板的id或者json文件。</p>
 <p>在grafana中import即可。</p>
-<p><img alt="import1" src="https://gitee.com/ljzsdut/pic/raw/master/default/Grafana-import1-1596676192562.png" /></p>
-<p><img alt="import2" src="https://gitee.com/ljzsdut/pic/raw/master/default/Grafana-import2-1596676218668.png" /></p>
+<p><img alt="import1" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/Grafana-import1-1596676192562.png" /></p>
+<p><img alt="import2" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/Grafana-import2-1596676218668.png" /></p>
 <h2 id="alertmanager">五、Alertmanager安装配置<a class="headerlink" href="#alertmanager" title="Permanent link">¶</a></h2>
 <div class="codehilite"><pre><span></span><code>tar -xvf alertmanager-0.15.3.linux-amd64.tar.gz -C /usr/local/
 <span class="nb">cd</span> /usr/local/
@@ -9100,9 +9100,9 @@ Dec <span class="m">11</span> <span class="m">10</span>:51:21 prometheus-node2 a
       <span class="nt">description</span><span class="p">:</span> <span class="s">&quot;{{$labels.mountpoint</span><span class="nv"> </span><span class="s">}}</span><span class="nv"> </span><span class="s">磁盘分区使用大于80%(目前使用:{{$value}}%)&quot;</span>
 </code></pre></div>
 
-<p><img alt="Prometheus-alerts1" src="https://gitee.com/ljzsdut/pic/raw/master/default/Prometheus-alerts1.jpeg" /></p>
+<p><img alt="Prometheus-alerts1" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/Prometheus-alerts1.jpeg" /></p>
 <h4 id="_5">已经收到邮件内容告警<a class="headerlink" href="#_5" title="Permanent link">¶</a></h4>
-<p><img alt="Prometheus-alerts2" src="https://gitee.com/ljzsdut/pic/raw/master/default/Prometheus-alerts2.jpeg" /></p>
+<p><img alt="Prometheus-alerts2" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/Prometheus-alerts2.jpeg" /></p>
 <h4 id="_6">高可用部署<a class="headerlink" href="#_6" title="Permanent link">¶</a></h4>
 <p>为了提升Prometheus的服务可靠性，我们会部署两个或多个的Prometheus服务，两个Prometheus具有相同的配置（Job配、告警规则、等），当其中一个Down掉了以后，可以保证Prometheus持续可用。</p>
 <p>AlertManager自带警报分组机制，即使不同的Prometheus分别发送相同的警报给Alertmanager，Alertmanager也会自动把这些警报合并处理。</p>
@@ -9129,11 +9129,11 @@ Dec <span class="m">11</span> <span class="m">10</span>:51:21 prometheus-node2 a
 </table>
 <p>虽然Alertmanager 能够同时处理多个相同的Prometheus的产生的警报，如果部署的Alertmanager是单节点，那就存在明显的的单点故障风险，当Alertmanager节点down机以后，警报功能则不可用。</p>
 <p>解决这个问题的方法就是使用传统的HA架构模式，部署Alertmanager多节点。但是由于Alertmanager之间关联存在不能满足HA的需求，因此会导致警报通知被Alertmanager重复发送多次的问题。</p>
-<p><img alt="OBfUr0-1598316235453" src="https://gitee.com/ljzsdut/pic/raw/master/default/OBfUr0-1598316235453.png" /></p>
+<p><img alt="OBfUr0-1598316235453" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/OBfUr0-1598316235453.png" /></p>
 <p>Alertmanager为了解决这个问题，<strong>引入了Gossip机制，为多个Alertmanager之间提供信息传递机制。确保及时的在多个Alertmanager分别接受到相同的警报信息的情况下，不会发送重复的警报信息给Receiver</strong>.</p>
 <h5 id="gossip">Gossip 机制<a class="headerlink" href="#gossip" title="Permanent link">¶</a></h5>
 <p>要知道什么是Gossip机制，必须了解清楚Alertmanager中的每一次警报通知是如何产生的，下面一图很详细的阐述了警报个流程：</p>
-<p><img alt="19TwU5-1598316276898" src="https://gitee.com/ljzsdut/pic/raw/master/default/19TwU5-1598316276898.png" /></p>
+<p><img alt="19TwU5-1598316276898" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/19TwU5-1598316276898.png" /></p>
 <table>
 <thead>
 <tr>
@@ -9291,7 +9291,7 @@ systemctl start alertmanager01 alertmanager02 alertmanager03
 </code></pre></div>
 
 <p>启动完成后，就可以访问http://192.168.1.220:19093可以看到以下集群状态了，我这里是为了测试，本地启动了多个端口，如果是实际生产环境中，是不同节点以及不同的IP，这些根据自己的需求设计即可。</p>
-<p><img alt="MRx173-1598316306035" src="https://gitee.com/ljzsdut/pic/raw/master/default/MRx173-1598316306035.png" /></p>
+<p><img alt="MRx173-1598316306035" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/MRx173-1598316306035.png" /></p>
 <p>Prometheus中的配置：</p>
 <p><strong>注意不要让Prometheus指向Alertmanagers的负载均衡器，而是将Prometheus指向所有Alertmanagers的列表</strong>。例如：</p>
 <div class="codehilite"><pre><span></span><code>alerting:
@@ -9306,7 +9306,7 @@ systemctl start alertmanager01 alertmanager02 alertmanager03
 </code></pre></div>
 
 <p>配置完成以后，重启或者reload Prometheus服务，访问http://192.168.1.220:19090/config就可以看到具体的配置信息了。</p>
-<p><img alt="Mjz4Yr-1598316350794" src="https://gitee.com/ljzsdut/pic/raw/master/default/Mjz4Yr-1598316350794.png" /></p>
+<p><img alt="Mjz4Yr-1598316350794" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/Mjz4Yr-1598316350794.png" /></p>
 <p>到此，Alertmanager集群配置就完成了，对于进群中的警报测试很简单，直接down掉一个端口，然后触发警报，看看警报是否可以正常发送。</p>
                 
                   

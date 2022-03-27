@@ -9066,7 +9066,7 @@
 <p>如果T是<strong>预先声明类型</strong>：<strong>boolean</strong>, <strong>numeric</strong>, or <strong>string</strong>（布尔，数值，字符串）中的一个，或者是一个<strong>类型字面量</strong>(<code>type literal</code>)，他们对应的基础类型就是T自身。否则，T的基础类型就是T所引用的那个类型的<strong>类型声明</strong>(<code>type declaration</code>)。</p>
 <p>即：</p>
 <p>基础类型要么是<strong>预先声明类型</strong>，要么是<strong>组合类型的类型字面量</strong>，不能是自定义的命名类型的名称。（即如果<code>T</code>是一个类型字面量，它的基础类型就是<code>T</code>自身）</p>
-<p><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/webp-20220228093431092-1646012071202.jpg" /></p>
+<p><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/webp-20220228093431092-1646012071202.jpg" /></p>
 <div class="codehilite"><pre><span></span><code><span class="kd">type</span> <span class="nx">I</span> <span class="kt">int32</span> <span class="c1">// numeric</span>
 <span class="kd">type</span> <span class="nx">II</span> <span class="kt">float64</span>  <span class="c1">// numeric  ，所以I和II具有相同的基础类型numeric</span>
 
@@ -9095,7 +9095,7 @@
 <p><code>type T map[S]int</code>. 由于<code>s</code>的基础类型是<code>string</code>，那么是否<code>type T map[S]int</code>的基础类型应该是 <code>map[string]int</code> 而并非<code>map[S]int</code>呢？确定吗？ 在此，我们讨论的是基础未命名类型<code>map[S]int</code>，<strong>因为基础类型只追溯到它的未命名类型的<span style='color:red;background:背景颜色;font-size:文字大小;'>最外层</span>，所以<code>map[S]int</code>内层的S就不再追溯</strong>（或者就像说明上说的：如果<code>T</code>是一个类型字面量，它的基础类型就是<code>T</code>自身），所以<code>U</code>的基础类型是<code>map[S]int</code>。</p>
 <h3 id="_2">可赋值性<a class="headerlink" href="#_2" title="Permanent link">¶</a></h3>
 <p>什么情况下变量<code>x</code>可以赋值给另一个类型<code>T</code></p>
-<p><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/webp-20220228093942008-1646012382110.jpg" /></p>
+<p><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/webp-20220228093942008-1646012382110.jpg" /></p>
 <ul>
 <li>x的类型与T相同</li>
 <li>T是一个接口类型，而且x的类型实现了接口T</li>
@@ -9159,7 +9159,7 @@
 <p>编译通过，因为<code>m</code>是未命名类型，同时<code>m</code>和<code>mMap</code>有相同的基础类型。</p>
 </blockquote>
 <h3 id="_3">类型转换<a class="headerlink" href="#_3" title="Permanent link">¶</a></h3>
-<p><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/webp-1646016740576.jpg" /></p>
+<p><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/webp-1646016740576.jpg" /></p>
 <ul>
 <li>具有相同的基础类型，就可以做类型转换。</li>
 <li>

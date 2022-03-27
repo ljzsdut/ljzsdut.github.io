@@ -8467,25 +8467,25 @@
 <p>默认情况下Wireshark认为udp 4789端口对应的数据 为Vxlan协议数据包.</p>
 <p>而Linux内核默认的处理vxlan的协议端口为UDP 8472端口，因此在抓包使用wireshark统计观察分析Linux系统下的数据时，不能默认直接解析vxlan协议，而是直接将vxlan协议的数据作为UDP的数据块，可读性不高，因此需要客户化设置将UDP 8472 端口与Vxlan协议对应起来，以便wireshark软件解析协议.</p>
 <p>如下图:</p>
-<p><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3podXpodXhpYXpzdA==,size_16,color_FFFFFF,t_70-1636349807513.png" /></p>
+<p><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3podXpodXhpYXpzdA==,size_16,color_FFFFFF,t_70-1636349807513.png" /></p>
 <h3 id="wireshark_enabled_protocol">查看wireshark支持的协议 以及 enabled protocol<a class="headerlink" href="#wireshark_enabled_protocol" title="Permanent link">¶</a></h3>
 <p>Internals -&gt; Supported Protocols(slow!)-&gt;查看对话框中是否有vxlan协议，有的话说明此版本的wireshark已经支持解析vxlan协议,否则不支持，请更新wireshark版本.</p>
-<p><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/20210111144752630-1636349823543.png" /></p>
-<p><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3podXpodXhpYXpzdA==,size_16,color_FFFFFF,t_70-20211108133739155-1636349859274.png" /></p>
+<p><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/20210111144752630-1636349823543.png" /></p>
+<p><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3podXpodXhpYXpzdA==,size_16,color_FFFFFF,t_70-20211108133739155-1636349859274.png" /></p>
 <h3 id="enabled_protocolvxlan_protocolenabled">查看enabled protocol,确保vxlan protocol处于enabled状态.<a class="headerlink" href="#enabled_protocolvxlan_protocolenabled" title="Permanent link">¶</a></h3>
 <div class="codehilite"><pre><span></span><code>      Analyze -&gt;Enabled Protocols-&gt;Vxlan
 </code></pre></div>
 
-<p><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3podXpodXhpYXpzdA==,size_16,color_FFFFFF,t_70-20211108133745734-1636349865842.png" /></p>
-<p><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3podXpodXhpYXpzdA==,size_16,color_FFFFFF,t_70-20211108133751283-1636349871392.png" /></p>
+<p><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3podXpodXhpYXpzdA==,size_16,color_FFFFFF,t_70-20211108133745734-1636349865842.png" /></p>
+<p><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3podXpodXhpYXpzdA==,size_16,color_FFFFFF,t_70-20211108133751283-1636349871392.png" /></p>
 <h3 id="wireshark8472vxlan">调整Wireshark配置，让8472端口的数据包解析为vxlan协议.<a class="headerlink" href="#wireshark8472vxlan" title="Permanent link">¶</a></h3>
 <p>选中 udp 端口8472 的数据包 -&gt; decode as -&gt; UDP (destination 8472)  decode as -&gt; VXLAN</p>
 <p>或者    选中 udp 端口8472 的数据包 -&gt;  (菜单栏) Analyze-&gt;Decode as -&gt; UDP (destination 8472)  decode as -&gt; VXLAN</p>
-<p><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3podXpodXhpYXpzdA==,size_16,color_FFFFFF,t_70-20211108133813756-1636349893878.png" /></p>
-<p><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3podXpodXhpYXpzdA==,size_16,color_FFFFFF,t_70-20211108133819633-1636349899745.png" /></p>
-<p><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3podXpodXhpYXpzdA==,size_16,color_FFFFFF,t_70-20211108133827228-1636349907343.png" /></p>
+<p><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3podXpodXhpYXpzdA==,size_16,color_FFFFFF,t_70-20211108133813756-1636349893878.png" /></p>
+<p><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3podXpodXhpYXpzdA==,size_16,color_FFFFFF,t_70-20211108133819633-1636349899745.png" /></p>
+<p><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3podXpodXhpYXpzdA==,size_16,color_FFFFFF,t_70-20211108133827228-1636349907343.png" /></p>
 <p>正确解析后数据如下图</p>
-<p><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3podXpodXhpYXpzdA==,size_16,color_FFFFFF,t_70-20211108133832397-1636349912513.png" /></p>
+<p><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3podXpodXhpYXpzdA==,size_16,color_FFFFFF,t_70-20211108133832397-1636349912513.png" /></p>
 <p>说明：</p>
 <p>1  其他类似的协议可以类推。</p>
 <p>2  文档中介绍的方式只是临时起效，Wireshark软件重启后，配置丢失，应该可以设置用户个性化配置永久保存。</p>

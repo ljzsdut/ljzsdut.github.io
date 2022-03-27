@@ -8640,7 +8640,7 @@
 </blockquote>
 <h2 id="_7">自定义模块<a class="headerlink" href="#_7" title="Permanent link">¶</a></h2>
 <p>这个最简单， 创建一个.py文件，就可以称之为模块，就可以在另外一个程序里导入</p>
-<p><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-1628641012597.png" /></p>
+<p><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-1628641012597.png" /></p>
 <h2 id="_8">模块查找路径<a class="headerlink" href="#_8" title="Permanent link">¶</a></h2>
 <p>发现，自己写的模块只能在当前路径下的程序里才能导入，换一个目录再导入自己的模块就报错说找不到了， 这是为什么？</p>
 <p>这与导入模块的查找路径有关</p>
@@ -8697,7 +8697,7 @@
 
 <p>根据上面的结构，如何实现在apeland<em>web<code>/views.py</code>里导入my</em><code>proj/settings.py</code>模块？</p>
 <p>直接导入的话，会报错，说找到不模块</p>
-<p><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20210811081851405-1628641131536.png" /></p>
+<p><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20210811081851405-1628641131536.png" /></p>
 <p>是因为路径找不到，my_proj/settings.py 相当于是apeland_web/views.py的父亲(apeland_web)的兄弟(my_proj)的儿子(settings.py)，settings.py算是views.py的表弟啦，在views.py里只能导入同级别兄弟模块代码，或者子级别包里的模块，根本不知道表弟表哥的存在。这可怎么办呢？</p>
 <p>答案是<strong>添加环境变量，把父亲级的路径添加到sys.path中，就可以了，这样导入 就相当于从父亲级开始找模块了。</strong></p>
 <p><em>apeland_web/views.py中添加环境变量</em></p>
@@ -8714,7 +8714,7 @@
 <p>官方推荐的玩法是，在项目里创建个入口程序，整个程序调用的开始应该是从入口程序发起，这个入口程序一般放在项目的顶级目录</p>
 <p>这样做的好处是，项目中的二级目录 apeland_web/views.py中再调用他表亲my_proj/settings.py时就不用再添加环境变量了。</p>
 <p>原因是由于manage.py在顶层，manage.py启动时项目的环境变量路径就会自动变成….xxx/my_proj/这一级别</p>
-<p><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/image_FMkmC3b-1628641142634.png" /></p>
+<p><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image_FMkmC3b-1628641142634.png" /></p>
                 
                   
                 

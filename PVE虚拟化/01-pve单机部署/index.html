@@ -8528,20 +8528,20 @@
 <p>7、VM支持虚拟化嵌套、支持cloudinit、支持硬件透传(Passthrough)、根据镜像模板进行克隆、链接克隆实现秒级生成、支持备份(手动或策略备份作业)</p>
 <h2 id="pve_1">pve单机部署<a class="headerlink" href="#pve_1" title="Permanent link">¶</a></h2>
 <p>1、选择第一个选项，安装PVE</p>
-<p><img alt="OCaTUa-1617679748237" src="https://gitee.com/ljzsdut/pic/raw/master/default/OCaTUa-1617679748237-1617679755306.jpg" /></p>
+<p><img alt="OCaTUa-1617679748237" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/OCaTUa-1617679748237-1617679755306.jpg" /></p>
 <p>2、同意协议</p>
-<p><img alt="SoXrju-1617679774429" src="https://gitee.com/ljzsdut/pic/raw/master/default/SoXrju-1617679774429-1617679777596.jpg" /></p>
+<p><img alt="SoXrju-1617679774429" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/SoXrju-1617679774429-1617679777596.jpg" /></p>
 <p>3、选择系统盘</p>
-<p><img alt="IqRB8B-1617679798161" src="https://gitee.com/ljzsdut/pic/raw/master/default/IqRB8B-1617679798161-1617679801673.jpg" /></p>
+<p><img alt="IqRB8B-1617679798161" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/IqRB8B-1617679798161-1617679801673.jpg" /></p>
 <p>4、配置国家、地区</p>
-<p><img alt="GsjJ9X-1617679812856" src="https://gitee.com/ljzsdut/pic/raw/master/default/GsjJ9X-1617679812856-1617679816203.jpg" /></p>
+<p><img alt="GsjJ9X-1617679812856" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/GsjJ9X-1617679812856-1617679816203.jpg" /></p>
 <p>5、配置密码、邮箱
 如果为生产环境务必配置为强口令。邮箱建议配置为真实邮箱.</p>
-<p><img alt="gFQKcd-1617679844307" src="https://gitee.com/ljzsdut/pic/raw/master/default/gFQKcd-1617679844307-1617679848231.jpg" /></p>
+<p><img alt="gFQKcd-1617679844307" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/gFQKcd-1617679844307-1617679848231.jpg" /></p>
 <p>6、配置网卡、主机名、IP地址、DNS等信息</p>
-<p><img alt="gzZmfy-1617679887572" src="https://gitee.com/ljzsdut/pic/raw/master/default/gzZmfy-1617679887572.jpg" /></p>
+<p><img alt="gzZmfy-1617679887572" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/gzZmfy-1617679887572.jpg" /></p>
 <p>7、检查无误后点击安装。</p>
-<p><img alt="53d75y-1617679926125" src="https://gitee.com/ljzsdut/pic/raw/master/default/53d75y-1617679926125-1617679929743.jpg" /></p>
+<p><img alt="53d75y-1617679926125" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/53d75y-1617679926125-1617679929743.jpg" /></p>
 <p>安装结束后重启，通过浏览器访问，出现以下页面证明安装成功。
 地址：https://你的IP地址:8006
 用户名：root
@@ -8596,7 +8596,7 @@ mv /etc/apt/sources.list.d/pve-enterprise.list ~/pve-enterprise.list.bak
 </code></pre></div>
 
 <p>找到以下内容，并注释掉：
-<img alt="在这里插入图片描述" src="https://gitee.com/ljzsdut/pic/raw/master/default/20200825115736860-1617681058392.png" /></p>
+<img alt="在这里插入图片描述" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/20200825115736860-1617681058392.png" /></p>
 <h2 id="qemu-guest-agent">启用qemu-guest-agent<a class="headerlink" href="#qemu-guest-agent" title="Permanent link">¶</a></h2>
 <p>对于任何一个虚拟化平台，总有一个客户机软件和宿主机通信，例如vmware的vmtools。KVM下的就是qemu-guest-agent。因为PVE是基于KVM的，所以客户端依旧是 qemu-guest-agent 。</p>
 <p><a href="https://foxi.buduanwang.vip/virtualization/pve/530.html/">guest安装(不安装会提示Guest Agent未运行)</a></p>

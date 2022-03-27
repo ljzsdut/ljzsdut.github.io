@@ -8715,7 +8715,7 @@
                   <h1>02 无floatingIP访问外网(vm访问service data网)抓包分析</h1>
                 
                 <h2 id="_1">概述<a class="headerlink" href="#_1" title="Permanent link">¶</a></h2>
-<p><img alt="q9yc8n-1629247387590" src="https://gitee.com/ljzsdut/pic/raw/master/default/q9yc8n-1629247387590-1629247400675.png" /></p>
+<p><img alt="q9yc8n-1629247387590" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/q9yc8n-1629247387590-1629247400675.png" /></p>
 <p>关于接口/port的一些知识点：</p>
 <p>1、tap、qbr、qvo、qvb的id是一致的。</p>
 <p>2、每个子网在qrouter上对应1个qr口。qrouter上所有子网共用1个rfp和fpr口。每个子网对应snat-ns上的1个sg口，共用一个qg口。</p>
@@ -8890,7 +8890,7 @@ tcpdump: listening on qr-9a2c0e41-0c, link-type EN10MB <span class="o">(</span>E
     <span class="m">172</span>.31.2.130 &gt; <span class="m">100</span>.121.0.75: ICMP <span class="nb">echo</span> request, id <span class="m">5184</span>, seq <span class="m">232</span>, length <span class="m">64</span>
 </code></pre></div>
 
-<p><img alt="image-20210817194732483" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20210817194732483-1629200852781.png" /></p>
+<p><img alt="image-20210817194732483" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20210817194732483-1629200852781.png" /></p>
 <h3 id="br-intcompute_1">br-int（compute节点）<a class="headerlink" href="#br-intcompute_1" title="Permanent link">¶</a></h3>
 <p>从qr口发出去的报文，进入到br-int桥。通过正常的二层转发，进入到patch-tun设备。</p>
 <blockquote>
@@ -9103,7 +9103,7 @@ tcpdump: listening on eth1, link-type EN10MB <span class="o">(</span>Ethernet<sp
 <ul>
 <li>作为一个 NORMAL 二层交换机使用（正常的二层转发设备），</li>
 </ul>
-<p><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/041703489039816-20211119095318908-1637286799016.jpg" /></p>
+<p><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/041703489039816-20211119095318908-1637286799016.jpg" /></p>
                 
                   
                 

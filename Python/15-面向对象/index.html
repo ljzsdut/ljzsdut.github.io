@@ -8793,7 +8793,7 @@
 </ol>
 <p><strong>self参数的作用:</strong></p>
 <p>对象是由对应的类实例化而来的,当对象调用相应类的方法时，会将对象自身作为一个参数传递给类中的self参数，此参数由python内部自动传递，无需手动赋值。通俗地将：self参数指代类实例化后产生的那个实例对象。</p>
-<p><img alt="image-20200305155519117" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20200305155519117.png" /></p>
+<p><img alt="image-20200305155519117" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20200305155519117.png" /></p>
 <p><strong>易错点：</strong></p>
 <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">asd</span><span class="p">:</span>
     <span class="k">def</span> <span class="nf">ad</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">):</span>
@@ -8930,7 +8930,7 @@ python并不会真的阻止你访问私有属性，这只是以一种约定。</
 <p>多继承：指定多个父类</p>
 <h4 id="_11">继承搜索顺序<a class="headerlink" href="#_11" title="Permanent link">¶</a></h4>
 <p>如果子类和父类具有同名的方法，在调用子类的该方法时，调用顺序：子类&gt; 父类（如果是多继承，自左至右，顺序调用；共有父类，后者调用）后者调用是因为前者就算调用了，也会被后者调用时再次覆盖。</p>
-<p><img alt="image-20200305162931678" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20200305162931678.png" /></p>
+<p><img alt="image-20200305162931678" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20200305162931678.png" /></p>
 <p>验证：对于共有父类这种情况，比较靠谱的方法分析就是画出类树结构图。</p>
 <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">F</span><span class="p">:</span>
     <span class="k">def</span> <span class="nf">test</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -8974,7 +8974,7 @@ python并不会真的阻止你访问私有属性，这只是以一种约定。</
 <span class="c1">#C</span>
 </code></pre></div>
 
-<p><img alt="image-20200305163031900" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20200305163031900.png" /></p>
+<p><img alt="image-20200305163031900" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20200305163031900.png" /></p>
 <p>说明：每个object.attribute都会开启新的<strong>独立搜索</strong>。Python会对每个&lt;属性取出表达式object.attribute&gt;进行对类树的独立搜索。这包括在class语句外对实例和类的引用（例如，X.attr），以及在类方法函数内对self实例参数属性的引用。方法中的每个self.attr表达式都会开启对self及其上层的类的attr属性的搜索。（attribute包括字段、方法、特性等类的成员）</p>
 <h4 id="_12">子类调用父类同名方法<a class="headerlink" href="#_12" title="Permanent link">¶</a></h4>
 <p>Python中子类调用父类的同名方法（覆盖/修改父类的方法）有两种方法能够实现：</p>
@@ -9033,7 +9033,7 @@ python并不会真的阻止你访问私有属性，这只是以一种约定。</
 
 <h2 id="_14">类成员<a class="headerlink" href="#_14" title="Permanent link">¶</a></h2>
 <p>类的成员可以分为三大类：字段、方法和属性。</p>
-<p><img alt="image-20200305163824101" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20200305163824101.png" /></p>
+<p><img alt="image-20200305163824101" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20200305163824101.png" /></p>
 <div class="codehilite"><pre><span></span><code><span class="k">class</span>  <span class="nc">province</span><span class="p">:</span>
     <span class="n">country</span> <span class="o">=</span> <span class="s1">&#39;China&#39;</span>  <span class="c1"># 静态字段（类属性）,定义在class内、方法体之外，没有self，保存中类中</span>
     <span class="k">def</span>  <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">name</span><span class="p">):</span>  <span class="c1">#构造方法</span>
@@ -9103,7 +9103,7 @@ python并不会真的阻止你访问私有属性，这只是以一种约定。</
 </code></pre></div>
 
 <p>每个实例对象都会继承类属性并获得自己的名称空间。所以类有一个命名空间，实例对象也有一个不同的命名空间。</p>
-<p><img alt="image-20200305164324760" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20200305164324760.png" /></p>
+<p><img alt="image-20200305164324760" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20200305164324760.png" /></p>
 <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">Person</span><span class="p">():</span>
     <span class="n">country</span><span class="o">=</span><span class="s1">&#39;China&#39;</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">name</span><span class="p">,</span><span class="n">age</span><span class="p">):</span>
@@ -9135,12 +9135,12 @@ python并不会真的阻止你访问私有属性，这只是以一种约定。</
 </ul>
 <p><strong>相同点：</strong>对于所有的方法而言，均属于类（非对象），所以，在内存中也只保存一份。</p>
 <p><strong>不同点：</strong>方法调用者不同、调用方法时自动传入的参数不同。</p>
-<p><img alt="image-20200305164608550" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20200305164608550.png" /></p>
+<p><img alt="image-20200305164608550" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20200305164608550.png" /></p>
 <h3 id="_17">类的属性——特性<a class="headerlink" href="#_17" title="Permanent link">¶</a></h3>
 <p>之所以叫属性，是因为这个方法可以像字段一样调用。不用带括号。</p>
 <p>属性存在意义是：访问属性时可以制造出和访问字段完全相同的假象。</p>
 <p>属性由方法变种而来，如果Python中没有属性，方法完全可以代替其功能。</p>
-<p><img alt="image-20200305164912471" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20200305164912471.png" /></p>
+<p><img alt="image-20200305164912471" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20200305164912471.png" /></p>
 <p>属性的定义和调用要注意一下几点：</p>
 <ul>
 <li>

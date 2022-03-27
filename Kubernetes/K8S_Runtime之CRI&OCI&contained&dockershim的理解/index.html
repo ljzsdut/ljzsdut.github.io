@@ -8497,7 +8497,7 @@
 <p><a href="https://blog.csdn.net/u011563903/article/details/90743853">转载</a></p>
 <h2 id="k8s_runtime">典型的K8S Runtime架构<a class="headerlink" href="#k8s_runtime" title="Permanent link">¶</a></h2>
 <p>从最常见的Docker说起，kubelet和Docker的集成方案图如下：</p>
-<p><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTE1NjM5MDM=,size_16,color_FFFFFF,t_70-1627561302547.png" /></p>
+<p><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTE1NjM5MDM=,size_16,color_FFFFFF,t_70-1627561302547.png" /></p>
 <p>当kubelet要创建一个容器时，需要以下几步：</p>
 <p>1、Kubelet 通过 CRI 接口（gRPC）调用 dockershim，请求创建一个容器。CRI 即容器运行时接口（Container Runtime Interface），这一步中，Kubelet 可以视作一个简单的 CRI Client，而 dockershim 就是接收请求的 Server。目前 dockershim 的代码其实是内嵌在 Kubelet 中的，所以接收调用的凑巧就是 Kubelet 进程；</p>
 <p>2、dockershim 收到请求后，转化成 Docker Daemon 能听懂的请求，发到 Docker Daemon 上请求创建一个容器。</p>
@@ -8545,11 +8545,11 @@
 <h3 id="containerdcri-o">Containerd和CRI-O<a class="headerlink" href="#containerdcri-o" title="Permanent link">¶</a></h3>
 <p>上一节看到现在的 Runtime 实在是有点复杂了，而复杂是万恶之源（其实本质上就是想干掉 Docker），于是就有了直接拿 containerd 做 oci-runtime 的方案。当然，除了 Kubernetes 之外，containerd 还要接诸如 Swarm 等调度系统，因此它不会去直接实现 CRI，这个适配工作当然就要交给一个 shim 了。</p>
 <p>containerd 1.0 中，对 CRI 的适配通过一个单独的进程 CRI-containerd 来完成：</p>
-<p><img alt="oT8Y0Y-1627561520933" src="https://gitee.com/ljzsdut/pic/raw/master/default/oT8Y0Y-1627561520933.png" /></p>
+<p><img alt="oT8Y0Y-1627561520933" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/oT8Y0Y-1627561520933.png" /></p>
 <p>containerd 1.1 中做的又更漂亮一点，砍掉了 CRI-containerd 这个进程，直接把适配逻辑作为插件放进了 containerd 主进程中：</p>
-<p><img alt="wnIykZ-1627561545220" src="https://gitee.com/ljzsdut/pic/raw/master/default/wnIykZ-1627561545220.png" /></p>
+<p><img alt="wnIykZ-1627561545220" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/wnIykZ-1627561545220.png" /></p>
 <p>但在 containerd 做这些事情之情，社区就已经有了一个更为专注的 cri-runtime：CRI-O，它非常纯粹，就是兼容 CRI 和 OCI，做一个 Kubernetes 专用的运行时：</p>
-<p><img alt="Dj5HMc-1627561563700" src="https://gitee.com/ljzsdut/pic/raw/master/default/Dj5HMc-1627561563700.png" /></p>
+<p><img alt="Dj5HMc-1627561563700" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/Dj5HMc-1627561563700.png" /></p>
 <p>其中 conmon 就对应 containerd-shim，大体意图是一样的。
 CRI-O 和（直接调用）containerd 的方案比起默认的 dockershim 确实简洁很多，但没啥生产环境的验证案例，我所知道的仅仅是 containerd 在 GKE 上是 beta 状态。因此假如你对 Docker 没有特殊的政治恨意，大可不必把 dockershim 这套换掉。</p>
 <h2 id="katagvisorfirecracker">强隔离容器：Kata，gVisor，Firecracker<a class="headerlink" href="#katagvisorfirecracker" title="Permanent link">¶</a></h2>
@@ -8561,7 +8561,7 @@ CRI-O 和（直接调用）containerd 的方案比起默认的 dockershim 确实
 <li>默认的 oci-runtime 是 runC，而 runC 启动的容器是共享内核的</li>
 </ul>
 <p>对于第二个问题，一个典型的解决方案就是提供一个新的 OCI 实现，用 VM 来跑容器，实现内核上的硬隔离。runV 和 Clear Containers 都是这个思路。因为这两个项目做得事情是很类似，后来就合并成了一个项目 Kata Container。Kata 的一张图很好地解释了基于虚拟机的容器与基于 namespaces 和 cgroups 的容器间的区别：</p>
-<p><img alt="gQZyzO-1627561623669" src="https://gitee.com/ljzsdut/pic/raw/master/default/gQZyzO-1627561623669.png" /></p>
+<p><img alt="gQZyzO-1627561623669" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/gQZyzO-1627561623669.png" /></p>
 <p>当然，没有系统是完全安全的，假如 hypervisor 存在漏洞，那么用户仍有可能攻破隔离。但所有的事情都要对比而言，在共享内核的情况下，暴露的攻击面是非常大的，做安全隔离的难度就像在美利坚和墨西哥之间修 The Great Wall，而当内核隔离之后，只要守住 hypervisor 这道关子就后顾无虞了。</p>
 <p>嗯，一个 VM 里跑一个容器，听上去隔离性很不错，但不是说虚拟机又笨重又不好管理才切换到容器的吗，怎么又要走回去了？</p>
 <p>Kata 告诉你，虚拟机没那么邪恶，只是以前没玩好：</p>
@@ -8572,16 +8572,16 @@ CRI-O 和（直接调用）containerd 的方案比起默认的 dockershim 确实
 <p>不过话说回来，Kubernetes 上的调度单位是 Pod，是容器组啊，Kata 这样一个虚拟机里一个容器，同一个 Pod 间的容器还怎么做 namespace 的共享？</p>
 <p>这就要说回我们前面讲到的 CRI 中针对 PodSandbox（容器沙箱环境）的操作接口了。第一节中，我们刻意简化了场景，只考虑创建一个容器，而没有讨论创建一个 Pod。大家都知道，真正启动 Pod 里定义的容器之前，kubelet 会先启动一个 infra 容器，并执行 /pause 让 infra 容器的主进程永远挂起。这个容器存在的目的就是维持住整个 Pod 的各种 namespace，真正的业务容器只要加入 infra 容器的 network 等 namespace 就能实现对应 namespace 的共享。而 infra 容器创造的这个共享环境则被抽象为 PodSandbox。每次 kubelet 在创建 Pod 时，就会先调用 CRI 的 RunPodSandbox 接口启动一个沙箱环境，再调用 CreateContainer 在沙箱中创建容器。</p>
 <p>这里就已经说出答案了，对于 Kata Container 而言，只要在 RunPodSandbox 调用中创建一个 VM，之后再往 VM 中添加容器就可以了。最后运行 Pod 的样子就是这样的：</p>
-<p><img alt="iMNwPv-1627561713300" src="https://gitee.com/ljzsdut/pic/raw/master/default/iMNwPv-1627561713300.png" /></p>
+<p><img alt="iMNwPv-1627561713300" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/iMNwPv-1627561713300.png" /></p>
 <p>说完了 Kata，其实 gVisor 和 Firecracker 都不言自明了，大体上都是类似的，只是：</p>
 <p>gVisor 并不会去创建一个完整的 VM，而是实现了一个叫 “Sentry” 的用户态进程来处理容器的 syscall，而拦截 syscall 并重定向到 Sentry 的过程则由 KVM 或 ptrace 实现。</p>
 <p>Firecracker 称自己为 microVM，即轻量级虚拟机，它本身还是基于 KVM 的，不过 KVM 通常使用 QEMU 来虚拟化除 CPU 和内存外的资源，比如 IO 设备，网络设备。Firecracker 则使用 rust 实现了最精简的设备虚拟化，为的就是压榨虚拟化的开销，越轻量越好。</p>
 <h1 id="_3">第二篇<a class="headerlink" href="#_3" title="Permanent link">¶</a></h1>
-<p><img alt="图片" src="https://gitee.com/ljzsdut/pic/raw/master/default/640-1628813608714.png" /></p>
+<p><img alt="图片" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/640-1628813608714.png" /></p>
 <p>在学习 Containerd 之前我们有必要对 Docker 的发展历史做一个简单的回顾，因为这里面牵涉到的组件实战是有点多，有很多我们会经常听到，但是不清楚这些组件到底是干什么用的，比如 <code>libcontainer</code>、<code>runc</code>、<code>containerd</code>、<code>CRI</code>、<code>OCI</code> 等等。</p>
 <h2 id="docker">Docker<a class="headerlink" href="#docker" title="Permanent link">¶</a></h2>
 <p>从 Docker 1.11 版本开始，Docker 容器运行就不是简单通过 Docker Daemon 来启动了，而是通过集成 containerd、runc 等多个组件来完成的。虽然 Docker Daemon 守护进程模块在不停的重构，但是基本功能和定位没有太大的变化，一直都是 CS 架构，守护进程负责和 Docker Client 端交互，并管理 Docker 镜像和容器。现在的架构中组件 containerd 就会负责集群节点上容器的生命周期管理，并向上为 Docker Daemon 提供 gRPC 接口。</p>
-<p><img alt="图片" src="https://gitee.com/ljzsdut/pic/raw/master/default/640-20210813081503257-1628813703361.png" /></p>
+<p><img alt="图片" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/640-20210813081503257-1628813703361.png" /></p>
 <p>docker 架构</p>
 <p>当我们要创建一个容器的时候，现在 Docker Daemon 并不能直接帮我们创建了，而是请求 <code>containerd</code> 来创建一个容器，containerd 收到请求后，也并不会直接去操作容器，而是创建一个叫做 <code>containerd-shim</code> 的进程，让这个进程去操作容器，我们指定容器进程是需要一个父进程来做状态收集、维持 stdin 等 fd 打开等工作的，假如这个父进程就是 containerd，那如果 containerd 挂掉的话，整个宿主机上所有的容器都得退出了，而引入 <code>containerd-shim</code> 这个垫片就可以来规避这个问题了。</p>
 <p>然后创建容器需要做一些 namespaces 和 cgroups 的配置，以及挂载 root 文件系统等操作，这些操作其实已经有了标准的规范，那就是 OCI（开放容器标准），<code>runc</code> 就是它的一个参考实现（Docker 被逼无耐将 <code>libcontainer</code> 捐献出来改名为 <code>runc</code> 的），这个标准其实就是一个文档，主要规定了容器镜像的结构、以及容器需要接收哪些操作指令，比如 create、start、stop、delete 等这些命令。<code>runc</code> 就可以按照这个 OCI 文档来创建一个符合规范的容器，既然是标准肯定就有其他 OCI 实现，比如 Kata、gVisor 这些容器运行时都是符合 OCI 标准的。</p>
@@ -8591,24 +8591,24 @@ CRI-O 和（直接调用）containerd 的方案比起默认的 dockershim 确实
 <p>我们知道 Kubernetes 提供了一个 CRI 的容器运行时接口，那么这个 CRI 到底是什么呢？这个其实也和 Docker 的发展密切相关的。</p>
 <p>在 Kubernetes 早期的时候，当时 Docker 实在是太火了，Kubernetes 当然会先选择支持 Docker，而且是通过硬编码的方式直接调用 Docker API，后面随着 Docker 的不断发展以及 Google 的主导，出现了更多容器运行时，Kubernetes 为了支持更多更精简的容器运行时，Google 就和红帽主导推出了 CRI 标准，用于将 Kubernetes 平台和特定的容器运行时（当然主要是为了干掉 Docker）解耦。</p>
 <p><code>CRI</code>（Container Runtime Interface 容器运行时接口）本质上就是 Kubernetes 定义的一组与容器运行时进行交互的接口，所以只要实现了这套接口的容器运行时都可以对接到 Kubernetes 平台上来。不过 Kubernetes 推出 CRI 这套标准的时候还没有现在的统治地位，所以有一些容器运行时可能不会自身就去实现 CRI 接口，于是就有了 <code>shim（垫片）</code>， 一个 shim 的职责就是作为适配器将各种容器运行时本身的接口适配到 Kubernetes 的 CRI 接口上，其中 <code>dockershim</code> 就是 Kubernetes 对接 Docker 到 CRI 接口上的一个垫片实现。</p>
-<p><img alt="图片" src="https://gitee.com/ljzsdut/pic/raw/master/default/640-20210813081521761-1628813721866.png" /></p>
+<p><img alt="图片" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/640-20210813081521761-1628813721866.png" /></p>
 <p>Kubelet 通过 gRPC 框架与容器运行时或 shim 进行通信，其中 kubelet 作为客户端，CRI shim（也可能是容器运行时本身）作为服务器。</p>
 <p>CRI 定义的 API(https://github.com/kubernetes/kubernetes/blob/release-1.5/pkg/kubelet/api/v1alpha1/runtime/api.proto) 主要包括两个 gRPC 服务，<code>ImageService</code> 和 <code>RuntimeService</code>，<code>ImageService</code> 服务主要是拉取镜像、查看和删除镜像等操作，<code>RuntimeService</code> 则是用来管理 Pod 和容器的生命周期，以及与容器交互的调用（exec/attach/port-forward）等操作，可以通过 kubelet 中的标志 <code>--container-runtime-endpoint</code> 和 <code>--image-service-endpoint</code> 来配置这两个服务的套接字。</p>
-<p><img alt="pWPEuF-1628813862309" src="https://gitee.com/ljzsdut/pic/raw/master/default/pWPEuF-1628813862309.png" /></p>
+<p><img alt="pWPEuF-1628813862309" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/pWPEuF-1628813862309.png" /></p>
 <p>不过这里同样也有一个例外，那就是 Docker，由于 Docker 当时的江湖地位很高，Kubernetes 是直接内置了 <code>dockershim</code> 在 kubelet 中的，所以如果你使用的是 Docker 这种容器运行时的话是不需要单独去安装配置适配器之类的，当然这个举动似乎也麻痹了 Docker 公司。</p>
-<p><img alt="图片" src="https://gitee.com/ljzsdut/pic/raw/master/default/640-20210813081850166-1628813930270.png" /></p>
+<p><img alt="图片" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/640-20210813081850166-1628813930270.png" /></p>
 <p>现在如果我们使用的是 Docker 的话，当我们在 Kubernetes 中创建一个 Pod 的时候，首先就是 kubelet 通过 CRI 接口调用 <code>dockershim</code>，请求创建一个容器，kubelet 可以视作一个简单的 CRI Client, 而 dockershim 就是接收请求的 Server，不过他们都是在 kubelet 内置的。</p>
 <p><code>dockershim</code> 收到请求后, 转化成 Docker Daemon 能识别的请求, 发到 Docker Daemon 上请求创建一个容器，请求到了 Docker Daemon 后续就是 Docker 创建容器的流程了，去调用 <code>containerd</code>，然后创建 <code>containerd-shim</code> 进程，通过该进程去调用 <code>runc</code> 去真正创建容器。</p>
 <p>其实我们仔细观察也不难发现使用 Docker 的话其实是调用链比较长的，真正容器相关的操作其实 containerd 就完全足够了，Docker 太过于复杂笨重了，当然 Docker 深受欢迎的很大一个原因就是提供了很多对用户操作比较友好的功能，但是对于 Kubernetes 来说压根不需要这些功能，因为都是通过接口去操作容器的，所以自然也就可以将容器运行时切换到 containerd 来。</p>
-<p><img alt="图片" src="https://gitee.com/ljzsdut/pic/raw/master/default/640-20210813081920255-1628813960359.png" /></p>
+<p><img alt="图片" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/640-20210813081920255-1628813960359.png" /></p>
 <p>切换到 containerd 可以消除掉中间环节，操作体验也和以前一样，但是由于直接用容器运行时调度容器，所以它们对 Docker 来说是不可见的。因此，你以前用来检查这些容器的 Docker 工具就不能使用了。</p>
 <p>你不能再使用 <code>docker ps</code> 或 <code>docker inspect</code> 命令来获取容器信息。由于不能列出容器，因此也不能获取日志、停止容器，甚至不能通过 <code>docker exec</code> 在容器中执行命令。</p>
 <p>当然我们仍然可以下载镜像，或者用 <code>docker build</code> 命令构建镜像，但用 Docker 构建、下载的镜像，对于容器运行时和 Kubernetes，均不可见。为了在 Kubernetes 中使用，需要把镜像推送到镜像仓库中去。</p>
 <p>从上图可以看出在 containerd 1.0 中，对 CRI 的适配是通过一个单独的 <code>CRI-Containerd</code> 进程来完成的，这是因为最开始 containerd 还会去适配其他的系统（比如 swarm），所以没有直接实现 CRI，所以这个对接工作就交给 <code>CRI-Containerd</code> 这个 shim 了。</p>
 <p>然后到了 containerd 1.1 版本后就去掉了 <code>CRI-Containerd</code> 这个 shim，直接把适配逻辑作为插件的方式集成到了 containerd 主进程中，现在这样的调用就更加简洁了。</p>
-<p><img alt="图片" src="https://gitee.com/ljzsdut/pic/raw/master/default/640-20210813081936046-1628813976149.png" /></p>
+<p><img alt="图片" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/640-20210813081936046-1628813976149.png" /></p>
 <p>与此同时 Kubernetes 社区也做了一个专门用于 Kubernetes 的 CRI 运行时 CRI-O，直接兼容 CRI 和 OCI 规范。</p>
-<p><img alt="图片" src="https://gitee.com/ljzsdut/pic/raw/master/default/640-20210813081941274-1628813981376.png" /></p>
+<p><img alt="图片" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/640-20210813081941274-1628813981376.png" /></p>
 <p>这个方案和 containerd 的方案显然比默认的 dockershim 简洁很多，不过由于大部分用户都比较习惯使用 Docker，所以大家还是更喜欢使用 <code>dockershim</code> 方案。</p>
 <p>但是随着 CRI 方案的发展，以及其他容器运行时对 CRI 的支持越来越完善，Kubernetes 社区在2020年7月份就开始着手移除 dockershim 方案了：https://github.com/kubernetes/enhancements/tree/master/keps/sig-node/2221-remove-dockershim，现在的移除计划是在 1.20 版本中将 kubelet 中内置的 dockershim 代码分离，将内置的 dockershim 标记为<code>维护模式</code>，当然这个时候仍然还可以使用 dockershim，目标是在 1.23/1.24 版本发布没有 dockershim 的版本（代码还在，但是要默认支持开箱即用的 docker 需要自己构建 kubelet，会在某个宽限期过后从 kubelet 中删除内置的 dockershim 代码）。</p>
 <p>那么这是否就意味着 Kubernetes 不再支持 Docker 了呢？当然不是的，这只是废弃了内置的 <code>dockershim</code> 功能而已，Docker 和其他容器运行时将一视同仁，不会单独对待内置支持，如果我们还想直接使用 Docker 这种容器运行时应该怎么办呢？可以将 dockershim 的功能单独提取出来独立维护一个 <code>cri-dockerd</code> 即可，就类似于 containerd 1.0 版本中提供的 <code>CRI-Containerd</code>，当然还有一种办法就是 Docker 官方社区将 CRI 接口内置到 Dockerd 中去实现。</p>
@@ -8625,7 +8625,7 @@ CRI-O 和（直接调用）containerd 的方案比起默认的 dockershim 确实
 </ul>
 <h2 id="_4">架构<a class="headerlink" href="#_4" title="Permanent link">¶</a></h2>
 <p>containerd 可用作 Linux 和 Windows 的守护程序，它管理其主机系统完整的容器生命周期，从镜像传输和存储到容器执行和监测，再到底层存储到网络附件等等。</p>
-<p><img alt="v3AYlL-1628814051241" src="https://gitee.com/ljzsdut/pic/raw/master/default/v3AYlL-1628814051241.png" /></p>
+<p><img alt="v3AYlL-1628814051241" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/v3AYlL-1628814051241.png" /></p>
 <p>上图是 containerd 官方提供的架构图，可以看出 containerd 采用的也是 C/S 架构，服务端通过 unix domain socket 暴露低层的 gRPC API 接口出去，客户端通过这些 API 管理节点上的容器，每个 containerd 只负责一台机器，Pull 镜像，对容器的操作（启动、停止等），网络，存储都是由 containerd 完成。具体运行容器由 runc 负责，实际上只要是符合 OCI 规范的容器都可以支持。</p>
 <p>为了解耦，containerd 将系统划分成了不同的组件，每个组件都由一个或多个模块协作完成（Core 部分），每一种类型的模块都以插件的形式集成到 Containerd 中，而且插件之间是相互依赖的，例如，上图中的每一个长虚线的方框都表示一种类型的插件，包括 Service Plugin、Metadata Plugin、GC Plugin、Runtime Plugin 等，其中 Service Plugin 又会依赖 Metadata Plugin、GC Plugin 和 Runtime Plugin。每一个小方框都表示一个细分的插件，例如 Metadata Plugin 依赖 Containers Plugin、Content Plugin 等。比如:</p>
 <ul>
@@ -8633,7 +8633,7 @@ CRI-O 和（直接调用）containerd 的方案比起默认的 dockershim 确实
 <li><code>Snapshot Plugin</code>: 用来管理容器镜像的文件系统快照，镜像中的每一层都会被解压成文件系统快照，类似于 Docker 中的 graphdriver。</li>
 </ul>
 <p>总体来看 containerd 可以分为三个大块：Storage、Metadata 和 Runtime。</p>
-<p><img alt="containerd 架构2" src="https://gitee.com/ljzsdut/pic/raw/master/default/640-20210813082156485-1628814116598.png" /></p>
+<p><img alt="containerd 架构2" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/640-20210813082156485-1628814116598.png" /></p>
 <h3 id="_5">安装<a class="headerlink" href="#_5" title="Permanent link">¶</a></h3>
 <p>这里我使用的系统是 <code>Linux Mint 20.2</code>，首先需要安装 <code>seccomp</code> 依赖：</p>
 <div class="codehilite"><pre><span></span><code>➜  ~ apt-get update
@@ -8769,7 +8769,7 @@ opt/containerd/cluster/gce/env
 </code></pre></div>
 
 <p>启动完成后就可以使用 containerd 的本地 CLI 工具 <code>ctr</code> 了，比如查看版本：</p>
-<p><img alt="ctr version" src="https://gitee.com/ljzsdut/pic/raw/master/default/QvRQmr-1628814191198.png" /></p>
+<p><img alt="ctr version" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/QvRQmr-1628814191198.png" /></p>
 <h3 id="_6">配置<a class="headerlink" href="#_6" title="Permanent link">¶</a></h3>
 <p>我们首先来查看下上面默认生成的配置文件 <code>/etc/containerd/config.toml</code>：</p>
 <div class="codehilite"><pre><span></span><code><span class="nv">disabled_plugins</span> <span class="o">=</span> <span class="o">[]</span>

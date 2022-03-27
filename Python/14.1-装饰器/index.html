@@ -8652,7 +8652,7 @@
 <span class="n">foo</span><span class="p">(</span><span class="s2">&quot;python&quot;</span><span class="p">,</span><span class="n">age</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
 </code></pre></div>
 
-<p><img alt="image-20200304172836984" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20200304172836984.png" /></p>
+<p><img alt="image-20200304172836984" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20200304172836984.png" /></p>
 <h2 id="_6">带参数的装饰器：<a class="headerlink" href="#_6" title="Permanent link">¶</a></h2>
 <p>装饰器还有更大的灵活性，例如带参数的装饰器，在上面的装饰器调用中，该装饰器接收唯一的参数就是执行业务的函数foo。装饰器的语法允许我们在调用时，提供其它参数，比如@decorator(a)。这样，就为装饰器的编写和使用提供了更大的灵活性。比如，我们可以在装饰器中指定日志的等级，因为不同业务函数可能需要的日志级别是不一样的。</p>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">use_logging</span><span class="p">(</span><span class="n">level</span><span class="p">):</span>

@@ -8589,7 +8589,7 @@ osdmap e109 pool <span class="s1">&#39;rbd&#39;</span> <span class="o">(</span><
 <p>可见，这三个OSD保存了这个文件的三分副本，这就是ceph的多副本的基础，将一份数据保存成多个副本，按照一定规则分布在各个OSD中，而多副本的数据的一个特点就是，他们都保存在同名的PG下面，也就是同名的目录下。这样，我们就对PG有了一个直接的理解。</p>
 <h2 id="activeclean"><code>active+clean</code>想说爱你不容易<a class="headerlink" href="#activeclean" title="Permanent link">¶</a></h2>
 <p><code>active + clean</code>是PG的健康状态，然而PG也会<code>生病</code>,有的是小感冒，有的则可能是一级伤残，下面就是集群进入恢复状态时的一个截图，这里面聚集了各种老弱病残，现在就来分析下每种病症的原因:
-<img alt="故障时的ceph-s截图" src="https://gitee.com/ljzsdut/pic/raw/master/default/1472111550476-1626780241958.png" /></p>
+<img alt="故障时的ceph-s截图" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/1472111550476-1626780241958.png" /></p>
 <p>这里再次回忆下集群的配置：<code>size = 3, min_size = 2</code></p>
 <h3 id="degraded">Degraded<a class="headerlink" href="#degraded" title="Permanent link">¶</a></h3>
 <p>降级：由上文可以得知，每个PG有三个副本，分别保存在不同的OSD中，在非故障情况下，这个PG是<code>a+c</code>状态，那么，如果保存<code>0.44</code>这个PG的osd.4挂掉了，这个PG是什么状态呢，操作如下：</p>

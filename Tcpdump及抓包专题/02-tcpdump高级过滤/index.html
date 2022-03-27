@@ -8888,11 +8888,11 @@
                 
                 <h2 id="_1">理论<a class="headerlink" href="#_1" title="Permanent link">¶</a></h2>
 <h3 id="osi">OSI七层参考模型<a class="headerlink" href="#osi" title="Permanent link">¶</a></h3>
-<p><img alt="up-8f894980b3afbdfe8c273b157e4ab5fa787-1619057726873" src="https://gitee.com/ljzsdut/pic/raw/master/default/up-8f894980b3afbdfe8c273b157e4ab5fa787-1619057726873-1619057767062.gif" /></p>
+<p><img alt="up-8f894980b3afbdfe8c273b157e4ab5fa787-1619057726873" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/up-8f894980b3afbdfe8c273b157e4ab5fa787-1619057726873-1619057767062.gif" /></p>
 <h3 id="header">链路层Header<a class="headerlink" href="#header" title="Permanent link">¶</a></h3>
 <p>参考链接：http://blog.chinaunix.net/uid-20530497-id-2878069.html</p>
 <h4 id="ethernet">Ethernet帧<a class="headerlink" href="#ethernet" title="Permanent link">¶</a></h4>
-<p><img alt="3lKDxc-1636336119672" src="https://gitee.com/ljzsdut/pic/raw/master/default/3lKDxc-1636336119672-1636336133261.jpg" /></p>
+<p><img alt="3lKDxc-1636336119672" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/3lKDxc-1636336119672-1636336133261.jpg" /></p>
 <p>以太帧有好多种，我们最常用到的是Ethernet II，Ethernet II即DIX 2.0：Xerox与DEC、Intel在1982年制定的以太网标准帧格式。Cisco名称为：ARPA。</p>
 <p>Ethernet II类型以太网帧的最小长度为64字节（6＋6＋2＋46＋4），最大长度为1518字节（6＋6＋2＋1500＋4）。</p>
 <p>其中前12字节分别标识出发送数据帧的源节点MAC地址和接收数据帧的目标节点MAC地址。（注：ISL封装后可达1548字节，802.1Q封装后可达1522字节）</p>
@@ -8933,7 +8933,7 @@
 </table>
 <p>在不定长的数据字段后是4个字节的帧校验序列（Frame. Check Sequence，FCS）</p>
 <h4 id="arp">ARP帧<a class="headerlink" href="#arp" title="Permanent link">¶</a></h4>
-<p><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/20530497_13164955993wg8-1636336392529.png" /></p>
+<p><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/20530497_13164955993wg8-1636336392529.png" /></p>
 <p>硬件类型：1 表示以太网</p>
 <p>协议类型：和Ethernet数据帧中类型字段相同</p>
 <p>OP操作字段：</p>
@@ -8964,7 +8964,7 @@
 </tbody>
 </table>
 <h4 id="8021q_vlan4">802.1q VLAN数据帧(4字节)<a class="headerlink" href="#8021q_vlan4" title="Permanent link">¶</a></h4>
-<p><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/20530497_1316495600uhmj-1636336550272.png" /></p>
+<p><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/20530497_1316495600uhmj-1636336550272.png" /></p>
 <ul>
 <li>Type：长度为2字节，取值为0x8100，表示此帧的类型为802.1Q Tag帧。</li>
 <li>PRI：长度为3比特，可取0～7之间的值，表示帧的优先级，值越大优先级越高。该优先级主要为QoS差分服务提供参考依据（COS）。</li>
@@ -8974,8 +8974,8 @@
 <p>参考：</p>
 <p>https://blog.csdn.net/lqrensn/article/details/5134408</p>
 <p>http://blog.itpub.net/15480802/viewspace-1334334/</p>
-<p><img alt="Pz46TI-1635491312915" src="https://gitee.com/ljzsdut/pic/raw/master/default/Pz46TI-1635491312915-1635491320198.png" /></p>
-<p><img alt="xQtzt1-1635490633696" src="https://gitee.com/ljzsdut/pic/raw/master/default/xQtzt1-1635490633696-1635490661420.png" /></p>
+<p><img alt="Pz46TI-1635491312915" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/Pz46TI-1635491312915-1635491320198.png" /></p>
+<p><img alt="xQtzt1-1635490633696" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/xQtzt1-1635490633696-1635490661420.png" /></p>
 <table>
 <thead>
 <tr>
@@ -9071,7 +9071,7 @@
 </tbody>
 </table>
 <h3 id="tcp_header">TCP Header<a class="headerlink" href="#tcp_header" title="Permanent link">¶</a></h3>
-<p><img alt="jG8yR8-1635490866196" src="https://gitee.com/ljzsdut/pic/raw/master/default/jG8yR8-1635490866196-1635490872151.png" /></p>
+<p><img alt="jG8yR8-1635490866196" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/jG8yR8-1635490866196-1635490872151.png" /></p>
 <table>
 <thead>
 <tr>
@@ -9147,7 +9147,7 @@
 </tbody>
 </table>
 <h3 id="udp_header">UDP Header<a class="headerlink" href="#udp_header" title="Permanent link">¶</a></h3>
-<p><img alt="sNalST-1636276671769" src="https://gitee.com/ljzsdut/pic/raw/master/default/sNalST-1636276671769-1636276703039.jpg" /></p>
+<p><img alt="sNalST-1636276671769" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/sNalST-1636276671769-1636276703039.jpg" /></p>
 <p>UDP首部有8个字节，由4个字段构成，每个字段都是两个字节。</p>
 <ul>
 <li>
@@ -9164,30 +9164,30 @@
 </li>
 </ul>
 <h3 id="icmp_header">ICMP Header<a class="headerlink" href="#icmp_header" title="Permanent link">¶</a></h3>
-<p><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/305dd7ea50e1706daeafd55c-1635491045623.jpg" /> </p>
+<p><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/305dd7ea50e1706daeafd55c-1635491045623.jpg" /> </p>
 <p><strong>ICMP报文的各种状态：</strong> </p>
 <p>目的不可达报文</p>
-<p><img alt="image-20211029150526436" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20211029150526436-1635491126593.png" /></p>
+<p><img alt="image-20211029150526436" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20211029150526436-1635491126593.png" /></p>
 <p>源端抑制报文</p>
-<p><img alt="image-20211029150539355" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20211029150539355-1635491139521.png" /></p>
+<p><img alt="image-20211029150539355" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20211029150539355-1635491139521.png" /></p>
 <p>超时报文</p>
-<p><img alt="image-20211029150604699" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20211029150604699-1635491164862.png" /></p>
+<p><img alt="image-20211029150604699" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20211029150604699-1635491164862.png" /></p>
 <p>参数问题</p>
-<p><img alt="image-20211029150615978" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20211029150615978-1635491176137.png" /></p>
+<p><img alt="image-20211029150615978" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20211029150615978-1635491176137.png" /></p>
 <p>改变路由</p>
-<p><img alt="image-20211029150626791" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20211029150626791-1635491186948.png" /></p>
+<p><img alt="image-20211029150626791" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20211029150626791-1635491186948.png" /></p>
 <p>回送请求和回答</p>
-<p><img alt="image-20211029150636394" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20211029150636394-1635491196551.png" /></p>
+<p><img alt="image-20211029150636394" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20211029150636394-1635491196551.png" /></p>
 <p>时间戳请求和回答</p>
-<p><img alt="image-20211029150646283" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20211029150646283-1635491206442.png" /></p>
+<p><img alt="image-20211029150646283" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20211029150646283-1635491206442.png" /></p>
 <p>地址掩码请求和回答</p>
-<p><img alt="image-20211029150657264" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20211029150657264-1635491217425.png" /></p>
+<p><img alt="image-20211029150657264" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20211029150657264-1635491217425.png" /></p>
 <p>路由询问和通告</p>
-<p><img alt="image-20211029150729414" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20211029150729414-1635491249567.png" /></p>
-<p><img alt="image-20211029150740583" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20211029150740583-1635491260747.png" /></p>
+<p><img alt="image-20211029150729414" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20211029150729414-1635491249567.png" /></p>
+<p><img alt="image-20211029150740583" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20211029150740583-1635491260747.png" /></p>
 <h3 id="vxlan_header">VXlan Header<a class="headerlink" href="#vxlan_header" title="Permanent link">¶</a></h3>
-<p><img alt="KvsOP5-1636277271083" src="https://gitee.com/ljzsdut/pic/raw/master/default/KvsOP5-1636277271083-1636277279083.jpg" /></p>
-<p><img alt="1DQAr7-1635492004316" src="https://gitee.com/ljzsdut/pic/raw/master/default/1DQAr7-1635492004316-1635492032891.jpg" /></p>
+<p><img alt="KvsOP5-1636277271083" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/KvsOP5-1636277271083-1636277279083.jpg" /></p>
+<p><img alt="1DQAr7-1635492004316" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/1DQAr7-1635492004316-1635492032891.jpg" /></p>
 <table>
 <thead>
 <tr>
@@ -9480,7 +9480,7 @@ icmp-timxceed, icmp-paramprob, icmp-tstamp, icmp-tstampreply, icmp-ireq, icmp-ir
 </code></pre></div>
 
 <p>下图表示了TCP各状态转换的标记</p>
-<p><img alt="img" src="https://gitee.com/ljzsdut/pic/raw/master/default/650581-20180510003225443-782852645-1635492888071.jpg" /></p>
+<p><img alt="img" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/650581-20180510003225443-782852645-1635492888071.jpg" /></p>
 <h3 id="udp">UDP头<a class="headerlink" href="#udp" title="Permanent link">¶</a></h3>
 <div class="codehilite"><pre><span></span><code>0      7 8     15 16    23 24    31  
 +--------+--------+--------+--------+

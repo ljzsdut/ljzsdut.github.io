@@ -8462,7 +8462,7 @@
 </li>
 </ul>
 <p>实验：在宿主机上创建2个netns，然后使用veth联通两个netns。测试两个netns是否可ping通</p>
-<p><img alt="h1LKDi-1625189168440" src="https://gitee.com/ljzsdut/pic/raw/master/default/h1LKDi-1625189168440-1625189174026.png" /></p>
+<p><img alt="h1LKDi-1625189168440" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/h1LKDi-1625189168440-1625189174026.png" /></p>
 <div class="codehilite"><pre><span></span><code><span class="c1">#创建名称空间netns1和netns2</span>
 <span class="o">[</span>root@OS-network-1 ~<span class="o">]</span><span class="c1"># ip netns add netns1</span>
 <span class="o">[</span>root@OS-network-1 ~<span class="o">]</span><span class="c1"># ip netns add netns2</span>
@@ -8655,7 +8655,7 @@ default via <span class="m">10</span>.211.55.1 dev br1
 <p>br-in：虚拟桥</p>
 <p>br-ex：物理桥，与物理网卡绑定</p>
 <p>中间的路由器和dhcp在一个netns中。</p>
-<p><img alt="image-20210701203133619" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20210701203133619-1625142693764.png" /></p>
+<p><img alt="image-20210701203133619" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20210701203133619-1625142693764.png" /></p>
 <div class="codehilite"><pre><span></span><code><span class="o">[</span>root@OS-network-1 ~<span class="o">]</span><span class="c1"># brctl addbr br-ex</span>
 
 <span class="o">[</span>root@OS-network-1 ~<span class="o">]</span><span class="c1"># ip a</span>

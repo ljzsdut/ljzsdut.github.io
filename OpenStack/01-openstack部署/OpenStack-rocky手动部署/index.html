@@ -8613,7 +8613,7 @@ systemctl start memcached.service
 </li>
 </ul>
 <p>在 Keystone中，不仅只是用户与Keystone 发生认证机制，OpenStack 内部各服务之间的通信也要 Keystone的参与。以用户创建实例虚拟机为例，用户首先向 Keystone 发送如用户密码之类的身份信息，Keystone验证成功后向用户配发 Token，之后用户向 Nova 发出带有Token的实例创建请求，Nova 接收到请求后向 Keystone验证Token的有效性，Token被证实有效后，由Nova向Glance服务发出带有Token的镜像传输请求，Glance同样要到Keystone去验证Token的有效性，被证实有效后Glance向 Nova 正式提供镜像目录查询和传递服务，Nova 获取镜像后继续向 Neutron 发送带有Token的网络创建服务，再由 Neutron向 Keystone求证Token的有效性，Token被证实有效后，Neutron 允许Nova使用网络服务，Nova启动虚拟机成功，同时向用户返回创建实例成功的通知，下图为用户创建实例过程中 Keystone的响应流程。</p>
-<p><img alt="image-20210624171124418" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20210624171124418-1624525884600.png" /></p>
+<p><img alt="image-20210624171124418" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20210624171124418-1624525884600.png" /></p>
 <h3 id="1">1、创建数据库<a class="headerlink" href="#1" title="Permanent link">¶</a></h3>
 <div class="codehilite"><pre><span></span><code>CREATE DATABASE keystone<span class="p">;</span>
 
@@ -8702,7 +8702,7 @@ systemctl start httpd.service
 <h3 id="9domain_projects_users_roles">9、创建domain, projects, users, roles<a class="headerlink" href="#9domain_projects_users_roles" title="Permanent link">¶</a></h3>
 <p>domain中包含：user、group、project</p>
 <p>role：全局资源</p>
-<p><img alt="bDc7DW-1624359586705" src="https://gitee.com/ljzsdut/pic/raw/master/default/bDc7DW-1624359586705-1624359596282.jpg" /></p>
+<p><img alt="bDc7DW-1624359586705" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/bDc7DW-1624359586705-1624359596282.jpg" /></p>
 <ul>
 <li>创建domain(可选，只用于演示)</li>
 </ul>
@@ -8833,7 +8833,7 @@ systemctl start httpd.service
 <h2 id="imageglance">Image服务—glance<a class="headerlink" href="#imageglance" title="Permanent link">¶</a></h2>
 <p>Glance 主要负责Image的注册和查询传送服务，Glance 中的镜像可以是用户制作并上传的镜像，也可以是对当前实例进行快照形式copy后的镜像副本，两种类型的镜像都可以快速用于实例部署。通过Glance提供的标准 RESTful API接口， Glance存储的镜像可以供OpenStack 用户和管理员的多台服务器进行并行查询和访问，默认情况下， Glance 将用户上传的镜像存储在部署Glance服务的主机目录上（/var/lib/glance/images）。Glance API服务可以通过配置缓存机制（memcached）来提高镜像服务的响应速度，Glance 支持多种后端存储服务，例如本地文件系统、Swift、AWS S3兼容的对象存储、 Ceph等。</p>
 <p>OpenStack 的镜像服务主要由 Glance-api 和 Glance-registry 两个服务构成。目前Glance中的镜像数据分为两部分存放，Image的元数据通过Glance-registry存放在数据库中，而Image 的 Chunk数据则通过Glance-store存放在各种 Backend Store （后端存储）中，并从中获取。</p>
-<p><img alt="image-20210624170142602" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20210624170142602-1624525302842-1624525340309.png" /></p>
+<p><img alt="image-20210624170142602" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20210624170142602-1624525302842-1624525340309.png" /></p>
 <h3 id="1_1">1、创建数据库<a class="headerlink" href="#1_1" title="Permanent link">¶</a></h3>
 <div class="codehilite"><pre><span></span><code>CREATE DATABASE glance<span class="p">;</span>
 

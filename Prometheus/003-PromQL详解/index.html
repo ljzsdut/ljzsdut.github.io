@@ -8838,7 +8838,7 @@
 </li>
 </ul>
 <p>如下图所示，Metric Name的表示方式有两种。后一种通常用于Prometheus内部，但是其更加灵活，比如可以对指标名称进行正则匹配等。</p>
-<p><img alt="image-20220116165603213" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20220116165603213-1642323363384.png" /></p>
+<p><img alt="image-20220116165603213" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20220116165603213-1642323363384.png" /></p>
 <h3 id="_2">指标名称及标签使用注意事项<a class="headerlink" href="#_2" title="Permanent link">¶</a></h3>
 <p>指标名称和标签的特定组合代表着一个时间序列；</p>
 <ul>
@@ -8860,14 +8860,14 @@
 <p>value是float64格式的数据</p>
 </li>
 </ul>
-<p><img alt="prometheus样本数据格式" src="https://gitee.com/ljzsdut/pic/raw/master/default/prometheus%E6%A0%B7%E6%9C%AC%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F-1642326125116.png" /></p>
+<p><img alt="prometheus样本数据格式" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/prometheus%E6%A0%B7%E6%9C%AC%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F-1642326125116.png" /></p>
 <h2 id="_4">时间序列(也称向量)<a class="headerlink" href="#_4" title="Permanent link">¶</a></h2>
 <p>时间序列数据：按照时间顺序记录系统、设备状态变化的数据，每个数据称为一个样本；</p>
 <ul>
 <li>数据采集以特定的时间周期进行，因而，随着时间流逝，将这些样本数据记录下来，将生成一个离散的样本数据序列；</li>
 <li>时间序列也称为向量（Vector） ；而将多个序列(向量)放在同一个坐标系内（以时间为横轴，以序列为纵轴），将形成一个由数据点组成的矩阵；</li>
 </ul>
-<p><img alt="image-20210520114048817" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20210520114048817-1621482049097.png" /></p>
+<p><img alt="image-20210520114048817" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20210520114048817-1621482049097.png" /></p>
 <blockquote>
 <p>上图中：</p>
 <p>每一行表示一个时间序列；</p>
@@ -8889,7 +8889,7 @@
 <li>即时向量：最近一次的时间戳上跟踪的数据指标；</li>
 <li>时间范围向量：指定时间范围内的所有时间戳上的数据指标；</li>
 </ul>
-<p><img alt="image-20210520092049191" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20210520092049191-1621473649357.png" /></p>
+<p><img alt="image-20210520092049191" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20210520092049191-1621473649357.png" /></p>
 <h2 id="promql4data_type">PromQL的4种数据类型(Data Type)<a class="headerlink" href="#promql4data_type" title="Permanent link">¶</a></h2>
 <p>PromQL的表达式中支持4种数据类型：</p>
 <ul>
@@ -8914,7 +8914,7 @@
 <li>即时向量选择器（Instant Vector Selectors）：返回0个、1个或多个时间序列上在给定时间戳（instant）上的各自的<strong>一个样本</strong>，该样本也可称为即时样本；</li>
 <li>范围向量选择器（Range Vector Selectors）：返回0个、1个或多个时间序列上在给定时间范围内的各自的<strong>一组样本</strong>；</li>
 </ul>
-<p><img alt="image-20210520120129504" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20210520120129504-1621483289726.png" /></p>
+<p><img alt="image-20210520120129504" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20210520120129504-1621483289726.png" /></p>
 <p><strong>向量表达式使用要点：</strong></p>
 <p>向量表达式的返回值类型是 即时向量、范围向量、标量或字符串4种数据类型其中之一，但是，有些使用场景要求表达式返回值必须满足特定的条件，例如</p>
 <ul>
@@ -9067,13 +9067,13 @@ prometheus_http_request_duration_seconds_count<span class="o">{</span><span clas
 <li>为了构建Histogram，首先需要将值的范围进行分段，即将所有值的整个可用范围分成一系列连续、相邻（相邻处可以是等同值）但不重叠的间隔，而后统计每个间隔中有多少值。</li>
 <li>从统计学的角度看，分位数不能被聚合，也不能进行算术运算；</li>
 </ul>
-<p><img alt="image-20210520133212618" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20210520133212618-1621488732949.png" /></p>
+<p><img alt="image-20210520133212618" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20210520133212618-1621488732949.png" /></p>
 <p>对于Prometheus来说，Histogram会在一段时间范围内对数据进行采样（通常是请求持续时长或响应大小等），并将其计入可配置的bucket（存储桶）中</p>
 <ul>
 <li>Histogram事先将特定测度可能的取值范围分隔为多个样本空间(bucket)，并通过对落入bucket内的观测值进行计数以及求和操作。</li>
 <li>与常规方式略有不同的是，Prometheus取值间隔的划分采用的是<strong>累积（Cumulative）区间间隔机制</strong>，即每个bucket中的样本均包含了其前面所有bucket中的样本，因而也称为<strong>累积直方图</strong>。这样的好处：可降低Histogram的维护成本；支持粗略计算样本值的分位数；单独提供了<code>_sum</code>和<code>_count</code>指标，从而支持计算平均值。</li>
 </ul>
-<p><img alt="image-20210520133759290" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20210520133759290-1621489079555.png" /></p>
+<p><img alt="image-20210520133759290" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20210520133759290-1621489079555.png" /></p>
 <p>Histogram类型的每个指标有一个基础指标名称<code>&lt;basename&gt;</code>，它会提供多个时间序列:</p>
 <ul>
 <li><code>&lt;basename&gt;_bucket{le="&lt;upper inclusive bound&gt;"}</code>：观测桶的上边界（upper inclusive bound），即样本统计区间上限。例如，最大区间（包含所有样本）的名称为<code>&lt;basename&gt;_bucket{le="+Inf"}</code>；“le”指小于等于“≤”。</li>
@@ -9110,7 +9110,7 @@ prometheus_rule_evaluation_duration_seconds_count <span class="m">3</span>
 </li>
 <li><code>&lt;basename&gt;_count</code>：抓取到的所有样本总数；</li>
 </ul>
-<p><img alt="image-20220116191244218" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20220116191244218-1642331564394.png" /></p>
+<p><img alt="image-20220116191244218" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20220116191244218-1642331564394.png" /></p>
 <h2 id="_10">聚合函数<a class="headerlink" href="#_10" title="Permanent link">¶</a></h2>
 <p>一般说来，单个指标的价值不大，监控场景中往往需要联合并可视化一组指标，这种联合机制即是指“聚合”操作，例如，将计数、求和、平均值、分位数、标准差及方差等统计函数应用于时间序列的样本之上生成具有统计学意义的结果等；</p>
 <p>对查询结果事先按照某种分类机制进行分组（groupby）并将查询结果<strong>按组进行聚合计算</strong>也是较为常见的需求，例如分组统计、分组求平均值、分组求和等；</p>
@@ -9181,8 +9181,8 @@ prometheus_rule_evaluation_duration_seconds_count <span class="m">3</span>
 <li>一对一（One-to-One）</li>
 <li>一对多或多对一（Many-to-One，One-to-Many）</li>
 </ul>
-<p><img alt="image-20210520140434890" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20210520140434890-1621490675236.png" /></p>
-<p><img alt="image-20210520140449180" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20210520140449180-1621490689377.png" /></p>
+<p><img alt="image-20210520140434890" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20210520140434890-1621490675236.png" /></p>
+<p><img alt="image-20210520140449180" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20210520140449180-1621490689377.png" /></p>
 <h3 id="_14">一对一匹配<a class="headerlink" href="#_14" title="Permanent link">¶</a></h3>
 <p>即时向量的一对一匹配</p>
 <ul>
@@ -9209,18 +9209,18 @@ rate<span class="o">(</span>prometheus_http_requests_total<span class="o">{</spa
 <p>右侧会生成一个即时向量，它计算出所有标签组合所代表的各类请求的增长速率；</p>
 <p>计算时，PromQL会在操作符左右两侧的结果元素中找到<strong>标签完全一致</strong>的元素进行比较；其意义为，计算出每类请求中的5xx响应码在该类请求中所占的比例；</p>
 <p><strong>示例2：</strong></p>
-<p><img alt="image-20220117212743586" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20220117212743586-1642426063775.png" /></p>
+<p><img alt="image-20220117212743586" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20220117212743586-1642426063775.png" /></p>
 <p><strong>示例3：对于prometheus_http_requests_total指标，如何求出每个handler下，2xx响应码的占比是否大于10%？</strong></p>
 <p>1、先查看2XX响应码的rate值：<code>rate(prometheus_http_requests_total{code=~'2.*'}[5m])</code></p>
-<p><img alt="image-20220117220508825" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20220117220508825-1642428309019.png" /></p>
+<p><img alt="image-20220117220508825" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20220117220508825-1642428309019.png" /></p>
 <p>2、查看所有响应码的时间序列：<code>rate(prometheus_http_requests_total{}[5m])</code></p>
-<p><img alt="image-20220117220603796" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20220117220603796-1642428363981.png" /></p>
+<p><img alt="image-20220117220603796" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20220117220603796-1642428363981.png" /></p>
 <p>要求对于每个handler，求2xx的占比，所以需要先分组，按照handler分组后，进行sum()操作：</p>
-<p><img alt="image-20220117220800695" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20220117220800695-1642428480891.png" /></p>
+<p><img alt="image-20220117220800695" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20220117220800695-1642428480891.png" /></p>
 <p>对sum结果乘以10%：</p>
-<p><img alt="image-20220117221029163" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20220117221029163-1642428629354.png" /></p>
+<p><img alt="image-20220117221029163" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20220117221029163-1642428629354.png" /></p>
 <p>注意，此时，标签只剩余hander一个标签了。为了满足one-to-one匹配，使用on进行匹配，即</p>
-<p><img alt="image-20220117221115488" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20220117221115488-1642428675682.png" /></p>
+<p><img alt="image-20220117221115488" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20220117221115488-1642428675682.png" /></p>
 <h3 id="_15">一对多/多对一匹配<a class="headerlink" href="#_15" title="Permanent link">¶</a></h3>
 <p>“一”侧的每个元素，可与“多”侧的多个元素进行匹配；只必须使用group_left或group_right明确指定哪侧为“多”侧；</p>
 <p><strong>匹配表达式语法</strong></p>
@@ -9231,8 +9231,8 @@ rate<span class="o">(</span>prometheus_http_requests_total<span class="o">{</spa
 </code></pre></div>
 
 <p><strong>示例：</strong>不同响应码在该类请求方法中的占比</p>
-<p><img alt="image-20220117222206510" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20220117222206510-1642429326690.png" /></p>
-<p><img alt="image-20220117212848028" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20220117212848028-1642426128205.png" /></p>
+<p><img alt="image-20220117222206510" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20220117222206510-1642429326690.png" /></p>
+<p><img alt="image-20220117212848028" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20220117212848028-1642426128205.png" /></p>
 <h2 id="_16">内置函数<a class="headerlink" href="#_16" title="Permanent link">¶</a></h2>
 <p>官方文档：https://prometheus.io/docs/prometheus/latest/querying/functions/</p>
                 

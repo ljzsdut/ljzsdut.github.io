@@ -8500,7 +8500,7 @@
 <p>primary&amp;replica能够自动负载均衡，对于<code>"number_of_shards": 3,"number_of_replicas": 1</code>的集群，一共会有6个shard（3 primary+3 replica）。如果对该集群进行扩容，扩容的极限是：6个shard最多扩容到6台机器，每个shard可以占用单台服务器的所有资源，性能最好。如果超出扩容极限，可以动态修改replica数量到9个shard (3primary+ 6 replica)，然后扩容到9台机器，比3台机器时，拥有3倍的<strong>读</strong>吞吐量。</p>
 <h3 id="master">master宕机与恢复<a class="headerlink" href="#master" title="Permanent link">¶</a></h3>
 <p><a href="https://zhuanlan.zhihu.com/p/110079342">es如何选主</a>：必须获取半数以上的选票才可以成为主，所以node数一般设置为奇数台。</p>
-<p><img alt="image-20201230172714867" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20201230172714867-1609320435082.png" /></p>
+<p><img alt="image-20201230172714867" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20201230172714867-1609320435082.png" /></p>
                 
                   
                 

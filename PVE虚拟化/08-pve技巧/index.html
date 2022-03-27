@@ -8451,21 +8451,21 @@
                 <h2 id="pveip">pve更换IP<a class="headerlink" href="#pveip" title="Permanent link">¶</a></h2>
 <p>由于Proxmox是基于Debian的底层，所以我们可以修改配置文件来更改IP，一共要更改三个。</p>
 <p>一、在局域网的电脑浏览器输入PVE的IP地址登录后台，从左边的菜单找到“PVE”—“_Shell”菜单，进入网页版的ssh界面下；或者用winscp进入主机输入root密码后登录到ssh下；</p>
-<p><a href="https://www.xhling.com/wp-content/uploads/2020/10/pve-1024x534.jpg"><img alt="Proxmox VE (PVE) 修改WEB管理IP地址" src="https://gitee.com/ljzsdut/pic/raw/master/default/pve-1024x534-1617684167460.jpg" /></a></p>
+<p><a href="https://www.xhling.com/wp-content/uploads/2020/10/pve-1024x534.jpg"><img alt="Proxmox VE (PVE) 修改WEB管理IP地址" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/pve-1024x534-1617684167460.jpg" /></a></p>
 <p>systemctl restart networking   重启网络生效</p>
 <p>二、输入以下命令回车：</p>
 <p>vi /etc/network/interfaces</p>
 <p>通过键盘上下左右移动到address这行的IP地址，按一次i进入修改状态，修改为新的IP地址，如果需要网关则修改gateway这行，修改完成确认无误后按一次ESC键输入:wq!回车保存退出。<strong>（根据自己环境配置。图片仅供参考）</strong></p>
-<p><a href="https://www.xhling.com/wp-content/uploads/2020/10/pve1-1024x421.jpg"><img alt="Proxmox VE (PVE) 修改WEB管理IP地址" src="https://gitee.com/ljzsdut/pic/raw/master/default/pve1-1024x421-1617684167531.jpg" /></a></p>
+<p><a href="https://www.xhling.com/wp-content/uploads/2020/10/pve1-1024x421.jpg"><img alt="Proxmox VE (PVE) 修改WEB管理IP地址" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/pve1-1024x421-1617684167531.jpg" /></a></p>
 <p>三、输入以下命令回车：</p>
 <p>vi /etc/issue</p>
 <p>通过键盘上下左右移动到https://这行的IP地址，按一次i进入修改状态，修改为新的IP地址，端口8006不要改，修改完成确认无误后按一次ESC键输入:wq!回车保存退出。</p>
 <p>该步骤主要是为了显示为正确的IP。如果不修改，也不会影响使用。</p>
-<p><a href="https://www.xhling.com/wp-content/uploads/2020/10/pve2-1024x644.jpg"><img alt="Proxmox VE (PVE) 修改WEB管理IP地址" src="https://gitee.com/ljzsdut/pic/raw/master/default/pve2-1024x644-1617684167594.jpg" /></a></p>
+<p><a href="https://www.xhling.com/wp-content/uploads/2020/10/pve2-1024x644.jpg"><img alt="Proxmox VE (PVE) 修改WEB管理IP地址" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/pve2-1024x644-1617684167594.jpg" /></a></p>
 <p>四、输入以下命令回车：</p>
 <p>vi /etc/hosts</p>
 <p>通过键盘上下左右移动到第2行的IP地址，按一次i进入修改状态，修改为新的IP地址，修改完成确认无误后按一次ESC键输入:wq!回车保存退出</p>
-<p><a href="https://www.xhling.com/wp-content/uploads/2020/10/pve3-1024x591.jpg"><img alt="Proxmox VE (PVE) 修改WEB管理IP地址" src="https://gitee.com/ljzsdut/pic/raw/master/default/pve3-1024x591-1617684167655.jpg" /></a></p>
+<p><a href="https://www.xhling.com/wp-content/uploads/2020/10/pve3-1024x591.jpg"><img alt="Proxmox VE (PVE) 修改WEB管理IP地址" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/pve3-1024x591-1617684167655.jpg" /></a></p>
 <p>五、reboot，重启PVE，完美解决！</p>
 <h2 id="_1">嵌套虚拟化<a class="headerlink" href="#_1" title="Permanent link">¶</a></h2>
 <p><strong>1、PVE开启嵌套虚拟化支持</strong></p>
@@ -8492,7 +8492,7 @@ Y
 <p>至此，pve的套娃功能就开启完成；</p>
 <p><strong>2、设置guste启用嵌套虚拟化</strong></p>
 <p>在创建虚拟机的过程中，cpu的类别选择host即可。</p>
-<p><img alt="uZxyPu-1617684751191" src="https://gitee.com/ljzsdut/pic/raw/master/default/uZxyPu-1617684751191-1617684758765.png" /></p>
+<p><img alt="uZxyPu-1617684751191" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/uZxyPu-1617684751191-1617684758765.png" /></p>
 <h2 id="_2">推荐文章<a class="headerlink" href="#_2" title="Permanent link">¶</a></h2>
 <p>https://foxi.buduanwang.vip/pve/</p>
                 

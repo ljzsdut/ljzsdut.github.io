@@ -8557,7 +8557,7 @@
 <h2 id="rebalancing">数据rebalancing重分布<a class="headerlink" href="#rebalancing" title="Permanent link">¶</a></h2>
 <p><a href="https://docs.ceph.com/en/nautilus/architecture/#rebalancing">参考链接</a></p>
 <p>随着集群资源的不断增长，Ceph集群的空间可能会存在不够用的情况，因此需要对集群进行扩容，扩容通常包含两种：横向扩容和纵向扩容。横向扩容即增加台机器，纵向扩容即在单个节点上添加更多的OSD存储，以满足数据增长的需求，添加OSD的时候由于集群的状态（cluster map）已发生了改变，因此会涉及到数据的<code>重分布（rebalancing）</code>，即 pool 的PGs数量是固定的，需要将PGs数平均的分摊到多个OSD节点上。</p>
-<p><img alt="K4WNWg-1618025594838" src="https://gitee.com/ljzsdut/pic/raw/master/default/K4WNWg-1618025594838-1618025601648.png" /></p>
+<p><img alt="K4WNWg-1618025594838" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/K4WNWg-1618025594838-1618025601648.png" /></p>
 <p>当OSD数量变更时，Monitor会更新osd map（cluster map），此时会<strong>自动触发</strong>pg的rebalancing，如果pg中含有大量的数据，此时会有较大的负载压力。建议增减OSD时，选择业务低峰期操作。此外，增减OSD时，建议不要一次性增减多个OSD，而是每次增减一个。   </p>
 <h2 id="rebalance">临时关闭rebalance<a class="headerlink" href="#rebalance" title="Permanent link">¶</a></h2>
 <p>当在做rebalance的时候，每个osd都会按照osd_max_backfills指定数量的线程来同步,如果该数值比较大，同步会比较快，但是会影响部分性能；</p>

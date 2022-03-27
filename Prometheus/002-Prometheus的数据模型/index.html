@@ -8571,7 +8571,7 @@
                 <h2 id="prometheus">Prometheus的数据模型<a class="headerlink" href="#prometheus" title="Permanent link">¶</a></h2>
 <h3 id="_1">概述<a class="headerlink" href="#_1" title="Permanent link">¶</a></h3>
 <p>监控系统一般会从各个维度去获取监控数据，然后将其保存在监控系统中。</p>
-<p><img alt="image-20210520101120004" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20210520101120004-1621476680239.png" /></p>
+<p><img alt="image-20210520101120004" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20210520101120004-1621476680239.png" /></p>
 <h3 id="_2">时间序列<a class="headerlink" href="#_2" title="Permanent link">¶</a></h3>
 <p>Prometheus从根本上所有的存储都是按<strong>时间序列</strong>去实现的。</p>
 <p>每个时间序列由2个元素唯一确定：metrics(指标名称) 、label组合(一个或多个标签) 。相同的metric_name和相同的label组合组成一条时间序列，不同的metric_name或不同的label组合都表示不同的时间序列。为了支持一些查询，有时还会临时产生一些时间序列存储</p>
@@ -8581,8 +8581,8 @@
 <li>同一指标可能会适配到多个目标或设备，因而它使用“标签”作为元数据，从而为Metric添加更多的信息描述纬度；</li>
 <li>这些标签还可以作为过滤器进行指标过滤及聚合运算；</li>
 </ul>
-<p><img alt="image-20210520085552863" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20210520085552863-1621472153019.png" /></p>
-<p><img alt="image-20210520100713691" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20210520100713691-1621476433996.png" /></p>
+<p><img alt="image-20210520085552863" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20210520085552863-1621472153019.png" /></p>
+<p><img alt="image-20210520100713691" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20210520100713691-1621476433996.png" /></p>
 <h3 id="_3">指标名称和标签<a class="headerlink" href="#_3" title="Permanent link">¶</a></h3>
 <p>每条时间序列是由唯一的<strong>指标名称</strong>和<strong>一组标签</strong> （key=value）的形式组成，即一个时间序列由指标名称和标签2部分共同组成。</p>
 <ul>
@@ -8603,7 +8603,7 @@
 <h3 id="jobstarget">Jobs和Target<a class="headerlink" href="#jobstarget" title="Permanent link">¶</a></h3>
 <p>Target：又称Instance或endpoint，是metric的数据采集点。能够接收Prometheus Server数据Scrape操作的网络端点（endpoint），即为一个Instance（实例），每个Target用一个网络端点<code>IP:PORT</code>进行标识；每个target上有多个metric，一般通过请求<code>IP:PORT/metrics</code>获取。</p>
 <p>Job：通常，具有类似功能的Instance/Target的集合称为一个Job，例如一个MySQL主从复制集群中的所有MySQL进程；</p>
-<p><img alt="image-20210520091443922" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20210520091443922-1621473284081.png" /></p>
+<p><img alt="image-20210520091443922" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20210520091443922-1621473284081.png" /></p>
 <div class="codehilite"><pre><span></span><code><span class="p p-Indicator">-</span> <span class="nt">job_name</span><span class="p">:</span> <span class="s">&#39;mysql-server&#39;</span>
   <span class="nt">static_configs</span><span class="p">:</span>
   <span class="p p-Indicator">-</span> <span class="nt">targets</span><span class="p">:</span>  <span class="c1"># 一个job中包含多个target</span>

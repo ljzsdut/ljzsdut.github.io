@@ -8672,7 +8672,7 @@
 <p><code>bash
 istioctl manefest generate --set profile=demo |kubectl delete -f -</code></p>
 <h2 id="_5"><a href="https://istio.io/latest/docs/ops/deployment/architecture/">架构</a><a class="headerlink" href="#_5" title="Permanent link">¶</a></h2>
-<p><img alt="TcVc5a-1605452016275" src="https://gitee.com/ljzsdut/pic/raw/master/default/TcVc5a-1605452016275.png" /></p>
+<p><img alt="TcVc5a-1605452016275" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/TcVc5a-1605452016275.png" /></p>
 <h3 id="envoy">Envoy<a class="headerlink" href="#envoy" title="Permanent link">¶</a></h3>
 <p>Istio 使用 <a href="https://envoyproxy.github.io/envoy/">Envoy</a> 代理的扩展版本。Envoy 是用 C++ 开发的高性能代理，用于协调服务网格中所有服务的入站和出站流量。Envoy代理是唯一与数据平面流量交互的 Istio 组件。</p>
 <blockquote>
@@ -8709,9 +8709,9 @@ istioctl manefest generate --set profile=demo |kubectl delete -f -</code></p>
 <h3 id="pilot">Pilot<a class="headerlink" href="#pilot" title="Permanent link">¶</a></h3>
 <p>Pilot 为 Envoy sidecar 提供服务发现、用于智能路由的流量管理功能（例如，A/B 测试、金丝雀发布等）以及弹性功能（超时、重试、熔断器等）。</p>
 <p>Pilot 将控制流量行为的高级路由规则转换为特定于环境的配置，并在运行时将它们传播到 sidecar。Pilot 将特定于平台的服务发现机制抽象出来，并将它们合成为任何符合 <a href="https://www.envoyproxy.io/docs/envoy/latest/api/api">Envoy API</a> 的 sidecar 都可以使用的标准格式。</p>
-<p><img alt="bwOoB7-1605487033720" src="https://gitee.com/ljzsdut/pic/raw/master/default/bwOoB7-1605487033720.png" /></p>
+<p><img alt="bwOoB7-1605487033720" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/bwOoB7-1605487033720.png" /></p>
 <p>下图展示了平台适配器和 Envoy 代理如何交互。</p>
-<p><img alt="KCwWCi-1605453189326" src="https://gitee.com/ljzsdut/pic/raw/master/default/KCwWCi-1605453189326.png" /></p>
+<p><img alt="KCwWCi-1605453189326" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/KCwWCi-1605453189326.png" /></p>
 <ol>
 <li>平台启动一个服务的新实例，该实例通知其平台适配器。</li>
 <li>平台适配器使用 Pilot 抽象模型注册实例。</li>

@@ -8387,13 +8387,13 @@
 </blockquote>
 <h2 id="ipip">IPIP模式简介<a class="headerlink" href="#ipip" title="Permanent link">¶</a></h2>
 <p>Calico中的IP Pool可以使用两种模式：BGP或者IPIP。本文使用的是IPIP模式，是一种将各Node的路由之间做一个tunnel，再把网络连接起来的模式：</p>
-<p><img alt="image.png" src="https://gitee.com/ljzsdut/pic/raw/master/default/format,png-1619161445454.png" /></p>
+<p><img alt="image.png" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/format,png-1619161445454.png" /></p>
 <p>从字面上说，就是将一个IP数据包套在另一个IP包里，使用到了Linux提供的隧道技术。可以理解为一个基于IP层的网桥，将两个本不通的网络通过点对点连接起来。</p>
 <h2 id="k8s-calico-ipip">K8s-Calico-IPIP网络实战分析<a class="headerlink" href="#k8s-calico-ipip" title="Permanent link">¶</a></h2>
 <p>下面我们就进行基于Calico-IPIP模式下的K8s容器互联网络分析。</p>
 <h3 id="_1">实验准备<a class="headerlink" href="#_1" title="Permanent link">¶</a></h3>
 <p>准备了1master 2slaver的K8s集群，设置为Calico-IPIP网络。每个slaver内（node1，node2）分别部署了一个Pod容器，结构示意图如下：</p>
-<p><img alt="image.png" src="https://gitee.com/ljzsdut/pic/raw/master/default/format,png-20210423150436017-1619161476128.png" /></p>
+<p><img alt="image.png" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/format,png-20210423150436017-1619161476128.png" /></p>
 <h3 id="_2">网络结构解析<a class="headerlink" href="#_2" title="Permanent link">¶</a></h3>
 <h4 id="pod">pod网络<a class="headerlink" href="#pod" title="Permanent link">¶</a></h4>
 <p>首先通过指令<code>kubectl exec -it pod1 /bin/bash</code>进入pod1容器中，再使用指令 <code>ip addr</code> 查看pod1内的网络设备。</p>
@@ -8466,14 +8466,14 @@ Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
 
 <h4 id="_3">网络结构小结<a class="headerlink" href="#_3" title="Permanent link">¶</a></h4>
 <p>根据上节的信息，绘出当前实验网络的主要设备图。后面将进行网络连接实战。</p>
-<p><img alt="YoTQ0b-1619161688523" src="https://gitee.com/ljzsdut/pic/raw/master/default/YoTQ0b-1619161688523-1619161690815.png" /></p>
+<p><img alt="YoTQ0b-1619161688523" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/YoTQ0b-1619161688523-1619161690815.png" /></p>
 <h3 id="_4">网络连接实战<a class="headerlink" href="#_4" title="Permanent link">¶</a></h3>
 <h4 id="node_1">node间访问<a class="headerlink" href="#node_1" title="Permanent link">¶</a></h4>
 <p>很容易的，我们先猜测一个从pod2发往pod1的ip数据流向。
-<img alt="image.png" src="https://gitee.com/ljzsdut/pic/raw/master/default/format,png-20210423150854745-1619161734856.png" /></p>
+<img alt="image.png" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/format,png-20210423150854745-1619161734856.png" /></p>
 <p>下面让我们一起来验证我们的猜测吧！使用的工具就是tcpdump啦~
 分别在两个node的Cali.c2、tunl0、eth0出进行抓包分析，结果如下图所示，其中Cali.c2与tunl0的ip完全一致，因此合并输出。
-<img alt="image.png" src="https://gitee.com/ljzsdut/pic/raw/master/default/format,png-20210423150908477-1619161748597.png" /></p>
+<img alt="image.png" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/format,png-20210423150908477-1619161748597.png" /></p>
 <p>按照标志的①、②、③、④来依次分析：
 ①：上节已经说了，pod2中的eth0(即图中的vthe0)与Cali.c2是一对veth pair，因此，Cali.c2接收到的ip流向一定与vthe0相同，为 10.100.9.206-&gt;10.100.15.150。</p>
 <p>查看之前的node2 route表，发现有一条 ：</p>
@@ -8506,7 +8506,7 @@ Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
 <span class="m">10</span>.100.9.207    <span class="m">0</span>.0.0.0         <span class="m">255</span>.255.255.255 UH    <span class="m">0</span>      <span class="m">0</span>        <span class="m">0</span> cali7116f2b12fa
 </code></pre></div>
 
-<p><img alt="FZae31-1619161926171" src="https://gitee.com/ljzsdut/pic/raw/master/default/FZae31-1619161926171-1619161929545.png" /></p>
+<p><img alt="FZae31-1619161926171" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/FZae31-1619161926171-1619161929545.png" /></p>
 <h2 id="_5">总结<a class="headerlink" href="#_5" title="Permanent link">¶</a></h2>
 <ul>
 <li>IPIP模式下，node间的Pod访问会使用IPIP技术对出node的ip报进行隧道封装</li>

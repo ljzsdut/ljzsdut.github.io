@@ -9104,7 +9104,7 @@
 
 <p>​       Golang中的string的本质是一个字节切片：[]byte，其底层是byte数组，每个string其实只占用两个机器字长：一个指针和一个长度。只不过这个指针在Go中完全不可见，所以对我们来说，<strong>string是一个底层byte数组的值类型而非指针类型</strong>。</p>
 <p>​       字符串是一个不可变对象，不变性意味这如果两个字符串共享相同的底层数据的话也是安全的，这使得复制任何长度的字符串代价是低廉的。同样，一个字符串s和对应的子字符串切片s[7:]的操作也可以安全地共享相同的内存，因此字符串切片操作代价也是低廉的。在这两种情况下都没有必要分配新的内存。 下图演示了一个字符串和两个子字符串共享相同的底层数据。</p>
-<p><img alt="1566370558262" src="https://gitee.com/ljzsdut/pic/raw/master/default/1566370558262.png" /></p>
+<p><img alt="1566370558262" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/1566370558262.png" /></p>
 <p><strong>字符读写磁盘本质探讨：</strong></p>
 <blockquote>
 <p>a) 字符存储到计算机：字符--&gt;对应码值--&gt;依据编码规则转换为二进制--&gt;存储</p>

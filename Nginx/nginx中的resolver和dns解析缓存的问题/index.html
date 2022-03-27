@@ -8429,7 +8429,7 @@ location /applyrecord/aladinnApplyrecord <span class="o">{</span>
 <p>这里还有一个问题，发现通过set和resolver设置域名解析时，重启路由器测试访问时，还是无法解析出新地址，通过tcpdump抓包没有发现有请求dns解析。</p>
 <p>后来注意到还有个 valid 参数需要配置，这个参数用来控制缓存时间的，默认时间取决于dns记录的ttl值，比如我用windows搭建的dns解析默认是3600秒，也就是一小时。</p>
 <p>通过修改valid参数，这里设置为5秒后，再次抓包发现每隔5秒后访问虚拟主机的时候就会产生一次dns解析。</p>
-<p><img alt="AWqnkz-1643331485550" src="https://gitee.com/ljzsdut/pic/raw/master/default/AWqnkz-1643331485550.png" /></p>
+<p><img alt="AWqnkz-1643331485550" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/AWqnkz-1643331485550.png" /></p>
 <p>这样才解决动态dns解析访问问题。</p>
                 
                   

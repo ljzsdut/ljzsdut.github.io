@@ -8772,8 +8772,8 @@
 <li>把元数据的更新日志于流式化后存储在RADOS集群上</li>
 <li>将层级结构中的的每个名称空间对应地实例化成一个目录且存储为一个专有的RADOS对象</li>
 </ul>
-<p><img alt="image-20211008082228569" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20211008082228569-1633652601225.png" /></p>
-<p><img alt="image-20211008082507269" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20211008082507269-1633652707401.png" /></p>
+<p><img alt="image-20211008082228569" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20211008082228569-1633652601225.png" /></p>
+<p><img alt="image-20211008082507269" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20211008082507269-1633652707401.png" /></p>
 <p>CephFS库（libcephfs ）工作在 librados 之上，并代表Ceph文件系统。最上层代表两种可以访问 Ceph 文件系统的客户端。</p>
 <h2 id="metadata_server_1">部署metadata server<a class="headerlink" href="#metadata_server_1" title="Permanent link">¶</a></h2>
 <h3 id="1ceph-mds">1、安装软件包(ceph-mds)<a class="headerlink" href="#1ceph-mds" title="Permanent link">¶</a></h3>
@@ -8988,7 +8988,7 @@ none &lt;mount-point&gt; fuse.ceph  ceph.id<span class="o">=</span>&lt;user-id&g
 <li>惰性混编分区</li>
 <li>动态子树分区：ceph使用的方式</li>
 </ul>
-<p><img alt="image-20211008084300077" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20211008084300077-1633653780236.png" /></p>
+<p><img alt="image-20211008084300077" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20211008084300077-1633653780236.png" /></p>
 <h2 id="multi_mds">Multi MDS<a class="headerlink" href="#multi_mds" title="Permanent link">¶</a></h2>
 <p>为了减轻一个ACTIVE MDS的工作负载，可以将目录树的每个子节点由一个单独的MDS来负载响应，这种方式就是多活MDS。此外还需要使用Active+Standby模式实现MDS的HA。</p>
 <p>多主MDS(多活MDS)模式是指CephFS将整个文件系统的名称空间切分为多个子树并配置到多个MDS之上，不过，读写操作的负载均衡策略是不同的，分别是<strong>子树切分</strong>和<strong>目录副本</strong>。</p>

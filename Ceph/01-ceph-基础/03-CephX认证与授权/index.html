@@ -8726,7 +8726,7 @@
 <p>Ceph使用cephx协议对客户端进行身份认证。每个MON都可以对客户端进行身份验正并分发密钥，不存在单点故障和性能瓶颈。</p>
 <p>当一个 Client 需要连接 Ceph 集群时，它首先通过自己的用户名和秘钥（client.cinder/client.nova…) 来连接到 <code>/etc/ceph/ceph.conf</code>配置文件指定IP的MON，认证成功后，可以获取集群的很多MAP( monmap,osdmap,crushmap…)，通过这些 MAP，即可向 Ceph 集群读取数据。</p>
 <h3 id="cephx_1">CephX身份验正流程<a class="headerlink" href="#cephx_1" title="Permanent link">¶</a></h3>
-<p><img alt="image-20211007150907673" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20211007150907673-1633590547814.png" /></p>
+<p><img alt="image-20211007150907673" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20211007150907673-1633590547814.png" /></p>
 <ul>
 <li>
 <p>Client向MON发起认证请求，MON使用客户端密钥对session key进行加密，会返回用于身份验正的数据结构，其包含获取Ceph服务时用到的session key；</p>
@@ -8743,7 +8743,7 @@
 </ul>
 <p>注意：CephX身份验正功能仅限制Ceph的各组件之间，它不能扩展到其它非Ceph组件；它并不解决数据传输加密的问题;</p>
 <h3 id="cephx-mdsosd">CephX身份验正-MDS和OSD<a class="headerlink" href="#cephx-mdsosd" title="Permanent link">¶</a></h3>
-<p><img alt="image-20211007152240698" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20211007152240698-1633591360833.png" /></p>
+<p><img alt="image-20211007152240698" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20211007152240698-1633591360833.png" /></p>
 <h2 id="_1">认证与授权<a class="headerlink" href="#_1" title="Permanent link">¶</a></h2>
 <p>无论Ceph客户端是何类型，Ceph都会在存储池中将所有数据存储为对象，Ceph用户需要拥有存储池访问权限才能读取和写入数据，Ceph用户必须拥有执行权限才能使用Ceph的管理命令。</p>
 <h3 id="_2">用户<a class="headerlink" href="#_2" title="Permanent link">¶</a></h3>

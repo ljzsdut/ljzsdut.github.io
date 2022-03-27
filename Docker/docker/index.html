@@ -9448,11 +9448,11 @@
 <h2 id="docker_1">docker的感性认识<a class="headerlink" href="#docker_1" title="Permanent link">¶</a></h2>
 <p>镜像与容器的关系？</p>
 <p>docker容器就是一个<strong>虚拟机</strong>。（不准确！！！）</p>
-<p><img alt="zdVNU5-1588813249650" src="https://gitee.com/ljzsdut/pic/raw/master/default/zdVNU5-1588813249650.png" /></p>
+<p><img alt="zdVNU5-1588813249650" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/zdVNU5-1588813249650.png" /></p>
 <p>每个虚拟化应用程序不仅包括应用程序（可能只有数十MB）以及必要的二进制文件和库，还包括整个客户机操作系统（可能重数十GB）。</p>
-<p><img alt="VKGPli-1588813269809" src="https://gitee.com/ljzsdut/pic/raw/master/default/VKGPli-1588813269809.png" /></p>
+<p><img alt="VKGPli-1588813269809" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/VKGPli-1588813269809.png" /></p>
 <p>Docker容器仅包含应用程序及其依赖项。它在主机操作系统上的用户空间中作为隔离进程运行，与其他容器共享内核。因此，它具有虚拟机的资源隔离和分配优势，而且具有更高的可移植性和效率。</p>
-<p><img alt="VMware ESXi" src="https://gitee.com/ljzsdut/pic/raw/master/default/de00051386e8e9274d890356a0133e00ba9-1588812589049.jpg" /></p>
+<p><img alt="VMware ESXi" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/de00051386e8e9274d890356a0133e00ba9-1588812589049.jpg" /></p>
 <h2 id="docker_2">docker的优势<a class="headerlink" href="#docker_2" title="Permanent link">¶</a></h2>
 <p>作为一种新兴的虚拟化方式，Docker 跟传统的虚拟化方式相比具有众多的优势。</p>
 <p><strong>1.更高效的利用系统资源</strong></p>
@@ -9639,7 +9639,7 @@ drwxr-xr-x <span class="m">4</span> root root <span class="m">0</span> 4月  <sp
 <h4 id="1unionfs">1、什么是UnionFS<a class="headerlink" href="#1unionfs" title="Permanent link">¶</a></h4>
 <p>​       UnionFS(联合文件系统)是把不同物理位置的目录合并到同一个目录中的文件系统服务。其早期是应用在LiveCD领域的，通过联合文件系统可以非常快速地引导系统初始化或检测磁盘等硬件资源。这是因为只需要把CD只读挂载到特定目录，然后在其上附加一层可读写的文件层，对文件的任何变动修改都会被添加到新的文件层内，这种技术被称为写时复制。</p>
 <p>​       写时复制是一种可以有效节约资源的技术，它被很好地应用在Docker镜像上。其思想是如果有一个资源需要被重复利用，在没有任何修改的情况下，新旧实例会共享资源，并不需要进行复制，如果有实例需要对资源进行任何的修改，并不会直接修改资源，而是会创建一个新的资源并在其上进行修改，这样原来的资源并不会进行任何修改，而是与新创建的资源结合在外，表现为修改后的资源状态。这样做<strong>可以显著地减轻对未修改资源的复制而带来的资源消耗问题</strong>。</p>
-<p><img alt="wupkO4-1588815408371" src="https://gitee.com/ljzsdut/pic/raw/master/default/wupkO4-1588815408371.jpg" /></p>
+<p><img alt="wupkO4-1588815408371" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/wupkO4-1588815408371.jpg" /></p>
 <p>下面通过讲解在Docker中如何使用UnionFS更深入地理解写时复制。</p>
 <h4 id="2unionfsimages">2、UnionFS在Images中的使用<a class="headerlink" href="#2unionfsimages" title="Permanent link">¶</a></h4>
 <p>一个最常见的 rootfs，或者说容器镜像，会包括如下所示的一些目录和文件，比如 /bin，/etc，/proc 等等。Docker在镜像的设计中，引入了层（layer）的概念。也就是说，<strong>用户制作镜像的每一步操作，都会生成一个层</strong>，也就是一个增量 rootfs。 </p>
@@ -9653,7 +9653,7 @@ drwxr-xr-x <span class="m">4</span> root root <span class="m">0</span> 4月  <sp
 <h3 id="1">1、网络原理<a class="headerlink" href="#1" title="Permanent link">¶</a></h3>
 <p>这部分主要介绍Docker的网络原理，通过Linux系统模拟实现一个Docker默认网络的方法。</p>
 <p>首先对Docker网络的实现原理进行整体简略的介绍，当Docker服务安装并启动后，在主机上输入ifconfig 命令，可以发现主机上多了一个docker0的虚拟网桥，这个网桥为Docker的网络通信提供支持。如图所示，在默认网络情况下，当启动一个Docker容器时，Docker会为容器分配一个IP地址,并通过一对vethpair将容器的eth0绑定到主机的docker0网桥中。</p>
-<p><img alt="image-20200430164125580" src="https://gitee.com/ljzsdut/pic/raw/master/default/image-20200430164125580-1588236089725.png" /></p>
+<p><img alt="image-20200430164125580" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/image-20200430164125580-1588236089725.png" /></p>
 <h3 id="2docker">2、模拟实现Docker网络<a class="headerlink" href="#2docker" title="Permanent link">¶</a></h3>
 <p>下面通过Linux系统模拟Docker网络模型，实现上面介绍的网络结构。</p>
 <ul>
@@ -9811,9 +9811,9 @@ rtt min/avg/max/mdev <span class="o">=</span> <span class="m">10</span>.923/13.6
 <p>Iptables的DNAT规则。</p>
 <h2 id="docker_6">三、docker使用<a class="headerlink" href="#docker_6" title="Permanent link">¶</a></h2>
 <h3 id="docker_7">docker命令列表<a class="headerlink" href="#docker_7" title="Permanent link">¶</a></h3>
-<p><img alt="docker命令列表" src="https://gitee.com/ljzsdut/pic/raw/master/default/docker命令列表-1588561030560.png" /></p>
+<p><img alt="docker命令列表" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/docker命令列表-1588561030560.png" /></p>
 <p>查看命令帮助：<code>docker COMMAND --help</code></p>
-<p><img alt="docker命令2" src="https://gitee.com/ljzsdut/pic/raw/master/default/docker命令2-1588561164377.png" /></p>
+<p><img alt="docker命令2" src="https://cdn.jsdelivr.net/gh/ljzsdut/images@master/default/docker命令2-1588561164377.png" /></p>
 <h3 id="docker_search">docker search查找镜像<a class="headerlink" href="#docker_search" title="Permanent link">¶</a></h3>
 <div class="codehilite"><pre><span></span><code><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># docker search centos  #搜索远程仓库的镜像</span>
 INDEX       NAME                                         DESCRIPTION                                     STARS     OFFICIAL   AUTOMATED
