@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>JS on ljzsdut</title><link>https://note.ljzsdut.com/%E5%89%8D%E7%AB%AF/%E5%90%8E%E7%AB%AF%E4%BA%BAJS/</link><description>Recent content in JS on ljzsdut</description><generator>Hugo -- gohugo.io</generator><atom:link href="https://note.ljzsdut.com/%E5%89%8D%E7%AB%AF/%E5%90%8E%E7%AB%AF%E4%BA%BAJS/index.xml" rel="self" type="application/rss+xml"/><item><title/><link>https://note.ljzsdut.com/%E5%89%8D%E7%AB%AF/%E5%90%8E%E7%AB%AF%E4%BA%BAJS/01-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E5%89%8D%E7%AB%AF/%E5%90%8E%E7%AB%AF%E4%BA%BAJS/01-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</guid><description>起步入门 语言介绍 JavaScript 官方名称是 ECMAScript 是一种属于网络的脚本语言,已经被广泛用于 Web 应用开发,常用来为网页添加各式各样的动态功能,为用户提供更流畅美观的浏览效果。
+1995 年 2 月 Netscape 的布兰登.艾奇开发了针对网景公司的 Netscape Navigator浏览器的脚本语言 LiveScript。之后 Netscape 与 Sun 公司联盟后 LiveScript 更名为 JavaScript。
+微软在 javascript 发布后为了抢占市场推出了 JScript。为了让脚本语言规范不在混乱，根据 javascript 1.1 版本推出了 ECMA-262 的脚本语言标准。
+ECMA 是欧洲计算机制造商协会由 Sum、微软、NetScape 公司的程序员组成。
+文档中会经常使用 JS 简写来代替 JavaScript
+适用场景 浏览器网页端开发 做为服务器后台语言使用Node.js(opens new window) 移动端手机 APP 开发，如 Facebook 的 React Native (opens new window)、uniapp、PhoneGap、IONIC 跨平台的桌面应用程序，如使用 electronjs(opens new window) 所以 JS 是一专多能的语言，非常适合学习使用。
+发展历史 1994 年 Netscape（网景）公司发布了 Navigator 浏览器 1.</description></item><item><title/><link>https://note.ljzsdut.com/%E5%89%8D%E7%AB%AF/%E5%90%8E%E7%AB%AF%E4%BA%BAJS/02-%E8%BF%90%E7%AE%97%E7%AC%A6%E4%B8%8E%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E5%89%8D%E7%AB%AF/%E5%90%8E%E7%AB%AF%E4%BA%BAJS/02-%E8%BF%90%E7%AE%97%E7%AC%A6%E4%B8%8E%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6/</guid><description>运算符 下面来讨论常用的编程运算符的使用。
+赋值运算符 使用 = 进行变量赋值
+let url = &amp;#39;houdunren.com&amp;#39;; 算术运算符 包括以下几种算术运算符。
+运算符 说明 * 乘法 / 除法 + 加法 - 减法 % 取余数 let a = 5,b = 3; console.log(a * b); //15 console.log(a % b); //2 复合运算符 可以使用 *=、/=、+=、-=、%= 简写算术运算。即 n*=2 等同于 n=n*2。
+let n = 2; n *= 2; console.log(n); 对变量加减相应数值。
+let n = 2; n += 3; console.log(n); //0 n -= 5; console.log(n); //5 n+=3 是 n=n+3 的简写形式</description></item><item><title/><link>https://note.ljzsdut.com/%E5%89%8D%E7%AB%AF/%E5%90%8E%E7%AB%AF%E4%BA%BAJS/03-%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E5%89%8D%E7%AB%AF/%E5%90%8E%E7%AB%AF%E4%BA%BAJS/03-%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B/</guid><description>类型检测 JS 提供了非常丰富的数据类型，开发者要学会使用最适合的数据类型处理业务 。
+typeof typeof 用于返回以下原始类型
+基本类型：number/string/boolean function object undefined 可以使用 typeof 用于判断数据的类型
+let a = 1; console.log(typeof a); //number let b = &amp;#34;1&amp;#34;; console.log(typeof b); //string //未赋值或不存在的变量返回undefined var hd; console.log(typeof hd); function run() {} console.log(typeof run); //function let c = [1, 2, 3]; console.log(typeof c); //object let d = { name: &amp;#34;houdunren.com&amp;#34; }; console.log(typeof d); //object instanceof instanceof 运算符用于检测构造函数的 prototype 属性是否出现在某个实例对象的原型链上。
+也可以理解为是否为某个对象的实例，typeof不能区分数组，但instanceof则可以。
+后面章节会详细介绍原型链
+let hd = []; let houdunren = {}; console.</description></item><item><title/><link>https://note.ljzsdut.com/%E5%89%8D%E7%AB%AF/%E5%90%8E%E7%AB%AF%E4%BA%BAJS/04-%E6%95%B0%E7%BB%84%E7%B1%BB%E5%9E%8B/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E5%89%8D%E7%AB%AF/%E5%90%8E%E7%AB%AF%E4%BA%BAJS/04-%E6%95%B0%E7%BB%84%E7%B1%BB%E5%9E%8B/</guid><description>声明数组 向军大叔每晚八点在 抖音 (opens new window)和 bilibli (opens new window)直播
+数组是多个变量值的集合，数组是Array 对象的实例，所以可以像对象一样调用方法。
+创建数组 使用对象方式创建数组
+console.log(new Array(1, &amp;#39;后盾人&amp;#39;, &amp;#39;hdcms&amp;#39;)); //[1, &amp;#34;后盾人&amp;#34;, &amp;#34;hdcms&amp;#34;] 使用字面量创建是推荐的简单作法
+const array = [&amp;#34;hdcms&amp;#34;, &amp;#34;houdunren&amp;#34;]; 多维数组定义
+const array = [[&amp;#34;hdcms&amp;#34;], [&amp;#34;houdunren&amp;#34;]]; console.log(array[1][0]); 数组是引用类型可以使用const声明并修改它的值
+const array = [&amp;#34;hdcms&amp;#34;, &amp;#34;houdunren&amp;#34;]; array.push(&amp;#34;houdunwang&amp;#34;); console.log(array); 使用原型的 length属性可以获取数组元素数量
+let hd = [&amp;#34;后盾人&amp;#34;, &amp;#34;hdcms&amp;#34;]; console.log(hd.length); //2 数组可以设置任何值，下面是使用索引添加数组
+let hd = [&amp;#34;后盾人&amp;#34;]; hd[1] = &amp;#34;hdcms&amp;#34;; 下面直接设置 3 号数组，会将 1/2 索引的数组定义为空值
+let hd = [&amp;#34;后盾人&amp;#34;]; hd[3] = &amp;#34;hdcms&amp;#34;; console.</description></item><item><title/><link>https://note.ljzsdut.com/%E5%89%8D%E7%AB%AF/%E5%90%8E%E7%AB%AF%E4%BA%BAJS/05-symbol/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E5%89%8D%E7%AB%AF/%E5%90%8E%E7%AB%AF%E4%BA%BAJS/05-symbol/</guid><description>Symbol Symbol用于防止属性名冲突而产生的，比如向第三方对象中添加属性时。
+Symbol 的值是唯一的，独一无二的不会重复的
+基础知识 Symbol let hd = Symbol(); let edu = Symbol(); console.log(hd); //symbol console.log(hd == edu); //false Symbol 不可以添加属性
+let hd = Symbol(); hd.name = &amp;#34;后盾人&amp;#34;; console.log(hd.name); 描述参数 可传入字符串用于描述Symbol，方便在控制台分辨Symbol
+let hd = Symbol(&amp;#34;is name&amp;#34;); let edu = Symbol(&amp;#34;这是一个测试&amp;#34;); console.log(hd); //Symbol(is name) console.log(edu.toString()); //Symbol(这是一个测试) 传入相同参数Symbol也是独立唯一的，因为参数只是描述而已，但使用 Symbol.for则不会
+let hd = Symbol(&amp;#34;后盾人&amp;#34;); let edu = Symbol(&amp;#34;后盾人&amp;#34;); console.log(hd == edu); //false 使用description可以获取传入的描述参数
+let hd = Symbol(&amp;#34;后盾人&amp;#34;); console.log(hd.description); //后盾人 Symbol.for 根据描述获取Symbol，如果不存在则新建一个Symbol</description></item><item><title/><link>https://note.ljzsdut.com/%E5%89%8D%E7%AB%AF/%E5%90%8E%E7%AB%AF%E4%BA%BAJS/06-Set/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E5%89%8D%E7%AB%AF/%E5%90%8E%E7%AB%AF%E4%BA%BAJS/06-Set/</guid><description>Set 用于存储任何类型的唯一值，无论是基本类型还是对象引用。
+只能保存值没有键名 严格类型检测如字符串数字不等于数值型数字 值是唯一的 遍历顺序是添加的顺序，方便保存回调函数 基本使用 对象可以属性最终都会转为字符串
+let obj = { 1: &amp;#34;hdcms&amp;#34;, &amp;#34;1&amp;#34;: &amp;#34;houdunren&amp;#34; }; console.table(obj); //{1:&amp;#34;houdunren&amp;#34;} 使用对象做为键名时，会将对象转为字符串后使用
+let obj = { 1: &amp;#34;hdcms&amp;#34;, &amp;#34;1&amp;#34;: &amp;#34;houdunren&amp;#34; }; console.table(obj); let hd = { [obj]: &amp;#34;后盾人&amp;#34; }; console.table(hd); console.log(hd[obj.toString()]); console.log(hd[&amp;#34;[object Object]&amp;#34;]); 使用数组做初始数据
+let hd = new Set([&amp;#39;后盾人&amp;#39;, &amp;#39;hdcms&amp;#39;]); console.log(hd.values()); //{&amp;#34;后盾人&amp;#34;, &amp;#34;hdcms&amp;#34;} Set 中是严格类型约束的，下面的数值1与字符串1属于两个不同的值
+let set = new Set(); set.add(1); set.add(&amp;#34;1&amp;#34;); console.log(set); //Set(2) {1, &amp;#34;1&amp;#34;} 使用 add 添加元素，不允许重复添加hdcms值
+let hd = new Set(); hd.</description></item><item><title/><link>https://note.ljzsdut.com/%E5%89%8D%E7%AB%AF/%E5%90%8E%E7%AB%AF%E4%BA%BAJS/07-Map/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E5%89%8D%E7%AB%AF/%E5%90%8E%E7%AB%AF%E4%BA%BAJS/07-Map/</guid><description>Map Map是一组键值对的结构，用于解决以往不能用对象做为键的问题
+具有极快的查找速度 函数、对象、基本类型都可以作为键或值 声明定义 可以接受一个数组作为参数，该数组的成员是一个表示键值对的数组。
+let m = new Map([ [&amp;#39;houdunren&amp;#39;, &amp;#39;后盾人&amp;#39;], [&amp;#39;hdcms&amp;#39;, &amp;#39;开源系统&amp;#39;] ]); console.log(m.get(&amp;#39;houdunren&amp;#39;)); //后盾人 使用set 方法添加元素，支持链式操作
+let map = new Map(); let obj = { name: &amp;#34;后盾人&amp;#34; }; map.set(obj, &amp;#34;houdunren.com&amp;#34;).set(&amp;#34;name&amp;#34;, &amp;#34;hdcms&amp;#34;); console.log(map.entries()); //MapIterator {{…} =&amp;gt; &amp;#34;houdunren.com&amp;#34;, &amp;#34;name&amp;#34; =&amp;gt; &amp;#34;hdcms&amp;#34;} 使用构造函数new Map创建的原理如下
+const hd = new Map(); const arr = [[&amp;#34;houdunren&amp;#34;, &amp;#34;后盾人&amp;#34;], [&amp;#34;hdcms&amp;#34;, &amp;#34;开源系统&amp;#34;]]; arr.forEach(([key, value]) =&amp;gt; { hd.set(key, value); }); console.log(hd); 对于键是对象的Map， 键保存的是内存地址，值相同但内存地址不同的视为两个键。
+let arr = [&amp;#34;后盾人&amp;#34;]; const hd = new Map(); hd.</description></item><item><title/><link>https://note.ljzsdut.com/%E5%89%8D%E7%AB%AF/%E5%90%8E%E7%AB%AF%E4%BA%BAJS/08-%E5%87%BD%E6%95%B0%E8%BF%9B%E9%98%B6/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E5%89%8D%E7%AB%AF/%E5%90%8E%E7%AB%AF%E4%BA%BAJS/08-%E5%87%BD%E6%95%B0%E8%BF%9B%E9%98%B6/</guid><description>基础知识 向军大叔每晚八点在 抖音 (opens new window)和 bilibli (opens new window)直播
+函数是将复用的代码块封装起来的模块，在 JS 中函数还有其他语言所不具有的特性，接下来我们会详细掌握使用技巧。
+声明定义 在 JS 中函数也是对象函数是Function类的创建的实例，下面的例子可以方便理解函数是对象。
+let hd = new Function(&amp;#34;title&amp;#34;, &amp;#34;console.log(title)&amp;#34;); hd(&amp;#39;后盾人&amp;#39;); 标准语法是使用函数声明来定义函数
+function hd(num) { return ++num; } console.log(hd(3)); 对象字面量属性函数简写
+let user = { name: null, getName: function (name) { return this.name; }, //简写形式 setName(value) { this.name = value; } } user.setName(&amp;#39;后盾人&amp;#39;); console.log(user.getName()); // 后盾人 全局函数会声明在 window 对象中，这不正确建议使用后面章节的模块处理
+console.log(window.screenX); //2200 当我们定义了 screenX 函数后就覆盖了 window.screenX 方法
+function screenX() { return &amp;#34;后盾人&amp;#34;; } console.</description></item><item><title/><link>https://note.ljzsdut.com/%E5%89%8D%E7%AB%AF/%E5%90%8E%E7%AB%AF%E4%BA%BAJS/09-%E4%BD%9C%E7%94%A8%E5%9F%9F%E4%B8%8E%E9%97%AD%E5%8C%85/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E5%89%8D%E7%AB%AF/%E5%90%8E%E7%AB%AF%E4%BA%BAJS/09-%E4%BD%9C%E7%94%A8%E5%9F%9F%E4%B8%8E%E9%97%AD%E5%8C%85/</guid><description>作用域 向军大叔每晚八点在 抖音 (opens new window)和 bilibli (opens new window)直播
+全局作用域只有一个，每个函数又都有作用域（环境）。
+编译器运行时会将变量定义在所在作用域 使用变量时会从当前作用域开始向上查找变量 作用域就像攀亲亲一样，晚辈总是可以向上辈要些东西 使用规范 作用域链只向上查找，找到全局 window 即终止，应该尽量不要在全局作用域中添加变量。
+函数被执行后其环境变量将从内存中删除。下面函数在每次执行后将删除函数内部的 total 变量。
+function count() { let total = 0; } count(); 函数每次调用都会创建一个新作用域
+let site = &amp;#39;后盾人&amp;#39;; function a() { let hd = &amp;#39;houdunren.com&amp;#39;; function b() { let cms = &amp;#39;hdcms.com&amp;#39;; console.log(hd); console.log(site); } b(); } a(); 如果子函数被使用时父级环境将被保留
+function hd() { let n = 1; return function() { let b = 1; return function() { console.</description></item><item><title/><link>https://note.ljzsdut.com/%E5%89%8D%E7%AB%AF/%E5%90%8E%E7%AB%AF%E4%BA%BAJS/10-%E5%AF%B9%E8%B1%A1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E5%89%8D%E7%AB%AF/%E5%90%8E%E7%AB%AF%E4%BA%BAJS/10-%E5%AF%B9%E8%B1%A1/</guid><description>基础知识 向军大叔每晚八点在 抖音 (opens new window)和 bilibli (opens new window)直播
+对象是包括属性与方法的数据类型，JS 中大部分类型都是对象如 String/Number/Math/RegExp/Date 等等。
+传统的函数编程会有错中复杂的依赖很容易创造意大利式面条代码。
+面向过程编程
+let name = &amp;#34;向军&amp;#34;; let grade = [ { lesson: &amp;#34;js&amp;#34;, score: 99 }, { lesson: &amp;#34;mysql&amp;#34;, score: 85 } ]; function average(grade, name) { const total = grade.reduce((t, a) =&amp;gt; t + a.score, 0); return name + &amp;#34;:&amp;#34; + total / grade.length + &amp;#34;分&amp;#34;; } console.log(average(grade, name)); 面向对象编程
+下面使用对象编程的代码结构清晰，也减少了函数的参数传递，也不用担心函数名的覆盖
+let user = { name: &amp;#34;后盾人&amp;#34;, grade: [ { lesson: &amp;#34;js&amp;#34;, score: 99 }, { lesson: &amp;#34;mysql&amp;#34;, score: 85 } ], average() { const total = this.</description></item><item><title/><link>https://note.ljzsdut.com/%E5%89%8D%E7%AB%AF/%E5%90%8E%E7%AB%AF%E4%BA%BAJS/11-%E5%8E%9F%E5%9E%8B%E4%B8%8E%E7%BB%A7%E6%89%BF/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E5%89%8D%E7%AB%AF/%E5%90%8E%E7%AB%AF%E4%BA%BAJS/11-%E5%8E%9F%E5%9E%8B%E4%B8%8E%E7%BB%A7%E6%89%BF/</guid><description>原型基础 向军大叔每晚八点在 抖音 (opens new window)和 bilibli (opens new window)直播
+原型对象 每个对象都有一个原型prototype对象，通过函数创建的对象也将拥有这个原型对象。原型是一个指向对象的指针。
+可以将原型理解为对象的父亲，对象从原型对象继承来属性 原型就是对象除了是某个对象的父母外没有什么特别之处 所有函数的原型默认是 Object的实例，所以可以使用toString/toValues/isPrototypeOf 等方法的原因 使用原型对象为多个对象共享属性或方法 如果对象本身不存在属性或方法将到原型上查找 使用原型可以解决，通过构建函数创建对象时复制多个函数造成的内存占用问题 原型包含 constructor 属性，指向构造函数 对象包含 __proto__ 指向他的原型对象 下例使用的就是数组原型对象的 concat 方法完成的连接操作
+let hd = [&amp;#34;a&amp;#34;]; console.log(hd.concat(&amp;#34;b&amp;#34;)); console.log(hd); 默认情况下创建的对象都有原型
+let hd = { name: &amp;#34;后盾人&amp;#34; }; console.log(hd); 以下 x、y 的原型都为元对象 Object，即 JS 中的根对象
+let x = {}; let y = {}; console.log(Object.getPrototypeOf(x) == Object.getPrototypeOf(y)); //true 我们也可以创建一个极简对象（纯数据字典对象）没有原型（原型为 null)
+let hd = { name: 3 }; console.</description></item><item><title/><link>https://note.ljzsdut.com/%E5%89%8D%E7%AB%AF/%E5%90%8E%E7%AB%AF%E4%BA%BAJS/12-%E7%B1%BB/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E5%89%8D%E7%AB%AF/%E5%90%8E%E7%AB%AF%E4%BA%BAJS/12-%E7%B1%BB/</guid><description>基础知识 为了和其他语言继承形态一致，JS提供了class 关键词用于模拟传统的class ，但底层实现机制依然是原型继承。
+class 只是语法糖为了让类的声明与继承更加简洁清晰。
+声明定义 可以使用类声明和赋值表达式定义类，推荐使用类声明来定义类
+//类声明 class User { } console.log(new Article()); let Article = class { }; console.log(new User()); 类方法间不需要逗号
+class User { show() {} get() { console.log(&amp;#34;get method&amp;#34;); } } const hd = new User(); hd.get(); 构造函数 使用 constructor 构造函数传递参数，下例中show为构造函数方法，getName为原型方法
+constructor 会在 new 时自动执行 class User { constructor(name) { this.name = name; this.show = function() {}; } getName() { return this.name; } } const xj = new User(&amp;#34;向军大叔&amp;#34;); console.</description></item><item><title/><link>https://note.ljzsdut.com/%E5%89%8D%E7%AB%AF/%E5%90%8E%E7%AB%AF%E4%BA%BAJS/13-%E6%A8%A1%E5%9D%97%E8%AE%BE%E8%AE%A1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E5%89%8D%E7%AB%AF/%E5%90%8E%E7%AB%AF%E4%BA%BAJS/13-%E6%A8%A1%E5%9D%97%E8%AE%BE%E8%AE%A1/</guid><description>模块设计 向军大叔每晚八点在 抖音 (opens new window)和 bilibli (opens new window)直播
+使用分析 项目变大时需要把不同的业务分割成多个文件，这就是模块的思想。模块是比对象与函数更大的单元，使用模块组织程序便于维护与扩展。
+生产环境中一般使用打包工具如 webpack 构建，他提供更多的功能。但学习完本章节后会再学习打包工具会变得简单。
+模块就是一个独立的文件，里面是函数或者类库 虽然 JS 没有命名空间的概念，使用模块可以解决全局变量冲突 模块需要隐藏内部实现，只对外开发接口 模块可以避免滥用全局变量，造成代码不可控 模块可以被不同的应用使用，提高编码效率 实现原理 在过去 JS 不支持模块时我们使用AMD/CMD（浏览器端使用）、CommonJS（Node.js使用）、UMD(两者都支持)等形式定义模块。
+AMD 代表性的是 require.js，CMD 代表是淘宝的 seaJS 框架。
+下面通过定义一个类似 require.js 的 AMD 模块管理引擎，来体验模块的工作原理。
+向军大叔写的hdjs 使用的是 AMD 规范构建
+let module = (function() { //模块列表集合 const moduleLists = {}; function define(name, modules, action) { modules.map((m, i) =&amp;gt; { modules[i] = moduleLists[m]; }); //执行并保存模块 moduleLists[name] = action.apply(null, modules); } return { define }; })(); //声明模块不依赖其它模块 module.</description></item><item><title/><link>https://note.ljzsdut.com/%E5%89%8D%E7%AB%AF/%E5%90%8E%E7%AB%AF%E4%BA%BAJS/14-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E5%89%8D%E7%AB%AF/%E5%90%8E%E7%AB%AF%E4%BA%BAJS/14-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/</guid><description>基础知识 向军大叔每晚八点在 抖音 (opens new window)和 bilibli (opens new window)直播
+正则表达式是用于匹配字符串中字符组合的模式，在 JavaScript 中，正则表达式也是对象。
+正则表达式是在宿主环境下运行的，如js/php/node.js 等 本章讲解的知识在其他语言中知识也是可用的，会有些函数使用上的区别 对比分析 与普通函数操作字符串来比较，正则表达式可以写出更简洁、功能强大的代码。
+下面使用获取字符串中的所有数字来比较函数与正则的差异。
+let hd = &amp;#34;houdunren2200hdcms9988&amp;#34;; let nums = [...hd].filter(a =&amp;gt; !Number.isNaN(parseInt(a))); console.log(nums.join(&amp;#34;&amp;#34;)); 使用正则表达式将简单得多
+let hd = &amp;#34;houdunren2200hdcms9988&amp;#34;; console.log(hd.match(/\d/g).join(&amp;#34;&amp;#34;)); 创建正则 JS 提供字面量与对象两种方式创建正则表达式
+字面量创建 使用//包裹的字面量创建方式是推荐的作法，但它不能在其中使用变量
+let hd = &amp;#34;houdunren.com&amp;#34;; console.log(/u/.test(hd));//true 下面尝试使用 a 变量时将不可以查询
+let hd = &amp;#34;houdunren.com&amp;#34;; let a = &amp;#34;u&amp;#34;; console.log(/a/.test(hd)); //false 虽然可以使用 eval 转换为 js 语法来实现将变量解析到正则中，但是比较麻烦，所以有变量时建议使用下面的对象创建方式
+let hd = &amp;#34;houdunren.com&amp;#34;; let a = &amp;#34;u&amp;#34;; console.</description></item><item><title/><link>https://note.ljzsdut.com/%E5%89%8D%E7%AB%AF/%E5%90%8E%E7%AB%AF%E4%BA%BAJS/15-Promise/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E5%89%8D%E7%AB%AF/%E5%90%8E%E7%AB%AF%E4%BA%BAJS/15-Promise/</guid><description>Promise 向军大叔每晚八点在 抖音 (opens new window)和 bilibli (opens new window)直播
+JavaScript 中存在很多异步操作,Promise 将异步操作队列化，按照期望的顺序执行，返回符合预期的结果。可以通过链式调用多个 Promise 达到我们的目的。
+Promise 在各种开源库中已经实现，现在标准化后被浏览器默认支持。
+promise 是一个拥有 then 方法的对象或函数
+问题探讨 下面通过多个示例来感受一下不使用 promise 时，处理相应问题的不易，及生成了不便阅读的代码。
+定时嵌套 下面是一个定时器执行结束后，执行另一个定时器，这种嵌套造成代码不易阅读
+&amp;lt;style&amp;gt; div { width: 100px; height: 100px; background: yellowgreen; position: absolute; } &amp;lt;/style&amp;gt; &amp;lt;body&amp;gt; &amp;lt;div&amp;gt;&amp;lt;/div&amp;gt; &amp;lt;/body&amp;gt; &amp;lt;script&amp;gt; function interval(callback, delay = 100) { let id = setInterval(() =&amp;gt; callback(id), delay); } const div = document.querySelector(&amp;#34;div&amp;#34;); interval(timeId =&amp;gt; { const left = parseInt(window.getComputedStyle(div).left); div.</description></item><item><title/><link>https://note.ljzsdut.com/%E5%89%8D%E7%AB%AF/%E5%90%8E%E7%AB%AF%E4%BA%BAJS/16-%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E5%89%8D%E7%AB%AF/%E5%90%8E%E7%AB%AF%E4%BA%BAJS/16-%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86/</guid><description>任务管理 向军大叔每晚八点在 抖音 (opens new window)和 bilibli (opens new window)直播
+JavaScript 语言的一大特点就是单线程，也就是说同一个时间只能处理一个任务。为了协调事件、用户交互、脚本、UI 渲染和网络处理等行为，防止主线程的不阻塞，（事件循环）Event Loop 的方案应用而生。
+JavaScript 处理任务是在等待任务、执行任务 、休眠等待新任务中不断循环中，也称这种机制为事件循环。
+主线程中的任务执行完后，才执行任务队列中的任务 有新任务到来时会将其放入队列，采取先进先执行的策略执行队列中的任务 比如多个 setTimeout 同时到时间了，就要依次执行 任务包括 script(整体代码)、 setTimeout、setInterval、DOM 渲染、DOM 事件、Promise、XMLHTTPREQUEST 等
+原理分析 下面通过一个例子来详细分析宏任务与微任务
+console.log(&amp;#34;后盾人&amp;#34;); setTimeout(function() { console.log(&amp;#34;定时器&amp;#34;); }, 0); Promise.resolve() .then(function() { console.log(&amp;#34;promise1&amp;#34;); }) .then(function() { console.log(&amp;#34;promise2&amp;#34;); }); console.log(&amp;#34;houdunren.com&amp;#34;); #输出结果为 后盾人 houdunren.com promise1 promise2 定时器 先执最前面的宏任务 script，然后输出
+script start 然后执行到 setTimeout 异步宏任务，并将其放入宏任务队列，等待执行
+之后执行到 Promise.then 微任务，并将其放入微任务队列，等待执行
+然后执行到主代码输出
+script end 主线程所有任务处理完成
+通过事件循环遍历微任务队列，将刚才放入的 Promise.then 微任务读取到主线程执行，然后输出</description></item><item><title/><link>https://note.ljzsdut.com/%E5%89%8D%E7%AB%AF/%E5%90%8E%E7%AB%AF%E4%BA%BAJS/17-Promise%E6%A0%B8%E5%BF%83/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E5%89%8D%E7%AB%AF/%E5%90%8E%E7%AB%AF%E4%BA%BAJS/17-Promise%E6%A0%B8%E5%BF%83/</guid><description>起步构建 向军大叔每晚八点在 抖音 (opens new window)和 bilibli (opens new window)直播
+本章来自己开发一个 Promise 实现，提升异步编程的能力。
+首先声明定义类并声明 Promise 状态与值，有以下几个细节需要注意。
+executor 为执行者 当执行者出现异常时触发拒绝状态 使用静态属性保存状态值 状态只能改变一次，所以在 resolve 与 reject 添加条件判断 因为 resolve或rejected方法在 executor 中调用，作用域也是 executor 作用域，这会造成 this 指向 window，现在我们使用的是 class 定义，this 为 undefined。 class HD { static PENDING = &amp;#34;pending&amp;#34;; static FULFILLED = &amp;#34;fulfilled&amp;#34;; static REJECTED = &amp;#34;rejected&amp;#34;; constructor(executor) { this.status = HD.PENDING; this.value = null; try { executor(this.resolve.bind(this), this.reject.bind(this)); } catch (error) { this.</description></item><item><title/><link>https://note.ljzsdut.com/%E5%89%8D%E7%AB%AF/%E5%90%8E%E7%AB%AF%E4%BA%BAJS/18-DOM/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E5%89%8D%E7%AB%AF/%E5%90%8E%E7%AB%AF%E4%BA%BAJS/18-DOM/</guid><description>基础知识 向军大叔每晚八点在 抖音 (opens new window)和 bilibli (opens new window)直播
+操作文档 HTML 的 JS 处理方式为 DOM 即 Document Object Model 文档对象模型。如果对 HTML 很了解使用 DOM 并不复杂。
+浏览器在加载页面是会生成 DOM 对象，以供我们使用 JS 控制页面元素。
+文档渲染 浏览器会将 HTML 文本内容进行渲染，并生成相应的 JS 对象，同时会对不符规则的标签进行处理。
+浏览器会将标签规范后渲染页面 目的一让页面可以正确呈现 目的二可以生成统一的 JS 可操作对象 标签修复 在 html 中只有内容houdunren.com 而没有任何标签时，通过浏览器的 检查&amp;gt;元素 标签查看会自动修复成以下格式的内容
+下面 H1 标签结束错误并且属性也没有引号，浏览器在渲染中会进行修复
+&amp;lt;body&amp;gt; &amp;lt;h1 id=houdunren&amp;gt;后盾人&amp;lt;h1&amp;gt; &amp;lt;/body&amp;gt; 处理后的结果
+&amp;lt;html&amp;gt; &amp;lt;head&amp;gt;&amp;lt;/head&amp;gt; &amp;lt;body&amp;gt; &amp;lt;h1 id=&amp;#34;houdunren&amp;#34;&amp;gt;后盾人&amp;lt;/h1&amp;gt; &amp;lt;/body&amp;gt; &amp;lt;/html&amp;gt; 表格处理 表格 tabel 中不允许有内容，浏览器在渲染过程中会进行处理
+&amp;lt;table&amp;gt; houdunren.com &amp;lt;tr&amp;gt; &amp;lt;td&amp;gt;houdunwang.</description></item><item><title/><link>https://note.ljzsdut.com/%E5%89%8D%E7%AB%AF/%E5%90%8E%E7%AB%AF%E4%BA%BAJS/19-%E7%A9%BA%E9%97%B4%E5%9D%90%E6%A0%87/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E5%89%8D%E7%AB%AF/%E5%90%8E%E7%AB%AF%E4%BA%BAJS/19-%E7%A9%BA%E9%97%B4%E5%9D%90%E6%A0%87/</guid><description>视口与文档 向军大叔每晚八点在 抖音 (opens new window)和 bilibli (opens new window)直播
+首先理解视口（窗口）与文档的含义
+网页很多都是多屏（通过滚动条显示看不见的内容），所以文档尺寸一般大于视口尺寸 视口尺寸不包括浏览器工具条、菜单、标签、状态栏等 当你打开控制台后，视口尺寸就相应变小了 position 使用文档定位，fixed 使用视口定位 文档坐标在页面滚动时不发生改变 视口坐标的操作需要考虑滚动条的位置 视口与文档尺寸 视口坐标需要知道滚动条位置才可以进行计算，有以下几种方式获取滚动位置
+方法 说明 注意 window.innerWidth 视口宽度 包括滚动条（不常用） window.innerHeight 视口高度 包括滚动条（不常用） document.documentElement.clientWidth 视口宽度 document.documentElement.clientHeight 视口高度 几何尺寸 元素在页面中拥有多个描述几何数值的尺寸，下面截图进行了形象的描述。
+坐标都是从左上角计算，这与 CSS 中的 right/bottom 等不同
+方法列表 下面是获取尺寸的方法或属性
+方法 说明 备注 element.getBoundingClientRect 返回元素在视口坐标及元素大小，包括外边距，width/height 与 offsetWidth/offsetHeight 匹配 窗口坐标 element.getClientRects 行级元素每行尺寸位置组成的数组 element.offsetParent 拥有定位属性的父级，或 body/td/th/table 对于隐藏元素/body/html 值为 null element.offsetWidth 元素宽度尺寸，包括内边距与边框和滚动条 element.offsetHeight 元素高度尺寸，包括内边距与边框和滚动条 element.offsetLeft 相对于祖先元素的 X 轴坐标 element.offsetTop 相对于祖先元素的 Y 轴坐标 element.</description></item><item><title/><link>https://note.ljzsdut.com/%E5%89%8D%E7%AB%AF/%E5%90%8E%E7%AB%AF%E4%BA%BAJS/20-%E4%BA%8B%E4%BB%B6/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E5%89%8D%E7%AB%AF/%E5%90%8E%E7%AB%AF%E4%BA%BAJS/20-%E4%BA%8B%E4%BB%B6/</guid><description>基础知识 向军大叔每晚八点在 抖音 (opens new window)和 bilibli (opens new window)直播
+在文档、浏览器、标签元素等元素在特定状态下触发的行为即为事件，比如用户的单击行为、表单内容的改变行为即为事件，我们可以为不同的事件定义处理程序。JS 使用异步事件驱动的形式管理事件。
+事件类型 JS 为不同的事件定义的类型，也可以称为事件名称。
+事件目标 事件目标指产生事件的对象，比如 a 标签被点击那么 a 标签就是事件目标。元素是可以嵌套的，所以在进行一次点击行为时可能会触发多个事件目标。
+处理程序 事件的目的是要执行一段代码，我们称这类代码为事件处理（监听）程序。当在对象上触发事件时就会执行定义的事件处理程序。
+HTML 绑定 可以在 html 元素上设置事件处理程序，浏览器解析后会绑定到 DOM 属性中
+&amp;lt;button onclick=&amp;#34;alert(`houdunren.com`)&amp;#34;&amp;gt;后盾人&amp;lt;/button&amp;gt; 往往事件处理程序业务比较复杂，所以绑定方法或函数会很常见
+绑定函数或方法时需要加上括号 &amp;lt;button onclick=&amp;#34;show()&amp;#34;&amp;gt;后盾人&amp;lt;/button&amp;gt; &amp;lt;script&amp;gt; function show() { alert(&amp;#39;houdunren.com&amp;#39;) } &amp;lt;/script&amp;gt; 当然也可以使用方法做为事件处理程序
+&amp;lt;input type=&amp;#34;text&amp;#34; onkeyup=&amp;#34;HD.show()&amp;#34; /&amp;gt; &amp;lt;script&amp;gt; class HD { static show() { console.log(&amp;#39;houdunren&amp;#39;) } } &amp;lt;/script&amp;gt; 可以传递事件源对象与事件对象
+&amp;lt;button onclick=&amp;#34;show(this,&amp;#39;houdunren&amp;#39;,&amp;#39;hdcms&amp;#39;,&amp;#39;向军大叔&amp;#39;,event)&amp;#34;&amp;gt;后盾人&amp;lt;/button&amp;gt; &amp;lt;script&amp;gt; function show(...args) { console.log(args) } &amp;lt;/script&amp;gt; DOM 绑定 也可以将事件处理程序绑定到 DOM 属性中</description></item><item><title/><link>https://note.ljzsdut.com/%E5%89%8D%E7%AB%AF/%E5%90%8E%E7%AB%AF%E4%BA%BAJS/21-%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E5%89%8D%E7%AB%AF/%E5%90%8E%E7%AB%AF%E4%BA%BAJS/21-%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82/</guid><description>基础知识 向军大叔每晚八点在 抖音 (opens new window)和 bilibli (opens new window)直播
+浏览器天生具发送 HTTP 请求的能力，比如在在址栏输入内容，提交 FORM 表单等。本章来学习通过 JS 程序来管理 HTTP 请求的能力。
+使用 JS 脚本发送 HTTP 请求，不会带来页面的刷新，所以用户体验非常好。
+XMLHttpRequest 使用 XMLHttpRequest 发送请求，是一种存在很久的方案。现代浏览器支持使用 fetch 的异步请求方式，fetch 基于 promise 异步操作体验更好。
+基本使用 使用 XMLHttpRequest 发送请求需要执行以下几步
+使用 new XMLHttpRequest 创建 xhr 对象 xhr.open 初始化请求参数 xhr.send 发送网络请求 xhr.onload 监听请求结果 xhr.onerror 请求中断等错误发生时的处理 响应类型 通过设置 xhr.responseType 对响应结果进行声明，来对结果自动进行处理。
+下面是可以使用的响应类型
+类型 说明 text 响应结果为文本 json 响应内容为 JSON，系统会自动将结果转为 JSON 对象 blob 二进制数据响应 document XML DOCUMENT 内容 响应结果 xhr.</description></item><item><title/><link>https://note.ljzsdut.com/%E5%89%8D%E7%AB%AF/%E5%90%8E%E7%AB%AF%E4%BA%BAJS/22-canvas/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E5%89%8D%E7%AB%AF/%E5%90%8E%E7%AB%AF%E4%BA%BAJS/22-canvas/</guid><description>基础知识 Canvas 是用使用 JS 画布的思想来绘制图形，下面通过一些示例掌握 Canvas 的使用
+项目模板 以下示例因为使用到了 Typescript，所以我们使用 vite 创建 typescript 项目，并选择使用 vanilla 模板来开发
+$ yarn create vite 项目安装执行结果
+执行结果 ✔ Project name: … aaa ✔ Select a framework: › vanilla ✔ Select a variant: › vanilla-ts 目录结构
+├── images //图片文件 │ └── p2.jpeg ├── index.html //项目模板文件 ├── package.json //项目配置文件 ├── src │ ├── main.ts //项目主文件，我们在这里编码 │ ├── style.css //公共样式 │ └── vite-env.d.ts //TS类型声明文件 ├── tsconfig.json //TS配置文件 └── yarn.</description></item></channel></rss>

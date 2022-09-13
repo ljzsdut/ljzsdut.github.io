@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ElasticSearch on ljzsdut</title><link>https://note.ljzsdut.com/%E6%95%B0%E6%8D%AE%E5%BA%93/ElasticSearch/</link><description>Recent content in ElasticSearch on ljzsdut</description><generator>Hugo -- gohugo.io</generator><atom:link href="https://note.ljzsdut.com/%E6%95%B0%E6%8D%AE%E5%BA%93/ElasticSearch/index.xml" rel="self" type="application/rss+xml"/><item><title/><link>https://note.ljzsdut.com/%E6%95%B0%E6%8D%AE%E5%BA%93/ElasticSearch/01-1-%E8%AF%A6%E8%A7%A3ES/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E6%95%B0%E6%8D%AE%E5%BA%93/ElasticSearch/01-1-%E8%AF%A6%E8%A7%A3ES/</guid><description>转载：https://mp.weixin.qq.com/s/70RGuszZdLkNgCc_NDY3fA
+一、生活中的数据 搜索引擎是对数据的检索，所以我们先从生活中的数据说起。我们生活中的数据总体分为两种：
+结构化数据 非结构化数据 「结构化数据：」 也称作行数据，是由二维表结构来逻辑表达和实现的数据，严格地遵循数据格式与长度规范，主要通过关系型数据库进行存储和管理。指具有固定格式或有限长度的数据，如数据库，元数据等。「非结构化数据：」 又可称为全文数据，不定长或无固定格式，不适于由数据库二维表来表现，包括所有格式的办公文档、XML、HTML、Word 文档，邮件，各类报表、图片和咅频、视频信息等。说明：如果要更细致的区分的话，XML、HTML 可划分为半结构化数据。因为它们也具有自己特定的标签格式，所以既可以根据需要按结构化数据来处理，也可抽取出纯文本按非结构化数据来处理。根据两种数据分类，搜索也相应的分为两种：
+结构化数据搜索 非结构化数据搜索 对于结构化数据，因为它们具有特定的结构，所以我们一般都是可以通过关系型数据库（MySQL，Oracle 等）的二维表（Table）的方式存储和搜索，也可以建立索引。对于非结构化数据，也即对全文数据的搜索主要有两种方法：
+顺序扫描 全文检索 「顺序扫描：」 通过文字名称也可了解到它的大概搜索方式，即按照顺序扫描的方式查询特定的关键字。例如给你一张报纸，让你找到该报纸中“平安”的文字在哪些地方出现过。你肯定需要从头到尾把报纸阅读扫描一遍然后标记出关键字在哪些版块出现过以及它的出现位置。这种方式无疑是最耗时的最低效的，如果报纸排版字体小，而且版块较多甚至有多份报纸，等你扫描完你的眼睛也差不多了。「全文搜索：」 对非结构化数据顺序扫描很慢，我们是否可以进行优化？把我们的非结构化数据想办法弄得有一定结构不就行了吗？将非结构化数据中的一部分信息提取出来，重新组织，使其变得有一定结构，然后对此有一定结构的数据进行搜索，从而达到搜索相对较快的目的。这种方式就构成了全文检索的基本思路。这部分从非结构化数据中提取出的然后重新组织的信息，我们称之为索引。这种方式的主要工作量在前期索引的创建，但是对于后期搜索却是快速高效的。
+二、先说说 Lucene 通过对生活中数据的类型作了一个简短了解之后，我们知道关系型数据库的 SQL 检索是处理不了这种非结构化数据的。这种非结构化数据的处理需要依赖全文搜索，而目前市场上开放源代码的最好全文检索引擎工具包就属于 Apache 的 Lucene了。但是 Lucene 只是一个工具包，它不是一个完整的全文检索引擎。Lucene 的目的是为软件开发人员提供一个简单易用的工具包，以方便的在目标系统中实现全文检索的功能，或者是以此为基础建立起完整的全文检索引擎。目前以 Lucene 为基础建立的开源可用全文搜索引擎主要是 Solr 和 Elasticsearch。Solr 和 Elasticsearch 都是比较成熟的全文搜索引擎，能完成的功能和性能也基本一样。但是 ES 本身就具有分布式的特性和易安装使用的特点，而 Solr 的分布式需要借助第三方来实现，例如通过使用 ZooKeeper 来达到分布式协调管理。不管是 Solr 还是 Elasticsearch 底层都是依赖于 Lucene，而 Lucene 能实现全文搜索主要是因为它实现了倒排索引的查询结构。如何理解倒排索引呢？ 假如现有三份数据文档，文档的内容如下分别是：
+Java is the best programming language. PHP is the best programming language. Javascript is the best programming language. 为了创建倒排索引，我们通过分词器将每个文档的内容域拆分成单独的词（我们称它为词条或 Term），创建一个包含所有不重复词条的排序列表，然后列出每个词条出现在哪个文档。结果如下所示：</description></item><item><title/><link>https://note.ljzsdut.com/%E6%95%B0%E6%8D%AE%E5%BA%93/ElasticSearch/01-ES%E5%85%A5%E9%97%A8%E4%BB%8B%E7%BB%8D/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E6%95%B0%E6%8D%AE%E5%BA%93/ElasticSearch/01-ES%E5%85%A5%E9%97%A8%E4%BB%8B%E7%BB%8D/</guid><description>lucene和elasticsearchl的前世今生 ​ lucene是一类jar包，是最先进、功能最强大的搜索库，直接基于lucene开发是非常复杂的。lucene的api复杂(实现一些简单的功能要写大量的java代码)，直接使用lucene的api还需要深入理解原理(各种索引结构)。
+​ elasticsearch基于lucene开发，隐藏复杂性，提供简单易用的restful api接口、 java api接口(还有其他语言的api接口)，es具有如下特点：
+分布式的文档存储引擎 分布式的搜索引擎和分析引擎 分布式，支持PB级数据 近实时特性 1、从写入数据到数据可以被搜索到有一个小延迟(大概1秒) 2、基于es执行搜索和分析可以达到秒级，速度快 开箱即用,优秀的默认参数,不需要任何额外设置,完全开源 Elasticsearch索引和Lucene索引的对比：
+一个分片就是一个Lucene的索引，也就是一个包含倒排索引的文件目录。它默认存储原始文档的内容，再加上一些额外的信息，如词条字典和词频，这些都能帮助到搜索。词条字典将每个词条和包含该词条的文档映射起来。搜索的时候，Elastisearch没有必要为了某个词条扫描所有的文档，而是根据这个字典快速地识别匹配的文档。
+Elasticsearch索引被分解为多块：分片。所以一个Elasticsearch的索引由多个Lucene的索引组成。
+词频使得Elasticsearch可以快速地获取某篇文档中某个词条出现的次数。这对于计算结果的相关性得分非常重要。例如，如果搜索“morris&amp;quot;，包含多个“morris”的文档通常更为相关。Elasticsearch将给它们更高的得分，让它们出现在结果列表的更前面。
+ElasticSearch的核心概念 集群（Cluster） 一个集群(cluster)有多个节点(node)组成。每个节点属于哪个集群是通过一个配置(集群名称，默认是elasticsearch) 来决定的，对于中小型应用来说，刚开始一个集群就一个节点很正常。
+一个节点可以通过配置集群名称(cluster.name)的方式来加入一个指定的集群。默认情况下，每个节点都会被安排加入到一个叫做“elasticsearch”的集群中，这意味着，如果你在你的网络中启动了若干个节点，并假定它们能够相互发现彼此，它们将会自动地形成并加入到一个叫做“elasticsearch”的集群中。
+节点（Node） 集群中的一个节点，节点一个一个名称（默认是随机分配的）。节点名称很重要 (在执行运维管理操作的时候)，默认节点会去加入一个名称为“elasticsearch&amp;rsquo;的 集群。如果直接启动一堆节点，那么他们会自动组成一个ES集群。当然，一个节点也可以组成一个集群。
+分片（shard） 单台机器无法存储大量数据，es可以将一个索引中的数据切分为多个shard，分布在多台服务器上存储。有了shard就可以横向扩展，存储更多数据，让搜索和分析等操作分布到多台服务器上去执行，提升吞吐量和性能。每个shard都是一个lucene index。
+副本（replica） 任何一个服务器随时可能故障或宕机，此时shard可能就会丢失，因此可以为每个shard创建多个replica副本。replica可以在shard故障时提供备用服务，保证数据不丢失，多个replica还可以提升搜索操作的吞吐量和性能。primary shard（建立索引时一次设置，创建后不能修改，默认5个），replica shard（随时修改数量，默认1个），默认每个索引10个shard，5个primary shard，5个replica shard，最小的高可用配置，是2台服务器。
+副本是分片的副本。分片有主分片(primary Shard)和副本分片(replida Shard)之分。
+一个Index数据在物理上被分布在多个主分片中，每个主分片只存放部分数据。
+每个主分片可以有多个副本，叫副本分片，是主分片的复制。
+文档 一个document相当于关系型数据库中的一行记录。是ES中最小的数据单元，一个document就是一条数据。通常用json格式表示。一个document中有多个字段（filed）。
+{ &amp;#34;product_id&amp;#34;: &amp;#34;1&amp;#34;, &amp;#34;product_name&amp;#34;: &amp;#34;高露洁牙膏&amp;#34;, &amp;#34;product_desc&amp;#34;: &amp;#34;高效美白&amp;#34;, &amp;#34;category_id&amp;#34;: &amp;#34;2&amp;#34;, &amp;#34;category_name&amp;#34;: &amp;#34;日化用品&amp;#34; } 扩展：
+文档优势：可以表示对象嵌套关系。是一种面向对象的存储方式。
+面向文档的搜索分析引擎
+（1）应用系统的数据结构都是面向对象的，复杂的 （2）对象数据存储到数据库中，只能拆解开来，变为扁平的多张表，每次查询的时候还得还原回对象格式，相当麻烦 （3）ES是面向文档的，文档中存储的数据结构，与面向对象的数据结构是一样的，基于这种文档数据结构，es可以提供复杂的索引，全文检索，分析聚合等功能 （4）es的document用json数据格式来表达
+public class Employee { private String email; private String firstName; private String lastName; private EmployeeInfo info; private Date joinDate; } private class EmployeeInfo { private String bio; // 性格 private Integer age; private String[] interests; // 兴趣爱好 } EmployeeInfo info = new EmployeeInfo(); info.</description></item><item><title/><link>https://note.ljzsdut.com/%E6%95%B0%E6%8D%AE%E5%BA%93/ElasticSearch/02-shard%E4%B8%8Ereplicas/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E6%95%B0%E6%8D%AE%E5%BA%93/ElasticSearch/02-shard%E4%B8%8Ereplicas/</guid><description>shard与replica机制 shard与replica认识 Elasticsearch索引由一个或多个主分片以及零个或多个副本分片构成； 每个shard都是一个最小工作单元，都是一个lucene实例，能够承载部分数据， 具有完整的建立索引和处理请求的能力； 增减节点时，shard会自动在nodes中负载均衡（rebalance）； shard分为primary shard和replica shard。每个document只能存在于某一个primary shard以及其对应的replica shard中， 不可能存在于多个primary shard。 replica shard是primary shard的副本，负责容错，以及承担读请求负载； 一个索引的primary shard的数量在创建索引的时候就固定了, replica shard的数量可以随时修改； primary shard的默认数量是5，replica默认是1。 默认有10个shard, 5个primary shard, 5个replica shard； 一个索引的多个primary shard可以分布在同一个node上，但primary shard不能和自己的replica shard放在同一个节点上(否则节点宕机，primary shard和副本都丢失，起不到容错的作用)，但是可以和其他primary shard的replica shard放在同一个节点上。此外，同一个primary shard对应的多个replica shard之间也不能在同一个节点上。总结：存储相同数据的shard不能在同一个节点上，无论是primary shard与其对应的replica shard，还是互为备份的replica shard之间。 PUT test_index { &amp;#34;settings&amp;#34;: { &amp;#34;number_of_shards&amp;#34;: 3, # primary shard的数量 &amp;#34;number_of_replicas&amp;#34;: 1 } } 扩容与容错性 如何超出扩容极限，以及如何提升容错性？
+primary&amp;amp;replica能够自动负载均衡，对于&amp;quot;number_of_shards&amp;quot;: 3,&amp;quot;number_of_replicas&amp;quot;: 1的集群，一共会有6个shard（3 primary+3 replica）。如果对该集群进行扩容，扩容的极限是：6个shard最多扩容到6台机器，每个shard可以占用单台服务器的所有资源，性能最好。如果超出扩容极限，可以动态修改replica数量到9个shard (3primary+ 6 replica)，然后扩容到9台机器，比3台机器时，拥有3倍的读吞吐量。
+节点角色 http://blog.itpub.net/9399028/viewspace-2666851/
+master宕机与恢复 es如何选主：必须获取半数以上的选票才可以成为主，所以node数一般设置为奇数台。
+主节点作用 选举时间点 Elasticsearch在满足如下时间点的时候会触发选举</description></item><item><title/><link>https://note.ljzsdut.com/%E6%95%B0%E6%8D%AE%E5%BA%93/ElasticSearch/03-es%E6%90%9C%E7%B4%A2%E8%AF%AD%E6%B3%95/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E6%95%B0%E6%8D%AE%E5%BA%93/ElasticSearch/03-es%E6%90%9C%E7%B4%A2%E8%AF%AD%E6%B3%95/</guid><description>一、简单CURD 1、查询 # 查询所有的索引 GET _cat/indices # 查询所有的索引(带标题栏) GET _cat/indices?v # 查询movies的所有数据 GET movies/_search # 查询movies的记录数量 GET movies/_count # 查询id为24的数据 GET movies/_doc/24 # 查询id为24的数据，并指定返回的属性 GET movies/_doc/24?_source=filed1,filed2 2、创建(或覆盖)文档 # 添加id为1的文档；如果没有指定id，则ES会自动生成一个hash字符串作为id POST user/_doc/1 { &amp;#34;firstname&amp;#34;: &amp;#34;san&amp;#34;, &amp;#34;lastname&amp;#34;: &amp;#34;zhang&amp;#34; } # 创建或者覆盖文档,同POST PUT user/_doc/2 { &amp;#34;firstname&amp;#34;: &amp;#34;si&amp;#34;, &amp;#34;lastname&amp;#34;: &amp;#34;li&amp;#34; } **ES内部进行更新文档(全量更新/覆盖)的机制：**会将原来的doc标记为delete，然后使用新的doc进行创建。
+3、创建文档(不覆盖)(_create) # 创建id为2的文档，如果索引中已存在相同id，会报错; POST user/_create/2 { &amp;#34;firstname&amp;#34;: &amp;#34;si&amp;#34;, &amp;#34;lastname&amp;#34;: &amp;#34;li&amp;#34; } # 创建id为5的文档，如果已存在就报错，如果不存在就创建,同POST PUT user/_create/5 { &amp;#34;firstname&amp;#34;: &amp;#34;ljzu&amp;#34;, &amp;#34;lastname&amp;#34;: &amp;#34;sdut&amp;#34; } 4、更新文档(_update) partial update：部分更新，只更新部分属性字段。不会覆盖整条document。</description></item><item><title/><link>https://note.ljzsdut.com/%E6%95%B0%E6%8D%AE%E5%BA%93/ElasticSearch/03-%E6%90%9C%E7%B4%A2api/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E6%95%B0%E6%8D%AE%E5%BA%93/ElasticSearch/03-%E6%90%9C%E7%B4%A2api/</guid><description>准备数据 PUT ecommerce/product/1 { &amp;#34;name&amp;#34;: &amp;#34;gaolujie yagao&amp;#34;, &amp;#34;desc&amp;#34;: &amp;#34;gaoxiao meibai&amp;#34;, &amp;#34;price&amp;#34;: 30, &amp;#34;producer&amp;#34;: &amp;#34;gaolujie producer&amp;#34;, &amp;#34;tags&amp;#34;: [ &amp;#34;meibai&amp;#34;, &amp;#34;fangzhu&amp;#34; ] } PUT ecommerce/product/2 { &amp;#34;name&amp;#34;: &amp;#34;jiajieshi yagao&amp;#34;, &amp;#34;desc&amp;#34;: &amp;#34;youxiao fangzhu&amp;#34;, &amp;#34;price&amp;#34;: 25, &amp;#34;producer&amp;#34;: &amp;#34;jiajieshi producer&amp;#34;, &amp;#34;tags&amp;#34;: [ &amp;#34;fangzhu&amp;#34; ] } PUT ecommerce/product/3 { &amp;#34;name&amp;#34;: &amp;#34;zhonghua yagao&amp;#34;, &amp;#34;desc&amp;#34;: &amp;#34;caoben zhiwu&amp;#34;, &amp;#34;price&amp;#34;: 40, &amp;#34;producer&amp;#34;: &amp;#34;zhonghua producer&amp;#34;, &amp;#34;tags&amp;#34;: [ &amp;#34;qingxin&amp;#34; ] } 1、query string search 示例1 搜索全部商品：GET /ecommerce/product/_search
+查询：
+GET /ecommerce/product/_search 结果：</description></item><item><title/><link>https://note.ljzsdut.com/%E6%95%B0%E6%8D%AE%E5%BA%93/ElasticSearch/04-%E7%B4%A2%E5%BC%95%E5%85%83%E6%95%B0%E6%8D%AE/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E6%95%B0%E6%8D%AE%E5%BA%93/ElasticSearch/04-%E7%B4%A2%E5%BC%95%E5%85%83%E6%95%B0%E6%8D%AE/</guid><description>GET user/_doc/1 # 输出 { &amp;#34;_index&amp;#34; : &amp;#34;user&amp;#34;, &amp;#34;_type&amp;#34; : &amp;#34;_doc&amp;#34;, &amp;#34;_id&amp;#34; : &amp;#34;1&amp;#34;, &amp;#34;_version&amp;#34; : 1, &amp;#34;_seq_no&amp;#34; : 0, &amp;#34;_primary_term&amp;#34; : 1, &amp;#34;found&amp;#34; : true, &amp;#34;_source&amp;#34; : { &amp;#34;firstname&amp;#34; : &amp;#34;san&amp;#34;, &amp;#34;lastname&amp;#34; : &amp;#34;zhang&amp;#34; } } _index元数据 代表一个document存放在哪个索引中。 索引名称必须都是小写，不能下划线开头，不能包含逗号。 index内的document的结构尽量一致。 _type元数据 代表document属于index中的哪个类别(type)。从7.0版本开始，一个索引只能一个一个类别，类别名称为“_doc”. type名称可以是大写或小写。不能下划线开头，不能包含逗号。 _id元数据 代表document的唯一标识，与index和type一起，可以唯一标识和定位一个document 我们可以手动指定document的id,也可以不指定，由es自动为我们创建一个id。一般来说， 是从某些其他的系统中，导入一些数据到es时，会采取指定id的方式，就是使用系统中已有数据的的唯一标识， 作为es中document的id。自动生成的id,长度为20个字符；采用base64编码，是URL安全的，可以放在URL中使用；采用GUID方式生成的, 分布式系统并行生成时不会发生冲突。 _document元数据 document删除的机制：
+es会将老的document标记为deleted, 并不会立即进行物理删除，当我们创建越来越多的document的时候，es会在适当的时机在后台自动删除标记为deleted的document。
+_source元数据 _source元数据： 就是说，我们在创建一个document的时候， 使用的那个放在request body中的json串，默认情况下，在get的时候，会原封不动的给我们返回回来。
+可以在request body中指定_source{}，来实现投影操作。 _version元数据 _version：document的修改的版本号。
+推荐文档：https://www.cnblogs.com/duanxz/p/5209058.html
+ES的并发控制是通过基于版本号控制的乐观锁实现的：一般是在数据表中加上一个数据版本号 version 字段，表示数据被修改的次数。当数据被修改时，version 值会+1。当线程A要更新数据值时，在读取数据的同时也会读取 version 值，在提交更新时，若刚才读取到的 version 值与当前数据库中的 version 值相等时才更新，否则重试更新操作，直到更新成功。 向ES发起请求时，可是带上版本号：PUT user/_doc/1?</description></item><item><title/><link>https://note.ljzsdut.com/%E6%95%B0%E6%8D%AE%E5%BA%93/ElasticSearch/05-document%E8%B7%AF%E7%94%B1%E5%8E%9F%E7%90%86/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E6%95%B0%E6%8D%AE%E5%BA%93/ElasticSearch/05-document%E8%B7%AF%E7%94%B1%E5%8E%9F%E7%90%86/</guid><description>document路由原理 1、什么是document路由？
+一个index会被分为多个主分片（primary_shards），一个document只能放在一个primary_shards中。
+在客户端创建document的时候，ES就要决定document放在index的哪个shard上。这个过程称为document routing，即数据路由。
+2、路由算法
+shard = hash(routing) % number_of_primary_shards
+每次增删改查一个document的时候，都会带过来一个routing number，默认就是这个document的_id（_id可能是手动指定，也可能是自动生成）。
+将这个routing值，传入一个hash函数中，产出一个routing值的hash值，假设hash(routing) = 21，然后将hash函数产出的值对这个index的primary shard的数量求余数（假设primary shard的数量为3）：21 % 3 = 0，就决定了，这个document就放在P0上。
+相同的routing值，每次过来，从hash函数中产出的hash值一定是相同的。
+3、手动指定routing
+默认的routing就是_id 也可以在发送请求的时候，手动指定一个routing value，比如说put /index/type/id?routing=user_id
+手动指定routing value是很有用的，这样可以让某一类document一定被路由到一个shard上去，那么在后续进行应用级别的负载均衡，以及提升批量读取的性能的时候，是很有帮助的。
+4、primary shard数量不可变的原因
+primary shard的数量确定之后不可更改，这是因为，数据路由时确定了shard的数值，后续primary shard数量变了的话，再根据路由算法确定shard的位置，得到的shard数值就会与原先不一致，导致找不到数据。
+5、通过协调节点进行增删改的内部原理
+前面讲了数据路由原理，这里要讲的是document是在哪里进行路由，那么就要引出一个概念：协调节点。简单地说所有的shard都是成为协调节点。java客户端可以往任何一个shard发送请求，因为任何一个shard都知道每个document在哪个shard上。请求发送到哪个节点上，哪个节点就可以成为该请求的协调节点。
+下面讲一下增删改的流程/内部原理：
+（1）客户端请求任意一个节点，该节点成为协调节点。
+（2）通过document路由计算后，请求会从协调节点被转发到最终的primary shard上去处理。（因为是增删改操作，所以不能由replica shard处理）
+（3）primary shard会在自己本地进行相关的处理操作，然后primary shard将document同步到自己的replica shard上。
+（4）协调节点发现路由到的所有primary shard和对应的replica shard都处理完请求后，就返回响应结果给客户端。
+6、通过协调节点进行查询的内部原理
+对于读请求，与增删改不同的是，协调节点会把查询请求路由到涉及到的document的其中一个primary shard或replica shard上，因为replica shard是可以服务于读请求的。具体会使用round-robin随机轮询算法，使读请求负载均衡至多个shard上。被分配的shard会将请求回复给协调节点，最终由协调节点响应客户端。
+写一致性原理与quorum机制 1、我们发送任何一个增删该查操作的时候，比如说PUT /index/type/id ,都可以带上一个consistency参数，指明我们想要的写一致性是什么取值。例如put /index/type/id?consistency=quorum，consistency一共有如下取值：
+one : 要求我们这个写操作，只要primary shard 是active活跃可用的，就可以执行
+all: 要求我们这个写操作，必须所有的primary shard和replica shard都是活跃的，才可以执行这个写操作
+quorum ：默认值，要求所有的shard中，必须大部分shard 都是活跃的，可用的</description></item><item><title/><link>https://note.ljzsdut.com/%E6%95%B0%E6%8D%AE%E5%BA%93/ElasticSearch/06-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%88%86%E8%AF%8D%E5%99%A8/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E6%95%B0%E6%8D%AE%E5%BA%93/ElasticSearch/06-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%88%86%E8%AF%8D%E5%99%A8/</guid><description>分词 analysis(只是一个概念)，文本分析是将全文本转换为一系列单词的过程，也叫分词。analysis是通 过analyzer(分词器)来实现的，可以使用Elasticsearch内置的分词器，也可以自己去定制一些分词 器。 除了在数据写入的时候进行分词处理，那么在查询的时候也可以使用分析器对查询语句进行分词。
+analysis是由三部分组成，例如有 Hello a World, the world is beautiful
+Character Filter: 例如将文本中html标签剔除掉，例如将&amp;amp;转换为’and‘等等。 Tokenizer: 按照规则进行分词，在英文中按照空格分词。 Token Filter: 进行nomalnization(标准化)操作：去掉stop world(停用词，a, an, the, is, are等)，转换小写，同义词转换，单复数转换 什么是标准化处理？
+标准化处理是用于完善分词器结果的。
+分词器处理的文本结果，通常会有一些不需要的、有异议的、包含时态转化等情况的数据。在如：I think dogs is human&amp;rsquo;s best friend.中的分词结果是：i、 think、 dogs、 human&amp;rsquo;s、 best、 friend。其中i是很少应用在搜索条件中的单词；dogs 是 dog 单词的复数形式，通常在搜索过程中使用dog 作为搜索条件更频繁一些；human&amp;rsquo;s 是特殊的标记方式，通常不会在搜索中作为条件出现。那么 ElasticSearch 维护这些单词是没有太大必要的。这个时候就需要标准化处理了。
+如：china 搜索时，如果条件为 cn 是否可搜索到。如：dogs，搜索时，条件为 dog是否可搜索到数据。如果可以使用简写（cn）或者单复数（dog&amp;amp;dogs）搜索到想要的结果，那么称为搜索引擎人性化。
+normalization 是为了提升召回率的（recall），就是提升搜索能力的。
+normalization 是配合分词器(analyzer)完成其功能的。
+1、内置的分词器 分词器名称 处理过程 Standard Analyzer 默认的分词器，按词切分，小写处理 Simple Analyzer 按照非字母切分(符号被过滤)，小写处理 Stop Analyzer 小写处理，停用词过滤(the, a, this) Whitespace Analyzer 按照空格切分，不转小写 Keyword Analyzer 不分词，直接将输入当做输出 Pattern Analyzer 正则表达式，默认是\W+(非字符串分隔) 不同类型的field，可能有的是full text，有的可能是exact value。</description></item><item><title/><link>https://note.ljzsdut.com/%E6%95%B0%E6%8D%AE%E5%BA%93/ElasticSearch/07-%E9%87%8D%E5%BB%BA%E7%B4%A2%E5%BC%95/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E6%95%B0%E6%8D%AE%E5%BA%93/ElasticSearch/07-%E9%87%8D%E5%BB%BA%E7%B4%A2%E5%BC%95/</guid><description>reindex https://www.cnblogs.com/sanduzxcvbnm/p/12084714.html
+写入数据的底层原理 segment、translog、commit point、refresh、segment merge
+https://blog.csdn.net/zong_0915/article/details/107289478
+https://www.cnblogs.com/jpfss/p/10826258.html
+filter执行原理 （1）在倒排索引中查找搜索串，获取document list
+date来举例
+word doc1 doc2 doc3 2017-01-01 * * 2017-02-02 * * 2017-03-03 * * * filter：2017-02-02
+到倒排索引中一找，发现2017-02-02对应的document list是doc2,doc3
+（2）为每个在倒排索引中搜索到的结果，构建一个bitset，[0, 0, 0, 1, 0, 1]
+使用找到的doc list，构建一个bitset，就是一个二进制的数组，数组每个元素都是0或1，用来标识一个doc对一个filter条件是否匹配，如果匹配就是1，不匹配就是0
+[0, 1, 1]
+doc1：不匹配这个filter的 doc2和do3：是匹配这个filter的
+尽可能用简单的数据结构去实现复杂的功能，可以节省内存空间，提升性能
+（3）遍历每个过滤条件对应的bitset，优先从最稀疏的开始搜索，查找满足所有条件的document
+后面会讲解，一次性其实可以在一个search请求中，发出多个filter条件，每个filter条件都会对应一个bitset 遍历每个filter条件对应的bitset，先从最稀疏的开始遍历
+[0, 0, 0, 1, 0, 0]：比较稀疏 [0, 1, 0, 1, 0, 1]
+先遍历比较稀疏的bitset，就可以先过滤掉尽可能多的数据
+遍历所有的bitset，找到匹配所有filter条件的doc
+请求：filter，postDate=2017-01-01，userID=1
+postDate: [0, 0, 1, 1, 0, 0] userID: [0, 1, 0, 1, 0, 1]</description></item><item><title/><link>https://note.ljzsdut.com/%E6%95%B0%E6%8D%AE%E5%BA%93/ElasticSearch/08-%E9%9B%86%E7%BE%A4shard%E5%9D%87%E8%A1%A1%E7%AD%96%E7%95%A5-ilm/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E6%95%B0%E6%8D%AE%E5%BA%93/ElasticSearch/08-%E9%9B%86%E7%BE%A4shard%E5%9D%87%E8%A1%A1%E7%AD%96%E7%95%A5-ilm/</guid><description>集群shard均衡策略 https://zhuanlan.zhihu.com/p/164970344
+ES集群的rebalance和allocation功能，可以自动均衡集群内部数据、分配分片，保证各个节点间尽量均衡。但是，在高访问量或者节点宕机的情况下，大范围的rebalance会影响到集群性能。所以，调整好集群相关参数，是重中之重。
+1 - shard分配策略 集群分片分配是指将索引的shard分配到其他节点的过程，会在如下情况下触发：
+集群内有节点宕机，需要故障恢复； 增加副本； 索引的动态均衡，包括集群内部节点数量调整、删除索引副本、删除索引等情况； 上述策略开关，可以动态调整，由参数cluster.routing.allocation.enable控制，启用或者禁用特定分片的分配。该参数的可选参数有：
+all - 默认值，允许为所有类型分片分配分片； primaries - 仅允许分配主分片的分片； new_primaries - 仅允许为新索引的主分片分配分片； none - 任何索引都不允许任何类型的分片； 重新启动节点时，此设置不会影响本地主分片的恢复。如果重新启动的节点具有未分配的主分片的副本，会立即恢复该主分片。
+PUT _cluster/settings { &amp;#34;persistent&amp;#34; : { &amp;#34;cluster.routing.rebalance.enable&amp;#34;: &amp;#34;none&amp;#34;, ##允许在一个节点上发生多少并发传入分片恢复。 默认为2。 ##多数为副本 &amp;#34;cluster.routing.allocation.node_concurrent_incoming_recoveries&amp;#34;:2， ##允许在一个节点上发生多少并发传出分片恢复，默认为2. ## 多数为主分片 &amp;#34;cluster.routing.allocation.node_concurrent_outgoing_recoveries&amp;#34;:2, ##为上面两个的统一简写 &amp;#34;cluster.routing.allocation.node_concurrent_recoveries&amp;#34;:2, ##在通过网络恢复副本时，节点重新启动后未分配的主节点的恢复使用来自本地 磁盘的数据。 ##这些应该很快，因此更多初始主要恢复可以在同一节点上并行发生。 默认为4。 &amp;#34;cluster.routing.allocation.node_initial_primaries_recoveries&amp;#34;:4, ##允许执行检查以防止基于主机名和主机地址在单个主机上分配同一分片的多个实例。 ##默认为false，表示默认情况下不执行检查。 此设置仅适用于在同一台计算机上启动多个节点的情况。这个我的理解是如果设置为false， ##则同一个节点上多个实例可以存储同一个shard的多个副本没有容灾作用了 &amp;#34;cluster.routing.allocation.same_shard.host&amp;#34;:true } } 2 - rebalance策略 cluster.routing.rebalance.enable为特定类型的分片启用或禁用重新平衡：
+all - （默认值）允许各种分片的分片平衡； primaries - 仅允许主分片的分片平衡； replicas - 仅允许对副本分片进行分片平衡； none - 任何索引都不允许任何类型的分片平衡； cluster.</description></item><item><title/><link>https://note.ljzsdut.com/%E6%95%B0%E6%8D%AE%E5%BA%93/ElasticSearch/09-%E5%87%A0%E7%A7%8D%E5%B8%B8%E7%94%A8%E7%9A%84Elasticsearch%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB%E6%96%B9%E6%A1%88/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E6%95%B0%E6%8D%AE%E5%BA%93/ElasticSearch/09-%E5%87%A0%E7%A7%8D%E5%B8%B8%E7%94%A8%E7%9A%84Elasticsearch%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB%E6%96%B9%E6%A1%88/</guid><description>转载：https://blog.csdn.net/easylife206/article/details/123675403
+如果准备将自建的 elasticsearch 迁移上云，或者的迁移到其他es集群内，可以根据自己的业务需要选择合适的迁移方案。如果业务可以停服或者可以暂停写操作，可以使用以下几种方式进行数据迁移：
+COS 快照,即Cloud Object Storage logstash elasticsearch-dump 各种迁移方式的对比如下：
+迁移方式 适用场景 COS 快照 数据量大的场景（GB、TB、PB 级别）对迁移速度要求较高的场景 logstash 迁移全量或增量数据，且对实时性要求不高的场景需要对迁移的数据通过 es query 进行简单的过滤的场景需要对迁移的数据进行复杂的过滤或处理的场景版本跨度较大的数据迁移场景，如 5.x 版本迁移到 6.x 版本或 7.x 版本 elasticsearch-dump 数据量较小的场景 1、COS 快照 基于 COS 快照的迁移方式是使用 ES 的 snapshot api 接口进行迁移，基本原理就是从源 ES 集群创建索引快照，然后在目标 ES 集群中进行恢复。通过 snapshot 方式进行数据迁移时，特别需要注意 ES 的版本问题：
+目标ES集群的主版本号（如5.6.4中的5为主版本号）≥ 源ES集群的主版本号。 1.x 版本的集群创建的快照不能在 5.x 版本中恢复。 在源 ES 集群中创建 repository 创建快照前必须先创建 repository 仓库，一个 repository 仓库可以包含多份快照文件，repository 主要有以下几种类型。
+fs：共享文件系统，将快照文件存放于文件系统中。 url：指定文件系统的 URL 路径，支持协议：http、https、ftp、file、jar。 s3：AWS S3 对象存储,快照存放于 S3 中，以插件形式支持，安装该插件请参考 repository-s3[1]。 hdfs：快照存放于 hdfs 中，以插件形式支持，安装该插件请参考 repository-hdfs[2]。 cos：快照存放于腾讯云COS对象存储中，以插件形式支持，安装该插件请参考 cos-repository[3]。 如果需要从自建 ES 集群迁移至腾讯云的 ES 集群，可以直接使用 COS 类型仓库。但需要先在自建 ES 集群上安装 cos-repository 插件（安装插件后需要重启集群才能使用），先把自建 ES 集群中的数据先备份到 COS，然后在腾讯云上的 ES 集群中恢复出来，以完成数据的迁移。</description></item></channel></rss>

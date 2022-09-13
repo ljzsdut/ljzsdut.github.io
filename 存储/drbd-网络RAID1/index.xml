@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>drbd on ljzsdut</title><link>https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/drbd-%E7%BD%91%E7%BB%9CRAID1/</link><description>Recent content in drbd on ljzsdut</description><generator>Hugo -- gohugo.io</generator><atom:link href="https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/drbd-%E7%BD%91%E7%BB%9CRAID1/index.xml" rel="self" type="application/rss+xml"/><item><title/><link>https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/drbd-%E7%BD%91%E7%BB%9CRAID1/001-%E7%AE%80%E4%BB%8B%E5%92%8C%E5%AE%89%E8%A3%85-/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/drbd-%E7%BD%91%E7%BB%9CRAID1/001-%E7%AE%80%E4%BB%8B%E5%92%8C%E5%AE%89%E8%A3%85-/</guid><description>转载：https://www.cnblogs.com/f-ck-need-u/p/8673178.html
+1.drbd简介 官方文档：https://linbit.com/drbd-user-guide/drbd-guide-9_0-en/#p-intro
+drbd是通过网络(tcp连接)在不同服务器之间实现基于block级别进行数据实时同步的软件。类似于inotify+rsync，只不过inotify+rsync是按文件级别来同步的，而drbd是工作在文件系统下层的，实现的是block同步和拷贝，效率相对较高。且inotify+rsync是通过监控事件来实现实时同步的，而drbd则跟普通写入磁盘的过程一样，只不过多了一条写入网卡的分支路线。
+如下图，此处只是简单的示意图。更具体的原理图见下文。
+drbd只能在分区上、LVM逻辑卷上或整块磁盘上实现，不能在某一个目录上实现。
+drbd支持同步、半同步、异步三种数据同步的方式。
+drbd支持脑裂(brain split)通知和自动恢复。
+2.drbd工作原理和术语说明 drbd的核心功能是通过Linux内核模块实现的。特别地，操作系统中的虚拟块设备(virtual block device)中有它的驱动，因此drbd几乎处于操作系统I/O堆栈的&amp;quot;最底部&amp;quot;。这使得它非常具有弹性，可以很容易地为服务提供高可用性。
+但注意，drbd处于文件系统之下的层次，不能实现文件系统层次的功能，例如检查文件是否损坏、为文件系统提供高可用等。但它是基于block的，可以做块设备检查、同步的完整性检查等。
+2.1 drbd工作原理 drbd实现基于块级别的数据同步，其实现方式是通过tcp连接来镜像整个设备。
+它有主备节点的概念。在主节点上，可以对drbd设备创建文件系统以供读取，甚至可以直接IO。在主节点写入的数据通过DRBD设备存储到主节点的磁盘设备中，同时，这个数据块也会通过网络传输到备节点对应的DRBD设备上，最终写入备用节点的磁盘设备上实现同步。在备用节点上，DRBD只是将数据从DRBD设备写入到备用节点的磁盘中，无法供外界读、写，之所以连读都提供，是为了维护缓存一致性(cache coherency)的问题。
+现在大部分的高可用集群都会使用共享存储，在实时同步以及数据一致性角度而言，drbd能代替共享存储。而且，drbd可以配合高可用软件，实现高可用服务的切换而不会数据丢失，因为备节点和主节点数据是实时同步的，这样给用户的体验是更好的，但却节约了成本，其性能与稳定性方面也不错。
+下图是drbd的原理图。
+对于正常的文件系统，写入数据的流程：buffer--&amp;gt;filesystem--&amp;gt; disk scheduler--&amp;gt;disk driver--&amp;gt;disk。
+而使用drbd时，流程是上图中的红色箭头。在filesystem的下一层加上drbd层，该层将写入的数据通过drbd发送到tcp套接字的send缓存(send buffer)，再通过DMA的方式拷贝到网卡，由网卡发送到备节点。备节点的drbd设备从tcp套接字的recv缓存(recv buffer)中接收数据，然后从drbd设备读出数据并等待disk scheduler调度写入到磁盘中。
+如果不理解或者理解的不清晰，可先阅读：不可不知的socket和TCP连接过程。
+其中A/B/C是drbd复制的协议级别，如下&amp;quot;drbd复制模型&amp;quot;所述。
+2.2 drbd复制协议模型 上面drbd工作原理图中的A、B、C对应的是drbd的不同复制模型。复制模型指的是数据的写入执行到哪个过程就认为此次写操作已经完成。
+drbd有三种复制协议：同步、半同步、异步。
+A协议：异步复制(asynchronous)，如上图A标识，指的是**当数据写到本地磁盘上，并且复数据已经复制到tcp的send buffer缓冲区以后，此时就认为写入磁盘成功。**此复制协议性能好，但可能会丢失一些最近的数据。
+B协议：半同步复制(semi sync)，也称为内存复制，如上图B标识，指的是**数据已经写到本地磁盘上，并且已经被对方的tcp协议栈接收到(即写入到了对方的recv buffer中)，此时就认为此次写操作成功。**此复制协议性能较好，且只有当两节点都断电时才会丢失最近处于socket buffer中的数据。因此性能和数据可靠性介于协议A和C之间。
+C协议：同步复制(sync)，如上图C标识，指的是**数据已经写入到本地磁盘，也已经写入到远程磁盘上，此时就认为此次写操作成功。**此复制协议性能较差，但数据可靠性高。
+C复制协议是drbd默认使用的协议。
+2.3 DRBD设备的概念 DRBD设备是操作系统中的一个虚拟块设备，在Linux上游内核中已经集成了DRBD的块设备模块和驱动。它的主设备号(major)为147，次设备号默认从0开始编号。
+在一组主机上,drbd设备的设备名称为/dev/drbdN，这个N通常和它的次设备号一致。
+DRBD需要构建在底层设备之上，然后构建出一个块设备出来。对于用户来说，一个DRBD设备，就像是一个分区，可以在上面创建文件系统。DRBD所支持的底层设备有以下这些类：
+1、磁盘或磁盘的某一个分区； 2、软 raid 设备； 3、LVM的逻辑卷； 4、EVMS(企业卷管理系统,Enterprise Volume Management System)； 4、其他任何的块设备，甚至DRBD块设备自身也能成为另一个DRBD的底层设备。 2.4 drbd资源角色 在drbd构造的集群中，资源具有角色的概念，分别为primary和secondary（主从的概念）。
+所有primary的资源将不受限制进行读写操作，可以创建文件系统，可以使用裸设备，可以直接io。而所有secondary的设备中不能挂载，不能读、写。
+2.5 drbd工作模式 主从模型master/slave（primary/secondary） 这种机制在某一时刻只允许有一个主节点。主节点的作用是可以挂载使用，写入数据等；从节点只是作为主节点的镜像，是主节点的备份，且是不可见的。
+这样的工作机制的好处是可以有效的避免磁盘出现单点故障，而且数据不会错乱。
+双主模型dula primary(primary/primary) 所谓双主模型是2个节点都可以当做主节点来挂载使用。但会导致数据错乱。当第一个主节点对某一文件正在执行写操作，此时另一个节点也正在对同一文件执行写操作，这种情况会造成数据错乱，从而导致数据不能正常使用。</description></item><item><title/><link>https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/drbd-%E7%BD%91%E7%BB%9CRAID1/002-%E9%85%8D%E7%BD%AE%E5%92%8C%E4%BD%BF%E7%94%A8-/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/drbd-%E7%BD%91%E7%BB%9CRAID1/002-%E9%85%8D%E7%BD%AE%E5%92%8C%E4%BD%BF%E7%94%A8-/</guid><description>转载：https://www.cnblogs.com/f-ck-need-u/p/8678883.html
+drbd的简介、同步机制和安装见另一篇文章：drbd(一)：简介、同步机制和安装。
+本文所述为drbd8.4的配置，和8.4版本之前的版本，以及drbd9版本的差别都非常大。
+1.drbd配置文件 drbd的主配置文件/etc/drbd.conf，为了管理的便捷性，在此文件中使用了include指令指定了包含的配置文件段，默认的在/etc/drbd.d/目录下。在此目录有全局配置文件global_common.conf和其他配置文件*.res文件。其中在主配置文件中include全局配置文件的指令只能出现一个，且必须出现在最前面。
+两个节点的配置文件应尽量完全一致。
+在/usr/share/doc/drbd-版本/下有drbd.conf的样例配置文件。
+以下是global_common.conf的结构。
+global { usage-count yes; # 是否参加drbd的使用者统计，默认此选项为YES } common { # common段定义每一个资源从此继承的参数，非必须，但建议将多个资源共享的参数定义在此以降低配置文件的复杂度 handlers { } startup { } options { } disk { } net { } } 全局配置修改如下：
+global { usage-count no; } common { handlers{ # 定义出现以下问题(如splitbrain或out-of-sync错误)时处理策略 pri-on-incon-degr &amp;#34;/usr/lib/drbd/notify-pri-on-incon-degr.sh; /usr/lib/drbd/notify-emergency-reboot.sh; echo b &amp;gt; /proc/sysrq-trigger ; reboot -f&amp;#34;; pri-lost-after-sb &amp;#34;/usr/lib/drbd/notify-pri-lost-after-sb.sh; /usr/lib/drbd/notify-emergency-reboot.sh; echo b &amp;gt; /proc/sysrq-trigger ; reboot -f&amp;#34;; local-io-error &amp;#34;/usr/lib/drbd/notify-io-error.sh; /usr/lib/drbd/notify-emergency-shutdown.sh; echo o &amp;gt; /proc/sysrq-trigger ; halt -f&amp;#34;; split-brain &amp;#34;/usr/lib/drbd/notify-split-brain.</description></item><item><title/><link>https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/drbd-%E7%BD%91%E7%BB%9CRAID1/003-drbd%E7%9A%84%E7%8A%B6%E6%80%81%E8%AF%B4%E6%98%8E-/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/drbd-%E7%BD%91%E7%BB%9CRAID1/003-drbd%E7%9A%84%E7%8A%B6%E6%80%81%E8%AF%B4%E6%98%8E-/</guid><description>转载：https://www.cnblogs.com/f-ck-need-u/p/8684648.html
+1.几种获取状态信息的方法 drbd有很多获取信息的方式。在drbd84和之前的版本，大多都使用cat /proc/drbd来获取信息，多数情况下，这个文件展示的信息对于管理和维护drbd来说已经足够。
+例如以下是drbd84上两个volume的节点状态信息：
+[root@drbd1 ~]# cat /proc/drbd version: 8.4.10-1 (api:1/proto:86-101) GIT-hash: a4d5de01fffd7e4cde48a080e2c686f9e8cebf4c build by mockbuild@, 2017-09-15 14:23:22 0: cs:Connected ro:Primary/Secondary ds:UpToDate/UpToDate C r----- ns:76408 nr:0 dw:76408 dr:3441 al:22 bm:0 lo:0 pe:0 ua:0 ap:0 ep:1 wo:f oos:0 1: cs:Connected ro:Primary/Secondary ds:UpToDate/UpToDate C r----- ns:4957732 nr:0 dw:76324 dr:4883249 al:29 bm:0 lo:0 pe:0 ua:0 ap:0 ep:1 wo:f oos:0 但从drbd9开始，/proc/drbd文件已经废弃了(其实从drbd84就已经废弃了，只不过仍然能获取信息)，因为drbd9中添加了几个新状态信息，也修改了一些信息的显示名称，而这个文件并没有&amp;quot;跟上脚步&amp;quot;。以下是drbd9中该文件展示的信息。
+[root@drbd91 ~]# cat /proc/drbd version: 9.0.9-1 (api:2/proto:86-112) GIT-hash: f7b979e7af01813e031aac579140237640c94569 build by mockbuild@, 2017-09-14 17:45:45 Transports (api:16): tcp (9.</description></item><item><title/><link>https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/drbd-%E7%BD%91%E7%BB%9CRAID1/004-drbd%E5%A4%9A%E8%8A%82%E7%82%B9drbd9-/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/drbd-%E7%BD%91%E7%BB%9CRAID1/004-drbd%E5%A4%9A%E8%8A%82%E7%82%B9drbd9-/</guid><description>转载：https://www.cnblogs.com/f-ck-need-u/p/8691373.html
+1.drbd多节点简介 在drbd9以前，drbd一直只能配置两个节点，要么是primary/secondary，要么是primary/primary。虽然在这些版本上也能配置第三个节点实现三路节点的同步，但这个第三节点一般都只当作备份drbd设备，几乎没人去使用drbd配置3节点。
+但是在drbd9中，drbd可以定义环状网络的多节点，最多支持16个节点。这些节点之间，两两都要握手。例如，下图是5节点的drbd环状图。
+对于host1节点来说，它有4个对端(peer)节点：host2、host3、host4、host5。这4个节点组成host1的&amp;quot;搭档&amp;quot;(partner)。请区分peer和partner：peer是节点与节点之间的关系，称为对端；partner是节点和其他所有节点的关系。虽然，是否区分peer和partner不影响drbd9的使用，但是看drbd9文档的时候有用。
+根据上图，每节点都需要和其他任意一个节点建立连接，因此2节点的drbd只需一个连接对，3节点的drbd需要3个连接对，4个节点需要6个连接对，16个节点需要120个连接对。
+在drbd84和以前的版本上，几乎总是使用/proc/drbd文件来获取节点之间的状态信息。但是这个文件只能记录两个节点的信息，而drbd9支持多个节点，这个文件已经无法完整记录各节点之间的关系，因此**/proc/drbd已经完全废弃了**。
+在drbd9上，可以使用drbdadm status或drbdsetup status等命令获取各节点的信息。
+由于每个节点都需要和其他所有节点通信，因此每个节点的元数据区的大小都要比两节点时的元数据翻(N-1)倍，这意味着很容易出现元数据区空间不足的情况。因此，请保证每个节点的元数据区够大。如果drbdadm up启动失败，可以查看/var/log/message日志进行排查是否是因为元数据区的问题。
+drbd9.0中还不支持多节点的多主模型(虽能实现，但官方说没有测试，很危险)，在drbd9.1中将正式支持多节点的多主模型。而单主模型的drbd，又没必要多节点，所以在drbd9中，新添加的多节点特性有点不上不下。
+最后，目前还不适合使用drbd9.0，不少新添加的功能还没有完善。
+2.配置3节点的drbd 以下是/etc/drbd.d/rs0.res文件中的内容：
+resource rs0 { volume 0 { device /dev/drbd0; disk /dev/sdb2; meta-disk /dev/sdb1; } volume 1 { device /dev/drbd1; disk /dev/sdb4; meta-disk /dev/sdb3; } on drbd90.longshuai.com { address 192.168.100.56:7788; node-id 0; # 需要定义每个节点标识符id } on drbd91.longshuai.com { address 192.168.100.55:7788; node-id 1; } on drbd92.longshuai.com { address 192.168.100.58:7788; node-id 2; } connection { # 定义环状网络中的连接对 host drbd90.</description></item><item><title/><link>https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/drbd-%E7%BD%91%E7%BB%9CRAID1/01-drbd%E5%AE%89%E8%A3%85/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/drbd-%E7%BD%91%E7%BB%9CRAID1/01-drbd%E5%AE%89%E8%A3%85/</guid><description>编译安装drbd drbd可以通过包管理器来进行安装。此处，我们使用更加通过的编译安装的方式。
+参考源码包中的drbd-9.1.7/docker/entry.sh脚本。
+下载地址：https://github.com/LINBIT/drbd/archive/refs/tags/drbd-9.1.7.tar.gz
+# 加载依赖模块。说明：下面的模块并不是必须的 # we are not too strict about these, not all are required everywhere # # libcrc32c: dependency for DRBD # nvmet_rdma, nvme_rdma: LINSTOR NVME layer # loop: LINSTOR when using loop devices as backing disks # dm_writecache: LINSTOR writecache layer # dm_cache: LINSTOR cache layer # dm_thin_pool: LINSTOR thinly provisioned storage # dm_snapshot: LINSTOR snapshotting # dm_crypt: LINSTOR encrypted volumes for m in libcrc32c nvmet_rdma nvme_rdma loop dm_writecache dm_cache dm_thin_pool dm_snapshot dm_crypt; do modprobe &amp;#34;$m&amp;#34; 2&amp;gt;/dev/null &amp;amp;&amp;amp; s=success || s=failed echo &amp;#34;Loading ${m}: ${s}&amp;#34; done cd /tmp/pkg tar xf /drbd-9.</description></item><item><title/><link>https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/drbd-%E7%BD%91%E7%BB%9CRAID1/02-drbd%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/drbd-%E7%BD%91%E7%BB%9CRAID1/02-drbd%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80/</guid><description>一、DRBD介绍 DRBD（Distributed ReplicatedBlock Device）是一种基于软件的，无共享，分布式块设备复制的存储解决方案，在服务器之间的对块设备（硬盘，分区，逻辑卷等）进行镜像。也就是说当某一个应用程序完成写操作后，它提交的数据不仅仅会保存在本地块设备上，DRBD也会将这份数据复制一份，通过网络传输到另一个节点的块设备上，这样，两个节点上的块设备上的数据将会保存一致，这就是镜像功能。
+DRBD是由内核模块和相关脚本而构成，用以构建高可用性的集群，其实现方式是通过网络来镜像整个设备。它允许用户在远程机器上建立一个本地块设备的实时镜像，与心跳连接结合使用，可以把它看作是一种网络RAID，它允许用户在远程机器上建立一个本地块设备的实时镜像。
+DRBD工作在内核当中，类似于一种驱动模块。DRBD工作的位置在文件系统的buffer cache和磁盘调度器之间，通过tcp/ip发给另外一台主机到对方的tcp/ip最终发送给对方的drbd，再由对方的drbd存储在本地对应磁盘 上，类似于一个网络RAID-1功能。在高可用(HA)中使用DRBD功能，可以代替使用一个共享盘阵。本地(主节点)与远程主机(备节点)的数据可以保 证实时同步。当本地系统出现故障时,远程主机上还会保留有一份相同的数据,可以继续使用。
+二、DRDB的工作原理 DRBD是linux的内核的存储层中的一个分布式存储系统，可用使用DRBD在两台Linux服务器之间共享块设备，共享文件系统和数据。类似于一个网络RAID-1的功能，其工作原理的架构图如下：
+DRBD底层设备支持 DRBD需要构建在底层设备之上，然后构建出一个块设备出来。对于用户来说，一个DRBD设备，就像是一块物理的磁盘，可以在上面内创建文件系统。
+DRBD所支持的底层设备有以下这些类：
+1）一个磁盘，或者是磁盘的某一个分区；
+2）一个soft raid 设备；
+3）一个LVM的逻辑卷；
+4）一个EVMS（Enterprise Volume Management System，企业卷管理系统）的卷；
+5）其他任何的块设备。
+DRBD工作原理 DRBD是一种块设备,可以被用于高可用(HA)之中。它类似于一个网络RAID-1功能。当你将数据写入本地文件系统时，数据还将会被发送到网络中另一台主机上。以相同的形式记录在一个文件系统中。 本地(主节点)与远程主机(备节点)的数据可以保证实时同步。当本地系统出现故障时，远程主机上还会保留有一份相同的数据，可以继续使用。在高可用(HA)中使用DRBD功能，可以代替使用一个共享盘阵。因为数据同时存在于本地主机和远程主机上，切换时，远程主机只要使用它上面的那份备份数据，就可以继续进行服务了。
+DRBD是如何工作的（工作机制） (DRBD Primary)负责接收数据，把数据写到本地磁盘并发送给另一台主机(DRBD Secondary)，另一个主机再将数据存到自己的磁盘中。
+目前，DRBD每次只允许对一个节点进行读写访问，但这对于通常的故障切换高可用集群来说已经足够用了。
+以后的版本将支持两个节点进行读写存取。
+DRBD协议说明
+1）数据一旦写入磁盘并发送到网络中就认为完成了写入操作。
+2）收到接收确认就认为完成了写入操作。
+3）收到写入确认就认为完成了写入操作。
+DRBD与HA的关系 一个DRBD系统由两个节点构成，与HA集群类似，也有主节点和备用节点之分，在带有主要设备的节点上，应用程序和操作系统可以运行和访问DRBD设备（/dev/drbd*）。
+在主节点写入的数据通过DRBD设备存储到主节点的磁盘设备中，同时，这个数据也会自动发送到备用节点对应的DRBD设备，最终写入备用节点的磁盘设备上，在备用节点上，DRBD只是将数据从DRBD设备写入到备用节点的磁盘中。
+现在大部分的高可用性集群都会使用共享存储，而DRBD也可以作为一个共享存储设备，使用DRBD不需要太多的硬件的投资。因为它在TCP/IP网络中运行，所以，利用DRBD作为共享存储设备，要节约很多成本，因为价格要比专用的存储网络便宜很多；其性能与稳定性方面也不错。
+三、DRBD的特性（基本功能） 分布式复制块设备（DRBD技术）是一种基于软件的，无共享，复制的存储解决方案，在服务器之间的对块设备（硬盘，分区，逻辑卷等）进行镜像。
+DRBD镜像数据的特性：
+1）实时性：当某个应用程序完成对数据的修改时，复制功能立即发生。
+2）透明性：应用程序的数据存储在镜像块设备上是独立透明的，他们的数据在两个节点上都保存一份，因此，无论哪一台服务器宕机， 都不会影响应用程序读取数据的操作，所以说是透明的。
+3）同步镜像和异步镜像：同步镜像表示当应用程序提交本地的写操作后，数据后会同步写到两个节点上去；异步镜像表示当应用程序提交写操作后，只有当本地的节点上完成写操作后，另一个节点才可以完成写操作。
+四、DRBD的用户空间管理工具 为了能够配置和管理drbd的资源，drbd提供了一些管理工具与内核模块进行通信：
+1）drbdadm：高级的DRBD程序管理套件工具。它从配置文件/etc/drbd.conf中获取所有配置参数。drbdadm为drbdsetup和drbdmeta两个命令充当程序的前端应用，执行drbdadm实际是执行的drbdsetup和drbdeta两个命令。
+2）drbdsetup：drbdsetup可以让用户配置已经加载在内核中运行的DRBD模块，它是底层的DRBD程序管理套件工具。使用该命令时，所有的配置参数都需要直接在命令行中定义，虽然命令很灵活，但是大大的降低了命令的简单易用性，因此很多的用户很少使用drbdsetup。
+3）drbdmeta：drbdmeta允许用户创建、转储、还原和修改drbd的元数据结构。这个命令也是用户极少用到。
+五、DRBD的模式 DRBD有2中模式，一种是DRBD的主从模式，另一种是DRBD的双主模式
+DRBD的主从模式 这种模式下，其中一个节点作为主节点，另一个节点作为从节点。其中主节点可以执行读、写操作；从节点不可以挂载文件系统，因此，也不可以执行读写操作。
+在这种模式下，资源在任何时间只能存储在主节点上。这种模式可用在任何的文件系统上（EXT3、EXT4、XFS等等）。默认这种模式下，一旦主节点发生故障，从节点需要手工将资源进行转移，且主节点变成从节点和从节点变成主节点需要手动进行切换。不能自动进行转移，因此比较麻烦。
+为了解决手动将资源和节点进行转移，可以将DRBD做成高可用集群的资源代理（RA），这样一旦其中的一个节点宕机，资源会自动转移到另一个节点，从而保证服务的连续性。
+DRBD的双主模式 这是DRBD8.0之后的新特性，在双主模式下，任何资源在任何特定的时间都存在两个主节点。这种模式需要一个共享的集群文件系统，利用分布式的锁机制进行管理，如GFS和OCFS2。
+部署双主模式时，DRBD可以是负载均衡的集群，这就需要从两个并发的主节点中选取一个首选的访问数据。这种模式默认是禁用的，如果要是用的话必须在配置文件中进行声明。
+六、DRBD的同步协议 DRBD的复制功能就是将应用程序提交的数据一份保存在本地节点，一份复制传输保存在另一个节点上。但是DRBD需要对传输的数据进行确认以便保证另一个节点的写操作完成，就需要用到DRBD的同步协议，DRBD同步协议有三种：
+协议A：异步复制协议 一旦本地磁盘写入已经完成，数据包已在发送队列中，则写被认为是完成的。在一个节点发生故障时，可能发生数据丢失，因为被写入到远程节点上的数据可能仍在发送队列。
+尽管，在故障转移节点上的数据是一致的，但没有及时更新。这通常是用于地理上分开的节点。
+数据在本地完成写操作且数据已经发送到TCP/IP协议栈的队列中，则认为写操作完成。如果本地节点的写操作完成，此时本地节点发生故障，而数据还处在TCP/IP队列中，则数据不会发送到对端节点上。因此，两个节点的数据将不会保持一致。这种协议虽然高效，但是并不能保证数据的可靠性。
+协议B：内存同步（半同步）复制协议 一旦本地磁盘写入已完成且复制数据包达到了对等节点，则认为写在主节点上被认为是完成的。数据丢失可能发生在参加的两个节点同时故障的情况下，因为在传输中的数据可能不会被提交到磁盘。</description></item><item><title/><link>https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/drbd-%E7%BD%91%E7%BB%9CRAID1/03-drbd%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/drbd-%E7%BD%91%E7%BB%9CRAID1/03-drbd%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/</guid><description>1、在线调整参数 对现有资源的配置文件进行修改，两个对等节点要保持一致，然后执行 drbdadm adjust &amp;lt;resource&amp;gt; 在两个节点上都要执行；
+2、完整性验证 复制传输数据完整性验证 (验证算法：MD5、SHA-1、CRC-32C) 此特性针对在复制过程中由于网络传输原因导致的数据不一致。 DRBD对每个要复制的块生成一个校验和(摘要信息)，用来对peer端数据进行完整性校验，如果接收到的块的校验和与source端的校验和不一致，将会要求重传。
+resource &amp;lt;resource&amp;gt; net { data-integrity-alg &amp;lt;algorithm&amp;gt;; } ... } 在线设备验证 （这个对性能还是有很大影响的）
+如果我们不在传输过程中对数据进行校验，我们仍然可以采用在线设备验证的方式，原理同上，我们可以采用定时任务周期性的对数据进行验证。默认情况下在线设备验证是未启用的，可以在配置文件/etc/drbd.conf添加。
+它通过验证源对每个底层的设备某一资源的块存储设备一次计算出加密摘要，传输到对等节点，对摘要对应的本地副本块进行验证，若不匹配，则进行标识并进行重新同步，在线验证过程中不会阻塞资源的复制，不会造成系统的中断；
+操作方式：配置文件中修改，也可以配置到common区块，对所有资源都适用
+resource &amp;lt;resource&amp;gt; { net{ verify-alg &amp;lt;algorithm&amp;gt; # 例如：verify-alg sha1; } } 验证命令：
+drbdadm verify &amp;lt;resource&amp;gt; 在验证运行时，如果出现out-of-sync 块，那需要在验证完毕之后使用：
+drbdadm disconnect &amp;lt;resource&amp;gt; drbdadm connect &amp;lt;resource&amp;gt; 这个方式用的还是少，不过可以配置为每周，或者每个月进行一次校验；
+3、配置同步的速率： 总的来说还是适合就好，大致取决于磁盘的转速和网卡的IO，后台带宽被占满影响复制，影响程序； 比较好的大小是，可用带宽和磁盘IO较小值的30% 。
+可以根据网络带宽或网络资源状况配置同步速率以及使用临时速率，可变速率等。同步速率设置的超过网络的最大可用带宽也是没有任何意义的。
+根据经验同步速率比较合理的是可用带宽的 30%。 计算公式: MIN(I/O子系统，网络I/O)*0.3 假定一个 I/O 子系统能支持 180MB/s 的吞吐量， 而千兆网络可支持 110MB/s， 此时网络带宽会成为瓶颈，可以计算出,同步速率：110*0.3=33MB/s 假定一个 I/O 子系统能支持 80MB/s 的吞吐量，而千兆网络可支持 110MB/s， 此时磁盘I/O会成为瓶颈，可以计算出,同步速率：80*0.</description></item><item><title/><link>https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/drbd-%E7%BD%91%E7%BB%9CRAID1/04-split_brain%E8%84%91%E8%A3%82%E5%A4%84%E7%90%86/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/drbd-%E7%BD%91%E7%BB%9CRAID1/04-split_brain%E8%84%91%E8%A3%82%E5%A4%84%E7%90%86/</guid><description>脑裂的状态 split brain实际上是指在某种情况下，造成drbd的两个节点断开连接，都以primary的身份来运行。当drbd某primary节点连接对方节点准备发送信息的时候，如果发现对方也是primary状态，那么会立刻自行断开连接，并认定当前已经发生split brain了，这时候他会在系统日志中记录以下信息：
+&amp;#34;Split-Brain detected,dropping connection!&amp;#34; 当发生split brain之后，如果查看连接状态，其中至少会有一个是StandAlone状态，另外一个可能也是StandAlone（如果是同时发现split brain状态），也有可能是WFConnection的状态。
+脑裂自动解决策略 如果在配置文件中配置了自动解决split brain（好像linbit不推荐这样做），drbd会自行解决split brain问题，可通过如下策略进行配置。
+Discarding modifications made on the “younger” primary。在这种模式下，当网络重新建立连接并且发现了裂脑，DRBD会丢弃最后切换到主节点上的主机所修改的数据。 Discarding modifications made on the “older” primary. 在这种模式下，当网络重新建立连接并且发现了裂脑，DRBD丢弃首先切换到主节点上的主机后所修改的数据。 Discarding modifications on the primary with fewer changes.在这种模式下，当网络重新建立连接并且发现了裂脑，DRBD会比较两台主机之间修改的数据量，并丢弃修改数据量较少的主机上的所有数据。 Graceful recovery from split brain if one host has had no intermediate changes.在这种模式下，如果其中一个主机在脑裂期间并没有数据修改，DRBD会自动重新进行数据同步，并宣布脑裂问题已解决。(这种情况几乎不可能存在) 手动解决脑裂(建议) 自动裂脑自动修复能不能被接受取决于个人应用。考虑建立一个DRBD的例子库。在“丢弃修改比较少的主节点的修改”兴许对web应用好过数据库应用。与此相反，财务的数据库则是对于任何修改的丢失都是不能容忍的，这就需要不管在什么情况下都需要手工修复裂脑问题。
+因此需要在启用裂脑自动修复前考虑你的应用情况。如果没有配置split brain自动解决方案，我们可以手动解决。首先我们必须要确定哪一边应该作为解决问题后的primary，一旦确定好这一点，那么我们同时也就确定接受丢失。
+在split brain之后，另外一个节点上面所做的所有数据变更了。当这些确定下来后，就可以通过以下操作来恢复了：
+1）首先在确定要作为secondary的节点上面切换成secondary，并放弃该资源的数据：
+# 1. 断开连接 [root@master2 ~]# drbdadm disconnect data # data为资源名称 # 2.设置为secondary状态 [root@master2 ~]# drbdadm secondary data # 3.</description></item><item><title/><link>https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/drbd-%E7%BD%91%E7%BB%9CRAID1/0715-%E8%B7%A8%E9%9B%86%E7%BE%A4etcd%E4%B8%BB%E5%A4%87%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E5%AE%9E%E6%96%BD%E6%96%B9%E6%A1%88/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/drbd-%E7%BD%91%E7%BB%9CRAID1/0715-%E8%B7%A8%E9%9B%86%E7%BE%A4etcd%E4%B8%BB%E5%A4%87%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E5%AE%9E%E6%96%BD%E6%96%B9%E6%A1%88/</guid><description>一、方案背景 为了提高集团云上协同业务和数据的可靠性和容灾能力，需要针对现有生产环境进行设计异地主备容灾方案。
+云上协同生产环境公共组件（etcd 等）数据目前使用本地存储方式存放于集群节点上，为提高数据可用性，规划基于 drbd 技术进行跨集群数据实时同步， 将生产环境（主集群）公共组件业务数据实时同步到备集群（浪潮公有云），并在主集群故障时能够快速将负载切换到备集群，同时确保数据无丢失。
+本方案以 etcd 公共组件为例，提供 etcd 生产数据切换 drbd 的具体实施步骤，以及主备切换的演练方案，为其他中间件提供统一参考。
+二、实施目标 将生产环境上基于 hostpath-provisioner 本地存储的 etcd 数据切换至 drbd 管理的同步盘上，并确保切换前后数据一致无丢失， 切换过程尽可能简单、易操作、便捷快速，降低实施风险。
+三、风险评估 3.1 实施风险 生产环境首次切换中间件本地存储到 DRBD 数据盘，需要重新调度现有中间件 Pod 负载，使其落到规划有 DRBD 资源的节点上，此过程必然影响业务，导致不可用， 整个切换过程至少需要保留总计 2 个小时的操作、数据验证以及排障预留时间窗口。
+3.2 数据风险 生产数据切换过程中，需要拷贝已有数据到 DRBD 同步盘中，此过程要求运维操作人员严格安装方案手册执行，操作前进行数据备份，操作过程中确保数据、文件以及递归子目录权限等保持完整一致，杜绝产生任何生产数据的人为变更。
+3.3 故障容灾 主备集群运行期间 DRBD 资源数据实时同步，在网络可靠条件下，DRBD 数据主备保持实时一致性； 主集群故障时，当需要进行备集群切换提升为临时主集群，需要人工操作介入，正常可控制到分钟级（&amp;lt;10min）完成切换以及中间件服务可用； 四、实施规划 以下内容均以 10.110.21.51（主集群） 和 10.110.21.45（备集群） 上两套测试环境为例进行演示说明。
+总体规划图参考此前 DRBD 数据同步验证方案。
+4.1 环境基本信息 4.1.1 主集群 etcd 在主集群 common 命名空间下，以 statefulset 方式运行三副本 etcd 高可用服务； etcd 使用 hostpath-provisioner 本地存储插件将数据持久化在 pv 中，pv 数据落在所调度节点的 /data/vmdata/hpvolumes/pvc-xxxx 目录下； /data/vmdata/hpvolumes/ 即 etcd 使用的 sc 中配置的本地数据目录，该目录在集群节点上挂载了一块独立数据盘 /dev/sdb1； 创建集群时，为 etcd 中间件规划的三块 20G 独占磁盘，分别位于 worker01、worker02、worker03 上的 /dev/sdc, 并且未经格式化； etcd 三个节点落在三个 worker 节点上，但是仅通过 control-plane 标签选择所有 worker 节点，未落在规划了 etcd 磁盘的节点； 规划 etcd 磁盘的三个节点未打 etcd 相关标签； 未部署 drbd 组件; 4.</description></item><item><title/><link>https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/drbd-%E7%BD%91%E7%BB%9CRAID1/drbd%E6%8E%A8%E8%8D%90%E9%98%85%E8%AF%BB/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/drbd-%E7%BD%91%E7%BB%9CRAID1/drbd%E6%8E%A8%E8%8D%90%E9%98%85%E8%AF%BB/</guid><description>https://www.cnblogs.com/cheyunhua/category/2076668.html
+骏马金龙drbd系列：
+drbd(一)：简介和安装
+drbd(二)：配置和使用
+drbd(三)：drbd的状态说明
+drbd(四)：drbd多节点(drbd9)
+常见问题：
+1、启用了before-resync-target，但是reSync时，无法触发。
+原因是禁用了usermode_helper。
+root@worker16:~# cat /sys/module/drbd/parameters/usermode_helper disabled 解决：重新加载内核模块（或重启系统自动重新加载内核模块）
+root@worker16:~# cat /sys/module/drbd/parameters/usermode_helper /sbin/drbdadm 参考连接：https://kb.linbit.com/disable-userland-helper-scripts-before-resync-target</description></item><item><title/><link>https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/drbd-%E7%BD%91%E7%BB%9CRAID1/mariadb-galera%E9%9B%86%E7%BE%A4drbd%E4%B8%BB%E5%A4%87%E5%AE%B9%E7%81%BE%E6%B5%8B%E8%AF%95/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/drbd-%E7%BD%91%E7%BB%9CRAID1/mariadb-galera%E9%9B%86%E7%BE%A4drbd%E4%B8%BB%E5%A4%87%E5%AE%B9%E7%81%BE%E6%B5%8B%E8%AF%95/</guid><description>环境说明 主、备中心各部署一套MariaDB Galera集群。
+准备工作 查看pvc和pod相关信息（主中心） root@master01:~# kubectl get pvc -A |grep mysql-data-mariadb-server common mysql-data-mariadb-server-0 Bound pvc-b20feb26-b413-426f-b5cb-710e76e40b84 150Gi RWO hostpath-provisioner 8d common mysql-data-mariadb-server-1 Bound pvc-48e35e45-c9fe-4e10-9cad-1db6d7adae15 150Gi RWO hostpath-provisioner 8d common mysql-data-mariadb-server-2 Bound pvc-4219647e-19e1-4683-949c-b7f166391a6c 150Gi RWO hostpath-provisioner 8d root@master01:~# kubectl get pod -owide -A |grep mariadb-server common mariadb-server-0 1/1 Running 0 8d 100.101.102.13 &amp;lt;none&amp;gt; worker13 &amp;lt;none&amp;gt; &amp;lt;none&amp;gt; common mariadb-server-1 1/1 Running 0 8d 100.101.80.13 &amp;lt;none&amp;gt; worker14 &amp;lt;none&amp;gt; &amp;lt;none&amp;gt; common mariadb-server-2 1/1 Running 0 8d 100.</description></item></channel></rss>

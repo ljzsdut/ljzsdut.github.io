@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ljzsdut</title><link>https://note.ljzsdut.com/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Java/JVM/</link><description>Recent content on ljzsdut</description><generator>Hugo -- gohugo.io</generator><atom:link href="https://note.ljzsdut.com/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Java/JVM/index.xml" rel="self" type="application/rss+xml"/><item><title/><link>https://note.ljzsdut.com/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Java/JVM/00-JVM%E8%B0%83%E4%BC%98JVM-GC-and-Tuning/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Java/JVM/00-JVM%E8%B0%83%E4%BC%98JVM-GC-and-Tuning/</guid><description>GC和GC Tuning 作者：马士兵教育 http://mashibing.com
+GC的基础知识 1.什么是垃圾 C语言申请内存：malloc free
+C++： new delete
+c/C++ 手动回收内存
+Java: new ？
+自动内存回收，编程上简单，系统不容易出错，手动释放内存，容易出两种类型的问题：
+忘记回收 多次回收 没有任何引用指向的一个对象或者多个对象（循环引用）
+2.如何定位垃圾 引用计数（ReferenceCount） 根可达算法(RootSearching) 3.常见的垃圾回收算法 标记清除(mark sweep) - 位置不连续 产生碎片 效率偏低（两遍扫描） 拷贝算法 (copying) - 没有碎片，浪费空间 标记压缩(mark compact) - 没有碎片，效率偏低（两遍扫描，指针需要调整） 4.JVM内存分代模型（用于分代垃圾回收算法） 部分垃圾回收器使用的模型
+除Epsilon ZGC Shenandoah之外的GC都是使用逻辑分代模型
+G1是逻辑分代，物理不分代
+除此之外不仅逻辑分代，而且物理分代
+新生代 + 老年代 + 永久代（1.7）Perm Generation/ 元数据区(1.8) Metaspace
+永久代 元数据 - Class 永久代必须指定大小限制 ，元数据可以设置，也可以不设置，无上限（受限于物理内存） 字符串常量 1.7 - 永久代，1.8 - 堆 MethodArea逻辑概念 - 永久代、元数据 新生代 = Eden + 2个suvivor区</description></item><item><title/><link>https://note.ljzsdut.com/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Java/JVM/01-%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Java/JVM/01-%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/</guid><description>Java虚拟机与程序的生命周期 在Java代码中，类型的加载、连接与初始化过程都是在程序运行期间完成的。
+类加载、连接、初始化 class Test { public static int a = 1; } 加载：(从磁盘)查找并加载类的二进制数据(到内存中) 连接：
+验证: 确保被加载的类的正确性 准备:为类的静态变量分配内存，并将其初始化为默认值 解析:把类中的符号引用转换为直接引用 初始化：为类的静态变量赋予正确的初始值
+类使用、卸载 使用：程序使用类，比如创建对象、调用方法等
+卸载：将内存中的字节码销毁掉。此后无法再使用类。
+JVM生命周期的结束 在如下几种情况下，Java虚拟机将结束生命周期 1、执行了System.exit()方法
+2、程序正常执行结束
+3、程序在执行过程中遇到了异常或错误而异常终止
+4、由于操作系统出现错误而导致Java虚拟机进程终止
+类的使用 Java程序对类的使用方式可分为两种
+主动使用
+被动使用
+所有的Java虚拟机实现必须在每个类或接口被Java程序“ 首次主动使用 ”时才初始化他们。
+主动使用的7种情况 创建类的实例 访问某个类或接口的静态变量(static)，或对该静态变量赋值（对于静态字段来说，只有直接定义了该字段的类才会被初始化） 调用类的静态方法 反射（如Class.forName(&amp;quot;com.test.Test&amp;quot;)）
+初始化一个类的子类时，会主动使用父类。（当一个类在初始化时，要求其父类全部都已经初始化完毕）接口没有要求父类必须完成初始化。
+包含main方法的类（java虚拟机启动时被表明为启动类的类）
+从jdk1.7开始，提供的动态语言支持。如果调用时对应的类没有初始化，则会初始化。
+被动使用 除了以上7种，其它使用java类的方法都呗看做对类的被动使用，都不会导致类的初始化。
+类的加载 类的加载指的是将类的.class文件中的二进制数据读入到内存中,将其放在运行时数据区的方法区内,然后在内存中创建一个java.lang.Class对象(规范并未说明 Class对象位于哪里, HotSpot虚拟机将其放在了方法区中)用来封装类在方法区内的数据结构。
+类的加载的最终产品是位于内存中的Class对象。 Class对象封装了类在方法区内的数据结构，并且向Java程序员提供了访问方法区内的数据结构的接口。
+有两种类型的类加载器：
+Java虚拟机自带的加载器 根类加载器(Bootstrap) 扩展类加载器(Extension) 系统(应用)类加载器(System) 用户自定义的类加载器 java.lang.ClassLoader的子类 用户可以定制类的加载方式 类加载器并不需要等到某个类被“首次主动使用”时再加载它。
+JVM规范允许类加载器在预料某个类将要被使用时就预先加载它，如果在预先加载的过程中遇到了.class文件缺失或存在错误，类加载器必须在程序首次主动使用该类时才报告错误(LinkageError 错误) 如果这个类直没有被程序主动使用，那么类加载器就不会报告错误。 类加载器 父亲也会委托其父亲的。
+类的连接 类被加载后，就进入连接阶段。连接就是将已经读入到内存的类的二进制数据合并到虚拟机的运行时环境中去。
+类的验证 类的验证的内容：</description></item></channel></rss>

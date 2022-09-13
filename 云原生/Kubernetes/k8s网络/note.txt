@@ -1,0 +1,17 @@
+https://www.yuque.com/wei.luo/
+https://www.yuque.com/wei.luo/cilium/ilfr1k
+
+往期视频资料：https://www.yuque.com/wei.luo/network
+
+kubeadm init --kubernetes-version=v1.20.5 --image-repository registry.aliyuncs.com/google_containers --pod-network-cidr=10.244.0.0/16 --service-cidr=10.96.0.0/12 --skip-phases=addon/kube-proxy --ignore-preflight-errors=Swap
+
+debug: "true"
+debug-verbose: "datapath"
+
+
+
+
+查看日志技巧：grep -i subsys=daemon
+downgrade特性降级的日志关键字：Falling
+
+35-06:00

@@ -1,0 +1,637 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "gnetId": null,
+  "graphTooltip": 0,
+  "id": 207,
+  "iteration": 1656303821247,
+  "links": [],
+  "panels": [
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "prometheus",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 0
+      },
+      "hiddenSeries": false,
+      "id": 6,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.4.5",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "irate(container_cpu_usage_seconds_total{namespace=\"$namespace\", pod=\"$pod\", container!=\"POD\"}[5m])",
+          "interval": "",
+          "legendFormat": "",
+          "queryType": "randomWalk",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "pod CPU",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:271",
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "$$hashKey": "object:272",
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "prometheus",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 12,
+        "y": 0
+      },
+      "hiddenSeries": false,
+      "id": 4,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.4.5",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "irate(container_network_receive_bytes_total{namespace=\"$namespace\", pod=\"$pod\"}[5m])",
+          "interval": "",
+          "legendFormat": "入口-[$namespace]-$pod",
+          "queryType": "randomWalk",
+          "refId": "A"
+        },
+        {
+          "expr": "irate(container_network_transmit_bytes_total{namespace=\"$namespace\", pod=\"$pod\"}[5m])",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "出口-[$namespace]-$pod",
+          "refId": "B"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "pod网络",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:303",
+          "format": "binBps",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "$$hashKey": "object:304",
+          "format": "bytes",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "prometheus",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 0,
+        "y": 8
+      },
+      "hiddenSeries": false,
+      "id": 2,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.4.5",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "container_memory_usage_bytes{namespace=\"${namespace}\",pod=\"${pod}\", container!=\"POD\"}",
+          "interval": "",
+          "legendFormat": "",
+          "queryType": "randomWalk",
+          "refId": "A"
+        },
+        {
+          "expr": "container_memory_max_usage_bytes{namespace=\"${namespace}\",pod=\"${pod}\"}",
+          "hide": true,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "B"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "pod内存",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:390",
+          "format": "bytes",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "$$hashKey": "object:391",
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    }
+  ],
+  "refresh": false,
+  "schemaVersion": 27,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "allValue": null,
+        "current": {
+          "selected": false,
+          "text": "common",
+          "value": "common"
+        },
+        "datasource": "prometheus",
+        "definition": "label_values(container_memory_usage_bytes, namespace)",
+        "description": null,
+        "error": null,
+        "hide": 0,
+        "includeAll": false,
+        "label": null,
+        "multi": false,
+        "name": "namespace",
+        "options": [
+          {
+            "selected": false,
+            "text": "monitoring",
+            "value": "monitoring"
+          },
+          {
+            "selected": false,
+            "text": "kube-system",
+            "value": "kube-system"
+          },
+          {
+            "selected": false,
+            "text": "logging",
+            "value": "logging"
+          },
+          {
+            "selected": false,
+            "text": "kubevirt",
+            "value": "kubevirt"
+          },
+          {
+            "selected": false,
+            "text": "cie",
+            "value": "cie"
+          },
+          {
+            "selected": false,
+            "text": "lcm",
+            "value": "lcm"
+          },
+          {
+            "selected": false,
+            "text": "cdi",
+            "value": "cdi"
+          },
+          {
+            "selected": false,
+            "text": "ccwork-gw",
+            "value": "ccwork-gw"
+          },
+          {
+            "selected": true,
+            "text": "common",
+            "value": "common"
+          },
+          {
+            "selected": false,
+            "text": "lma",
+            "value": "lma"
+          },
+          {
+            "selected": false,
+            "text": "cicd",
+            "value": "cicd"
+          },
+          {
+            "selected": false,
+            "text": "ccwork-uc",
+            "value": "ccwork-uc"
+          },
+          {
+            "selected": false,
+            "text": "ccwork-ac",
+            "value": "ccwork-ac"
+          },
+          {
+            "selected": false,
+            "text": "ccwork-mgt",
+            "value": "ccwork-mgt"
+          },
+          {
+            "selected": false,
+            "text": "ccwork",
+            "value": "ccwork"
+          },
+          {
+            "selected": false,
+            "text": "ccwork-op",
+            "value": "ccwork-op"
+          },
+          {
+            "selected": false,
+            "text": "ccwork-ta",
+            "value": "ccwork-ta"
+          },
+          {
+            "selected": false,
+            "text": "default",
+            "value": "default"
+          },
+          {
+            "selected": false,
+            "text": "ccwork-base",
+            "value": "ccwork-base"
+          }
+        ],
+        "query": {
+          "query": "label_values(container_memory_usage_bytes, namespace)",
+          "refId": "StandardVariableQuery"
+        },
+        "refresh": 0,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": {
+          "selected": false,
+          "text": "common-redis-redis4-ha-server-0",
+          "value": "common-redis-redis4-ha-server-0"
+        },
+        "datasource": "prometheus",
+        "definition": "label_values(container_memory_usage_bytes{namespace=\"$namespace\"}, pod)",
+        "description": "pod",
+        "error": null,
+        "hide": 0,
+        "includeAll": false,
+        "label": "pod",
+        "multi": false,
+        "name": "pod",
+        "options": [
+          {
+            "selected": false,
+            "text": "keepalived-fkdgx",
+            "value": "keepalived-fkdgx"
+          },
+          {
+            "selected": false,
+            "text": "keepalived-dssm5",
+            "value": "keepalived-dssm5"
+          },
+          {
+            "selected": false,
+            "text": "keepalived-vnkb4",
+            "value": "keepalived-vnkb4"
+          },
+          {
+            "selected": false,
+            "text": "common-postgresql-stolon-proxy-56f8cc87ff-lm6lk",
+            "value": "common-postgresql-stolon-proxy-56f8cc87ff-lm6lk"
+          },
+          {
+            "selected": false,
+            "text": "common-postgresql-stolon-sentinel-67fb4d6988-9twzm",
+            "value": "common-postgresql-stolon-sentinel-67fb4d6988-9twzm"
+          },
+          {
+            "selected": false,
+            "text": "common-postgresql-stolon-proxy-56f8cc87ff-gb2sf",
+            "value": "common-postgresql-stolon-proxy-56f8cc87ff-gb2sf"
+          },
+          {
+            "selected": false,
+            "text": "common-redis-redis4-ha-sentinel-2",
+            "value": "common-redis-redis4-ha-sentinel-2"
+          },
+          {
+            "selected": false,
+            "text": "common-redis-redis4-ha-sentinel-1",
+            "value": "common-redis-redis4-ha-sentinel-1"
+          },
+          {
+            "selected": false,
+            "text": "common-redis-redis4-ha-server-1",
+            "value": "common-redis-redis4-ha-server-1"
+          },
+          {
+            "selected": false,
+            "text": "common-redis-redis4-ha-sentinel-0",
+            "value": "common-redis-redis4-ha-sentinel-0"
+          },
+          {
+            "selected": true,
+            "text": "common-redis-redis4-ha-server-0",
+            "value": "common-redis-redis4-ha-server-0"
+          },
+          {
+            "selected": false,
+            "text": "common-etcd-etcd-1",
+            "value": "common-etcd-etcd-1"
+          },
+          {
+            "selected": false,
+            "text": "common-etcd-etcd-0",
+            "value": "common-etcd-etcd-0"
+          },
+          {
+            "selected": false,
+            "text": "common-mongodb-main-mongodb4-rs-main-0",
+            "value": "common-mongodb-main-mongodb4-rs-main-0"
+          },
+          {
+            "selected": false,
+            "text": "common-postgresql-stolon-keeper-1",
+            "value": "common-postgresql-stolon-keeper-1"
+          },
+          {
+            "selected": false,
+            "text": "common-etcd-etcd-2",
+            "value": "common-etcd-etcd-2"
+          },
+          {
+            "selected": false,
+            "text": "common-mongodb-msg-mongodb4-rs-msg-0",
+            "value": "common-mongodb-msg-mongodb4-rs-msg-0"
+          },
+          {
+            "selected": false,
+            "text": "common-redis-redis4-ha-server-2",
+            "value": "common-redis-redis4-ha-server-2"
+          },
+          {
+            "selected": false,
+            "text": "common-postgresql-stolon-keeper-0",
+            "value": "common-postgresql-stolon-keeper-0"
+          },
+          {
+            "selected": false,
+            "text": "common-postgresql-stolon-sentinel-67fb4d6988-kzqkg",
+            "value": "common-postgresql-stolon-sentinel-67fb4d6988-kzqkg"
+          },
+          {
+            "selected": false,
+            "text": "mariadb-ingress-884497c65-jhld6",
+            "value": "mariadb-ingress-884497c65-jhld6"
+          },
+          {
+            "selected": false,
+            "text": "mariadb-ingress-884497c65-mlh7v",
+            "value": "mariadb-ingress-884497c65-mlh7v"
+          },
+          {
+            "selected": false,
+            "text": "mariadb-ingress-error-pages-5ddb87bdd4-zplrd",
+            "value": "mariadb-ingress-error-pages-5ddb87bdd4-zplrd"
+          },
+          {
+            "selected": false,
+            "text": "mariadb-server-0",
+            "value": "mariadb-server-0"
+          },
+          {
+            "selected": false,
+            "text": "mariadb-server-2",
+            "value": "mariadb-server-2"
+          },
+          {
+            "selected": false,
+            "text": "mariadb-server-1",
+            "value": "mariadb-server-1"
+          }
+        ],
+        "query": {
+          "query": "label_values(container_memory_usage_bytes{namespace=\"$namespace\"}, pod)",
+          "refId": "StandardVariableQuery"
+        },
+        "refresh": 0,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      }
+    ]
+  },
+  "time": {
+    "from": "2022-06-23T03:00:00.000Z",
+    "to": "2022-06-23T03:20:59.000Z"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "ccwork-dashboard",
+  "uid": "Cc9GPmqnk",
+  "version": 17
+}

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Network on ljzsdut</title><link>https://note.ljzsdut.com/%E4%BA%91%E5%8E%9F%E7%94%9F/Kubernetes/k8s%E7%BD%91%E7%BB%9C/</link><description>Recent content in Network on ljzsdut</description><generator>Hugo -- gohugo.io</generator><atom:link href="https://note.ljzsdut.com/%E4%BA%91%E5%8E%9F%E7%94%9F/Kubernetes/k8s%E7%BD%91%E7%BB%9C/index.xml" rel="self" type="application/rss+xml"/><item><title/><link>https://note.ljzsdut.com/%E4%BA%91%E5%8E%9F%E7%94%9F/Kubernetes/k8s%E7%BD%91%E7%BB%9C/01-K8s%E6%89%81%E5%B9%B3%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B%E6%BC%AB%E8%B0%88/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E4%BA%91%E5%8E%9F%E7%94%9F/Kubernetes/k8s%E7%BD%91%E7%BB%9C/01-K8s%E6%89%81%E5%B9%B3%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B%E6%BC%AB%E8%B0%88/</guid><description>K8s网络模型漫谈 K8s网络模型 简单来说，Kubernetes引入的网络模型提出了下列基本要求。只要满足了这些要求，即可成为一个K8s网络方案供应商。
+每个Pod都有自己单独的IP地址
+Pod内部的所有容器共享Pod的IP地址且可以相互自由通信
+一个Node上的容器可以使用IP地址和其它Node上面的容器通信，且不需要通过NAT
+注意：这里只是说Pods之间跨Node通信时不可以用NAT，但是Pod访问其它实体比如google.com时可以使用NAT
+如果Pod使用宿主机网络环境，那么跨Node的容器间可以使用IP地址进行通信，且不需要通过NAT
+像Linux这种可以直接让Pod使用宿主机网络环境的平台，跨Node的容器间间通信也不可以通过NAT
+一个Node上面的agent（比如system daemon, kubelet等）可以使用IP地址和位于该Node上面的所有容器通信，且不需要通过NAT
+Pod之间容器通信所涉及到的隔离问题通过Network policy解决
+这种类型的网络模型也被称作为&amp;quot;扁平网络&amp;quot;。下图展示了这样的扁平网络。同时它也画出了宿主机环境既可能是二层互通的也可能是三层可达的这样一个事实。
+图：K8s扁平网络模型
+我们来细品这些要求。容器之间可以通过IP通信，且不能NAT，至少说明以下两点：
+不能NAT意味着Pod自己看自己的IP和别人(宿主机上面的agent或者其它Pod)看到自己的IP是一样的，对，一眼看穿、看懂对方的那种。而与此对应的是，如有NAT在捣鬼的话，当企业内部的机器访问躲在Nginx后面的服务时，二者相互看不清对方的本来面目。 容器之间IP互通，也就间接要求了宿主机之间是三层可达的。为什么呢？如果是宿主机环境是二层网络，那么天生就是三层可达的，但如果二层不通的话，就需要三层可达，不然从一个Pod发出的数据不是被憋死在宿主机上面了吗？对于在阿里云或腾讯云上租借VM作为Node来搭建K8s集群这样一个典型的使用场景来讲，更方便的姿势是直接将这些租借的VM置于同一个subnet。 Pod可以被当成是有独立、唯一IP地址的VM或者主机。此时Pod内的容器就很像VM或主机上的进程，它们都跑在相同的network namespace里面且共享同一个IP地址。当需要把运营环境从VM或主机迁移到Kubernetes时，采用这个模型会使得迁移前后，无论是RD还是OP对网络部分的理解相对一致，平滑地过度而不至于出现剧烈的变化。
+另外，因为K8s网络隔离是通过network policy完成的，而不是基于网络拓扑，这样便于理解和维护。
+可以看到K8s网络模型只是要求了容器间可以直接用IP地址自由地通信，但并没有强制要求Pod IP在K8s网络边界之外也可以路由。是的，K8s说&amp;quot;我只要扁平，剩下的我不管&amp;quot;。说到&amp;quot;K8s网络边界&amp;quot;也就引出了一个重要的概念：K8s网络和宿主机网络。
+宿主机网络：组成K8s集群的各个Node之间在没有安装K8s前就已经存在的网络拓扑。比如通过subnet将所有的Node放到一个LAN里面，或通过VLAN将其分属不同的子网但三层可通信，甚至让它们分布在同一个Region但不同的Zone里面。
+K8s网络：特点是扁平化，可以直接使用宿主机网络，也可以在每个Node上以一个bridge为网关管理该Node上的所有Pod。
+K8s网络和宿主机网络之间是有明显的边界存在的，当容器在跨Node间通信时，traffic会在这两个环境间来回穿梭跳跃。当我们审视K8s集群相关的traffic时，比较好的方式是提醒自己：traffic目前在什么位置？是在K8s网络内部还是已经流出K8s网络到了宿主机网络环境？
+一般会将宿主机网络称为Underyling network，在其之上的K8s网络方案虽然看起来变化多端，但实现方式无外乎以下几种模式：
+Overlay networks模式：Overlay模式是在二层或三层网络之上再构建起来一个独立的网络，这个网络通常会有自己独立的IP地址空间、交换或者路由的实现。VXLAN协议是目前最流行的Overlay网络隧道协议之一，显著优势就是灵活，对底层网络没有侵入性。 直接路由Pod IP模式：路由模式放弃了跨主机容器在L2的连通性，而专注于通过路由协议提供容器在L3的通信方案；路由模式更易于集成到现在的数据中心的基础设施之上，便捷地连接容器和主机，并在报文过滤和隔离方面有着更好的扩展能力及更精细的控制模型。 Underlay模式：路由模式放弃了跨主机容器在L2的连通性，而专注于通过路由协议提供容器在L3的通信方案；路由模式更易于集成到现在的数据中心的基础设施之上，便捷地连接容器和主机，并在报文过滤和隔离方面有着更好的扩展能力及更精细的控制模型。 CNI 在CNI标准出来之前的两个月，Docker公司主持起草了一个叫CNM(Container Network Model)规范。但与CNI的开放性相比，Docker坚持CNM只能基于 Docker 来设计，可对于K8s而言，Docker只是它编排大业里面可选择的众多容器引擎之一而已，因而容器网络作为K8s最基础也是最重要的部分绝不可能绑定在Docker身上。于是K8s在经过一番研究以及挣扎之后，毅然决定放弃CNM，自立CNI。
+我们今天依旧可以重温Kubernetes Network SIG 的Leader、Google 的工程师蒂姆·霍金（Tim Hockin）于2016年所写的文章：为何K8s不使用CNM https://kubernetes.io/blog/2016/01/why-kubernetes-doesnt-use-libnetwork/。行文中充满了所提Feature Request被Docker工程师无情拒绝时的无耐。其中提到一个非常有意思的细节：很多提交给Docker的问题，都被Docker RD以&amp;quot;working as intended&amp;quot;为由关闭。
+时至今日，回望来时路，在当时弃CNM而扶持CNI是一件挺冒险的事情，但如今再看CNCF landscape &amp;ldquo;Cloud Native Network&amp;quot;部分，看看那众多支持CNI的网络方案，用&amp;quot;百花齐放&amp;quot;和&amp;quot;百家争鸣&amp;quot;来形容绝不为过。
+图：CNCF landscape &amp;ldquo;Cloud Native Network&amp;rdquo;
+典型的CNI实现方案 K8s内建了一个kubenet，它可以支持一些基本的网络连接。但更普遍的使用方式是用第三方的网络方案。只要它满足CNI(Container Network Interface) 规范就可以以插件的方式在K8s环境使用。
+CNI插件的种类多种多样，但关键的功能不外乎以下两个:
+网络插件，主要负责将Pod插入到K8s网络或从K8s网络删除。</description></item><item><title/><link>https://note.ljzsdut.com/%E4%BA%91%E5%8E%9F%E7%94%9F/Kubernetes/k8s%E7%BD%91%E7%BB%9C/%E6%89%8B%E5%8A%A8%E5%86%85%E6%A0%B8%E5%AE%9E%E7%8E%B0VXLAN/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E4%BA%91%E5%8E%9F%E7%94%9F/Kubernetes/k8s%E7%BD%91%E7%BB%9C/%E6%89%8B%E5%8A%A8%E5%86%85%E6%A0%B8%E5%AE%9E%E7%8E%B0VXLAN/</guid><description>VXLAN MAC IN UDP
+大二层
+什么是VXLAN-华为VXLAN技术指导
+数据中心网络之Spine-Leaf 架构
+Linux手动实现VXLAN 点对点 点对多 对于多个Peer的处理方式(一般在测试环境中使用)：
+路由反射器RR（BGP EVPN）：</description></item></channel></rss>

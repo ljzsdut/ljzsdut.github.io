@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>如何访问Service on ljzsdut</title><link>https://note.ljzsdut.com/%E4%BA%91%E5%8E%9F%E7%94%9F/Kubernetes/k8s%E7%BD%91%E7%BB%9C/%E8%AE%BF%E9%97%AEService/</link><description>Recent content in 如何访问Service on ljzsdut</description><generator>Hugo -- gohugo.io</generator><atom:link href="https://note.ljzsdut.com/%E4%BA%91%E5%8E%9F%E7%94%9F/Kubernetes/k8s%E7%BD%91%E7%BB%9C/%E8%AE%BF%E9%97%AEService/index.xml" rel="self" type="application/rss+xml"/><item><title/><link>https://note.ljzsdut.com/%E4%BA%91%E5%8E%9F%E7%94%9F/Kubernetes/k8s%E7%BD%91%E7%BB%9C/%E8%AE%BF%E9%97%AEService/%E8%AE%BF%E9%97%AEiptables_svc%E5%90%84%E6%83%85%E5%BD%A2%E5%88%86%E6%9E%90/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E4%BA%91%E5%8E%9F%E7%94%9F/Kubernetes/k8s%E7%BD%91%E7%BB%9C/%E8%AE%BF%E9%97%AEService/%E8%AE%BF%E9%97%AEiptables_svc%E5%90%84%E6%83%85%E5%BD%A2%E5%88%86%E6%9E%90/</guid><description>myapp.yaml apiVersion: apps/v1 kind: Deployment metadata: name: myapp namespace: default spec: replicas: 3 selector: matchLabels: app: myapp release: canary strategy: type: RollingUpdate rollingUpdate: maxSurge: 1 maxUnavailable: 1 template: metadata: name: myapp labels: app: myapp release: canary spec: containers: - name: myapp image: registry-jinan-lab.inspurcloud.cn/testljz/myapp:v1 ports: - name: http containerPort: 80 --- apiVersion: v1 kind: Service metadata: name: myapp namespace: default spec: ports: - port: 80 protocol: TCP targetPort: 80 selector: app: myapp release: canary sessionAffinity: None type: ClusterIP 网络结构 root@4906e91c-f6a7-4686-945b-535203f14695-master-1:~# kubectl get svc myapp NAME TYPE CLUSTER-IP EXTERNAL-IP PORT(S) AGE myapp ClusterIP 10.</description></item><item><title/><link>https://note.ljzsdut.com/%E4%BA%91%E5%8E%9F%E7%94%9F/Kubernetes/k8s%E7%BD%91%E7%BB%9C/%E8%AE%BF%E9%97%AEService/%E8%AE%BF%E9%97%AEservice%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86-iptables%E6%A8%A1%E5%BC%8F/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E4%BA%91%E5%8E%9F%E7%94%9F/Kubernetes/k8s%E7%BD%91%E7%BB%9C/%E8%AE%BF%E9%97%AEService/%E8%AE%BF%E9%97%AEservice%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86-iptables%E6%A8%A1%E5%BC%8F/</guid><description>一个请求如何从 Service 到达 Pod ？ 备用地址
+怎么从传统的Linux网络视角理解容器网络？
+K8S Service 实战与原理初探
+K8s网络实战分析之service调用 推荐
+理解kubernetes环境的iptables
+K8S kube-proxy iptables 原理分析
+iptables-addrtype模块
+总结：
+iptables实现的svc的本质：dnat，实现目标IP从svc_ip向pod_ip的转换，最终将访问svc在本机上转换为了访问Pod。
+node节点上的iptables中有到达所有service的规则，service 的cluster IP并不是一个实际的IP，它的存在只是为了找出实际的endpoint地址，对达到cluster IP的报文都要进行DNAT为Pod IP(+port)，不同node上的报文实际上是通过POD IP传输的，cluster IP只是本node节点的一个概念，用于查找并DNAT，即目的地址为clutter IP的报文只是本node发送的，其他节点不会发送(也没有路由支持)，即默认下cluster ip仅支持本node节点的service访问
+今天我们来聊一个有意思的话题：当我们向一个K8s service发起请求后，这个请求是如何到达这个服务背后的Pod上的？
+为了便于讨论，我们把范围限定在：当我们从一个K8s cluster的Pod里面向位于同cluster的另一个service发起请求这样的场景。
+1. 基础知识 为什么二哥说这个话题有意思呢？它其实是一个包含多个基础知识的综合题。想要找到答案，得需要理解几个与之相关的重要基础知识：iptables、package flow和路由。我们先来依次过一下这几个基础概念。
+1.1 Service和Pod关系 首先我们先来复习一下Service和Pod之间的关系。Service存在的意义是将背后的Pod聚合在一起，以单一入口的方式对外提供服务。这里的外部访问者既可能是K8s cluster内部的Pod，也可以是K8s外部的进程。
+我们都知道service有一个可以在K8s内部访问到的虚拟IP地址（Cluster IP），这个地址你可以在kubedns里面找到，所以请求端通常通过类似下面这个FQDN prometheus-service.LanceAndCloudnative.svc.cluster.local来访问一个服务。但如果你K8s Node上无论是执行 ip a 还是 netstat -an 都无法找到这个虚拟地址。
+另外我们还知道一个service背后会站着若干个Pod，每个Pod有自己的IP地址。如图1所示。
+图 1：Service和Pod之间的关系
+1.2 netfilter package flow Linux 在内核网络组件中很多关键位置处都布置了 netfilter 过滤器。Netfilter 框架是 Linux 防火墙和网络的主要维护者罗斯迪·鲁塞尔（Rusty Russell）提出并主导设计的，它围绕网络层（IP 协议）的周围，埋下了五个钩子（Hooks），每当有数据包流到网络层，经过这些钩子时，就会自动触发由内核模块注册在这里的回调函数，程序代码就能够通过回调来干预 Linux 的网络通信。
+图2所示的PREROUTING、INPUT、OUTPUT、FORWARD、POSTROUTING即为这里提到的5个钩子。每个钩子都像珍珠项链一样串联着若干规则，从而形成一个链。这些规则散落在五个表中，它们分布是NAT、Mangle、RAW、Security和Filter。其中Security表不常用，除去它，我们把其它部分合起来简称五链四表。</description></item><item><title/><link>https://note.ljzsdut.com/%E4%BA%91%E5%8E%9F%E7%94%9F/Kubernetes/k8s%E7%BD%91%E7%BB%9C/%E8%AE%BF%E9%97%AEService/%E8%AE%BF%E9%97%AEservice%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86-ipvs%E6%A8%A1%E5%BC%8F/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E4%BA%91%E5%8E%9F%E7%94%9F/Kubernetes/k8s%E7%BD%91%E7%BB%9C/%E8%AE%BF%E9%97%AEService/%E8%AE%BF%E9%97%AEservice%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86-ipvs%E6%A8%A1%E5%BC%8F/</guid><description>「深度」这一次，彻底搞懂 kube-proxy IPVS 模式的工作原理！（手动模拟）
+k8s集群中ipvs负载详解 推荐
+IPVS从入门到精通kube-proxy实现原理
+k8s技术圈：ipvs 基本介绍
+https://www.jianshu.com/p/e53e24c27efe</description></item></channel></rss>

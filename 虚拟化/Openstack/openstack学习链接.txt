@@ -1,0 +1,15 @@
+cinder：
+	cinder-lvm：https://www.cnblogs.com/sammyliu/p/4159147.html
+	cinder：https://www.cnblogs.com/sammyliu/p/4219974.html
+
+
+Neutron：
+	br-int与br-tun：https://www.cnblogs.com/sammyliu/p/4201143.html   (通过ovs-ofctl show br-tun查看port对应的id)
+	router与dhcp：https://www.cnblogs.com/sammyliu/p/4201721.html
+	VLAN类型的provider：https://www.cnblogs.com/sammyliu/p/4626419.html
+	GRE/VXLAN：https://www.cnblogs.com/sammyliu/p/4627230.html
+
+
+glance：
+
+

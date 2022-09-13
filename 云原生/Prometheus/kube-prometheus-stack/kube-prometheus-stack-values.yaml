@@ -1,0 +1,671 @@
+# ## Provide custom recording or alerting rules to be deployed into the cluster.
+# ## operater根据配置生成PrometheusRule对象
+# additionalPrometheusRules: 
+#   - name: blackbox  #PrometheusRules对象的name，命名需要符合规范
+#     groups:
+#       - name: Blackbox
+#         rules:
+#         - alert: BlackboxProbeHttpFailure
+#           annotations:
+#             summary: "Blackbox probe HTTP failure (instance {{ $labels.instance }})"
+#             description: "HTTP status code is not 200-399\n  VALUE = {{ $value }}\n  LABELS: {{ $labels }}"
+#           expr: probe_http_status_code <= 199 OR probe_http_status_code >= 400
+#           for: 1m
+#           labels:
+#             severity: critical
+#         - alert: BlackboxSslCertificateWillExpireSoon
+#           expr: probe_ssl_earliest_cert_expiry - time() < 86400 * 30
+#           for: 5m
+#           labels:
+#             severity: warning
+#           annotations:
+#             summary: "Blackbox SSL certificate will expire soon (instance {{ $labels.instance }})"
+#             description: "SSL certificate expires in 30 days\n  VALUE = {{ $value }}\n  LABELS: {{ $labels }}"
+#         - alert: BlackboxSslCertificateExpired
+#           expr: probe_ssl_earliest_cert_expiry - time() <= 0
+#           for: 5m
+#           labels:
+#             severity: critical
+#           annotations:
+#             summary: "Blackbox SSL certificate expired (instance {{ $labels.instance }})"
+#             description: "SSL certificate has expired already\n  VALUE = {{ $value }}\n  LABELS: {{ $labels }}"
+
+## Component scraping etcd
+##
+kubeEtcd:
+  enabled: ture
+
+  ## If your etcd is not deployed as a pod, specify IPs it can be found on
+  ##
+  endpoints:
+  - 10.211.55.41
+
+  ## Etcd service. If using kubeEtcd.endpoints only the port and targetPort are used
+  ##
+  service:
+    port: 2381
+    targetPort: 2381
+    # selector:
+    #   component: etcd
+
+  ## Configure secure access to the etcd cluster by loading a secret into prometheus and
+  ## specifying security configuration below. For example, with a secret named etcd-client-cert
+  ##
+  ## serviceMonitor:
+  ##   scheme: https
+  ##   insecureSkipVerify: false
+  ##   serverName: localhost
+  ##   caFile: /etc/prometheus/secrets/etcd-client-cert/etcd-ca
+  ##   certFile: /etc/prometheus/secrets/etcd-client-cert/etcd-client
+  ##   keyFile: /etc/prometheus/secrets/etcd-client-cert/etcd-client-key
+  ##
+  serviceMonitor:
+    ## Scrape interval. If not set, the Prometheus default scrape interval is used.
+    ##
+    interval: ""
+    scheme: http
+    insecureSkipVerify: true
+    serverName: ""
+    caFile: "/etc/prometheus/secrets/etcd-ssl/ca.pem"
+    certFile: "/etc/prometheus/secrets/etcd-ssl/etcd.pem"
+    keyFile: "/etc/prometheus/secrets/etcd-ssl/etcd-key.pem"
+
+    ## 	metric relabel configs to apply to samples before ingestion.
+    ##
+    metricRelabelings: []
+    # - action: keep
+    #   regex: 'kube_(daemonset|deployment|pod|namespace|node|statefulset).+'
+    #   sourceLabels: [__name__]
+
+    # 	relabel configs to apply to samples before ingestion.
+    ##
+    relabelings: []
+    # - sourceLabels: [__meta_kubernetes_pod_node_name]
+    #   separator: ;
+    #   regex: ^(.*)$
+    #   targetLabel: nodename
+    #   replacement: $1
+    #   action: replace
+
+## Component scraping the kube controller manager
+##
+kubeControllerManager:
+  enabled: true
+
+  ## If your kube controller manager is not deployed as a pod, specify IPs it can be found on
+  ##
+  endpoints:
+  - 10.211.55.41
+
+  ## If using kubeControllerManager.endpoints only the port and targetPort are used
+  ##
+  service:
+    port: 10252
+    targetPort: 10252
+    # selector:
+    #   component: kube-controller-manager
+
+  serviceMonitor:
+    ## Scrape interval. If not set, the Prometheus default scrape interval is used.
+    ##
+    interval: ""
+
+    ## Enable scraping kube-controller-manager over https.
+    ## Requires proper certs (not self-signed) and delegated authentication/authorization checks
+    ##
+    https: false
+
+    # Skip TLS certificate validation when scraping
+    insecureSkipVerify: null
+
+    # Name of the server to use when validating TLS certificate
+    serverName: null
+
+    ## 	metric relabel configs to apply to samples before ingestion.
+    ##
+    metricRelabelings: []
+    # - action: keep
+    #   regex: 'kube_(daemonset|deployment|pod|namespace|node|statefulset).+'
+    #   sourceLabels: [__name__]
+
+    # 	relabel configs to apply to samples before ingestion.
+    ##
+    relabelings: []
+    # - sourceLabels: [__meta_kubernetes_pod_node_name]
+    #   separator: ;
+    #   regex: ^(.*)$
+    #   targetLabel: nodename
+    #   replacement: $1
+    #   action: replace
+
+## Component scraping kube scheduler
+##
+kubeScheduler:
+  enabled: true
+
+  ## If your kube scheduler is not deployed as a pod, specify IPs it can be found on
+  ##
+  endpoints:
+  - 10.211.55.41
+
+  ## If using kubeScheduler.endpoints only the port and targetPort are used
+  ##
+  service:
+    port: 10251
+    targetPort: 10251
+    # selector:
+    #   component: kube-scheduler
+
+  serviceMonitor:
+    ## Scrape interval. If not set, the Prometheus default scrape interval is used.
+    ##
+    interval: ""
+    ## Enable scraping kube-scheduler over https.
+    ## Requires proper certs (not self-signed) and delegated authentication/authorization checks
+    ##
+    https: false
+
+    ## Skip TLS certificate validation when scraping
+    insecureSkipVerify: null
+
+    ## Name of the server to use when validating TLS certificate
+    serverName: null
+
+    ## 	metric relabel configs to apply to samples before ingestion.
+    ##
+    metricRelabelings: []
+    # - action: keep
+    #   regex: 'kube_(daemonset|deployment|pod|namespace|node|statefulset).+'
+    #   sourceLabels: [__name__]
+
+    # 	relabel configs to apply to samples before ingestion.
+    ##
+    relabelings: []
+    # - sourceLabels: [__meta_kubernetes_pod_node_name]
+    #   separator: ;
+    #   regex: ^(.*)$
+    #   targetLabel: nodename
+    #   replacement: $1
+    #   action: replace
+
+## Component scraping kube proxy
+##
+kubeProxy:
+  enabled: true
+
+  ## If your kube proxy is not deployed as a pod, specify IPs it can be found on
+  ##
+  endpoints:
+  - 10.211.55.41
+  - 10.211.55.42
+  - 10.211.55.43
+
+  service:
+    port: 10249
+    targetPort: 10249
+    # selector:
+    #   k8s-app: kube-proxy
+
+  serviceMonitor:
+    ## Scrape interval. If not set, the Prometheus default scrape interval is used.
+    ##
+    interval: ""
+
+    ## Enable scraping kube-proxy over https.
+    ## Requires proper certs (not self-signed) and delegated authentication/authorization checks
+    ##
+    https: false
+
+    ## 	metric relabel configs to apply to samples before ingestion.
+    ##
+    metricRelabelings: []
+    # - action: keep
+    #   regex: 'kube_(daemonset|deployment|pod|namespace|node|statefulset).+'
+    #   sourceLabels: [__name__]
+
+    # 	relabel configs to apply to samples before ingestion.
+    ##
+    relabelings: []
+    # - action: keep
+    #   regex: 'kube_(daemonset|deployment|pod|namespace|node|statefulset).+'
+    #   sourceLabels: [__name__]
+
+## Configuration for alertmanager. ref: https://prometheus.io/docs/alerting/alertmanager/
+##
+alertmanager:
+  # alertmanager的配置文件,opertaer会将其配置为secret/alertmanager-prometheus-operator-alertmanager
+  config:
+    global:
+      resolve_timeout: 5m
+    route:
+      receiver: dingtalk
+      group_wait: 30s
+      group_interval: 5m
+      repeat_interval: 1h
+      group_by: [alertname]
+      routes:
+      - receiver: "null"
+        group_wait: 10s
+        repeat_interval: 24h
+        match:
+          severity: none
+          alertname: Watchdog
+      - receiver: "null"
+        group_wait: 10s
+        repeat_interval: 24h
+        match:
+          alertname: CPUThrottlingHigh
+          container: config-reloader
+      - receiver: "null"
+        group_wait: 10s
+        repeat_interval: 24h
+        match:
+          alertname: CPUThrottlingHigh
+          container: rules-configmap-reloader
+      - receiver: dingtalk
+        match:
+          severity: warning
+      - receiver: dingtalk
+        group_wait: 10s
+        repeat_interval: 5m
+        match:
+          severity: critical
+    receivers:
+    - name: "null"
+    - name: dingtalk
+      webhook_configs:
+      - url: 'http://webhook-dingtalk.monitoring:8060/dingtalk/webhook1/send'
+        send_resolved: true
+
+  ingress:
+    enabled: true
+    annotations: {}
+    labels: {}
+
+    hosts: 
+      - alertmanager.ljzsdut.com
+    paths: 
+    - /
+
+    tls: 
+    - secretName: rencaiyoujia-tls-secret
+      hosts:
+      - alertmanager.ljzsdut.com
+  
+  #side-car limits
+  configReloaderCpu: 300m
+  configReloaderMemory: 25Mi
+
+  ## Settings affecting alertmanagerSpec
+  ## ref: https://github.com/coreos/prometheus-operator/blob/master/Documentation/api.md#alertmanagerspec
+  ##
+  alertmanagerSpec:
+
+    ## Size is the expected size of the alertmanager cluster. The controller will eventually make the size of the
+    ## running cluster equal to the expected size.
+    replicas: 1
+
+    ## Time duration Alertmanager shall retain data for. Default is '120h', and must match the regular expression
+    ## [0-9]+(ms|s|m|h) (milliseconds seconds minutes hours).
+    ##
+    retention: 120h
+
+    ## Storage is the definition of how storage will be used by the Alertmanager instances.
+    ## ref: https://github.com/coreos/prometheus-operator/blob/master/Documentation/user-guides/storage.md
+    ##
+    # storage:
+    #   volumeClaimTemplate:
+    #     spec:
+    #       storageClassName: glusterfs-r1
+    #       accessModes: ["ReadWriteOnce"]
+    #       resources:
+    #         requests:
+    #           storage: 50Gi
+
+    ## Define which Nodes the Pods are scheduled on.
+    ## ref: https://kubernetes.io/docs/user-guide/node-selection/
+    ##
+    nodeSelector: {}
+
+    # ## Define resources requests and limits for single Pods.
+    # ## ref: https://kubernetes.io/docs/user-guide/compute-resources/
+    # ##
+    # resources:
+    #   limits:
+    #     cpu: "1"
+    #     memory: 1000Mi
+    #   requests:
+    #     cpu: 750m
+    #     memory: 750Mi
+
+    ## Pod anti-affinity can prevent the scheduler from placing Prometheus replicas on the same node.
+    ## The default value "soft" means that the scheduler should *prefer* to not schedule two replica pods onto the same node but no guarantee is provided.
+    ## The value "hard" means that the scheduler is *required* to not schedule two replica pods onto the same node.
+    ## The value "" will disable pod anti-affinity so that no anti-affinity rules will be configured.
+    ##
+    podAntiAffinity: ""
+
+    ## If anti-affinity is enabled sets the topologyKey to use for anti-affinity.
+    ## This can be changed to, for example, failure-domain.beta.kubernetes.io/zone
+    ##
+    podAntiAffinityTopologyKey: kubernetes.io/hostname
+
+    ## Assign custom affinity rules to the alertmanager instance
+    ## ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/
+    ##
+    affinity: {}
+    # nodeAffinity:
+    #   requiredDuringSchedulingIgnoredDuringExecution:
+    #     nodeSelectorTerms:
+    #     - matchExpressions:
+    #       - key: kubernetes.io/e2e-az-name
+    #         operator: In
+    #         values:
+    #         - e2e-az1
+    #         - e2e-az2
+
+    ## If specified, the pod's tolerations.
+    ## ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
+    ##
+    tolerations: []
+    # - key: "key"
+    #   operator: "Equal"
+    #   value: "value"
+    #   effect: "NoSchedule"
+
+## Using default values from https://github.com/helm/charts/blob/master/stable/grafana/values.yaml
+##
+grafana:
+  enabled: true
+  adminPassword: "rcyj!QAZ2wsx"
+  ingress:
+    ## If true, Grafana Ingress will be created
+    ##
+    enabled: true
+
+    ## Annotations for Grafana Ingress
+    ##
+    annotations: {}
+      # kubernetes.io/ingress.class: nginx
+      # kubernetes.io/tls-acme: "true"
+
+    ## Labels to be added to the Ingress
+    ##
+    labels: {}
+
+    ## Hostnames.
+    ## Must be provided if Ingress is enable.
+    ##
+    hosts:
+      - grafana.ljzsdut.com
+
+    ## Path for grafana ingress
+    path: /
+
+    ## TLS configuration for grafana Ingress
+    ## Secret must be manually created in the namespace
+    ##
+    tls:
+    - secretName: rencaiyoujia-tls-secret
+      hosts:
+      - grafana.ljzsdut.com
+
+## Manages Prometheus and Alertmanager components
+##
+prometheusOperator:
+  ## Resource limits & requests
+  ##
+  resources:
+    limits:
+      cpu: 200m
+      memory: 500Mi
+    requests:
+      cpu: 100m
+      memory: 50Mi
+
+
+  ## Define which Nodes the Pods are scheduled on.
+  ## ref: https://kubernetes.io/docs/user-guide/node-selection/
+  ##
+  nodeSelector: {}
+
+  ## Tolerations for use with node taints
+  ## ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
+  ##
+  tolerations: []
+  # - key: "key"
+  #   operator: "Equal"
+  #   value: "value"
+  #   effect: "NoSchedule"
+
+  ## Assign custom affinity rules to the prometheus operator
+  ## ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/
+  ##
+  affinity: {}
+    # nodeAffinity:
+    #   requiredDuringSchedulingIgnoredDuringExecution:
+    #     nodeSelectorTerms:
+    #     - matchExpressions:
+    #       - key: kubernetes.io/e2e-az-name
+    #         operator: In
+    #         values:
+    #         - e2e-az1
+    #         - e2e-az2
+
+  configReloaderCpu: 200m
+  configReloaderMemory: 25Mi
+
+## Deploy a Prometheus instance
+##
+prometheus:
+  ingress:
+    enabled: true
+    annotations: {}
+    labels: {}
+
+    ## Hostnames.
+    ## Must be provided if Ingress is enabled.
+    ##
+    hosts:
+      - prometheus.ljzsdut.com
+
+    ## Paths to use for ingress rules - one path should match the prometheusSpec.routePrefix
+    ##
+    paths: 
+    - /
+
+    ## TLS configuration for Prometheus Ingress
+    ## Secret must be manually created in the namespace
+    ##
+    tls:
+      - secretName: rencaiyoujia-tls-secret
+        hosts:
+          - prometheus.ljzsdut.com
+
+  configReloaderCpu: 300m
+  configReloaderMemory: 25Mi
+
+  ## Settings affecting prometheusSpec
+  ## ref: https://github.com/coreos/prometheus-operator/blob/master/Documentation/api.md#prometheusspec
+  ##
+  prometheusSpec:
+    ## Image of Prometheus.
+    ##
+    image:
+      repository: quay.io/prometheus/prometheus
+      tag: v2.22.2
+      sha: ""
+
+    ## Tolerations for use with node taints
+    ## ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
+    ##
+    tolerations: []
+    #  - key: "key"
+    #    operator: "Equal"
+    #    value: "value"
+    #    effect: "NoSchedule"
+
+
+    ## Define which Nodes the Pods are scheduled on.
+    ## ref: https://kubernetes.io/docs/user-guide/node-selection/
+    ##
+    nodeSelector: {}
+
+    ## How long to retain metrics
+    ##
+    retention: 10d
+
+    ## Maximum size of metrics
+    ##
+    retentionSize: ""
+
+    ## Number of Prometheus replicas desired
+    ##
+    replicas: 1
+
+    affinity: {}
+    # nodeAffinity:
+    #   requiredDuringSchedulingIgnoredDuringExecution:
+    #     nodeSelectorTerms:
+    #     - matchExpressions:
+    #       - key: kubernetes.io/e2e-az-name
+    #         operator: In
+    #         values:
+    #         - e2e-az1
+    #         - e2e-az2
+
+
+    # ## Resource limits & requests
+    # ##
+    # resources:
+    #   limits:
+    #     cpu: 1500m
+    #     memory: 4500Mi
+    #   requests:
+    #     cpu: 1500m
+    #     memory: 1500Mi
+
+    # ## Prometheus StorageSpec for persistent data
+    # ## ref: https://github.com/coreos/prometheus-operator/blob/master/Documentation/user-guides/storage.md
+    # ##
+    # storageSpec: 
+    #   volumeClaimTemplate:
+    #     spec:
+    #       storageClassName: glusterfs-r1
+    #       accessModes: ["ReadWriteOnce"]
+    #       resources:
+    #         requests:
+    #           storage: 50Gi
+    
+    additionalAlertManagerConfigs: []
+    # 此处书写Prometheus原生的scrape配置
+    additionalScrapeConfigs:
+      - job_name: 'kubernetes-http-services'
+        metrics_path: /probe
+        params:
+          module: [http_2xx]  # 使用定义的http模块
+        kubernetes_sd_configs:
+        - role: service  # service 类型的服务发现
+        relabel_configs:
+        # 只有service的annotation中配置了 prometheus.io/http_probe=true 的才进行发现
+        - source_labels: [__meta_kubernetes_service_annotation_prometheus_io_http_probe]
+          action: keep
+          regex: true
+        - source_labels: [__address__]
+          target_label: __param_target
+        - target_label: __address__
+          replacement: blackbox-exporter:9115  #blackbox-exporter访问地址
+        - source_labels: [__param_target]
+          target_label: instance
+        - action: labelmap
+          regex: __meta_kubernetes_service_label_(.+)
+        - source_labels: [__meta_kubernetes_namespace]
+          target_label: kubernetes_namespace
+        - source_labels: [__meta_kubernetes_service_name]
+          target_label: kubernetes_name
+      - job_name: 'kubernetes-ingresses'
+        metrics_path: /probe
+        params:
+          module: [http_2xx]  # 使用定义的http模块
+        kubernetes_sd_configs:
+        - role: ingress  # ingress 类型的服务发现
+        relabel_configs:
+        # 只有ingress的annotation中配置了 prometheus.io/http_probe=true的才进行发现
+        - source_labels: [__meta_kubernetes_ingress_annotation_prometheus_io_http_probe]
+          action: keep
+          regex: true
+        - source_labels: [__meta_kubernetes_ingress_scheme,__address__,__meta_kubernetes_ingress_path]
+          regex: (.+);(.+);(.+)
+          replacement: ${1}://${2}${3}
+          target_label: __param_target
+        # prometheus.io/http_probe_path=/ping
+        - source_labels: [__meta_kubernetes_ingress_scheme,__address__,__meta_kubernetes_ingress_annotation_prometheus_io_http_probe_path,__meta_kubernetes_ingress_annotationpresent_prometheus_io_http_probe_path]
+          regex: (.+);(.+);(.+);true
+          replacement: ${1}://${2}${3}
+          target_label: __param_target
+        - target_label: __address__
+          replacement: blackbox-exporter:9115
+        - source_labels: [__param_target]
+          target_label: instance
+        - action: labelmap
+          regex: __meta_kubernetes_ingress_label_(.+)
+        - source_labels: [__meta_kubernetes_namespace]
+          target_label: kubernetes_namespace
+        - source_labels: [__meta_kubernetes_ingress_name]
+          target_label: kubernetes_name
+      - job_name: 'blackbox_static_http_2xx'
+        scrape_interval: 45s
+        metrics_path: /probe
+        params:
+          module: [http_2xx]  # Look for a HTTP 200 response.
+        static_configs:
+          - targets:
+            - https://www.xiaocaiyoujia.com
+            - https://www.xiaocaiyoujia.com/h5/
+            - https://www.xiaocaiyoujia.com/h5_ent/
+            - https://oppc.rencaiyoujia.com/ping
+            - https://nacos.rencaiyoujia.com/nacos
+            - https://risk-rule.rencaiyoujia.com/ping
+            - https://www.rencaiyoujia.com/govapi/test/ping
+            - https://www.rencaiyoujia.com
+            - https://m.rencaiyoujia.com
+            - https://www.m.rencaiyoujia.com
+            - https://fa.rencaiyoujia.com
+            - https://rencaiyoujia.com
+            - https://rcpgadmin.rencaiyoujia.com
+            - https://dsfh5.rencaiyoujia.com
+            - https://assessh5.rencaiyoujia.com
+            - https://ommp.rencaiyoujia.com
+            - https://ommp.rencaiyoujia.com
+            - https://risk-frontend.rencaiyoujia.com
+            - https://withdraw.rencaiyoujia.com
+            - https://wallet.rencaiyoujia.com
+            - https://s.rencaiyoujia.com
+            - https://www.m.govjob.rencaiyoujia.com/
+            - https://govjob.rencaiyoujia.com/auth
+            - https://govjobadmin.rencaiyoujia.com/
+            - https://talent-api.rencaiyoujia.com/auth.api/health
+            - https://runtime.rencaiyoujia.com
+            - https://hcm.rencaiyoujia.com
+            - https://hcmrt.rencaiyoujia.com/ping
+            - https://hcmapi.rencaiyoujia.com/ping
+            - https://pm.rencaiyoujia.cn
+            - https://gitlab.rencaiyoujia.cn
+        relabel_configs:
+          - source_labels: [__address__]
+            target_label: __param_target
+          - source_labels: [__param_target]
+            target_label: instance
+          - target_label: __address__
+            replacement: prometheus-blackbox-exporter:9115
+    # 生成ServiceMonitor对象      
+    additionalServiceMonitors: []
+    # 生成PodMonitor对象
+    additionalPodMonitors: []
+
+# 子chart的value配置
+kube-state-metrics:
+  image:
+    repository: registry.cn-qingdao.aliyuncs.com/ljzsdut/k8simg
+    tag: k8s.gcr.io--kube-state-metrics--kube-state-metrics---v1.9.8
+    pullPolicy: IfNotPresent

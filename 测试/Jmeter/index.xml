@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ljzsdut</title><link>https://note.ljzsdut.com/%E6%B5%8B%E8%AF%95/Jmeter/</link><description>Recent content on ljzsdut</description><generator>Hugo -- gohugo.io</generator><atom:link href="https://note.ljzsdut.com/%E6%B5%8B%E8%AF%95/Jmeter/index.xml" rel="self" type="application/rss+xml"/><item><title/><link>https://note.ljzsdut.com/%E6%B5%8B%E8%AF%95/Jmeter/00-Jmeter%E5%85%A5%E9%97%A8%E4%BB%8B%E7%BB%8D/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E6%B5%8B%E8%AF%95/Jmeter/00-Jmeter%E5%85%A5%E9%97%A8%E4%BB%8B%E7%BB%8D/</guid><description>一、创建helloworld测试用例 创建一个最简单的测试用例：线程组&amp;ndash;&amp;gt;取样器&amp;ndash;&amp;gt;断言&amp;ndash;&amp;gt;监听器(结果)
+Jmeter 用户行为 线程组 用户(用户数) 取样器 请求(协议) 断言 判断请求是否成功 监听器 结果分析 添加线程组 添加取样器 在线程组中添加取样器（HTTP请求）
+修改取样器参数
+添加配置元件——Cookie管理器 添加许可，无需修改
+添加监听器 监听器作用是为了查看结果
+运行测试用例 二、Jmeter元件 注意：元件是有作用域的。
+测试计划 线程组 线程组可以理解为一个任务，其中的每个线程相当于一个用户。
+常用的线程组类型 普通线程组 setUp线程组：会在所有的线程组运行之前运行，一般用于初始化操作 tearDown线程组：会在所有的线程组运行之后运行，一般用于收尾操作 相关配置 线程数：相当于模拟的用户数。（每个请求也是依次执行的，如果要同时执行，可以使用”同步定时器“）
+Ramp-Up：表示使用多长时间启动所有的线程。
+参考值：50&amp;lt;线程数/ramp-up&amp;lt;100 如果太大，会导致第1个线程已经运行完毕退出，而后面的线程还没有启动，达不到并发的效果。 如果太小，短时间内启动大量的线程会导致Jmeter出现瓶颈，而不是服务端出现瓶颈。 循环次数：
+永远+调度器：调度器就是一个定时任务
+断言 监听器 监听器主要是为了查看jmeter的结果。可以采用不同的监听器从不同的维度分析结果：
+查看结果树 汇总报告 聚合报告 图形结果 定时器 固定定时器，类似loadruner中的思考时间：尽可能模拟用户使用情况 同步定时器，类似loadruner中的集合点：让所有的请求在同一时刻同时发送
+配置元件 配置元件是对jmeter的测试脚本做一些配置。
+http请求默认值 可以为多个http取样器设置默认参数，这样就可以不用为每个http采样器设置了。一般用于多个http采样器共用参数的设置。例如请求地址
+逻辑控制器 逻辑控制器类似于编程语言的流程控制语句，控制取样器等的处理逻辑。比如事务控制器可以让一组请求组成一个事务进行测试。
+三、参数化 将参数值放到一个文件中，jmeter从文件中读取参数值。文件格式可以是.csv或.txt。
+➜ ~ cat Desktop/jmeter相关/login_users.txt sq001,123456 sq002,123456 sq003,123456 sq004,123456 sq005,123456 sq006,123456 sq007,123456 sq008,123456 sq009,123456 sq0010,123456 文件名可以写绝对路径，也可以写相对路径。如果有分布式的情况,且分布式的几台机器位于不同的操作系统，那么应该写相对路径。</description></item><item><title/><link>https://note.ljzsdut.com/%E6%B5%8B%E8%AF%95/Jmeter/01-Jmeter%E5%85%83%E4%BB%B6%E4%BD%9C%E7%94%A8%E5%9F%9F%E4%B8%8E%E5%8F%98%E9%87%8F/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E6%B5%8B%E8%AF%95/Jmeter/01-Jmeter%E5%85%83%E4%BB%B6%E4%BD%9C%E7%94%A8%E5%9F%9F%E4%B8%8E%E5%8F%98%E9%87%8F/</guid><description>元件作用域 概述 元件的作用域是靠测试计划的树型结构中元件的父子关系来确定的.
+作用域的原则 取样器(sampler)元件不和其它元件相互作用，因此不存在作用域的问题。 逻辑控制器(Logic Controller)元件只对其子节点中的取样器和逻辑控制器作用。 除取样器和逻辑控制器元件外，其他6类元件，如果是某个sampler的子节点，则该元件仅对其父子节点起作用。 除取样器和逻辑控制器元件外的其他6类元件，如果其父节点不是sampler，则其作用域是该元件父节点下的其他所有后代节点(包括子节点，子节点的子节点等)。 变量 全局变量定义 测试计划上定义 在”测试计划“上定义的变量，是全局变量。
+用户自定义变量 局部变量通过”用户自定义变量“这个元件实现。”用户自定义变量“元件会在测试计划开始执行之前进行初始化，所以”用户自定义变量“无论定义在哪里，其作用域为整个测试计划。
+局部变量 如果要要定义取样器级别的变量。可以在取样器详情里定义”参数“。
+变量引用 使用${VAR_NAME}的方式引用变量。</description></item><item><title/><link>https://note.ljzsdut.com/%E6%B5%8B%E8%AF%95/Jmeter/02-Jmeter%E8%84%9A%E6%9C%AC%E5%BD%95%E5%88%B6/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E6%B5%8B%E8%AF%95/Jmeter/02-Jmeter%E8%84%9A%E6%9C%AC%E5%BD%95%E5%88%B6/</guid><description>录制原理 将Jmeter设置为代理服务器，然后让浏览器访问代理服务器Jmeter，从而获取并记录请求到指定的线程组下。
+操作步骤 1、添加并启动jmeter代理服务器
+调整参数，并”启动“：
+2、设置浏览器使用代理服务器
+略
+3、在浏览器上进行操作，完成后关闭代理服务器。
+4、在录制的线程组下，对取样器进行帅选，过滤掉无关的请求。
+筛选的过程中,可以是用ctrl+F和多选操作。</description></item><item><title/><link>https://note.ljzsdut.com/%E6%B5%8B%E8%AF%95/Jmeter/03-Jmeter%E9%9B%86%E5%90%88%E7%82%B9%E6%8A%80%E6%9C%AF/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E6%B5%8B%E8%AF%95/Jmeter/03-Jmeter%E9%9B%86%E5%90%88%E7%82%B9%E6%8A%80%E6%9C%AF/</guid><description>使用场景 Jmeter中一个线程相当于一个用户，而线程是有CPU调度的。如果要控制的并发行为等，就需要使用到Jmeter的集合点技术。
+Jmeter通过添加”定时器“实现。
+同步定时器 同步定时器的目的：将线程block，直到被block的线程数达到指定的数量后，这些线程同时进行后面的操作，达到并发的效果。
+如果“模拟用户组的数量”设置为0，则取值为线程组的线程数。
+超时时间：超时后，及时梳理达不到设定值，也会进行后续操作。</description></item><item><title/><link>https://note.ljzsdut.com/%E6%B5%8B%E8%AF%95/Jmeter/04-Jmeter%E6%A3%80%E6%9F%A5%E7%82%B9-%E6%96%AD%E8%A8%80/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E6%B5%8B%E8%AF%95/Jmeter/04-Jmeter%E6%A3%80%E6%9F%A5%E7%82%B9-%E6%96%AD%E8%A8%80/</guid><description> 概述 检查点:指的是对于响应消息结果进行检查,在 meter中,称为断言。
+Jmeter中的各个请求 sampler中都可以添加断言。
+用于检查测试中得到的响应数据等是否符合预期,用以保证性能测试过程中的数据交互与预期一致。
+响应断言 对响应报文进行判断。“包括”和“匹配”模式下，&amp;ldquo;测试模式&amp;quot;支持正则表达式。
+对于同一个操作，我们可以配置多个断言。
+包括：部分匹配即可
+匹配：全部匹配
+响应文本：指html中的body标签部分
+文档(文本)：值各种形式的文本类型的文档，比如json、xml等，当然也包含html
+其他帮助，可以使用如下的方式打开帮助文档：
+其他类型断言 json断言 大小断言 HTML断言 XPath断言 断言持续时间：判断请求响应时间</description></item><item><title/><link>https://note.ljzsdut.com/%E6%B5%8B%E8%AF%95/Jmeter/05-Jmeter%E7%9B%91%E5%90%AC%E5%99%A8/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E6%B5%8B%E8%AF%95/Jmeter/05-Jmeter%E7%9B%91%E5%90%AC%E5%99%A8/</guid><description>概述 监听器的作用是用来查看Jmeter执行结果的。使用不同类型的监听器可以对执行结果做不同的分析。比如聚合分析等等。
+常用的监听器 查看结果树：调试的时候使用，进行性能测试时禁用
+聚合报告
+汇总报告
+后端监听器</description></item><item><title/><link>https://note.ljzsdut.com/%E6%B5%8B%E8%AF%95/Jmeter/06-%E9%85%8D%E7%BD%AE%E5%85%83%E4%BB%B6-%E5%8F%82%E6%95%B0%E5%8C%96-CSV%E6%96%87%E4%BB%B6/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E6%B5%8B%E8%AF%95/Jmeter/06-%E9%85%8D%E7%BD%AE%E5%85%83%E4%BB%B6-%E5%8F%82%E6%95%B0%E5%8C%96-CSV%E6%96%87%E4%BB%B6/</guid><description>概述 在使用JMeter的时候，往往需要参数化一些数据，常用到的就是CSV。
+使用 将参数值放到一个文件中，jmeter从文件中读取参数值。文件格式可以是.csv或.txt。
+➜ ~ cat Desktop/jmeter相关/login_users.txt sq001,123456 sq002,123456 sq003,123456 sq004,123456 sq005,123456 sq006,123456 sq007,123456 sq008,123456 sq009,123456 sq0010,123456 文件名可以写绝对路径，也可以写相对路径。如果有分布式的情况,且分布式的几台机器位于不同的操作系统，那么应该写相对路径。
+创建&amp;quot;CSV数据文件&amp;quot;元件
+配置参数化
+Sharing Mode:共享模式: All threads:所有线程，所有线程循环取值，线程|取第一行，线程二取下一行。 Current thread group:当前线程组，各个线程组分别循环取值。 Current thread:当前线程，该测试计划内的所有线程都取第一行。
+使用参数化</description></item><item><title/><link>https://note.ljzsdut.com/%E6%B5%8B%E8%AF%95/Jmeter/07-%E9%85%8D%E7%BD%AE%E5%85%83%E4%BB%B6-HTTP%E4%BF%A1%E6%81%AF%E5%A4%B4%E9%85%8D%E7%BD%AE%E5%85%83%E4%BB%B6/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E6%B5%8B%E8%AF%95/Jmeter/07-%E9%85%8D%E7%BD%AE%E5%85%83%E4%BB%B6-HTTP%E4%BF%A1%E6%81%AF%E5%A4%B4%E9%85%8D%E7%BD%AE%E5%85%83%E4%BB%B6/</guid><description> 概述 Jmeter在构造HTTP请求消息时需要配置消息头，Jmeter提供HTTP信息头管理器来设置HTTP消息头部字段。
+使用</description></item><item><title/><link>https://note.ljzsdut.com/%E6%B5%8B%E8%AF%95/Jmeter/08-%E9%85%8D%E7%BD%AE%E5%85%83%E4%BB%B6-HTTPCookie%E7%AE%A1%E7%90%86%E5%99%A8/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E6%B5%8B%E8%AF%95/Jmeter/08-%E9%85%8D%E7%BD%AE%E5%85%83%E4%BB%B6-HTTPCookie%E7%AE%A1%E7%90%86%E5%99%A8/</guid><description>概述 Jmeter提供http cookie管理器管理cookies，Cookie管理器会默认把服务端返回的cookie数据记录下来。并应用在后续的http请求消息中。
+COOKIK管理器作用 自动管理cookie：像浏览器一样的存储和发送Cookie。如果Jmeter发送一个http请求，他的响应中包含Cookie，那么Cookie Manager就会自动地保存这些Cookie，并在所有后来发送到该站点的请求中使用这些Cookie的值。
+每个线程都有自己的存储cookie的区域。在cookie manager中看不到自动保存的cookie，可以在&amp;quot;查看结果树&amp;quot;的Request界面看到被发送的Cookie Data。
+接受到的Cookie的值能被存储到JMeter线程变量中。要把Cookies保存到线程变量中，要定义属性 &amp;ldquo;CookieManager.save.cookies=true&amp;rdquo;。线程变量名为COOKIE_+Cookie名。_
+属性CookieManager.name.prefix=可以用来修改默认的COOKIE_的值。
+手动管理Cookie：手动添加Cookie到Cookie Manager，这些Cookie的值被会所有线程共享。
+使用 添加的时候，一般让其位于所有取样器同一级别。这样可以让所有的取样器都使用（作用域）。
+如果没有自定义cookie的话，添加“HTTP Cookie管理器”后，保持默认即可，无需做其他操作。“HTTP Cookie管理器”会像浏览器一样自动维护cookie。
+如果要手动添加cookie，可以在“HTTP Cookie管理器”详情中添加。添加的cookie会被所有线程共享。</description></item><item><title/><link>https://note.ljzsdut.com/%E6%B5%8B%E8%AF%95/Jmeter/09-%E9%85%8D%E7%BD%AE%E5%85%83%E4%BB%B6-HTTP%E7%BC%93%E5%AD%98%E7%AE%A1%E7%90%86%E5%99%A8/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E6%B5%8B%E8%AF%95/Jmeter/09-%E9%85%8D%E7%BD%AE%E5%85%83%E4%BB%B6-HTTP%E7%BC%93%E5%AD%98%E7%AE%A1%E7%90%86%E5%99%A8/</guid><description>概述 浏览器缓存机制 浏览器缓存是把一个已经请求过的Web资源(如html页面，图片，js，数据等)拷贝一份副本储存在浏览器中。
+缓存会根据进来的请求保存输出内容的副本。当下一个请求来到的时候，如果是相同的URL，缓存会根据缓存机制决定是直接使用副本响应访问请求，还是向源服务器再次发送请求。
+比较常见的就是浏览器会缓存访问过网站的网页，当再次访问这个URL地址的时候，如果网页没有更新，就不会再次下载网页，而是直接使用本地缓存的网页。
+只有当网站明确标识资源已经更新，浏览器才会再次下载网页。
+为什么使用浏览器缓存 减少网络带宽消耗：无论对于网站运营者或者用户，带宽都代表着金钱，过多的带宽消耗，只会便宜了网络运营商。当Web缓存副本被使用时，只会产生极小的网络流量，可以有效的降低运营成本。
+降低服务器压力：给网络资源设定有效期之后，用户可以重复使用本地的缓存，减少对源服务器的请求，间接降低服务器的压力。同时，搜索引擎的爬虫机器人也能根据过期机制降低爬取的频率，也能有效降低服务器的压力。
+减少网络延迟，加快页面打开速度：对于最终用户，缓存的使用能够明显加快页面打开速度，达到更好的体验。
+浏览器的缓存规则 规则在HTTP协议头和HTML页面的Meta标签中定义。他们分别从新鲜度和校验值两个维度来规定浏览器是否可以直接使用缓存中的副本，还是需要去源服务器获取更新的版本。
+新鲜度(过期机制):
+也就是缓存副本有效期。一个缓存副本必须满足以下条件，浏览器会认为它是有效的，足够新的:
+含有完整的过期时间控制头信息(HTTP协议报头)，并且仍在有效期内; 浏览器已经使用过这个缓存副本，并且在一个会话中已经检查过新鲜度; 满足以上两个情况的一种，浏览器会直接从缓存中获取副本并渲染。
+校验值(验证机制)：
+服务器返回资源的时候有时在控制头信息带上这个资源的实体标签Etag(EntityTag)，它可以用来作为浏览器再次请求过程的校验标识。如过发现校验标识不匹配，说明资源已经被修改或过期，浏览器需求重新获取资源内容。
+HTTPCache管理器 该属性管理器用于模拟浏览器的Cache行为。
+为Test Plan增加该属性管理器后，Test Plan运行过程中会使用Last-Modifed、ETag和Expired等决定是否从Cache中获取相应的元素。
+使用 添加后，一般保持默认参数即可。</description></item><item><title/><link>https://note.ljzsdut.com/%E6%B5%8B%E8%AF%95/Jmeter/10-%E9%85%8D%E7%BD%AE%E5%85%83%E4%BB%B6-HTTP%E8%AF%B7%E6%B1%82%E9%BB%98%E8%AE%A4%E5%80%BC/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E6%B5%8B%E8%AF%95/Jmeter/10-%E9%85%8D%E7%BD%AE%E5%85%83%E4%BB%B6-HTTP%E8%AF%B7%E6%B1%82%E9%BB%98%E8%AE%A4%E5%80%BC/</guid><description> 概述 该属性管理器用于设置其作用范围内的所有HTTP的默认值，可被设置的内容包括HTTP请求的host、端口、协议等。
+一个Test Plan中可以有多个HTTP Request Defaults，处于多个HTTP Request Defaults作用域内的Sampler使用HTTP Request Defaults中设置值的并集。
+使用</description></item><item><title/><link>https://note.ljzsdut.com/%E6%B5%8B%E8%AF%95/Jmeter/11-%E9%85%8D%E7%BD%AE%E5%85%83%E4%BB%B6-%E8%AE%A1%E6%95%B0%E5%99%A8/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E6%B5%8B%E8%AF%95/Jmeter/11-%E9%85%8D%E7%BD%AE%E5%85%83%E4%BB%B6-%E8%AE%A1%E6%95%B0%E5%99%A8/</guid><description> 概述 如果需要引用的数据量较大，且要求不能重复或者需要自增，那么可以使用计数器来实现。
+计数器(counter):允许用户创建一个在线程组之内都可以被引用的计数器(变量 )。
+计数器允许用户配置一个起点,一个最大值,增量数，循环到最大值,然后重新开始,继续这样，直到测试结束。
+计数器使用long存储的值,所取的范围是2^63-2^63-1.
+使用 Starting value：给定计数器的起始值、初始值，第一次迭代时，会把该值赋给计数器
+递增：每次迭代后，给计数器增加的值
+最大值，计数器的最大值，如果超过最大值，重新设置为初始值(Start)。
+数字格式，可选格式，比如000，格式化为001，002;
+引用名称，用于控制在其它元素中引用该值，形式，${reference_nane}
+与每用户独立的跟踪计数器，全局的计数器:
+如果不勾选，即全局的，比如用户1获取值为1，用户2获取值还是为1; 如果勾选，即独立的，则每个用户有自己的值，比如用户获取值为1，用户2获取值为2。 每次迭代复原计数器，可选，仅勾选与每用户独立的跟踪计数器时可用;
+如果勾选，则每次线程组迭代，都会重置计数器的值，当线程组是在一个循环控制器内时比较有用。</description></item><item><title/><link>https://note.ljzsdut.com/%E6%B5%8B%E8%AF%95/Jmeter/12-%E9%80%BB%E8%BE%91%E6%8E%A7%E5%88%B6%E5%99%A8/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E6%B5%8B%E8%AF%95/Jmeter/12-%E9%80%BB%E8%BE%91%E6%8E%A7%E5%88%B6%E5%99%A8/</guid><description>逻辑控制器概述 jmeter中逻辑控制器(Logic Controllers)的作用域只对其子节点的sampler有效，作用是控制采样器的执行顺序。类似于编程语言中的流程控制语句。
+jmeter逻辑控制器，大概可以分为2种使用类型:
+控制测试计划执行过程中节点的逻辑执行顺序，如:Loop Controller (循环控制器)、IfController (如果if控制器)等; 对测试计划中的脚本进行分组，方便JMeter统计执行结果以及进行脚本的运行时控制等，如:ThroughputController(吞吐量控制器)、Transaction Controller(事务控制器)等。 常用控制器 临界区控制器 临界区控制器会给资源加锁，只允许一个线程对取样器操作。例如在对数据库更新一个数据时，此时可能需要同一时刻只允许一个线程更新。
+Runtime控制器 控制其子节点能够运行多长时间。
+例如要求大并发的条件下，运行多长时间。
+仅一次控制器 仅一次控制器告诉JMeter每个线程仅对其内部的子节点进行一次操作。</description></item><item><title/><link>https://note.ljzsdut.com/%E6%B5%8B%E8%AF%95/Jmeter/13-%E5%85%B3%E8%81%94%E6%8A%80%E6%9C%AF-%E6%AD%A3%E5%88%99%E5%8C%B9%E9%85%8D%E6%8F%90%E5%8F%96%E5%99%A8/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E6%B5%8B%E8%AF%95/Jmeter/13-%E5%85%B3%E8%81%94%E6%8A%80%E6%9C%AF-%E6%AD%A3%E5%88%99%E5%8C%B9%E9%85%8D%E6%8F%90%E5%8F%96%E5%99%A8/</guid><description>
+模板：作用是使用匹配的值创建字符串。 用$$引用起来，如果在正则表达式中有多个正则表达式分组,则可以是$2$$3$等等，表示解析到的第几个值，如:$1$表示解析到的第1个值 参考文档：https://jmeter.apache.org/usermanual/component_reference.html#Regular_Expression_Extractor</description></item><item><title/><link>https://note.ljzsdut.com/%E6%B5%8B%E8%AF%95/Jmeter/14-JDBC-%E8%BF%9E%E6%8E%A5%E6%95%B0%E6%8D%AE%E5%BA%93/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E6%B5%8B%E8%AF%95/Jmeter/14-JDBC-%E8%BF%9E%E6%8E%A5%E6%95%B0%E6%8D%AE%E5%BA%93/</guid><description>概述 创建数据库链接
+创建数据库请求(用于发送SQL语句)
+创建断言查看响应结果
+创建监听器查看测试过程和结果
+使用 1、创建数据库链接
+2、创建”JDBC Request“取样器</description></item><item><title/><link>https://note.ljzsdut.com/%E6%B5%8B%E8%AF%95/Jmeter/15-%E8%B0%83%E7%94%A8OS%E7%B3%BB%E7%BB%9F%E5%91%BD%E4%BB%A4-OS%E8%BF%9B%E7%A8%8B%E5%8F%96%E6%A0%B7%E5%99%A8/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E6%B5%8B%E8%AF%95/Jmeter/15-%E8%B0%83%E7%94%A8OS%E7%B3%BB%E7%BB%9F%E5%91%BD%E4%BB%A4-OS%E8%BF%9B%E7%A8%8B%E5%8F%96%E6%A0%B7%E5%99%A8/</guid><description> 概述 Jmeter提供&amp;quot;OS进程取样器&amp;quot;调用系统程序/执行命令。
+OS进程取样器用来启动一个可执行程序，由于是通过命令行方式启动该可执行程序，所以可以用任何语言编写一个测试用的可执行程序。
+在该可执行程序中调用我们的接口，调用完成后可以做简单的解析判断输出文本信息，也可以把返回的原始数据输出而交由JMeter做后续解析判断。
+使用</description></item><item><title/><link>https://note.ljzsdut.com/%E6%B5%8B%E8%AF%95/Jmeter/16-%E6%8F%92%E4%BB%B6%E6%8A%80%E6%9C%AF/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E6%B5%8B%E8%AF%95/Jmeter/16-%E6%8F%92%E4%BB%B6%E6%8A%80%E6%9C%AF/</guid><description>Jmeter支持安装插件进行功能扩展，插件放置于:安装目录/lib/ext/
+插件安装方式:
+通过Plugins Manager安装各个插件(官方插件 )，插件地址：https://jmeter-plugins.org/
+直接将需要的插件放置/lib/ext/下面</description></item><item><title/><link>https://note.ljzsdut.com/%E6%B5%8B%E8%AF%95/Jmeter/17-%E5%85%B6%E4%BB%96/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E6%B5%8B%E8%AF%95/Jmeter/17-%E5%85%B6%E4%BB%96/</guid><description>JMeter测试报告</description></item></channel></rss>

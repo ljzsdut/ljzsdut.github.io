@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Flannel网络 on ljzsdut</title><link>https://note.ljzsdut.com/%E4%BA%91%E5%8E%9F%E7%94%9F/Kubernetes/k8s%E7%BD%91%E7%BB%9C/%E8%AE%BF%E9%97%AEPod-Flannel%E7%BD%91%E7%BB%9C/</link><description>Recent content in Flannel网络 on ljzsdut</description><generator>Hugo -- gohugo.io</generator><atom:link href="https://note.ljzsdut.com/%E4%BA%91%E5%8E%9F%E7%94%9F/Kubernetes/k8s%E7%BD%91%E7%BB%9C/%E8%AE%BF%E9%97%AEPod-Flannel%E7%BD%91%E7%BB%9C/index.xml" rel="self" type="application/rss+xml"/><item><title/><link>https://note.ljzsdut.com/%E4%BA%91%E5%8E%9F%E7%94%9F/Kubernetes/k8s%E7%BD%91%E7%BB%9C/%E8%AE%BF%E9%97%AEPod-Flannel%E7%BD%91%E7%BB%9C/flannel%E7%BD%91%E7%BB%9C%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E4%BA%91%E5%8E%9F%E7%94%9F/Kubernetes/k8s%E7%BD%91%E7%BB%9C/%E8%AE%BF%E9%97%AEPod-Flannel%E7%BD%91%E7%BB%9C/flannel%E7%BD%91%E7%BB%9C%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/</guid><description>TODO：需要根据如下的内容进行内容丰富。
+flannel vxlan工作基本原理
+flannel之Vxlan原理
+flannel网络vxlan模式原理及使用
+tun设备的妙用-Flannel UDP模式篇
+带你搞懂 Kubernetes Flannel 高性能网络插件的两种常用工作模式
+https://zhuanlan.zhihu.com/p/306623547
+https://www.cnblogs.com/zhangpeiyao/p/13929604.html
+https://www.sohu.com/a/420628608_786807
+https://blog.csdn.net/hguisu/article/details/92637760
+#宿主机172.17.252.174上的pod [root@iZ2zehld5mqm155c5i504aZ ~]# docker exec -it aa9317d9a52f ip addr 1: lo: &amp;lt;LOOPBACK,UP,LOWER_UP&amp;gt; mtu 65536 qdisc noqueue state UNKNOWN qlen 1000 link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00 inet 127.0.0.1/8 scope host lo valid_lft forever preferred_lft forever 3: eth0@if49: &amp;lt;BROADCAST,MULTICAST,UP,LOWER_UP,M-DOWN&amp;gt; mtu 1500 qdisc noqueue state UP link/ether ca:eb:f6:28:5d:c1 brd ff:ff:ff:ff:ff:ff inet 172.20.1.195/24 brd 172.20.1.255 scope global eth0 valid_lft forever preferred_lft forever [root@iZ2zehld5mqm155c5i504aZ ~]# docker exec -it aa9317d9a52f ip route default via 172.</description></item></channel></rss>

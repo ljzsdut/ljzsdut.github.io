@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ljzsdut</title><link>https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/Ceph/02-ceph-handbook/</link><description>Recent content on ljzsdut</description><generator>Hugo -- gohugo.io</generator><atom:link href="https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/Ceph/02-ceph-handbook/index.xml" rel="self" type="application/rss+xml"/><item><title/><link>https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/Ceph/02-ceph-handbook/Advance_usage/advanced_usage/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/Ceph/02-ceph-handbook/Advance_usage/advanced_usage/</guid><description>第三部分：Ceph 进阶 这部分内容介绍了一些 Ceph 使用中的进阶技巧，主要面向二线运维人员。</description></item><item><title/><link>https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/Ceph/02-ceph-handbook/Advance_usage/cal_pg_per_osd/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/Ceph/02-ceph-handbook/Advance_usage/cal_pg_per_osd/</guid><description>9. 统计 OSD 上 PG 的数量 我们可以通过一个 Python 脚本，统计出每个 OSD 上分布了多少个 PG ，以此判断集群的数据分布是否均衡。
+#!/usr/bin/env python import sys import os import json cmd = &amp;#39;&amp;#39;&amp;#39; ceph pg dump | awk &amp;#39; /^pg_stat/ { col=1; while($col!=&amp;#34;up&amp;#34;) {col++}; col++ } /^[0-9a-f]+\.[0-9a-f]+/ {print $1,$col}&amp;#39; &amp;#39;&amp;#39;&amp;#39; body = os.popen(cmd).read() SUM = {} for line in body.split(&amp;#39;\n&amp;#39;): if not line.strip(): continue SUM[line.split()[0]] = json.loads(line.split()[1]) pool = set() for key in SUM: pool.add(key.split(&amp;#39;.&amp;#39;)[0]) mapping = {} for number in pool: for k,v in SUM.</description></item><item><title/><link>https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/Ceph/02-ceph-handbook/Advance_usage/change_fd/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/Ceph/02-ceph-handbook/Advance_usage/change_fd/</guid><description>3. 修改 Cinder/Glance 进程的最大可用 FD 本篇内容是根据生产环境中遇到的实际问题进行的总结。
+背景 在生产环境中遇到这样一个问题：
+下发删除卷消息无法成功删除卷，后通过 cinder 命令行命令 cinder service-list 查询cinder 服务状态，发现 cinder-volume host : r2202002controller@rbd-sata 服务状态为 DOWN 。
+| cinder-volume | r2202002controller@rbd-sata | nova | enabled | down | 该状态表明该 cinder-volume 进程已经没有正常上报心跳，处于无法处理请求的状态。
+原因分析 通过现场复现问题和查看 cinder-volume 日志，发现在出问题的时间点都有删除卷的操作下发，但是有的卷一直未结束删除卷流程，直到重启 cinder-volume 进程时才恢复。
+2016-09-23 13:42:48.176 44907 INFO cinder.volume.manager [req-0182ed51-a4a7-44e4-bd3e-3d456610a135 ff01ec05ed4442799ebad096c1aa2921 584c5f2fed764ec9b840319eb2cd0608 - - -] volume b38ea39e-b1f5-4af6-a7b1-40fe1d5e80ee: deleting 2016-09-23 16:52:08.290 52145 INFO cinder.volume.manager [req-be3fe7fc-39fe-4bc3-9a70-d5be1e7330ce - - - - -] Resuming delete on volume: b38ea39e-b1f5-4af6-a7b1-40fe1d5e80ee 怀疑在删除 RDB 卷流程有挂死问题，通过进一步查看日志，发现最后走到调用 RDB Client 删除卷时就中断了:</description></item><item><title/><link>https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/Ceph/02-ceph-handbook/Advance_usage/change_osd_journal/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/Ceph/02-ceph-handbook/Advance_usage/change_osd_journal/</guid><description>4. 更换 OSD Journal 本篇中部分内容来自 zphj1987 —— 如何替换 Ceph 的 Journal
+Ceph 在一块单独的磁盘上部署 OSD 的时候，是默认把 journal 和 OSD 放在同一块磁盘的不同分区上。有时候，我们可能需要把 OSD 的 journal 分区从一个磁盘替换到另一个磁盘上去。那么应该怎样替换 Ceph 的 journal 分区呢？
+有两种方法来修改 Ceph 的 journal：
+创建一个 journal 分区，在上面创建一个新的 journal。 转移已经存在的 journal 分区到新的分区上，这个适合整盘替换。 Ceph 的 journal 是基于事务的日志，所以正确的下刷 journal 数据，然后重新创建 journal 并不会引起数据丢失，因为在下刷 journal 的数据的时候，osd 是停止的，一旦数据下刷后，这个 journal 是不会再有新的脏数据进来的。
+第一种方法 1、首先给 Ceph 集群设置 noout 标志。
+root@mon:~# ceph osd set noout set noout 2、假设我们现在想要替换 osd.0 的 journal。首先查看 osd.0 当前的 journal 位置，当前使用的是 /dev/sdb2 分区。</description></item><item><title/><link>https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/Ceph/02-ceph-handbook/Advance_usage/find_rbd_data_loc/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/Ceph/02-ceph-handbook/Advance_usage/find_rbd_data_loc/</guid><description>7. 查看 RBD 镜像的位置 有时，我们需要查看某个 RBD 镜像的对象都存放在哪些 PG 中，这些 PG 又分布在哪些 OSD 上。可以利用下面的 shell 脚本来实现快速查看 RBD 镜像的位置。
+#!/bin/bash # USAGE:./rbd-loc &amp;lt;pool&amp;gt; &amp;lt;image&amp;gt; if [ -z ${1} ] || [ -z ${2} ]; then echo &amp;quot;USAGE: ./rbd-loc &amp;lt;pool&amp;gt; &amp;lt;image&amp;gt;&amp;quot; exit 1 fi rbd_prefix=$(rbd -p ${1} info ${2} | grep block_name_prefix | awk '{print $2}') for i in $(rados -p ${1} ls | grep ${rbd_prefix}) do ceph osd map ${1} ${i} done 执行的效果如下所示：</description></item><item><title/><link>https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/Ceph/02-ceph-handbook/Advance_usage/list_rbd_watcher/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/Ceph/02-ceph-handbook/Advance_usage/list_rbd_watcher/</guid><description>10. 查看使用 RBD 镜像的客户端 有时候删除 rbd image 会提示当前 rbd image 正在使用中，无法删除：
+rbd rm foo 2016-11-09 20:16:14.018332 7f81877a07c0 -1 librbd: image has watchers - not removing Removing image: 0% complete...failed. rbd: error: image still has watchers This means the image is still open or the client using it crashed. Try again after closing/unmapping it or waiting 30s for the crashed client to timeout. 所以希望能查看到底是谁在使用 rbd image。
+对于 rbd image 的使用，目前主要有两种形式：内核模块 map 后再 mount ；通过 libvirt 等供给虚拟机使用。都是利用 rados listwatchers 去查看，只是两种形式下需要读取的文件不一样。</description></item><item><title/><link>https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/Ceph/02-ceph-handbook/Advance_usage/mon_backup/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/Ceph/02-ceph-handbook/Advance_usage/mon_backup/</guid><description>2. Monitor 的备份和恢复 本篇内容来自 徐小胖&amp;rsquo;blog —— monitor 的增删改备
+Monitor 的备份 每个 MON 的数据都是保存在数据库内的，这个数据库位于 /var/lib/ceph/mon/$cluster-$hostname/store.db ，这里的 $cluster 是集群的名字， $hostname 为主机名，MON 的所有数据即目录 /var/lib/ceph/mon/$cluster-$hostname/ ，备份好这个目录之后，就可以在任一主机上恢复 MON 了。
+这里参考了下 这篇文章 里面的备份方法，简单讲基本思路就是，停止一个 MON，然后将这个 MON 的数据库压缩保存到其他路径，再开启 MON。文中提到了之所以要停止 MON 是要保证 levelDB 数据库的完整性。然后可以做个定时任务一天或者一周备份一次。
+另外最好把 /etc/ceph/ 目录也备份一下。
+这个备份路径最好是放到其他节点上，不要保存到本地，因为一般 MON 节点要坏就坏一台机器。
+这里给出文中提到的备份方法：
+service ceph stop mon tar czf /var/backups/ceph-mon-backup_$(date +'%a').tar.gz /var/lib/ceph/mon service ceph start mon #for safety, copy it to other nodes scp /var/backups/* someNode:/backup/ Monitor 的恢复 现在有一个 Ceph 集群，包含 3 个 monitors： ceph-1 、ceph-2 和 ceph-3 。</description></item><item><title/><link>https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/Ceph/02-ceph-handbook/Advance_usage/pg_active_remapped/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/Ceph/02-ceph-handbook/Advance_usage/pg_active_remapped/</guid><description>6. PG 卡在 active + remapped 状态 问题现象 有时，我们的 Ceph 集群可能会出现 PG 长时间卡在 active + remapped 的状态。
+root@ceph1:~# ceph -s cluster 5ccdcb2d-961d-4dcb-a9ed-e8034c56cf71 health HEALTH_WARN 88 pgs stuck unclean monmap e2: 1 mons at {ceph1=192.168.56.102:6789/0}, election epoch 1, quorum 0 ceph1 osdmap e71: 4 osds: 4 up, 3 in pgmap v442: 256 pgs, 4 pools, 285 MB data, 8 objects 690 MB used, 14636 MB / 15326 MB avail 88 active+remapped 168 active+clean 产生问题的原因 出现这种情况，一般是做了 osd 的 reweight 操作引起的，这是因为一般在做 reweight 的操作的时候，根据算法，这个上面的 pg 是会尽量分布在这个主机上的，而 crush reweight 不变的情况下，去修改 osd 的 reweight 的时候，可能算法上会出现无法映射的问题。</description></item><item><title/><link>https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/Ceph/02-ceph-handbook/Advance_usage/pg_pgp/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/Ceph/02-ceph-handbook/Advance_usage/pg_pgp/</guid><description>1. PG 和 PGP 的区别 本篇内容来自 zphj1987 —— Ceph 中 PG 和 PGP 的区别
+前言 首先来一段关于 PG 和 PGP 区别的英文解释：
+PG = Placement Group
+PGP = Placement Group for Placement purpose
+pg_num = number of placement groups mapped to an OSD
+When pg_num is increased for any pool, every PG of this pool splits into half, but they all remain mapped to their parent OSD.
+Until this time, Ceph does not start rebalancing.</description></item><item><title/><link>https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/Ceph/02-ceph-handbook/Advance_usage/rbd_real_size/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/Ceph/02-ceph-handbook/Advance_usage/rbd_real_size/</guid><description>8. 查看 RBD 镜像的实际大小 本篇内容来自 zphj1987 —— 如何统计 Ceph 的 RBD 真实使用容量
+Ceph 的 rbd 一直有个问题就是无法清楚的知道这个分配的空间里面到底使用了多少，使用 rbd info 命令查询出来的容量是预分配的总容量而非实际使用容量。在 Jewel 版中提供了一个新的接口去查询，对于老版本来说可能同样有这个需求，本篇将详细介绍如何解决这个问题。
+目前已知的有三种查询方法：
+使用 rbd du 查询（Jewel 版才支持） 使用 rbd diff 根据对象统计的方法进行统计 方法一：使用 rbd du 查询 此命令在 Jewel 版中可用。
+root@mon:~# rbd du rbd/mysql-img NAME PROVISIONED USED test 52.8047M 0 不过需要注意，执行此命令要求开启 rbd image 的如下属性：
+layering, exclusive-lock, object-map, fast-diff 具体使用可参考 这篇文章 。
+方法二：使用 rbd diff root@mon:~# rbd diff rbd/mysql-img | awk '{ SUM += $2 } END { print SUM/1024/1024 &amp;quot; MB&amp;quot; }' 52.</description></item><item><title/><link>https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/Ceph/02-ceph-handbook/Advance_usage/rescue_osd_parted/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/Ceph/02-ceph-handbook/Advance_usage/rescue_osd_parted/</guid><description>5. 清空 OSD 的分区表后如何恢复 本篇内容来自 zphj1987 —— 不小心清空了 Ceph 的 OSD 的分区表如何恢复
+假设不小心对 Ceph OSD 执行了 ceph-deploy disk zap 这个操作，那么该 OSD 对应磁盘的分区表就丢失了。本文讲述了在这种情况下如何进行恢复。
+破坏环境 我们现在有一个正常的集群，假设用的是默认的分区的方式，我们先来看看默认的分区方式是怎样的。
+1、查看默认的分区方式。
+root@mon:~# ceph-disk list ··· /dev/sdb : /dev/sdb1 ceph data, active, cluster ceph, osd.0, journal /dev/sdb2 /dev/sdb2 ceph journal, for /dev/sdb1 ··· 2、查看分区情况
+root@mon:~# parted -s /dev/sdb print Model: SEAGATE ST3300657SS (scsi) Disk /dev/sdb: 300GB Sector size (logical/physical): 512B/512B Partition Table: gpt Disk Flags: Number Start End Size File system Name Flags 2 1049kB 1074MB 1073MB ceph journal 1 1075MB 300GB 299GB xfs ceph data 3、破坏 /dev/sdb 的分区表，该磁盘对应的是 osd.</description></item><item><title/><link>https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/Ceph/02-ceph-handbook/Operation/add_rm_mon/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/Ceph/02-ceph-handbook/Operation/add_rm_mon/</guid><description>6. 增加/删除 Monitor 一个集群可以只有一个 monitor，我们推荐生产环境至少部署 3 个。 Ceph 使用 Paxos 算法的一个变种对各种 map 、以及其它对集群来说至关重要的信息达成共识。建议（但不是强制）部署奇数个 monitor 。Ceph 需要 mon 中的大多数在运行并能够互相通信，比如单个 mon，或 2 个中的 2 个，3 个中的 2 个，4 个中的 3 个等。初始部署时，建议部署 3 个 monitor。后续如果要增加，请一次增加 2 个。
+6.1 增加 Monitor（手动） 1、在目标节点上，新建 mon 的默认目录。{mon-id} 一般取为节点的 hostname 。
+ssh {new-mon-host} sudo mkdir /var/lib/ceph/mon/ceph-{mon-id} 2、创建一个临时目录（和第 1 步中的目录不同，添加 mon 完毕后需要删除该临时目录），来存放新增 mon 所需的各种文件，
+mkdir {tmp} 3、获取 mon 的 keyring 文件，保存在临时目录下。
+ceph auth get mon. -o {tmp}/{key-filename} 4、获取集群的 mon map 并保存到临时目录下。</description></item><item><title/><link>https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/Ceph/02-ceph-handbook/Operation/add_rm_osd/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/Ceph/02-ceph-handbook/Operation/add_rm_osd/</guid><description>7. 增加/删除 OSD 如果您的集群已经在运行，你可以在运行时添加或删除 OSD 。
+7.1 增加 OSD（手动） 要增加一个 OSD，要依次创建数据目录、把硬盘挂载到数据目录、把 OSD 加入集群、然后把它加入 CRUSH Map。
+Tip： Ceph 喜欢统一的硬件，与存储池无关。如果你要新增容量不一的硬盘驱动器，还需调整它们的权重。但是，为实现最佳性能，CRUSH 的分级结构最好按类型、容量来组织。
+1、创建 OSD。如果未指定 UUID， OSD 启动时会自动生成一个。下列命令会输出 OSD 号，后续步骤你会用到。
+ceph osd create [{uuid} [{id}]] 如果指定了可选参数 {id} ，那么它将作为 OSD id 。要注意，如果此数字已使用，此命令会出错。
+警告： 一般来说，我们不建议指定 {id} 。因为 ID 是按照数组分配的，跳过一些依然会浪费内存；尤其是跳过太多、或者集群很大时，会更明显。若未指定 {id} ，将用最小可用数字。
+2、在新 OSD 主机上创建数据目录。
+ssh {new-osd-host} sudo mkdir /var/lib/ceph/osd/ceph-{osd-number} 3、如果准备用于 OSD 的是单独的磁盘而非系统盘，先把它挂载到刚创建的目录下：
+ssh {new-osd-host} sudo mkfs -t {fstype} /dev/{drive} sudo mount -o user_xattr /dev/{hdd} /var/lib/ceph/osd/ceph-{osd-number} 4、初始化 OSD 数据目录。</description></item><item><title/><link>https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/Ceph/02-ceph-handbook/Operation/change_cluster_conf/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/Ceph/02-ceph-handbook/Operation/change_cluster_conf/</guid><description>11. 修改集群配置 启动 Ceph 存储集群时，各守护进程都从同一个配置文件（即默认的 ceph.conf ）里查找它自己的配置。ceph.conf 中可配置参数很多，有时我们需要根据实际环境对某些参数进行修改。
+修改的方式分为两种：直接修改 ceph.conf 配置文件中的参数值，修改完后需要重启 Ceph 进程才能生效。或在运行中动态地进行参数调整，无需重启进程。
+11.1 查看运行时配置 如果你的 Ceph 存储集群在运行，而你想看一个在运行进程的配置，用下面的命令：
+ceph daemon {daemon-type}.{id} config show | less 如果你现在位于 osd.0 所在的主机，命令将是：
+ceph daemon osd.0 config show | less 11.2 修改配置文件 Ceph 配置文件可用于配置存储集群内的所有守护进程、或者某一类型的所有守护进程。要配置一系列守护进程，这些配置必须位于能收到配置的段落之下，比如：
+[global]
+描述： [global] 下的配置影响 Ceph 集群里的所有守护进程。
+实例： auth supported = cephx
+[osd]
+描述： [osd] 下的配置影响存储集群里的所有 ceph-osd 进程，并且会覆盖 [global] 下的同一选项。
+实例： osd journal size = 1000
+[mon]
+描述： [mon] 下的配置影响集群里的所有 ceph-mon 进程，并且会覆盖 [global] 下的同一选项。</description></item><item><title/><link>https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/Ceph/02-ceph-handbook/Operation/common_operations/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/Ceph/02-ceph-handbook/Operation/common_operations/</guid><description>第一部分：常用操作 本部分介绍了 Ceph 集群的常用操作，包括进程的起停、集群的监控、用户管理、MON/OSD 的增加和删除、存储池的操作、修改集群的配置，以及 Crushmap 的管理、修改 Monitor 的 IP 等操作。</description></item><item><title/><link>https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/Ceph/02-ceph-handbook/Operation/log_debug/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/Ceph/02-ceph-handbook/Operation/log_debug/</guid><description>12. 日志和调试 一般来说，你应该在运行时增加调试选项来调试问题；也可以把调试选项添加到 Ceph 配置文件里来调试集群启动时的问题，然后查看 /var/log/ceph （默认位置）下的日志文件。
+Tip： 调试输出会拖慢系统，这种延时有可能掩盖竞争条件。
+日志记录是资源密集型任务。如果你碰到的问题在集群的某个特定区域，只启用那个区域对应的日志功能即可。例如，你的 OSD 运行良好、元数据服务器却有问题，这时应该先打开那个可疑元数据服务器实例的调试日志；如果不行再打开各子系统的日志。
+重要： 详尽的日志每小时可能超过 1GB ，如果你的系统盘满了，这个节点就会停止工作。
+如果你要打开或增加 Ceph 日志级别，确保有足够的系统盘空间。滚动日志文件的方法见下面的 加快日志更迭 小节。集群稳定运行后，可以关闭不必要的调试选项以优化运行。集群在运行中记录调试输出信息会拖慢系统、且浪费资源。
+12.1 运行时 如果你想在运行时查看某一进程的配置，必须先登录对应主机，然后执行命令：
+ceph daemon {daemon-name} config show | less 例如：
+ceph daemon osd.0 config show | less 要在运行时激活 Ceph 的调试输出（即 dout() ），用 ceph tell 命令把参数注入运行时配置：
+ceph tell {daemon-type}.{daemon id or *} injectargs --{name} {value} [--{name} {value}] 用 osd 、 mon 或 mds 替代 {daemon-type} 。还可以用星号（ * ）把配置应用到同类型的所有守护进程，或者指定具体守护进程的 ID 。例如，要给名为 ods.</description></item><item><title/><link>https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/Ceph/02-ceph-handbook/Operation/manage_crushmap/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/Ceph/02-ceph-handbook/Operation/manage_crushmap/</guid><description>9. 管理 Crushmap CRUSH 算法通过计算数据存储位置来确定如何存储和检索。 CRUSH 授权 Ceph 客户端直接连接 OSD ，而非通过一个中央服务器或代理。数据存储、检索算法的使用，使 Ceph 避免了单点故障、性能瓶颈、和伸缩的物理限制。
+CRUSH 需要一张集群的 Map，且使用 CRUSH Map 把数据伪随机地、尽量平均地分布到整个集群的 OSD 里。CRUSH Map 包含 OSD 列表、把设备汇聚为物理位置的“桶”列表、和指示 CRUSH 如何复制存储池里的数据的规则列表。
+完全手动管理 CRUSH Map 也是可能的，在配置文件中设定：
+osd crush update on start = false 9.1 编辑 CRUSH Map 要编辑现有的 CRUSH Map：
+获取 CRUSH Map； 反编译 CRUSH 图； 至少编辑一个设备、桶、规则； 重编译 CRUSH Map； 注入 CRUSH Map。 要激活 CRUSH Map 里某存储池的规则，找到通用规则集编号，然后把它指定到那个规则集。详情参见本手册第一部分 8. 操作 Pool 中调整存储池选项值部分。
+获取 CRUSH Map 要获取集群的 CRUSH Map，执行命令：</description></item><item><title/><link>https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/Ceph/02-ceph-handbook/Operation/modify_mon_ip/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/Ceph/02-ceph-handbook/Operation/modify_mon_ip/</guid><description>10. 修改 MON IP Ceph 客户端和其他 Ceph 守护进程通过 ceph.conf 来发现 monitor。但是 monitor 之间是通过 mon map 而非 ceph.conf 来发现彼此。
+10.1 修改 MON IP（正确的方法） 仅修改 ceoh.conf 中 mon 的 IP 是不足以确保集群中的其他 monitor 收到更新的。要修改一个 mon 的 IP，你必须先新增一个使用新 IP 的 monitor（参考1.6 增加/删除 Monitor），确保这个新 mon 成功加入集群并形成法定人数。然后，删除使用旧 IP 的 mon。最后，更新 ceph.conf ，以便客户端和其他守护进程可以知道新 mon 的 IP。
+比如，假设现有 3 个 monitors：
+[mon.a] host = host01 addr = 10.0.0.1:6789 [mon.b] host = host02 addr = 10.0.0.2:6789 [mon.c] host = host03 addr = 10.</description></item><item><title/><link>https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/Ceph/02-ceph-handbook/Operation/monitor_cluster/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/Ceph/02-ceph-handbook/Operation/monitor_cluster/</guid><description>2. 监控集群 集群运行起来后，你可以用 ceph 工具来监控集群的状态，典型的监控项目包括检查 OSD 状态、monitor 的状态、PG 的状态和元数据服务器的状态（目前楚天云环境并没有部署元数据服务器）。
+2.1 交互模式 要在交互模式下运行 ceph ，不要带参数运行 ceph ，例如：
+ceph ceph&amp;gt; health ceph&amp;gt; status ceph&amp;gt; quorum_status ceph&amp;gt; mon_status 2.2 检查集群的监控状况 启动集群后、读写数据前，先检查下集群的健康状态。你可以用下面的命令检查：
+ceph health 如果你的配置文件或 keyring 文件不在默认路径下，你得在命令中指定：
+ceph -c /path/to/conf -k /path/to/keyring health 集群刚起来的时候，你也许会碰到像 HEALTH_WARN XXX num placement groups stale 这样的健康告警，等一会再检查下。集群准备好的话 ceph health 会给出 HEALTH_OK 这样的消息，这时候就可以开始使用集群了。
+2.3 观察集群 要观察集群内正发生的事件，打开一个新终端，然后输入：
+ceph -w Ceph 会打印各种事件。例如一个包括 3 个 Mon、和 33 个 OSD 的 Ceph 集群可能会打印出这些：
+cluster b84b887e-9e0c-4211-8423-e0596939cd36 health HEALTH_OK monmap e1: 3 mons at {OPS-ceph1=192.</description></item><item><title/><link>https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/Ceph/02-ceph-handbook/Operation/monitor_osd/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/Ceph/02-ceph-handbook/Operation/monitor_osd/</guid><description>3. 监控 OSD 某 OSD 的状态可以是在集群内（ in ）或集群外（ out ）、也可以是运行着的（ up ）或不在运行的（ down ）。如果一个 OSD 处于 up 状态，它也可以是在集群之内 in （你可以读写数据）或者之外 out 。如果它以前是 in 但最近 out 了， Ceph 会把 PG 迁移到其他 OSD 上。如果某个 OSD out 了， CRUSH 就不会再分配 PG 给它。如果它 down 了，其状态也应该是 out 。默认在 OSD down 掉 300s 后会标记它为 out 状态。
+注意：如果某个 OSD 状态为 down &amp;amp; in ，必定有问题，而且集群处于非健康状态。
+OSD 监控的一个重要事情就是，当集群启动并运行时，所有 OSD 也应该是启动（ up ）并在集群内（ in ）运行的。用下列命令查看：
+ceph osd stat 其结果会告诉你 osd map 的版本（ eNNNN ），总共有多少个 OSD 、几个是 up 的、几个是 in 的。</description></item><item><title/><link>https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/Ceph/02-ceph-handbook/Operation/monitor_pg/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/Ceph/02-ceph-handbook/Operation/monitor_pg/</guid><description>4. 监控 PG CRUSH 算法把 PG 分配到 OSD 时，它会根据存储池的副本数设置，把 PG 分配到不同的 OSD 上。比如，如果存储池设置为 3 副本， CRUSH 可能把它们分别分配到 osd.1 、osd.2 、osd.3 。考虑到 CRUSH Map 中设定的故障域，实际上 CRUSH 找出的是伪随机位置，所以在大型集群中，很少能看到 PG 被分配到了相邻的 OSD 。我们把涉及某个特定 PG 副本的一组 OSD 称为 acting set 。在某些情况下，位于 acting set 中的一个 OSD down 了或者不能为 PG 内的对象提供服务，这些情形发生时无需惊慌，常见原因如下：
+你增加或移除了某个 OSD 。然后 CRUSH 算法把 PG 重新分配到了其他 OSD ，因此改变了 Acting Set 的构成，并且引发了 “backfill” 过程来进行数据迁移。 某个 OSD down 了、重启了，而现在正在恢复（ recovering ）。 Acting Set 中的一个 OSD down 了，不能提供服务，另一个 OSD 临时接替其工作。 Ceph 靠 Up Set 处理客户端请求，它们是实际处理读写请求的 OSD 集合。大多数情况下 Up Set 和 Acting Set 是相同的。如果不同，说明可能 Ceph 正在迁移数据、某 OSD 在恢复、或者有别的问题。这种情况下， Ceph 通常表现为 “HEALTH WARN” 状态，还有 “stuck stale” 消息。</description></item><item><title/><link>https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/Ceph/02-ceph-handbook/Operation/operate_cluster/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/Ceph/02-ceph-handbook/Operation/operate_cluster/</guid><description>1. 操作集群 1.1 用 UPSTART 控制 CEPH 用 ceph-deploy 把 Ceph Cuttlefish 及更高版部署到 Ubuntu 14.04 上，你可以用基于事件的 Upstart 来启动、关闭 Ceph 节点上的守护进程。 Upstart 不要求你在配置文件里定义守护进程例程。
+1.1.1 列出节点上所有的 Ceph 作业和实例 sudo initctl list | grep ceph 1.1.2 启动所有守护进程 要启动某一 Ceph 节点上的所有守护进程，用下列命令：
+sudo start ceph-all 1.1.3 停止所有守护进程 要停止某一 Ceph 节点上的所有守护进程，用下列命令：
+sudo stop ceph-all 1.1.4 按类型启动所有守护进程 要启动某一 Ceph 节点上的某一类守护进程，用下列命令：
+sudo start ceph-osd-all sudo start ceph-mon-all sudo start ceph-mds-all 1.1.5 按类型停止所有守护进程 要停止某一 Ceph 节点上的某一类守护进程，用下列命令：
+sudo stop ceph-osd-all sudo stop ceph-mon-all sudo stop ceph-mds-all 1.</description></item><item><title/><link>https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/Ceph/02-ceph-handbook/Operation/operate_pool/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/Ceph/02-ceph-handbook/Operation/operate_pool/</guid><description>8. 操作 Pool 如果你开始部署集群时没有创建存储池， Ceph 会用默认存储池 rbd 存放数据。存储池提供的功能：
+自恢复力： 你可以设置在不丢数据的前提下允许多少 OSD 失效。对多副本存储池来说，此值是一对象应达到的副本数。典型配置是存储一个对象和它的一个副本（即 size = 2 ），但你可以更改副本数；对纠删编码的存储池来说，此值是编码块数（即纠删码配置里的 m = 2 ）。 归置组： 你可以设置一个存储池的 PG 数量。典型配置给每个 OSD 分配大约 100 个 PG，这样，不用过多计算资源就能得到较优的均衡。配置了多个存储池时，要考虑到这些存储池和整个集群的 PG 数量要合理。 CRUSH 规则： 当你在存储池里存数据的时候，与此存储池相关联的 CRUSH 规则集可控制 CRUSH 算法，并以此操纵集群内对象及其副本的复制（或纠删码编码的存储池里的数据块）。你可以自定义存储池的 CRUSH 规则。 快照： 用 ceph osd pool mksnap 创建快照的时候，实际上创建了某一特定存储池的快照。 要把数据组织到存储池里，你可以列出、创建、删除存储池，也可以查看每个存储池的使用统计数据。
+8.1 列出存储池 要列出集群的存储池，命令如下：
+ceph osd lspools 在新安装好的集群上，默认只有一个 rbd 存储池。
+8.2 创建存储池 创建存储池前可以先看看存储池、PG 和 CRUSH 配置参考。你最好在配置文件里重置默认 PG 数量，因为默认值并不理想。
+例如：
+osd pool default pg num = 100 osd pool default pgp num = 100 要创建一个存储池，执行：</description></item><item><title/><link>https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/Ceph/02-ceph-handbook/Operation/user_management/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/Ceph/02-ceph-handbook/Operation/user_management/</guid><description>5. 用户管理 Ceph 把数据以对象的形式存于各存储池中。Ceph 用户必须具有访问存储池的权限才能够读写数据。另外，Ceph 用户必须具有执行权限才能够使用 Ceph 的管理命令。
+5.1 授权（能力） Ceph 用 “能力”（ capabilities, caps ）这个术语来描述给认证用户的授权，这样才能使用 Mon、 OSD 和 MDS 的功能。能力也用于限制对某一存储池内的数据或某个命名空间的访问。 Ceph 管理员用户可在创建或更新普通用户时赋予他相应的能力。
+能力的语法符合下面的形式：
+{daemon-type} 'allow {capability}' [{daemon-type} 'allow {capability}'] Monitor 能力： Monitor 能力包括 r 、 w 、 x 和 allow profile {cap}，例如：
+mon 'allow rwx' mon 'allow profile osd' OSD 能力： OSD 能力包括 r 、 w 、 x 、 class-read 、 class-write 和 profile osd 。另外， OSD 能力还支持存储池和命名空间的配置。</description></item><item><title/><link>https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/Ceph/02-ceph-handbook/README/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/Ceph/02-ceph-handbook/README/</guid><description>简介 《 Ceph 运维手册》汇总了 Ceph 在使用中常见的运维和操作问题，主要用于指导运维人员的相关工作。存储组的新员工，在对 Ceph 有了基础了解之后，也可以通过本手册进一步深入 Ceph 的使用和运维。
+本书的内容大部分来自 Ceph 官方文档，另一部分来自技术博客，还有一部分来自实际使用中的经验总结。
+环境 本手册是基于以下两种环境：
+Ubuntu 14.04， Ceph Hammer 版。 CentOS 7.2， Ceph Jewel版。 作者 李海静
+lihaijing@fiberhome.com
+本书 GitBook 地址 点击下面的地址进行在线阅读：
+https://lihaijing.gitbooks.io/ceph-handbook/content
+本书 GitHub 地址 本书源文件托管在 GitHub 上，欢迎大家 Fork 本项目：
+https://github.com/lihaijing/ceph-handbook
+https://github.com/lihaijing/ceph-handbook.git</description></item><item><title/><link>https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/Ceph/02-ceph-handbook/SUMMARY/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/Ceph/02-ceph-handbook/SUMMARY/</guid><description>Summary 简介 第一部分：常用操作 1. 操作集群 2. 监控集群 3. 监控 OSD 4. 监控 PG 5. 用户管理 6. 增加/删除 Monitor 7. 增加/删除 OSD 8. 操作 Pool 9. 管理 Crushmap 10. 修改 MON IP 11. 修改集群配置 12. 日志和调试 第二部分：故障处理 1. 常见 MON 故障处理 2. 常见 OSD 故障处理 3. 常见 PG 故障处理 4. 全局 Ceph 节点宕机处理 5. 单个 Ceph 节点宕机处理 第三部分：Ceph 进阶 1. PG 和 PGP 的区别 2. Monitor 的备份和恢复 3. 修改 Cinder/Glance 进程的最大可用 FD 4.</description></item><item><title/><link>https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/Ceph/02-ceph-handbook/Troubleshooting/troubleshooting/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/Ceph/02-ceph-handbook/Troubleshooting/troubleshooting/</guid><description>第二部分：故障处理 本部分就 Ceph 存储集群常见的问题做了归纳和总结，方便运维人员进行故障排除。</description></item><item><title/><link>https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/Ceph/02-ceph-handbook/Troubleshooting/troubleshooting_lost_power/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/Ceph/02-ceph-handbook/Troubleshooting/troubleshooting_lost_power/</guid><description>4. 全局Ceph节点宕机处理 在极端情况下，如数据中心断电，造成 Ceph 存储集群全局宕机，可以按照本节所示流程进行 Ceph 集群上电恢复操作。
+4.1 手动上电执行步骤 如为 Ceph 集群上电，monitor server 应最先上电；集群上电前确认使用 Ceph 之前端作业服务已停止。
+使用 IPMI 或于设备前手动进行上电。
+确认 NTP 服务及系统时间已同步，命令如下：
+# ps-ef | grep ntp
+# date
+# ntpq -p
+登入上电之 ceph server 确认 ceph service 已正常运行，命令如下：
+# ps -ef | grep ceph
+登入集群 monitor server 查看状态，OSD 全都 up 集群仍为 noout flag(s) set
+# ceph -s
+# ceph osd tree
+登入 monitor server 解除 stopping w/out rebalancing，命令如下：</description></item><item><title/><link>https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/Ceph/02-ceph-handbook/Troubleshooting/troubleshooting_mon/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/Ceph/02-ceph-handbook/Troubleshooting/troubleshooting_mon/</guid><description>1. 常见 MON 故障处理 Monitor 维护着 Ceph 集群的信息，如果 Monitor 无法正常提供服务，那整个 Ceph 集群就不可访问。一般来说，在实际运行中，Ceph Monitor的个数是 2n + 1 ( n &amp;gt;= 0) 个，在线上至少3个，只要正常的节点数 &amp;gt;= n+1，Ceph 的 Paxos 算法就能保证系统的正常运行。所以，当 Monitor 出现故障的时候，不要惊慌，冷静下来，一步一步地处理。
+1.1 开始排障 在遭遇 Monitor 故障时，首先回答下列几个问题：
+Mon 进程在运行吗？
+我们首先要确保 Mon 进程是在正常运行的。很多人往往忽略了这一点。
+是否可以连接 Mon Server？
+有时候我们开启了防火墙，导致无法与 Monitor 的 IP 或端口进行通信。尝试使用 ssh 连接服务器，如果成功，再尝试用其他工具（如 telnet ， nc 等）连接 monitor 的端口。
+ceph -s 命令是否能运行并收到集群回复？
+如果答案是肯定的，那么你的集群已启动并运行着。你可以认为如果已经形成法定人数，monitors 就只会响应 status 请求。
+如果 ceph -s 阻塞了，并没有收到集群的响应且输出了很多 fault 信息，很可能此时你的 monitors 全部都 down 掉了或只有部分在运行（但数量不足以形成法定人数）。</description></item><item><title/><link>https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/Ceph/02-ceph-handbook/Troubleshooting/troubleshooting_osd/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/Ceph/02-ceph-handbook/Troubleshooting/troubleshooting_osd/</guid><description>2. 常见 OSD 故障处理 进行 OSD 排障前，先检查一下 monitors 和网络。如果 ceph health 或 ceph -s 返回的是健康状态，这意味着 monitors 形成了法定人数。如果 monitor 还没达到法定人数、或者 monitor 状态错误，要先解决 monitor 的问题。核实下你的网络，确保它在正常运行，因为网络对 OSD 的运行和性能有显著影响。
+2.1 收集 OSD 数据 开始 OSD 排障的第一步最好先收集信息，另外还有监控 OSD 时收集的，如 ceph osd tree 。
+Ceph 日志 如果你没改默认路径，可以在 /var/log/ceph 下找到 Ceph 的日志：
+ls /var/log/ceph 如果看到的日志还不够详细，可以增大日志级别。请参考1.12 日志和调试，查阅如何保证看到大量日志又不影响集群运行。
+管理套接字 用管理套接字工具检索运行时信息。列出节点上所有 Ceph 套接字：
+ls /var/run/ceph 然后，执行下例命令显示可用选项，把 {daemon-name} 换成实际的守护进程（如 osd.0 ）：
+ceph daemon osd.0 help 或者，你也可以指定一个 {socket-file} （如 /var/run/ceph 下的文件）：</description></item><item><title/><link>https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/Ceph/02-ceph-handbook/Troubleshooting/troubleshooting_pg/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/Ceph/02-ceph-handbook/Troubleshooting/troubleshooting_pg/</guid><description>3. 常见 PG 故障处理 3.1 PG 无法达到 CLEAN 状态 创建一个新集群后，PG 的状态一直处于 active ， active + remapped 或 active + degraded 状态， 而无法达到 active + clean 状态 ，那很可能是你的配置有问题。
+你可能需要检查下集群中有关 Pool 、 PG 和 CRUSH 的配置项，做以适当的调整。
+一般来说，你的集群中需要多于 1 个 OSD，并且存储池的 size 要大于 1 副本。
+单节点集群 有时候，我们需要搭建一个单节点的 Ceph 实验环境。此时，在开始创建 monitor 和 OSD 之前，你需要把 Ceph 配置文件中的 osd crush chooseleaf type 选项从默认值 1 （表示 host 或 node）修改为 0 （表示 osd）。这样做是告诉 Ceph 允许把数据的不同副本分布到同一 host 的 OSDs 上。</description></item><item><title/><link>https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/Ceph/02-ceph-handbook/Troubleshooting/troubleshooting_single_lost_power/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/Ceph/02-ceph-handbook/Troubleshooting/troubleshooting_single_lost_power/</guid><description> 5. 单个Ceph节点宕机处理 在某些情况下，如服务器硬件故障，造成单台 Ceph 节点宕机无法启动，可以按照本节所示流程将该节点上的 OSD 移除集群，从而达到 Ceph 集群的恢复。
+5.1 单台 Ceph 节点宕机处理步骤 登陆 ceph monitor 节点，查询 ceph 状态：
+ceph health detail
+将故障节点上的所有 osd 设置成 out，该步骤会触发数据 recovery, 需要等待数据迁移完成, 同时观察虚拟机是否正常：
+ceph osd out osd_id
+从 crushmap 将 osd 移除，该步骤会触发数据 reblance，等待数据迁移完成，同时观察虚拟机是否正常：
+ceph osd crush remove osd_name
+删除 osd 的认证： ceph auth del osd_name
+删除 osd ：ceph osd rm osd_id
+5.2 恢复后检查步骤 检查 ceph 集群状态正常； 检查虚拟机状态正常； 楚天云人员检查虚拟机业务是否正常； 检查平台服务正常：nova、cinder、glance； 创建新卷正常； 创建虚拟机正常。</description></item></channel></rss>

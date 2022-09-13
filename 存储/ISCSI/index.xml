@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>iscsi on ljzsdut</title><link>https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/ISCSI/</link><description>Recent content in iscsi on ljzsdut</description><generator>Hugo -- gohugo.io</generator><atom:link href="https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/ISCSI/index.xml" rel="self" type="application/rss+xml"/><item><title/><link>https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/ISCSI/Linux%E4%B8%8A%E9%85%8D%E7%BD%AE%E4%BD%BF%E7%94%A8iSCSI%E8%AF%A6%E7%BB%86%E8%AF%B4%E6%98%8E-%E4%B8%BB/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/ISCSI/Linux%E4%B8%8A%E9%85%8D%E7%BD%AE%E4%BD%BF%E7%94%A8iSCSI%E8%AF%A6%E7%BB%86%E8%AF%B4%E6%98%8E-%E4%B8%BB/</guid><description>转载
+第1章 iSCSI简介 1.1 scsi和iscsi 传统的SCSI技术是存储设备最基本的标准协议，但通常需要设备互相靠近并用SCSI总线连接，因此受到物理环境的限制。
+**iSCSI(Internet Small Computer System Interface)，顾名思义，iSCSI是网络上的SCSI，也就是通过网络连接的SCSI。**它是由IBM公司研究开发用于实现在IP网络上运行SCSI协议的存储技术，能够让SCSI接口与以太网技术相结合，使用iSCSI协议基于以太网传送SCSI命令与数据，克服了SCSI需要直接连接存储设备的局限性，使得可以跨越不同的服务器共享存储设备，并可以做到不停机状态下扩展存储容量。
+iSCSI实现的是IP SAN，数据传输基于以太网。
+1.2 iSCSI数据封装 iSCSI分为服务端和客户端，服务端需要安装scsi target用来共享存储设备，客户端需要安装iscsi initiator用来连接target端，将target端共享的设备挂载到initiator本地，可以对其进行分区，格式化等操作，访问过程如下图：
+initiator向target发起scsi命令后，在数据报文从里向外逐层封装SCSI协议报文、iSCSI协议报文、tcp头、ip头。
+封装是需要消耗CPU资源的，如果完全以软件方式来实现iscsi，那么所有的封装过程都由操作系统来完成。在很繁忙的服务器上，这样的资源消耗可能不太能接受，但好在它是完全免费的，对于不是非常繁忙的服务器采用它可以节省一大笔资金。
+除了软件方式实现，还有硬件方式的initiator(TOE卡和HBA卡)，通过硬件方式实现iSCSI。由于它们有控制芯片，可以帮助或者完全替代操作系统对协议报文的封装。
+TOE卡，操作系统首先封装SCSI和iSCSI协议报文，而TCP/IP头则交由TOE内的芯片来封装，这样就能减少一部分系统资源消耗。 HBA卡，操作系统只需封装SCSI，剩余的iSCSI协议报文还有TCP/IP头由HBA芯片负责封装。 显然，HBA卡实现iSCSI是最好的方案，但是它要花钱，还不便宜。
+第2章 配置使用iSCSI 2.1 部署iscsi前的说明和需求描述 1.说明
+(1).iscsi在target端是工作在套接字上的，监听端口默认是3260，且使用的是tcp连接。因为要保证数据安全性，使用udp可能会导致丢包。 (2).iscsi对客户端有身份认证的需要，有两种认证方式：基于IP认证，基于CHAP认证(双方都进行验证，即双向认证)。 2.需求描述
+找一台服务器A作为iscsi的target，将其中的一块磁盘或分区/dev/sdb当作要共享的存储设备共享出去。再找两台服务器B和C当作iscsi initiator连接到target的共享存储上。
+大致拓扑图如下：
+请确保服务器A上已经关闭了防火墙或者允许了3260端口。
+下图描述了使用iSCSI的大致过程，后文内容虽然因为介绍各种用法而显得比较杂，但根据这张图的流程，阅读时很容易搞清楚相关内容。
+2.2 安装target 在服务器A上：
+yum -y install scsi-target-utils #Ubuntu： apt install tgt 查看该工具包生成了哪些文件。
+rpm -ql scsi-target-utils /etc/rc.d/init.d/tgtd # /etc/sysconfig/tgtd /etc/tgt/targets.conf # /usr/sbin/tgt-admin # /usr/sbin/tgt-setup-lun /usr/sbin/tgtadm # /usr/sbin/tgtd /usr/sbin/tgtimg /usr/share/doc/scsi-target-utils-1.0.24 /usr/share/doc/scsi-target-utils-1.0.24/README /usr/share/doc/scsi-target-utils-1.0.24/README.iscsi /usr/share/doc/scsi-target-utils-1.0.24/README.iser /usr/share/doc/scsi-target-utils-1.0.24/README.lu_configuration /usr/share/doc/scsi-target-utils-1.0.24/README.mmc /usr/share/man/man5/targets.</description></item><item><title/><link>https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/ISCSI/Linux%E4%B8%8B%E6%90%AD%E5%BB%BAiSCSI%E5%85%B1%E4%BA%AB%E5%AD%98%E5%82%A8%E7%9A%84%E6%96%B9%E6%B3%95TGT%E6%96%B9%E5%BC%8F-%E6%AC%A1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E5%AD%98%E5%82%A8/ISCSI/Linux%E4%B8%8B%E6%90%AD%E5%BB%BAiSCSI%E5%85%B1%E4%BA%AB%E5%AD%98%E5%82%A8%E7%9A%84%E6%96%B9%E6%B3%95TGT%E6%96%B9%E5%BC%8F-%E6%AC%A1/</guid><description>Linux下搭建iSCSI共享存储的方法 TGT 方式 一、概述 iSCSI（internet SCSI）技术由IBM公司研究开发，是一个供硬件设备使用的、可以在IP协议的上层运行的SCSI指令集，这种指令集合可以实现在IP网络上运行SCSI协议，使其能够在诸如高速千兆以太网上进行路由选择。iSCSI技术是一种新储存技术，该技术是将现有SCSI接口与以太网络(Ethernet)技术结合，使服务器可与使用IP网络的储存装置互相交换资料。
+iSCSI分为服务端和客户端，服务端需要安装scsi target用来共享存储设备，客户端需要安装iscsi initiator用来连接target端，将target端共享的设备挂载到initiator本地，可以对其进行分区，格式化等操作，访问过程如下图：
+1、iSCSI实现数据的访问需要的条件： 1、iSCSI客户端具有的特性：
+iSCSI initiator（发起人）是发起I/O操作的启动者；需要通过发现过程请求远端快设备；可以与target进行持久连接；在Linux系统中可以使用open-iscsi软件包来模拟实现；
+2、iSCSI服务器端具有的特性：
+iSCSI target是I/O操作的执行者；需要导出一个或多个块设备供启动者（initiator）使用；
+在Linux系统中可以使用两种target工具，分别为tgt，和targetcli。
+这里先介绍TGT的方法，TGT是Fujita Tomonori于2006年底将SCSI Target Framework (STGT/TGT) 引入Linux内核。它在内核中有一个库，可协助内核控制目标驱动程序，TGT是用户态实现的iscsi target，所有目标处理都在用户空间进行。在2010年底，LIO项目被选择来代替TGT作为内核态实现的iscsi target。当选择LIO替换TGT时，它的实现已经进行了调整，以允许TGT用户空态模块继续运行，因此TGT社区支持在内核中包含LIO。在Linux内核 2.6.38 之前都是TGT。
+3、iSCSI 命名规则
+iSCSI 使用全球唯一的名称标识 iSCSI 设备（目标target或启动器initiator）。此名称类似于与光纤通道设备相关联的全球名称 (WWN)，可作为一种通用的设备识别方式使用。
+iSCSI 名称有两种不同格式。第一种是通过iSCSI限定名以 iqn.开头通常称为“IQN 名称”。第二种是通过企业唯一标识符，以eui.开头也称为“EUI 名称”，此方法不常用。
+有关 iSCSI 命名要求和字符串配置文件的更多详细信息，请参见 IETF 网站上的 RFC 3721 和 RFC 3722。
+命令方式一：iSCSI 限定名
+iSCSI 限定名采用 iqn.yyyy-mm.naming-authority:unique name 的形式，其中：
+yyyy-mm ：表示“年份-月份“，是公司成立的年份和月份，这里的公司一般为安装软件的这个公司，当然了可以随意选个时间
+naming-authority ：通常是公司的 Internet 域名的逆转格式。例如，pipci 公司的 iSCSI 限定名形式可能是 iqn.2018-01.cc.pipci.iscsi。此名称表示 pipci.cc域名于 2018 年 1 月注册，iscsi 是pipci.</description></item></channel></rss>

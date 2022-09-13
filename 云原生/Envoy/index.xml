@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Envoy on ljzsdut</title><link>https://note.ljzsdut.com/%E4%BA%91%E5%8E%9F%E7%94%9F/Envoy/</link><description>Recent content in Envoy on ljzsdut</description><generator>Hugo -- gohugo.io</generator><atom:link href="https://note.ljzsdut.com/%E4%BA%91%E5%8E%9F%E7%94%9F/Envoy/index.xml" rel="self" type="application/rss+xml"/><item><title/><link>https://note.ljzsdut.com/%E4%BA%91%E5%8E%9F%E7%94%9F/Envoy/01-Envoy%E5%9F%BA%E7%A1%80-%E7%90%86%E8%AE%BA/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E4%BA%91%E5%8E%9F%E7%94%9F/Envoy/01-Envoy%E5%9F%BA%E7%A1%80-%E7%90%86%E8%AE%BA/</guid><description>服务网格概述 服务网格是指专注于处理服务间通信的基础设施，它负责在现代云原生应用组成的复杂拓扑中可靠地传递请求;
+Sidecar治理模式是新一代的解决方案：让服务集中解 决业务逻辑的问题，网络相关的功能则与业务逻辑剥离，并封装为独 立的运行单元并作为服务的反向透 明代理，从而不再与业务紧密关联。换句话说，微服务的业务程序独立运行，而网络功能则以独立的代理层工作于客户端与服务之间，专门为代理的服务提供熔断、限流、追 踪、指标采集和服务发现等功能; 而这些由各服务的专用代理层联合 组成的服务通信网络则称之为服务 网格(Service Mesh);
+Service Mesh解决方案极大降低了业务逻辑与网络功能之间的耦合度，能够快捷、 方便地集成到现有的业务环境中，并提供了多语言、多协议支持，运维和管理成本 被大大压缩，且开发人员能够将精力集中于业务逻辑本身，而无须再关注业务代码 以外的其它功能。
+数据平面与控制平面 数据平面：触及系统中的每个数据包或请求，负责服务发现、健康检查、路由、负载均衡、身份验证/授权和可观测性等;
+控制平面：为网格中的所有正在运行的数据平面提供策略和配置，从而将所有数据平面 联合构建为分布式系统，它不接触系统中的任何数据包或请求;负责的任务包括例如确定两个服务Service X到Sevice Y之间的路由，Service Y相关集群的负载均衡 机制、断路策略、流量转移机制等，并将决策下发给Service X和Service Y的Sidecar;
+控制平面组件 工作负载调度程序:借助于底层的基础设施(例如kubernetes)完成服务及其Sidecar运行位置的调度决策; 服务发现:服务网格中的服务发现;· Sidecar代理配置API:各Sidecar代理以最终一致的方式从各种系统组件获取配置; 控制平面UI:管理人员的操作接口，用于配置全局级别的设置，例如部署、身份认证和 授权、路由及负载均衡等; 服务网格通讯逻辑 一旦启用Service Mesh，服务间的通信将遵循以下通信逻辑。
+微服务彼此间不会直接进行通信，而是由各服务前端的称为Service Mesh的代理程序进行; Service Mesh内置支持服务发现、熔断、负载均衡等网络相关的用于控制服务间通信的各种高级功能; Service Mesh与编程语言无关，开发人员可以使用任何编程语言编写微服务的业务逻辑， 各服务之间也可以使用不同的编程语言开发; 服务间的通信的局部故障可由Service Mesh自动处理; Service Mesh中的各服务的代理程序由控制平面(Control Plane)集中管理;各代理程序之间的通信网络也称为数据平面(Data Plane); 部署于容器编排平台时，各代理程序会以微服务容器的Sidecar模式运行; 服务网格的基本功能 控制服务间通信:熔断、重试、超时、故障注入、负载均衡和故障转移等; 服务发现:通过专用的服务总线发现服务端点; 可观测:指标数据采集、监控、分布式日志记录和分布式追踪; 安全性:TLS/SSL通信和密钥管理; 身份认证和授权检查:身份认证，以及基于黑白名单或RBAC的访问控制功能; 部署:对容器技术的原生支持，例如Docker和Kubernetes等; 服务间的通信协议:HTTP 1.1、HTTP 2.0和gRPC等; 健康状态检测:监测上游服务的健康状态; &amp;hellip;&amp;hellip; 服务网格的部署模式 服务网格的部署模式有两种:主机共享代理及Sidecar容器
+主机共享代理
+适用于同一主机上存在许多容器的场景，并且还可利用连接池来提高吞吐量 但一个代理进程故障将终止其所在主机上的整个容器队列，受影响的不仅仅是单个服务 实现方式中，常见的是运行为Kubernetes之上的DaemonSet sidecar容器
+代理进程注入每个Pod定义以与主容器一同运行 Sidecar进程应该尽可能轻量且功能完善 实现方案:Linkerd、Envoy和Conduit Envoy概述 Envoy是一个7层代理和通信总线。</description></item><item><title/><link>https://note.ljzsdut.com/%E4%BA%91%E5%8E%9F%E7%94%9F/Envoy/02-%E4%BD%BF%E7%94%A8%E5%85%A5%E9%97%A8/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E4%BA%91%E5%8E%9F%E7%94%9F/Envoy/02-%E4%BD%BF%E7%94%A8%E5%85%A5%E9%97%A8/</guid><description>启动Envoy 启动Envoy时，需要通过“-c”选项为其指定初始配置文件，以提供引导配置( Bootstrap configuration)，这也是使用v2 API的必然要求;
+~]$ envoy -c &amp;lt;path_to_config&amp;gt;.{json,yaml,pb,pb_text} #扩展名代表了配置信息的组织格式; 引导配置是Envoy配置信息的基点，用于承载Envoy的初始配置，它可能包括静态资源和动态资源的定义:
+静态资源(static_resources)在启动时直接加载 动态资源(dynamic_resources)则需要通过配置的xDS服务获取并生成 通常，Listener和Cluster是Envoy得以运行的基础，而二者的配置可以全部为静态格式， 也可以混合使用动态及静态方式提供，或者全部配置为动态;
+一个yaml格式纯静态的基础配置框架类似如下所示:
+static_resources: listeners: - name: ... address: {} filter_chains: [] # 过滤器链是listener的重要组成部分 clusters: - name: ... type: ... #指定集群内部成员的生成方式 connect_timeout: {} lb_policy: ... load_assignment: {} 详细配置文件详见官方文档
+Listener简易静态配置 侦听器主要用于定义Envoy监听的用于接收Downstreams请求的套接字、 用于处理请求时调用的过滤器链及相关的其它配置属性;
+listeners: - name: address: socket_address: { address: ..., port_value: ..., protocol: ... } filter_chains: - filters: - name: config: 示例：
+下面是一个最简单的静态侦听器配置示例envoy.yaml，主要有3部分组成：name、address、fileter_chains：
+static_resources: listeners: - name: listener_0 address: socket_address: address: 0.</description></item><item><title/><link>https://note.ljzsdut.com/%E4%BA%91%E5%8E%9F%E7%94%9F/Envoy/03-%E7%AE%A1%E7%90%86%E6%8E%A5%E5%8F%A3/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E4%BA%91%E5%8E%9F%E7%94%9F/Envoy/03-%E7%AE%A1%E7%90%86%E6%8E%A5%E5%8F%A3/</guid><description>配置管理接口 Envoy内建了一个管理接口，它支持查询和修改操作，甚至有可能暴露私有数据(例如统计数据、集群名称和证书信息等)，因此非常有必要精心编排其访问控制机制以避免非授权访问；在bootstrap配置文件的admin字段下进行配置：
+admin: # 管理接口的配置段 access_log_path: ... # 管理接口的访问日志文件路径，无须记录访问日志时使用/dev/null; profile_path: ... # cpu profiler的输出路径，默认为/var/log/envoy/envoy.prof; address: # 监听的套接字; socket_address: protocol: ... address: ... port_value: ... 下面是一个简单的配置示例:
+admin: access_log_path: /tmp/admin_access.log address: socket_address: { address: 127.0.0.1, port_value: 9901 } 内置path admin接口内置了多个/path，不同的path可能会分别接受不同的GET或 POST请求；
+GET /help:打印所有可用选项;
+admin commands are: GET / : Admin home page # GET /certs : print certs on machine # 列出已加载的所有TLS证书及相关的信息； GET /clusters : upstream cluster status # 额外支持使用“GET /clusters?format=json” GET /config_dump : dump current Envoy configs (experimental) # 打印Envoy加载的各类配置信息; GET /contention : dump current Envoy mutex contention stats (if enabled) # ，互斥跟踪 POST /cpuprofiler : enable/disable the CPU profiler # ，启用或禁用cpuprofiler（cpu性能剖析） POST /healthcheck/fail : cause the server to fail health checks # 强制设定HTTP健康状态检查为失败； POST /healthcheck/ok : cause the server to pass health checks # 强制设定HTTP健康状态检查为成功； POST /heapprofiler : enable/disable the heap profiler # 启用或禁用heapprofiler； GET /help : print out list of admin commands #打印当前帮助 GET /hot_restart_version : print the hot restart compatibility version # 打印热重启相关的信息; GET /listeners : print listener addresses # 列出所有侦听器，支持使用“GET /listeners?</description></item><item><title/><link>https://note.ljzsdut.com/%E4%BA%91%E5%8E%9F%E7%94%9F/Envoy/04-front-proxy-and-tls/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E4%BA%91%E5%8E%9F%E7%94%9F/Envoy/04-front-proxy-and-tls/</guid><description>front-proxy 官方文档
+官方示例
+git clone -b v1.11.1 https://github.com/envoyproxy/envoy.git cd envoy/examples/front-proxy/ docker-compose up TLS虚拟主机 Envoy的listener支持面向下游客户端一侧的TLS会话，并可选地支持验正客户端证书;
+listener中用到的数字证书可于配置中静态提供，也可借助于SDS动态获取 ;
+listeners: ... filter_chains: - filters: ... tls_context: #v2版本的API配置，v3版本已经发生了变化 common_tls_context: {} # 常规证书的相关设置; tls_params: {} # TLS协议版本，加密套件等; tls_certificates: # 用到的证书和私钥文件等; - certificate_chain: # TLS证书链; filename: ... # 证书文件路径; private_key: # 私钥; filename: ... # 私钥文件路径; password: # 私钥口令; filename: ... # 口令文件路径 tls_certifcate_sds_secret_configs: [] # 要基于SDS API获取TLS会话的相关信息时的配置; require_client_certificate: # 是否验正客户端证书; 示例
+static_resources: listeners: - name: listener_http address: socket_address: { address: 0.</description></item><item><title/><link>https://note.ljzsdut.com/%E4%BA%91%E5%8E%9F%E7%94%9F/Envoy/05-xDS-API%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E4%BA%91%E5%8E%9F%E7%94%9F/Envoy/05-xDS-API%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80/</guid><description>xDS API 概述 Envoy对xDS API的管理由后端服务器实现，包括LDS、CDS、RDS、EDS、SDS、HDS(Health Discovery Service)、RLS(Rate Limit Service)和MS(Metric Service)等；所有这些API都提供了最终的一致性，并且彼此间不存在相互影响；部分更高级别的操作(例如执行服务的A/B部署)需要进行排序以防止流量被丢弃，因此，基于一个管理服务器提供多类API时还需要使用聚合发现服务(ADS)API；ADS API允许所有其他API通过来自单个管理服务器的单个gRPC双向流进行编组，从而允许对操作进行确定性排序;
+Envoy提供了基于Python和Golang的SDK，可以基于这些SDK开发各种DS服务器。也可以使用开源的DS管理服务器，例如istio（pilot）。
+动态配置 Envoy支持基于文件系统或通过查询一到多个管理服务器(Management Server) 来发现各种动态资源(配置信息)，这些发现服务及其相应的API联合起来称为 xDS API;
+xDS API为Envoy提供了资源的动态配置机制，它也被称为Data Plane API
+Envoy v2 API以Protocol Buffers的proto3语言定义，该API支持:
+通过gRPC进行xDS API更新的流式传输，较之v1有效降低了更新延迟（双向流通道） 新的REST-JSON API，支持以YAML/JSON格式承载配置信息（轮训） 也支持基于文件系统的订阅，以REST-JSON或gRPC来传输更新 总之，Envoy通过订阅，指定要监视的文件系统路径、启动gRPC流或轮询REST- JSON URL来请求资源配置信息，后两种方法涉及使用DiscoveryRequest proto载荷发送请求，这三种方法中，资源均以DiscoveryResponse proto负载的形式进行响应。
+Envoy资源的配置源(ConfigSource) Envoy支持三种配置源。
+配置源(ConfigSource)用于指定资源配置数据的来源，用于为Listener、Cluster、 Route、Endpoint、Secret和VirtualHost等资源提供配置信息；
+目前，Envoy支持的资源配置源只能是path、api_config_source或ads其中之一；
+api_config_source或ads的数据来自于xDS API Server，即Management Server；
+文件系统订阅 文件系统订阅为Envoy提供动态配置的最简单方法，是将其放置在ConfigSource中显式指定的文件路径中。Envoy将使用inotify(Mac OS X上的kqueue)来监视文件的更改，并在更新时解析文件中的DiscoveryResponse proto。二进制protobufs，JSON，YAML和proto文本是DiscoveryResponse支持的格式，这意味着，无论采用上述何种方案，文件内容自身需要编排为DiscoveryResponse proto响应报文的格式。
+提示
+除了统计计数器和日志以外，没有任何机制可用于文件系统订阅ACK/NACK更新
+如果发生配置更新拒绝，xDS API的最后一个有效配置将继续使用（继续使用之前的配置）
+gRPC订阅 Enovy支持为每个xDS API独立指定gRPC ApiConfigSource，它指向与管理服务器对应的某上游集群，这将为每个xDS资源类型启动一个独立的双向gRPC流，可能会发送给不同的管理服务器，每个流都有自己独立维护的资源版本 ，且不存在跨资源类型的共享版本机制 ;在不使用ADS的情况下，每个资源类型可能具有不同的版本，因为Envoy API允许指向不同的EDS/RDS资源配置并对应不同的ConfigSources。
+API的交付方式采用最终一致性机制 ;
+下图是基于ACK的配置逻辑：
+Discovery Proto 源码文件envoy/api/envoy/api/v2/discovery.proto共定义了5种报文格式
+DiscoveryRequest:资源发现的请求报文 DiscoveryResponse:资源发现的响应报文 DeltaDiscoveryRequest:增量格式的请求报文，用于请求单个资源 DeltaDiscoveryResponse:增量格式的响应报文 Resource:跟踪的资源 DeltaDiscoveryRequest and DeltaDiscoveryResponse are used in a new gRPC endpoint for Delta xDS.</description></item><item><title/><link>https://note.ljzsdut.com/%E4%BA%91%E5%8E%9F%E7%94%9F/Envoy/06-xDS%E4%B9%8B%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E8%AE%A2%E9%98%85/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E4%BA%91%E5%8E%9F%E7%94%9F/Envoy/06-xDS%E4%B9%8B%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E8%AE%A2%E9%98%85/</guid><description>集群定义格式 clusters: - name: ... eds_cluster_config: service_name: eds_config: path: ... # ConfigSource，支持使用path, api_config_source或ads三者之一; 以EDS为例，Cluster为静态定义，其各Endpoint通过EDS动态发现;
+下例是将endpoint的定义由静态配置(STATIC)转换为EDS动态发现:
+docker-compose演示基于文件系统的订阅 示例1：以EDS为例，Cluster为静态定义，其各Endpoint通过EDS动态发现 准备用到的相关文件。 docker-compose目录下的文件结构：
+root@ubuntu1:~/servicemesh_in_practise/eds-filesystem# tree . . ├── docker-compose.yaml ├── Dockerfile-envoy ├── eds.conf └── envoy.yaml 0 directories, 4 files 准备Dockerfile-envoy文件，定义envoy镜像
+root@ubuntu1:~/servicemesh_in_practise/eds-filesystem# cat Dockerfile-envoy FROM envoyproxy/envoy-alpine:v1.11.1 COPY ./eds.conf* ./envoy.yaml /etc/envoy/ RUN apk update &amp;amp;&amp;amp; apk --no-cache add curl 准备一个空的eds.conf配置文件，用于之后在该文件上做基于文件系统的订阅
+root@ubuntu1:~/servicemesh_in_practise/eds-filesystem# cat eds.conf {} 准备envoy的配置文件(envoy.yaml)
+root@ubuntu1:~/servicemesh_in_practise/eds-filesystem# cat envoy.yaml node: id: envoy_001 cluster: testcluster admin: access_log_path: /tmp/admin_access.</description></item><item><title/><link>https://note.ljzsdut.com/%E4%BA%91%E5%8E%9F%E7%94%9F/Envoy/07-xDS%E4%B9%8B%E5%9F%BA%E4%BA%8EREST%E7%AE%A1%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%AE%A2%E9%98%85/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E4%BA%91%E5%8E%9F%E7%94%9F/Envoy/07-xDS%E4%B9%8B%E5%9F%BA%E4%BA%8EREST%E7%AE%A1%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%AE%A2%E9%98%85/</guid><description> 概述 以EDS为例，Cluster为静态定义，其各Endpoint通过EDS动态发现：
+DS配置格式：
+clusters: - name: ... eds_cluster_config: service_name: ... eds_config: api_config_source: api_type: ... # API可经由REST或gRPC获取，支持的类型包括REST、GRPC和DELTA_GRPC cluster_names: ... # 提供服务的集群名称列表，仅能与REST类型的API一起使用;多个集群用于冗余之目的，故障时将循环访问; refresh_delay: ... # REST API轮询时间间隔; request_timeout: ... # REST API请求超时时长，默认为1s; 注意:提供REST API服务的管理服务器（MS）也需要定义为Envoy上的集群，并由 eds等相关的动态发现服务进行调用;一般，这些管理服务器需要以静态的方式提供;
+试验拓扑：
+docker-compose部署：1个Envoy+1个Rest管理服务器+2个上游服务器
+1、相关文件的目录结构
+root@ubuntu1:~/servicemesh_in_practise/eds-rest# tree . . ├── docker-compose.yaml ├── Dockerfile-envoy ├── envoy.yaml └── resources ├── endpoints-2.json └── endpoints.json 1 directory, 5 files</description></item><item><title/><link>https://note.ljzsdut.com/%E4%BA%91%E5%8E%9F%E7%94%9F/Envoy/08-xDS%E4%B9%8B%E5%9F%BA%E4%BA%8Egrpc%E7%AE%A1%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%AE%A2%E9%98%85/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E4%BA%91%E5%8E%9F%E7%94%9F/Envoy/08-xDS%E4%B9%8B%E5%9F%BA%E4%BA%8Egrpc%E7%AE%A1%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%AE%A2%E9%98%85/</guid><description>以EDS为例，Cluster为静态定义，其各Endpoint通过EDS动态发现;
+EDS配置格式
+clusters: - name: ... eds_cluster_config: service_name: eds_config: api_config_source: api_type: ... # API可经由REST或gRPC获取，支持的类型包括REST、GRPC和DELTA_GRPC rate_limit_settings: {...} # 速率限制 grpc_services: # 提供grpc服务的一到多个服务源 envoy_grpc: # Envoy内建的grpc客户端，envoy_grpc和google_grpc二者仅能用其一; cluster_name: ... # grpc集群的名称; google_grpc: # Google的C++ grpc客户端 timeout: ... # grpc超时时长; 注意:提供REST API服务的管理服务器也需要定义为Envoy上的集群，并由 eds等相关的动态发现服务进行调用;一般，这些管理服务器需要以静态的方式提供;
+基于grpc的EDS示例：
+root@istio:~/ServiceMesh_in_Practise/eds-grpc# ls Dockerfile-envoy docker-compose.yaml envoy.yaml resources 基于grpc的全动态配置示例：
+将Listener、Route、Cluster和Endpoint的定义分别以lds、rds、cds和eds提供。
+root@istio:~/ServiceMesh_in_Practise/lds-cds-grpc# ls Dockerfile-envoy docker-compose.yaml envoy.yaml resources</description></item><item><title/><link>https://note.ljzsdut.com/%E4%BA%91%E5%8E%9F%E7%94%9F/Envoy/09-ADS/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E4%BA%91%E5%8E%9F%E7%94%9F/Envoy/09-ADS/</guid><description>动态配置 Envoy 的强大功能之一是支持动态配置。到现在为止，我们一直在使用静态配置。我们使用 static_resources 字段将监听器、集群、路由和其他资源指定为静态资源。
+当使用动态配置时，我们不需要重新启动 Envoy 进程就可以生效。相反，Envoy 通过从磁盘或网络上的文件读取配置，动态地重新加载配置。动态配置使用所谓的发现服务 API，指向配置的特定部分。这些 API 也被统称为 xDS。当使用 xDS 时，Envoy 调用外部基于 gRPC/REST 的配置供应商，这些供应商实现了发现服务 API 来检索配置。
+外部基于 gRPC/REST 的配置提供者也被称为控制平面。当使用磁盘上的文件时，我们不需要控制平面。Envoy 提供了控制平面的 Golang 实现，但是 Java 和其他控制平面的实现也可以使用。
+Envoy 内部有多个发现服务 API。所有这些在下表中都有描述。
+发现服务名称 描述 监听器发现服务（LDS） 使用 LDS，Envoy 可以在运行时发现监听器，包括所有的过滤器栈、HTTP 过滤器和对 RDS 的引用。 扩展配置发现服务（ECDS） 使用 ECDS，Envoy 可以独立于监听器获取扩展配置（例如，HTTP 过滤器配置）。 路由发现服务（RDS） 使用 RDS，Envoy 可以在运行时发现 HTTP 连接管理器过滤器的整个路由配置。与 EDS 和 CDS 相结合，我们可以实现复杂的路由拓扑结构。 虚拟主机发现服务（VHDS） 使用 VHDS 允许 Envoy 从路由配置中单独请求虚拟主机。当路由配置中有大量的虚拟主机时，就可以使用这个功能。 宽泛路由发现服务（SRDS） 使用 SRDS，我们可以把路由表分解成多个部分。当我们有大的路由表时，就可以使用这个 API。 集群发现服务（CDS） 使用 CDS，Envoy 可以发现上游集群。Envoy 将通过排空和重新连接所有现有的连接池来优雅地添加、更新或删除集群。Envoy 在初始化时不必知道所有的集群，因为我们可以在以后使用 CDS 配置它们。 端点发现服务（EDS） 使用 EDS，Envoy 可以发现上游集群的成员。 秘密发现服务（SDS） 使用 SDS，Envoy 可以为其监听器发现秘密（证书和私钥，TLS 会话密钥），并为对等的证书验证逻辑进行配置。 运行时发现服务（RTDS） 使用 RTDS，Envoy 可以动态地发现运行时层。 聚合发现服务（ADS）</description></item><item><title/><link>https://note.ljzsdut.com/%E4%BA%91%E5%8E%9F%E7%94%9F/Envoy/10-cluster%E7%AE%A1%E7%90%86/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E4%BA%91%E5%8E%9F%E7%94%9F/Envoy/10-cluster%E7%AE%A1%E7%90%86/</guid><description>集群管理器(Cluster Manager) Envoy支持同时配置任意数量的上游集群，并基于Cluster Manager管理它们;
+Cluster Manager负责为集群管理上游主机的健康状态、负载均衡机制、连接类型及适用协议等;
+生成集群配置的方式由静态或动态(CDS)两种;
+集群预热 集群在服务器启动或者通过 CDS 进行初始化时需要一个预热的过程，这意味 着集群存在下列状况。
+初始服务发现加载 (例如DNS 解析、EDS 更新等)完成之前不可用 配置了主动健康状态检查机制时，Envoy会主动发送健康状态检测请求报文至发现的每个上游主机;于是，初始的主动健康检查成功完成之前不可用 于是，新增集群初始化完成之前对Envoy的其它组件来说不可见;而对于需要 更新的集群，在其预热完成后通过与旧集群的原子交换来确保不会发生流量中 断类的错误;
+服务发现 集群管理器配置上游集群时需要知道如何解析集群成员，相应的解析机 制即为服务发现;
+集群中的每个成员由endpoint进行标识，它可由用户静态配置，也可通过EDS 或DNS服务动态发现;
+Static:静态配置，即显式指定每个上游主机的已解析名称(IP地址/端口或unix域套按字文 件);
+Strict DNS:严格DNS，Envoy将持续和异步地解析指定的DNS目标，并将DNS结果中的返 回的每个IP地址视为上游集群中可用成员;
+Logical DNS:逻辑DNS，集群仅使用在需要启动新连接时返回的第一个IP地址，而非严格 获取DNS查询的结果并假设它们构成整个上游集群;适用于必须通过DNS访问的大规模 Web服务集群;
+Original destination:当传入连接通过iptables的REDIRECT或TPROXY target或使用代理协 议重定向到Envoy时，可以使用原始目标集群;
+Endpoint discovery service (EDS):EDS是一种基于GRPC或REST-JSON API的xDS管理服务 器获取集群成员的服务发现方式;
+Custom cluster:Envoy还支持在集群配置上的cluster_type字段中指定使用自定义集群发现机 制;
+最终一致的服务发现 Envoy的服务发现并未采用完全一致的机制，而是假设主机以最终一致的方式加入或离开网格，它结合主动健康状态检查机制来判定集群的健康状态;健康与否的决策机制以完全分布式的方式进行，因此可以很好地应对网络分区。
+为集群启用主机健康状态检查机制后，Envoy基于如下方式判定是否路由请求 到一个主机：
+故障处理机制 Envoy提供了一系列开箱即用的故障处理机制：
+超时(timeout) 有限次数的重试，并支持可变的重试延迟 主动健康检查与异常探测 连接池 断路器 所有这些特性，都可以在运行时动态配置; 结合流量管理机制，用户可为每个服务/版本定制所需的故障恢复机制;
+Upstreams 健康状态检测 健康状态检测用于确保代理服务器不会将下游客户端的请求代理至工作异常的上游主机;
+Envoy支持两种类型的健康状态检测，二者均基于集群进行定义：
+主动检测(Active Health Checking):Envoy周期性地发送探测报文至上游主机，并根据 其响应判断其健康状态;Envoy目前支持三种类型的主动检测:
+HTTP:向上游主机发送HTTP请求报文 L3/L4:向上游主机发送L3/L4请求报文，基于响应的结果判定其健康状态，或仅通过连接状态进行判定; Redis:向上游的redis服务器发送Redis PING ; 被动检测(Passive Health Checking):Envoy通过异常检测(Outlier Detection)机制进行 被动模式的健康状态检测; 目前，仅http router、tcp proxy和redis proxy三个过滤器支持异常值检测;Envoy支持以下类型的异常检测：</description></item><item><title/><link>https://note.ljzsdut.com/%E4%BA%91%E5%8E%9F%E7%94%9F/Envoy/11-HTTP%E6%B5%81%E9%87%8F%E7%AE%A1%E7%90%86/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E4%BA%91%E5%8E%9F%E7%94%9F/Envoy/11-HTTP%E6%B5%81%E9%87%8F%E7%AE%A1%E7%90%86/</guid><description>Envoy高级路由 Envoy基于HTTP router过滤器基于路由表完成多种高级路由机制，例如
+将域名映射到虚拟主机
+path的前缀(prefix)匹配、精确匹配或正则表达式匹配
+虚拟主机级别的TLS重定向;
+路由级别的path/host重定向，以及由Envoy直接生成响应报文;
+显式host重定向、前缀重定向;
+基于HTTP标头或路由配置的请求重试与请求超时;
+通过“运行时参数值”从一个集群迁移至另一个集群(流量迁移)
+通过“基于权重/百分比”的路由跨多个集群进行流量分割
+基于任意标头匹配路由规则;
+基于优先级的路由;
+基于hash策略的路由;
+&amp;hellip;&amp;hellip;
+虚机主机及路由配置概述 虚拟主机 路由配置中的顶级元素是虚拟主机。每个虚拟主机都有一个逻辑名称以及一组域名，请求报文中的HOST头将根据此处的域名进行路由；单个侦听器可以服务于多个顶级域。基于域名选择虚拟主机后，将基于配置的路由机制完成请求路由或进行重定向;
+虚拟主机的配置字段：
+{ &amp;#34;name&amp;#34;: &amp;#34;...&amp;#34;, &amp;#34;domains&amp;#34;: [], &amp;#34;routes&amp;#34;: [], &amp;#34;require_tls&amp;#34;: &amp;#34;...&amp;#34;, &amp;#34;virtual_clusters&amp;#34;: [], &amp;#34;rate_limits&amp;#34;: [], &amp;#34;request_headers_to_add&amp;#34;: [], &amp;#34;request_headers_to_remove&amp;#34;: [], &amp;#34;response_headers_to_add&amp;#34;: [], &amp;#34;response_headers_to_remove&amp;#34;: [], &amp;#34;cors&amp;#34;: &amp;#34;{...}&amp;#34;, &amp;#34;per_filter_config&amp;#34;: &amp;#34;{...}&amp;#34;, &amp;#34;typed_per_filter_config&amp;#34;: &amp;#34;{...}&amp;#34;, &amp;#34;include_request_attempt_count&amp;#34;: &amp;#34;...&amp;#34;, &amp;#34;retry_policy&amp;#34;: &amp;#34;{...}&amp;#34;, &amp;#34;hedge_policy&amp;#34;: &amp;#34;{...}&amp;#34; } 虚拟主机级别的路由策略用于为相关的路由属性提供默认配置，用户也可在路由配置上自定义用到的路由属性，例如限流、CORS和重试机制等;
+Envoy匹配路由时，它基于如下工作过程进行：
+检测HTTP请求的host标头或:authority(即USER@HOST)，并将其同路由配置中定义的虚拟主机作匹配检查;
+在匹配到的虚拟主机配置中按顺序检查虚拟主机中的每个路由条目中的匹配条件，直到第一个路由条目匹配的为止(短路);
+如果定义了虚拟集群，按顺序检查虚拟主机中的每个虚拟集群，直到第一个匹配的为止;
+listeners: - name: address: {...} filter_chians: [] - filters: - name: envoy.</description></item><item><title/><link>https://note.ljzsdut.com/%E4%BA%91%E5%8E%9F%E7%94%9F/Envoy/12-%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7%E5%BA%94%E7%94%A8/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E4%BA%91%E5%8E%9F%E7%94%9F/Envoy/12-%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7%E5%BA%94%E7%94%A8/</guid><description/></item><item><title/><link>https://note.ljzsdut.com/%E4%BA%91%E5%8E%9F%E7%94%9F/Envoy/13-Envoy%E6%9C%8D%E5%8A%A1%E7%BD%91%E6%A0%BC%E5%AE%89%E5%85%A8/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E4%BA%91%E5%8E%9F%E7%94%9F/Envoy/13-Envoy%E6%9C%8D%E5%8A%A1%E7%BD%91%E6%A0%BC%E5%AE%89%E5%85%A8/</guid><description>Envoy的身份认证机制 Envoy认证机制 Envoy支持两种类型的认证机制：
+传输认证:即服务间的认证，它基于双向TLS实现传输认证(即mTLS)，包括双向认证 、信道安全和证书自动管理;每个服务都需要有其用于服务间双向认证的标识，以实现 此种认证机制; 用户认证:也称为终端用户认证，用于认证请求的最终用户或者设备;Envoy通过JWT( JSON Web Token)实现此类认证需求，以保护服务端的资源; 客户端基于HTTP标头向服务端发送JWT 服务端验证签名 envoy.filters.http.jwt_authn过滤器 TLS&amp;amp;mTLS静态配置 Envoy支持在侦听器中实现TLS终止以及与上游集群建立连接时的TLS始发。
+Listener：与客户端通信时的TLS终止 Cluster：同上游建立TLS通信时的始发 TLS终止定义于Listener中，而与上游集群的连接始发定义于Cluster中；在底层使用BoringSSL作为SSL库；DownstreamTlsContexts支持多个TLS证书(多个证书需要属于同一类型，RSA或ECDSA)，但UpstreamTlsContexts目前仅支持单个证书；支持执行标准边缘代理任务，以及启动与具有高级TLS要求的外部服务(TLS1.2，SNI等)的连接；
+仅在验证上下文指定一个或多个受信任的证书颁发机构后才会启用上下游的证书 验证功能;Linux和BSD系统上CA包的常用路径如下：
+/etc/ssl/certs/ca-certificates.crt (Debian/Ubuntu/Gentoo等) /etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem (CentOS/RHEL 7) /etc/pki/tls/certs/ca-bundle.crt (Fedora/RHEL 6) /etc/ssl/ca-bundle.pem (OpenSUSE) /usr/local/etc/ssl/cert.pem (FreeBSD) /etc/ssl/cert.pem (OpenBSD) 设定数字证书 配置时，可以通过静态资源格式指定使用的TLS证书，也可以通过SDS动态获取 TLS证书;
+SDS可以简化证书管理，各实例的证书可由SDS统一推送，证书过期后，SDS推送新证书至Envoy实例可立即生效而无需重启或重新部署; 获取到所需要的证书之后侦听器方能就绪;不过，若因同SDS服务器的连接失败或收到其错误 响应而无法获取证书，则侦听器会打开端口，但会重置连接请求; Envoy同SDS服务器之间的通信必须使用安全连接; SDS服务器需要实现gRPC服务SecretDiscoveryService，它遵循与其他xDS相同的协议; 设定数字证书的方式：
+静态格式的Secret定义在static_resources上下文，并由listener或cluster在tls_context通过指定文件路径引用 不予事先定义Secret，而由listener或cluster直接在tls_context中定义 通过SDS提供证书时，需要配置好SDS集群，并由listener或cluster在tls_context中通过sds_config 引用; 设定Secret 定义Secret时，通常有定义数字证书(服务端或客户端)、票证密钥和证书校验机 制三种类型，但每个定义仅能指定为其中一种类型:
+static_resources: listeners: [] clusters: [] secrets: [] # 静态指定的Secret列表，定义时，以下三种方式可选其一; - name: ... # 可用于引用此秘密(Secret)的惟一标识; tls_cretificate: {...} # 数字证书 certificate_chain: {.</description></item><item><title/><link>https://note.ljzsdut.com/%E4%BA%91%E5%8E%9F%E7%94%9F/Envoy/others/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E4%BA%91%E5%8E%9F%E7%94%9F/Envoy/others/</guid><description>https://github.com/pingxin0521/envoy-handbook</description></item></channel></rss>

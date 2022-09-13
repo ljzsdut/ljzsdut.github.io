@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>CNI on ljzsdut</title><link>https://note.ljzsdut.com/%E4%BA%91%E5%8E%9F%E7%94%9F/Kubernetes/k8s%E7%BD%91%E7%BB%9C/Pod%E7%BD%91%E7%BB%9C%E4%B9%8BCNI/</link><description>Recent content in CNI on ljzsdut</description><generator>Hugo -- gohugo.io</generator><atom:link href="https://note.ljzsdut.com/%E4%BA%91%E5%8E%9F%E7%94%9F/Kubernetes/k8s%E7%BD%91%E7%BB%9C/Pod%E7%BD%91%E7%BB%9C%E4%B9%8BCNI/index.xml" rel="self" type="application/rss+xml"/><item><title/><link>https://note.ljzsdut.com/%E4%BA%91%E5%8E%9F%E7%94%9F/Kubernetes/k8s%E7%BD%91%E7%BB%9C/Pod%E7%BD%91%E7%BB%9C%E4%B9%8BCNI/01-%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3CNI-%E9%80%9A%E7%94%A8%E8%AE%BE%E8%AE%A1%E8%A7%84%E8%8C%83/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E4%BA%91%E5%8E%9F%E7%94%9F/Kubernetes/k8s%E7%BD%91%E7%BB%9C/Pod%E7%BD%91%E7%BB%9C%E4%B9%8BCNI/01-%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3CNI-%E9%80%9A%E7%94%A8%E8%AE%BE%E8%AE%A1%E8%A7%84%E8%8C%83/</guid><description>为什么要有CNI CNI是Container Network Interface的缩写，简单地说，就是一个标准的，通用的接口。
+已知我们现在有各种各样的容器平台：docker，kubernetes，mesos，我们也有各种各样的容器网络解决方案：flannel，calico，weave，并且还有各种新的解决方案在不断涌现。如果每出现一个新的解决方案，我们都需要对两者进行适配，那么由此带来的工作量必然是巨大的，而且也是重复和不必要的。事实上，我们只要提供一个标准的接口，更准确的说是一种协议，就能完美地解决上述问题（一个抽象的接口层，将容器网络配置方案与容器平台方案解耦。）。一旦有新的网络方案出现，只要它能满足这个标准的协议，那么它就能为同样满足该协议的所有容器平台提供网络功能，而CNI正是这样的一个标准接口协议。
+什么是CNI 通俗地讲，CNI是一个接口协议，用于连接容器管理系统和网络插件。前者提供一个容器所在的network namespace（从网络的角度来看，network namespace和容器是完全等价的），后者负责将network interface插入该network namespace中（比如veth的一端），并且在宿主机做一些必要的配置（例如将veth的另一端加入bridge中），最后对namespace中的interface进行IP和路由的配置。
+那么CNI的工作其实主要是从容器管理系统处获取运行时信息，包括network namespace的路径，容器ID以及network interface name，再从容器网络的配置文件中加载网络配置信息，再将这些信息传递给对应的插件，由插件进行具体的网络配置工作，并将配置的结果再返回到容器管理系统中。
+最后，需要注意的是，在之前的CNI版本中，网络配置文件只能描述一个network，这也就表明了一个容器只能加入一个容器网络。但是在后来的CNI版本中，我们可以在配置文件中定义一个所谓的NetworkList，事实上就是定义一个network序列，CNI会依次调用各个network的插件对容器进行相应的配置，从而允许一个容器能够加入多个容器网络。
+可见，CNI的接口并不是指HTTP、gRPC接口，而是指对可执行程序的调用（exec)。这些可执行程序称之为CNI插件，以K8S为例，K8S节点默认的CNI插件路径为 /opt/cni/bin ，在K8S节点上查看该目录，可以看到可供使用的CNI插件：
+$ ls /opt/cni/bin/ bandwidth bridge dhcp firewall flannel host-device host-local ipvlan loopback macvlan portmap ptp sbr static tuning vlan kubelet中实现了CNI，CNI插件（可执行文件）会被kubelet调用。kubelet --network-plugin=cni表示启用cni插件，--cni-conf-dir 指定networkconfig配置路径，默认路径是：/etc/cni/net.d；--cni-bin-dir指定plugin可执行文件路径，默认路径是：/opt/cni/bin；
+CNI plugin 只需要通过 CNI 库实现两类方法, 一类是创建容器时调用, 一类是删除容器时调用.
+说明：
+Docker并没有采用CNI标准，而是在CNI创建之初同步开发了CNM（Container Networking Model）标准。但由于技术和非技术原因，CNM模型并没有得到广泛的应用。
+在组成上，CNI可以认为由libcni库和plugins组成。即CNI=libcni+plugins。libcni的默认配置文件为/etc/cni/net.d/*.conflist，而各个插件需要的配置文件是libcni生成的，libcni会为每个CNI插件都生成独立的配置文件，然后在调用各个CNI插件时通过stdin方式传递给CNI插件。
+CNI的工作过程 CNI的工作过程大致如下图所示：
+CNI通过json格式的配置文件来描述网络配置，当需要设置容器网络时，由容器运行时负责执行CNI插件，并通过CNI插件的标准输入（stdin）来传递json网络配置文件信息，通过标准输出（stdout）接收插件的执行结果。
+图中的 libcni 是CNI提供的一个go package，封装了一些符合CNI规范的标准操作，便于容器运行时和网络插件对接CNI标准。
+从上图可知，各种容器运行时如果要使用CNI，就需要基于libcni库开发对各种网络插件的调用实现。容器运行时中的libcni库，会通过环境变量和json网络配置文件传递给具体到网络插件，各个网络插件实现具体的容器网络操作。
+其中下文中的cnitool就是类似于容器运行时的一种基于libcni的实现，可以去调用cni插件。
+举一个CNI插件被调用的直观的例子，假如我们要调用bridge插件将容器接入到主机网桥，则调用的命令看起来长这样：
+# CNI_COMMAND=ADD 顾名思义表示创建。 # XXX=XXX 其他参数定义见下文。 # &amp;lt; config.</description></item><item><title/><link>https://note.ljzsdut.com/%E4%BA%91%E5%8E%9F%E7%94%9F/Kubernetes/k8s%E7%BD%91%E7%BB%9C/Pod%E7%BD%91%E7%BB%9C%E4%B9%8BCNI/02-k8s%E4%B9%8Bpod%E5%A4%9A%E7%BD%91%E5%8D%A1%E6%96%B9%E6%A1%88multus-cni/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E4%BA%91%E5%8E%9F%E7%94%9F/Kubernetes/k8s%E7%BD%91%E7%BB%9C/Pod%E7%BD%91%E7%BB%9C%E4%B9%8BCNI/02-k8s%E4%B9%8Bpod%E5%A4%9A%E7%BD%91%E5%8D%A1%E6%96%B9%E6%A1%88multus-cni/</guid><description>转载：https://zhuanlan.zhihu.com/p/145985580
+其他参考：
+https://juejin.cn/post/6844903999825674248
+https://blog.csdn.net/cloudvtech/article/details/80221988
+https://blog.csdn.net/u010827484/article/details/86824497
+在Kubernetes中，网络是非常重要的一个领域。 Kubernetes本身不提供网络解决方案，但是提供了CNI规范。这些规范被许多CNI插件（例如WeaveNet，Flannel，Calico等）遵守。这些插件中任何一个都可以在集群上使用和部署以提供网络解决方案。该网络称为集群的默认网络。此默认网络使Pods不仅可以在同一节点上而且可以在群集中的各个节点之间相互通信。
+随着发展，Kubernetes 缺乏支持VNF中多个网络接口的所需功能。传统上，网络功能使用多个网络接口分离控制，管理和控制用户/数据的网络平面。他们还用于支持不同的协议，满足不同的调整和配置要求。
+为了解决这个需求，英特尔实现了MULTUS的CNI插件，其中提供了将多个接口添加到Pod的功能。这允许POD通过不同的接口连接到多个网络，并且每个接口都将使用其自己的CNI插件（CNI插件可以相同或不同。这完全取决于需求和实现）。
+下面是Multus CNI提供的连接到Pod的网络接口的图示。该图显示了具有三个接口的容器：eth0，net0和net1。 eth0连接kubernetes集群网络以连接kubernetes服务器/服务（例如kubernetes api-server，kubelet等）。 net0和net1是其他网络附件，并通过使用其他CNI插件（例如vlan / vxlan / ptp）连接到其他网络。
+MULTUS 工作原理 Kubernetes当前没有提供为POD添加额外的接口选项的规定，或支持多个CNI插件同时工作的规定，但是它确实提供了一种由api服务器扩展受支持的API的机制。使用“自定义资源定义”可以做到这一点。 MULTUS依赖于“自定义资源定义”来存储其他接口和CNI插件所需的信息。
+我们首先需要确保将MULTUS二进制文件放置在/opt/cni/bin位置的所有节点上，并在/etc/cni/net.d位置创建一个新的配置文件。与MULTUS使用的kubeconfig文件一起使用。
+在/etc/cni/net.d中创建的新配置文件基于集群中已经存在的默认网络配置。
+在此之后，CRD用于定义新的种类名称“ NetworkAttachmentDefinition”，以及服务帐户和MULTUS的集群角色以及相应的绑定。这个新的集群角色将提供对随CRD添加的新API组以及默认API组中Pod资源的访问权限。
+然后创建类型为“ NetworkAttachmentDefinition”的客户资源实例，该实例稍后将在创建具有多个接口的Pod时使用。
+部署示例 在本文中，我们将多次提及两件事：
+“默认网络”-这是您的Pod到Pod网络。这就是集群中Pod之间相互通信的方式，以及它们之间的连通性。一般而言，这被称为名为eth0的接口。此接口始终连接到您的Pod，以便它们之间可以相互连接。除此之外，我们还将添加接口。 “ CRD”-自定义资源定义。自定义资源是扩展Kubernetes API的一种方式。我们在这里使用这些存储Multus可以读取的一些信息。首先，我们使用它们来存储附加到您的Pod的每个其他接口的配置。 目前支持Kubernetes 1.16+版本。
+安装 我们建议的用于部署Multus的快速入门方法是使用Daemonset（在群集中的每个节点上运行Pod的方法）进行部署，该Pod会安装Multus二进制文件并配置Multus以供使用。
+首先，克隆此GitHub存储库。
+git clone https://github.com/intel/multus-cni.git &amp;amp;&amp;amp; cd multus-cni 我们将在此存储库中使用带有kubectl的YAML文件。
+$ cat ./deployments/multus-daemonset.yml | kubectl apply -f - Multus daemonset 完成了那些工作？ 启动Multus守护程序集，这会在每个节点上运行一个pod，从而在/opt/cni/bin中的每个节点上放置一个Multus二进制文件 按照字母顺序读取/etc/cni/net.d中的第一个配置文件，并为Multus创建一个新的配置文件，即/etc/cni/net.d/00-multus.conf，此配置是自动生成并基于默认网络配置（假定是按字母顺序排列的第一个配置） 在每个节点上创建一个/etc/cni/net.d/multus.d目录，其中包含用于Multus访问Kubernetes API的身份验证信息。 创建其他接口 我们要做的第一件事是为我们附加到Pod的每个其他接口创建配置。我们将通过创建自定义资源来做到这一点。快速入门安装的一部分会创建一个“ CRD”（自定义资源定义，它是我们保留这些自定义资源的位置），我们将在其中存储每个接口的配置。
+CNI 配置 我们将添加的每个配置都是CNI配置。如果您不熟悉它们，让我们快速分解它们。这是一个示例CNI配置：
+{ &amp;#34;cniVersion&amp;#34;: &amp;#34;0.</description></item><item><title/><link>https://note.ljzsdut.com/%E4%BA%91%E5%8E%9F%E7%94%9F/Kubernetes/k8s%E7%BD%91%E7%BB%9C/Pod%E7%BD%91%E7%BB%9C%E4%B9%8BCNI/03-k8s%E4%B9%8Bovs-cni/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E4%BA%91%E5%8E%9F%E7%94%9F/Kubernetes/k8s%E7%BD%91%E7%BB%9C/Pod%E7%BD%91%E7%BB%9C%E4%B9%8BCNI/03-k8s%E4%B9%8Bovs-cni/</guid><description>转载：https://www.jianshu.com/p/9bdd8b9f21a7
+简介 ovs-cni是由kubevirt提供的一种k8s cni, 用于将pod接口加入到ovs网桥上面，其原理为：创建一对veth接口，一端加到ovs网桥，另一端加到pod内部。
+ovs-cni不会自动创建网桥，所以必须提前创建好。
+ovs-cni也不会实现跨host的pod通信，必须提前规划好通过ovs跨host通信方案。
+环境介绍 必须在安装了multus的k8s环境上，因为要使用multus创建的crd资源network-attachment-definitions来定义ovs配置。
+k8s环境如下：
+root@master:~# kubectl get nodes -o wide NAME STATUS ROLES AGE VERSION INTERNAL-IP EXTERNAL-IP OS-IMAGE KERNEL-VERSION CONTAINER-RUNTIME master Ready master 183d v1.17.3 192.168.122.20 &amp;lt;none&amp;gt; Ubuntu 19.10 5.3.0-62-generic docker://19.3.2 node1 Ready &amp;lt;none&amp;gt; 183d v1.17.3 192.168.122.21 &amp;lt;none&amp;gt; Ubuntu 19.10 5.3.0-62-generic docker://19.3.2 node2 Ready &amp;lt;none&amp;gt; 183d v1.17.3 192.168.122.22 &amp;lt;none&amp;gt; Ubuntu 19.10 5.3.0-62-generic docker://19.3.2 root@master:~# kubectl get pod -n kube-system NAME READY STATUS RESTARTS AGE calico-kube-controllers-5b644bc49c-4vfjx 1/1 Running 2 46d calico-node-5gtw7 1/1 Running 2 46d calico-node-mqt6l 1/1 Running 4 46d calico-node-t4vjh 1/1 Running 2 46d coredns-9d85f5447-4znmx 1/1 Running 4 42d coredns-9d85f5447-fh667 1/1 Running 2 42d etcd-master 1/1 Running 8 183d kube-apiserver-master 1/1 Running 0 27h kube-controller-manager-master 1/1 Running 8 183d kube-multus-ds-amd64-7b4fw 1/1 Running 0 5h13m kube-multus-ds-amd64-dq2s8 1/1 Running 0 5h13m kube-multus-ds-amd64-sqf8g 1/1 Running 0 5h13m kube-proxy-l4wn7 1/1 Running 5 183d kube-proxy-prhcm 1/1 Running 5 183d kube-proxy-psxqt 1/1 Running 8 183d kube-scheduler-master 1/1 Running 8 183d 在三个节点上执行如下命令，安装openvswitch，如果要实现跨host的pod通信，可以将host上的对外通信的网卡加到网桥上。</description></item></channel></rss>

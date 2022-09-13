@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ljzsdut</title><link>https://note.ljzsdut.com/%E8%99%9A%E6%8B%9F%E5%8C%96/PVE%E8%99%9A%E6%8B%9F%E5%8C%96/</link><description>Recent content on ljzsdut</description><generator>Hugo -- gohugo.io</generator><atom:link href="https://note.ljzsdut.com/%E8%99%9A%E6%8B%9F%E5%8C%96/PVE%E8%99%9A%E6%8B%9F%E5%8C%96/index.xml" rel="self" type="application/rss+xml"/><item><title/><link>https://note.ljzsdut.com/%E8%99%9A%E6%8B%9F%E5%8C%96/PVE%E8%99%9A%E6%8B%9F%E5%8C%96/01-pve%E5%8D%95%E6%9C%BA%E9%83%A8%E7%BD%B2/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E8%99%9A%E6%8B%9F%E5%8C%96/PVE%E8%99%9A%E6%8B%9F%E5%8C%96/01-pve%E5%8D%95%E6%9C%BA%E9%83%A8%E7%BD%B2/</guid><description>pve特点 1、每个节点地位一致，通过每个节点都可以管理整个集群，每个节点安装10分钟左右;
+2、具备快速交付的相关功能，比如克隆虚拟机，cloudinit设置虚拟机参数，批量开机、关机，批量VM热迁移;
+3、支持CPU超分配和内存超分配（注意单台虚拟机不能超过物理机）;
+4、超融合，服务器同时完成计算、存储、网络功能，节约硬件成本;
+5、结合冗余设计，充足的配件故障容忍，单块硬盘故障不影响虚拟机正常使用;
+6、可以存储分级，系统盘使用快速存储池，数据盘使用普通存储池
+7、VM支持虚拟化嵌套、支持cloudinit、支持硬件透传(Passthrough)、根据镜像模板进行克隆、链接克隆实现秒级生成、支持备份(手动或策略备份作业)
+pve单机部署 1、选择第一个选项，安装PVE
+2、同意协议
+3、选择系统盘
+4、配置国家、地区
+5、配置密码、邮箱 如果为生产环境务必配置为强口令。邮箱建议配置为真实邮箱.
+6、配置网卡、主机名、IP地址、DNS等信息
+7、检查无误后点击安装。
+安装结束后重启，通过浏览器访问，出现以下页面证明安装成功。
+地址：https://你的IP地址:8006 用户名：root 密码：为安装时配置的密码。 域：选择Linux PAM
+禁止弹出未订阅窗口 默认安装后，会有“You do not have a valid subscription for this server.”弹窗，可以对其禁用。
+vi /usr/share/pve-manager/js/pvemanagerlib.js #搜索Proxmox.Utils.checked_command(function() {}); 找到以下内容，并注释掉： 或直接使用如下命令：
+sed -i &amp;#39;/Proxmox.Utils.checked_command(function() {});/d&amp;#39; /usr/share/pve-manager/js/pvemanagerlib.js 部署后优化 1、由于自带的软件源速度较慢，我们换成国内的软件源。登录到控制台进行操作
+#删除默认的源，替换为国内源 cat &amp;gt;/etc/apt/sources.list &amp;lt;&amp;lt;EOF deb http://mirrors.163.com/debian/ buster main non-free contrib deb http://mirrors.163.com/debian/ buster-updates main non-free contrib deb http://mirrors.163.com/debian/ buster-backports main non-free contrib deb-src http://mirrors.</description></item><item><title/><link>https://note.ljzsdut.com/%E8%99%9A%E6%8B%9F%E5%8C%96/PVE%E8%99%9A%E6%8B%9F%E5%8C%96/02-%E5%88%9B%E5%BB%BA%E9%9B%86%E7%BE%A4/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E8%99%9A%E6%8B%9F%E5%8C%96/PVE%E8%99%9A%E6%8B%9F%E5%8C%96/02-%E5%88%9B%E5%BB%BA%E9%9B%86%E7%BE%A4/</guid><description>可以独立使用Proxmox VE，而不需要成为集群的一部分。但是为了真正充分利用Proxmox，集群支持许多更高级的特性，例如集中管理、高可用性(漂移)和实时迁移。当多个Proxmox节点位于同一个集群中时，可以通过任何成员节点登录到Proxmox GUI来管理和监视它们。在Proxmox中没有主从方案。所有节点通过共享相同的配置一起工作。 集群就是一组共享资源的Proxmox服务器或节点。一个Proxmox集群可以包含多达32个物理节点。如果网络延迟允许，节点数量可以更高。但是任何数量的节点超过32都可能导致集群内的不稳定情况。
+在命名集群时，请记住，它最多可以是15个字符，并且一旦设置完成后，无法进行更改。
+准备工作 时间同步
+apt install -y chrony 不同的网络基础设施：
+pve集群中有：
+管理网络 集群网络(corosync通信，特点是通信量小，但是对时延要求较高) 业务网络(创建虚拟机时指定，条件不允许时，可以与管理网络公用) 如果启用ceph集群，ceph集群中有：
+业务网络（条件不允许，可以与pve的业务网络共用） 集群网络(用于数据恢复、数据平衡，强烈建议使用独立的网络，最好是万兆) 创建集群 创建集群有两种方式：
+ssh 终端 Web 界面 通过 Web 界面创建 默认为通过节点主机名解析的IP创建集群管理网络。
+在新的版本当中，已经支持通过添加第二个网络作为备份网络。
+[info]确保为集群通信选择的网络没有被用于任何高流量负载，比如(网络)存储或实时迁移。虽然集群网络本身生成的数据量很小，但它对延迟非常敏感。
+创建集群最核心的就是集群同步服务corosync，corosync成功后会生成配置文件corosync.conf，，如果启动失败后需要手动修改配置文件。
+通过命令创建 # 创建集群 $ pvecm create pmc-cluster ##pvecm create pmc-cluster --link0 192.168.20.71 $ pvecm status 添加节点到集群中 即将添加到集群的节点不能容纳任何来宾（guests）。在加入集群时，会覆盖/etc/pve中的所有现有配置，因为guest id可能会发生冲突。作为一种解决方案，创建 guest(vzdump)的备份，并在将节点添加到集群后将其恢复为不同的ID。
+web 界面的方式
+获取加入集群信息
+在要加入集群的节点上
+虽然，有的时候，不指定 Link 0 的地址，也能加入集群，但在多网络当中，建议还是指定一下较好。
+命令行的方式
+集群中添加节点
+$ pvecm add 192.168.20.71 // 在 73 上，添加到 71 集群当中 $ pvecm status 当添加一个节点到一个单独的集群网络时，你需要使用link0参数设置该网络上的节点地址:</description></item><item><title/><link>https://note.ljzsdut.com/%E8%99%9A%E6%8B%9F%E5%8C%96/PVE%E8%99%9A%E6%8B%9F%E5%8C%96/03-%E5%AE%89%E8%A3%85ceph%E9%9B%86%E7%BE%A4/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E8%99%9A%E6%8B%9F%E5%8C%96/PVE%E8%99%9A%E6%8B%9F%E5%8C%96/03-%E5%AE%89%E8%A3%85ceph%E9%9B%86%E7%BE%A4/</guid><description>安装ceph组件（全部节点） 注意： 在全部节点安装
+1、选择节点 — ”ceph“ 点击 ” Install ceph ”
+2、选择版本
+3、输入 ” Y “ 开始安装
+如果软件包下载速度较慢，可以采用如下2种方案处理：
+可以先安装一台，然后将安装包拷贝到其他节点相同路径中。安装包保存路径：/var/cache/apt/archives
+可以使用nginx做个代理。
+《使用nginx代理pve-ceph源》
+通过pveceph install命令或控制台安装Ceph时，包都是从download.proxmox.com地址下载，即使在/etc/apt/sources.list.d/ceph.list做替换也不行，因为在执行pveceph install时会替换掉/etc/apt/sources.list.d/ceph.list文件，所以最终会导致，不管你怎么替换依旧会从download.proxmox.com地址下载。
+既然改变不了download.proxmox.com的地址，我们就不要去改了，本文解决方案是将download.proxmox.com地址进行反向代理，在PVE服务器更改hosts。
+步骤如下：
+假如当前有三台PVE服务器组成Ceph集群，你可以在其中一台服务器安装nginx，或另启动一台服务器安装nginx，nginx配置文件内容如下：
+server { listen 80; server_name download.proxmox.com; location / { proxy_pass http://mirrors.ustc.edu.cn/proxmox/; } } 假设nginx服务器的IP地址是10.10.10.100，那么在三台PVE主机上分别配置其hosts文件，添加以下内容
+echo &amp;#39;10.10.10.100 download.proxmox.com&amp;#39; &amp;gt;&amp;gt; /etc/hosts 表示强制将download.proxmox.com域名解析到nginx反向代理机上，这样实际访问的地址就是https://mirrors.ustc.edu.cn/proxmox/
+配置ceph 在第一个节点上，主要配置&amp;quot;网络&amp;quot;和&amp;quot;ceph monitor&amp;quot;。
+此时，集群已经创建完毕。为了保证monitor和mgr的高可用，我们需要至少创建3个monitor和2个mgr。
+创建osd 创建osd时，需要先定位到磁盘所在的主机上，然后再进行”ceph“ — ”osd“ 选项中进行创建。
+创建pool 添加存储池至PVE ”数据中心“ — ”存储“ — ”添加“ — ”RBD“。
+参考文档 ceph:https://pve.proxmox.com/pve-docs/chapter-pveceph.html
+pmxcfs: https://pve.proxmox.com/pve-docs/chapter-pmxcfs.html#chapter_pmxcfs</description></item><item><title/><link>https://note.ljzsdut.com/%E8%99%9A%E6%8B%9F%E5%8C%96/PVE%E8%99%9A%E6%8B%9F%E5%8C%96/04-Promox%E7%9A%84HA%E9%85%8D%E7%BD%AE/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E8%99%9A%E6%8B%9F%E5%8C%96/PVE%E8%99%9A%E6%8B%9F%E5%8C%96/04-Promox%E7%9A%84HA%E9%85%8D%E7%BD%AE/</guid><description>Promox的HA配置 HA功能可以实现虚拟机的自动热迁移，即虚拟机漂移。
+前提条件 要实现HA，需要满足：
+创建好集群 有共享存储（nfs,glusterfs,ceph等） 操作步骤 DataCenter(test)&amp;ndash;&amp;gt;HA 第一步，创建HA的Groups
+HA Group表示虚拟机可以在哪些宿主机之间漂移。
+DataCenter(test)&amp;ndash;&amp;gt;HA&amp;ndash;&amp;gt;Groups&amp;ndash;&amp;gt;Create 这里可以有很多选项，我们就选择最最常用的。
+DataCenter(test)&amp;ndash;&amp;gt;HA&amp;ndash;&amp;gt;Add
+按照VM 100加入HA的情况，把其他所有机器都加入HA 特别需要注意的是Request State: 如果不需要开机的，选择stopped。 状态还有ignored和disabled两类状态。</description></item><item><title/><link>https://note.ljzsdut.com/%E8%99%9A%E6%8B%9F%E5%8C%96/PVE%E8%99%9A%E6%8B%9F%E5%8C%96/05-%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%AE%A1%E7%90%86/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E8%99%9A%E6%8B%9F%E5%8C%96/PVE%E8%99%9A%E6%8B%9F%E5%8C%96/05-%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%AE%A1%E7%90%86/</guid><description>查看概要及监控 可以通过“概要”选项卡查看不同级别的概要信息和监控信息。
+“数据中心”——”概要“
+”物理机“——“概要”
+“虚拟机”——”概要“
+虚拟机模板 基本的操作系统安装不再赘述。
+虚拟机可以支持转换成模板。模板可以用于克隆。
+注意：虚拟机可以转换成模板，但是模板无法转换成虚拟机。
+安装cloud-init cloud-init是云平台为Linux操作系统的虚拟机做系统初始化配置的开源服务软件。阿里云、AWS、Azure和OpenStack等主流云平台均支持cloud-init。阿里云版cloud-init能在ECS实例启动阶段完成系统初始化配置，包括NTP、软件源、主机名和SSH密钥对等，同时执行实例自定义数据（User data）脚本。更多详情，请参见cloud-init官方文档。
+虚拟机上安装cloud-init软件
+# 虚拟机上安装cloud-init yum install cloud-init -y #配置文件：/etc/cloud/cloud.cfg # 用于自动扩容系统盘。建议整个系统盘使用一个分区，这样有利于扩容 yum install –y cloud-utils-growpart 其他cloud-init配置可参考：
+https://support.huaweicloud.com/bestpractice-ims/ims_bp_0024.html
+https://support.huaweicloud.com/bpicg-bms/bms_picg_0322.html
+控制台上为虚拟机添加**“Cloud-Init CDROM”**驱动
+重启虚拟机后，虚拟机的“Cloud-Init”选项就可以编辑了。
+如果不想使用自建的虚拟机模板，可以使用官网提供的cloud-init版本的操作系统：
+Centos7下载地址： http://cloud.centos.org/centos/7/images/
+Debian10下载地址: http://cdimage.debian.org/cdimage/cloud/OpenStack/current-10/
+Ubuntu18下载地址： https://cloud-images.ubuntu.com/bionic/current/
+原文链接：https://blog.csdn.net/qq_24841037/article/details/98848814
+cloud-init参考链接：
+https://blog.csdn.net/qq_24841037/article/details/98848814 https://foxi.buduanwang.vip/virtualization/pve/388.html/ http://einverne.github.io/post/2020/03/cloud-init.html https://www.jianshu.com/p/5c2a63220027 https://help.aliyun.com/document_detail/57803.html
+创建网络 默认创建一个桥接网络。
+&amp;ldquo;物理机&amp;rdquo;——“系统”——”网络“：
+支持桥接网络、BOND、VLAN 支持OVS(openvswitch) 管理网络、业务网络、集群网络、存储网络可独立组网 创建存储 pve支持丰富的存储，默认使用&amp;quot;LVM-Thin&amp;quot;作为磁盘映像，使用&amp;quot;目录&amp;quot;作为备份文件、模板文件的存储。
+集成支持ceph存储，推荐使用ceph存储作为共享存储。
+支持各类存储，包括:LVM，LVM-Thin，iSCSI/内核，iSCSI/libiscsi, Ceph/RBD, CephFs, ZFS over iSCSl, ZFS(本地)，目录，NFS，CIFS，GlusterFS等
+创建虚拟机 建议使用模板进行克隆。
+当然，也可以使用裸盘进行操作系统的安装。
+VM克隆 根据镜像模板进行克隆
+链接克隆实现秒级生成
+VM迁移 热迁移</description></item><item><title/><link>https://note.ljzsdut.com/%E8%99%9A%E6%8B%9F%E5%8C%96/PVE%E8%99%9A%E6%8B%9F%E5%8C%96/06-%E7%94%A8%E6%88%B7%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E8%99%9A%E6%8B%9F%E5%8C%96/PVE%E8%99%9A%E6%8B%9F%E5%8C%96/06-%E7%94%A8%E6%88%B7%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86/</guid><description>pve用户种类 1、使用linxu用户(/etc/passwd)
+2、使用pve用户(/etc/pve/priv/shadow.cfg)
+3、对接ldap用户
+4、AD活动目录
+创建用户或组 以pve用户为例。输入用户名、组和密码等信息
+资源分配 通过添加“用户权限”或“组权限”实现权限分配：
+为“vm_use_group”组分配id为101和102的虚拟机使用权限：
+如果要想让用户可以使用存储用来存放备份数据，则需要进行如下授权：
+定制角色 pve有一些内置角色，如果无法满足需求，可以自定义角色：
+创建完成：</description></item><item><title/><link>https://note.ljzsdut.com/%E8%99%9A%E6%8B%9F%E5%8C%96/PVE%E8%99%9A%E6%8B%9F%E5%8C%96/07-%E9%9B%86%E7%BE%A4%E7%AE%A1%E7%90%86/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E8%99%9A%E6%8B%9F%E5%8C%96/PVE%E8%99%9A%E6%8B%9F%E5%8C%96/07-%E9%9B%86%E7%BE%A4%E7%AE%A1%E7%90%86/</guid><description>一、删除集群节点 操作前提 从带删除节点移除(迁移)所有虚拟机，并确保您没有要保留的本地数据或备份（或对其做相应地保存）。
+从集群中删除节点hp4 1、登录除hp4之外的其他节点，进行查看节点信息
+hp1# pvecm nodes Membership information ~~~~~~~~~~~~~~~~~~~~~~ Nodeid Votes Name 1 1 hp1 (local) 2 1 hp2 3 1 hp3 4 1 hp4 2、必须关闭hp4的电源，并确保它不会在此现有的集群网络中再次原样打开。如果按原样打开节点电源，则群集将被破坏，可能很难恢复干净的群集状态。
+3、关闭节点hp4的电源后，我们可以安全地将其从集群中删除。
+hp1# pvecm delnode hp4 Killing node 4 4、使用pvecm nodes或pvecm status再次检查节点列表。它看起来应该像这样：
+hp1# pvecm status Quorum information ~~~~~~~~~~~~~~~~~~ Date: Mon Apr 20 12:44:28 2015 Quorum provider: corosync_votequorum Nodes: 3 Node ID: 0x00000001 Ring ID: 1/8 Quorate: Yes Votequorum information ~~~~~~~~~~~~~~~~~~~~~~ Expected votes: 3 Highest expected: 3 Total votes: 3 Quorum: 2 Flags: Quorate Membership information ~~~~~~~~~~~~~~~~~~~~~~ Nodeid Votes Name 0x00000001 1 192.</description></item><item><title/><link>https://note.ljzsdut.com/%E8%99%9A%E6%8B%9F%E5%8C%96/PVE%E8%99%9A%E6%8B%9F%E5%8C%96/08-pve%E6%8A%80%E5%B7%A7/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E8%99%9A%E6%8B%9F%E5%8C%96/PVE%E8%99%9A%E6%8B%9F%E5%8C%96/08-pve%E6%8A%80%E5%B7%A7/</guid><description>pve更换IP 由于Proxmox是基于Debian的底层，所以我们可以修改配置文件来更改IP，一共要更改三个。
+一、在局域网的电脑浏览器输入PVE的IP地址登录后台，从左边的菜单找到“PVE”—“_Shell”菜单，进入网页版的ssh界面下；或者用winscp进入主机输入root密码后登录到ssh下；
+systemctl restart networking 重启网络生效
+二、输入以下命令回车：
+vi /etc/network/interfaces
+通过键盘上下左右移动到address这行的IP地址，按一次i进入修改状态，修改为新的IP地址，如果需要网关则修改gateway这行，修改完成确认无误后按一次ESC键输入:wq!回车保存退出。（根据自己环境配置。图片仅供参考）
+三、输入以下命令回车：
+vi /etc/issue
+通过键盘上下左右移动到https://这行的IP地址，按一次i进入修改状态，修改为新的IP地址，端口8006不要改，修改完成确认无误后按一次ESC键输入:wq!回车保存退出。
+该步骤主要是为了显示为正确的IP。如果不修改，也不会影响使用。
+四、输入以下命令回车：
+vi /etc/hosts
+通过键盘上下左右移动到第2行的IP地址，按一次i进入修改状态，修改为新的IP地址，修改完成确认无误后按一次ESC键输入:wq!回车保存退出
+五、reboot，重启PVE，完美解决！
+嵌套虚拟化 1、PVE开启嵌套虚拟化支持
+PVE虚拟出来的主机CPU默认不支持vmx，也就是不支持嵌套虚拟化，所以在这里我们需要手动打开这个功能，这里查看的时候功能是关的
+root@pve231:~# cat /sys/module/kvm_intel/parameters/nested N 关闭pve所有的虚拟机，并执行以下命令： （如果执行报错，就要检查下虚拟机是否全部都关闭）
+modprobe -r kvm_intel modprobe kvm_intel nested=1 查看netsed是否开启
+root@pve231:~# cat /sys/module/kvm_intel/parameters/nested Y 设置自动加载nested命令
+echo &amp;#34;options kvm_intel nested=1&amp;#34; &amp;gt;&amp;gt; /etc/modprobe.d/modprobe.conf 至此，pve的套娃功能就开启完成；
+2、设置guste启用嵌套虚拟化
+在创建虚拟机的过程中，cpu的类别选择host即可。
+配置vlan子接口 vlan id 为194为例：
+设置VLAN子接口可以通过2种方式指定主网卡，二者选其一即可：
+通过网卡子接口命名的方式：interfaceX.1，该子接口命名方式方式同时指定了主网卡名字和VLAN的ID。 通过指定vlan原始设备：指定主网卡vlan-raw-device enp7s0f0，指定VLAN：vlan-id 194 auto lo iface lo inet loopback auto enp7s0f0.194 iface enp7s0f0.</description></item></channel></rss>

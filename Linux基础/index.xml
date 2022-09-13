@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ljzsdut</title><link>https://note.ljzsdut.com/Linux%E5%9F%BA%E7%A1%80/</link><description>Recent content on ljzsdut</description><generator>Hugo -- gohugo.io</generator><atom:link href="https://note.ljzsdut.com/Linux%E5%9F%BA%E7%A1%80/index.xml" rel="self" type="application/rss+xml"/><item><title/><link>https://note.ljzsdut.com/Linux%E5%9F%BA%E7%A1%80/03-awk/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/Linux%E5%9F%BA%E7%A1%80/03-awk/</guid><description>[TOC]
+awk简介 awk是一个报告生成器，它拥有强大的文本格式化的能力。你可以把”报告”理解为”报表”或者”表格”。awk是逐行处理的。
+awk其实是一门编程语言，它支持条件判断、数组、循环等功能。所以，我们也可以把awk理解成一个脚本语言解释器。
+awk [options] ‘Pattern{Action} ...’ file... awk用于表示字符串的引号是双引号。
+$1这种内置变量的外侧不能加入双引号，否则$1会被当做文本输出。
+$0 表示显示整行 ，$NF表示当前行分割后的最后一列（$0和$NF均为内置变量）注意，$NF 和 NF 要表达的意思是不一样的，对于awk来说，$NF表示最后一个字段，NF表示当前行被分隔符切开以后，一共有几个字段。
+除了使用 -F 选项指定输入分隔符，还能够通过设置内部变量的方式，指定awk的输入分隔符，awk内置变量FS可以用于指定输入分隔符，但是在使用变量时，需要使用-v选项，用于指定对应的变量，比如 -v FS=’#’，
+内置变量 FS：输入字段分隔符， 默认为空白字符
+OFS：输出字段分隔符， 默认为空白字符
+RS：输入记录分隔符(输入换行符)， 指定输入时的换行符
+ORS：输出记录分隔符（输出换行符），输出时用指定符号代替换行符
+NF：number of Field，当前行的字段的个数(即当前行被分割成了几列)，字段数量
+NR：行号，当前处理的文本行的行号。
+FNR：各文件分别计数的行号
+FILENAME：当前文件名
+ARGC：命令行参数的个数
+ARGV：数组，保存的是命令行所给定的各参数
+1、在awk中，只有在引用$0、$1等内置变量的值的时候才会用到”$”,引用其他变量时，不管是内置变量，还是自定义变量，都不使用”$”,而是直接使用变量名。
+自定义变量 方法一：-v varname=value 变量名区分字符大小写。
+方法二：在program中直接定义。但是注意，变量定义与动作之间需要用分号”;”隔开。
+awk格式化——printf动作 1）使用printf动作输出的文本不会换行，如果需要换行，可以在对应的”格式替换符”后加入”\n”进行转义。
+2）使用printf动作时，”指定的格式” 与 “被格式化的文本” 之间，需要用”逗号”隔开。
+3）使用printf动作时，”格式”中的”格式替换符”必须与 “被格式化的文本” 一一对应。
+我们可以利用格式替换符对文本中的每一列进行格式化，示例如下。
+我们可以利用awk的内置变量FS，指定输入字段分隔符，然后再利用printf动作，进行格式化，示例如下。
+上例完美的体现了awk的格式化能力，因为awk本身负责文本切割，printf动作负责格式化文本，双剑合璧了。
+继续扩展一下，可以利用awk的begin模式，结合printf动作，输出一个像样的表格，下图中用到的”修饰符”此处不再赘述，如果不明白，参考printf命令详解。
+模式pattern awk是逐行处理文本的，也就是说，awk会先处理完当前行，再处理下一行，如果我们不指定任何”条件”，awk会一行一行的处理文本中的每一行，如果我们指定了”条件”，只有满足”条件”的行才会被处理，不满足”条件”的行就不会被处理。
+当awk进行逐行处理的时候，会把pattern（模式）作为条件，判断将要被处理的行是否满足条件，是否能跟”模式”进行匹配，如果匹配，则处理，如果不匹配，则不进行处理。
+空模式 没有被指定任何”模式”的情况，也是一种”模式”，我们称这种情况为”空模式”，”空模式”会匹配文本中的每一行，所以，每一行都满足”条件”，所以，每一行都会执行相应的动作。
+特殊模式 让两列合并在一起显示
+awk ‘{print $1 $2}’ 表示每行分割后，将第一列（第一个字段）和第二列（第二个字段）连接在一起输出。 awk ‘{print $1,$2}’ 表示每行分割后，将第一列（第一个字段）和第二列（第二个字段）以输出分隔符隔开后显示。 AWK 包含两种特殊的模式：BEGIN 和 END。</description></item><item><title/><link>https://note.ljzsdut.com/Linux%E5%9F%BA%E7%A1%80/debian%E8%BD%AF%E4%BB%B6%E6%BA%90source.list%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F%E8%AF%B4%E6%98%8E/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/Linux%E5%9F%BA%E7%A1%80/debian%E8%BD%AF%E4%BB%B6%E6%BA%90source.list%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F%E8%AF%B4%E6%98%8E/</guid><description>在安装完debian操作系统之后大家做的第一件事大概就是修改source.list文件了吧，否则你是无法在线更新软件的，那么source.list文件中的各个配置项的具体含义你搞懂了么？下面就以我的source.list文件为例为大家讲解一下。
+deb http://mirrors.163.com/debian/ wheezy main non-free contrib deb http://mirrors.163.com/debian/ wheezy-proposed-updates main non-free contrib deb-src http://mirrors.163.com/debian/ wheezy main non-free contrib deb-src http://mirrors.163.com/debian/ wheezy-proposed-updates main non-free contrib 其中可以把每一行分为四个部分,说白了，当你在线更新某个软件时，debian就是遵照这四个选项（准确的说是后三项）的指示找到软件来给你安装的：
+deb ### ftp地址 ### 版本代号 ### 限定词 deb ### http://mirrors.163.com/debian/ ### wheezy ### main non-free contrib 其中，
+1. 第一部分 第一部分为deb或者deb-src，其中前者代表软件的位置，后者代表软件的源代码的位置
+2. 第二部分 第二部分为你的ftp镜像的url，以我的为例，我是用的是大陆速度较快的网易镜像。在浏览器中打开此链接以后会发现有如下内容：
+其中：
+/dists/ 目录包含&amp;quot;发行版&amp;quot;(distributions), 此处是获得 Debian 发布版本(releases)和已发布版本(pre-releases)的软件包的正规途径. 有些旧软件包及 packages.gz 文件仍在里面.
+/pool/ 目录为软件包的物理地址. 软件包均放进一个巨大的 &amp;ldquo;池子(pool)&amp;rdquo;, 按照源码包名称分类存放. 为了方便管理, pool 目录下按属性再分类(&amp;ldquo;main&amp;rdquo;, &amp;ldquo;contrib&amp;rdquo; 和 &amp;ldquo;non-free&amp;rdquo;), 分类下面再按源码包名称的首字母归档. 这些目录包含的文件有: 运行于各种系统架构的二进制软件包, 生成这些二进制软件包的源码包.</description></item><item><title/><link>https://note.ljzsdut.com/Linux%E5%9F%BA%E7%A1%80/drbd/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/Linux%E5%9F%BA%E7%A1%80/drbd/</guid><description>编译模块 在容器中编译drbd，将编译后的drbd模块加载到宿主机内核中。然后，容器退出。
+docker run \ -v /sys:/sys \ -v /dev:/dev \ -v /usr/src:/usr/src:ro \ -v /lib/modules:/lib/modules \ -e LB_HOW=compile \ -e LB_INSTALL=yes \ --privileged \ --rm \ -i piraeusdatastore/drbd9-centos7:v9.1.7 &amp;ndash;privileged： 否则无法执行insmod或modprobe指令 -v /lib/modules:/lib/modules ：LB_INSTALL=yes时，编译后，将内核模块拷贝到/lib/modules/$(uname -r)/updates/目录下
+清理模块： rmmod drbd_transport_tcp drbd rm -rf /lib/modules/$(uname -r)/updates/drbd* entry.sh脚本 #!/bin/bash SIGN_KEY=https://packages.linbit.com/package-signing-pubkey.asc PKGS=/pkgs HOSTRELEASE=/etc/host-release die() { &amp;gt;&amp;amp;2 echo &amp;gt;&amp;amp;2 echo -e &amp;#34;$1&amp;#34; exit 1 } debug() { [ -n &amp;#34;$LB_DEBUG&amp;#34; ] || return 0 &amp;gt;&amp;amp;2 echo &amp;gt;&amp;amp;2 echo &amp;#34;DEBUG: $1&amp;#34; &amp;gt;&amp;amp;2 echo } map_dist() { # allow to override [ -n &amp;#34;$LB_DIST&amp;#34; ] &amp;amp;&amp;amp; { echo &amp;#34;$LB_DIST&amp;#34;; return 0; } # if we got called, and are that far we can assume this mapped file has to exist [ -f &amp;#34;$HOSTRELEASE&amp;#34; ] || die &amp;#34;You have to bind-mount /etc/os-release to the container&amp;#39;s $HOSTRELEASE&amp;#34; lbdisttool.</description></item><item><title/><link>https://note.ljzsdut.com/Linux%E5%9F%BA%E7%A1%80/ipmitool%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/Linux%E5%9F%BA%E7%A1%80/ipmitool%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3/</guid><description>IPMITOOL常用操作指令 一、开关机，重启
+\1. 查看开关机状态：
+ipmitool -H (BMC的管理IP地址) -I lanplus -U (BMC登录用户名) -P (BMC 登录用户名的密码) power status
+\2. 开机：
+ipmitool -H (BMC的管理IP地址) -I lanplus -U (BMC登录用户名) -P (BMC 登录用户名的密码) power on
+\3. 关机：
+ipmitool -H (BMC的管理IP地址) -I lanplus -U (BMC登录用户名) -P (BMC 登录用户名的密码) power off
+\4. 重启：
+ipmitool -H (BMC的管理IP地址) -I lanplus -U (BMC登录用户名) -P (BMC 登录用户名的密码) power reset
+二、用户管理
+说明：[ChannelNo] 字段是可选的，ChannoNo为1或者8；BMC默认有2个用户：user id为1的匿名用户，user id为2的ADMIN用户；&amp;lt;&amp;gt;字段为必选内容；：2为user权限，3为Operator权限，4为Administrator权限；
+\1. 查看用户信息：
+ipmitool -H (BMC的管理IP地址) -I lanplus -U (BMC登录用户名) -P (BMC 登录用户名的密码) user list [ChannelNo]</description></item><item><title/><link>https://note.ljzsdut.com/Linux%E5%9F%BA%E7%A1%80/jumpserver%E4%BD%BF%E7%94%A8%E6%96%87%E6%A1%A3/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/Linux%E5%9F%BA%E7%A1%80/jumpserver%E4%BD%BF%E7%94%A8%E6%96%87%E6%A1%A3/</guid><description>基本配置 管理用户 管理用户是资产（被控服务器）上的 root，或拥有 NOPASSWD: ALL sudo 权限的用户， JumpServer 使用该用户来 推送系统用户、获取资产硬件信息 等。
+创建资产 系统用户 添加授权之前，需要先进行创建系统用户。
+系统用户是 JumpServer 跳转登录资产时使用的用户，可以理解为登录资产用户，如 web，sa，dba（ssh web@some-host），而不是直接使用jumpserver中的某个用户的用户名跳转登录服务器（ssh xiaoming@some-host）；
+简单来说是用户使用自己的用户名登录 JumpServer，JumpServer 使用系统用户登录资产。 系统用户创建时，如果选择了自动推送，JumpServer 会使用 Ansible 自动推送系统用户到资产中，如果资产（交换机）不支持 Ansible，请手动填写账号密码。
+如果不选用“自动推送”，则需用在资产上手动创建该“系统用户”。如果选用“自动推送”，则会在资产的系统用户上创建公钥连接，私钥保存在jms中。
+对于普通用户，可以禁用一些危险命令：
+!/bin/bash,!/bin/tcsh,!/bin/su,!/usr/bin/passwd,!/usr/bin/passwd root,!/bin/vim /etc/sudoers,!/usr/bin/vim /etc/sudoers,!/usr/sbin/visudo,!/usr/bin/sudo -i,!/bin/bi /etc/ssh/*,!/bin/chmod 777 /etc/*,!/bin/chmod 777 *,!/bin/chmod 777,!/bin/chmod -R 777 *,!/bin/rm /*,!/bin/rm /,!/bin/rm -rf /,!/bin/rm -rf /*,!/bin/rm /etc,!/bin/rm -r /etc,!/bin/rm -rf /etc,!/bin/rm /etc/*,!/bin/rm -r /etc/*,!/bin/rm -rf /etc/*,!/bin/rm /root,!/bin/rm -r /root,!/bin/rm -rf /root,!/bin/rm /root/*,!/bin/rm -r /root/*,!/bin/rm -rf /root/*,!</description></item><item><title/><link>https://note.ljzsdut.com/Linux%E5%9F%BA%E7%A1%80/linux%E4%B8%ADinode%E5%8C%85%E5%90%AB%E4%BB%80%E4%B9%88%E5%86%85%E5%AE%B9/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/Linux%E5%9F%BA%E7%A1%80/linux%E4%B8%ADinode%E5%8C%85%E5%90%AB%E4%BB%80%E4%B9%88%E5%86%85%E5%AE%B9/</guid><description>linux中inode包含什么内容？ inode 是一个重要概念，是理解Unix/Linux文件系统和硬盘储存的基础。
+一、inode是什么？ 理解inode，要从文件储存说起。
+文件储存在硬盘上，硬盘的最小存储单位叫做&amp;quot;扇区&amp;quot;（Sector）。每个扇区储存512字节（相当于0.5KB）。
+操作系统读取硬盘的时候，不会一个个扇区地读取，这样效率太低，而是一次性连续读取多个扇区，即一次性读取一个&amp;quot;块&amp;quot;（block）。这种由多个扇区组成的&amp;quot;块&amp;quot;，是文件存取的最小单位。&amp;ldquo;块&amp;quot;的大小，最常见的是4KB，即连续八个 sector组成一个 block。
+文件数据都储存在&amp;quot;块&amp;quot;中，那么很显然，我们还必须找到一个地方储存文件的元信息，比如文件的创建者、文件的创建日期、文件的大小等等。这种储存文件元信息的区域就叫做inode，中文译名为&amp;quot;索引节点&amp;rdquo;。
+二、inode的内容 inode包含文件的元信息，具体来说有以下内容：
+* 文件的字节数
+* 文件拥有者的User ID
+* 文件的Group ID
+* 文件的读、写、执行权限
+* 文件的时间戳，共有三个：ctime指inode上一次变动的时间，mtime指文件内容上一次变动的时间，atime指文件上一次打开的时间。
+* 链接数，即有多少文件名指向这个inode
+* 文件数据block的位置
+可以用stat命令，查看某个文件的inode信息：
+stat example.txt
+总之，除了文件名以外的所有文件信息，都存在inode之中。至于为什么没有文件名，下文会有详细解释。
+三、inode的大小 inode也会消耗硬盘空间，所以硬盘格式化的时候，操作系统自动将硬盘分成两个区域。一个是数据区，存放文件数据；另一个是inode区（inode table），存放inode所包含的信息。
+每个inode节点的大小，一般是128字节或256字节。inode节点的总数，在格式化时就给定，一般是每1KB或每2KB就设置一个inode。假定在一块1GB的硬盘中，每个inode节点的大小为128字节，每1KB就设置一个inode，那么inode table的大小就会达到128MB，占整块硬盘的12.8%。
+查看每个硬盘分区的inode总数和已经使用的数量，可以使用df命令。
+df -i 查看每个inode节点的大小，可以用如下命令：
+sudo dumpe2fs -h /dev/hda | grep &amp;#34;Inode size&amp;#34; 由于每个文件都必须有一个inode，因此有可能发生inode已经用光，但是硬盘还未存满的情况。这时，就无法在硬盘上创建新文件。
+四、inode号码 每个inode都有一个号码，操作系统用inode号码来识别不同的文件。
+这里值得重复一遍，Unix/Linux系统内部不使用文件名，而使用inode号码来识别文件。对于系统来说，文件名只是inode号码便于识别的别称或者绰号。表面上，用户通过文件名，打开文件。实际上，系统内部这个过程分成三步：首先，系统找到这个文件名对应的inode号码；其次，通过inode号码，获取inode信息；最后，根据inode信息，找到文件数据所在的block，读出数据。
+使用ls -i命令，可以看到文件名对应的inode号码：
+ls -i example.txt 五、目录文件 Unix/Linux系统中，目录（directory）也是一种文件。打开目录，实际上就是打开目录文件。
+目录文件的结构非常简单，就是一系列目录项（dirent）的列表。每个目录项，由两部分组成：所包含文件的文件名，以及该文件名对应的inode号码。
+ls命令只列出目录文件中的所有文件名：
+ls /etc ls -i命令列出整个目录文件，即文件名和inode号码：
+ls -i /etc 如果要查看文件的详细信息，就必须根据inode号码，访问inode节点，读取信息。ls -l命令列出文件的详细信息。</description></item><item><title/><link>https://note.ljzsdut.com/Linux%E5%9F%BA%E7%A1%80/Linux%E5%AE%89%E8%A3%85%E5%AD%97%E4%BD%93/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/Linux%E5%9F%BA%E7%A1%80/Linux%E5%AE%89%E8%A3%85%E5%AD%97%E4%BD%93/</guid><description>Linux安装字体 前言 近期在项目开发中，遇到一个问题。alpine作为基础镜像的docker容器里，java程序将word转换为pdf，或者产生验证码时，就报错。
+java.lang.NullPointerException: null at sun.awt.FontConfiguration.getVersion(FontConfiguration.java:1264) at sun.awt.FontConfiguration.readFontConfigFile(FontConfiguration.java:219) at sun.awt.FontConfiguration.init(FontConfiguration.java:107) at sun.awt.X11FontManager.createFontConfiguration(X11FontManager.java:774) at sun.font.SunFontManager$2.run(SunFontManager.java:431) at java.security.AccessController.doPrivileged(Native Method) at sun.font.SunFontManager.&amp;lt;init&amp;gt;(SunFontManager.java:376) at sun.awt.FcFontManager.&amp;lt;init&amp;gt;(FcFontManager.java:35) at sun.awt.X11FontManager.&amp;lt;init&amp;gt;(X11FontManager.java:57) at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62) at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45) at java.lang.reflect.Constructor.newInstance(Constructor.java:423) at java.lang.Class.newInstance(Class.java:442) at sun.font.FontManagerFactory$1.run(FontManagerFactory.java:83) at java.security.AccessController.doPrivileged(Native Method) at sun.font.FontManagerFactory.getInstance(FontManagerFactory.java:74) at java.awt.Font.getFont2D(Font.java:491) at java.awt.Font.access$000(Font.java:224) at java.awt.Font$FontAccessImpl.getFont2D(Font.java:228) at sun.font.FontUtilities.getFont2D(FontUtilities.java:180) at sun.java2d.SunGraphics2D.checkFontInfo(SunGraphics2D.java:670) at sun.java2d.SunGraphics2D.getFontInfo(SunGraphics2D.java:831) at sun.java2d.pipe.GlyphListPipe.drawString(GlyphListPipe.java:50) at sun.java2d.SunGraphics2D.drawString(SunGraphics2D.java:2926) at com.rcyj.common.utils.code.ImageCodeUtil.generateCodeAndPic(ImageCodeUtil.java:82) at com.rcyj.system.controller.SysSmsController.getImg(SysSmsController.java:136) at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) at java.</description></item><item><title/><link>https://note.ljzsdut.com/Linux%E5%9F%BA%E7%A1%80/lvm%E6%93%8D%E4%BD%9C/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/Linux%E5%9F%BA%E7%A1%80/lvm%E6%93%8D%E4%BD%9C/</guid><description>创建lvm sdb： yum install -y lvm2 pvcreate /dev/sdb vgcreate vgu01 -s 16M /dev/sdb lvcreate -n lvu01 -L 399G vgu01 #修改逻辑卷大小 # mkfs.ext4 /dev/mapper/vgu01-lvu01 mkfs.xfs /dev/mapper/vgu01-lvu01 mkdir /u01 echo &amp;#39;/dev/mapper/vgu01-lvu01 /u01 xfs defaults 0 0&amp;#39;&amp;gt;&amp;gt;/etc/fstab # echo &amp;#39;/dev/mapper/vgu01-lvu01 /u01 ext4 defaults 0 0&amp;#39;&amp;gt;&amp;gt;/etc/fstab mount -a df -h /u01 vdb： yum install -y lvm2 pvcreate /dev/vdb vgcreate vgu01 -s 16M /dev/vdb lvcreate -n lvu01 -L 199G vgu01 #修改逻辑卷大小 # mkfs.ext4 /dev/mapper/vgu01-lvu01 mkfs.</description></item><item><title/><link>https://note.ljzsdut.com/Linux%E5%9F%BA%E7%A1%80/Makefile%E5%85%A5%E9%97%A8/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/Linux%E5%9F%BA%E7%A1%80/Makefile%E5%85%A5%E9%97%A8/</guid><description>Make 命令教程 转载：http://www.ruanyifeng.com/blog/2015/02/make.htmls
+代码变成可执行文件，叫做编译（compile）；先编译这个，还是先编译那个（即编译的安排），叫做构建（build）。
+Make是最常用的构建工具，诞生于1977年，主要用于C语言的项目。但是实际上 ，任何只要某个文件有变化，就要重新构建的项目，都可以用Make构建。
+本文介绍Make命令的用法，从简单的讲起，不需要任何基础，只要会使用命令行，就能看懂。我的参考资料主要是Isaac Schlueter的《Makefile文件教程》和《GNU Make手册》。
+一、Make的概念 Make这个词，英语的意思是&amp;quot;制作&amp;quot;。Make命令直接用了这个意思，就是要做出某个文件。比如，要做出文件a.txt，就可以执行下面的命令。
+$ make a.txt 但是，如果你真的输入这条命令，它并不会起作用。因为Make命令本身并不知道，如何做出a.txt，需要有人告诉它，如何调用其他命令完成这个目标。
+比如，假设文件 a.txt 依赖于 b.txt 和 c.txt ，是后面两个文件连接（cat命令）的产物。那么，make 需要知道下面的规则。
+a.txt: b.txt c.txt cat b.txt c.txt &amp;gt; a.txt 也就是说，make a.txt 这条命令的背后，实际上分成两步：第一步，确认 b.txt 和 c.txt 必须已经存在，第二步使用 cat 命令 将这个两个文件合并，输出为新文件。
+像这样的规则，都写在一个叫做Makefile的文件中，Make命令依赖这个文件进行构建。Makefile文件也可以写为makefile， 或者用命令行参数指定为其他文件名。
+$ make -f rules.txt # 或者 $ make --file=rules.txt 上面代码指定make命令依据rules.txt文件中的规则，进行构建。
+总之，make只是一个根据指定的Shell命令进行构建的工具。它的规则很简单，你规定要构建哪个文件、它依赖哪些源文件，当那些文件有变动时，如何重新构建它。
+二、Makefile文件的格式 构建规则都写在Makefile文件里面，要学会如何Make命令，就必须学会如何编写Makefile文件。
+2.1 概述 Makefile文件由一系列规则（rules）构成。每条规则的形式如下。
+&amp;lt;target&amp;gt; : &amp;lt;prerequisites&amp;gt; [tab] &amp;lt;commands&amp;gt; 上面第一行冒号前面的部分，叫做&amp;quot;目标&amp;quot;（target），冒号后面的部分叫做&amp;quot;前置条件&amp;quot;（prerequisites）；第二行必须由一个tab键起首，后面跟着&amp;quot;命令&amp;quot;（commands）。
+&amp;ldquo;目标&amp;quot;是必需的，不可省略；&amp;ldquo;前置条件&amp;quot;和&amp;quot;命令&amp;quot;都是可选的，但是两者之中必须至少存在一个。
+每条规则就明确两件事：构建目标的前置条件是什么，以及如何构建。下面就详细讲解，每条规则的这三个组成部分。
+2.2 目标（target） 一个目标（target）就构成一条规则。目标通常是文件名，指明Make命令所要构建的对象，比如上文的 a.</description></item><item><title/><link>https://note.ljzsdut.com/Linux%E5%9F%BA%E7%A1%80/s3cmd/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/Linux%E5%9F%BA%E7%A1%80/s3cmd/</guid><description>[TOC] s3cmd-参考资料
+https://s3tools.org/usage
+http://s3tools.org/s3cmd-sync
+生成配置文件 s3cmd --configure 桶操作 S3没有文件夹的概念，只有桶(bucket)的概念。桶可以看做是一个namespace下 的根目录。
+创建桶： s3cmd mb s3://my-bucket-name 删除空桶 s3cmd rb s3://my-bucket-name 查看所有桶 s3cmd ls 查看指定bucket的内容 s3cmd ls s3://my-bucket-name 文件操作 上传文件 s3cmd put file.txt s3://my-bucket-name/file.txt s3cmd put file.txt s3://my-bucket-name/ s3cmd put --acl-public file.txt s3://my-bucket-name/file.txt #上传并将权限设置为所有人可读 # 目录 s3cmd put ./* s3://my-bucket-name/ #批量上传文件 # 注意区分 dir1 和 dir1/ 的区别：与rsync的处理方式一致，dir1/等同于 dir1/* # s3cmd put -r dir1 s3://my-bucket-name/ dir1/file1-1.txt -&amp;gt; s3://my-bucket-name/dir1/file1-1.txt [1 of 1] # s3cmd put -r dir1/ s3://my-bucket-name/ dir1/file1-1.</description></item><item><title/><link>https://note.ljzsdut.com/Linux%E5%9F%BA%E7%A1%80/ssh%E5%85%AC%E9%92%A5%E9%85%8D%E7%BD%AE/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/Linux%E5%9F%BA%E7%A1%80/ssh%E5%85%AC%E9%92%A5%E9%85%8D%E7%BD%AE/</guid><description>[ ! -d ~/.ssh ] &amp;amp;&amp;amp; mkdir -pv ~/.ssh &amp;amp;&amp;amp; chmod 700 ~/.ssh echo &amp;#39;ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDDIrTtU/1Z7QjgNBGiZbkwiGW2jLmB+P92PIRpMsjUt3ti1OgxUba0k5Hc32hiBR/67bJaqqOhDK/x/SSTbRE5pbn/7VMKUwYz0DIWBGhYQ9bQPuX00SjuFD64RgqVnRH2GisihLkYf99Hj4yG8IOUbxn459mSILDd862EugpwY9ThQVtzoSbdzZtve+5RrjFTEiyx4isii/9ebztZ3BTgpZXiWxhh8SrefkE4bSDB+5qJcEnERWrLqPa23eHz7IqHddhnNB+gYBiL3ycoapBMJMCNK0Nc74AiZZr3eIyptVjFFV+ZJjuii64bzbJsqh9NBiD2WveGRo00HL6b72Dx lijuzhang&amp;#39;&amp;gt;&amp;gt;~/.ssh/authorized_keys chmod 600 ~/.ssh/authorized_keys useradd k8s passwd k8s usermod -aG docker k8s ssh连接慢：
+https://blog.csdn.net/kadwf123/article/details/105999717/
+/etc/ssh/sshd_config文件中GSSAPIAuthentication=no和UseDNS=no systemctl restart sshd Jumpserver.pub
+[ ! -d ~/.ssh ] &amp;amp;&amp;amp; mkdir -pv ~/.ssh &amp;amp;&amp;amp; chmod 700 ~/.ssh echo &amp;#39;ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDtyHrOWkwTUJT25bQoqxZePW+f2HUPosjqRuFC/JqYQBlg/XBr4dbuViWNUOYuStHcHDk8bDG9EemFD1x2uuJTMf5w4/zYCqNZhT/4XQxDNtKdAITprs2saMFXsa+95rXbSsfzKdEO9mjgVMs2Jr0cWW8rUVHjGNFNQA+upKX5viYc1MMuuWWMWWeBE2q336Ut/0wfh0m7lLyYGfXZLbZ8XCWVn/IooeF8zv93Uxroh5ZVfffd+qARgljSdzljXNOjF/PsKdBblw+gTis1K5q1toZ+QfKoJ7TzJXPzYjOyS/bl0XZbqFJGzUS4XC1JuR2ms62gg87PESzWkpBP+eWD jumpserver&amp;#39;&amp;gt;&amp;gt;~/.ssh/authorized_keys chmod 600 ~/.ssh/authorized_keys Mac:
+[ ! -d ~/.ssh ] &amp;amp;&amp;amp; mkdir -pv ~/.ssh &amp;amp;&amp;amp; chmod 700 ~/.ssh echo &amp;#39;ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDDIrTtU/1Z7QjgNBGiZbkwiGW2jLmB+P92PIRpMsjUt3ti1OgxUba0k5Hc32hiBR/67bJaqqOhDK/x/SSTbRE5pbn/7VMKUwYz0DIWBGhYQ9bQPuX00SjuFD64RgqVnRH2GisihLkYf99Hj4yG8IOUbxn459mSILDd862EugpwY9ThQVtzoSbdzZtve+5RrjFTEiyx4isii/9ebztZ3BTgpZXiWxhh8SrefkE4bSDB+5qJcEnERWrLqPa23eHz7IqHddhnNB+gYBiL3ycoapBMJMCNK0Nc74AiZZr3eIyptVjFFV+ZJjuii64bzbJsqh9NBiD2WveGRo00HL6b72Dx lijuzhang&amp;#39;&amp;gt;&amp;gt;~/.</description></item><item><title/><link>https://note.ljzsdut.com/Linux%E5%9F%BA%E7%A1%80/ssh%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/Linux%E5%9F%BA%E7%A1%80/ssh%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/</guid><description>在windows下，我们有xshell或者SecureCRT这样的利器供我们使用，但如果在macOS下的话用起来就恼火。但事实上我们可以通过配置ssh命令的行为来更加方便的管理设备。
+官方文档链接 或 man ssh_config
+配置文件的读取 ssh命令会按以下的顺序读取文件获得配置的参数。
+命令行选项 ~/.ssh/config /etc/ssh/ssh_config 对于每个参数，第一个获得的值将被使用。
+配置文件中用Host分开每个节，每个节的设备只会应用到匹配上Host指定模式的主机上。比如
+ssh test 命令只会匹配配置文件中
+Host test ... ... 指定的属性。
+由于只会使用第一个获取的值，所以要将某些特别的属性放在前面，共有的或默认的属性放在配置文件后面。
+配置文件的格式 空行及以#开头的的行识别为注释，否则的话每行就有**keyword arguments**这样的格式。在参数含有空格的时候，可以使用&amp;quot;来包围参数。 keywords不区分大小写，但arguments区分大小写。
+常用选项 Host pattern 限制之后的直到下一个**Host或Match**之间的声明只应用于匹配pattern的主机。多个pattern用空白分割。*代表了所有主机默认选项。 HostName 真实主机名。IP和域名都可以接受。 IdentityFile 指定私钥文件位置，可指定多个，按序读取。 PasswordAuthentication 是否使用密码认证。 Port 连接端口，默认22 User 登录用户名。 更多选项 Match pattern 限制之后的直到下一个**Host或Match**之间的声明只应用于满足pattern。
+AddKeysToAgent { no | yes | ask | confirm }
+AddressFamily { any | inet | inet6 }
+BatchMode { no | yes } 是否关闭 密码 询问。对某些脚本任务中不需要密码工作很有用。</description></item><item><title/><link>https://note.ljzsdut.com/Linux%E5%9F%BA%E7%A1%80/Supervisor%E4%BD%BF%E7%94%A8%E8%AF%A6%E8%A7%A3/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/Linux%E5%9F%BA%E7%A1%80/Supervisor%E4%BD%BF%E7%94%A8%E8%AF%A6%E8%A7%A3/</guid><description>一、supervisor简介 Supervisor是用Python开发的一套通用的进程管理程序，能将一个普通的命令行进程变为后台daemon，并监控进程状态，异常退出时能自动重启。它是通过fork/exec的方式把这些被管理的进程当作supervisor的子进程来启动，这样只要在supervisor的配置文件中，把要管理的进程的可执行文件的路径写进去即可。也实现当子进程挂掉的时候，父进程可以准确获取子进程挂掉的信息的，可以选择是否自己启动和报警。supervisor还提供了一个功能，可以为supervisord或者每个子进程，设置一个非root的user，这个user就可以管理它对应的进程。
+注：本文以centos7为例，supervisor版本3.4.0。
+二、supervisor安装 配置好yum源后，可以直接安装
+yum install supervisor Debian/Ubuntu可通过apt安装
+apt-get install supervisor pip安装
+pip install supervisor easy_install安装
+easy_install supervisor 三、supervisor使用 supervisor配置文件：/etc/supervisord.conf 注：supervisor的配置文件默认是不全的，不过在大部分默认的情况下，上面说的基本功能已经满足。
+子进程配置文件路径：/etc/supervisord.d/ 注：默认子进程配置文件为ini格式，可在supervisor主配置文件中修改。
+四、配置文件说明 supervisor.conf配置文件说明： [unix_http_server] file=/tmp/supervisor.sock ;UNIX socket 文件，supervisorctl 会使用 ;chmod=0700 ;socket文件的mode，默认是0700 ;chown=nobody:nogroup ;socket文件的owner，格式：uid:gid ;[inet_http_server] ;HTTP服务器，提供web管理界面 ;port=127.0.0.1:9001 ;Web管理后台运行的IP和端口，如果开放到公网，需要注意安全性 ;username=user ;登录管理后台的用户名 ;password=123 ;登录管理后台的密码 [supervisord] logfile=/tmp/supervisord.log ;日志文件，默认是 $CWD/supervisord.log logfile_maxbytes=50MB ;日志文件大小，超出会rotate，默认 50MB，如果设成0，表示不限制大小 logfile_backups=10 ;日志文件保留备份数量默认10，设为0表示不备份 loglevel=info ;日志级别，默认info，其它: debug,warn,trace pidfile=/tmp/supervisord.pid ;pid 文件 nodaemon=false ;是否在前台启动，默认是false，即以 daemon 的方式启动 minfds=1024 ;可以打开的文件描述符的最小值，默认 1024 minprocs=200 ;可以打开的进程数的最小值，默认 200 [supervisorctl] serverurl=unix:///tmp/supervisor.</description></item><item><title/><link>https://note.ljzsdut.com/Linux%E5%9F%BA%E7%A1%80/tcTraffic-Control%E5%91%BD%E4%BB%A4linux%E8%87%AA%E5%B8%A6%E9%AB%98%E7%BA%A7%E6%B5%81%E6%8E%A7/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/Linux%E5%9F%BA%E7%A1%80/tcTraffic-Control%E5%91%BD%E4%BB%A4linux%E8%87%AA%E5%B8%A6%E9%AB%98%E7%BA%A7%E6%B5%81%E6%8E%A7/</guid><description>tc命令——linux基于ip进行流量限制
+转载：https://cloud.tencent.com/developer/article/1409664
+原理部分参考多方文档进行整理，本文主要目的是记录几个限速的实例来进行直观认识和学习（git限速1、2）。
+参考：
+http://blog.csdn.net/zhongbeida_xue/article/details/54613750 http://www.cnblogs.com/endsock/archive/2011/12/09/2281519.html http://blog.163.com/ninja_wk/blog/static/989155620084280154811/ http://www.chinaunix.net/jh/4/16110.html https://my.oschina.net/u/3497124/blog/1632937 http://blog.csdn.net/qinyushuang/article/details/46611709 https://blog.51cto.com/u_15473842/4882032 一、tc原理 Linux操作系统中的流量控制器TC（Traffic Control）用于Linux内核的流量控制，主要是通过在输出端口处建立一个队列来实现流量控制。 接收包从输入接口进来后，经过流量限制丢弃不符合规定的数据包，由输入多路分配器进行判断选择：
+如果接收包的目的主机是本主机，那么将该包送给上层处理，否则需要进行转发，将接收包交到转发块（Forwarding Block）处理。 转发块同时也接收本主机上层(TCP、UDP等)产生的包，通过查看路由表，决定所处理包的下一跳。 然后，对包进行排列以便将它们送到输出接口。 一般只能限制网卡发送的数据包，不能限制网卡接收的数据包，所以可以通过改变发送次序来控制传输速率。Linux流量控制主要是在输出接口排列时进行处理和实现的。
+二、规则 2.1 流量控制方式 流量控制包括以下几种方式：
+SHAPING(限制)： 当流量被限制，它的传输速率就被控制在某个值以下。限制值可以大大小于有效带宽，这样可以平滑突发数据流量，使网络更为稳定。shaping（限制）只适用于向外的流量。 SCHEDULING(调度)： 通过调度数据包的传输，可以在带宽范围内，按优先级分配带宽。SCHEDULING(调度)也只适于向外的流量。 POLICING(策略)： SHAPING用于处理向外的流量，而POLICIING(策略)用于处理接收到的数据。 DROPPING(丢弃)： 如果流量超过某个设定的带宽，就丢弃数据包，不管是向内还是向外。 2.2 流量控制处理对象 流量的处理由三种对象控制，它们是：
+qdisc（排队规则） class（类别） filter（过滤器） 2.2.1 qdisc（排队规则） QDisc(排队规则)是queueing discipline的简写，它是理解流量控制(traffic control)的基础。无论何时，内核如果需要通过某个网络接口发送数据包，它都需要按照为这个接口配置的qdisc(排队规则)把数据包加入队列。然后，内核会尽可能多地从qdisc里面取出数据包，把它们交给网络适配器驱动模块。最简单的QDisc是pfifo，它不对进入的数据包做任何的处理，数据包采用先入先出的方式通过队列。不过，它会保存网络接口一时无法处理的数据包。
+qdisc的类别如下：
+CLASSLESS QDisc(不可分类QDisc) [p|b]fifo： 使用最简单的qdisc，纯粹的先进先出。只有一个参数：limit，用来设置队列的长度，pfifo是以数据包的个数为单位；bfifo是以字节数为单位。 pfifo_fast： 在编译内核时，如果打开了高级路由器(Advanced Router)编译选项，pfifo_fast就是系统的标准QDISC。它的队列包括三个波段(band)。在每个波段里面，使用先进先出规则。而三个波段(band)的优先级也不相同，band 0的优先级最高，band 2的最低。如果band0里面有数据包，系统就不会处理band 1里面的数据包，band 1和band 2之间也是一样。数据包是按照服务类型(Type of Service,TOS)被分配多三个波段(band)里面的。 red： red是Random Early Detection(随机早期探测)的简写。如果使用这种QDISC，当带宽的占用接近于规定的带宽时，系统会随机地丢弃一些数据包。它非常适合高带宽应用。 sfq： sfq是Stochastic Fairness Queueing的简写。它按照会话(session&amp;ndash;对应于每个TCP连接或者UDP流)为流量进行排序，然后循环发送每个会话的数据包。 tbf： tbf是Token Bucket Filter的简写，适合于把流速降低到某个值。 不可分类qdisc配置： 如果没有可分类QDisc，不可分类QDisc只能附属于设备的根。它们的用法如下：</description></item><item><title/><link>https://note.ljzsdut.com/Linux%E5%9F%BA%E7%A1%80/timedatectl%E5%91%BD%E4%BB%A4%E6%97%B6%E9%97%B4%E6%97%B6%E5%8C%BA%E6%93%8D%E4%BD%9C%E8%AF%A6%E8%A7%A3/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/Linux%E5%9F%BA%E7%A1%80/timedatectl%E5%91%BD%E4%BB%A4%E6%97%B6%E9%97%B4%E6%97%B6%E5%8C%BA%E6%93%8D%E4%BD%9C%E8%AF%A6%E8%A7%A3/</guid><description>Linux下使用timedatectl命令时间时区操作详解 timedatectl命令对于RHEL / CentOS 7和基于Fedora 21+的分布式系统来说，是一个新工具，它作为systemd系统和服务管理器的一部分，代替旧的传统的用在基于Linux分布式系统的sysvinit守护进程的date命令。
+timedatectl命令可以查询和更改系统时钟和设置，你可以使用此命令来设置或更改当前的日期，时间和时区，或实现与远程NTP服务器的自动系统时钟同步。
+在本教程中，我要讲的是，如何在你的Linux系统上，通过使用来自于终端使用timedatectl命令的NTP，设置date、time、timezone和synchronize time来管理时间。
+让你的Linux服务器或系统保持正确的时间是一个很好的实践，它有以下优点：
+维护及时操作的系统任务，因为在Linux中的大多数任务都是由时间来控制的。 记录事件和系统上其它信息等的正确时间。 如何查找和设置Linux本地时区 1.要显示系统的当前时间和日期，使用命令行中的timedatectl命令，如下：
+# timedatectl status 在上面的示例中，RTC time就是硬件时钟的时间。
+2.Linux系统上的time总是通过系统上的timezone设置的，要查看当前时区，按如下做：
+# timedatectl OR
+# timedatectl | grep Time 3.要查看所有可用的时区，运行以下命令：
+# timedatectl list-timezones 4.要根据地理位置找到本地的时区，运行以下命令：
+# timedatectl list-timezones | egrep -o “Asia/B.*”
+# timedatectl list-timezones | egrep -o “Europe/L.*”
+# timedatectl list-timezones | egrep -o “America/N.*” 5.要在Linux中设置本地时区，使用set-timezone开关，如下所示。
+# timedatectl set-timezone “Asia/Kolkata” 推荐使用和设置协调世界时，即UTC。
+# timedatectl set-timezone UTC 你需要输入正确命名的时区，否者在你改变时区的时候，可能会发生错误。在下面的例子中，由于 “Asia/Kalkata” 这个时区是不正确的，因此导致了错误。
+如何在Linux中设置时间和日期 6.你可以使用timedatectl命令，设置系统上的日期和时间，如下所示：</description></item><item><title/><link>https://note.ljzsdut.com/Linux%E5%9F%BA%E7%A1%80/tmux/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/Linux%E5%9F%BA%E7%A1%80/tmux/</guid><description>[TOC]
+一文助你打通 tmux 我以前一直喜欢使用系统平台自带的 Terminal 处理问题，因为它高效，最近迷恋上一款操作终端的软件 Tmux , 这是一个非常好用的软件，它让我可以更高效的操作终端，大大提高我的工作效率，很容易上手，如果你和我一样经常使用终端解决问题，那么 Tmux 你是很值得学习的。
+tmux 的安装 Linux 系统中通常使用 yum 来安装 tmux :
+yum install tmux Mac OS 通常使用 brew 来安装 tmux :
+brew install tmux 你可以看到使用 tmux 的门槛就是这么低。
+tmux 中的几个名词 在开始使用 tmux 之前我们需要先了解关于 tmux 的几个名词：
+session, window , pane 在这里我们就把他们分别叫做会话，窗口，窗格 。
+关于session 很多人都叫会话，个人感觉叫任务更贴切，更形象。
+通常我们在终端中操作一个任务的时候，一旦终端关闭，任务也就结束了，被强制关闭了，在 tmux 中 使用 session 就可以解决这个问题，我们可以把当前操作的任务隐藏起来，在视觉上让它消失，任务继续执行着，当我们想返回任务做一些操作的时候，它可以很方便的回来，我们通常把上面的操作就做 session 操作，我们可以把 session 给隐藏起来，我们也可以把 session 给真的关掉。
+在 tmux 中有一个窗口的概念，我们可以这样要去理解窗口：当前呈现在我们面前的这一个工作区域就是一个窗口（当前的终端界面），窗口可以被不断切割，切割成一个个小块，这一个个小块我们叫做窗格（pane）,这就是窗口和窗格的概念，我们把它想象成一块大蛋糕可以切成很多小块蛋糕，窗口可以被分割成很多小的窗格。
+总结： 一个 session 通常指一个任务里面可以有很多窗口，一个窗口又可以有很多的窗格。</description></item><item><title/><link>https://note.ljzsdut.com/Linux%E5%9F%BA%E7%A1%80/ubuntu%E5%86%85%E6%A0%B8%E5%8D%87%E7%BA%A7%E4%B8%8Egrub2/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/Linux%E5%9F%BA%E7%A1%80/ubuntu%E5%86%85%E6%A0%B8%E5%8D%87%E7%BA%A7%E4%B8%8Egrub2/</guid><description>Ubuntu 18.04 Linux内核升级 升级步骤 参考链接：https://www.jianshu.com/p/0c2e7a530cfe
+我们需要的软件包共有四个，即两个header头文件，一个image镜像，一个modules模块。Ubuntu内核下载地址
+注意：在内核版本4.17之前（不含4.17）中是无modules文件的，所以你只需要3个软件包即两个header，一个image即可完成更新。且网上目前搜索到的内核更新教程通常都是适合4.17内核之前的，而我们更新到4.17之后版本，例如我们更新到5.4.187，在dkpg步骤时候会提示缺少依赖项，没有modules文件！
+# 1、先下载对应的.deb文件，然后执行： apt -y update # 可选 apt -y upgrade # 可选 wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.4.187/amd64/linux-headers-5.4.187-0504187-generic_5.4.187-0504187.202203230944_amd64.deb wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.4.187/amd64/linux-headers-5.4.187-0504187_5.4.187-0504187.202203230944_all.deb wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.4.187/amd64/linux-image-unsigned-5.4.187-0504187-generic_5.4.187-0504187.202203230944_amd64.deb wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.4.187/amd64/linux-modules-5.4.187-0504187-generic_5.4.187-0504187.202203230944_amd64.deb sudo dpkg -i *.deb # 2、当提示成功安装后，进行重启： update-initramfs -u # 可选，但建议(shell脚本) reboot grub的默认配置参数 grub的真正读取的配置文件为：/boot/grub/grub.cfg
+grub的用户自定义默认配置在：/etc/default/grub，
+root@mgt01:~# cat /etc/default/grub # If you change this file, run &amp;#39;update-grub&amp;#39; afterwards to update # /boot/grub/grub.cfg. # For full documentation of the options in this file, see: # info -f grub -n &amp;#39;Simple configuration&amp;#39; GRUB_DEFAULT=0 GRUB_TIMEOUT_STYLE=hidden GRUB_TIMEOUT=0 GRUB_DISTRIBUTOR=`lsb_release -i -s 2&amp;gt; /dev/null || echo Debian` GRUB_CMDLINE_LINUX_DEFAULT=&amp;#34;quiet splash&amp;#34; GRUB_CMDLINE_LINUX=&amp;#34;&amp;#34; # Uncomment to enable BadRAM filtering, modify to suit your needs # This works with Linux (no patch required) and with any kernel that obtains # the memory map information from GRUB (GNU Mach, kernel of FreeBSD .</description></item><item><title/><link>https://note.ljzsdut.com/Linux%E5%9F%BA%E7%A1%80/vm.swappiness%E5%8F%82%E6%95%B0%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%8E%E4%BA%A4%E6%8D%A2%E5%88%86%E5%8C%BA%E4%B9%8B%E9%97%B4%E4%BC%98%E5%8C%96%E4%BD%9C%E7%94%A8/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/Linux%E5%9F%BA%E7%A1%80/vm.swappiness%E5%8F%82%E6%95%B0%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%8E%E4%BA%A4%E6%8D%A2%E5%88%86%E5%8C%BA%E4%B9%8B%E9%97%B4%E4%BC%98%E5%8C%96%E4%BD%9C%E7%94%A8/</guid><description>Linux系统swappiness参数在内存与交换分区之间优化作用 https://blog.csdn.net/lufeisan/article/details/53339991
+swappiness的值的大小对如何使用swap分区是有着很大的联系的。swappiness=0的时候表示最大限度使用物理内存，然后才是 swap空间，swappiness＝100的时候表示积极的使用swap分区，并且把内存上的数据及时的搬运到swap空间里面。linux的基本默认设置为60，具体如下：
+一般默认值都是60
+[root@timeserver ~]# cat /proc/sys/vm/swappiness 60
+也就是说，你的内存在使用到100-60=40%的时候，就开始出现有交换分区的使用。大家知道，内存的速度会比磁盘快很多，这样子会加大系统io，同时造的成大量页的换进换出，严重影响系统的性能，所以我们在操作系统层面，要尽可能使用内存，对该参数进行调整。
+激活设置
+[root@timeserver ~]# sysctl -p
+在linux中，可以通过修改swappiness内核参数，降低系统对swap的使用，从而提高系统的性能。 遇到的问题是这样的，新版本产品发布后，每小时对内存的使用会有一个尖峰。虽然这个峰值还远没有到达服务器的物理内存，但确发现内存使用达到峰值时系统开始使用swap。在swap的过程中系统性能会有所下降，表现为较大的服务延迟。对这种情况，可以通过调节swappiness内核参数降低系统对swap的使用，从而避免不必要的swap对性能造成的影响。 简单地说这个参数定义了系统对swap的使用倾向，默认值为60，值越大表示越倾向于使用swap。可以设为0，这样做并不会禁止对swap的使用，只是最大限度地降低了使用swap的可能性。 通过sysctl -q vm.swappiness可以查看参数的当前设置。 修改参数的方法是修改/etc/sysctl.conf文件，加入vm.swappiness=xxx，并重起系统。这个操作相当于是修改虚拟系统中的/proc/sys/vm/swappiness文件，将值改为XXX数值。 如果不想重起，可以通过sysctl -p动态加载/etc/sysctl.conf文件，但建议这样做之前先清空swap。</description></item><item><title/><link>https://note.ljzsdut.com/Linux%E5%9F%BA%E7%A1%80/%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%9F%A5%E7%9C%8B%E5%B7%A5%E5%85%B7hexdump%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/Linux%E5%9F%BA%E7%A1%80/%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%9F%A5%E7%9C%8B%E5%B7%A5%E5%85%B7hexdump%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3/</guid><description>命令简介： hexdump是Linux下的一个二进制文件查看工具，它可以将二进制文件转换为ASCII、八进制、十进制、十六进制格式进行查看。
+指令所在路径：/usr/bin/hexdump
+命令语法： hexdump: [-bcCdovx] [-e fmt] [-f fmt_file] [-n length] [-s skip] [file ...] 命令参数： 此命令参数是Red Hat Enterprise Linux Server release 5.7下hexdump命令参数，不同版本Linux的hexdump命令参数有可能不同。
+参数 长参数 描叙 -b 每个字节显示为8进制。一行共16个字节，一行开始以十六进制显示偏移值 -c 每个字节显示为ASCII字符 -C 每个字节显示为16进制和相应的ASCII字符 -d 两个字节显示为10进制 -e 格式化输出 -f Specify a file that contains one or more newline separated format strings. Empty lines and lines whose first non-blank character is a hash mark (#) are ignored. -n 只格式前n个长度的字符 -o 两个字节显示为8进制 -s 从偏移量开始输出 -v The -v option causes hexdump to display all input data.</description></item><item><title/><link>https://note.ljzsdut.com/Linux%E5%9F%BA%E7%A1%80/%E4%BD%BF%E7%94%A8axel%E5%92%8Caria2c%E5%BC%95%E7%88%86%E4%BD%A0%E7%9A%84%E4%B8%8B%E8%BD%BD/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/Linux%E5%9F%BA%E7%A1%80/%E4%BD%BF%E7%94%A8axel%E5%92%8Caria2c%E5%BC%95%E7%88%86%E4%BD%A0%E7%9A%84%E4%B8%8B%E8%BD%BD/</guid><description>使用axel和aria2c引爆你的下载！ 在Linux中比较常见见的下载工具是curl和wget，但是下载比较大的文件如镜像文件百度云等我更喜欢用axel和aria2c这样能够加速下载的工具，那么这两个工具怎么用呢？ 温馨提示如果你电脑上未安装这两个工具可用下面命令安装
+yum install -y axel aria2 这样两个功能类似的工具，我比较喜欢把他们放在一起用对比的方法学习所以我例了一个下面的表格 对比项 axel aria2c 支持的下载协议 HTTP，HTTPS,FTP,FTPS等 HTTP/HTTPS GEET方式， FTP，BitTorrent协议和fast扩展 更改下载文件路径/名称 -o -o 限制连接数 -n -x, –max-connection-per-server，默认为1。可设置为1-16 限制下载速度 -s 或 –max-speed –max-download-limit，默认不限速 断点续传 使用相同的axel命令即可 -c 替换进度条 -a 无 从文件获取输入 不支持 -i，–input-file 下载BiTorrent文件种子和磁力链接 不支持 支持 下载多个文件 不支持 -z 列举几个例子加深理解 axel 用20个连接限制1.5M(默认的下载单位为Kb,1.5M=1500000kb)的速度下载deepin的镜像文件到/tmp目录下并改名为deepin15.5.iso文件不使用默认的下载进度条
+axel -a -n 20 -s 1500000 -o /tmp/deepin15.5.iso https://mirrors.tuna.tsinghua.edu.cn/deepin-cd/15.5/deepin-15.5-amd64.iso aria2c 用5个连接限速2M(不可使用小数)从含有deepin镜像文件http下载链接的文件中下载到/tmp目录下改名为deepin15.5.iso并要求下载中断之后能够继续下载
+aria2c -x 5 --max-download-limit=2M -c -i ~/deepin.txt wget 断点续传和限速： https://blog.csdn.net/marksinoberg/article/details/51790203
+-c为断点续传 –limit-rate 为限速 wget -c --limit-rate=2m https://tmp.</description></item><item><title/><link>https://note.ljzsdut.com/Linux%E5%9F%BA%E7%A1%80/%E6%89%87%E5%8C%BA-%E5%9D%97-%E6%AE%B5-page%E7%9A%84%E5%85%B3%E7%B3%BB/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/Linux%E5%9F%BA%E7%A1%80/%E6%89%87%E5%8C%BA-%E5%9D%97-%E6%AE%B5-page%E7%9A%84%E5%85%B3%E7%B3%BB/</guid><description>对于块/簇概念的理解，我们可以归结为一点：磁盘块/簇是虚拟出来的。块是操作系统中最小的逻辑存储单位，操作系统与磁盘打交道的最小单位是磁盘块。簇和块是一个相对概念，通俗的来讲，在Windows下如NTFS等文件系统中叫做簇；在Linux下如Ext4等文件系统中叫做块（block）。每个簇或者块可以包括2、4、8、16、32、64…2的n次方个扇区。
+磁盘块存在的意义就是方便操作系统读取。传统意义上，由于扇区的数量比较小，数目众多在寻址时比较困难，所以操作系统就将相邻的扇区组合在一起，形成一个块，再对块进行整体的操作。看似懂了，但还是懵逼，好不容易理解了扇区的概念（扇区是磁盘的最小组成单元），又出来了块/簇，看了概念但还是似懂非懂。
+磁盘块是个虚拟出来的概念，是操作系统中的。操作系统为什么要虚拟个这样的概念出来呢？操作系统与磁盘打交道的最小单位是磁盘块。操作系统操作磁盘，也需要通过磁盘驱动器进行。所以离不开扇区的。最小单位，好比我们生活中约定最小单位是一毛。扇区是真实的东西。磁盘驱动器操作磁盘数据，每次都按照扇为最小单位操作。簇也是操作系统弄出来的概念。读写基本单位是扇区。磁盘驱动器是按照这个单位操作磁盘数据的。又没特意指明操作系统读写磁盘的基本单位。文件系统就是操作系统的一部分，所以文件系统操作文件的最小单位是块。
+块，听这个词语会明白，是抽象概念。真的有块形状的东西吗？是因为我们老喜欢叫磁盘块，磁盘块，这个块让我们以为磁盘的基本单位是块。当我们说块的时候，是从软件角度（即操作系统）来说的。因为我们编程大部分是在特定的操作系统上运行，与硬件打交道不用我们关注，交给操作系统去处理。本来操作系统的一个任务之一就是与硬件通信，控制各种硬件，由于操作系统以块为单位操作磁盘，于是，我们不会去提扇区，而是总说磁盘块。既然磁盘块是一个虚拟概念。是操作系统自己＂杜撰＂的。软件的概念，不是真实的。
+所以大小由操作系统决定，操作系统可以配置一个块多大。一个块大小=一个扇区大小*2的n次方。N是可以修改的。顿时我思考：为什么磁盘块大小必须是扇区大小的整数倍呢？因为，磁盘驱动器，磁盘附带的硬件设备，与磁盘读写数据，操作系统也要靠它。它读取磁盘数据就是扇区的大小。一个扇区是512字节。
+操作系统经常与内存和硬盘这两种存储设备进行通信，类似于“块”的概念，都需要一种虚拟的基本单位。所以，与内存操作，是虚拟一个页的概念来作为最小单位。与硬盘打交道，就是以块为最小单位。扇区： 硬盘的最小读写单元块/簇： 是操作系统针对硬盘读写的最小单元page： 是内存与操作系统之间操作的最小单元。
+扇区（Sector）： 扇区，概念来自于早期磁盘，在硬盘、DVD中还有用，在Nand/SD中已经没意义了，
+扇区是块设备本身的特性，大小一般为512的整数倍，因为历史原因很多时候都向前兼容定义为512，任何块设备硬件对数据处理的基本单位都是扇区。
+硬盘的基本访问单位， SATA硬盘一般为512B；
+任何块设备硬件对数据处理的基本单位。通常，1个扇区的大小为512byte。（对设备而言）；
+扇区是硬件被操作时软件使用的最小的操作单元。
+就是一个扇区一个扇区进行操作（扇区的大小在存储设备生产时就设计好）。
+是硬盘等存储设备传送单位，大小一般为512B
+为了达到可接受的性能，硬盘和类似的设备快速传送几个相邻字节的数据。块设备的每次数据传输操作都是作用于一组称为扇区的相邻字节。大部分磁盘设备中，一个扇区的大小是512字节。
+扇区和块的关系：
+block由一个或多个sector组成，block是软件（OS、文件系统）中最小的操作单位；
+操作系统的虚拟文件系统从硬件设备上读取一个block,实际为从硬件设备读取一个或多个sector。
+block最终要映射到sector上，所以block的大小一般是sector的整数倍。
+扇区是硬件设备传送数据的基本单位，而块是VFS和文件系统传送数据的基本单位；一个块对应磁盘上一个或多个相邻的扇区，而VFS系统将其看成是一个单一的数据单元。
+文件和块的关系：
+块的概念来自于文件系统；
+对于文件管理来说，每个文件对应的多个block可能是不连续的；一个文件至少占用一个块；
+Determining block size in an OS is a case of tradeoffs. Every file must occupy at least one block, even if the file is 0 bytes long, so there&amp;rsquo;s something for the file&amp;rsquo;s metadata to be attached to. Small block sizes are good when you need to store many small files.</description></item><item><title/><link>https://note.ljzsdut.com/Linux%E5%9F%BA%E7%A1%80/%E8%AE%BE%E8%AE%A1shell%E8%84%9A%E6%9C%AC%E9%80%89%E9%A1%B9getopt/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/Linux%E5%9F%BA%E7%A1%80/%E8%AE%BE%E8%AE%A1shell%E8%84%9A%E6%9C%AC%E9%80%89%E9%A1%B9getopt/</guid><description>设计shell脚本选项：getopt man 1 getopt翻译：https://www.cnblogs.com/f-ck-need-u/p/9757959.html
+写shell脚本的时候，通过while、case、shift来设计脚本的命令行选项是一件比较麻烦的事，因为Unix命令行的选项和参数自由度很高，支持短选项和长选项，参数可能是可选的，选项顺序可能是无所谓的，等等。
+bash下的getopt命令可以解析命令行的选项和参数，将散乱、自由的命令行选项和参数进行改造，得到一个完整的、规范化的参数列表，这样再使用while、case和shift进行处理就简单的太多了。
+getopt有不同的版本，本文介绍的是它的增强版(enhanced)，相比传统的getopt(也称为兼容版本的getopt)，它提供了引号保护的能力。另外，除了不同版本的getopt，bash还有一个内置命令getopts(注意，有个尾随的字符s)，也用来解析命令行选项，但只能解析短选项。
+要验证安装的getopt是增强版的还是传统版的，使用getopt -T判断即可。如果它什么都不输出，则是增强版，此时它的退出状态码为4。如果输出&amp;quot;&amp;ndash;&amp;quot;，则是传统版的getopt，此时它的退出状态码为0。如果想在脚本中进行版本检查，可以参考如下代码：
+getopt -T &amp;amp;&amp;gt;/dev/null;[ $? -ne 4 ] &amp;amp;&amp;amp; { echo &amp;#34;not enhanced version&amp;#34;;exit 1; } 1.命令行选项的那些事 在学习getopt如何使用之前，必须先知道命令行的一些常识。这些，都可以通过getopt来实现，但有些实现起来可能会比较复杂。
+1.区分option、parameter、argument、option argument和non-option parameter
+parameter和argument都表示参数，前者通常表示独立性的参数，后者通常表示依赖于其它实体的参数。parameter的含义更广，argument可以看作parameter的一种。
+例如，定义函数时function foo(x,y){CODE}，函数的参数x和y称为parameter。调用函数并传递参数时，foo(arg1,arg2)中的arg1和arg2都是依赖于函数的，称为argument更合适，当然也可以称为更广泛的parameter。
+再例如，一个命令行：
+tar -zcf a.tar.gz /etc/pki 粗分的话，-z、-c、-f、a.tar.gz、/etc/pki都可以称为parameter。细分的话：
+&amp;ldquo;-z -c -f&amp;quot;称为选项，即option a.tar.gz是选项&amp;rdquo;-f&amp;quot;的选项参数(传递给选项的参数)，依赖于选项，称为argument更合适，更严格的称呼是option argument /etc/pki既不属于选项，也不属于某个选项的参数，它称为非选项类型的参数，对应的名称为non-option parameter 本文要介绍的是getopt，所以只考虑命令行参数的情况。
+2.短选项和长选项以及它们的&amp;quot;潜规则&amp;quot;
+Linux中绝大多数命令都提供了短选项和长选项。一般来说，短选项是只使用一个&amp;quot;-&amp;ldquo;开头，选项部分只使用一个字符，长选项是使用两个短横线(即&amp;rdquo;&amp;ndash;&amp;quot;)开头的。
+例如&amp;quot;-a&amp;quot;是短选项，&amp;quot;&amp;ndash;append&amp;quot;是长选项。
+一般来说，选项的顺序是无所谓的，但并非绝对如此，有时候某些选项必须放在前面，必须放在某些选项的前面、后面。
+一般来说，短选项：
+可以通过一个短横线&amp;quot;-&amp;ldquo;将多个短选项连接在一起，但如果连在一起的短选项有参数的话，则必须作为串联的最后一个字符。
+例如&amp;rdquo;-avz&amp;quot;其实会被解析为&amp;quot;-a -v -z&amp;quot;，tar -zcf a.tar.gz串联了多个短选项，但&amp;quot;-f&amp;quot;选项有参数a.tar.gz，所以它必须作为串联选项的最后一个字符。
+短选项的参数可以和选项名称连在一起，也可以是用空白分隔。例如-n 3和-n3是等价的，数值3都是&amp;quot;-n&amp;quot;选项的参数值。
+如果某个短选项的参数是可选的，那么它的参数必须紧跟在选项名后面，不能使用空格分开。至于为什么，见下面的第3项。
+一般来说，长选项：
+可以使用等号或空白连接两种方式提供选项参数。例如--file=FILE或--file FILE。 如果某个长选项的参数是可选的，那么它的参数必须使用&amp;quot;=&amp;ldquo;连接。至于为什么，见下面的第3项。 长选项一般可以缩写，只要不产生歧义即可。 例如，ls命令，以&amp;quot;a&amp;quot;开头的长选项有3个。
+$ ls --help | grep -- &amp;#39;--a&amp;#39; -a, --all do not ignore entries starting with .</description></item></channel></rss>

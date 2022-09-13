@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Java on ljzsdut</title><link>https://note.ljzsdut.com/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Java/</link><description>Recent content in Java on ljzsdut</description><generator>Hugo -- gohugo.io</generator><atom:link href="https://note.ljzsdut.com/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Java/index.xml" rel="self" type="application/rss+xml"/><item><title/><link>https://note.ljzsdut.com/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Java/00-idea%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE%E6%AD%A5%E9%AA%A4/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Java/00-idea%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE%E6%AD%A5%E9%AA%A4/</guid><description>idea创建项目步骤 1、创建一个空项目(JavaSE_ Code)
+2、创建一个新模块(idea test)
+3、在idea test模块下的src下创建一个包(com.itheima)
+4、在com.itheima包下新建一个类(HelloWorld)
+5、在HelloWorld类中编写代码
+6、在idea中执行程序
+1、创建项目 2、创建模块（idea_test） 3、创建包 包名一般为域名倒写。
+4、coding&amp;amp;run 在类中写代码。
+一个java文件中可以有多个类。一个文件中的public类最多有1个（可以为0个）。
+Java保存的文件名必须与类名一致，规则如下：
+如果有public类，则public类名必须与文件名一致；
+如果没有public类，文件名可与任一类名一致即可。
+idea中的项目结构 项目&amp;gt;模块&amp;gt;包&amp;gt;类
+idea中的内容辅助键和快捷键 快速生成语句 main()方法：psvm+回车
+输出语句：sout+回车
+for循环5次：5.for回车
+内容辅助键： （内容提示，代码补全等）
+快捷键 command+/ 单行注释
+shift+command+/ 多行注释
+option+command+L 格式化代码
+参考
+idea模块操作 新建模块 删除模块 说明：这里的删除只是从idea的项目管理中删除，文件还存在磁盘上。如果要删除磁盘上的文件，可以通过文件管理器进行删除。
+导入模块 先把模块文件放在项目目录下，然后进行如下操作：</description></item><item><title/><link>https://note.ljzsdut.com/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Java/01-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B8%8E%E5%8F%98%E9%87%8F%E5%B8%B8%E9%87%8F/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Java/01-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B8%8E%E5%8F%98%E9%87%8F%E5%B8%B8%E9%87%8F/</guid><description>关键字 关键字特点：
+关键字的字母全部小写。 常用的代码编辑器，针对关键字有特殊的颜色标记，非常直观。
+注释 常量 常量类型 说明：空常量null不用使用println(null)输出。
+数据类型 Java语言是强类型语言,对于每一种数据都给出了明确的数据类型,不同的数据类型也分配了不同的内存空间,所以它们表示的数据大小也是不一样的。
+基本数据类型 变量 变量：变量是程序运行过程中，其值可以改变的量。从本质上讲，变量是内存上的一块区域。
+变量由变量名、数据类型、变量值组成。
+定义、使用 变量定义格式：
+​ 数据类型 变量名 = 变量值;
+​ 基本数据类型：byte, short, int, long, float, double, char, boolean
+变量的使用:
+​ 取值格式：变量
+​ 修改值格式:变量名 = 变量值;
+int a = 20; // 定义 a = 30; // 修改值 System.out.println(a) // 取值 注意事项 1、变量不能重复定义；
+2、变量未赋值（未初始化），不能使用；
+3、long类型的变量定义的时候，为了防止整数过大，后面要加L；（整数常量默认为int类型）
+4、float类型的变量定义的时候，为了防止类型不兼容，后面要加F；（小数常量默认为double类型）
+long a = 100000000000L; float b = 3.14F; 标识符 标识符：就是给类、方法、变量等起名字的符号。
+标识符定义规则 1、由数字、字母、下划线(_)和美元符($)组成
+2、不能以数字开头</description></item><item><title/><link>https://note.ljzsdut.com/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Java/02-%E8%BF%90%E7%AE%97%E7%AC%A6/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Java/02-%E8%BF%90%E7%AE%97%E7%AC%A6/</guid><description>运算符与表达式定义 运算符：对常量或者变量进行操作的符号
+表达式:用运算符把常量或者变量连接起来符合java语法的式子就可以称为表达式。
+​ 不同运算符连接的表达式体现的是不同类型的表达式。
+示例： 算数运算符 基本算数运算符 字符的“+”操作 示例：
+字符串的“+”操作 示例：
+赋值运算符 示例：
+自增自减运算符 示例：
+关系运算符 逻辑运算符 逻辑运算符,是用来连接关系表达式的运算符。当然，逻辑运算符也可以直接连接布尔类型的常量或者变量。
+基本逻辑运算符 短路逻辑运算符 int i = 10; int j = 20; System.out.println((i++ &amp;gt;100) &amp;amp;&amp;amp; (j++ &amp;gt;100)); System.out.println(&amp;#34;i:&amp;#34;+i); System.out.println(&amp;#34;j:&amp;#34;+j); 三元运算符 示例：</description></item><item><title/><link>https://note.ljzsdut.com/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Java/03-%E6%95%B0%E6%8D%AE%E8%BE%93%E5%85%A5/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Java/03-%E6%95%B0%E6%8D%AE%E8%BE%93%E5%85%A5/</guid><description>Scanner使用的基本步骤 示例：</description></item><item><title/><link>https://note.ljzsdut.com/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Java/04-%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Java/04-%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5/</guid><description>顺序结构 顺序结构是程序中最简单最基本的流程控制，没有特定的语法结构,按照代码的先后顺序，依次执行,程序中大多数的代码都是这样执行的。
+分支结构 if语句 格式1：
+if (关系表达式){ 语句体; } 格式2：
+if (关系表达式){ 语句体1; }else{ 语句体2; } 格式3：
+if (关系表达式1){ 语句体1; }else if (关系表达式1){ 语句体2; } ...... else{ 语句体3; } switch语句 switch (表达式){ case 值1： 语句1; break; case 值2： 语句2; break; ... default: 语句n; [break;] } 格式说明：
+​ 表达式：取值为byte、short、 int、 char，JDK5以后可以是枚举，JDK7以后可以是String。
+​ case：后面跟的是要和表达式进行比较的值。
+​ break:表示中断,结束的意思，用来结束switch语句。
+​ default：表示所有情况都不匹配的时候，就执行该处的内容，和if语句的else相似。
+执行流程:
+​ 首先计算表达式的值。
+​ 依次和case后面的值进行比较， 如果有对应的值，就会执行相应的语句，在执行的过程中，遇到break就会结束。
+​ 如果所有的case后面的值和表达式的值都不匹配，就会执行default里面的语句体，然后程序结束掉。
+case穿透 在switch语句中， 如果case控制的语句体后面不写break,将出现穿透现象,在不判断下一个case值的情况下,向下运行,直到遇到break,或者整体switch语句结束。
+循环结构 for循环语句 格式： for (初始化语句;条件判断语句;条件控制语句){ 循环体语句; } 示例： for (int i=1; i&amp;lt;=5;i++){ System.</description></item><item><title/><link>https://note.ljzsdut.com/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Java/05-%E6%95%B0%E7%BB%84/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Java/05-%E6%95%B0%E7%BB%84/</guid><description> 服务 部署目录 数据目录 备注 nacos /u01/services mysql://10.15.9.210:3306/nacos_config maven /u01/install/apache-maven-3.6.2 harbor /u01/services/harbor /u01/applications/harbor_data Showdoc docker run -d &amp;ndash;name showdoc &amp;ndash;user=root &amp;ndash;privileged=true -p 4999:80 -v /u01/applications/showdoc_data/html:/var/www/html/ star7th/showdoc /u01/applications/showdoc_data docker运行 SpringCloud微服务 /u01/services/rcyj-gateway /</description></item><item><title/><link>https://note.ljzsdut.com/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Java/%E9%9A%8F%E7%AC%94/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Java/%E9%9A%8F%E7%AC%94/</guid><description> 方法 方法定义 格式：
+修饰符 返回值类型 方法名(参数类型 参数名,...){ ... 方法体 ... return 返回值; } 修饰符:修饰符，这是可选的，告诉编译器如何调用该方法。定义了该方法的访问类型。
+返回值类型:方法可能会返回值。returnValueType 是方法返回值的数据类型。有些方法执行所需的操作，但没有返回值。在这种情况下，returnValueType 是关键字void。
+方法名:是方法的实际名称。方法名和参数表共同构成方法签名。
+参数类型:参数像是一个占位符。当方法被调用时，传递值给参数。这个值被称为实参或变量。参数列表是指方法的参数类型、顺序和参数的个数。参数是可选的，方法可以不包含任何参数。
+​ 形式参数:在方法被调用时用于接收外界输入的数据。
+​ 实参:调用方法时实际传给方法的数据。
+​ Java都是值传递。
+方法体:方法体包含具体的语句，定义该方法的功能。
+方法调用 调用方法：对象名.方法名(实参列表) Java支持两种调用方法的方式，根据方法是否返回值来选择。当方法返回一个值的时候，方法调用通常被当做一个值。例如:int larger = max(30， 40); 如果方法返回值是void,方法调用一定是一条语句。 System.out.println(&amp;quot;Hello, kuangshen!&amp;quot;);
+方法重载</description></item></channel></rss>

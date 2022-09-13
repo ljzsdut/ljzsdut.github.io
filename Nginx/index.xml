@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ljzsdut</title><link>https://note.ljzsdut.com/Nginx/</link><description>Recent content on ljzsdut</description><generator>Hugo -- gohugo.io</generator><atom:link href="https://note.ljzsdut.com/Nginx/index.xml" rel="self" type="application/rss+xml"/><item><title/><link>https://note.ljzsdut.com/Nginx/00-ubuntu%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85nginx/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/Nginx/00-ubuntu%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85nginx/</guid><description>apt install libpcre3 libpcre3-dev apt install openssl libssl-dev apt install -y libperl-dev ./configure --prefix=/usr/src/nginx \ --user=nginx --group=nginx \ --with-http_ssl_module \ --with-http_v2_module \ --with-http_realip_module \ --with-http_stub_status_module \ --with-http_gzip_static_module \ --with-pcre \ --with-stream \ --with-stream_ssl_module \ --with-stream_realip_module \ --with-http_perl_module \ --add-module=/root/ make make install</description></item><item><title/><link>https://note.ljzsdut.com/Nginx/01-Nginx%E9%85%8D%E7%BD%AE/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/Nginx/01-Nginx%E9%85%8D%E7%BD%AE/</guid><description>转自微信公众号“马哥Linux运维 ”
+Nginx 状态页 基于nginx模块ngx_http_auth_basic_module实现，在编译安装nginx的时候需要添加编译参数&amp;ndash;with-http_stub_status_module，否则配置完成之后监测会是提示语法错误。
+查看是否加载了ngx_http_auth_basic_module模块 [root@CentOS7 ~]#/apps/nginx/sbin/nginx -V nginx version: nginx/1.14.2 built by gcc 4.8.5 20150623 (Red Hat 4.8.5-36) (GCC) built with OpenSSL 1.0.2k-fips 26 Jan 2017 TLS SNI support enabled configure arguments: --prefix=/apps/nginx --user=nginx --group=nginx --with-http_ssl_module --with-http_v2_module --with-http_realip_module --with-http_stub_status_module --with-http_gzip_static_module --with-pcre --with-stream --with-stream_ssl_module --with-stream_realip_module --with-http_perl_module [root@CentOS7 ~]#vim /apps/nginx/conf/nginx.conf location /nginx_status { stub_status; allow 192.168.36.0/24; deny all; } [root@CentOS7 ~]#/apps/nginx/sbin/nginx -s reload 访问测试
+[root@CentOS-Test ~]#curl 192.168.36.104/nginx_status Active connections: 1 server accepts handled requests 124 124 223 # 这三个数字分别对应accepts,handled,requests三个值 Reading: 0 Writing: 1 Waiting: 0 Active connections：当前处于活动状态的客户端连接数，包括连接等待空闲连接数。 accepts：统计总值，Nginx自启动后已经接受的客户端请求的总数。 handled：统计总值，Nginx自启动后已经处理完成的客户端请求的总数，通常等于accepts，除非有因 worker_connections限制等被拒绝的连接。 requests：统计总值，Nginx自启动后客户端发来的总的请求数。 Reading：当前状态，正在读取客户端请求报文首部的连接的连接数。 Writing：当前状态，正在向客户端发送响应报文过程中的连接数。 Waiting：当前状态，正在等待客户端发出请求的空闲连接数，开启 keep-alive的情况下,这个值等于active – (reading+writing), Nginx第三方模块 添加第三方模块：echo-nginx-module</description></item><item><title/><link>https://note.ljzsdut.com/Nginx/02-Nginx%E5%B8%B8%E7%94%A8%E5%8A%9F%E8%83%BD%E4%B8%BE%E4%BE%8B%E8%A7%A3%E6%9E%90/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/Nginx/02-Nginx%E5%B8%B8%E7%94%A8%E5%8A%9F%E8%83%BD%E4%B8%BE%E4%BE%8B%E8%A7%A3%E6%9E%90/</guid><description>静态HTTP服务器 说明
+Nginx是一个HTTP服务器，可以将服务器上的静态文件（如HTML、图片）通过HTTP协议展现给客户端。
+配置
+每个人配置文件路径可能会不同，但格式一样。
+[root@localhost]# vim /etc/nginx/nginx.conf server { listen 80; server_name localhost; #charset koi8-r; #access_log /var/log/nginx/host.access.log main; location / { root /usr/share/nginx/html; index index.html index.htm; } 反向代理服务器 说明
+客户端本来可以直接通过HTTP协议访问某网站应用服务器，网站管理员可以在中间加上一个Nginx，客户端请求Nginx，Nginx请求应用服务器，然后将结果返回给客户端，此时Nginx就是反向代理服务器。
+配置
+每个人配置文件路径可能会不同，但格式一样。
+[root@localhost]# vim /etc/nginx/nginx.conf server { listen 80; location / { proxy_pass http://103.160.1.166:8080; # 应用服务器HTTP地址 } } 既然服务器可以直接HTTP访问，为什么要在中间加上一个反向代理，不是多此一举吗？反向代理有什么作用？继续往下看，下面的负载均衡、虚拟主机等，都基于反向代理实现，当然反向代理的功能也不仅仅是这些。
+负载均衡 说明
+当网站访问量非常大时，访问也会越来越慢，一台服务器已经不够用了。于是将同一个应用部署在多台服务器上，将大量用户的请求分配给多台机器处理。同时带来的好处是，其中一台服务器万一挂了，只要还有其他服务器正常运行，就不会影响用户使用。Nginx可以通过反向代理来实现负载均衡。
+配置1
+将请求轮询分配到应用服务器，也就是一个客户端的多次请求，有可能会由多台不同的服务器处理。可以通过ip-hash的方式，根据客户端ip地址的hash值将请求分配给固定的某一个服务器处理。
+[root@localhost]# vim /etc/nginx/nginx.conf server { listen 80 default_server; server_name _; return 444; # 过滤其他域名的请求，返回444状态码 } [root@localhost]# vim /etc/nginx/nginx.</description></item><item><title/><link>https://note.ljzsdut.com/Nginx/03-%E4%BD%BF%E7%94%A8nginx%E5%81%9Ayum%E4%BB%A3%E7%90%86/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/Nginx/03-%E4%BD%BF%E7%94%A8nginx%E5%81%9Ayum%E4%BB%A3%E7%90%86/</guid><description>有时候别人分配的机器只有一台可以连接公网，其它的都出不去，又要使用yum，
+则可以在能连接到公网的机器上面配置一个http代理，然后其它机器在/etc/yum.conf里面添加：
+proxy=http://代理IP:port这句，之后就可以使用代理访问yum仓库。
+nginx代理yum 1、配置nginx代理 [root@server-681863e4-dbcf-4230-98fd-15182c846129 conf.d]# cat &amp;gt;/etc/nginx/conf.d/yumproxy.conf &amp;lt;&amp;lt;&amp;#34;EOF&amp;#34; server { listen 9999; server_name 10.15.9.220; add_header Access-Control-Allow-Origin *; add_header Access-Control-Allow-Headers X-Requested-With; add_header Access-Control-Allow-Methods GET,POST,OPTIONS; location / { proxy_pass http://mirrors.aliyun.com; # allow 172.20.5.0/24; #访问控制 # deny all; } error_page 500 502 503 504 /50x.html; location = /50x.html { root html; } } EOF 2、yum配置使用代理 [root@ecs-ebs-std-centos7 ~]# cat &amp;gt;/etc/yum.conf &amp;lt;&amp;lt; &amp;#34;EOF&amp;#34; #YUM PROXY [main] proxy=http://10.15.9.220:9999 #添加这句 cachedir=/var/cache/yum/$basearch/$releasever keepcache=0 debuglevel=2 logfile=/var/log/yum.log exactarch=1 obsoletes=1 gpgcheck=1 plugins=1 installonly_limit=5 bugtracker_url=http://bugs.</description></item><item><title/><link>https://note.ljzsdut.com/Nginx/04-nginx%E9%85%8D%E7%BD%AEWebSocket/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/Nginx/04-nginx%E9%85%8D%E7%BD%AEWebSocket/</guid><description>一、Nginx代理的方式 客户端和代理服务器建立连接并发送请求，代理服务器端接收客户端的请求后与具体的后端服务器建立连接，并把请求分发给后端服务器进行处理，最后再将服务器的响应结果反馈给客户端。
+二、Nginx如何支持WebSocket WebSocket 和HTTP虽然是不同协议，但是两者“握手”方式兼容。通过HTTP升级机制，使用HTTP的Upgrade和Connection协议头的方式可以将连接从HTTP升级为WebSocket。浏览器请求如下图所示：
+三、Http升级为WebSocket 因为WebSocket协议是一个hop-by-hop协议（此类头部字段只对单次转发有效，会因为转发给缓存/代理服务器而失效），为了让Nginx代理服务器可以将来自客户端的Upgrade请求发送到后端服务器，要求Upgrade和Connection的头信息必须被显式的设置。
+代理服务器分别与客户端和服务器建立连接，由于WebSocket连接是长时间保持的，即长连接，所以代理服务器需要允许这些连接处于打开状态，而不是像对待HTTP使用的短连接那样将其关闭。
+可以通过修改Nginx的配置文件方式解决此问题，代理请求后端服务器的请求头设置：
+#监听websocket upstream websocket { #ip_hash; #转发到服务器上相应的ws端口 server localhost:3344; #server localhost:8011; } server { listen 80; server_name schoolsocket.zhuzhida.vip; location /ws { #转发到http://websocket proxy_pass http://websocket; proxy_read_timeout 300s; #设置超时时间 proxy_send_timeout 300s; proxy_set_header Host $host; proxy_set_header X-Real-IP $remote_addr; proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for; # 以下3行，实现升级到websocket协议 proxy_http_version 1.1; proxy_set_header Upgrade $http_upgrade; proxy_set_header Connection &amp;#34;upgrade&amp;#34;; } } 如果某个location的请求中既包含ws请求，也包含普通的http请求，此时需要根据请求类型自行判断是否开启：
+nginx官方文档配置如下：可以实现根据不同请求判断是否向upstream server开启websoket协议
+http { map $http_upgrade $connection_upgrade { default upgrade; &amp;#39;&amp;#39; close; } server { .</description></item><item><title/><link>https://note.ljzsdut.com/Nginx/05-nginx%E4%B8%AD%E7%9A%84resolver%E5%92%8Cdns%E8%A7%A3%E6%9E%90%E7%BC%93%E5%AD%98%E7%9A%84%E9%97%AE%E9%A2%98/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/Nginx/05-nginx%E4%B8%AD%E7%9A%84resolver%E5%92%8Cdns%E8%A7%A3%E6%9E%90%E7%BC%93%E5%AD%98%E7%9A%84%E9%97%AE%E9%A2%98/</guid><description>nginx中resolver参数配置解释 转载，原文链接：https://www.rootop.org/pages/4307.html
+其他参考：https://www.zhihu.com/question/61786355/answer/268735267
+遇到一个问题 之前有个测试环境配置 proxy_pass 时直接指定域名是可以用的，比如
+location / { proxy_pass http://dev.abc.com:10068; } 反向代理的地址是通过花生壳动态dns实现的。
+dev.abc.com通过cname解析到花生壳之类的动态dns给分配的域名上，如果路由器因为断电或者掉线之类的原因重新拨号后ip发生变化，此处nginx就无法反向代理了，必须重启一次nginx才行。
+今天遇到一个问题就是通过 set 设置变量，然后proxy_pass 调用变量实现反向代理（目的是减少配置复杂度），比如：
+set $skyneturl &amp;#34;http://dev.abc.com:10077&amp;#34;; # 注意set好像不支持变量名中带下划线或其它特殊字符 location /applyrecord/aladinnApplyrecord { proxy_pass $skyneturl; } 重启nginx后发现报502错误，也就是连不上后端服务器。
+看nginx日志发现错误提示：
+2019/04/11 10:34:04 [error] 17241#0: *4334742 no resolver defined to resolve dev.abc.com ... 说没有定义 resolver命令 来解析域名，查了一下发现需要配置resolver参数。
+**官网文档：**http://nginx.org/en/docs/http/ngx_http_core_module.html#resolver
+Syntax: resolver address ... [valid=time] [ipv6=on|off]; Default: — Context: http, server, location Configures name servers used to resolve names of upstream servers into addresses, for example: 意思是需要配置dns地址用来解析upstream中的域名，后来经过测试upstream中配置域名只会在nginx启动时解析一次，然后就一直用这个ip，无法使用resolver实现每次解析。</description></item><item><title/><link>https://note.ljzsdut.com/Nginx/06-client_header_buffer_size%E5%92%8Clarge_client_header_buffers%E5%AD%A6%E4%B9%A0414-Request-URI-too-large/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/Nginx/06-client_header_buffer_size%E5%92%8Clarge_client_header_buffers%E5%AD%A6%E4%B9%A0414-Request-URI-too-large/</guid><description>Nginx的client_header_buffer_size和large_client_header_buffers学习 之前看到有人写的一篇关于nginx配置中large_client_header_buffers的问题排查的文章，其中提到：
+large_client_header_buffers 虽然也可以在server{}内生效，但是只有 低于 nginx主配置中的值才有意义。
+对这个结论，我心存疑虑，总觉得这种设计很奇怪，于是自己做了个测试，希望能了解的更深入一些。
+测试方法 nginx主配置中加入配置项：（在主配置中将header大小控制在1k）
+http {
+include mime.types;
+default_type application/octet-stream;
+large_client_header_buffers 4 1k;
+......
+} 删除所有干扰vhost，仅留下一个：
+server {
+listen 80;
+server_name www.job360.com;
+large_client_header_buffers 4 1m;
+......
+} 构造请求的shell：（构造header超过1k的请求）
+#!/bin/bash
+url=&amp;#34;http://www.job360.com/test.html?debug=1&amp;#34;
+for i in {0..1000}
+do
+var=&amp;#34;v$i&amp;#34;
+url=&amp;#34;${url}&amp;amp;$var=$i&amp;#34;
+done
+curl $url -x 127.0.0.1:80 -v 第一次测试结果 测试得到的结果和之前看到的文章的结果不同，该长url请求成功被nginx处理。
+什么情况啊？于是查看和文章中环境上的不同，发现很重要的一点：我只有这一个vhost。
+于是添加了另外一个vhost，添加vhost配置如下：（没有设置 large_client_header_buffers）
+server {
+listen 80;
+server_name db.job360.com;
+......} 第二次测试结果 测试发现，nginx依旧可以处理该长url请求。
+再次思考不同点，想到：这些vhost是被主配置中include进来的，是否会和读取顺序有关呢？
+于是再次调整配置，将两个vhost放到了一个conf文件中，配置如下：
+server {
+listen 80;
+server_name db.</description></item></channel></rss>

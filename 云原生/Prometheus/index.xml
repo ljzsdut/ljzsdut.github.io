@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Prometheus on ljzsdut</title><link>https://note.ljzsdut.com/%E4%BA%91%E5%8E%9F%E7%94%9F/Prometheus/</link><description>Recent content in Prometheus on ljzsdut</description><generator>Hugo -- gohugo.io</generator><atom:link href="https://note.ljzsdut.com/%E4%BA%91%E5%8E%9F%E7%94%9F/Prometheus/index.xml" rel="self" type="application/rss+xml"/><item><title/><link>https://note.ljzsdut.com/%E4%BA%91%E5%8E%9F%E7%94%9F/Prometheus/001-Prometheus%E5%85%A5%E9%97%A8%E6%A6%82%E8%BF%B0/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E4%BA%91%E5%8E%9F%E7%94%9F/Prometheus/001-Prometheus%E5%85%A5%E9%97%A8%E6%A6%82%E8%BF%B0/</guid><description>Prometheus概述 Prometheus是一个开源的系统监视和警报工具包，自2012成立以来，许多公司和组织采用了Prometheus。它现在是一个独立的开源项目，并独立于任何公司维护。在2016年，Prometheus加入云计算基金会作为Kubernetes之后的第二托管项目。
+首先，Prometheus是一款时序（time series） 数据库；但它的功能却并非止步于TSDB，而是一款设计用于进行目标（Target）监控的关键组件；结合生态系统内的其它组件，例如Pushgateway、Altermanager和Grafana等，可构成个完整的IT监控系统；
+在Prometheus术语中，它所监控的事物称为目标（Target）。每个目标单元被称为指标（metric）。它以设置好的时间间隔通过http抓取目标，以收集指标并将数据放置在其时序数据库（Time Series Database）中。你可以使用PromQL查询语言查询相关target的指标。
+Prometheus特点 多维数据模型（由metric名称和k/v格式的标签确定的时间序列，每个独立的标签组合都代表一个时间序列） 灵活的查询语言（PromQL，支持聚合、切割、切片） 不依赖分布式存储 Prometheus本身就是一个时序数据库，自己可以完成数据的存储，数据存储于本地磁盘。但是如果要长时间存储数据，可以借助influxDB等外置的存储系统。
+通过Pull方式采集时间序列，基于HTTP请求，从配置文件中指定的网络端点（endpoint或target或instance，通常格式为IP:PORT）上周期性获取指标数据 Prometheus采集数据是用的Pull模型，也就是拉模型，通过HTTP协议去采集指标，只要应用系统能够提供HTTP接口就可以接入监控系统，相比于私有协议或二进制协议来说开发、简单。
+支持通过中介网关(PushGateway)的Push时间序列的方式 对于定时任务这种短周期的指标采集，如果采用Pull模式，可能造成任务结束了，Prometheus还没有来得及采集，这个时候可以使用加一个中转层，客户端推数据到PushGateway缓存一下，由Prometheus从push gateway pull指标过来。(需要额外搭建Push Gateway，同时需要新增job去从gateway采数据)
+监控数据通过服务发现或者静态配置来发现 支持图表和dashboard等多种方式 架构图 Prometheus生态圈中包含了多个组件，其中部分组件可选
+Prometheus Server：收集和存储时间序列数据； Client Library：客户端库，目的在于为那些期望原生提供Instrumentation功能的应用程序提供便捷的开发途径（应用内置/metrics接口）； Push Gateway：接收那些通常由短期作业生成的指标数据的网关，并支持由PrometheusServer进行指标拉取操作； Exporters：用于暴露现有应用程序或服务（不支持Instrumentation）的指标给PrometheusServer； Alertmanager：从Prometheus Server接收到“告警通知”后，通过去重、分组、路由等预处理功能后以高效向用户完成告警信息发送； Data Visualization : Prometheus Web UI （Prometheus Servet内建），及Grafana等； Service Discovery：动态发现待监控的Target，从而完成监控配置的重要组件，在容器化环境中尤为有用；该组件目前由Prometheus Server内建支持； 组件 Prometheus主程序 主要是负责抓取、存储、聚合、查询方面。
+Prometheus就是一个用Go编写的时序数据库，时序数据库简单来说就是存储随时间变化的数据的数据库。
+什么是随时间变化的数据（时序数据）呢？
+时序数据，是在一段时间内通过重复测量（measurement）而获得的观测值的集合；将这些观测值绘制于图形之上，它会有一个数据轴和一个时间轴；服务器指标数据、应用程序性能监控数据、网络数据等也都是时序数据；举个简单的例子，比如，CPU使用率，典型的随时间变化的量，这一秒是50%，下一秒也许就是80%了。或者是温度，今天是20度，明天可能就是18度了。
+探针程序与Pushgateway Prometheus支持通过三种类型的途径从目标上“抓取（Scrape）”指标数据；
+1、Exporters：*_exporter 提供数据采集的接口，一般适用于应用程序自身无法提供metric的程序，或者一些比较通用的中间件
+Node/system metrics exporter AWS CloudWatch exporter Blackbox exporter Collectd exporter Consul exporter Graphite exporter HAProxy exporter InfluxDB exporter JMX exporter Memcached exporter Mesos task exporter MySQL server exporter SNMP exporter StatsD exporter 2、Instrumentation：应用本身内置提供的支持Prometheus数据模型的采集接口。</description></item><item><title/><link>https://note.ljzsdut.com/%E4%BA%91%E5%8E%9F%E7%94%9F/Prometheus/002-Prometheus2.5-Grafana5.4%E4%BA%8C%E8%BF%9B%E5%88%B6%E9%83%A8%E7%BD%B2/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E4%BA%91%E5%8E%9F%E7%94%9F/Prometheus/002-Prometheus2.5-Grafana5.4%E4%BA%8C%E8%BF%9B%E5%88%B6%E9%83%A8%E7%BD%B2/</guid><description>[TOC]
+Prometheus2.5+Grafana5.4监控部署 prometheus大多数组件都是用Go编写的，他们可以非常轻松的基于二进制文件部署和构建.
+一、Prometheus安装及配置 1、下载及解压安装包 wget https://github.com/prometheus/prometheus/releases/download/v2.12.0/prometheus-2.12.0.linux-amd64.tar.gz useradd prometheus tar xf /tmp/prometheus-2.12.0.linux-amd64.tar.gz -C /usr/local/ mv /usr/local/prometheus-* /usr/local/prometheus chown -R prometheus:prometheus /usr/local/prometheus/ 2 、设置环境变量 vim /etc/profile PATH=/usr/local/prometheus/:$PATH:$HOME/bin source /etc/profile 3、检查配置文件 # promtool check config /usr/local/prometheus/prometheus.yml Checking /usr/local/prometheus/prometheus.yml SUCCESS: 0 rule files found 4、创建prometheus.service 的 systemd unit 文件 cat &amp;gt; /etc/systemd/system/prometheus.service &amp;lt;&amp;lt;EOF [Unit] Description=Prometheus Documentation=https://prometheus.io/ After=network.target [Service] Type=simple User=prometheus ExecStart=/usr/local/prometheus/prometheus --config.file=/usr/local/prometheus/prometheus.yml --storage.tsdb.retention.time=15d --storage.tsdb.path=/home/prometheus/data --web.listen-address=0.0.0.0:9090 --web.read-timeout=5m --web.max-connections=10 --query.max-concurrency=20 --query.timeout=2m Restart=on-failure [Install] WantedBy=multi-user.target EOF 可以直接使用如下命令启动:</description></item><item><title/><link>https://note.ljzsdut.com/%E4%BA%91%E5%8E%9F%E7%94%9F/Prometheus/003-Prometheus%E7%9A%84%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E4%BA%91%E5%8E%9F%E7%94%9F/Prometheus/003-Prometheus%E7%9A%84%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B/</guid><description>Prometheus的数据模型 概述 监控系统一般会从各个维度去获取监控数据，然后将其保存在监控系统中。
+时间序列 Prometheus从根本上所有的存储都是按时间序列去实现的。
+每个时间序列由2个元素唯一确定：metrics(指标名称) 、label组合(一个或多个标签) 。相同的metric_name和相同的label组合组成一条时间序列，不同的metric_name或不同的label组合都表示不同的时间序列。为了支持一些查询，有时还会临时产生一些时间序列存储
+时间序列是以“键值”形式存储的时序式的聚合数据（底层还会保存时间戳信息），它并不支持存储文本信息（只支持双精度浮点型数据），即：key value timestamp。例如下图中，key为时序(指标名称+标签)cpu_usage{core=&amp;quot;1&amp;quot;,ip=&amp;quot;128.0.0.1&amp;quot;}，value为14.04。 其中的“键”称为指标（Metric），它通常意味着CPU速率、内存使用率或分区空闲比例等； 同一指标可能会适配到多个目标或设备，因而它使用“标签”作为元数据，从而为Metric添加更多的信息描述纬度； 这些标签还可以作为过滤器进行指标过滤及聚合运算； 指标名称和标签 每条时间序列是由唯一的指标名称和一组标签 （key=value）的形式组成，即一个时间序列由指标名称和标签2部分共同组成。
+指标名称 一般是给监测对像起一名字，例如 http_requests_total 这样，它有一些命名规则，可以包字母数字之类的的。通常是以应用名称开头监测对像数值类型单位这样。例如： - push_total - userlogin_mysql_duration_seconds - app_memory_usage_bytes 标签 就是对一条时间序列不同维度的识别了，例如 一个http请求用的是POST还是GET，它的endpoint是什么，这时候就要用标签去标记了。最终形成的标识便是这样了 http_requests_total{method=&amp;#34;POST&amp;#34;,endpoint=&amp;#34;/api/tracks&amp;#34;} 记住，针对http_requests_total这个metrics name 无论是增加标签还是删除标签都会形成一条新的时间序列。 查询语句就可以跟据上面标签的组合来查询聚合结果了。 如果以传统数据库的理解来看这条语句，则可以考虑 http_requests_total是表名，标签是字段，而timestamp是主键，还有一个float64字段是值了。（Prometheus里面所有值都是按float64存储）
+Jobs和Target Target：又称Instance或endpoint，是metric的数据采集点。能够接收Prometheus Server数据Scrape操作的网络端点（endpoint），即为一个Instance（实例），每个Target用一个网络端点IP:PORT进行标识；每个target上有多个metric，一般通过请求IP:PORT/metrics获取。
+Job：通常，具有类似功能的Instance/Target的集合称为一个Job，例如一个MySQL主从复制集群中的所有MySQL进程；
+- job_name: &amp;#39;mysql-server&amp;#39; static_configs: - targets: # 一个job中包含多个target - &amp;#39;128.0.0.1:3306&amp;#39; - &amp;#39;128.0.0.2:3306&amp;#39; - &amp;#39;128.0.0.3:3306&amp;#39; job、target、metric、时序的关系 一个指标由指标名称和多个标签组成。而不同的标签组合会形成不同的时间序列。
+job、target、metric、时间序列 的关系：
+一个job包含多个target； 一个target中有多个metric； 一个metric包含多个时间序列； 上例中：
+job为：mysql-server
+target：&amp;lsquo;128.0.0.1:3306&amp;rsquo;、&amp;lsquo;128.0.0.2:3306&amp;rsquo;、&amp;lsquo;128.0.0.3:3306&amp;rsquo;
+metric：cpu_usage
+时序：cpu_usage{job=&amp;ldquo;1&amp;rdquo;,instance=&amp;ldquo;128.0.0.1&amp;rdquo;}
+时序值：14.04
+默认标签和默认时间序列 默认标签 当prometheus采集目标时，它会自动附加某些标签，用于识别被采集的目标。</description></item><item><title/><link>https://note.ljzsdut.com/%E4%BA%91%E5%8E%9F%E7%94%9F/Prometheus/004-PromQL%E8%AF%A6%E8%A7%A3/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E4%BA%91%E5%8E%9F%E7%94%9F/Prometheus/004-PromQL%E8%AF%A6%E8%A7%A3/</guid><description>PromQL概述 Prometheus提供了内置的数据查询语言PromQL （全称为Prometheus Query Language），支持用户进行实时的数据查询及聚合操作；
+PromQL使用表达式（expression）来表述查询需求 根据其使用的指标和标签，以及时间范围，表达式的查询请求可灵活地覆盖在一个或多个时间序列的一定范围内的样本之上，甚至是只包含单个时间序列的单个样本 基于PromQL表达式，用户可以针对指定的特征及其细分的纬度进行过滤、聚合、统计等运算从而产生期望的计算结果。
+PromQL支持基于定义的指标维度进行过滤和聚合：
+更改任何标签值，包括添加或删除标签，都会创建一个新的时间序列 应该尽可能地保持标签的稳定性，否则，则很可能创建新的时间序列，更甚者会生成一个动态的数据环境，并使得监控的数据源难以跟踪，从而导致建立在该指标之上的图形、告警及记录规则变得无效 Prometheus数据模型 时间序列 Prometheus中，每个时间序列都由指标名称(Metric Name)和标签(Label)来唯一标识，格式为&amp;lt;metric name&amp;gt;{&amp;lt;label name&amp;gt;=&amp;lt;label value&amp;gt;,…};
+指标名称：通常用于描述系统上要测定的某个特征；例如，http_requests_total表示接收到的HTTP请求总数；支持使用字母、数字、下划线和冒号，且必须能匹配R规范的正则表达式；
+标签：键值型数据，附加在指标名称之上，从而让指标能够支持多纬度特征；可选项；例如，http_requests.total{method=GET}和http_requests.total{method=POST}代表着两个不同的时间序列；标签名称可使用字母、数字和下划线，且必须能匹配RE2规范的正则表达式；以__为前缀的名称为Prometheus系统预留使用；
+如下图所示，Metric Name的表示方式有两种。后一种通常用于Prometheus内部，但是其更加灵活，比如可以对指标名称进行正则匹配等。
+指标名称及标签使用注意事项 指标名称和标签的特定组合代表着一个时间序列；
+指标名称相同，但标签不同的组合分别代表着不同的时间序列； 不同的指标名称自然更是代表着不同的时间序列； PromQL支持基于定义的指标维度进行过滤和聚合
+更改任何标签值，包括添加或删除标签，都会创建一个新的时间序列 应该尽可能地保持标签的稳定性，否则，则很可能创建新的时间序列，更甚者会生成一个动态的数据环境，并使得监控的数据源难以跟踪，从而导致建立在该指标之上的图形、告警及记录规则变得无效 样本数据格式 Prometheus的内部，每个样本数据都是k/v格式的数据，而且都是单独存放的。
+key由metric name、labels、timestamp组成；timestamp是毫秒精度的时间戳
+value是float64格式的数据
+时间序列(也称向量) 时间序列数据：按照时间顺序记录系统、设备状态变化的数据，每个数据称为一个样本；
+数据采集以特定的时间周期进行，因而，随着时间流逝，将这些样本数据记录下来，将生成一个离散的样本数据序列； 时间序列也称为向量（Vector） ；而将多个序列(向量)放在同一个坐标系内（以时间为横轴，以序列为纵轴），将形成一个由数据点组成的矩阵； 上图中：
+每一行表示一个时间序列；
+每一列表示一个即时向量；
+多个连续的列表示一个时间范围向量；
+Prometheus基于指标名称（metrics name）以及附属的标签集合（labelset）唯一定义一条时间序列。
+指标名称代表着监控目标上某类可测量属性的基本特征标识 标签则是这个基本特征上再次细分的多个可测量维度 注意：
+指标名称和标签的特定组合代表着一个时间序列；
+指标名称相同，但标签不同的组合分别代表着不同的时间序列；不同的指标名称自然更是代表着不同的时间序列；
+PromQL支持处理两种向量，并内置提供了一组用于数据处理的函数
+即时向量：最近一次的时间戳上跟踪的数据指标； 时间范围向量：指定时间范围内的所有时间戳上的数据指标； PromQL的4种数据类型(Data Type) PromQL的表达式中支持4种数据类型：
+即时向量（Instant Vector）：特定或全部的时间序列集合上，具有相同时间戳的一组样本值称为即时向量； 范围向量（Range Vector）：特定或全部的时间序列集合上，在指定的同一时间范围内的所有样本值； 标量（Scalar）：一个浮点型的数据值； 字符串（String） ：支持使用单引号、双引号或反引号进行引用，但反引号中不会对转义字符进行转义； 理解向量与标量：
+向量，无论是即时向量还是范围向量，它们时时间序列的上样本值。
+标量，只是一个浮点型或整形的数值。
+时间序列选择器 PromQL的查询操需要针对有限个时间序列上的样本数据进行，挑选出目标时间序列是构建表达式时最为关键的一步。
+时间序列选择器的作用是：挑选出符合条件的时间序列。</description></item><item><title/><link>https://note.ljzsdut.com/%E4%BA%91%E5%8E%9F%E7%94%9F/Prometheus/005-prometheus%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E8%AF%A6%E8%A7%A3/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E4%BA%91%E5%8E%9F%E7%94%9F/Prometheus/005-prometheus%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E8%AF%A6%E8%A7%A3/</guid><description>[TOC]
+Prometheus配置文件组成概述 Prometheus是微服务架构，prometheus server通过配置文件与其他组件进行关联。
+https://prometheus.io/docs/prometheus/latest/configuration/configuration/#relabel_config
+global: # How frequently to scrape targets by default. [ scrape_interval: &amp;lt;duration&amp;gt; | default = 1m ] # How long until a scrape request times out. [ scrape_timeout: &amp;lt;duration&amp;gt; | default = 10s ] # How frequently to evaluate rules. [ evaluation_interval: &amp;lt;duration&amp;gt; | default = 1m ] # The labels to add to any time series or alerts when communicating with # external systems (federation, remote storage, Alertmanager).</description></item><item><title/><link>https://note.ljzsdut.com/%E4%BA%91%E5%8E%9F%E7%94%9F/Prometheus/006-altermanager%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E8%AF%A6%E8%A7%A3/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E4%BA%91%E5%8E%9F%E7%94%9F/Prometheus/006-altermanager%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E8%AF%A6%E8%A7%A3/</guid><description>[TOC]
+Alertmanager简介 警报一直是整个监控系统中的重要组成部分，Prometheus监控系统中，警报是由独立的2部分组成，数据采集（Prometheus）与警报（Alertmanager）是分离的2个组件。警报规则在 Prometheus 定义，警报规则触发以后，才会将信息转发到给独立的组件Alertmanager ，经过 Alertmanager 对警报的信息处理后，最终通过接收器发送给指定用户。
+Prometheus Server端通过静态或者动态配置去拉取部署在k8s或云主机上的各种类别的监控指标数据，然后基于PromQL 对这些已经存储在本地存储TSDB 中的指标，定义阈值警报规则 Rules 。Prometheus会根据配置的参数周期性的对警报规则进行计算， 如果满足警报条件(告警规则评估结果为True)，生产一条警报信息，将其推送到 Alertmanager 组件。
+Alertmanager 收到警报信息之后，会对警告信息进行处理，进行 去重、分组 Group 并将它们通过定义好的路由 Routing 规则路由到正确的接收器 receiver， 比如 Email Slack 钉钉、企业微信 Robot（webhook） 企业微信等，最终异常事件 Warning、Error通知给定义好的接收人，其中如钉钉是基于第三方通知来实现的，对于通知人定义是在钉钉的第三方组件中配置。此外，它还负责静默和抑制警报。
+【总结】
+告警能力在Prometheus的架构中被划分成两个独立的部分。
+通过在Prometheus中定义AlertRule（告警规则），Prometheus会周期性的对告警规则进行计算，如果满足告警触发条件就会向Alertmanager发送告警信息。
+Alertmanager特性 在 Prometheus 中， 我们不仅仅可以对单条警报通过 PromQL定义规则，更多时候是对相关的多条警报进行分组后统一定义。下面开始把 Alertmanager 中的分组 Grouping 、抑制 Inhibition、静默 Sliences核心特性进行介绍，便于大家系统性的学习与理解。
+Alertmanager除了提供基本的告警通知能力以外，还主要提供了如：分组、抑制以及静默等告警特性：
+分组 在Prometheus中，还可以通过Group（告警组）对一组相关的告警进行统一定义。
+分组机制可以将相似的告警信息合并成一个通知。在某些情况下，比如在系统因大面积故障而触发告警潮时，在这种情况下分组机制可以将这些被触发的告警合并为一个告警通知，避免一次性接受大量的告警通知，被大量的告警噪声淹没，进而导致关键信息的隐没，而无法对问题进行快速定位。
+例如，当集群中有数百个正在运行的服务实例，并且为每一个实例设置了告警规则。假如此时发生了网络故障，可能导致大量的服务实例无法连接到数据库，结果就会有数百个告警被发送到Alertmanager。
+而作为用户，可能只希望能够在一个通知中中就能查看哪些服务实例收到影响。这时可以按照服务所在集群或者告警名称对告警进行分组，而将这些告警聚合在一起成为一个通知。
+告警分组，告警时间，以及告警的接受方式可以通过Alertmanager的配置文件进行配置。
+抑制 抑制是指当某一告警发出后，可以停止重复发送由此告警引发的其它告警的机制。
+当系统中某个组件或服务故障而触发告警通知后，那些依赖于该组件或服务的其它组件或服务可能也会因此而触发告警，抑制便是避免类似的级联告警的一种特性，从而让用户能将精力集中于真正的故障所在；
+例如，当一个交换机发生故障后，该故障会触发告警。此时连接到这个交换机上的其他设备也会因为交换机故障而触发报警，而我们不希望收到这些设备发送的告警，此时就可以使用抑制解决。
+抑制机制同样通过Alertmanager的配置文件进行设置。
+静默 静默 （Silent） :是指在一个特定的时间窗口内，即便接收到告警通知（符合静默的配置），Alertmanager也不会真正向用户发送告警信息的行为；通常，在系统例行维护期间，需要激活告警系统的静默特性；
+静默提供了一个简单的机制可以快速根据标签对告警进行静默处理。静默设置需要在Alertmanager的Web页面上进行设置。
+Prometheus告警规则【扩展】 Prometheus中的告警规则允许你基于PromQL表达式定义告警触发条件，Prometheus对这些触发规则进行周期性计算，当满足触发条件后则会触发告警通知。默认情况下，用户可以通过Prometheus的Web界面查看这些告警规则以及告警的触发状态。当Promthues与Alertmanager关联之后，Promthues可以将告警发送到Alertmanager中，并通过Alertmanager可以对这些告警进行进一步的处理。
+定义告警规则 在Prometheus中一条告警规则主要由以下几部分组成：
+告警名称：用户需要为告警规则命名，当然对于命名而言，需要能够直接表达出该告警的主要内容 告警规则表达式：告警规则由PromQL进行定义，其实际意义是：当表达式（PromQL）查询结果为true时持续多长时间（During）后出发告警 一条典型的告警规则如下所示：</description></item><item><title/><link>https://note.ljzsdut.com/%E4%BA%91%E5%8E%9F%E7%94%9F/Prometheus/007-Prometheus%E7%9A%84%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E4%BA%91%E5%8E%9F%E7%94%9F/Prometheus/007-Prometheus%E7%9A%84%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8/</guid><description>Prometheus本地存储概述 官方文档：https://prometheus.io/docs/prometheus/latest/storage/#storage
+Prometheus内置了TSDB，该存储经历了三个版本；
+v1.0:Leve1DB,性能不高，每秒只能接收50000个样本； v2.0:LevelDB,但使用了Facebook的Gorila压缩算法，极大地压缩了单个样本的大小,每秒可接收的样本提升到80000个； V3.0:由Prometheus2.0时引入，是一个独立维护的TSDB开源项目；在单机上，每秒可处理数百万个样本； Prometheus TSDB数据存储格式概览 以每2小时为一个时间窗口，并存储为一个单独的block; block会压缩、合并历史数据块，随着压缩合并，其block数量会减少； block的大小并不固定，但最小会保存两个小时的数据； Head（chunks_head）是当前使用的块，保存在内存中。为了数据的持久化，也会通过内存映射和wal机制保存在磁盘上，当时间窗口结束，则将head保存为block。
+block 每个block都有单独的目录，里面包含该时间窗口内所有的chunk、index、tombstones、meta.json
+nobody@prometheus-9c5d759b9-85v64:/prometheus$ ls 01G8B0Z98FMBZARJCPGE36RA48 chunks_head lock queries.active wal nobody@prometheus-9c5d759b9-85v64:/prometheus$ ls 01G8B0Z98FMBZARJCPGE36RA48/ chunks index meta.json tombstones chunks：用于保存时序数据，每个chunk的大小为512MB,超出该大小时则截断并创建为另一个Chunk；各Chunk以数字编号；
+nobody@prometheus-9c5d759b9-85v64:/prometheus$ ls 01G8B0Z98FMBZARJCPGE36RA48/chunks/ 000001 index：索引文件，它是Prometheus TSDB实现高效查询的基础；我们甚至可以通过Metrics Name和Labels查找时间序列数据在chunk文件中的位置；索引文件会将指标名称和标签索引到样本数据的时间序列中；
+tombstones：用于对数据进行软删除，即“标记删除”，以降低删除操作的成本；删除的记录并保存于tombstones文件中，而读取时间序列上的数据时，会基于tombstones进行过滤已经删除的部分；删除数据会在下一次block合并时，真正被删除。
+meta.json：block的元数据信息，这些元数据信息是block的合并、删除等操作的基础依赖
+wal 在前面的图中，Head块是数据库位于内存中的部分，Block(灰色块)是磁盘上不可更改的持久块，而预写日志(WAL)用于辅助完成持久写入；
+传入的样本(t,v)首先会进入Head，并在内存中停留一会儿，然后即会被刷写到磁盘并映射进内存中(M-map);
+当这些内存映射的块或内存中的块老化到一定程度时，它会将作为持久块刷写到磁盘；
+随着它们的老化进程，将合并更多的块，最在超过保留期限后被删除；
+WAL是数据库中发生的事件的顺序日志，在写入/修改/删除数据库中的数据之前，首先将事件记录（附加）到WAL中，然后在数据库中执行必要的操作；
+WAL的关键点在于，用于帮助TSDB先写日志，再写磁盘上的Block; WAL被分割为默认为128MB大小的文件段，它们都位于WAL目录下； 使用WAL技术可以方便地进行圆润、重试等操作； WAL日志的数量及截断的位置则保存于checkpoint文件中，该文件的内容要同步写入磁盘，以确保其可靠性；
+Prometheus存储配置 配置参数
+&amp;ndash;storage.tsdb.path：数据存储路径，WAL日志亦会存储于该目录下，默认为data;
+&amp;ndash;storage.tsdb.retention.time：样本数据在存储中保存的时长，超过该时长的数据就会被删除；默认为15d;
+&amp;ndash;storage.tsdb.retention.size：每个Block的最大字节数（不包括WAL文件），支持B、KB、MB、GB、TB、PB和EB，例如512MB等；
+&amp;ndash;storage.tsdb.wal-compression：是否启用WAL的压缩机制，2.20及以后的版本中默认即为启用；
+容量规划
+needed_disk_space=retention_time_seconds * ingested_samples_per_second * bytes_per_sample
+Prometheus远程存储 Prometheus可通过基于gRPC的适配器对接到远程存储，适配器主要处理“读”和“写”两种数据操作，它们可分别通过不同的URL完成。
+远程写 # The URL of the endpoint to send samples to.</description></item><item><title/><link>https://note.ljzsdut.com/%E4%BA%91%E5%8E%9F%E7%94%9F/Prometheus/008-Prometheus%E9%9B%86%E7%BE%A4/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E4%BA%91%E5%8E%9F%E7%94%9F/Prometheus/008-Prometheus%E9%9B%86%E7%BE%A4/</guid><description> 联邦Federation Thnaos https://mp.weixin.qq.com/s/NHD-mXTcNmZaI3JPSDxegA
+Cortex</description></item><item><title/><link>https://note.ljzsdut.com/%E4%BA%91%E5%8E%9F%E7%94%9F/Prometheus/009-grafana/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/%E4%BA%91%E5%8E%9F%E7%94%9F/Prometheus/009-grafana/</guid><description>Grafana是一款基于go语言开发的通用可视化工具，支持从多种不同的数据源加载并展示数据，可作为其数据源的部分存储系统如下所示：
+TSDB:Prometheus、IfluxDB、OpenTSDB和Graphit 日志和文档存储：Loki和ElasitchSearch 分布式请求跟踪：Zipkin、Jaeger和Tempo SQL DB:MySQL、PostgreSQL和Microsoft SQL Server &amp;hellip; Grafana基础
+默认监听于TCP协议的3000端口，支持集成其他认证服务，且能够通过/metrics:输出内建指标；
+几个基本概念
+数据源(Data Source)：提供用于展示的数据的存储系统；
+仪表盘(Dashboard)：组织和管理数据的可视化面板(Panel);
+团队和用户：提供了面向企业组织层级的管理能力；</description></item></channel></rss>
