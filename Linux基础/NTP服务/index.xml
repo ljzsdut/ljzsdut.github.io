@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ljzsdut</title><link>https://note.ljzsdut.com/Linux%E5%9F%BA%E7%A1%80/NTP%E6%9C%8D%E5%8A%A1/</link><description>Recent content on ljzsdut</description><generator>Hugo -- gohugo.io</generator><atom:link href="https://note.ljzsdut.com/Linux%E5%9F%BA%E7%A1%80/NTP%E6%9C%8D%E5%8A%A1/index.xml" rel="self" type="application/rss+xml"/><item><title/><link>https://note.ljzsdut.com/Linux%E5%9F%BA%E7%A1%80/NTP%E6%9C%8D%E5%8A%A1/Chrony%E8%AE%BE%E7%BD%AE%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%9B%86%E7%BE%A4%E5%90%8C%E6%AD%A5%E6%97%B6%E9%97%B4/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/Linux%E5%9F%BA%E7%A1%80/NTP%E6%9C%8D%E5%8A%A1/Chrony%E8%AE%BE%E7%BD%AE%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%9B%86%E7%BE%A4%E5%90%8C%E6%AD%A5%E6%97%B6%E9%97%B4/</guid><description>详解：Linux Chrony 设置服务器集群同步时间 [TOC]
-chrony简介 Chrony是一个开源的自由软件，像CentOS 7或基于RHEL 7操作系统，已经是默认服务，默认配置文件在 /etc/chrony.conf 它能保持系统时间与时间服务器（NTP）同步，让时间始终保持同步。相对于NTP时间同步软件，占据很大优势。其用法也很简单。当然，centos6也是可以使用chrony。
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ljzsdut</title><link>https://note.ljzsdut.com/Linux%E5%9F%BA%E7%A1%80/NTP%E6%9C%8D%E5%8A%A1/</link><description>Recent content on ljzsdut</description><generator>Hugo -- gohugo.io</generator><atom:link href="https://note.ljzsdut.com/Linux%E5%9F%BA%E7%A1%80/NTP%E6%9C%8D%E5%8A%A1/index.xml" rel="self" type="application/rss+xml"/><item><title/><link>https://note.ljzsdut.com/Linux%E5%9F%BA%E7%A1%80/NTP%E6%9C%8D%E5%8A%A1/Chrony%E8%AE%BE%E7%BD%AE%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%9B%86%E7%BE%A4%E5%90%8C%E6%AD%A5%E6%97%B6%E9%97%B4/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/Linux%E5%9F%BA%E7%A1%80/NTP%E6%9C%8D%E5%8A%A1/Chrony%E8%AE%BE%E7%BD%AE%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%9B%86%E7%BE%A4%E5%90%8C%E6%AD%A5%E6%97%B6%E9%97%B4/</guid><description>详解：Linux Chrony 设置服务器集群同步时间 详解：Linux Chrony 设置服务器集群同步时间 chrony简介 安装chrony 【实战】服务器集群之间的系统时间同步 chronyc命令行管理工具常用命令 收集的ntp服务器： chrony简介 Chrony是一个开源的自由软件，像CentOS 7或基于RHEL 7操作系统，已经是默认服务，默认配置文件在 /etc/chrony.conf 它能保持系统时间与时间服务器（NTP）同步，让时间始终保持同步。相对于NTP时间同步软件，占据很大优势。其用法也很简单。当然，centos6也是可以使用chrony。
 Chrony是网格创间协议的（NTP)的另一种实现．与网格时间协议后台程序(ntpd)不同．它可以更快地 且史准确地同步系统时钟。请注意：ntpd仍然包含只中以供需要运行NTP服务的齐户便用．
 Chrony的优势包括：
 更快的同步，只需要数分钟(甚至是毫秒、微妙级别)而非数小时时间。从而最大程度减少了时间和频率误差．这对于并非全天24小时运行的台式计算机或系统而言非常有用。 能够更好地响应时钟频率的快速变化。这对于具备不稳定时钟的虚拟机或导致时钟频率发生变化的 节能技术而言非常有用。 在初始同步后，它不会停止时钟，以防对需要系统时间保持单调的应用程序造成影响。 在应对临时非对称址延时，（例如，在大规模下载造成连接饱和时）提供了更好的稳定性。 无需对服务器进行定期轮询，因此具备问歇性网络连接的系统仍然可以快速同步时钟。 Chrony有两个核心组件，分别是：
@@ -13,12 +12,7 @@ CentOS Linux release 7.4.1708 (Core)
 $ yum install chrony -y 2.启动并加入开机自启动
 $ systemctl enable chronyd.service $ systemctl restart chronyd.service $ systemctl status chronyd.service 3.Firewalld设置
 $ firewall-cmd --add-service=ntp --permanent
-$ firewall-cmd --reload 因NTP服务端使用123/UDP端口协议，所以允许NTP服务即可。
-作为客户端，使用323/UDP端口协议。
-4.配置Chrony
-以下是系统默认配置文件，我对此加以说明：
-$ cat /etc/chrony.conf # 该参数可以多次用于添加时钟服务器，必须以&amp;#34;server &amp;#34;格式使用。使用pool.</description></item><item><title/><link>https://note.ljzsdut.com/Linux%E5%9F%BA%E7%A1%80/NTP%E6%9C%8D%E5%8A%A1/ntp/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/Linux%E5%9F%BA%E7%A1%80/NTP%E6%9C%8D%E5%8A%A1/ntp/</guid><description>[TOC]
-NTP协议原理与配置 1.NTP网络结构 在NTP的网络结构中,主要存在如下概念
+$ firewall-cmd --reload 因NTP服务端使用123/UDP端口协议，所以允许NTP服务即可。</description></item><item><title/><link>https://note.ljzsdut.com/Linux%E5%9F%BA%E7%A1%80/NTP%E6%9C%8D%E5%8A%A1/ntp/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/Linux%E5%9F%BA%E7%A1%80/NTP%E6%9C%8D%E5%8A%A1/ntp/</guid><description>NTP协议原理与配置 1.NTP网络结构 2.NTP访问控制 3.基本工作原理 NTP网络结构及时钟层数 NTP的工作模式 NTP服务 安装 配置文件详解 修改配置文件 1）修改所有节点的/etc/ntp.conf 2）选择一个主节点，修改其/etc/ntp.conf 3）主节点以外，修改/etc/ntp.conf 其他命令 ntpq -p ntpstat 查询你的ntp服务器同步信息 ntpd、ntpdate的区别 国内常用NTP服务器地址及IP 其他 timedate启用ntp 错误1：ntpdate -u ip -&amp;gt; no server suitable for synchronization found 参考文档 NTP协议原理与配置 1.NTP网络结构 在NTP的网络结构中,主要存在如下概念
 (1)同步子网。
 由主时间服务器、二级时间服务器、PC客户端和它们之间互连的传输路径组成同步子网。
 (2)主时间服务器。
@@ -33,9 +27,4 @@ NTP协议原理与配置 1.NTP网络结构 在NTP的网络结构中,主要存在
 (2)接收过程。
 在接收报文时,首先判断是否要对报文进行认证处理。如果不需要认证,则直接对报文进行后续处理;如果需要认证,则根据对应密钥ID和解密算法来认证。如果认证失败,则直接丢弃报文;如果认证通过,则对接收到的报文进行处理。
 3.基本工作原理 NTP的基本工作原理如所示。Device A和Device B通过网络相连，Device A和Device B的时间不同，需要通过NTP实现时间的自动同步。为便于理解，作如下假设：
-在Device A和Device B的时间同步之前，Device A的时间设定为10:00:00 am，Device B的时间设定为11:00:00 am。 DeviceB作为NTP时间服务器，即Device A与Device B的时间同步。 NTP报文从Device A到Device B、从Device B到Device A单向传输所需要的时间均为1秒。 DeviceB处理NTP报文所需的时间是1秒。 []
-Device A和Device B时间同步的工作过程如下：
-(1) Device A发送一个NTP报文给Device B，该报文带有它离开Device A时的时间戳，该时间戳为10:00:00 am（T1）。
-(2) 当此NTP报文到达Device B时，Device B在NTP报文上增加该报文到达Device B时的时间戳，该时间戳为11:00:01 am（T2）。
-(3) 当此NTP报文离开Device B时，Device B再在NTP报文上增加该报文离开Device B时的时间戳，该时间戳为11:00:02 am（T3）。
-(4) 当Device A接收到该响应报文时，Device A的本地时间为10:00:03 am（T4）。</description></item></channel></rss>
+在Device A和Device B的时间同步之前，Device A的时间设定为10:00:00 am，Device B的时间设定为11:00:00 am。 DeviceB作为NTP时间服务器，即Device A与Device B的时间同步。 NTP报文从Device A到Device B、从Device B到Device A单向传输所需要的时间均为1秒。 DeviceB处理NTP报文所需的时间是1秒。 []</description></item></channel></rss>
