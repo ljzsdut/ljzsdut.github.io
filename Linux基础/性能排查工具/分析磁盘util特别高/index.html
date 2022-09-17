@@ -434,6 +434,7 @@ mysql> select SQL_NO_CACHE b.id,a.k from sbtest_a a left join sbtest_b b on a.id
 <label><span class=flex><a href=/%E5%AD%98%E5%82%A8/drbd-%E7%BD%91%E7%BB%9CRAID1/03-drbd%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/ class=gdoc-nav__entry>03 Drbd注意事项</a></span></label></li><li><input type=checkbox class=hidden>
 <label><span class=flex><a href=/%E5%AD%98%E5%82%A8/drbd-%E7%BD%91%E7%BB%9CRAID1/04-split_brain%E8%84%91%E8%A3%82%E5%A4%84%E7%90%86/ class=gdoc-nav__entry>04 Split Brain脑裂处理</a></span></label></li><li><input type=checkbox class=hidden>
 <label><span class=flex><a href=/%E5%AD%98%E5%82%A8/drbd-%E7%BD%91%E7%BB%9CRAID1/0715-%E8%B7%A8%E9%9B%86%E7%BE%A4etcd%E4%B8%BB%E5%A4%87%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E5%AE%9E%E6%96%BD%E6%96%B9%E6%A1%88/ class=gdoc-nav__entry>0715 跨集群etcd主备数据同步实施方案</a></span></label></li><li><input type=checkbox class=hidden>
+<label><span class=flex><a href=/%E5%AD%98%E5%82%A8/drbd-%E7%BD%91%E7%BB%9CRAID1/drbd/ class=gdoc-nav__entry>Drbd</a></span></label></li><li><input type=checkbox class=hidden>
 <label><span class=flex><a href=/%E5%AD%98%E5%82%A8/drbd-%E7%BD%91%E7%BB%9CRAID1/drbd%E6%8E%A8%E8%8D%90%E9%98%85%E8%AF%BB/ class=gdoc-nav__entry>Drbd推荐阅读</a></span></label></li><li><input type=checkbox class=hidden>
 <label><span class=flex><a href=/%E5%AD%98%E5%82%A8/drbd-%E7%BD%91%E7%BB%9CRAID1/mariadb-galera%E9%9B%86%E7%BE%A4drbd%E4%B8%BB%E5%A4%87%E5%AE%B9%E7%81%BE%E6%B5%8B%E8%AF%95/ class=gdoc-nav__entry>Mariadb Galera集群drbd主备容灾测试</a></span></label></li></ul></li><li><input type=checkbox class=gdoc-nav__toggle id=navtree-058ca5f9>
 <label for=navtree-058ca5f9 class="flex justify-between align-center"><span class=flex>iscsi</span><svg class="gdoc-icon toggle gdoc_keyboard_arrow_left"><use xlink:href="#gdoc_keyboard_arrow_left"/></svg><svg class="gdoc-icon toggle gdoc_keyboard_arrow_down"><use xlink:href="#gdoc_keyboard_arrow_down"/></svg></label><ul class=gdoc-nav__list><li><input type=checkbox class=hidden>
@@ -479,10 +480,10 @@ mysql> select SQL_NO_CACHE b.id,a.k from sbtest_a a left join sbtest_b b on a.id
 <label><span class=flex><a href=/%E6%B5%8B%E8%AF%95/Jmeter/17-%E5%85%B6%E4%BB%96/ class=gdoc-nav__entry>17 其他</a></span></label></li></ul></li></ul></li><li><input type=checkbox class=gdoc-nav__toggle id=navtree-bd19e54f>
 <label for=navtree-bd19e54f class="flex justify-between align-center"><span class=flex>网络系列</span><svg class="gdoc-icon toggle gdoc_keyboard_arrow_left"><use xlink:href="#gdoc_keyboard_arrow_left"/></svg><svg class="gdoc-icon toggle gdoc_keyboard_arrow_down"><use xlink:href="#gdoc_keyboard_arrow_down"/></svg></label><ul class=gdoc-nav__list><li><input type=checkbox class=gdoc-nav__toggle id=navtree-2a86f350>
 <label for=navtree-2a86f350 class="flex justify-between align-center"><span class=flex>01 网络配置工具</span><svg class="gdoc-icon toggle gdoc_keyboard_arrow_left"><use xlink:href="#gdoc_keyboard_arrow_left"/></svg><svg class="gdoc-icon toggle gdoc_keyboard_arrow_down"><use xlink:href="#gdoc_keyboard_arrow_down"/></svg></label><ul class=gdoc-nav__list><li><input type=checkbox class=hidden>
-<label><span class=flex><a href=/%E7%BD%91%E7%BB%9C/01-%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE%E5%B7%A5%E5%85%B7/02-nmcli%E5%91%BD%E4%BB%A4/ class=gdoc-nav__entry>02 Nmcli命令</a></span></label></li><li><input type=checkbox class=hidden>
-<label><span class=flex><a href=/%E7%BD%91%E7%BB%9C/01-%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE%E5%B7%A5%E5%85%B7/21-ip-%E5%91%BD%E4%BB%A4%E7%94%A8%E6%B3%95%E5%BD%92%E7%BA%B3/ class=gdoc-nav__entry>21 IP 命令用法归纳</a></span></label></li><li><input type=checkbox class=hidden>
-<label><span class=flex><a href=/%E7%BD%91%E7%BB%9C/01-%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE%E5%B7%A5%E5%85%B7/22-ip%E5%91%BD%E4%BB%A4%E4%B9%8BLinux%E7%AD%96%E7%95%A5%E8%B7%AF%E7%94%B1ip-rule-ip-route/ class=gdoc-nav__entry>22 Ip命令之 Linux策略路由ip Rule IP Route</a></span></label></li><li><input type=checkbox class=hidden>
-<label><span class=flex><a href=/%E7%BD%91%E7%BB%9C/01-%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE%E5%B7%A5%E5%85%B7/23-ip%E5%91%BD%E4%BB%A4%E4%B9%8Broute%E8%B7%AF%E7%94%B1%E6%9D%A1%E7%9B%AE%E7%9A%84%E5%90%AB%E4%B9%89/ class=gdoc-nav__entry>23 Ip命令之route路由条目的含义</a></span></label></li></ul></li><li><input type=checkbox class=gdoc-nav__toggle id=navtree-28df12dd>
+<label><span class=flex><a href=/%E7%BD%91%E7%BB%9C/01-%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE%E5%B7%A5%E5%85%B7/01-ip-%E5%91%BD%E4%BB%A4%E7%94%A8%E6%B3%95%E5%BD%92%E7%BA%B3/ class=gdoc-nav__entry>01 IP 命令用法归纳</a></span></label></li><li><input type=checkbox class=hidden>
+<label><span class=flex><a href=/%E7%BD%91%E7%BB%9C/01-%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE%E5%B7%A5%E5%85%B7/02-ip%E5%91%BD%E4%BB%A4%E4%B9%8BLinux%E7%AD%96%E7%95%A5%E8%B7%AF%E7%94%B1ip-rule-ip-route/ class=gdoc-nav__entry>02 Ip命令之 Linux策略路由ip Rule IP Route</a></span></label></li><li><input type=checkbox class=hidden>
+<label><span class=flex><a href=/%E7%BD%91%E7%BB%9C/01-%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE%E5%B7%A5%E5%85%B7/03-ip%E5%91%BD%E4%BB%A4%E4%B9%8Broute%E8%B7%AF%E7%94%B1%E6%9D%A1%E7%9B%AE%E7%9A%84%E5%90%AB%E4%B9%89/ class=gdoc-nav__entry>03 Ip命令之route路由条目的含义</a></span></label></li><li><input type=checkbox class=hidden>
+<label><span class=flex><a href=/%E7%BD%91%E7%BB%9C/01-%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE%E5%B7%A5%E5%85%B7/04-nmcli%E5%91%BD%E4%BB%A4/ class=gdoc-nav__entry>04 Nmcli命令</a></span></label></li></ul></li><li><input type=checkbox class=gdoc-nav__toggle id=navtree-28df12dd>
 <label for=navtree-28df12dd class="flex justify-between align-center"><span class=flex>02 Iptables系列</span><svg class="gdoc-icon toggle gdoc_keyboard_arrow_left"><use xlink:href="#gdoc_keyboard_arrow_left"/></svg><svg class="gdoc-icon toggle gdoc_keyboard_arrow_down"><use xlink:href="#gdoc_keyboard_arrow_down"/></svg></label><ul class=gdoc-nav__list><li><input type=checkbox class=hidden>
 <label><span class=flex><a href=/%E7%BD%91%E7%BB%9C/02-Iptables%E7%B3%BB%E5%88%97/01-iptables%E6%A6%82%E5%BF%B5/ class=gdoc-nav__entry>01 Iptables概念</a></span></label></li><li><input type=checkbox class=hidden>
 <label><span class=flex><a href=/%E7%BD%91%E7%BB%9C/02-Iptables%E7%B3%BB%E5%88%97/02-iptables%E4%B9%8B%E8%A7%84%E5%88%99%E6%9F%A5%E8%AF%A2/ class=gdoc-nav__entry>02 Iptables之规则查询</a></span></label></li><li><input type=checkbox class=hidden>
@@ -525,7 +526,7 @@ mysql> select SQL_NO_CACHE b.id,a.k from sbtest_a a left join sbtest_b b on a.id
 <label for=navtree-d2d99c78 class="flex justify-between align-center"><span class=flex>Linux基础</span><svg class="gdoc-icon toggle gdoc_keyboard_arrow_left"><use xlink:href="#gdoc_keyboard_arrow_left"/></svg><svg class="gdoc-icon toggle gdoc_keyboard_arrow_down"><use xlink:href="#gdoc_keyboard_arrow_down"/></svg></label><ul class=gdoc-nav__list><li><input type=checkbox class=gdoc-nav__toggle id=navtree-c088099b>
 <label for=navtree-c088099b class="flex justify-between align-center"><span class=flex>Ntp服务</span><svg class="gdoc-icon toggle gdoc_keyboard_arrow_left"><use xlink:href="#gdoc_keyboard_arrow_left"/></svg><svg class="gdoc-icon toggle gdoc_keyboard_arrow_down"><use xlink:href="#gdoc_keyboard_arrow_down"/></svg></label><ul class=gdoc-nav__list><li><input type=checkbox class=hidden>
 <label><span class=flex><a href=/Linux%E5%9F%BA%E7%A1%80/NTP%E6%9C%8D%E5%8A%A1/Chrony%E8%AE%BE%E7%BD%AE%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%9B%86%E7%BE%A4%E5%90%8C%E6%AD%A5%E6%97%B6%E9%97%B4/ class=gdoc-nav__entry>Chrony设置服务器集群同步时间</a></span></label></li><li><input type=checkbox class=hidden>
-<label><span class=flex><a href=/Linux%E5%9F%BA%E7%A1%80/NTP%E6%9C%8D%E5%8A%A1/ntp/ class=gdoc-nav__entry>Ntp</a></span></label></li></ul></li><li><input type=checkbox class=gdoc-nav__toggle id=navtree-add49447>
+<label><span class=flex><a href=/Linux%E5%9F%BA%E7%A1%80/NTP%E6%9C%8D%E5%8A%A1/ntp%E6%9C%8D%E5%8A%A1/ class=gdoc-nav__entry>Ntp服务</a></span></label></li></ul></li><li><input type=checkbox class=gdoc-nav__toggle id=navtree-add49447>
 <label for=navtree-add49447 class="flex justify-between align-center"><span class=flex>Pxe</span><svg class="gdoc-icon toggle gdoc_keyboard_arrow_left"><use xlink:href="#gdoc_keyboard_arrow_left"/></svg><svg class="gdoc-icon toggle gdoc_keyboard_arrow_down"><use xlink:href="#gdoc_keyboard_arrow_down"/></svg></label><ul class=gdoc-nav__list><li><input type=checkbox class=hidden>
 <label><span class=flex><a href=/Linux%E5%9F%BA%E7%A1%80/PXE/dnsmasq%E8%AF%A6%E8%A7%A3/ class=gdoc-nav__entry>Dnsmasq详解</a></span></label></li><li><input type=checkbox class=hidden>
 <label><span class=flex><a href=/Linux%E5%9F%BA%E7%A1%80/PXE/pxe-dnsmasq/ class=gdoc-nav__entry>Pxe Dnsmasq</a></span></label></li></ul></li><li><input type=checkbox class=gdoc-nav__toggle id=navtree-1717e74d checked>
@@ -540,7 +541,6 @@ mysql> select SQL_NO_CACHE b.id,a.k from sbtest_a a left join sbtest_b b on a.id
 <label><span class=flex><a href=/Linux%E5%9F%BA%E7%A1%80/%E6%80%A7%E8%83%BD%E6%8E%92%E6%9F%A5%E5%B7%A5%E5%85%B7/%E7%BD%91%E7%BB%9C%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7netperf/ class=gdoc-nav__entry>网络性能测试工具netperf</a></span></label></li></ul></li><li><input type=checkbox class=hidden>
 <label><span class=flex><a href=/Linux%E5%9F%BA%E7%A1%80/03-awk/ class=gdoc-nav__entry>03 Awk</a></span></label></li><li><input type=checkbox class=hidden>
 <label><span class=flex><a href=/Linux%E5%9F%BA%E7%A1%80/debian%E8%BD%AF%E4%BB%B6%E6%BA%90source.list%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F%E8%AF%B4%E6%98%8E/ class=gdoc-nav__entry>Debian软件源source.List文件格式说明</a></span></label></li><li><input type=checkbox class=hidden>
-<label><span class=flex><a href=/Linux%E5%9F%BA%E7%A1%80/drbd/ class=gdoc-nav__entry>Drbd</a></span></label></li><li><input type=checkbox class=hidden>
 <label><span class=flex><a href=/Linux%E5%9F%BA%E7%A1%80/ipmitool%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3/ class=gdoc-nav__entry>Ipmitool命令详解</a></span></label></li><li><input type=checkbox class=hidden>
 <label><span class=flex><a href=/Linux%E5%9F%BA%E7%A1%80/jumpserver%E4%BD%BF%E7%94%A8%E6%96%87%E6%A1%A3/ class=gdoc-nav__entry>Jumpserver使用文档</a></span></label></li><li><input type=checkbox class=hidden>
 <label><span class=flex><a href=/Linux%E5%9F%BA%E7%A1%80/linux%E4%B8%ADinode%E5%8C%85%E5%90%AB%E4%BB%80%E4%B9%88%E5%86%85%E5%AE%B9/ class=gdoc-nav__entry>Linux中inode包含什么内容</a></span></label></li><li><input type=checkbox class=hidden>
@@ -585,180 +585,180 @@ mysql> select SQL_NO_CACHE b.id,a.k from sbtest_a a left join sbtest_b b on a.id
 justify-between" itemprop=breadcrumb><div><svg class="gdoc-icon gdoc_path hidden-mobile"><use xlink:href="#gdoc_path"/></svg><ol class=breadcrumb itemscope itemtype=https://schema.org/BreadcrumbList><li itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a itemscope itemtype=https://schema.org/WebPage itemprop=item itemid=/ href=/><span itemprop=name>Welcome to the ljzsdut's notes</span></a><meta itemprop=position content="1"></li><li>/</li><li itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a itemscope itemtype=https://schema.org/WebPage itemprop=item itemid=/Linux%E5%9F%BA%E7%A1%80/ href=/Linux%E5%9F%BA%E7%A1%80/><span itemprop=name>Linux基础</span></a><meta itemprop=position content="2"></li><li>/</li><li itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a itemscope itemtype=https://schema.org/WebPage itemprop=item itemid=/Linux%E5%9F%BA%E7%A1%80/%E6%80%A7%E8%83%BD%E6%8E%92%E6%9F%A5%E5%B7%A5%E5%85%B7/ href=/Linux%E5%9F%BA%E7%A1%80/%E6%80%A7%E8%83%BD%E6%8E%92%E6%9F%A5%E5%B7%A5%E5%85%B7/><span itemprop=name>性能排查工具</span></a><meta itemprop=position content="3"></li><li>/</li><li itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><span itemprop=name>分析磁盘%Util特别高</span><meta itemprop=position content="4"></li></ol></div><div><span class=editpage><svg class="gdoc-icon gdoc_code"><use xlink:href="#gdoc_code"/></svg><a href=https://github.com/ljzsdut/mynotes/edit/master/content/Linux%e5%9f%ba%e7%a1%80/%e6%80%a7%e8%83%bd%e6%8e%92%e6%9f%a5%e5%b7%a5%e5%85%b7/%e5%88%86%e6%9e%90%e7%a3%81%e7%9b%98%25util%e7%89%b9%e5%88%ab%e9%ab%98.md>Edit page</a></span></div></div><article class="gdoc-markdown gdoc-markdown__align--left"><h1>分析磁盘%Util特别高</h1><p>转载：GreatSQL <a class=gdoc-markdown__link href=https://mp.weixin.qq.com/s/aNFA1RXS2yMyFLQMDmJggg>老叶茶馆</a></p><div class=gdoc-page__anchorwrap><h1 id=一背景简介>一、背景简介
 <a data-clipboard-text=https://note.ljzsdut.com/Linux%E5%9F%BA%E7%A1%80/%E6%80%A7%E8%83%BD%E6%8E%92%E6%9F%A5%E5%B7%A5%E5%85%B7/%E5%88%86%E6%9E%90%E7%A3%81%E7%9B%98util%E7%89%B9%E5%88%AB%E9%AB%98/#一背景简介 class="gdoc-page__anchor clip flex align-center" title="Anchor to: 一、背景简介" aria-label="Anchor to: 一、背景简介" href=#%e4%b8%80%e8%83%8c%e6%99%af%e7%ae%80%e4%bb%8b><svg class="gdoc-icon gdoc_link"><use xlink:href="#gdoc_link"/></svg></a></h1></div><p>作为一个DBA难免不了会遇到性能问题，那么我们遇到性能问题该如何进行排查呢？</p><p>例如我们在高并发的业务下，出现业务响应慢，处理时间长我们又该如何入手进行排查。</p><p>本篇文章将分析io高的情况下如何分析及定位。</p><div class=gdoc-page__anchorwrap><h1 id=二环境复现>二、环境复现
 <a data-clipboard-text=https://note.ljzsdut.com/Linux%E5%9F%BA%E7%A1%80/%E6%80%A7%E8%83%BD%E6%8E%92%E6%9F%A5%E5%B7%A5%E5%85%B7/%E5%88%86%E6%9E%90%E7%A3%81%E7%9B%98util%E7%89%B9%E5%88%AB%E9%AB%98/#二环境复现 class="gdoc-page__anchor clip flex align-center" title="Anchor to: 二、环境复现" aria-label="Anchor to: 二、环境复现" href=#%e4%ba%8c%e7%8e%af%e5%a2%83%e5%a4%8d%e7%8e%b0><svg class="gdoc-icon gdoc_link"><use xlink:href="#gdoc_link"/></svg></a></h1></div><ul><li>环境配置：本次测试使用128C_512G_4TSSD服务器配置，MySQL版本为8.0.27</li><li>场景模拟：使用sysbench创建5个表，每个表2亿条数据，执行产生笛卡尔积查询的sql语句，产生io,可以模拟业务压力。首先使用sysbench进行数据压测</li></ul><div class=gdoc-page__anchorwrap><h1 id=三系统层面底层故障排查>三、系统层面底层故障排查
-<a data-clipboard-text=https://note.ljzsdut.com/Linux%E5%9F%BA%E7%A1%80/%E6%80%A7%E8%83%BD%E6%8E%92%E6%9F%A5%E5%B7%A5%E5%85%B7/%E5%88%86%E6%9E%90%E7%A3%81%E7%9B%98util%E7%89%B9%E5%88%AB%E9%AB%98/#三系统层面底层故障排查 class="gdoc-page__anchor clip flex align-center" title="Anchor to: 三、系统层面底层故障排查" aria-label="Anchor to: 三、系统层面底层故障排查" href=#%e4%b8%89%e7%b3%bb%e7%bb%9f%e5%b1%82%e9%9d%a2%e5%ba%95%e5%b1%82%e6%95%85%e9%9a%9c%e6%8e%92%e6%9f%a5><svg class="gdoc-icon gdoc_link"><use xlink:href="#gdoc_link"/></svg></a></h1></div><pre tabindex=0><code>Shell&gt; sysbench --test=/usr/local/share/sysbench/oltp_insert.lua --mysql-host=XXX --mysql-port=3306 --mysql-user=pcms --mysql-password=abc123 --mysql-db=sysbench --percentile=99 --table-size=2000000000 --tables=5 --threads=1000 prepare
-</code></pre><p>使用sysbench进行模拟高并发</p><pre tabindex=0><code>shell&gt; sysbench --test=/usr/local/share/sysbench/oltp_write_only.lua --mysql-host=xxx --mysql-port=3306 --mysql-user=pcms --mysql-password=abc123 --mysql-db=sysbench --percentile=99 --table-size=2000000000 --tables=5 --threads=1000 --max-time=60000 --report-interval=1 --threads=1000 --max-requests=0 --mysql-ignore-errors=all run
-</code></pre><p>执行笛卡尔积sql语句</p><pre tabindex=0><code>mysql&gt; select SQL_NO_CACHE b.id,a.k from sbtest_a a left join sbtest_b b on a.id=b.id  group by a.k order by b.c desc;
-</code></pre><div class=gdoc-page__anchorwrap><h2 id=31-检查当前服务器状态>3.1 检查当前服务器状态
-<a data-clipboard-text=https://note.ljzsdut.com/Linux%E5%9F%BA%E7%A1%80/%E6%80%A7%E8%83%BD%E6%8E%92%E6%9F%A5%E5%B7%A5%E5%85%B7/%E5%88%86%E6%9E%90%E7%A3%81%E7%9B%98util%E7%89%B9%E5%88%AB%E9%AB%98/#31-检查当前服务器状态 class="gdoc-page__anchor clip flex align-center" title="Anchor to: 3.1 检查当前服务器状态" aria-label="Anchor to: 3.1 检查当前服务器状态" href=#31-%e6%a3%80%e6%9f%a5%e5%bd%93%e5%89%8d%e6%9c%8d%e5%8a%a1%e5%99%a8%e7%8a%b6%e6%80%81><svg class="gdoc-icon gdoc_link"><use xlink:href="#gdoc_link"/></svg></a></h2></div><pre tabindex=0><code>shell&gt; top
-top - 19:49:05 up 10 days,  8:16,  2 users,  load average: 72.56, 40.21, 17.08
-Tasks: 1288 total,   1 running, 586 sleeping,   0 stopped,   0 zombie
-%Cpu(s): 19.7 us,  4.2 sy,  0.0 ni, 75.9 id,  1.0 wa,  0.0 hi,  0.2 si,  0.0 st
-KiB Mem : 53542118+total, 23667507+free, 22735366+used, 71392448 buff/cache
-KiB Swap:        0 total,        0 free,        0 used. 23128006+avail Mem 
-</code></pre><p>由上可知：目前一分钟负载为72.56，且呈上升趋势，并且存在io压力</p><div class=gdoc-page__anchorwrap><h2 id=32查看当前各个磁盘设备的io情况>3.2查看当前各个磁盘设备的io情况
-<a data-clipboard-text=https://note.ljzsdut.com/Linux%E5%9F%BA%E7%A1%80/%E6%80%A7%E8%83%BD%E6%8E%92%E6%9F%A5%E5%B7%A5%E5%85%B7/%E5%88%86%E6%9E%90%E7%A3%81%E7%9B%98util%E7%89%B9%E5%88%AB%E9%AB%98/#32查看当前各个磁盘设备的io情况 class="gdoc-page__anchor clip flex align-center" title="Anchor to: 3.2查看当前各个磁盘设备的io情况" aria-label="Anchor to: 3.2查看当前各个磁盘设备的io情况" href=#32%e6%9f%a5%e7%9c%8b%e5%bd%93%e5%89%8d%e5%90%84%e4%b8%aa%e7%a3%81%e7%9b%98%e8%ae%be%e5%a4%87%e7%9a%84io%e6%83%85%e5%86%b5><svg class="gdoc-icon gdoc_link"><use xlink:href="#gdoc_link"/></svg></a></h2></div><pre tabindex=0><code>shell&gt; iostat -m -x 1
-Linux 4.14.0-115.el7a.0.1.aarch64 (mysql-4)  01/08/2022  _aarch64_ (128 CPU)
-Device:         rrqm/s   wrqm/s     r/s     w/s    rMB/s    wMB/s avgrq-sz avgqu-sz   await r_await w_await  svctm  %util
-sda               0.00     0.00 14213.00 27430.00   222.08   465.15    33.80     5.39    0.13    0.14    0.12   0.02  86.00
-sdb               0.00     0.00    0.00    0.00     0.00     0.00     0.00     0.00    0.00    0.00    0.00   0.00   0.00
-dm-0              0.00     0.00    0.00    0.00     0.00     0.00     0.00     0.00    0.00    0.00    0.00   0.00   0.00
-dm-1              0.00     0.00    0.00    0.00     0.00     0.00     0.00     0.00    0.00    0.00    0.00   0.00   0.00
-dm-2              0.00     0.00    0.00    0.00     0.00     0.00     0.00     0.00    0.00    0.00    0.00   0.00   0.00
-</code></pre><p>由上可知：目前有多块物理磁盘，sda磁盘的io压力较大</p><div class=gdoc-page__anchorwrap><h2 id=33-检查sda磁盘当前的io读写情况>3.3 检查sda磁盘当前的io读写情况
-<a data-clipboard-text=https://note.ljzsdut.com/Linux%E5%9F%BA%E7%A1%80/%E6%80%A7%E8%83%BD%E6%8E%92%E6%9F%A5%E5%B7%A5%E5%85%B7/%E5%88%86%E6%9E%90%E7%A3%81%E7%9B%98util%E7%89%B9%E5%88%AB%E9%AB%98/#33-检查sda磁盘当前的io读写情况 class="gdoc-page__anchor clip flex align-center" title="Anchor to: 3.3 检查sda磁盘当前的io读写情况" aria-label="Anchor to: 3.3 检查sda磁盘当前的io读写情况" href=#33-%e6%a3%80%e6%9f%a5sda%e7%a3%81%e7%9b%98%e5%bd%93%e5%89%8d%e7%9a%84io%e8%af%bb%e5%86%99%e6%83%85%e5%86%b5><svg class="gdoc-icon gdoc_link"><use xlink:href="#gdoc_link"/></svg></a></h2></div><pre tabindex=0><code>shell&gt; iostat -d /dev/sda -m -x 1
-Linux 4.14.0-115.el7a.0.1.aarch64 (mysql-4)  01/08/2022  _aarch64_ (128 CPU)
-Device:         rrqm/s   wrqm/s     r/s     w/s    rMB/s    wMB/s avgrq-sz avgqu-sz   await r_await w_await  svctm  %util
-sda            0.00     0.17    7.86   81.23     0.29     3.96    97.88     0.23    2.53    0.22    2.76   0.04   0.33
-Device:         rrqm/s   wrqm/s     r/s     w/s    rMB/s    wMB/s avgrq-sz avgqu-sz   await r_await w_await  svctm  %util
-sda            0.00     0.00 21109.00 42839.00   329.81   710.90    33.33    19.47    0.30    0.16    0.37   0.02  96.00
-Device:         rrqm/s   wrqm/s     r/s     w/s    rMB/s    wMB/s avgrq-sz avgqu-sz   await r_await w_await  svctm  %util
-sda            0.00     0.00 19287.00 41404.00   301.36   692.29    33.53    15.73    0.26    0.18    0.30   0.02  93.00
-Device:         rrqm/s   wrqm/s     r/s     w/s    rMB/s    wMB/s avgrq-sz avgqu-sz   await r_await w_await  svctm  %util
-sda            0.00     0.00 22135.00 43044.00   345.86  1165.18    47.48   100.87    1.55    0.20    2.24   0.01  97.00
-</code></pre><p>由上可知：目前sda磁盘的压力比较大，每秒写入比每秒读差距较大，证明目前有大量的io写入</p><div class=gdoc-page__anchorwrap><h2 id=34-检查sda磁盘中哪个应用程序占用的io比较高>3.4 检查sda磁盘中哪个应用程序占用的io比较高
-<a data-clipboard-text=https://note.ljzsdut.com/Linux%E5%9F%BA%E7%A1%80/%E6%80%A7%E8%83%BD%E6%8E%92%E6%9F%A5%E5%B7%A5%E5%85%B7/%E5%88%86%E6%9E%90%E7%A3%81%E7%9B%98util%E7%89%B9%E5%88%AB%E9%AB%98/#34-检查sda磁盘中哪个应用程序占用的io比较高 class="gdoc-page__anchor clip flex align-center" title="Anchor to: 3.4 检查sda磁盘中哪个应用程序占用的io比较高" aria-label="Anchor to: 3.4 检查sda磁盘中哪个应用程序占用的io比较高" href=#34-%e6%a3%80%e6%9f%a5sda%e7%a3%81%e7%9b%98%e4%b8%ad%e5%93%aa%e4%b8%aa%e5%ba%94%e7%94%a8%e7%a8%8b%e5%ba%8f%e5%8d%a0%e7%94%a8%e7%9a%84io%e6%af%94%e8%be%83%e9%ab%98><svg class="gdoc-icon gdoc_link"><use xlink:href="#gdoc_link"/></svg></a></h2></div><pre tabindex=0><code>shell&gt; pidstat -d  1
-Linux 4.14.0-115.el7a.0.1.aarch64 (mysql-4)  01/08/2022  _aarch64_ (128 CPU)
-08:01:43 PM   UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s  Command
-08:01:44 PM  1000     73739  62018.35 171346.79      0.00  mysqld
-08:01:44 PM   UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s  Command
-08:01:45 PM  1000     73739 145328.00 435216.00      0.00  mysqld
-08:01:45 PM   UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s  Command
-08:01:46 PM  1000     73739 141488.00 433232.00      0.00  mysqld
-</code></pre><p>由上可知：占用io高的应用程序是mysql，且pid为73739</p><div class=gdoc-page__anchorwrap><h2 id=35-分析应用程序中哪一个线程占用的io比较高>3.5 分析应用程序中哪一个线程占用的io比较高
-<a data-clipboard-text=https://note.ljzsdut.com/Linux%E5%9F%BA%E7%A1%80/%E6%80%A7%E8%83%BD%E6%8E%92%E6%9F%A5%E5%B7%A5%E5%85%B7/%E5%88%86%E6%9E%90%E7%A3%81%E7%9B%98util%E7%89%B9%E5%88%AB%E9%AB%98/#35-分析应用程序中哪一个线程占用的io比较高 class="gdoc-page__anchor clip flex align-center" title="Anchor to: 3.5 分析应用程序中哪一个线程占用的io比较高" aria-label="Anchor to: 3.5 分析应用程序中哪一个线程占用的io比较高" href=#35-%e5%88%86%e6%9e%90%e5%ba%94%e7%94%a8%e7%a8%8b%e5%ba%8f%e4%b8%ad%e5%93%aa%e4%b8%80%e4%b8%aa%e7%ba%bf%e7%a8%8b%e5%8d%a0%e7%94%a8%e7%9a%84io%e6%af%94%e8%be%83%e9%ab%98><svg class="gdoc-icon gdoc_link"><use xlink:href="#gdoc_link"/></svg></a></h2></div><pre tabindex=0><code>shell&gt; pidstat -dt -p 73739 1  执行两三秒即可
-Average:     1000         -     73823      0.00 233133.98      0.00  |__mysqld
-Average:     1000         -     74674      0.00 174291.26      0.00  |__mysqld
-11:56:18 PM  1000         -     74770 124928.00  74688.00      0.00  |__mysqld
-11:56:17 PM  1000         -     74770 124603.77  73358.49      0.00  |__mysqld
-Average:     1000         -     74770 124761.17  74003.88      0.00  |__mysqld
-</code></pre><p>由上可知：74770这个线程占用的io比较高</p><div class=gdoc-page__anchorwrap><h2 id=36-分析这个线程在干什么>3.6 分析这个线程在干什么？
-<a data-clipboard-text=https://note.ljzsdut.com/Linux%E5%9F%BA%E7%A1%80/%E6%80%A7%E8%83%BD%E6%8E%92%E6%9F%A5%E5%B7%A5%E5%85%B7/%E5%88%86%E6%9E%90%E7%A3%81%E7%9B%98util%E7%89%B9%E5%88%AB%E9%AB%98/#36-分析这个线程在干什么 class="gdoc-page__anchor clip flex align-center" title="Anchor to: 3.6 分析这个线程在干什么？" aria-label="Anchor to: 3.6 分析这个线程在干什么？" href=#36-%e5%88%86%e6%9e%90%e8%bf%99%e4%b8%aa%e7%ba%bf%e7%a8%8b%e5%9c%a8%e5%b9%b2%e4%bb%80%e4%b9%88><svg class="gdoc-icon gdoc_link"><use xlink:href="#gdoc_link"/></svg></a></h2></div><pre tabindex=0><code>Shell&gt; perf trace -t 74770 -o /tmp/tmp_aa.pstrace
-Shell&gt; cat /tmp/tmp_aa.pstrace
-  2850.656 ( 1.915 ms): futex(uaddr: 0x653ae9c4, op: WAIT|PRIVATE_FLAG, val: 1)               = 0
-  2852.572 ( 0.001 ms): futex(uaddr: 0x653ae990, op: WAKE|PRIVATE_FLAG, val: 1)               = 0
-  2852.601 ( 0.001 ms): clock_gettime(which_clock: MONOTONIC, tp: 0xfff7bd470f68)             = 0
-  2852.690 ( 0.040 ms): write(fd: 159, buf: 0xd7a30020, count: 65536)                         = 65536
-  2852.796 ( 0.001 ms): clock_gettime(which_clock: MONOTONIC, tp: 0xfff7bd470f68)             = 0
-  2852.798 ( 0.001 ms): clock_gettime(which_clock: MONOTONIC, tp: 0xfff7bd470f58)             = 0
-  2852.939 ( 0.001 ms): clock_gettime(which_clock: MONOTONIC, tp: 0xfff7bd470f38)             = 0
-  2852.950 ( 0.001 ms): clock_gettime(which_clock: MONOTONIC, tp: 0xfff7bd470f68)             = 0
-  2852.977 ( 0.001 ms): clock_gettime(which_clock: MONOTONIC, tp: 0xfff7bd470f68)             = 0
-  2853.029 ( 0.035 ms): write(fd: 64, buf: 0xcd51e020, count: 65536)                          = 65536
-  2853.164 ( 0.001 ms): clock_gettime(which_clock: MONOTONIC, tp: 0xfff7bd470f68)             = 0
-  2853.167 ( 0.001 ms): clock_gettime(which_clock: MONOTONIC, tp: 0xfff7bd470f58)             = 0
-  2853.302 ( 0.001 ms): clock_gettime(which_clock: MONOTONIC, tp: 0xfff7bd470f38)             = 0
-</code></pre><p>由上可知：目前这个线程在写入多个文件，fd为文件句柄，文件句柄号有64、159</p><div class=gdoc-page__anchorwrap><h2 id=37-查看这个文件句柄是什么>3.7 查看这个文件句柄是什么
-<a data-clipboard-text=https://note.ljzsdut.com/Linux%E5%9F%BA%E7%A1%80/%E6%80%A7%E8%83%BD%E6%8E%92%E6%9F%A5%E5%B7%A5%E5%85%B7/%E5%88%86%E6%9E%90%E7%A3%81%E7%9B%98util%E7%89%B9%E5%88%AB%E9%AB%98/#37-查看这个文件句柄是什么 class="gdoc-page__anchor clip flex align-center" title="Anchor to: 3.7 查看这个文件句柄是什么" aria-label="Anchor to: 3.7 查看这个文件句柄是什么" href=#37-%e6%9f%a5%e7%9c%8b%e8%bf%99%e4%b8%aa%e6%96%87%e4%bb%b6%e5%8f%a5%e6%9f%84%e6%98%af%e4%bb%80%e4%b9%88><svg class="gdoc-icon gdoc_link"><use xlink:href="#gdoc_link"/></svg></a></h2></div><pre tabindex=0><code>shell&gt; lsof -p 73739|grep 159u
-mysqld 73739 mysql  159u   REG                8,0   212143246  7046482357 /mysql/mysqldata/16320fff-5fd5-4c47-889a-a9e1a8591d0d/tmp/#7046482357 (deleted)
-[root@mysql-4 ~]# lsof -p 73739|grep 64u
-mysqld 73739 mysql   64u   REG                8,0   211872724  6979323031 /mysql/mysqldata/16320fff-5fd5-4c47-889a-a9e1a8591d0d/tmp/#6979323031 (deleted)
-</code></pre><p>由上可知：这个线程在大量的写入临时文件</p><div class=gdoc-page__anchorwrap><h1 id=四分析mysql应用程序>四、分析MySQL应用程序
+<a data-clipboard-text=https://note.ljzsdut.com/Linux%E5%9F%BA%E7%A1%80/%E6%80%A7%E8%83%BD%E6%8E%92%E6%9F%A5%E5%B7%A5%E5%85%B7/%E5%88%86%E6%9E%90%E7%A3%81%E7%9B%98util%E7%89%B9%E5%88%AB%E9%AB%98/#三系统层面底层故障排查 class="gdoc-page__anchor clip flex align-center" title="Anchor to: 三、系统层面底层故障排查" aria-label="Anchor to: 三、系统层面底层故障排查" href=#%e4%b8%89%e7%b3%bb%e7%bb%9f%e5%b1%82%e9%9d%a2%e5%ba%95%e5%b1%82%e6%95%85%e9%9a%9c%e6%8e%92%e6%9f%a5><svg class="gdoc-icon gdoc_link"><use xlink:href="#gdoc_link"/></svg></a></h1></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>Shell&gt; sysbench --test<span class=o>=</span>/usr/local/share/sysbench/oltp_insert.lua --mysql-host<span class=o>=</span>XXX --mysql-port<span class=o>=</span><span class=m>3306</span> --mysql-user<span class=o>=</span>pcms --mysql-password<span class=o>=</span>abc123 --mysql-db<span class=o>=</span>sysbench --percentile<span class=o>=</span><span class=m>99</span> --table-size<span class=o>=</span><span class=m>2000000000</span> --tables<span class=o>=</span><span class=m>5</span> --threads<span class=o>=</span><span class=m>1000</span> prepare
+</span></span></code></pre></div><p>使用sysbench进行模拟高并发</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>shell&gt; sysbench --test<span class=o>=</span>/usr/local/share/sysbench/oltp_write_only.lua --mysql-host<span class=o>=</span>xxx --mysql-port<span class=o>=</span><span class=m>3306</span> --mysql-user<span class=o>=</span>pcms --mysql-password<span class=o>=</span>abc123 --mysql-db<span class=o>=</span>sysbench --percentile<span class=o>=</span><span class=m>99</span> --table-size<span class=o>=</span><span class=m>2000000000</span> --tables<span class=o>=</span><span class=m>5</span> --threads<span class=o>=</span><span class=m>1000</span> --max-time<span class=o>=</span><span class=m>60000</span> --report-interval<span class=o>=</span><span class=m>1</span> --threads<span class=o>=</span><span class=m>1000</span> --max-requests<span class=o>=</span><span class=m>0</span> --mysql-ignore-errors<span class=o>=</span>all run
+</span></span></code></pre></div><p>执行笛卡尔积sql语句</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>mysql&gt; <span class=k>select</span> SQL_NO_CACHE b.id,a.k from sbtest_a a left join sbtest_b b on a.id<span class=o>=</span>b.id  group by a.k order by b.c desc<span class=p>;</span>
+</span></span></code></pre></div><div class=gdoc-page__anchorwrap><h2 id=31-检查当前服务器状态>3.1 检查当前服务器状态
+<a data-clipboard-text=https://note.ljzsdut.com/Linux%E5%9F%BA%E7%A1%80/%E6%80%A7%E8%83%BD%E6%8E%92%E6%9F%A5%E5%B7%A5%E5%85%B7/%E5%88%86%E6%9E%90%E7%A3%81%E7%9B%98util%E7%89%B9%E5%88%AB%E9%AB%98/#31-检查当前服务器状态 class="gdoc-page__anchor clip flex align-center" title="Anchor to: 3.1 检查当前服务器状态" aria-label="Anchor to: 3.1 检查当前服务器状态" href=#31-%e6%a3%80%e6%9f%a5%e5%bd%93%e5%89%8d%e6%9c%8d%e5%8a%a1%e5%99%a8%e7%8a%b6%e6%80%81><svg class="gdoc-icon gdoc_link"><use xlink:href="#gdoc_link"/></svg></a></h2></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>shell&gt; top
+</span></span><span class=line><span class=cl>top - 19:49:05 up <span class=m>10</span> days,  8:16,  <span class=m>2</span> users,  load average: 72.56, 40.21, 17.08
+</span></span><span class=line><span class=cl>Tasks: <span class=m>1288</span> total,   <span class=m>1</span> running, <span class=m>586</span> sleeping,   <span class=m>0</span> stopped,   <span class=m>0</span> zombie
+</span></span><span class=line><span class=cl>%Cpu<span class=o>(</span>s<span class=o>)</span>: 19.7 us,  4.2 sy,  0.0 ni, 75.9 id,  1.0 wa,  0.0 hi,  0.2 si,  0.0 st
+</span></span><span class=line><span class=cl>KiB Mem : 53542118+total, 23667507+free, 22735366+used, <span class=m>71392448</span> buff/cache
+</span></span><span class=line><span class=cl>KiB Swap:        <span class=m>0</span> total,        <span class=m>0</span> free,        <span class=m>0</span> used. 23128006+avail Mem 
+</span></span></code></pre></div><p>由上可知：目前一分钟负载为72.56，且呈上升趋势，并且存在io压力</p><div class=gdoc-page__anchorwrap><h2 id=32查看当前各个磁盘设备的io情况>3.2查看当前各个磁盘设备的io情况
+<a data-clipboard-text=https://note.ljzsdut.com/Linux%E5%9F%BA%E7%A1%80/%E6%80%A7%E8%83%BD%E6%8E%92%E6%9F%A5%E5%B7%A5%E5%85%B7/%E5%88%86%E6%9E%90%E7%A3%81%E7%9B%98util%E7%89%B9%E5%88%AB%E9%AB%98/#32查看当前各个磁盘设备的io情况 class="gdoc-page__anchor clip flex align-center" title="Anchor to: 3.2查看当前各个磁盘设备的io情况" aria-label="Anchor to: 3.2查看当前各个磁盘设备的io情况" href=#32%e6%9f%a5%e7%9c%8b%e5%bd%93%e5%89%8d%e5%90%84%e4%b8%aa%e7%a3%81%e7%9b%98%e8%ae%be%e5%a4%87%e7%9a%84io%e6%83%85%e5%86%b5><svg class="gdoc-icon gdoc_link"><use xlink:href="#gdoc_link"/></svg></a></h2></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>shell&gt; iostat -m -x <span class=m>1</span>
+</span></span><span class=line><span class=cl>Linux 4.14.0-115.el7a.0.1.aarch64 <span class=o>(</span>mysql-4<span class=o>)</span>  01/08/2022  _aarch64_ <span class=o>(</span><span class=m>128</span> CPU<span class=o>)</span>
+</span></span><span class=line><span class=cl>Device:         rrqm/s   wrqm/s     r/s     w/s    rMB/s    wMB/s avgrq-sz avgqu-sz   await r_await w_await  svctm  %util
+</span></span><span class=line><span class=cl>sda               0.00     0.00 14213.00 27430.00   222.08   465.15    33.80     5.39    0.13    0.14    0.12   0.02  86.00
+</span></span><span class=line><span class=cl>sdb               0.00     0.00    0.00    0.00     0.00     0.00     0.00     0.00    0.00    0.00    0.00   0.00   0.00
+</span></span><span class=line><span class=cl>dm-0              0.00     0.00    0.00    0.00     0.00     0.00     0.00     0.00    0.00    0.00    0.00   0.00   0.00
+</span></span><span class=line><span class=cl>dm-1              0.00     0.00    0.00    0.00     0.00     0.00     0.00     0.00    0.00    0.00    0.00   0.00   0.00
+</span></span><span class=line><span class=cl>dm-2              0.00     0.00    0.00    0.00     0.00     0.00     0.00     0.00    0.00    0.00    0.00   0.00   0.00
+</span></span></code></pre></div><p>由上可知：目前有多块物理磁盘，sda磁盘的io压力较大</p><div class=gdoc-page__anchorwrap><h2 id=33-检查sda磁盘当前的io读写情况>3.3 检查sda磁盘当前的io读写情况
+<a data-clipboard-text=https://note.ljzsdut.com/Linux%E5%9F%BA%E7%A1%80/%E6%80%A7%E8%83%BD%E6%8E%92%E6%9F%A5%E5%B7%A5%E5%85%B7/%E5%88%86%E6%9E%90%E7%A3%81%E7%9B%98util%E7%89%B9%E5%88%AB%E9%AB%98/#33-检查sda磁盘当前的io读写情况 class="gdoc-page__anchor clip flex align-center" title="Anchor to: 3.3 检查sda磁盘当前的io读写情况" aria-label="Anchor to: 3.3 检查sda磁盘当前的io读写情况" href=#33-%e6%a3%80%e6%9f%a5sda%e7%a3%81%e7%9b%98%e5%bd%93%e5%89%8d%e7%9a%84io%e8%af%bb%e5%86%99%e6%83%85%e5%86%b5><svg class="gdoc-icon gdoc_link"><use xlink:href="#gdoc_link"/></svg></a></h2></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>shell&gt; iostat -d /dev/sda -m -x <span class=m>1</span>
+</span></span><span class=line><span class=cl>Linux 4.14.0-115.el7a.0.1.aarch64 <span class=o>(</span>mysql-4<span class=o>)</span>  01/08/2022  _aarch64_ <span class=o>(</span><span class=m>128</span> CPU<span class=o>)</span>
+</span></span><span class=line><span class=cl>Device:         rrqm/s   wrqm/s     r/s     w/s    rMB/s    wMB/s avgrq-sz avgqu-sz   await r_await w_await  svctm  %util
+</span></span><span class=line><span class=cl>sda            0.00     0.17    7.86   81.23     0.29     3.96    97.88     0.23    2.53    0.22    2.76   0.04   0.33
+</span></span><span class=line><span class=cl>Device:         rrqm/s   wrqm/s     r/s     w/s    rMB/s    wMB/s avgrq-sz avgqu-sz   await r_await w_await  svctm  %util
+</span></span><span class=line><span class=cl>sda            0.00     0.00 21109.00 42839.00   329.81   710.90    33.33    19.47    0.30    0.16    0.37   0.02  96.00
+</span></span><span class=line><span class=cl>Device:         rrqm/s   wrqm/s     r/s     w/s    rMB/s    wMB/s avgrq-sz avgqu-sz   await r_await w_await  svctm  %util
+</span></span><span class=line><span class=cl>sda            0.00     0.00 19287.00 41404.00   301.36   692.29    33.53    15.73    0.26    0.18    0.30   0.02  93.00
+</span></span><span class=line><span class=cl>Device:         rrqm/s   wrqm/s     r/s     w/s    rMB/s    wMB/s avgrq-sz avgqu-sz   await r_await w_await  svctm  %util
+</span></span><span class=line><span class=cl>sda            0.00     0.00 22135.00 43044.00   345.86  1165.18    47.48   100.87    1.55    0.20    2.24   0.01  97.00
+</span></span></code></pre></div><p>由上可知：目前sda磁盘的压力比较大，每秒写入比每秒读差距较大，证明目前有大量的io写入</p><div class=gdoc-page__anchorwrap><h2 id=34-检查sda磁盘中哪个应用程序占用的io比较高>3.4 检查sda磁盘中哪个应用程序占用的io比较高
+<a data-clipboard-text=https://note.ljzsdut.com/Linux%E5%9F%BA%E7%A1%80/%E6%80%A7%E8%83%BD%E6%8E%92%E6%9F%A5%E5%B7%A5%E5%85%B7/%E5%88%86%E6%9E%90%E7%A3%81%E7%9B%98util%E7%89%B9%E5%88%AB%E9%AB%98/#34-检查sda磁盘中哪个应用程序占用的io比较高 class="gdoc-page__anchor clip flex align-center" title="Anchor to: 3.4 检查sda磁盘中哪个应用程序占用的io比较高" aria-label="Anchor to: 3.4 检查sda磁盘中哪个应用程序占用的io比较高" href=#34-%e6%a3%80%e6%9f%a5sda%e7%a3%81%e7%9b%98%e4%b8%ad%e5%93%aa%e4%b8%aa%e5%ba%94%e7%94%a8%e7%a8%8b%e5%ba%8f%e5%8d%a0%e7%94%a8%e7%9a%84io%e6%af%94%e8%be%83%e9%ab%98><svg class="gdoc-icon gdoc_link"><use xlink:href="#gdoc_link"/></svg></a></h2></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>shell&gt; pidstat -d  <span class=m>1</span>
+</span></span><span class=line><span class=cl>Linux 4.14.0-115.el7a.0.1.aarch64 <span class=o>(</span>mysql-4<span class=o>)</span>  01/08/2022  _aarch64_ <span class=o>(</span><span class=m>128</span> CPU<span class=o>)</span>
+</span></span><span class=line><span class=cl>08:01:43 PM   UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s  Command
+</span></span><span class=line><span class=cl>08:01:44 PM  <span class=m>1000</span>     <span class=m>73739</span>  62018.35 171346.79      0.00  mysqld
+</span></span><span class=line><span class=cl>08:01:44 PM   UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s  Command
+</span></span><span class=line><span class=cl>08:01:45 PM  <span class=m>1000</span>     <span class=m>73739</span> 145328.00 435216.00      0.00  mysqld
+</span></span><span class=line><span class=cl>08:01:45 PM   UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s  Command
+</span></span><span class=line><span class=cl>08:01:46 PM  <span class=m>1000</span>     <span class=m>73739</span> 141488.00 433232.00      0.00  mysqld
+</span></span></code></pre></div><p>由上可知：占用io高的应用程序是mysql，且pid为73739</p><div class=gdoc-page__anchorwrap><h2 id=35-分析应用程序中哪一个线程占用的io比较高>3.5 分析应用程序中哪一个线程占用的io比较高
+<a data-clipboard-text=https://note.ljzsdut.com/Linux%E5%9F%BA%E7%A1%80/%E6%80%A7%E8%83%BD%E6%8E%92%E6%9F%A5%E5%B7%A5%E5%85%B7/%E5%88%86%E6%9E%90%E7%A3%81%E7%9B%98util%E7%89%B9%E5%88%AB%E9%AB%98/#35-分析应用程序中哪一个线程占用的io比较高 class="gdoc-page__anchor clip flex align-center" title="Anchor to: 3.5 分析应用程序中哪一个线程占用的io比较高" aria-label="Anchor to: 3.5 分析应用程序中哪一个线程占用的io比较高" href=#35-%e5%88%86%e6%9e%90%e5%ba%94%e7%94%a8%e7%a8%8b%e5%ba%8f%e4%b8%ad%e5%93%aa%e4%b8%80%e4%b8%aa%e7%ba%bf%e7%a8%8b%e5%8d%a0%e7%94%a8%e7%9a%84io%e6%af%94%e8%be%83%e9%ab%98><svg class="gdoc-icon gdoc_link"><use xlink:href="#gdoc_link"/></svg></a></h2></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>shell&gt; pidstat -dt -p <span class=m>73739</span> <span class=m>1</span>  执行两三秒即可
+</span></span><span class=line><span class=cl>Average:     <span class=m>1000</span>         -     <span class=m>73823</span>      0.00 233133.98      0.00  <span class=p>|</span>__mysqld
+</span></span><span class=line><span class=cl>Average:     <span class=m>1000</span>         -     <span class=m>74674</span>      0.00 174291.26      0.00  <span class=p>|</span>__mysqld
+</span></span><span class=line><span class=cl>11:56:18 PM  <span class=m>1000</span>         -     <span class=m>74770</span> 124928.00  74688.00      0.00  <span class=p>|</span>__mysqld
+</span></span><span class=line><span class=cl>11:56:17 PM  <span class=m>1000</span>         -     <span class=m>74770</span> 124603.77  73358.49      0.00  <span class=p>|</span>__mysqld
+</span></span><span class=line><span class=cl>Average:     <span class=m>1000</span>         -     <span class=m>74770</span> 124761.17  74003.88      0.00  <span class=p>|</span>__mysqld
+</span></span></code></pre></div><p>由上可知：74770这个线程占用的io比较高</p><div class=gdoc-page__anchorwrap><h2 id=36-分析这个线程在干什么>3.6 分析这个线程在干什么？
+<a data-clipboard-text=https://note.ljzsdut.com/Linux%E5%9F%BA%E7%A1%80/%E6%80%A7%E8%83%BD%E6%8E%92%E6%9F%A5%E5%B7%A5%E5%85%B7/%E5%88%86%E6%9E%90%E7%A3%81%E7%9B%98util%E7%89%B9%E5%88%AB%E9%AB%98/#36-分析这个线程在干什么 class="gdoc-page__anchor clip flex align-center" title="Anchor to: 3.6 分析这个线程在干什么？" aria-label="Anchor to: 3.6 分析这个线程在干什么？" href=#36-%e5%88%86%e6%9e%90%e8%bf%99%e4%b8%aa%e7%ba%bf%e7%a8%8b%e5%9c%a8%e5%b9%b2%e4%bb%80%e4%b9%88><svg class="gdoc-icon gdoc_link"><use xlink:href="#gdoc_link"/></svg></a></h2></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>Shell&gt; perf trace -t <span class=m>74770</span> -o /tmp/tmp_aa.pstrace
+</span></span><span class=line><span class=cl>Shell&gt; cat /tmp/tmp_aa.pstrace
+</span></span><span class=line><span class=cl>  2850.656 <span class=o>(</span> 1.915 ms<span class=o>)</span>: futex<span class=o>(</span>uaddr: 0x653ae9c4, op: WAIT<span class=p>|</span>PRIVATE_FLAG, val: 1<span class=o>)</span>               <span class=o>=</span> <span class=m>0</span>
+</span></span><span class=line><span class=cl>  2852.572 <span class=o>(</span> 0.001 ms<span class=o>)</span>: futex<span class=o>(</span>uaddr: 0x653ae990, op: WAKE<span class=p>|</span>PRIVATE_FLAG, val: 1<span class=o>)</span>               <span class=o>=</span> <span class=m>0</span>
+</span></span><span class=line><span class=cl>  2852.601 <span class=o>(</span> 0.001 ms<span class=o>)</span>: clock_gettime<span class=o>(</span>which_clock: MONOTONIC, tp: 0xfff7bd470f68<span class=o>)</span>             <span class=o>=</span> <span class=m>0</span>
+</span></span><span class=line><span class=cl>  2852.690 <span class=o>(</span> 0.040 ms<span class=o>)</span>: write<span class=o>(</span>fd: 159, buf: 0xd7a30020, count: 65536<span class=o>)</span>                         <span class=o>=</span> <span class=m>65536</span>
+</span></span><span class=line><span class=cl>  2852.796 <span class=o>(</span> 0.001 ms<span class=o>)</span>: clock_gettime<span class=o>(</span>which_clock: MONOTONIC, tp: 0xfff7bd470f68<span class=o>)</span>             <span class=o>=</span> <span class=m>0</span>
+</span></span><span class=line><span class=cl>  2852.798 <span class=o>(</span> 0.001 ms<span class=o>)</span>: clock_gettime<span class=o>(</span>which_clock: MONOTONIC, tp: 0xfff7bd470f58<span class=o>)</span>             <span class=o>=</span> <span class=m>0</span>
+</span></span><span class=line><span class=cl>  2852.939 <span class=o>(</span> 0.001 ms<span class=o>)</span>: clock_gettime<span class=o>(</span>which_clock: MONOTONIC, tp: 0xfff7bd470f38<span class=o>)</span>             <span class=o>=</span> <span class=m>0</span>
+</span></span><span class=line><span class=cl>  2852.950 <span class=o>(</span> 0.001 ms<span class=o>)</span>: clock_gettime<span class=o>(</span>which_clock: MONOTONIC, tp: 0xfff7bd470f68<span class=o>)</span>             <span class=o>=</span> <span class=m>0</span>
+</span></span><span class=line><span class=cl>  2852.977 <span class=o>(</span> 0.001 ms<span class=o>)</span>: clock_gettime<span class=o>(</span>which_clock: MONOTONIC, tp: 0xfff7bd470f68<span class=o>)</span>             <span class=o>=</span> <span class=m>0</span>
+</span></span><span class=line><span class=cl>  2853.029 <span class=o>(</span> 0.035 ms<span class=o>)</span>: write<span class=o>(</span>fd: 64, buf: 0xcd51e020, count: 65536<span class=o>)</span>                          <span class=o>=</span> <span class=m>65536</span>
+</span></span><span class=line><span class=cl>  2853.164 <span class=o>(</span> 0.001 ms<span class=o>)</span>: clock_gettime<span class=o>(</span>which_clock: MONOTONIC, tp: 0xfff7bd470f68<span class=o>)</span>             <span class=o>=</span> <span class=m>0</span>
+</span></span><span class=line><span class=cl>  2853.167 <span class=o>(</span> 0.001 ms<span class=o>)</span>: clock_gettime<span class=o>(</span>which_clock: MONOTONIC, tp: 0xfff7bd470f58<span class=o>)</span>             <span class=o>=</span> <span class=m>0</span>
+</span></span><span class=line><span class=cl>  2853.302 <span class=o>(</span> 0.001 ms<span class=o>)</span>: clock_gettime<span class=o>(</span>which_clock: MONOTONIC, tp: 0xfff7bd470f38<span class=o>)</span>             <span class=o>=</span> <span class=m>0</span>
+</span></span></code></pre></div><p>由上可知：目前这个线程在写入多个文件，fd为文件句柄，文件句柄号有64、159</p><div class=gdoc-page__anchorwrap><h2 id=37-查看这个文件句柄是什么>3.7 查看这个文件句柄是什么
+<a data-clipboard-text=https://note.ljzsdut.com/Linux%E5%9F%BA%E7%A1%80/%E6%80%A7%E8%83%BD%E6%8E%92%E6%9F%A5%E5%B7%A5%E5%85%B7/%E5%88%86%E6%9E%90%E7%A3%81%E7%9B%98util%E7%89%B9%E5%88%AB%E9%AB%98/#37-查看这个文件句柄是什么 class="gdoc-page__anchor clip flex align-center" title="Anchor to: 3.7 查看这个文件句柄是什么" aria-label="Anchor to: 3.7 查看这个文件句柄是什么" href=#37-%e6%9f%a5%e7%9c%8b%e8%bf%99%e4%b8%aa%e6%96%87%e4%bb%b6%e5%8f%a5%e6%9f%84%e6%98%af%e4%bb%80%e4%b9%88><svg class="gdoc-icon gdoc_link"><use xlink:href="#gdoc_link"/></svg></a></h2></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>shell&gt; lsof -p 73739<span class=p>|</span>grep 159u
+</span></span><span class=line><span class=cl>mysqld <span class=m>73739</span> mysql  159u   REG                8,0   <span class=m>212143246</span>  <span class=m>7046482357</span> /mysql/mysqldata/16320fff-5fd5-4c47-889a-a9e1a8591d0d/tmp/#7046482357 <span class=o>(</span>deleted<span class=o>)</span>
+</span></span><span class=line><span class=cl><span class=o>[</span>root@mysql-4 ~<span class=o>]</span><span class=c1># lsof -p 73739|grep 64u</span>
+</span></span><span class=line><span class=cl>mysqld <span class=m>73739</span> mysql   64u   REG                8,0   <span class=m>211872724</span>  <span class=m>6979323031</span> /mysql/mysqldata/16320fff-5fd5-4c47-889a-a9e1a8591d0d/tmp/#6979323031 <span class=o>(</span>deleted<span class=o>)</span>
+</span></span></code></pre></div><p>由上可知：这个线程在大量的写入临时文件</p><div class=gdoc-page__anchorwrap><h1 id=四分析mysql应用程序>四、分析MySQL应用程序
 <a data-clipboard-text=https://note.ljzsdut.com/Linux%E5%9F%BA%E7%A1%80/%E6%80%A7%E8%83%BD%E6%8E%92%E6%9F%A5%E5%B7%A5%E5%85%B7/%E5%88%86%E6%9E%90%E7%A3%81%E7%9B%98util%E7%89%B9%E5%88%AB%E9%AB%98/#四分析mysql应用程序 class="gdoc-page__anchor clip flex align-center" title="Anchor to: 四、分析MySQL应用程序" aria-label="Anchor to: 四、分析MySQL应用程序" href=#%e5%9b%9b%e5%88%86%e6%9e%90mysql%e5%ba%94%e7%94%a8%e7%a8%8b%e5%ba%8f><svg class="gdoc-icon gdoc_link"><use xlink:href="#gdoc_link"/></svg></a></h1></div><div class=gdoc-page__anchorwrap><h2 id=41-查看当前的会话列表>4.1 查看当前的会话列表
-<a data-clipboard-text=https://note.ljzsdut.com/Linux%E5%9F%BA%E7%A1%80/%E6%80%A7%E8%83%BD%E6%8E%92%E6%9F%A5%E5%B7%A5%E5%85%B7/%E5%88%86%E6%9E%90%E7%A3%81%E7%9B%98util%E7%89%B9%E5%88%AB%E9%AB%98/#41-查看当前的会话列表 class="gdoc-page__anchor clip flex align-center" title="Anchor to: 4.1 查看当前的会话列表" aria-label="Anchor to: 4.1 查看当前的会话列表" href=#41-%e6%9f%a5%e7%9c%8b%e5%bd%93%e5%89%8d%e7%9a%84%e4%bc%9a%e8%af%9d%e5%88%97%e8%a1%a8><svg class="gdoc-icon gdoc_link"><use xlink:href="#gdoc_link"/></svg></a></h2></div><pre tabindex=0><code>mysql&gt; select * from information_schema.processlist where command !=&#39;sleep&#39;;
-|  9 | pcms             | 172.16.76.12:57596 | sysbench | Query            |   67 | executing                                                     | select SQL_NO_CACHE b.id,a.k from sbtest_a a left join sbtest_b b on a.id=b.id  group by a.k order by b.c desc |   66477 |         0 |             0 |
-</code></pre><p>由上可知：目前这个sql已经执行了67s，且此sql使用了group by和order by，必然会产生io</p><div class=gdoc-page__anchorwrap><h2 id=42-通过线程号查询会话>4.2 通过线程号查询会话
-<a data-clipboard-text=https://note.ljzsdut.com/Linux%E5%9F%BA%E7%A1%80/%E6%80%A7%E8%83%BD%E6%8E%92%E6%9F%A5%E5%B7%A5%E5%85%B7/%E5%88%86%E6%9E%90%E7%A3%81%E7%9B%98util%E7%89%B9%E5%88%AB%E9%AB%98/#42-通过线程号查询会话 class="gdoc-page__anchor clip flex align-center" title="Anchor to: 4.2 通过线程号查询会话" aria-label="Anchor to: 4.2 通过线程号查询会话" href=#42-%e9%80%9a%e8%bf%87%e7%ba%bf%e7%a8%8b%e5%8f%b7%e6%9f%a5%e8%af%a2%e4%bc%9a%e8%af%9d><svg class="gdoc-icon gdoc_link"><use xlink:href="#gdoc_link"/></svg></a></h2></div><pre tabindex=0><code>mysql&gt; select * from threads where thread_os_id=74770\G;
-*************************** 1. row ***************************
-          THREAD_ID: 95
-               NAME: thread/sql/one_connection
-               TYPE: FOREGROUND
-     PROCESSLIST_ID: 9
-   PROCESSLIST_USER: pcms
-   PROCESSLIST_HOST: 172.16.76.12
-     PROCESSLIST_DB: sysbench
-PROCESSLIST_COMMAND: Query
-   PROCESSLIST_TIME: 91
-  PROCESSLIST_STATE: NULL
-   PROCESSLIST_INFO: select SQL_NO_CACHE b.id,a.k from sbtest_a a left join sbtest_b b on a.id=b.id  group by a.k order by b.c desc
-   PARENT_THREAD_ID: 1
-               ROLE: NULL
-       INSTRUMENTED: YES
-            HISTORY: YES
-    CONNECTION_TYPE: TCP/IP
-       THREAD_OS_ID: 74770
-     RESOURCE_GROUP: USR_default
-1 row in set (0.00 sec)
-</code></pre><p>由上可知：通过查询threads表可以进行验证，该线程在频繁创建临时表的原因就来源于此sql</p><div class=gdoc-page__anchorwrap><h2 id=43-查看该sql语句的执行计划进行进一步认证>4.3 查看该sql语句的执行计划，进行进一步认证
-<a data-clipboard-text=https://note.ljzsdut.com/Linux%E5%9F%BA%E7%A1%80/%E6%80%A7%E8%83%BD%E6%8E%92%E6%9F%A5%E5%B7%A5%E5%85%B7/%E5%88%86%E6%9E%90%E7%A3%81%E7%9B%98util%E7%89%B9%E5%88%AB%E9%AB%98/#43-查看该sql语句的执行计划进行进一步认证 class="gdoc-page__anchor clip flex align-center" title="Anchor to: 4.3 查看该sql语句的执行计划，进行进一步认证" aria-label="Anchor to: 4.3 查看该sql语句的执行计划，进行进一步认证" href=#43-%e6%9f%a5%e7%9c%8b%e8%af%a5sql%e8%af%ad%e5%8f%a5%e7%9a%84%e6%89%a7%e8%a1%8c%e8%ae%a1%e5%88%92%e8%bf%9b%e8%a1%8c%e8%bf%9b%e4%b8%80%e6%ad%a5%e8%ae%a4%e8%af%81><svg class="gdoc-icon gdoc_link"><use xlink:href="#gdoc_link"/></svg></a></h2></div><pre tabindex=0><code>mysql&gt; explain select SQL_NO_CACHE b.id,a.k from sbtest_a a left join sbtest_b b on a.id=b.id  group by a.k order by b.c desc\G;
-*************************** 1. row ***************************
-           id: 1
-  select_type: SIMPLE
-        table: a
-   partitions: NULL
-         type: ALL
-possible_keys: NULL
-          key: NULL
-      key_len: NULL
-          ref: NULL
-         rows: 1
-     filtered: 100.00
-        Extra: Using temporary; Using filesort
-*************************** 2. row ***************************
-           id: 1
-  select_type: SIMPLE
-        table: b
-   partitions: NULL
-         type: eq_ref
-possible_keys: PRIMARY
-          key: PRIMARY
-      key_len: 4
-          ref: sysbench.a.id
-         rows: 1
-     filtered: 100.00
-        Extra: NULL
-2 rows in set, 2 warnings (0.00 sec)
-</code></pre><p>由上可知：该sql的执行计划用到了临时表及临时文件，符合</p><div class=gdoc-page__anchorwrap><h2 id=44-查看全局状态进一步进行确认>4.4 查看全局状态进一步进行确认
-<a data-clipboard-text=https://note.ljzsdut.com/Linux%E5%9F%BA%E7%A1%80/%E6%80%A7%E8%83%BD%E6%8E%92%E6%9F%A5%E5%B7%A5%E5%85%B7/%E5%88%86%E6%9E%90%E7%A3%81%E7%9B%98util%E7%89%B9%E5%88%AB%E9%AB%98/#44-查看全局状态进一步进行确认 class="gdoc-page__anchor clip flex align-center" title="Anchor to: 4.4 查看全局状态进一步进行确认" aria-label="Anchor to: 4.4 查看全局状态进一步进行确认" href=#44-%e6%9f%a5%e7%9c%8b%e5%85%a8%e5%b1%80%e7%8a%b6%e6%80%81%e8%bf%9b%e4%b8%80%e6%ad%a5%e8%bf%9b%e8%a1%8c%e7%a1%ae%e8%ae%a4><svg class="gdoc-icon gdoc_link"><use xlink:href="#gdoc_link"/></svg></a></h2></div><pre tabindex=0><code>mysql&gt; show global status like &#39;%tmp%&#39;;
-+-------------------------+-------+
-| Variable_name           | Value |
-+-------------------------+-------+
-| Created_tmp_disk_tables | 3     |
-| Created_tmp_files       | 22    |
-| Created_tmp_tables      | 8     |
-+-------------------------+-------+
-</code></pre><p>多执行几次，可以看出tmp_files和tmp_disk_tables的值在增长，证明在大量的创建临时文件及磁盘临时表，符合该线程的行为</p><div class=gdoc-page__anchorwrap><h1 id=五故障处理>五、故障处理
+<a data-clipboard-text=https://note.ljzsdut.com/Linux%E5%9F%BA%E7%A1%80/%E6%80%A7%E8%83%BD%E6%8E%92%E6%9F%A5%E5%B7%A5%E5%85%B7/%E5%88%86%E6%9E%90%E7%A3%81%E7%9B%98util%E7%89%B9%E5%88%AB%E9%AB%98/#41-查看当前的会话列表 class="gdoc-page__anchor clip flex align-center" title="Anchor to: 4.1 查看当前的会话列表" aria-label="Anchor to: 4.1 查看当前的会话列表" href=#41-%e6%9f%a5%e7%9c%8b%e5%bd%93%e5%89%8d%e7%9a%84%e4%bc%9a%e8%af%9d%e5%88%97%e8%a1%a8><svg class="gdoc-icon gdoc_link"><use xlink:href="#gdoc_link"/></svg></a></h2></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>mysql&gt; <span class=k>select</span> * from information_schema.processlist where <span class=nb>command</span> !<span class=o>=</span><span class=s1>&#39;sleep&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>|</span>  <span class=m>9</span> <span class=p>|</span> pcms             <span class=p>|</span> 172.16.76.12:57596 <span class=p>|</span> sysbench <span class=p>|</span> Query            <span class=p>|</span>   <span class=m>67</span> <span class=p>|</span> executing                                                     <span class=p>|</span> <span class=k>select</span> SQL_NO_CACHE b.id,a.k from sbtest_a a left join sbtest_b b on a.id<span class=o>=</span>b.id  group by a.k order by b.c desc <span class=p>|</span>   <span class=m>66477</span> <span class=p>|</span>         <span class=m>0</span> <span class=p>|</span>             <span class=m>0</span> <span class=p>|</span>
+</span></span></code></pre></div><p>由上可知：目前这个sql已经执行了67s，且此sql使用了group by和order by，必然会产生io</p><div class=gdoc-page__anchorwrap><h2 id=42-通过线程号查询会话>4.2 通过线程号查询会话
+<a data-clipboard-text=https://note.ljzsdut.com/Linux%E5%9F%BA%E7%A1%80/%E6%80%A7%E8%83%BD%E6%8E%92%E6%9F%A5%E5%B7%A5%E5%85%B7/%E5%88%86%E6%9E%90%E7%A3%81%E7%9B%98util%E7%89%B9%E5%88%AB%E9%AB%98/#42-通过线程号查询会话 class="gdoc-page__anchor clip flex align-center" title="Anchor to: 4.2 通过线程号查询会话" aria-label="Anchor to: 4.2 通过线程号查询会话" href=#42-%e9%80%9a%e8%bf%87%e7%ba%bf%e7%a8%8b%e5%8f%b7%e6%9f%a5%e8%af%a2%e4%bc%9a%e8%af%9d><svg class="gdoc-icon gdoc_link"><use xlink:href="#gdoc_link"/></svg></a></h2></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>mysql&gt; <span class=k>select</span> * from threads where <span class=nv>thread_os_id</span><span class=o>=</span>74770<span class=se>\G</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>*************************** 1. row ***************************
+</span></span><span class=line><span class=cl>          THREAD_ID: <span class=m>95</span>
+</span></span><span class=line><span class=cl>               NAME: thread/sql/one_connection
+</span></span><span class=line><span class=cl>               TYPE: FOREGROUND
+</span></span><span class=line><span class=cl>     PROCESSLIST_ID: <span class=m>9</span>
+</span></span><span class=line><span class=cl>   PROCESSLIST_USER: pcms
+</span></span><span class=line><span class=cl>   PROCESSLIST_HOST: 172.16.76.12
+</span></span><span class=line><span class=cl>     PROCESSLIST_DB: sysbench
+</span></span><span class=line><span class=cl>PROCESSLIST_COMMAND: Query
+</span></span><span class=line><span class=cl>   PROCESSLIST_TIME: <span class=m>91</span>
+</span></span><span class=line><span class=cl>  PROCESSLIST_STATE: NULL
+</span></span><span class=line><span class=cl>   PROCESSLIST_INFO: <span class=k>select</span> SQL_NO_CACHE b.id,a.k from sbtest_a a left join sbtest_b b on a.id<span class=o>=</span>b.id  group by a.k order by b.c desc
+</span></span><span class=line><span class=cl>   PARENT_THREAD_ID: <span class=m>1</span>
+</span></span><span class=line><span class=cl>               ROLE: NULL
+</span></span><span class=line><span class=cl>       INSTRUMENTED: YES
+</span></span><span class=line><span class=cl>            HISTORY: YES
+</span></span><span class=line><span class=cl>    CONNECTION_TYPE: TCP/IP
+</span></span><span class=line><span class=cl>       THREAD_OS_ID: <span class=m>74770</span>
+</span></span><span class=line><span class=cl>     RESOURCE_GROUP: USR_default
+</span></span><span class=line><span class=cl><span class=m>1</span> row in <span class=nb>set</span> <span class=o>(</span>0.00 sec<span class=o>)</span>
+</span></span></code></pre></div><p>由上可知：通过查询threads表可以进行验证，该线程在频繁创建临时表的原因就来源于此sql</p><div class=gdoc-page__anchorwrap><h2 id=43-查看该sql语句的执行计划进行进一步认证>4.3 查看该sql语句的执行计划，进行进一步认证
+<a data-clipboard-text=https://note.ljzsdut.com/Linux%E5%9F%BA%E7%A1%80/%E6%80%A7%E8%83%BD%E6%8E%92%E6%9F%A5%E5%B7%A5%E5%85%B7/%E5%88%86%E6%9E%90%E7%A3%81%E7%9B%98util%E7%89%B9%E5%88%AB%E9%AB%98/#43-查看该sql语句的执行计划进行进一步认证 class="gdoc-page__anchor clip flex align-center" title="Anchor to: 4.3 查看该sql语句的执行计划，进行进一步认证" aria-label="Anchor to: 4.3 查看该sql语句的执行计划，进行进一步认证" href=#43-%e6%9f%a5%e7%9c%8b%e8%af%a5sql%e8%af%ad%e5%8f%a5%e7%9a%84%e6%89%a7%e8%a1%8c%e8%ae%a1%e5%88%92%e8%bf%9b%e8%a1%8c%e8%bf%9b%e4%b8%80%e6%ad%a5%e8%ae%a4%e8%af%81><svg class="gdoc-icon gdoc_link"><use xlink:href="#gdoc_link"/></svg></a></h2></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>mysql&gt; explain <span class=k>select</span> SQL_NO_CACHE b.id,a.k from sbtest_a a left join sbtest_b b on a.id<span class=o>=</span>b.id  group by a.k order by b.c desc<span class=se>\G</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>*************************** 1. row ***************************
+</span></span><span class=line><span class=cl>           id: <span class=m>1</span>
+</span></span><span class=line><span class=cl>  select_type: SIMPLE
+</span></span><span class=line><span class=cl>        table: a
+</span></span><span class=line><span class=cl>   partitions: NULL
+</span></span><span class=line><span class=cl>         type: ALL
+</span></span><span class=line><span class=cl>possible_keys: NULL
+</span></span><span class=line><span class=cl>          key: NULL
+</span></span><span class=line><span class=cl>      key_len: NULL
+</span></span><span class=line><span class=cl>          ref: NULL
+</span></span><span class=line><span class=cl>         rows: <span class=m>1</span>
+</span></span><span class=line><span class=cl>     filtered: 100.00
+</span></span><span class=line><span class=cl>        Extra: Using temporary<span class=p>;</span> Using filesort
+</span></span><span class=line><span class=cl>*************************** 2. row ***************************
+</span></span><span class=line><span class=cl>           id: <span class=m>1</span>
+</span></span><span class=line><span class=cl>  select_type: SIMPLE
+</span></span><span class=line><span class=cl>        table: b
+</span></span><span class=line><span class=cl>   partitions: NULL
+</span></span><span class=line><span class=cl>         type: eq_ref
+</span></span><span class=line><span class=cl>possible_keys: PRIMARY
+</span></span><span class=line><span class=cl>          key: PRIMARY
+</span></span><span class=line><span class=cl>      key_len: <span class=m>4</span>
+</span></span><span class=line><span class=cl>          ref: sysbench.a.id
+</span></span><span class=line><span class=cl>         rows: <span class=m>1</span>
+</span></span><span class=line><span class=cl>     filtered: 100.00
+</span></span><span class=line><span class=cl>        Extra: NULL
+</span></span><span class=line><span class=cl><span class=m>2</span> rows in set, <span class=m>2</span> warnings <span class=o>(</span>0.00 sec<span class=o>)</span>
+</span></span></code></pre></div><p>由上可知：该sql的执行计划用到了临时表及临时文件，符合</p><div class=gdoc-page__anchorwrap><h2 id=44-查看全局状态进一步进行确认>4.4 查看全局状态进一步进行确认
+<a data-clipboard-text=https://note.ljzsdut.com/Linux%E5%9F%BA%E7%A1%80/%E6%80%A7%E8%83%BD%E6%8E%92%E6%9F%A5%E5%B7%A5%E5%85%B7/%E5%88%86%E6%9E%90%E7%A3%81%E7%9B%98util%E7%89%B9%E5%88%AB%E9%AB%98/#44-查看全局状态进一步进行确认 class="gdoc-page__anchor clip flex align-center" title="Anchor to: 4.4 查看全局状态进一步进行确认" aria-label="Anchor to: 4.4 查看全局状态进一步进行确认" href=#44-%e6%9f%a5%e7%9c%8b%e5%85%a8%e5%b1%80%e7%8a%b6%e6%80%81%e8%bf%9b%e4%b8%80%e6%ad%a5%e8%bf%9b%e8%a1%8c%e7%a1%ae%e8%ae%a4><svg class="gdoc-icon gdoc_link"><use xlink:href="#gdoc_link"/></svg></a></h2></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>mysql&gt; show global status like <span class=s1>&#39;%tmp%&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>+-------------------------+-------+
+</span></span><span class=line><span class=cl><span class=p>|</span> Variable_name           <span class=p>|</span> Value <span class=p>|</span>
+</span></span><span class=line><span class=cl>+-------------------------+-------+
+</span></span><span class=line><span class=cl><span class=p>|</span> Created_tmp_disk_tables <span class=p>|</span> <span class=m>3</span>     <span class=p>|</span>
+</span></span><span class=line><span class=cl><span class=p>|</span> Created_tmp_files       <span class=p>|</span> <span class=m>22</span>    <span class=p>|</span>
+</span></span><span class=line><span class=cl><span class=p>|</span> Created_tmp_tables      <span class=p>|</span> <span class=m>8</span>     <span class=p>|</span>
+</span></span><span class=line><span class=cl>+-------------------------+-------+
+</span></span></code></pre></div><p>多执行几次，可以看出tmp_files和tmp_disk_tables的值在增长，证明在大量的创建临时文件及磁盘临时表，符合该线程的行为</p><div class=gdoc-page__anchorwrap><h1 id=五故障处理>五、故障处理
 <a data-clipboard-text=https://note.ljzsdut.com/Linux%E5%9F%BA%E7%A1%80/%E6%80%A7%E8%83%BD%E6%8E%92%E6%9F%A5%E5%B7%A5%E5%85%B7/%E5%88%86%E6%9E%90%E7%A3%81%E7%9B%98util%E7%89%B9%E5%88%AB%E9%AB%98/#五故障处理 class="gdoc-page__anchor clip flex align-center" title="Anchor to: 五、故障处理" aria-label="Anchor to: 五、故障处理" href=#%e4%ba%94%e6%95%85%e9%9a%9c%e5%a4%84%e7%90%86><svg class="gdoc-icon gdoc_link"><use xlink:href="#gdoc_link"/></svg></a></h1></div><p>通过上述的一系列排查，我们已经分析出来：目前sda磁盘的io使用率最高，且mysqld程序占用的最多。</p><p>通过排查有一个线程在频繁的创建临时表或临时文件且通过登录mysql排查会话及线程视图可以找到是由某一个慢sql导致的。</p><p>查看此慢sql的执行计划也会创建临时表和临时文件符合我们之前排查的预期。</p><p>此时我们就需要针对此慢sql进行优化，优化步骤由DBA进行处理，此处进行忽略。</p><p>慢sql优化完成后可以进行io的继续观察，看io是否有下降。</p><div class=gdoc-page__anchorwrap><h1 id=六代码分析>六、代码分析
-<a data-clipboard-text=https://note.ljzsdut.com/Linux%E5%9F%BA%E7%A1%80/%E6%80%A7%E8%83%BD%E6%8E%92%E6%9F%A5%E5%B7%A5%E5%85%B7/%E5%88%86%E6%9E%90%E7%A3%81%E7%9B%98util%E7%89%B9%E5%88%AB%E9%AB%98/#六代码分析 class="gdoc-page__anchor clip flex align-center" title="Anchor to: 六、代码分析" aria-label="Anchor to: 六、代码分析" href=#%e5%85%ad%e4%bb%a3%e7%a0%81%e5%88%86%e6%9e%90><svg class="gdoc-icon gdoc_link"><use xlink:href="#gdoc_link"/></svg></a></h1></div><p>我们可以使用pstack进行跟踪线程号，获取当前的线程堆栈信息。切记pstack会调用gdb进行debug调试</p><pre tabindex=0><code>shell&gt; pstack 74770 &gt;/tmp/74770.pstack
-Thread 1 (process 74770):
-#0  ha_innobase::general_fetch (this=0xea654228, buf=0xea662028 &#34;\212t\317\030\002&#34;, direction=1, match_mode=0  ) at /builds/naiwei.fang/percona-server/storage/innobase/handler/ha_innodb.cc:11159
-#1  0x0000000000d9913c in handler::ha_rnd_next (this=0xea654228, buf=0xea662028 &#34;\212t\317\030\002&#34;) at /build
-s/naiwei.fang/percona-server/sql/handler.cc:3173
-#2  0x0000000000f77db0 in TableScanIterator::Read (this=0xd256d5e8) at /builds/naiwei.fang/percona-server/sql/
-row_iterator.h:208
-#3  0x000000000124c714 in WriteRowsToChunks (xxhash_seed=899339, write_to_build_chunk=true, write_rows_with_nu
-ll_in_join_key=false, join_key_buffer=0xd01fdb98, tables_to_get_rowid_for=0, chunks=0xd01fdb58, join_condition
-s=..., tables=..., iterator=0xd256d5e8, thd=0xdb888000) at /builds/naiwei.fang/percona-server/sql/hash_join_it
-erator.cc:282
-#4  HashJoinIterator::BuildHashTable (this=this@entry=0xd01fd028) at /builds/naiwei.fang/percona-server/sql/ha
-sh_join_iterator.cc:495
-#5  0x000000000124c8ac in Init (this=0xd01fd028) at /builds/naiwei.fang/percona-server/sql/hash_join_iterator.
-cc:203
-#6  HashJoinIterator::Init (this=0xd01fd028) at /builds/naiwei.fang/percona-server/sql/hash_join_iterator.cc:1
-45
-#7  0x00000000010eca14 in Query_expression::ExecuteIteratorQuery (this=0xdec3a8b8, thd=thd@entry=0xdb888000) a
-t /builds/naiwei.fang/percona-server/sql/sql_union.cc:1224
-#8  0x00000000010ecccc in Query_expression::execute (this=this@entry=0xdec3a8b8, thd=thd@entry=0xdb888000) at 
-/builds/naiwei.fang/percona-server/sql/sql_union.cc:1284
-#9  0x0000000001083db0 in Sql_cmd_dml::execute_inner (this=0xd256bcb0, thd=0xdb888000) at /builds/naiwei.fang/
-percona-server/sql/sql_select.cc:791
-#10 0x000000000108cac8 in Sql_cmd_dml::execute (this=0xd256bcb0, thd=0xdb888000) at /builds/naiwei.fang/percon
-a-server/sql/sql_select.cc:575
-#11 0x00000000010384e8 in mysql_execute_command (thd=thd@entry=0xdb888000, first_level=first_level@entry=true)
- at /builds/naiwei.fang/percona-server/sql/sql_parse.cc:4677
-#12 0x000000000103b314 in dispatch_sql_command (thd=thd@entry=0xdb888000, parser_state=parser_state@entry=0xff
-f7bd4735b0, update_userstat=update_userstat@entry=false) at /builds/naiwei.fang/percona-server/sql/sql_parse.c
-c:5273
-#13 0x000000000103ccf0 in dispatch_command (thd=thd@entry=0xdb888000, com_data=0xffffb467c4d0, com_data@entry=
-0xfff7bd474640, command=COM_QUERY) at /builds/naiwei.fang/percona-server/sql/sql_parse.cc:1938
-#14 0x000000000103da40 in do_command (thd=thd@entry=0xdb888000) at /builds/naiwei.fang/percona-server/sql/sql_
-parse.cc:1386
-#15 0x0000000001152ca8 in handle_connection (arg=arg@entry=0xda53ab10) at /builds/naiwei.fang/percona-server/s
-ql/conn_handler/connection_handler_per_thread.cc:307
-#16 0x00000000022bc3ec in pfs_spawn_thread (arg=&lt;optimized out&gt;) at /builds/naiwei.fang/percona-server/storage
-/perfschema/pfs.cc:2899
-#17 0x0000ffffb43c7c48 in start_thread () from /lib64/libpthread.so.0
-#18 0x0000ffffb3c0f600 in thread_start () from /lib64/libc.so.6
-</code></pre><p>Enjoy GreatSQL :)</p></article><div class="gdoc-page__footer flex flex-wrap justify-between"></div></div></main><footer class=gdoc-footer><nav class="container flex"><div><section class="flex flex-wrap align-center"><span class="gdoc-footer__item gdoc-footer__item--row">Built with <a href=https://gohugo.io/ class=gdoc-footer__link>Hugo</a> and<svg class="gdoc-icon gdoc_heart"><use xlink:href="#gdoc_heart"/></svg></span>
+<a data-clipboard-text=https://note.ljzsdut.com/Linux%E5%9F%BA%E7%A1%80/%E6%80%A7%E8%83%BD%E6%8E%92%E6%9F%A5%E5%B7%A5%E5%85%B7/%E5%88%86%E6%9E%90%E7%A3%81%E7%9B%98util%E7%89%B9%E5%88%AB%E9%AB%98/#六代码分析 class="gdoc-page__anchor clip flex align-center" title="Anchor to: 六、代码分析" aria-label="Anchor to: 六、代码分析" href=#%e5%85%ad%e4%bb%a3%e7%a0%81%e5%88%86%e6%9e%90><svg class="gdoc-icon gdoc_link"><use xlink:href="#gdoc_link"/></svg></a></h1></div><p>我们可以使用pstack进行跟踪线程号，获取当前的线程堆栈信息。切记pstack会调用gdb进行debug调试</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>shell&gt; pstack <span class=m>74770</span> &gt;/tmp/74770.pstack
+</span></span><span class=line><span class=cl>Thread <span class=m>1</span> <span class=o>(</span>process 74770<span class=o>)</span>:
+</span></span><span class=line><span class=cl><span class=c1>#0  ha_innobase::general_fetch (this=0xea654228, buf=0xea662028 &#34;\212t\317\030\002&#34;, direction=1, match_mode=0  ) at /builds/naiwei.fang/percona-server/storage/innobase/handler/ha_innodb.cc:11159</span>
+</span></span><span class=line><span class=cl><span class=c1>#1  0x0000000000d9913c in handler::ha_rnd_next (this=0xea654228, buf=0xea662028 &#34;\212t\317\030\002&#34;) at /build</span>
+</span></span><span class=line><span class=cl>s/naiwei.fang/percona-server/sql/handler.cc:3173
+</span></span><span class=line><span class=cl><span class=c1>#2  0x0000000000f77db0 in TableScanIterator::Read (this=0xd256d5e8) at /builds/naiwei.fang/percona-server/sql/</span>
+</span></span><span class=line><span class=cl>row_iterator.h:208
+</span></span><span class=line><span class=cl><span class=c1>#3  0x000000000124c714 in WriteRowsToChunks (xxhash_seed=899339, write_to_build_chunk=true, write_rows_with_nu</span>
+</span></span><span class=line><span class=cl><span class=nv>ll_in_join_key</span><span class=o>=</span>false, <span class=nv>join_key_buffer</span><span class=o>=</span>0xd01fdb98, <span class=nv>tables_to_get_rowid_for</span><span class=o>=</span>0, <span class=nv>chunks</span><span class=o>=</span>0xd01fdb58, join_condition
+</span></span><span class=line><span class=cl><span class=nv>s</span><span class=o>=</span>..., <span class=nv>tables</span><span class=o>=</span>..., <span class=nv>iterator</span><span class=o>=</span>0xd256d5e8, <span class=nv>thd</span><span class=o>=</span>0xdb888000<span class=o>)</span> at /builds/naiwei.fang/percona-server/sql/hash_join_it
+</span></span><span class=line><span class=cl>erator.cc:282
+</span></span><span class=line><span class=cl><span class=c1>#4  HashJoinIterator::BuildHashTable (this=this@entry=0xd01fd028) at /builds/naiwei.fang/percona-server/sql/ha</span>
+</span></span><span class=line><span class=cl>sh_join_iterator.cc:495
+</span></span><span class=line><span class=cl><span class=c1>#5  0x000000000124c8ac in Init (this=0xd01fd028) at /builds/naiwei.fang/percona-server/sql/hash_join_iterator.</span>
+</span></span><span class=line><span class=cl>cc:203
+</span></span><span class=line><span class=cl><span class=c1>#6  HashJoinIterator::Init (this=0xd01fd028) at /builds/naiwei.fang/percona-server/sql/hash_join_iterator.cc:1</span>
+</span></span><span class=line><span class=cl><span class=m>45</span>
+</span></span><span class=line><span class=cl><span class=c1>#7  0x00000000010eca14 in Query_expression::ExecuteIteratorQuery (this=0xdec3a8b8, thd=thd@entry=0xdb888000) a</span>
+</span></span><span class=line><span class=cl>t /builds/naiwei.fang/percona-server/sql/sql_union.cc:1224
+</span></span><span class=line><span class=cl><span class=c1>#8  0x00000000010ecccc in Query_expression::execute (this=this@entry=0xdec3a8b8, thd=thd@entry=0xdb888000) at </span>
+</span></span><span class=line><span class=cl>/builds/naiwei.fang/percona-server/sql/sql_union.cc:1284
+</span></span><span class=line><span class=cl><span class=c1>#9  0x0000000001083db0 in Sql_cmd_dml::execute_inner (this=0xd256bcb0, thd=0xdb888000) at /builds/naiwei.fang/</span>
+</span></span><span class=line><span class=cl>percona-server/sql/sql_select.cc:791
+</span></span><span class=line><span class=cl><span class=c1>#10 0x000000000108cac8 in Sql_cmd_dml::execute (this=0xd256bcb0, thd=0xdb888000) at /builds/naiwei.fang/percon</span>
+</span></span><span class=line><span class=cl>a-server/sql/sql_select.cc:575
+</span></span><span class=line><span class=cl><span class=c1>#11 0x00000000010384e8 in mysql_execute_command (thd=thd@entry=0xdb888000, first_level=first_level@entry=true)</span>
+</span></span><span class=line><span class=cl> at /builds/naiwei.fang/percona-server/sql/sql_parse.cc:4677
+</span></span><span class=line><span class=cl><span class=c1>#12 0x000000000103b314 in dispatch_sql_command (thd=thd@entry=0xdb888000, parser_state=parser_state@entry=0xff</span>
+</span></span><span class=line><span class=cl>f7bd4735b0, <span class=nv>update_userstat</span><span class=o>=</span>update_userstat@entry<span class=o>=</span><span class=nb>false</span><span class=o>)</span> at /builds/naiwei.fang/percona-server/sql/sql_parse.c
+</span></span><span class=line><span class=cl>c:5273
+</span></span><span class=line><span class=cl><span class=c1>#13 0x000000000103ccf0 in dispatch_command (thd=thd@entry=0xdb888000, com_data=0xffffb467c4d0, com_data@entry=</span>
+</span></span><span class=line><span class=cl>0xfff7bd474640, <span class=nv>command</span><span class=o>=</span>COM_QUERY<span class=o>)</span> at /builds/naiwei.fang/percona-server/sql/sql_parse.cc:1938
+</span></span><span class=line><span class=cl><span class=c1>#14 0x000000000103da40 in do_command (thd=thd@entry=0xdb888000) at /builds/naiwei.fang/percona-server/sql/sql_</span>
+</span></span><span class=line><span class=cl>parse.cc:1386
+</span></span><span class=line><span class=cl><span class=c1>#15 0x0000000001152ca8 in handle_connection (arg=arg@entry=0xda53ab10) at /builds/naiwei.fang/percona-server/s</span>
+</span></span><span class=line><span class=cl>ql/conn_handler/connection_handler_per_thread.cc:307
+</span></span><span class=line><span class=cl><span class=c1>#16 0x00000000022bc3ec in pfs_spawn_thread (arg=&lt;optimized out&gt;) at /builds/naiwei.fang/percona-server/storage</span>
+</span></span><span class=line><span class=cl>/perfschema/pfs.cc:2899
+</span></span><span class=line><span class=cl><span class=c1>#17 0x0000ffffb43c7c48 in start_thread () from /lib64/libpthread.so.0</span>
+</span></span><span class=line><span class=cl><span class=c1>#18 0x0000ffffb3c0f600 in thread_start () from /lib64/libc.so.6</span>
+</span></span></code></pre></div><p>Enjoy GreatSQL :)</p></article><div class="gdoc-page__footer flex flex-wrap justify-between"></div></div></main><footer class=gdoc-footer><nav class="container flex"><div><section class="flex flex-wrap align-center"><span class="gdoc-footer__item gdoc-footer__item--row">Built with <a href=https://gohugo.io/ class=gdoc-footer__link>Hugo</a> and<svg class="gdoc-icon gdoc_heart"><use xlink:href="#gdoc_heart"/></svg></span>
 <span class="gdoc-footer__item gdoc-footer__item--row"><a href=https://blog.example.com/legal class=gdoc-footer__link>Legal Notice</a></span>
 <span class="gdoc-footer__item gdoc-footer__item--row"><a href=/privacy class=gdoc-footer__link>Privacy Policy</a></span></section><section class="flex flex-wrap align-center"><span class=gdoc-footer__item>Content licensed under
 <a href=https://creativecommons.org/licenses/by-sa/4.0/ class="gdoc-footer__link no-wrap">CC BY-SA 4.0</a></span></section></div><div class="flex flex-25 justify-end"><span class="gdoc-footer__item text-right"><a class="gdoc-footer__link fake-link" href=# aria-label="Back to top"><svg class="gdoc-icon gdoc_keyboard_arrow_up"><use xlink:href="#gdoc_keyboard_arrow_up"/></svg><span class=hidden-mobile>Back to top</span></a></span></div></nav></footer></div><script defer src=/js/search-1c4cfb2d.bundle.min.js></script></body></html>

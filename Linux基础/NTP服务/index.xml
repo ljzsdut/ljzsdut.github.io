@@ -12,7 +12,7 @@ CentOS Linux release 7.4.1708 (Core)
 $ yum install chrony -y 2.启动并加入开机自启动
 $ systemctl enable chronyd.service $ systemctl restart chronyd.service $ systemctl status chronyd.service 3.Firewalld设置
 $ firewall-cmd --add-service=ntp --permanent
-$ firewall-cmd --reload 因NTP服务端使用123/UDP端口协议，所以允许NTP服务即可。</description></item><item><title/><link>https://note.ljzsdut.com/Linux%E5%9F%BA%E7%A1%80/NTP%E6%9C%8D%E5%8A%A1/ntp/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/Linux%E5%9F%BA%E7%A1%80/NTP%E6%9C%8D%E5%8A%A1/ntp/</guid><description>NTP协议原理与配置 1.NTP网络结构 2.NTP访问控制 3.基本工作原理 NTP网络结构及时钟层数 NTP的工作模式 NTP服务 安装 配置文件详解 修改配置文件 1）修改所有节点的/etc/ntp.conf 2）选择一个主节点，修改其/etc/ntp.conf 3）主节点以外，修改/etc/ntp.conf 其他命令 ntpq -p ntpstat 查询你的ntp服务器同步信息 ntpd、ntpdate的区别 国内常用NTP服务器地址及IP 其他 timedate启用ntp 错误1：ntpdate -u ip -&amp;gt; no server suitable for synchronization found 参考文档 NTP协议原理与配置 1.NTP网络结构 在NTP的网络结构中,主要存在如下概念
+$ firewall-cmd --reload 因NTP服务端使用123/UDP端口协议，所以允许NTP服务即可。</description></item><item><title/><link>https://note.ljzsdut.com/Linux%E5%9F%BA%E7%A1%80/NTP%E6%9C%8D%E5%8A%A1/ntp%E6%9C%8D%E5%8A%A1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://note.ljzsdut.com/Linux%E5%9F%BA%E7%A1%80/NTP%E6%9C%8D%E5%8A%A1/ntp%E6%9C%8D%E5%8A%A1/</guid><description>NTP协议原理与配置 1.NTP网络结构 2.NTP访问控制 3.基本工作原理 NTP网络结构及时钟层数 NTP的工作模式 NTP服务 安装 配置文件详解 修改配置文件 1）修改所有节点的/etc/ntp.conf 2）选择一个主节点，修改其/etc/ntp.conf 3）主节点以外，修改/etc/ntp.conf 其他命令 ntpq -p ntpstat 查询你的ntp服务器同步信息 ntpd、ntpdate的区别 国内常用NTP服务器地址及IP 其他 timedate启用ntp 错误1：ntpdate -u ip -&amp;gt; no server suitable for synchronization found 参考文档 NTP协议原理与配置 1.NTP网络结构 在NTP的网络结构中,主要存在如下概念
 (1)同步子网。
 由主时间服务器、二级时间服务器、PC客户端和它们之间互连的传输路径组成同步子网。
 (2)主时间服务器。
